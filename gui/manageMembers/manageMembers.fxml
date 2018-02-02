@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+
+<AnchorPane prefHeight="398.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.manageMembers.ManageMembers">
+   <children>
+      <VBox layoutX="100.0" layoutY="75.0" prefHeight="398.0" prefWidth="400.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <TableView prefHeight="391.0" prefWidth="400.0">
+              <columns>
+                <TableColumn prefWidth="106.0" text="Username" />
+                  <TableColumn prefWidth="79.0" text="Id" />
+                <TableColumn prefWidth="214.0" text="Mail" />
+              </columns>
+            </TableView>
+            <HBox prefHeight="65.0" prefWidth="307.0">
+               <children>
+                  <JFXButton fx:id="cancel" onAction="#cancel" prefHeight="36.0" prefWidth="400.0" stylesheets="@../addbook/AddBook.css" text="Cancel" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

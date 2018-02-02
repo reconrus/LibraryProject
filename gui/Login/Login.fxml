@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+
+<AnchorPane prefHeight="316.0" prefWidth="344.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Login.Login">
+   <children>
+      <VBox layoutX="88.0" layoutY="166.0" prefHeight="316.0" prefWidth="344.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <JFXTextField fx:id="username" promptText="Username">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="50.0" right="50.0" top="120.0" />
+               </VBox.margin>
+            </JFXTextField>
+            <JFXPasswordField fx:id="password" onAction="#tryLogin" promptText="Password">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="50.0" right="50.0" top="10.0" />
+               </VBox.margin>
+            </JFXPasswordField>
+            <HBox prefHeight="70.0" prefWidth="344.0">
+               <VBox.margin>
+                  <Insets top="50.0" />
+               </VBox.margin>
+               <children>
+                  <JFXButton fx:id="register" onAction="#gotoRegister" prefHeight="61.0" prefWidth="175.0" stylesheets="@../addbook/AddBook.css" text="Register" />
+                  <JFXButton fx:id="login" onAction="#tryLogin" prefHeight="60.0" prefWidth="171.0" stylesheets="@../addbook/AddBook.css" text="Login" />
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets top="10.0" />
+         </padding>
+      </VBox>
+   </children>
+</AnchorPane>
