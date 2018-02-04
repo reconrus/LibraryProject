@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.AllBooks.AllBooks">
+   <children>
+      <TableView fx:id="BookTable" layoutX="28.0" layoutY="29.0" prefHeight="292.0" prefWidth="545.0">
+         <columns>
+            <TableColumn fx:id="id" prefWidth="31.0" text="ID" />
+            <TableColumn fx:id="Title" prefWidth="75.0" text="Title" />
+            <TableColumn fx:id="author" prefWidth="67.0" text="Author" />
+            <TableColumn fx:id="publisher" prefWidth="95.0" text="Publisher" />
+            <TableColumn fx:id="Avaliability" prefWidth="76.0" text="Is Avaliable" />
+            <TableColumn fx:id="price" prefWidth="54.0" text="Price" />
+            <TableColumn fx:id="type" minWidth="4.0" prefWidth="48.0" text="Type" />
+            <TableColumn fx:id="KeyWords" prefWidth="154.0" text="Key Words" />
+         </columns>
+      </TableView>
+      <JFXButton fx:id="Cancel" layoutX="184.0" layoutY="343.0" onAction="#Cancel" prefHeight="43.0" prefWidth="234.0" stylesheets="@../Menu/Menu.css" text="Cancel" />
+   </children>
+</AnchorPane>

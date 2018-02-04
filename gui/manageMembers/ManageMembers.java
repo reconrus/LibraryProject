@@ -7,22 +7,38 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
+import java.io.IOException;
+
 public class ManageMembers {
 
     @FXML
     private TableView<?> table;
 
     @FXML
-    private TableColumn<?, ?> UsernameTable;
+    private TableColumn<?, ?> id;
 
     @FXML
-    private TableColumn<?, ?> IdTable;
+    private TableColumn<?, ?> name;
 
     @FXML
-    private TableColumn<?, ?> MailTable;
+    private TableColumn<?, ?> address;
+
+    @FXML
+    private TableColumn<?, ?> phone;
+
+    @FXML
+    private TableColumn<?, ?> profession;
+
+    @FXML
+    private JFXButton addMember;
 
     @FXML
     private JFXButton cancel;
+
+    @FXML
+    void addMember(ActionEvent event) throws IOException {
+        Assist.loadStage(getClass().getResource("../login/register/register.fxml"),"Adding Member", true);
+    }
 
     @FXML
     void cancel(ActionEvent event) {

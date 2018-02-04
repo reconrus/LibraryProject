@@ -20,6 +20,14 @@ public class Menu {
     private JFXButton managemembers;
 
     @FXML
+    private JFXButton search;
+
+    @FXML
+    void ShowAllBooks(ActionEvent event) throws IOException {
+        Assist.loadStage(getClass().getResource("../AllBooks/AllBooks.fxml"),"Books",true);
+    }
+
+    @FXML
     void addBookButton(ActionEvent event) throws IOException {
         Assist.loadStage(getClass().getResource("../addbook/AddBook.fxml"), "Add Book",true);
     }
@@ -27,6 +35,12 @@ public class Menu {
     @FXML
     void gotoManage(ActionEvent event) throws IOException {
         Assist.loadStage(getClass().getResource("../manageMembers/manageMembers.fxml"),"Members",true);
+    }
+
+
+    @FXML
+    void search(ActionEvent event) throws IOException {
+        Assist.loadStage(getClass().getResource("../search/search.fxml"),"Search",true);
     }
 
 }

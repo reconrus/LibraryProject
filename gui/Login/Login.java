@@ -37,8 +37,14 @@ public class Login{
             Assist.error();
         }
         else {
+            //check if he is in db; also return true - if he is Patron, and false- if he is librarian
             Assist.closeStage(login);
-            Assist.loadStage(getClass().getResource("../menu/menu.fxml"), "Menu",true);
+            if(user.equals("patron")){ //later will change for normal checking
+                Assist.loadStage(getClass().getResource("../menu/menuforpatron.fxml"), "Menu",true);
+            }
+            else {
+                Assist.loadStage(getClass().getResource("../menu/menu.fxml"), "Menu", true);
+            }
         }
     }
 

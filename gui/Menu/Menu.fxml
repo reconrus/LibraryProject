@@ -10,8 +10,8 @@
          <children>
             <JFXButton fx:id="addbook" onAction="#addBookButton" prefHeight="91.0" prefWidth="141.0" text="Add Book" />
             <JFXButton fx:id="managemembers" layoutX="10.0" layoutY="10.0" onAction="#gotoManage" prefHeight="90.0" prefWidth="141.0" text="Manage Members" />
-            <JFXButton layoutX="10.0" layoutY="74.0" prefHeight="90.0" prefWidth="141.0" text="All Books" />
-            <JFXButton layoutX="10.0" layoutY="138.0" prefHeight="90.0" prefWidth="141.0" text="Search" />
+            <JFXButton layoutX="10.0" layoutY="74.0" onAction="#ShowAllBooks" prefHeight="90.0" prefWidth="141.0" text="All Books" />
+            <JFXButton fx:id="search" layoutX="10.0" layoutY="138.0" onAction="#search" prefHeight="90.0" prefWidth="141.0" text="Search" />
          </children>
       </VBox>
    </right>

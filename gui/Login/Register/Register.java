@@ -1,5 +1,7 @@
 package gui.Login.Register;
 
+import db.sample.Database;
+import db.sample.Student;
 import gui.assist.Assist;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
@@ -50,6 +52,9 @@ public class Register {
         }
         else{
             //add him db
+            if (isStudent){
+                //Database.user_creation(new Student(user, pass, email, pass.length()*user.length()*email.length()));
+            }
             Assist.closeStage(confirm);
         }
     }
