@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/LibrInno.iml" filepath="$PROJECT_DIR$/LibrInno.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/LibraryProject.iml" filepath="$PROJECT_DIR$/.idea/LibraryProject.iml" />
     </modules>
   </component>
 </project>

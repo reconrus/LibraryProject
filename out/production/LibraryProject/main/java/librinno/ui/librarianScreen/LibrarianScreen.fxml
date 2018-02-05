@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXListView?>
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import com.jfoenix.controls.JFXTreeTableView?>
+<?import de.jensd.fx.glyphs.icons525.Icons525View?>
+<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
+<?import de.jensd.fx.glyphs.materialicons.MaterialIconView?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="427.0" prefWidth="612.0" styleClass="root" stylesheets="@../../../../resources/theme.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.librinno.ui.librarianScreen.LibrarianScreenController">
+   <children>
+      <BorderPane prefHeight="200.0" prefWidth="200.0">
+         <center>
+            <JFXTabPane BorderPane.alignment="CENTER">
+               <tabs>
+                  <Tab text="Documents">
+                     <content>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <BorderPane prefHeight="387.0" prefWidth="612.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <bottom>
+                                    <AnchorPane prefHeight="33.0" prefWidth="612.0" style="-fx-background-color: #222429;" BorderPane.alignment="CENTER">
+                                       <children>
+                                          <JFXButton layoutX="132.0" layoutY="1.0" text="Add" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="28.0">
+                                             <graphic>
+                                                <Icons525View fill="WHITE" glyphName="BOOKS" size="40">
+                                                   <effect>
+                                                      <Glow />
+                                                   </effect>
+                                                </Icons525View>
+                                             </graphic>
+                                             <font>
+                                                <Font name="System Bold" size="16.0" />
+                                             </font>
+                                          </JFXButton>
+                                          <JFXButton layoutX="485.0" layoutY="6.0" text="Delete" textFill="WHITE" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="14.0">
+                                             <graphic>
+                                                <Icons525View fill="WHITE" glyphName="REMOVE" size="37">
+                                                   <effect>
+                                                      <Glow />
+                                                   </effect>
+                                                </Icons525View>
+                                             </graphic>
+                                             <font>
+                                                <Font name="System Bold" size="16.0" />
+                                             </font>
+                                          </JFXButton>
+                                          <JFXButton layoutX="153.0" layoutY="4.0" prefHeight="54.0" prefWidth="122.0" text="Issue" textFill="WHITE" AnchorPane.bottomAnchor="4.0">
+                                             <font>
+                                                <Font name="System Bold" size="16.0" />
+                                             </font>
+                                             <graphic>
+                                                <MaterialDesignIconView fill="WHITE" glyphName="LIBRARY" size="40" />
+                                             </graphic>
+                                          </JFXButton>
+                                          <JFXButton layoutX="306.0" prefHeight="54.0" prefWidth="122.0" text="Edit" textFill="WHITE">
+                                             <font>
+                                                <Font name="System Bold" size="16.0" />
+                                             </font>
+                                             <graphic>
+                                                <MaterialIconView fill="WHITE" glyphName="EDIT" size="40" />
+                                             </graphic>
+                                          </JFXButton>
+                                       </children>
+                                    </AnchorPane>
+                                 </bottom>
+                                 <center>
+                                    <JFXTreeTableView prefHeight="333.0" prefWidth="520.0" BorderPane.alignment="CENTER" />
+                                 </center>
+                                 <left>
+                                    <JFXListView prefHeight="333.0" prefWidth="137.0" style="-fx-background-color: #222429;" BorderPane.alignment="CENTER" />
+                                 </left>
+                              </BorderPane>
+                           </children></AnchorPane>
+                     </content>
+                  </Tab>
+                  <Tab text="Patrons">
+                     <content>
+                        <BorderPane prefHeight="200.0" prefWidth="200.0" />
+                     </content>
+                     <content>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <BorderPane prefHeight="387.0" prefWidth="612.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <bottom>
+                                    <AnchorPane prefHeight="0.0" prefWidth="612.0" BorderPane.alignment="CENTER">
+                                       <children>
+                                          <JFXButton layoutX="28.0" layoutY="7.0" text="Add" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="28.0">
+                                             <font>
+                                                <Font name="System Bold" size="16.0" />
+                                             </font>
+                                             <graphic>
+                                                <Icons525View fill="WHITE" glyphName="BOOKS" size="40">
+                                                   <effect>
+                                                      <Glow />
+                                                   </effect>
+                                                </Icons525View>
+                                             </graphic>
+                                          </JFXButton>
+                                          <JFXButton layoutX="485.0" layoutY="6.0" text="Delete" textFill="WHITE" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="14.0">
+                                             <font>
+                                                <Font name="System Bold" size="16.0" />
+                                             </font>
+                                             <graphic>
+                                                <Icons525View fill="WHITE" glyphName="REMOVE" size="37">
+                                                   <effect>
+                                                      <Glow />
+                                                   </effect>
+                                                </Icons525View>
+                                             </graphic>
+                                          </JFXButton>
+                                          <JFXButton layoutX="245.0" layoutY="-2.0" prefHeight="54.0" prefWidth="122.0" text="Edit" textFill="WHITE" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="250.0">
+                                             <font>
+                                                <Font name="System Bold" size="16.0" />
+                                             </font>
+                                             <graphic>
+                                                <MaterialIconView fill="WHITE" glyphName="EDIT" size="40" />
+                                             </graphic>
+                                          </JFXButton>
+                                       </children>
+                                    </AnchorPane>
+                                 </bottom>
+                                 <center>
+                                    <JFXTreeTableView BorderPane.alignment="CENTER" />
+                                 </center>
+                              </BorderPane>
+                           </children></AnchorPane>
+                     </content>
+                  </Tab>
+               </tabs>
+            </JFXTabPane>
+         </center>
+      </BorderPane>
+   </children>
+</StackPane>
