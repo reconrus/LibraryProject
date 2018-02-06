@@ -18,6 +18,7 @@ public class Main {
 
         //db.user_creation(user);
         Database db = new Database();
+        test_1();
         //User user = new User();
        // db.user_creation(user);
         //Book book= new Book();
@@ -25,13 +26,11 @@ public class Main {
     }
 
 
-    public void test_1() {
+    public static void test_1() {
         Database db = new Database();
-        Patron patron=new Patron();
-        Librarian librarian=new Librarian();
-        db.user_creation(patron);
-        db.user_creation(librarian);
-        Book book = new Book();
+        User user=new User("1234","1234","1234","1234","1234");
+        db.user_creation(user);
+        Book book = new Book("1234","1234","1234",1234,1234,"1234",true,1234);
         db.book_creation(book);
     }
 }

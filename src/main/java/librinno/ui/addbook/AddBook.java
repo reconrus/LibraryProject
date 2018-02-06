@@ -55,7 +55,8 @@ public class AddBook {
             Assist.error();
         }
         else{
-            Database.book_creation(new Book(bookTitle,bookAuthor,bookPublisher,Integer.parseInt(bookEdition),Integer.parseInt(bookPrice),bookKeyWords,bestseller,999));
+            Book book= new Book("1234","1234","1234",1234,1234,"1234",true,1234);
+            Database.book_creation(book);
             Assist.closeStage(cancel);
         }
     }
