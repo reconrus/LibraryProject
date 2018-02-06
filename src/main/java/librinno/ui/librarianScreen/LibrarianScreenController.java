@@ -4,6 +4,9 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTreeTableView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import main.java.librinno.ui.assist.Assist;
+
+import java.io.IOException;
 
 public class LibrarianScreenController {
 
@@ -32,12 +35,14 @@ public class LibrarianScreenController {
     private JFXButton editPatron;
 
     @FXML
-    void addDoc(ActionEvent event) {
+    void addDoc(ActionEvent event) throws IOException {
+        Assist.loadStage(getClass().getResource("../addbook/addbook.fxml"));
 
     }
 
     @FXML
-    void addPatron(ActionEvent event) {
+    void addPatron(ActionEvent event) throws IOException {
+        Assist.loadStage(getClass().getResource("../Register/register.fxml"));
 
     }
 
