@@ -4,6 +4,11 @@
     -fx-primarytext : #B2B2B2;
     -fx-blue: #1976D2;
     -fx-red: #FF0000;
+    -fx-text-fill: White;
+}
+
+.button{
+    -fx-text-fill: White;
 }
 
 .root{
@@ -20,4 +25,3 @@
 .tab-header-background{
     -fx-background-color: -fx-primary;
 }
-
