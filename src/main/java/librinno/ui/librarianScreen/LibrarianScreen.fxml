@@ -28,7 +28,7 @@
                                  <bottom>
                                     <AnchorPane prefHeight="33.0" prefWidth="612.0" style="-fx-background-color: #222429;" BorderPane.alignment="CENTER">
                                        <children>
-                                          <JFXButton layoutX="132.0" layoutY="1.0" text="Add" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="28.0">
+                                          <JFXButton fx:id="addDoc" layoutX="132.0" layoutY="1.0" onAction="#addDoc" text="Add" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="28.0">
                                              <graphic>
                                                 <Icons525View fill="WHITE" glyphName="BOOKS" size="40">
                                                    <effect>
@@ -40,7 +40,7 @@
                                                 <Font name="System Bold" size="16.0" />
                                              </font>
                                           </JFXButton>
-                                          <JFXButton layoutX="485.0" layoutY="6.0" text="Delete" textFill="WHITE" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="14.0">
+                                          <JFXButton fx:id="deleteDoc" layoutX="485.0" layoutY="6.0" onAction="#deleteDoc" text="Delete" textFill="WHITE" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="14.0">
                                              <graphic>
                                                 <Icons525View fill="WHITE" glyphName="REMOVE" size="37">
                                                    <effect>
@@ -52,7 +52,7 @@
                                                 <Font name="System Bold" size="16.0" />
                                              </font>
                                           </JFXButton>
-                                          <JFXButton layoutX="153.0" layoutY="4.0" prefHeight="54.0" prefWidth="122.0" text="Issue" textFill="WHITE" AnchorPane.bottomAnchor="4.0">
+                                          <JFXButton fx:id="issue" layoutX="153.0" layoutY="4.0" onAction="#issue" prefHeight="54.0" prefWidth="122.0" text="Issue" textFill="WHITE" AnchorPane.bottomAnchor="4.0">
                                              <font>
                                                 <Font name="System Bold" size="16.0" />
                                              </font>
@@ -60,7 +60,7 @@
                                                 <MaterialDesignIconView fill="WHITE" glyphName="LIBRARY" size="40" />
                                              </graphic>
                                           </JFXButton>
-                                          <JFXButton layoutX="306.0" prefHeight="54.0" prefWidth="122.0" text="Edit" textFill="WHITE">
+                                          <JFXButton fx:id="editDoc" layoutX="306.0" onAction="#editDoc" prefHeight="54.0" prefWidth="122.0" text="Edit" textFill="WHITE">
                                              <font>
                                                 <Font name="System Bold" size="16.0" />
                                              </font>
@@ -72,7 +72,7 @@
                                     </AnchorPane>
                                  </bottom>
                                  <center>
-                                    <JFXTreeTableView prefHeight="333.0" prefWidth="520.0" BorderPane.alignment="CENTER" />
+                                    <JFXTreeTableView fx:id="tableBook" prefHeight="333.0" prefWidth="520.0" BorderPane.alignment="CENTER" />
                                  </center>
                                  <left>
                                     <JFXListView prefHeight="333.0" prefWidth="137.0" style="-fx-background-color: #222429;" BorderPane.alignment="CENTER" />
@@ -92,19 +92,19 @@
                                  <bottom>
                                     <AnchorPane prefHeight="0.0" prefWidth="612.0" BorderPane.alignment="CENTER">
                                        <children>
-                                          <JFXButton layoutX="28.0" layoutY="7.0" text="Add" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="28.0">
+                                          <JFXButton fx:id="addPatron" layoutX="28.0" layoutY="7.0" onAction="#addPatron" text="Add" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="28.0">
                                              <font>
                                                 <Font name="System Bold" size="16.0" />
                                              </font>
                                              <graphic>
-                                                <Icons525View fill="WHITE" glyphName="BOOKS" size="40">
+                                                <Icons525View fill="WHITE" glyphName="USER_PLUS" size="40">
                                                    <effect>
                                                       <Glow />
                                                    </effect>
                                                 </Icons525View>
                                              </graphic>
                                           </JFXButton>
-                                          <JFXButton layoutX="485.0" layoutY="6.0" text="Delete" textFill="WHITE" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="14.0">
+                                          <JFXButton fx:id="deletePatron" layoutX="485.0" layoutY="6.0" onAction="#deletePatron" text="Delete" textFill="WHITE" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="14.0">
                                              <font>
                                                 <Font name="System Bold" size="16.0" />
                                              </font>
@@ -116,7 +116,7 @@
                                                 </Icons525View>
                                              </graphic>
                                           </JFXButton>
-                                          <JFXButton layoutX="245.0" layoutY="-2.0" prefHeight="54.0" prefWidth="122.0" text="Edit" textFill="WHITE" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="250.0">
+                                          <JFXButton fx:id="editPatron" layoutX="245.0" layoutY="-2.0" onAction="#editPatron" prefHeight="54.0" prefWidth="122.0" text="Edit" textFill="WHITE" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="250.0">
                                              <font>
                                                 <Font name="System Bold" size="16.0" />
                                              </font>

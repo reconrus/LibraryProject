@@ -2,13 +2,16 @@ package main.java.librinno.ui.patronScreen;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.JFXTreeTableView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import main.java.librinno.ui.assist.Assist;
 
 import java.io.IOException;
 
@@ -17,34 +20,35 @@ import java.io.IOException;
  */
 public class PatronScreenController {
 
-    @FXML
-    private JFXTextField patronID;
-    @FXML
-    private JFXTextField patronName;
-    @FXML
-    private JFXTextField patronPhone;
-    @FXML
-    private JFXTextField patronAddress;
 
+    @FXML
+    private JFXButton logout;
 
+    @FXML
+    private Text cardNumber;
 
+    @FXML
+    private Text fullName;
+
+    @FXML
+    private Text phone;
+
+    @FXML
+    private Text address;
+
+    @FXML
+    private Text bookCount;
+
+    @FXML
+    private JFXTreeTableView<?> reserveTable;
     @FXML
     private void logoutAction(ActionEvent event) throws IOException {
-
-        closeStage();
+        Assist.closeStage(logout);
 
         //Show login screen
-        Parent parent = FXMLLoader.load(getClass().getResource("/main/java/librinno/ui/login/LoginScreen.fxml"));
-        Stage stage = new Stage(StageStyle.DECORATED);
-        stage.setScene(new Scene(parent));
-        stage.show();
+        Assist.loadStage(getClass().getResource("/main/java/librinno/ui/login/LoginScreen.fxml"));
 
     }
-
-    private void closeStage() {
-        ((Stage) patronID.getScene().getWindow()).close();
-    }
-
 
 
 

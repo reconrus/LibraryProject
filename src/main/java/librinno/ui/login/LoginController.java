@@ -16,14 +16,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import main.java.librinno.ui.assist.Assist;
 
 
 public class LoginController {
-
-    @FXML
-    private JFXTextField username;
     @FXML
     private JFXPasswordField password;
+    @FXML
+    private JFXTextField username;
     @FXML
     private JFXButton login;
     @FXML
@@ -39,36 +39,28 @@ public class LoginController {
 
     @FXML
     private void loginAction(ActionEvent event) throws IOException {
-
         Boolean checkbox = isALibrarian.isSelected();
 
-        closeStage();
+        String id=username.getText();
+        String pass= password.getText();
+
+        //checkUser(id,pass);
+
+        Assist.closeStage(login);
 
         if(checkbox)
             loadLibrarian();
         else loadPatron();
     }
 
-    private void closeStage() {
-        ((Stage) login.getScene().getWindow()).close();
-    }
-
     private void loadLibrarian() throws IOException {
-
-            Parent parent = FXMLLoader.load(getClass().getResource("/main/java/librinno/ui/librarianScreen/LibrarianScreen.fxml"));
-            Stage stage = new Stage(StageStyle.DECORATED);
-            stage.setScene(new Scene(parent));
-            stage.show();
-
+            Assist.loadStage(getClass().getResource("../librarianScreen/LibrarianScreen.fxml"));
     }
 
 
     private void loadPatron() throws IOException {
 
-        Parent parent = FXMLLoader.load(getClass().getResource("/main/java/librinno/ui/patronScreen/PatronScreen.fxml"));
-        Stage stage = new Stage(StageStyle.DECORATED);
-        stage.setScene(new Scene(parent));
-        stage.show();
+        Assist.loadStage(getClass().getResource("../patronScreen/PatronScreen.fxml"));
 
     }
 }

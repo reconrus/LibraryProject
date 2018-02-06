@@ -1,4 +1,4 @@
-package gui.assist;
+package main.java.librinno.ui.assist;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -12,17 +12,11 @@ import java.io.IOException;
 import java.net.URL;
 
 public class Assist {
-    public static void loadStage(URL fxml, String title,Boolean wait) throws IOException {
+    public static void loadStage(URL fxml) throws IOException {
         Parent parent= FXMLLoader.load(fxml);
         Stage stage= new Stage(StageStyle.DECORATED);
-        stage.setTitle(title);
         stage.setScene(new Scene(parent));
-        if (wait){
-            stage.showAndWait();
-        }
-        else {
-            stage.show();
-        }
+        stage.show();
     }
     public static void loadScreen(URL fxml, Button butt) throws IOException {
         Parent parent= FXMLLoader.load(fxml);

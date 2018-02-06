@@ -16,8 +16,8 @@
          <children>
             <AnchorPane layoutX="10.0">
                <children>
-                  <JFXPasswordField layoutX="29.0" layoutY="46.0" prefHeight="25.0" prefWidth="211.0" promptText="Password" />
-                  <JFXTextField layoutX="29.0" prefHeight="25.0" prefWidth="211.0" promptText="ID Card" />
+                  <JFXPasswordField fx:id="password" layoutX="29.0" layoutY="46.0" onAction="#loginAction" prefHeight="25.0" prefWidth="211.0" promptText="Password" />
+                  <JFXTextField fx:id="username" layoutX="29.0" prefHeight="25.0" prefWidth="211.0" promptText="ID Card" />
                   <OctIconView fill="WHITE" glyphName="LOCK" layoutX="3.0" layoutY="67.0" size="20.0" wrappingWidth="15.999998688697815" />
                   <MaterialIconView fill="WHITE" glyphName="PERSON_OUTLINE" layoutY="24.0" size="22" />
                </children>
