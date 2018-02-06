@@ -6,6 +6,8 @@ import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXToggleButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import main.java.librinno.model.Database;
+import main.java.librinno.model.User;
 import main.java.librinno.ui.assist.Assist;
 
 public class Register {
@@ -47,13 +49,12 @@ public class Register {
             Assist.error();
         }
         else{
-            //add him db
-//            if (isStudent){
-//                Database.user_creation(new Student(user, pass, email, pass.length()*user.length()*email.length()));
-//            }
-//            else{
-//                Database.user_creation(new Faculty(user, pass, email, pass.length()*user.length()*email.length()));
-//            }
+              if (isStudent){
+                  Database.user_creation(new User(user,phoneNum, addressText, "Student", pass));
+                }
+              else{
+                  Database.user_creation(new User(user,phoneNum, addressText, "Faculity", pass));
+                }
             Assist.closeStage(confirm);
         }
     }

@@ -5,6 +5,8 @@ import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import main.java.librinno.model.Book;
+import main.java.librinno.model.Database;
 import main.java.librinno.ui.assist.Assist;
 
 public class AddBook {
@@ -49,12 +51,11 @@ public class AddBook {
         String bookKeyWords= keyWords.getText();
         String bookPublisher= publisher.getText();
         Boolean bestseller= isBestseller.isArmed();
-
         if ((bookAuthor.isEmpty())||(bookPrice.isEmpty())||(bookPublisher.isEmpty())||(bookTitle.isEmpty())){
             Assist.error();
         }
         else{
-            //method for adding books into db
+            Database.book_creation(new Book(bookTitle,bookAuthor,bookPublisher,Integer.parseInt(bookEdition),Integer.parseInt(bookPrice),bookKeyWords,bestseller,999));
             Assist.closeStage(cancel);
         }
     }
