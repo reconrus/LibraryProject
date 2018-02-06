@@ -1,4 +1,8 @@
-import java.util.ArrayList;
+package main.java.librinno.model;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  * Created by Ilnur Mamedbakov on 25.01.2018.
@@ -14,17 +18,32 @@ import java.util.ArrayList;
 public class Material {
     private int id;
     private String title;
-    private ArrayList<String> author;
+    private String author;
     private int price;
-    private ArrayList<String> KeyWords;
+    private String KeyWords;
 
 
 
     public int getId() {
         return id;
     }
-    public void setId(int id) {
-        this.id = id;
+    public void setId() {
+        //each card_number is individual in case of increasing there won't be identic id's
+        int max_id=0;
+        try {
+            Statement stmt=Database.con.createStatement();
+            //get infromation from database
+            ResultSet rs = stmt.executeQuery("SELECT id FROM Books");
+            while (rs.next()){
+                int id_an=rs.getInt("id");
+                if(id_an>max_id)
+                    max_id=id_an;
+            }
+            max_id++;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        this.id=max_id;
     }
     public String getTitle() {
         return title;
@@ -38,16 +57,19 @@ public class Material {
     public void setPrice(int price) {
         this.price = price;
     }
-    public ArrayList<String> getKeyWords() {
-        return KeyWords;
-    }
-    public void setKeyWords(ArrayList<String> keyWords) {
-        KeyWords = keyWords;
-    }
-    public ArrayList<String> getAuthor() {
+    public String getAuthor() {
         return author;
     }
-    public void setAuthor(ArrayList<String> author) {
+
+    public void setAuthor(String author) {
         this.author = author;
+    }
+
+    public String getKeyWords() {
+        return KeyWords;
+    }
+
+    public void setKeyWords(String keyWords) {
+        KeyWords = keyWords;
     }
 }

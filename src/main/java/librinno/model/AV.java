@@ -1,3 +1,5 @@
+package main.java.librinno.model;
+
 /**
  * Created by Ilnur Mamedbakov on 03.02.2018.
  * Class AV inherited from class Material

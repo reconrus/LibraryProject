@@ -1,4 +1,4 @@
-package sample;
+package main.java.librinno.model;
 
 /**
  * patron of library

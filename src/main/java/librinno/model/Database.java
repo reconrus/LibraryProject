@@ -1,4 +1,4 @@
-package sample;
+package main.java.librinno.model;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -10,12 +10,13 @@ import java.sql.SQLException;
  */
 public class Database {
     //for connection to database
-    public String url = "jdbc:mysql://127.0.0.1:3306/librinno";
-    public String login = "root";
-    public String password = "170199Dima";
+    //typical
+    public String url = "jdbc:mysql://triniti.ru-hoster.com/dmitrDbK";
+        public String login = "dmitrDbK";
+    public String password = "eQ1a5mg0Z7";
     public static PreparedStatement prst;
     public static Connection con;
-
+    public static boolean is_best_seller;
     /**
      * connecting to mysql database
      */
@@ -36,31 +37,36 @@ public class Database {
     public static void user_creation(User user) {
         try {
             //get all needed information
-            prst = con.prepareStatement("insert into users_of_library(username, phoneNumber, address, card_number) values(?, ?, ?, ?)");
+            prst = con.prepareStatement("insert into Users_of_the_library(Name, Address, Phone_number, Card_number,Type,Password) values(?, ?, ?, ?,?,?)");
             prst.setString(1, user.get_name());
             prst.setString(2, user.get_number());
             prst.setString(3, user.get_adress());
             prst.setInt(4, user.get_card_number());
+            prst.setString(5,user.get_type());
+            prst.setString(6,user.get_password());
             prst.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    //test for entering information in database
-    //done for test
-    public void test(User user) throws SQLException {
-
-        user.set_adress("somewhere");
-        user.set_number("880005553535");
-        user.set_name("someone");
-        user.set_card_number();
-
-        PreparedStatement pr_st =
-                Database.con.prepareStatement("insert into users_of_library(username, phoneNumber, address, card_number) values(?, ?, ?, ?)");
-        pr_st.setString(1,user.get_name());
-        pr_st.setString(2,user.get_number());
-        pr_st.setString(3,user.get_adress());
-        pr_st.setInt(4,user.get_card_number());
-        pr_st.executeUpdate();
+    public static void book_creation(Book book){
+        try {
+            prst=con.prepareStatement("insert into Books(id,Name,Author,Publisher,Edition,Price,Keywords,owner,is_bestseller,time_left) values(?,?,?,?,?,?,?,?,?,?)");
+            prst.setInt(1,book.getId());
+            prst.setString(2,book.getTitle());
+            prst.setString(3,book.getAuthor());
+            prst.setString(4,book.getPublisher());
+            prst.setInt(5,book.getEdition());
+            prst.setInt(6,book.getPrice());
+            prst.setString(7,book.getKeyWords());
+            prst.setInt(8,0);
+            prst.setBoolean(9,book.get_is_bestseller());
+            prst.setInt(10,book.get_left_time());
+            //еще owner
+            prst.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
+
 }

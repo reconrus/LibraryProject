@@ -1,4 +1,4 @@
-package sample;
+package main.java.librinno.model;
 
 /**
  * librarian of library

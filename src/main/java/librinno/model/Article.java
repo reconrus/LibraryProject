@@ -1,3 +1,4 @@
+package main.java.librinno.model;
 /**
  * Created by Ilnur Mamedbakov on 03.02.2018.
  * Class Article inherited from class Material
