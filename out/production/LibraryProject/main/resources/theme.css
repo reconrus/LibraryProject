@@ -1,0 +1,27 @@
+* {
+    -fx-primary : #2A2E37;
+    -fx-secondary : #222429/*#80889B /*#FFFF8D */;
+    -fx-primarytext : #B2B2B2;
+    -fx-blue: #1976D2;
+    -fx-red: #FF0000;
+    -fx-text-fill: White;
+}
+
+.button{
+    -fx-text-fill: White;
+}
+
+.root{
+    -fx-background-color: -fx-secondary;
+}
+
+/*TablPane styling*/
+.tab{
+    -fx-background-color: -fx-primary;
+    -fx-pref-width : 200;
+    -fx-pref-height : 40;
+}
+
+.tab-header-background{
+    -fx-background-color: -fx-primary;
+}
