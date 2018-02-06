@@ -49,12 +49,13 @@ public class Register {
             Assist.error();
         }
         else{
-              if (isStudent){
-                  Database.user_creation(new User(user,phoneNum, addressText, "Student", pass));
-                }
-              else{
-                  Database.user_creation(new User(user,phoneNum, addressText, "Faculity", pass));
-                }
+            Database db= new Database();
+            if (isStudent){
+                Database.user_creation(new User(user,phoneNum, addressText, "Student", pass));
+            }
+            else{
+                Database.user_creation(new User(user,phoneNum, addressText, "Faculity", pass));
+            }
             Assist.closeStage(confirm);
         }
     }
