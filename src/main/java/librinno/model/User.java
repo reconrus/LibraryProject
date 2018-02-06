@@ -32,6 +32,17 @@ public class User {
         set_type(sc.next());
         set_password(sc.next());
     }
+    public User(String name, String number, String address, String type, String password) {
+        // now entering in simple form
+        //get information about user
+        set_name(name);
+        set_number(number);
+        set_adress(address);
+        set_card_number();
+        set_type(type);
+        set_password(password);
+    }
+
 public void set_password(String password){
         this.password=password;
 }

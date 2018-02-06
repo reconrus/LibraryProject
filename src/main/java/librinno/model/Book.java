@@ -74,4 +74,17 @@ public class Book extends Material {
         set_is_bestseller(sc.nextBoolean());
         set_left_time(sc.nextInt());
     }
+    public Book(String title, String author, String pubisher, int edition, int price, String keyWords, Boolean is_bestseller, int left_time) {
+        setId();
+        setTitle(title);
+        setAuthor(author);
+        setPublisher(pubisher);
+        setEdition(edition);
+        setPrice(price);
+        //доделать
+        setKeyWords(keyWords);
+        //после идёт owner,который ноль
+        set_is_bestseller(is_bestseller);
+        set_left_time(left_time);
+    }
 }
