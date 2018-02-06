@@ -18,7 +18,7 @@ public class Main {
 
         //db.user_creation(user);
         Database db = new Database();
-        test_1();
+        //test_1();
         //User user = new User();
        // db.user_creation(user);
         //Book book= new Book();

@@ -8,14 +8,18 @@ public class Faculty extends Patron {
      * setter
      * @param name - name of user
      * @param phone_number -phone number of user
-     * @param adress where user lives
+     * @param address where user lives
      * @param card_number user id
      */
-    Faculty(String name, String phone_number, String adress, int card_number) {
+
+    public Faculty(String name, String phone_number, String address, int card_number) {
         this.name = name;
         this.Phone_Number = phone_number;
-        this.adress = adress;
+        this.adress = address;
         this.card_number = card_number;
         is_facullty_member=true;
     }
+
+
+
 }

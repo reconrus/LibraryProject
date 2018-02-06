@@ -5,6 +5,7 @@
     -fx-blue: #1976D2;
     -fx-red: #FF0000;
     -fx-text-fill: White;
+    -fx-text: White;
 }
 
 .button{
