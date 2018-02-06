@@ -67,7 +67,8 @@ public class LibrarianScreenController {
     }
 
     @FXML
-    void issue(ActionEvent event) {
+    void issue(ActionEvent event) throws IOException {
+        Assist.loadStage(getClass().getResource("../issue/issue.fxml"));
 
     }
 
