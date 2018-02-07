@@ -11,7 +11,10 @@ public class Test {
 
     private static String press = "Press Enter to continue \n";
     private static Scanner in;
-    public static void test() throws SQLException{
+
+    public static void main(String[] args) throws SQLException{
+
+        Database db = new Database();
 
         in = new Scanner(System.in);
 

@@ -20,9 +20,6 @@ public class Main {
         //use for project
         //enter information which will be put in database
 
-        Database db = new Database();
-
-        Test.test();
     }
 
 
