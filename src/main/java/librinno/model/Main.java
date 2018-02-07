@@ -22,12 +22,7 @@ public class Main {
 
         Database db = new Database();
 
-        Test.test_1();
-        Test.test_3();
-        Test.test_4();
-        Test.test_7();
-        Test.test_8();
-        Test.test_9();
+        Test.test();
     }
 
 
