@@ -27,8 +27,9 @@ public class Issue {
 
     @FXML
     void give(ActionEvent event) {
-        String book=BookID.getText();
-        String patron=PatronID.getText();
+        int book=Integer.parseInt(BookID.getText());
+        int patron=Integer.getInteger(PatronID.getText());
+
 
         Assist.closeStage(give);
     }

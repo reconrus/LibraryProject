@@ -16,21 +16,19 @@ public class Main {
         //use for project
         //enter information which will be put in database
 
-        //db.user_creation(user);
         Database db = new Database();
-        //test_1();
-        //User user = new User();
-       // db.user_creation(user);
-        //Book book= new Book();
-        //db.book_creation(book);
+        Booking booking=new Booking();
+        booking.check_out(108,12);
     }
 
 
-    public static void test_1() {
+    public void test_1() {
         Database db = new Database();
-        User user=new User("1234","1234","1234","1234","1234");
-        db.user_creation(user);
-        Book book = new Book("1234","1234","1234",1234,1234,"1234",true,1234);
+        Patron patron=new Patron();
+        Librarian librarian=new Librarian();
+        db.user_creation(patron);
+        db.user_creation(librarian);
+        Book book = new Book();
         db.book_creation(book);
     }
 }

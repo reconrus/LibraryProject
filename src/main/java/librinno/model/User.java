@@ -10,6 +10,8 @@ import java.util.Scanner;
  * user card in library
  */
 public class User {
+
+    public int zaregID;
     //all needed information for library
     public String name;
     public String adress;
@@ -128,5 +130,9 @@ public String get_password(){
     public int get_card_number() {
 
         return card_number;
+    }
+
+    public void giveID(int id){
+        zaregID= id;
     }
 }
