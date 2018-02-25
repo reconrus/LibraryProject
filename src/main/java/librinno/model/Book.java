@@ -17,7 +17,7 @@ public class Book extends Material {
     private int edition;
     private boolean is_bestseller;
     private int left_time;
-
+    private boolean reference;
     public int get_left_time() {
         return left_time;
     }
@@ -57,7 +57,8 @@ public class Book extends Material {
     public void setPublisher(String publisher) {
         this.publisher = publisher;
     }
-
+    public void set_reference(boolean reference){this.reference=reference;}
+    public boolean get_reference(){return reference;}
     Book() {
         //now entering in simple form
         //get information about user
@@ -73,8 +74,9 @@ public class Book extends Material {
         //после идёт owner,который ноль
         set_is_bestseller(sc.nextBoolean());
         set_left_time(sc.nextInt());
+        set_reference(sc.nextBoolean());
     }
-    public Book(String title, String author, String pubisher, int edition, int price, String keyWords, Boolean is_bestseller, int left_time) {
+    public Book(String title, String author, String pubisher, int edition, int price, String keyWords, Boolean is_bestseller, int left_time,boolean reference) {
         setId();
         setTitle(title);
         setAuthor(author);
@@ -86,5 +88,6 @@ public class Book extends Material {
         //после идёт owner,который ноль
         set_is_bestseller(is_bestseller);
         set_left_time(left_time);
+        set_reference(reference);
     }
 }

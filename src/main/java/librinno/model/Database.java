@@ -51,7 +51,7 @@ public class Database {
     }
     public static void book_creation(Book book){
         try {
-            prst=con.prepareStatement("insert into Books(id,Name,Author,Publisher,Edition,Price,Keywords,owner,is_bestseller,time_left) values(?,?,?,?,?,?,?,?,?,?)");
+            prst=con.prepareStatement("insert into Books(id,Name,Author,Publisher,Edition,Price,Keywords,owner,is_bestseller,time_left,is_reference) values(?,?,?,?,?,?,?,?,?,?,?)");
             prst.setInt(1,book.getId());
             prst.setString(2,book.getTitle());
             prst.setString(3,book.getAuthor());
@@ -63,6 +63,7 @@ public class Database {
             prst.setInt(8,0);
             prst.setBoolean(9,book.get_is_bestseller());
             prst.setInt(10,book.get_left_time());
+            prst.setBoolean(11,book.get_reference());
             //еще owner
             prst.executeUpdate();
         } catch (SQLException e) {
