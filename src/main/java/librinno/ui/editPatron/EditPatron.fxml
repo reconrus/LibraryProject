@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXToggleButton?>
+<?import java.net.URL?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="333.0" prefWidth="355.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.librinno.ui.editPatron.EditPatron">
+   <children>
+      <Group layoutX="62.0" layoutY="51.0">
+         <children>
+            <JFXTextField fx:id="name" prefHeight="25.0" prefWidth="232.0" promptText="Name" />
+            <JFXPasswordField fx:id="password" layoutY="41.0" prefHeight="25.0" prefWidth="232.0" promptText="Password" />
+            <JFXTextField fx:id="phone" layoutY="75.0" prefHeight="25.0" prefWidth="232.0" promptText="Phone" />
+            <JFXTextField fx:id="address" layoutY="109.0" prefHeight="25.0" prefWidth="232.0" promptText="Address" />
+            <AnchorPane layoutY="153.0" prefHeight="65.0" prefWidth="232.0">
+               <children>
+                  <Text fill="WHITE" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Teacher" wrappingWidth="67.13671875" />
+                  <Text fill="WHITE" layoutX="176.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Student" />
+                  <JFXToggleButton fx:id="isStudent" layoutX="77.0" layoutY="3.0" prefHeight="0.0" prefWidth="0.0" text=" " />
+               </children>
+            </AnchorPane>
+         </children>
+      </Group>
+      <JFXButton fx:id="cancel" layoutX="62.0" layoutY="280.0" onAction="#cancel" prefHeight="31.0" prefWidth="67.0" text="Cancel" />
+      <JFXButton fx:id="confirm" layoutX="219.0" layoutY="269.0" onAction="#confirm" prefHeight="47.0" prefWidth="75.0" text="Confirm" />
+   </children>
+   <stylesheets>
+      <URL value="@../../../../resources/theme.css" />
+      <URL value="@../../../../resources/theme.css" />
+   </stylesheets>
+</AnchorPane>
