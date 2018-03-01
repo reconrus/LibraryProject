@@ -1,4 +1,4 @@
-package main.java.librinno.ui.addbook;
+package main.java.librinno.ui.editDoc;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXRadioButton;
@@ -9,7 +9,7 @@ import main.java.librinno.model.Book;
 import main.java.librinno.model.Database;
 import main.java.librinno.ui.assist.Assist;
 
-public class AddBook {
+public class EditDoc {
 
     @FXML
     private JFXTextField publisher;

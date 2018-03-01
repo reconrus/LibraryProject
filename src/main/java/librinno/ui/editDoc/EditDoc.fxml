@@ -7,7 +7,7 @@
 <?import javafx.scene.Group?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="333.0" prefWidth="355.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.librinno.ui.addbook.AddBook">
+<AnchorPane prefHeight="333.0" prefWidth="355.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.librinno.ui.editDoc.EditDoc">
    <children>
       <Group layoutX="62.0" layoutY="30.0">
          <children>
