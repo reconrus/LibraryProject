@@ -44,7 +44,16 @@ public class User {
         set_type(type);
         set_password(password);
     }
-
+    public User(String name, String address,String number,  int cardnumber,String type, String password) {
+        // now entering in simple form
+        //get information about user
+        set_name(name);
+        set_number(number);
+        set_adress(address);
+        set_another_card_number(cardnumber);
+        set_type(type);
+        set_password(password);
+    }
 public void set_password(String password){
         this.password=password;
 }
@@ -54,7 +63,8 @@ public String get_password(){
     public void set_type(String type) {
         this.type = type;
     }
-
+    public void set_another_card_number(int id){this.card_number=id;}
+    public int get_another_card_number(){return card_number;}
     public String get_type() {
         return type;
     }
