@@ -5,14 +5,17 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane prefHeight="90.0" prefWidth="238.0" stylesheets="@../../../../resources/theme.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.librinno.ui.issue.Issue">
+<AnchorPane prefHeight="156.0" prefWidth="366.0" stylesheets="@../../../../resources/theme.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.librinno.ui.issue.Issue">
    <children>
-      <JFXButton fx:id="cancel" layoutX="53.0" layoutY="57.0" onAction="#cancel" text="Cancel" />
-      <JFXButton fx:id="give" layoutX="151.0" layoutY="57.0" onAction="#give" text="Give" />
-      <JFXTextField fx:id="BookID" layoutX="70.0" layoutY="24.0" prefHeight="25.0" prefWidth="52.0" promptText="Book ID" />
-      <JFXTextField fx:id="PatronID" layoutX="151.0" layoutY="24.0" onAction="#give" prefHeight="25.0" prefWidth="52.0" promptText="Patron ID" />
-      <Text layoutX="35.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Give" />
-      <Text layoutX="130.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="to" />
+      <AnchorPane layoutX="32.0" layoutY="24.0" prefHeight="111.0" prefWidth="267.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="20.0">
+         <children>
+            <JFXTextField fx:id="BookID" layoutX="64.0" layoutY="33.0" prefHeight="31.0" prefWidth="72.0" promptText="Doc ID" />
+            <JFXTextField fx:id="PatronID" layoutX="188.0" layoutY="33.0" onAction="#give" prefHeight="31.0" prefWidth="79.0" promptText="Patron ID" />
+            <JFXButton fx:id="cancel" layoutX="32.0" layoutY="80.0" onAction="#cancel" text="Cancel" />
+            <JFXButton fx:id="give" layoutX="203.0" layoutY="80.0" onAction="#give" text="Give" />
+            <Text fill="WHITE" layoutX="18.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Give" />
+            <Text fill="WHITE" layoutX="149.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="to" />
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

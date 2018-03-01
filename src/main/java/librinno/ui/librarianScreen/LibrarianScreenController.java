@@ -57,13 +57,13 @@ public class LibrarianScreenController {
     }
 
     @FXML
-    void editDoc(ActionEvent event) {
-
+    void editDoc(ActionEvent event) throws IOException {
+        Assist.loadStage(getClass().getResource("../editDoc/EditDoc.fxml"));
     }
 
     @FXML
-    void editPatron(ActionEvent event) {
-
+    void editPatron(ActionEvent event) throws IOException {
+        Assist.loadStage(getClass().getResource("../EditPatron/EditPatron.fxml"));
     }
 
     @FXML
