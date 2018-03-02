@@ -20,13 +20,13 @@ public class Main {
         //use for project
         //enter information which will be put in database
         Database db = new Database();
-        Librarian l=new Librarian();
-        db.user_creation(l);
+        //Librarian l=new Librarian();
+        //db.user_creation(l);
         System.out.println("Creating user:");
         //l.add_user();
         //l.add_book();
         //l.modify_book(100);
-        l.get_all_users();
+        Librarian.get_all_users();
     }
 
 
