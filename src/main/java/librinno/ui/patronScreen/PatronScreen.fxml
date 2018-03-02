@@ -56,12 +56,12 @@
                               </Group>
                               <Group layoutX="428.0" layoutY="119.0">
                                  <children>
-                                    <JFXButton text=" ">
+                                    <JFXButton fx:id="copiesButton" onAction="#showCopies" text=" ">
                                        <graphic>
                                           <MaterialIconView fill="WHITE" glyphName="BOOK" size="60" text="" wrappingWidth="51.0" />
                                        </graphic>
                                     </JFXButton>
-                                    <Text fx:id="bookCount" fill="WHITE" layoutX="34.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3">
+                                    <Text fx:id="bookCount" fill="WHITE" layoutX="34.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
                                        <font>
                                           <Font size="17.0" />
                                        </font></Text>

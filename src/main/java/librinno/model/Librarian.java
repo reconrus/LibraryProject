@@ -98,12 +98,8 @@ public class Librarian extends User {
         }
     }
 
-<<<<<<< HEAD
-    public LinkedList<User> get_all_users() {
-=======
     public static LinkedList<User> get_all_users() {
         Database db = new Database();
->>>>>>> UserTableOut
         LinkedList<User> users = new LinkedList<User>();
         try {
             Statement stmt = db.con.createStatement();
@@ -122,18 +118,12 @@ public class Librarian extends User {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-<<<<<<< HEAD
-        //вам для удобства,чтобы видели,что брать
+        //вам для удобства,чтобы видели,что брать TODO delete
        // for(int i=0;i<users.size();i++){
         //   System.out.println(users.get(i).get_name()+" "+users.get(i).get_adress()+
         //   " "+users.get(i).get_number()+" "+users.get(i).get_another_card_number()+" "+users.get(i).get_type()+" "+users.get(i).get_password());
        // }
-=======
-        for(int i=0;i<users.size();i++){
-            System.out.println(users.get(i).get_name()+" "+users.get(i).get_adress()+
-                    " "+users.get(i).get_number()+" "+users.get(i).get_another_card_number()+" "+users.get(i).get_type()+" "+users.get(i).get_password());
-        }
->>>>>>> UserTableOut
+
         return users;
     }
 }

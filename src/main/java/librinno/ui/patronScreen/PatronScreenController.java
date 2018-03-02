@@ -25,6 +25,9 @@ public class PatronScreenController {
     private JFXButton logout;
 
     @FXML
+    private JFXButton copiesButton;
+
+    @FXML
     private Text cardNumber;
 
     @FXML
@@ -41,6 +44,7 @@ public class PatronScreenController {
 
     @FXML
     private JFXTreeTableView<?> reserveTable;
+
     @FXML
     private void logoutAction(ActionEvent event) throws IOException {
         Assist.closeStage(logout);
@@ -49,6 +53,15 @@ public class PatronScreenController {
         Assist.loadStage(getClass().getResource("/main/java/librinno/ui/login/LoginScreen.fxml"));
 
     }
+
+    @FXML
+    private void showCopies(ActionEvent event)throws IOException{
+
+        Assist.loadStage(getClass().getResource("/main/java/librinno/ui/patronScreen/PatronSDocuments.fxml"));
+
+    }
+
+
 
 
 
