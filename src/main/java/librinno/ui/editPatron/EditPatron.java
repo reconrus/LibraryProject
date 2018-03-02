@@ -7,10 +7,13 @@ import com.jfoenix.controls.JFXToggleButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import main.java.librinno.model.Database;
+import main.java.librinno.model.Librarian;
 import main.java.librinno.model.User;
 import main.java.librinno.ui.assist.Assist;
 
 public class EditPatron {
+
+    private User userEd;
 
     @FXML
     private JFXTextField phone;
@@ -45,13 +48,23 @@ public class EditPatron {
         String addressText= address.getText();
         String phoneNum= phone.getText();
         Boolean isStudent= confirm.isArmed();
-        if (isStudent){
-            Database.user_creation(new User(user,phoneNum, addressText, "Student", pass));
-        }
-        else{
-            Database.user_creation(new User(user,phoneNum, addressText, "Faculity", pass));
-        }
+        userEd.set_adress(addressText);
+        userEd.set_name(user);
+        userEd.set_password(pass);
+        userEd.set_number(phoneNum);
+        Librarian.modify_user(userEd);
         Assist.closeStage(confirm);
     }
+
+
+    public void passGUI(User user){
+        name.setText(user.getName());
+        phone.setText(user.getPhone_Number());
+        password.setText(user.get_password());
+        address.setText(user.getAdress());
+        isStudent.setPickOnBounds(user.getType().equals("Student"));
+        userEd=user;
+    }
+
 
 }

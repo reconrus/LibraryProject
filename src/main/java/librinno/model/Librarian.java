@@ -46,8 +46,9 @@ public class Librarian extends User {
         //есть еще идея удалять по именам,но чтобы библиотекарю вылезло уведомление,мол,может удалиться более 1 юзера
     }
 
-    public void modify_user(User user) {
+    public static void modify_user(User user) {
         try {
+            Database db= new Database();
             PreparedStatement pr = db.con.prepareStatement("UPDATE Users_of_the_library " +
                     "SET Name=?,Address=?,Phone_number=?,Type=?,Password=? where Card_number=" + user.get_card_number());
             pr.setString(1, user.get_name());
@@ -123,10 +124,7 @@ public class Librarian extends User {
         //   System.out.println(users.get(i).get_name()+" "+users.get(i).get_adress()+
         //   " "+users.get(i).get_number()+" "+users.get(i).get_another_card_number()+" "+users.get(i).get_type()+" "+users.get(i).get_password());
         // }
-        for (int i = 0; i < users.size(); i++) {
-            System.out.println(users.get(i).get_name() + " " + users.get(i).get_adress() +
-                    " " + users.get(i).get_number() + " " + users.get(i).get_another_card_number() + " " + users.get(i).get_type() + " " + users.get(i).get_password());
-        }
+
 
         return users;
     }

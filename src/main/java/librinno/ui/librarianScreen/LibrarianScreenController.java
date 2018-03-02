@@ -8,14 +8,22 @@ import javafx.collections.ObservableList;
 import javafx.collections.ObservableSet;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import main.java.librinno.model.Book;
 import main.java.librinno.model.Database;
 import main.java.librinno.model.Librarian;
 import main.java.librinno.model.User;
+import main.java.librinno.ui.Register.Register;
+import main.java.librinno.ui.addbook.AddBook;
 import main.java.librinno.ui.assist.Assist;
+import main.java.librinno.ui.editPatron.EditPatron;
 
 import java.io.IOException;
 import java.sql.ResultSet;
@@ -72,15 +80,6 @@ public class LibrarianScreenController {
     private TableColumn<User, String> userType;
 
     @FXML
-    private JFXButton addPatron;
-
-    @FXML
-    private JFXButton deletePatron;
-
-    @FXML
-    private JFXButton editPatron;
-
-    @FXML
     void showTableUser(){
         userID.setCellValueFactory(new PropertyValueFactory<User,Integer>("card_number"));
         userName.setCellValueFactory(new PropertyValueFactory<User,String>("name"));
@@ -93,6 +92,18 @@ public class LibrarianScreenController {
         list.addAll(users);
 
         tableUser.getItems().setAll(list);
+    }
+
+    @FXML
+    void editPatron() throws IOException {
+        User user= tableUser.getSelectionModel().getSelectedItem();
+        FXMLLoader loader= new FXMLLoader(getClass().getResource("../editPatron/EditPatron.fxml"));
+        Parent parent= loader.load();
+        EditPatron reg= (EditPatron) loader.getController();
+        reg.passGUI(user);
+        Stage stage= new Stage(StageStyle.DECORATED);
+        stage.setScene(new Scene(parent));
+        stage.showAndWait();
     }
 
     @FXML
@@ -122,10 +133,10 @@ public class LibrarianScreenController {
         Assist.loadStage(getClass().getResource("../editDoc/EditDoc.fxml"));
     }
 
-    @FXML
-    void editPatron(ActionEvent event) throws IOException {
-        Assist.loadStage(getClass().getResource("../EditPatron/EditPatron.fxml"));
-    }
+    //@FXML
+    //void editPatron(ActionEvent event) throws IOException {
+    //    Assist.loadStage(getClass().getResource("../EditPatron/EditPatron.fxml"));
+    //}
 
     @FXML
     void issue(ActionEvent event) throws IOException {

@@ -6,6 +6,8 @@
 <?import de.jensd.fx.glyphs.icons525.Icons525View?>
 <?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
 <?import de.jensd.fx.glyphs.materialicons.MaterialIconView?>
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -140,7 +142,7 @@
                                     </AnchorPane>
                                  </bottom>
                                  <center>
-                                    <TableView fx:id="tableUser" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                    <TableView fx:id="tableUser" onMouseReleased="#editPatron" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                                       <columns>
                                         <TableColumn fx:id="userID" prefWidth="75.0" text="ID" />
                                         <TableColumn fx:id="userName" prefWidth="75.0" text="Name" />
@@ -151,6 +153,14 @@
                                        <columnResizePolicy>
                                           <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                        </columnResizePolicy>
+                                       <contextMenu>
+                                          <ContextMenu>
+                                            <items>
+                                                <MenuItem mnemonicParsing="false" onAction="#deleteDoc" text="Delete" />
+                                              <MenuItem mnemonicParsing="false" onAction="#editPatron" text="Edit" />
+                                            </items>
+                                          </ContextMenu>
+                                       </contextMenu>
                                     </TableView>
                                  </center>
                               </BorderPane>
