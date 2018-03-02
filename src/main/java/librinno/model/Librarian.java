@@ -103,26 +103,30 @@ public class Librarian extends User {
         LinkedList<User> users = new LinkedList<User>();
         try {
             Statement stmt = db.con.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * from Users_of_the_library");
+            ResultSet rs = stmt.executeQuery("SELECT * FROM Users_of_the_library");
 
             while (rs.next()) {
-                String name=rs.getString("Name");
-                String address=rs.getString("Address");
-                String Phonenumber=rs.getString("Phone_number");
-                int id=rs.getInt("Card_number");
-                String type=rs.getString("Type");
-                String password=rs.getString("Password");
-                User user=new User(name, address,Phonenumber,id,type,password);
+                String name = rs.getString("Name");
+                String address = rs.getString("Address");
+                String Phonenumber = rs.getString("Phone_number");
+                int id = rs.getInt("Card_number");
+                String type = rs.getString("Type");
+                String password = rs.getString("Password");
+                User user = new User(name, address, Phonenumber, id, type, password);
                 users.add(user);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        //вам для удобства,чтобы видели,что брать TODO delete
-       // for(int i=0;i<users.size();i++){
+        //вам для удобства,чтобы видели,что брать
+        // for(int i=0;i<users.size();i++){
         //   System.out.println(users.get(i).get_name()+" "+users.get(i).get_adress()+
         //   " "+users.get(i).get_number()+" "+users.get(i).get_another_card_number()+" "+users.get(i).get_type()+" "+users.get(i).get_password());
-       // }
+        // }
+        for (int i = 0; i < users.size(); i++) {
+            System.out.println(users.get(i).get_name() + " " + users.get(i).get_adress() +
+                    " " + users.get(i).get_number() + " " + users.get(i).get_another_card_number() + " " + users.get(i).get_type() + " " + users.get(i).get_password());
+        }
 
         return users;
     }
