@@ -25,10 +25,13 @@ public class EditPatron {
     private JFXTextField name;
 
     @FXML
+    private JFXTextField id;
+
+    @FXML
     private JFXTextField address;
 
     @FXML
-    private JFXToggleButton isStudent;
+    private JFXTextField type;
 
     @FXML
     private JFXButton confirm;
@@ -47,11 +50,13 @@ public class EditPatron {
         String pass= password.getText();
         String addressText= address.getText();
         String phoneNum= phone.getText();
-        Boolean isStudent= confirm.isArmed();
+        String typeUs= type.getText();
         userEd.set_adress(addressText);
         userEd.set_name(user);
         userEd.set_password(pass);
         userEd.set_number(phoneNum);
+        userEd.set_type(typeUs);
+        System.out.println(userEd.get_type());
         Librarian.modify_user(userEd);
         Assist.closeStage(confirm);
     }
@@ -62,7 +67,9 @@ public class EditPatron {
         phone.setText(user.getPhone_Number());
         password.setText(user.get_password());
         address.setText(user.getAdress());
-        isStudent.setPickOnBounds(user.getType().equals("Student"));
+        type.setText(user.get_type());
+        id.setText(user.get_another_card_number());
+        id.setEditable(false);
         userEd=user;
     }
 

@@ -104,6 +104,7 @@ public class LibrarianScreenController {
         Stage stage= new Stage(StageStyle.DECORATED);
         stage.setScene(new Scene(parent));
         stage.showAndWait();
+        showTableUser();
     }
 
     @FXML
