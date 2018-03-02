@@ -56,7 +56,6 @@ public class EditPatron {
         userEd.set_password(pass);
         userEd.set_number(phoneNum);
         userEd.set_type(typeUs);
-        System.out.println(userEd.get_type());
         Librarian.modify_user(userEd);
         Assist.closeStage(confirm);
     }

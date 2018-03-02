@@ -23,6 +23,7 @@ import main.java.librinno.model.User;
 import main.java.librinno.ui.Register.Register;
 import main.java.librinno.ui.addbook.AddBook;
 import main.java.librinno.ui.assist.Assist;
+import main.java.librinno.ui.editDoc.EditDoc;
 import main.java.librinno.ui.editPatron.EditPatron;
 
 import java.io.IOException;
@@ -44,7 +45,7 @@ public class LibrarianScreenController {
     private JFXButton editDoc;
 
     @FXML
-    private TableView<?> tableBook;
+    private TableView<Book> tableBook;
 
     @FXML
     private TableColumn<Book, String> id;
@@ -97,14 +98,18 @@ public class LibrarianScreenController {
     @FXML
     void editPatron() throws IOException {
         User user= tableUser.getSelectionModel().getSelectedItem();
-        FXMLLoader loader= new FXMLLoader(getClass().getResource("../editPatron/EditPatron.fxml"));
-        Parent parent= loader.load();
-        EditPatron reg= (EditPatron) loader.getController();
-        reg.passGUI(user);
-        Stage stage= new Stage(StageStyle.DECORATED);
-        stage.setScene(new Scene(parent));
-        stage.showAndWait();
-        showTableUser();
+        if (user==null){
+            Assist.error();
+        }else {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../editPatron/EditPatron.fxml"));
+            Parent parent = loader.load();
+            EditPatron reg = (EditPatron) loader.getController();
+            reg.passGUI(user);
+            Stage stage = new Stage(StageStyle.DECORATED);
+            stage.setScene(new Scene(parent));
+            stage.showAndWait();
+            showTableUser();
+        }
     }
 
     @FXML
@@ -130,14 +135,21 @@ public class LibrarianScreenController {
     }
 
     @FXML
-    void editDoc(ActionEvent event) throws IOException {
-        Assist.loadStage(getClass().getResource("../editDoc/EditDoc.fxml"));
+    void editDoc() throws IOException {
+        Book book= tableBook.getSelectionModel().getSelectedItem();
+        if (book==null){
+            Assist.error();
+        }else {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../editDoc/EditDoc.fxml"));
+            Parent parent = loader.load();
+            EditDoc reg = (EditDoc) loader.getController();
+            reg.passGUI(book);
+            Stage stage = new Stage(StageStyle.DECORATED);
+            stage.setScene(new Scene(parent));
+            stage.showAndWait();
+            showTableUser();
+        }
     }
-
-    //@FXML
-    //void editPatron(ActionEvent event) throws IOException {
-    //    Assist.loadStage(getClass().getResource("../EditPatron/EditPatron.fxml"));
-    //}
 
     @FXML
     void issue(ActionEvent event) throws IOException {

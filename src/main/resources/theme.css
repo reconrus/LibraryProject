@@ -4,8 +4,6 @@
     -fx-primarytext : #B2B2B2;
     -fx-blue: #1976D2;
     -fx-red: #FF0000;
-    -fx-text-fill: White;
-    -fx-text: White;
 }
 
 .button{
@@ -31,7 +29,11 @@
     -fx-text-fill: Black;
     -fx-text: Black;	
 }
-.context-menu{
-    -fx-text-fill: Black;
-    -fx-text: Black;
+.text-field{
+    -fx-text-fill: White;
+    -fx-text: White;
+}
+.password-field{
+    -fx-text-fill: White;
+    -fx-text: White;
 }

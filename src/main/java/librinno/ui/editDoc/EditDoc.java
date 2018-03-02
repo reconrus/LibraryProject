@@ -5,6 +5,7 @@ import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javassist.compiler.ast.Keyword;
 import main.java.librinno.model.Book;
 import main.java.librinno.model.Database;
 import main.java.librinno.ui.assist.Assist;
@@ -41,6 +42,8 @@ public class EditDoc {
     @FXML
     private JFXRadioButton isReference;
 
+    private Book bookEd;
+
     @FXML
     void cancel(ActionEvent event) { Assist.closeStage(cancel);}
 
@@ -54,11 +57,27 @@ public class EditDoc {
         String bookPublisher= publisher.getText();
         Boolean bestseller= isBestseller.isArmed();
         Boolean reference= isReference.isArmed();
-        //Database db= new Database();
-        //Book book= new Book(bookTitle,bookAuthor,bookPublisher,Integer.parseInt(bookEdition),Integer.parseInt(bookPrice),bookKeyWords,bestseller,999,false);
-        //db.book_creation(book);
+        bookEd.setTitle(bookTitle);
+        bookEd.setPrice(Integer.parseInt(bookPrice));
+        bookEd.setAuthor(bookAuthor);
+        bookEd.setEdition(Integer.parseInt(bookEdition));
+        bookEd.setKeyWords(bookKeyWords);
+        bookEd.setPublisher(bookPublisher);
         Assist.closeStage(cancel);
 
+    }
+
+    public void passGUI(Book book){
+        name.setText(book.getTitle());
+        price.setText(""+book.getPrice());
+        author.setText(book.getAuthor());
+        edition.setText(""+book.getEdition());
+        keyWords.setText(book.getKeyWords());
+        publisher.setText(book.getPublisher());
+        name.setText(book.getTitle());
+        isBestseller.setSelected(book.get_is_bestseller());
+        isReference.setSelected(book.get_reference());
+        bookEd=book;
     }
 
 }

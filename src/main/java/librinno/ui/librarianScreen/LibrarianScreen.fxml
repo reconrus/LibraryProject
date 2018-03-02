@@ -142,7 +142,7 @@
                                     </AnchorPane>
                                  </bottom>
                                  <center>
-                                    <TableView fx:id="tableUser" onMouseReleased="#editPatron" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                    <TableView fx:id="tableUser" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                                       <columns>
                                         <TableColumn fx:id="userID" prefWidth="75.0" text="ID" />
                                         <TableColumn fx:id="userName" prefWidth="75.0" text="Name" />
