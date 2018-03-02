@@ -157,4 +157,14 @@ public class LibrarianScreenController {
 
     }
 
+    @FXML
+    void issueCopy(ActionEvent event) throws IOException{
+
+    }
+
+    @FXML
+    void returnDocument(ActionEvent event) throws IOException{
+
+    }
+
 }
