@@ -16,6 +16,9 @@ public class EditDoc {
     private JFXTextField publisher;
 
     @FXML
+    private JFXTextField id;
+
+    @FXML
     private JFXTextField name;
 
     @FXML
@@ -29,6 +32,8 @@ public class EditDoc {
 
     @FXML
     private JFXTextField keyWords;
+    @FXML
+    private JFXTextField year;
 
     @FXML
     private JFXRadioButton isBestseller;
@@ -55,6 +60,7 @@ public class EditDoc {
         String bookEdition= edition.getText();
         String bookKeyWords= keyWords.getText();
         String bookPublisher= publisher.getText();
+        String bookYear= year.getText();
         Boolean bestseller= isBestseller.isArmed();
         Boolean reference= isReference.isArmed();
         bookEd.setTitle(bookTitle);
@@ -63,6 +69,9 @@ public class EditDoc {
         bookEd.setEdition(Integer.parseInt(bookEdition));
         bookEd.setKeyWords(bookKeyWords);
         bookEd.setPublisher(bookPublisher);
+        bookEd.set_is_bestseller(bestseller);
+        bookEd.set_reference(reference);
+        bookEd.setYear(Integer.parseInt(bookYear));
         Assist.closeStage(cancel);
 
     }
@@ -75,8 +84,11 @@ public class EditDoc {
         keyWords.setText(book.getKeyWords());
         publisher.setText(book.getPublisher());
         name.setText(book.getTitle());
+        year.setText(book.getYear()+"");
         isBestseller.setSelected(book.get_is_bestseller());
         isReference.setSelected(book.get_reference());
+        id.setText(book.getId()+"");
+        id.setEditable(false);
         bookEd=book;
     }
 

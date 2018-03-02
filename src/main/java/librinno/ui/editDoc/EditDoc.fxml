@@ -9,9 +9,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="382.0" prefWidth="355.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.librinno.ui.editDoc.EditDoc">
+<AnchorPane prefHeight="416.0" prefWidth="355.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.librinno.ui.editDoc.EditDoc">
    <children>
-      <Group layoutX="62.0" layoutY="67.0">
+      <Group layoutX="62.0" layoutY="98.0">
          <children>
             <JFXTextField fx:id="name" prefHeight="25.0" prefWidth="232.0" promptText="Title" />
             <JFXTextField fx:id="author" layoutY="34.0" prefHeight="25.0" prefWidth="232.0" promptText="Author" />
@@ -19,13 +19,15 @@
             <JFXTextField fx:id="edition" layoutY="103.0" prefHeight="25.0" prefWidth="232.0" promptText="Edition" />
             <JFXTextField fx:id="price" layoutY="136.0" prefHeight="25.0" prefWidth="232.0" promptText="Price" />
             <JFXTextField fx:id="keyWords" layoutY="170.0" onAction="#confirm" prefHeight="25.0" prefWidth="232.0" promptText="Key Words" />
-            <JFXRadioButton fx:id="isBestseller" layoutX="-7.0" layoutY="210.0" prefHeight="17.0" prefWidth="95.0" text="Bestseller" />
-            <JFXRadioButton fx:id="isReference" layoutX="106.0" layoutY="210.0" prefHeight="17.0" prefWidth="111.0" text="Reference Book" />
+            <JFXRadioButton fx:id="isBestseller" layoutX="-7.0" layoutY="236.0" prefHeight="17.0" prefWidth="95.0" text="Bestseller" />
+            <JFXRadioButton fx:id="isReference" layoutX="101.0" layoutY="236.0" prefHeight="17.0" prefWidth="111.0" text="Reference Book" />
+            <JFXTextField fx:id="id" layoutY="-32.0" prefHeight="25.0" prefWidth="232.0" promptText="ID" />
+            <JFXTextField fx:id="year" layoutY="200.0" prefHeight="25.0" prefWidth="232.0" promptText="Year" />
          </children>
       </Group>
-      <JFXButton fx:id="cancel" layoutX="62.0" layoutY="330.0" onAction="#cancel" prefHeight="31.0" prefWidth="67.0" text="Cancel" />
-      <JFXButton fx:id="confirm" layoutX="220.0" layoutY="330.0" onAction="#confirm" prefHeight="31.0" prefWidth="74.0" text="Confirm" />
-      <Text fill="WHITE" layoutX="62.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter new values" textAlignment="CENTER" wrappingWidth="231.99999779462814">
+      <JFXButton fx:id="cancel" layoutX="59.0" layoutY="361.0" onAction="#cancel" prefHeight="31.0" prefWidth="67.0" text="Cancel" />
+      <JFXButton fx:id="confirm" layoutX="219.0" layoutY="361.0" onAction="#confirm" prefHeight="31.0" prefWidth="74.0" text="Confirm" />
+      <Text fill="WHITE" layoutX="59.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter new values" textAlignment="CENTER" wrappingWidth="231.99999779462814">
          <font>
             <Font size="20.0" />
          </font>
