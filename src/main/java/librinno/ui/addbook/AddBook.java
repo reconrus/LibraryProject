@@ -39,6 +39,9 @@ public class AddBook {
     private JFXButton cancel;
 
     @FXML
+    private JFXTextField amount;
+
+    @FXML
     void cancel(ActionEvent event) { Assist.closeStage(cancel);}
 
     @FXML
@@ -49,6 +52,7 @@ public class AddBook {
         String bookEdition= edition.getText();
         String bookKeyWords= keyWords.getText();
         String bookPublisher= publisher.getText();
+        String bookAmount= amount.getText();
         Boolean bestseller= isBestseller.isArmed();
         if ((bookAuthor.isEmpty())||(bookPrice.isEmpty())||(bookPublisher.isEmpty())||(bookTitle.isEmpty())){
             Assist.error();
