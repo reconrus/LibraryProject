@@ -45,19 +45,14 @@ public class EditPatron {
         String addressText= address.getText();
         String phoneNum= phone.getText();
         Boolean isStudent= confirm.isArmed();
-        if ((user.isEmpty())||pass.isEmpty()||addressText.isEmpty()||phoneNum.isEmpty()){
-            Assist.error();
+        /*if (isStudent){
+            Database.user_creation(new User(user,phoneNum, addressText, "Student", pass));
         }
         else{
-            Database db= new Database();
-            if (isStudent){
-                Database.user_creation(new User(user,phoneNum, addressText, "Student", pass));
-            }
-            else{
-                Database.user_creation(new User(user,phoneNum, addressText, "Faculity", pass));
-            }
-            Assist.closeStage(confirm);
+            Database.user_creation(new User(user,phoneNum, addressText, "Faculity", pass));
         }
+        */
+        Assist.closeStage(confirm);
     }
 
 }

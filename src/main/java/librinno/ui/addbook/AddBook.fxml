@@ -17,8 +17,9 @@
             <JFXTextField fx:id="edition" layoutY="103.0" prefHeight="25.0" prefWidth="232.0" promptText="Edition" />
             <JFXTextField fx:id="price" layoutY="136.0" prefHeight="25.0" prefWidth="232.0" promptText="Price" />
             <JFXTextField fx:id="keyWords" layoutY="170.0" prefHeight="25.0" prefWidth="232.0" promptText="Key Words" />
-            <JFXRadioButton fx:id="isBestseller" layoutX="-7.0" layoutY="245.0" prefHeight="17.0" prefWidth="95.0" text="Bestseller" />
             <JFXTextField fx:id="amount" layoutY="205.0" prefHeight="25.0" prefWidth="232.0" promptText="Amount" />
+            <JFXRadioButton fx:id="isBestseller" layoutX="-7.0" layoutY="245.0" prefHeight="17.0" prefWidth="95.0" text="Bestseller" />
+            <JFXRadioButton fx:id="isReference" layoutX="100.0" layoutY="245.0" prefHeight="17.0" prefWidth="111.0" text="Reference Book" />
          </children>
       </Group>
       <JFXButton fx:id="cancel" layoutX="62.0" layoutY="313.0" onAction="#cancel" prefHeight="31.0" prefWidth="67.0" text="Cancel" />

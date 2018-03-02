@@ -33,6 +33,9 @@ public class AddBook {
     private JFXRadioButton isBestseller;
 
     @FXML
+    private JFXRadioButton isReference;
+
+    @FXML
     private JFXButton confirm;
 
     @FXML
@@ -54,6 +57,7 @@ public class AddBook {
         String bookPublisher= publisher.getText();
         String bookAmount= amount.getText();
         Boolean bestseller= isBestseller.isArmed();
+        Boolean reference= isReference.isArmed();
         if ((bookAuthor.isEmpty())||(bookPrice.isEmpty())||(bookPublisher.isEmpty())||(bookTitle.isEmpty())){
             Assist.error();
         }
