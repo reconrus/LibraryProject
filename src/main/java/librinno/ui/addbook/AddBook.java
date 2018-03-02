@@ -33,10 +33,16 @@ public class AddBook {
     private JFXRadioButton isBestseller;
 
     @FXML
+    private JFXRadioButton isReference;
+
+    @FXML
     private JFXButton confirm;
 
     @FXML
     private JFXButton cancel;
+
+    @FXML
+    private JFXTextField amount;
 
     @FXML
     void cancel(ActionEvent event) { Assist.closeStage(cancel);}
@@ -49,7 +55,9 @@ public class AddBook {
         String bookEdition= edition.getText();
         String bookKeyWords= keyWords.getText();
         String bookPublisher= publisher.getText();
+        String bookAmount= amount.getText();
         Boolean bestseller= isBestseller.isArmed();
+        Boolean reference= isReference.isArmed();
         if ((bookAuthor.isEmpty())||(bookPrice.isEmpty())||(bookPublisher.isEmpty())||(bookTitle.isEmpty())){
             Assist.error();
         }

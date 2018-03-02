@@ -37,6 +37,9 @@ public class EditDoc {
 
     @FXML
     private JFXButton cancel;
+    
+    @FXML
+    private JFXRadioButton isReference;
 
     @FXML
     void cancel(ActionEvent event) { Assist.closeStage(cancel);}
@@ -50,15 +53,12 @@ public class EditDoc {
         String bookKeyWords= keyWords.getText();
         String bookPublisher= publisher.getText();
         Boolean bestseller= isBestseller.isArmed();
-        if ((bookAuthor.isEmpty())||(bookPrice.isEmpty())||(bookPublisher.isEmpty())||(bookTitle.isEmpty())){
-            Assist.error();
-        }
-        else{
-            Database db= new Database();
-            Book book= new Book(bookTitle,bookAuthor,bookPublisher,Integer.parseInt(bookEdition),Integer.parseInt(bookPrice),bookKeyWords,bestseller,999,false);
-            db.book_creation(book);
-            Assist.closeStage(cancel);
-        }
+        Boolean reference= isReference.isArmed();
+        //Database db= new Database();
+        //Book book= new Book(bookTitle,bookAuthor,bookPublisher,Integer.parseInt(bookEdition),Integer.parseInt(bookPrice),bookKeyWords,bestseller,999,false);
+        //db.book_creation(book);
+        Assist.closeStage(cancel);
+
     }
 
 }
