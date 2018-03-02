@@ -26,3 +26,8 @@
 .tab-header-background{
     -fx-background-color: -fx-primary;
 }
+
+.table-cell{
+    -fx-text-fill: Black;
+    -fx-text: Black;	
+}

@@ -98,10 +98,11 @@ public class Librarian extends User {
         }
     }
 
-    public void get_all_users() {
+    public static LinkedList<User> get_all_users() {
+        Database db = new Database();
         LinkedList<User> users = new LinkedList<User>();
         try {
-            Statement stmt = Database.con.createStatement();
+            Statement stmt = db.con.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * from Users_of_the_library");
 
             while (rs.next()) {
@@ -118,8 +119,9 @@ public class Librarian extends User {
             e.printStackTrace();
         }
         for(int i=0;i<users.size();i++){
-           System.out.println(users.get(i).get_name()+" "+users.get(i).get_adress()+
-           " "+users.get(i).get_number()+" "+users.get(i).get_another_card_number()+" "+users.get(i).get_type()+" "+users.get(i).get_password());
+            System.out.println(users.get(i).get_name()+" "+users.get(i).get_adress()+
+                    " "+users.get(i).get_number()+" "+users.get(i).get_another_card_number()+" "+users.get(i).get_type()+" "+users.get(i).get_password());
         }
+        return users;
     }
 }

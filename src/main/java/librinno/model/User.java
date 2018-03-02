@@ -64,9 +64,37 @@ public String get_password(){
         this.type = type;
     }
     public void set_another_card_number(int id){this.card_number=id;}
-    public int get_another_card_number(){return card_number;}
+    public String get_another_card_number(){return ""+card_number;}
     public String get_type() {
         return type;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getCard_number() {
+        return card_number;
+    }
+
+    public String getAdress() {
+        return adress;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public String getPhone_Number() {
+        return Phone_Number;
+    }
+
+    public int getZaregID() {
+        return zaregID;
     }
 
     /**
