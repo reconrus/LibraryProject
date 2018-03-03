@@ -66,49 +66,59 @@ public class Librarian extends User {
     }
 
     public void add_CopiesOfMaterial(int id,int number){
-        try {
-            Statement stmt = db.con.createStatement();
-            ResultSet rs;
-            rs = stmt.executeQuery("SELECT Id_of_original FROM Copy");
-            while (rs.next()){
-                if (rs.getInt(1)==id){
-                    for (int i = 0; i <number ; i++) {
-                        PreparedStatement prst = db.con.prepareStatement("insert into Copy (id_of_original,Owner,Time_left) values(?,?,?)");
-                        prst.setInt(1, id);
-                        prst.setInt(2, 0);
-                        prst.setInt(3, 999);
-                        prst.executeUpdate();
+        try {if (number>0) {
+                Statement stmt = db.con.createStatement();
+                ResultSet rs;
+                rs = stmt.executeQuery("SELECT Id_of_original FROM Copy");
+                while (rs.next()) {
+                    if (rs.getInt(1) == id) {
+                        for (int i = 0; i < number; i++) {
+                            PreparedStatement prst = db.con.prepareStatement("insert into Copy (id_of_original,Owner,Time_left) values(?,?,?)");
+                            prst.setInt(1, id);
+                            prst.setInt(2, 0);
+                            prst.setInt(3, 999);
+                            prst.executeUpdate();
+                        }
+                        return;
                     }
-                    return;
                 }
-            }
+        }
         }catch (SQLException e) {
             e.printStackTrace();
         }
     }
-    public void add_book(String title, String author, String publisher, int edition, int price, String keyWords, Boolean is_bestseller,boolean reference,int year, int number) {
+
+    public void add_book(String title, String author, String publisher, int edition, int price, String keyWords, Boolean is_bestseller,boolean reference,int year,int amount) throws SQLException {
         /*
         * To add book, you need to send all information about book
         * ID will be created in DB with auto_increment
         * time_left will be 999 and owner 0 - because only librarian(Id =0) can add books
         * */
-        Book book = new Book(title,author,publisher,edition,price,keyWords,is_bestseller,reference,year, number);
+        Book book = new Book(title,author,publisher,edition,price,keyWords,is_bestseller,reference,year);
         db.book_creation(book);
+        ArrayList<Integer> arrayList=db.isBookAlreadyExist(book);
+        add_CopiesOfMaterial(arrayList.get(1),amount-1);
     }
     public void add_article(String title,String author,int price, String keyWords, Boolean is_bestseller,
-                            boolean reference,String journal,String editor,int yearOfDate,int monthOfDate,int dayOfDate, int number) throws SQLException {
+                            boolean reference,String journal,String editor,int yearOfDate,int monthOfDate,int dayOfDate,int amount) throws SQLException {
         /*
         * To add article, you need to send all information about article
         * ID will be created in DB with auto_increment
         * time_left will be 999 and owner 0 - because only librarian(Id =0) can add articles
         * */
-        Article article = new Article(title,author,price,keyWords,is_bestseller,reference,journal,editor,yearOfDate,monthOfDate,dayOfDate, number);
+        Article article = new Article(title,author,price,keyWords,is_bestseller,reference,journal,editor,yearOfDate,monthOfDate,dayOfDate);
         db.article_creation(article);
+        ArrayList<Integer> arrayList=db.isArticleAlreadyExist(article);
+        add_CopiesOfMaterial(arrayList.get(1),amount-1);
     }
-    public void add_AV(String title,String author,int price, String keyWords, Boolean is_bestseller,boolean reference, int number)throws SQLException{
-        AV av = new AV(title,author,price,keyWords,is_bestseller,reference, number);
+
+    public void add_AV(String title,String author,int price, String keyWords, Boolean is_bestseller,boolean reference,int amount)throws SQLException{
+        AV av = new AV(title,author,price,keyWords,is_bestseller,reference);
         db.av_creation(av);
+        ArrayList<Integer> arrayList=db.isAVAlreadyExist(av);
+        add_CopiesOfMaterial(arrayList.get(1),amount-1);
     }
+
     public void delete_AV_by_id(int id){
         try {
             PreparedStatement pr = db.con.prepareStatement("DELETE from AV WHERE id=" + id);
@@ -227,7 +237,7 @@ public class Librarian extends User {
                 String keyWord = rs.getString("Keywords");
                 boolean is_bestseller = rs.getBoolean("is_bestseller");
                 boolean is_reference = rs.getBoolean("is_reference");
-                AV av = new AV(name,author,price,keyWord,is_bestseller,is_reference, number);
+                AV av = new AV(name,author,price,keyWord,is_bestseller,is_reference);
                 avs.add(av);
                 numberOfAV.add(number);
             }
@@ -269,7 +279,7 @@ public class Librarian extends User {
                 int yearDate =rs.getDate("Date").getYear();
                 int monthDate =rs.getDate("Date").getMonth();
                 int dayDate =rs.getDate("Date").getDay();
-                Article article = new Article(name,author,price,keyWord,is_bestseller,is_reference,journal,editor,yearDate,monthDate,dayDate, number);
+                Article article = new Article(name,author,price,keyWord,is_bestseller,is_reference,journal,editor,yearDate,monthDate,dayDate);
                 articles.add(article);
                 numberOfArticle.add(number);
             }
@@ -320,7 +330,7 @@ public class Librarian extends User {
                 boolean is_bestseller = rs.getBoolean("is_bestseller");
                 boolean is_reference = rs.getBoolean("is_reference");
                 int year = rs.getInt("Year");
-                Book book = new Book(name,author,publisher,edition,price,keyWord,is_bestseller,is_reference,year, number);
+                Book book = new Book(name,author,publisher,edition,price,keyWord,is_bestseller,is_reference,year);
                 books.add(book);
             }
         }catch (SQLException e) {

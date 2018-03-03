@@ -60,7 +60,7 @@ public class Book extends Material {
         setReference(sc.nextBoolean());
     }
 
-    public Book(String title, String author, String publisher, int edition, int price, String keyWords, Boolean is_bestseller,boolean reference,int year, int number) {
+    public Book(String title, String author, String publisher, int edition, int price, String keyWords, Boolean is_bestseller,boolean reference,int year) {
         setTitle(title);
         setAuthor(author);
         setPublisher(publisher);
@@ -70,6 +70,5 @@ public class Book extends Material {
         setIs_bestseller(is_bestseller);
         setReference(reference);
         setYear(year);
-        setNumber(number);
     }
 }
