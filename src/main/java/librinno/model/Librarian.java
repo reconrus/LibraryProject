@@ -36,8 +36,9 @@ public class Librarian extends User {
         }
     }
 
-    public void delete_user_by_id(int user_id) {
+    public static void delete_user_by_id(int user_id) {
         try {
+            Database db= new Database();
             PreparedStatement pr = db.con.prepareStatement("DELETE from Users_of_the_library WHERE Card_number=" + user_id);
             pr.executeUpdate();
         } catch (SQLException e) {
