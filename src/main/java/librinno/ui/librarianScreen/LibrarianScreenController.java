@@ -143,6 +143,8 @@ public class LibrarianScreenController {
     @FXML
     void deletePatron(ActionEvent event) {
         User user= tableUser.getSelectionModel().getSelectedItem();
+        Librarian.delete_user_by_id(user.card_number);
+        showTableUser();
     }
 
 
