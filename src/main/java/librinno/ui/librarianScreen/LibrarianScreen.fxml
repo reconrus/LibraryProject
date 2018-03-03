@@ -156,7 +156,7 @@
                                        <contextMenu>
                                           <ContextMenu>
                                             <items>
-                                                <MenuItem mnemonicParsing="false" onAction="#deleteDoc" text="Delete" />
+                                                <MenuItem mnemonicParsing="false" onAction="#deletePatron" text="Delete" />
                                               <MenuItem mnemonicParsing="false" onAction="#editPatron" text="Edit" />
                                             </items>
                                           </ContextMenu>
