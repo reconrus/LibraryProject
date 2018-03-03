@@ -86,27 +86,27 @@ public class Librarian extends User {
             e.printStackTrace();
         }
     }
-    public void add_book(String title, String author, String publisher, int edition, int price, String keyWords, Boolean is_bestseller,boolean reference,int year) {
+    public void add_book(String title, String author, String publisher, int edition, int price, String keyWords, Boolean is_bestseller,boolean reference,int year, int number) {
         /*
         * To add book, you need to send all information about book
         * ID will be created in DB with auto_increment
         * time_left will be 999 and owner 0 - because only librarian(Id =0) can add books
         * */
-        Book book = new Book(title,author,publisher,edition,price,keyWords,is_bestseller,reference,year);
+        Book book = new Book(title,author,publisher,edition,price,keyWords,is_bestseller,reference,year, number);
         db.book_creation(book);
     }
     public void add_article(String title,String author,int price, String keyWords, Boolean is_bestseller,
-                            boolean reference,String journal,String editor,int yearOfDate,int monthOfDate,int dayOfDate) throws SQLException {
+                            boolean reference,String journal,String editor,int yearOfDate,int monthOfDate,int dayOfDate, int number) throws SQLException {
         /*
         * To add article, you need to send all information about article
         * ID will be created in DB with auto_increment
         * time_left will be 999 and owner 0 - because only librarian(Id =0) can add articles
         * */
-        Article article = new Article(title,author,price,keyWords,is_bestseller,reference,journal,editor,yearOfDate,monthOfDate,dayOfDate);
+        Article article = new Article(title,author,price,keyWords,is_bestseller,reference,journal,editor,yearOfDate,monthOfDate,dayOfDate, number);
         db.article_creation(article);
     }
-    public void add_AV(String title,String author,int price, String keyWords, Boolean is_bestseller,boolean reference)throws SQLException{
-        AV av = new AV(title,author,price,keyWords,is_bestseller,reference);
+    public void add_AV(String title,String author,int price, String keyWords, Boolean is_bestseller,boolean reference, int number)throws SQLException{
+        AV av = new AV(title,author,price,keyWords,is_bestseller,reference, number);
         db.av_creation(av);
     }
     public void delete_AV_by_id(int id){
@@ -227,7 +227,7 @@ public class Librarian extends User {
                 String keyWord = rs.getString("Keywords");
                 boolean is_bestseller = rs.getBoolean("is_bestseller");
                 boolean is_reference = rs.getBoolean("is_reference");
-                AV av = new AV(name,author,price,keyWord,is_bestseller,is_reference);
+                AV av = new AV(name,author,price,keyWord,is_bestseller,is_reference, number);
                 avs.add(av);
                 numberOfAV.add(number);
             }
@@ -269,7 +269,7 @@ public class Librarian extends User {
                 int yearDate =rs.getDate("Date").getYear();
                 int monthDate =rs.getDate("Date").getMonth();
                 int dayDate =rs.getDate("Date").getDay();
-                Article article = new Article(name,author,price,keyWord,is_bestseller,is_reference,journal,editor,yearDate,monthDate,dayDate);
+                Article article = new Article(name,author,price,keyWord,is_bestseller,is_reference,journal,editor,yearDate,monthDate,dayDate, number);
                 articles.add(article);
                 numberOfArticle.add(number);
             }
@@ -280,7 +280,7 @@ public class Librarian extends User {
         articleWithNumber.add(numberOfArticle);
         return articleWithNumber;
     }
-    public ArrayList get_all_books(){
+    public static ArrayList<Book> get_all_books(){
         /*
         * Возвращает два ArrayList'а в ArrayList'е, в первом элементе лист с объетками документа
         * во втором элементе количество копий этого документа
@@ -291,10 +291,10 @@ public class Librarian extends User {
          *      2: |book2|| 7|
          *      3: |book3|| 2|
         * */
-        ArrayList<ArrayList> bookWithNumber = new ArrayList();
+
         Database db = new Database();
         ArrayList<Book> books = new ArrayList<Book>();
-        ArrayList<Integer> numberOfBook = new ArrayList<Integer>();
+
         try {
             Statement stmt = db.con.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM Books");
@@ -320,18 +320,16 @@ public class Librarian extends User {
                 boolean is_bestseller = rs.getBoolean("is_bestseller");
                 boolean is_reference = rs.getBoolean("is_reference");
                 int year = rs.getInt("Year");
-                Book book = new Book(name,author,publisher,edition,price,keyWord,is_bestseller,is_reference,year);
+                Book book = new Book(name,author,publisher,edition,price,keyWord,is_bestseller,is_reference,year, number);
                 books.add(book);
-                numberOfBook.add(number);
             }
         }catch (SQLException e) {
             e.printStackTrace();
         }
-        bookWithNumber.add(books);
-        bookWithNumber.add(numberOfBook);
+
 //        for (int i = 0; i <bookWithNumber.get(0).size() ; i++)
 //            System.out.println(bookWithNumber.get(0).get(i)+" "+bookWithNumber.get(1).get(i));
-        return bookWithNumber;
+        return books;
     }
 
     public static LinkedList<User> get_all_users() {

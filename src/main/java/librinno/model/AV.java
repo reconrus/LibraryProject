@@ -19,13 +19,13 @@ public class AV extends Material {
     }
 
     public AV(String title,String author,int price, String keyWords, Boolean is_bestseller,
-                   boolean reference){
+                   boolean reference, int number){
         setTitle(title);
         setAuthor(author);
         setPrice(price);
         setKeyWords(keyWords);
         setIs_bestseller(is_bestseller);
         setReference(reference);
-
+        setNumber(number);
     }
 }

@@ -23,6 +23,7 @@ public class Material {
     protected String KeyWords;
     protected boolean reference;
     protected boolean is_bestseller;
+    protected int number;
 
 
     public int getId() {
@@ -85,4 +86,7 @@ public class Material {
     public void setReference(boolean reference) {
         this.reference = reference;
     }
+
+    public void setNumber(int number){ this.number = number; }
+    public int getNumber(){ return this.number;}
 }

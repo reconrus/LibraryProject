@@ -31,7 +31,8 @@ public class Article extends Material{ ////////////////////////////////////////
 
     }
     public Article(String title,String author,int price, String keyWords, Boolean is_bestseller,
-                   boolean reference,String journal,String editor,int yearOfDate,int monthOfDate,int dayOfDate){
+                   boolean reference,String journal,String editor,int yearOfDate,int monthOfDate,int dayOfDate,
+                   int number){
         setTitle(title);
         setAuthor(author);
         setPrice(price);
@@ -41,6 +42,7 @@ public class Article extends Material{ ////////////////////////////////////////
         setJournal(journal);
         setEditor(editor);
         setDate(yearOfDate,monthOfDate,dayOfDate);
+        setNumber(number);
     }
 
     public String getJournal() {
