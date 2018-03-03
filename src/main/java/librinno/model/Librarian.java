@@ -121,6 +121,7 @@ public class Librarian extends User {
     }
 
     public void modify_AV(AV av){
+
         try{
             ArrayList arrayList = db.isAVAlreadyExist(av);
             PreparedStatement pr = db.con.prepareStatement("UPDATE AV " +
@@ -176,19 +177,29 @@ public class Librarian extends User {
         }
     }
 
-    public ArrayList getAllDocuments(){
-        ArrayList arrayList=new ArrayList();
 
-        return arrayList;
-    }
 
-    public LinkedList get_all_AV(){
+    public ArrayList get_all_AV(){
+        ArrayList<ArrayList> AVWithNumber = new ArrayList<ArrayList>();
         Database db = new Database();
-        LinkedList<AV> avs = new LinkedList<AV>();
+        ArrayList<AV> avs = new ArrayList<AV>();
+        ArrayList<Integer> numberOfAV = new ArrayList<Integer>();
         try {
             Statement stmt = db.con.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM AV");
             while (rs.next()){
+
+                int number=0;
+                int id=rs.getInt("id");
+                Statement stmt2 = db.con.createStatement();
+                ResultSet rs2;
+                rs2 = stmt2.executeQuery("SELECT * FROM Copy");
+                while (rs2.next()){
+                    if (rs2.getInt("id_of_original") == id){
+                        number++;
+                    }
+                }
+
                 String name = rs.getString("Name");
                 String author = rs.getString("Author");
                 int price =rs.getInt("Price");
@@ -197,19 +208,35 @@ public class Librarian extends User {
                 boolean is_reference = rs.getBoolean("is_reference");
                 AV av = new AV(name,author,price,keyWord,is_bestseller,is_reference);
                 avs.add(av);
+                numberOfAV.add(number);
             }
         }catch (SQLException e) {
             e.printStackTrace();
         }
-        return avs;
+        AVWithNumber.add(avs);
+        AVWithNumber.add(numberOfAV);
+        return AVWithNumber;
     }
-    public LinkedList get_all_articles(){
+    public ArrayList get_all_articles(){
+        ArrayList<ArrayList> articleWithNumber = new ArrayList();
         Database db = new Database();
-        LinkedList<Article> articles = new LinkedList<Article>();
+        ArrayList<Article> articles = new ArrayList<Article>();
+        ArrayList<Integer> numberOfArticle = new ArrayList<Integer>();
         try {
             Statement stmt = db.con.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM Articles");
             while (rs.next()){
+                int number=0;
+                int id=rs.getInt("id");
+                Statement stmt2 = db.con.createStatement();
+                ResultSet rs2;
+                rs2 = stmt2.executeQuery("SELECT * FROM Copy");
+                while (rs2.next()){
+                    if (rs2.getInt("id_of_original") == id){
+                        number++;
+                    }
+                }
+
                 String name = rs.getString("Name");
                 String author = rs.getString("Author");
                 int price =rs.getInt("Price");
@@ -218,27 +245,50 @@ public class Librarian extends User {
                 boolean is_reference = rs.getBoolean("is_reference");
                 String journal = rs.getString("Journal");
                 String editor = rs.getString("Editor");
-                //LocalDate date =rs.getDate("Date").toLocalDate();
                 int yearDate =rs.getDate("Date").getYear();
                 int monthDate =rs.getDate("Date").getMonth();
                 int dayDate =rs.getDate("Date").getDay();
                 Article article = new Article(name,author,price,keyWord,is_bestseller,is_reference,journal,editor,yearDate,monthDate,dayDate);
                 articles.add(article);
+                numberOfArticle.add(number);
             }
         }catch (SQLException e) {
             e.printStackTrace();
         }
-        return articles;
+        articleWithNumber.add(articles);
+        articleWithNumber.add(numberOfArticle);
+        return articleWithNumber;
     }
-    public LinkedList get_all_books(){
+    public ArrayList get_all_books(){
+        /*
+        * Возвращает два ArrayList'а в ArrayList'е, в первом элементе лист с объетками документа
+        * во втором элементе количество копий этого документа
+        * так и в get_all_articles() и get_all_AV()
+        * тип так: |0    ||1 |
+        *          ___________
+        *       1: |book1|| 4|
+         *      2: |book2|| 7|
+         *      3: |book3|| 2|
+        * */
+        ArrayList<ArrayList> bookWithNumber = new ArrayList();
         Database db = new Database();
-        LinkedList<Book> books = new LinkedList<Book>();
-        LinkedList<Integer> numberOfBook = new LinkedList<Integer>();
+        ArrayList<Book> books = new ArrayList<Book>();
+        ArrayList<Integer> numberOfBook = new ArrayList<Integer>();
         try {
             Statement stmt = db.con.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM Books");
             while (rs.next()){
+
+                int number=0;
                 int id=rs.getInt("id");
+                Statement stmt2 = db.con.createStatement();
+                ResultSet rs2;
+                rs2 = stmt2.executeQuery("SELECT * FROM Copy");
+                while (rs2.next()){
+                    if (rs2.getInt("id_of_original") == id){
+                        number++;
+                    }
+                }
 
                 String name = rs.getString("Name");
                 String author = rs.getString("Author");
@@ -251,11 +301,16 @@ public class Librarian extends User {
                 int year = rs.getInt("Year");
                 Book book = new Book(name,author,publisher,edition,price,keyWord,is_bestseller,is_reference,year);
                 books.add(book);
+                numberOfBook.add(number);
             }
         }catch (SQLException e) {
             e.printStackTrace();
         }
-        return books;
+        bookWithNumber.add(books);
+        bookWithNumber.add(numberOfBook);
+//        for (int i = 0; i <bookWithNumber.get(0).size() ; i++)
+//            System.out.println(bookWithNumber.get(0).get(i)+" "+bookWithNumber.get(1).get(i));
+        return bookWithNumber;
     }
 
     public static LinkedList<User> get_all_users() {
