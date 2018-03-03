@@ -226,5 +226,22 @@ public class Database {
         arrayList.add(0);
         return arrayList;
     }
-
+    public User get_information_about_the_user (int id) throws SQLException{
+        Statement stmt=con.createStatement();
+        ResultSet rs=stmt.executeQuery("SELECT * FROM Users_of_the_library WHERE Card_number="+id);
+        String name="";
+        String address="";
+        String Phonenumber="";
+        String type="";
+        String password="";
+        while (rs.next()) {
+            name = rs.getString("Name");
+            address = rs.getString("Address");
+            Phonenumber = rs.getString("Phone_number");
+            type = rs.getString("Type");
+            password = rs.getString("Password");
+        }
+        User user = new User(name, address, Phonenumber, id, type, password);
+        return user;
+    }
 }
