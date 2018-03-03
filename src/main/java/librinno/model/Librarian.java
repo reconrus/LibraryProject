@@ -133,8 +133,12 @@ public class Librarian extends User {
             System.out.println("AV with such id didn't found");
         }
     }
+<<<<<<< HEAD
 
     public void delete_book_by_id(int id) {
+=======
+    public static void delete_book_by_id(int id) {
+>>>>>>> 2d223b99a71e480d73cf78b7523798712828d56d
 
         try {
             PreparedStatement pr = db.con.prepareStatement("DELETE from Books WHERE id=" + id);
@@ -159,10 +163,16 @@ public class Librarian extends User {
 
     public void modify_AV(AV av) {
 
+<<<<<<< HEAD
         try {
             ArrayList arrayList = db.isAVAlreadyExist(av);
             PreparedStatement pr = db.con.prepareStatement("UPDATE AV " +
                     "SET Name=?,Author=?,Price=?,Keywords=?,is_bestseller=?,is_reference=? where id=" + arrayList.get(1));
+=======
+        try{
+            PreparedStatement pr = db.con.prepareStatement("UPDATE AV " +
+                    "SET Name=?,Author=?,Price=?,Keywords=?,is_bestseller=?,is_reference=? where id="+ av.getId());
+>>>>>>> 2d223b99a71e480d73cf78b7523798712828d56d
             pr.setString(1, av.getTitle());
             pr.setString(2, av.getAuthor());
             pr.setInt(3, av.getPrice());
@@ -174,12 +184,17 @@ public class Librarian extends User {
             e.printStackTrace();
         }
     }
+<<<<<<< HEAD
 
     public void modify_article(Article article) {
         try {
             ArrayList arrayList = db.isArticleAlreadyExist(article);
+=======
+    public void modify_article(Article article){
+        try{
+>>>>>>> 2d223b99a71e480d73cf78b7523798712828d56d
             PreparedStatement pr = db.con.prepareStatement("UPDATE Articles " +
-                    "SET Name=?,Author=?,Price=?,Keywords=?,is_bestseller=?,is_reference=?,Journal=?,Editor=?,Date=? where id=" + arrayList.get(1));
+                    "SET Name=?,Author=?,Price=?,Keywords=?,is_bestseller=?,is_reference=?,Journal=?,Editor=?,Date=? where id=" + article.getId());
             pr.setString(1, article.getTitle());
             pr.setString(2, article.getAuthor());
             pr.setInt(3, article.getPrice());
@@ -197,9 +212,12 @@ public class Librarian extends User {
 
     public static void modify_book(Book book) {
         try {
+<<<<<<< HEAD
             ArrayList arrayList = db.isBookAlreadyExist(book);
+=======
+>>>>>>> 2d223b99a71e480d73cf78b7523798712828d56d
             PreparedStatement pr = db.con.prepareStatement("UPDATE Books " +
-                    "SET Name=?,Author=?,Publisher=?,Edition=?,Price=?,Keywords=?,is_bestseller=?,is_reference=? where id=" + arrayList.get(1));
+                    "SET Name=?,Author=?,Publisher=?,Edition=?,Price=?,Keywords=?,is_bestseller=?,is_reference=? where id="+book.getId());
             pr.setString(1, book.getTitle());
             pr.setString(2, book.getAuthor());
             pr.setString(3, book.getPublisher());
@@ -336,7 +354,11 @@ public class Librarian extends User {
                 boolean is_bestseller = rs.getBoolean("is_bestseller");
                 boolean is_reference = rs.getBoolean("is_reference");
                 int year = rs.getInt("Year");
+<<<<<<< HEAD
                 Book book = new Book(id, name, author, publisher, edition, price, keyWord, is_bestseller, is_reference, year,0);
+=======
+                Book book = new Book(id,name,author,publisher,edition,price,keyWord,is_bestseller,is_reference,year, get_number_of_copies_of_book(id));
+>>>>>>> 2d223b99a71e480d73cf78b7523798712828d56d
                 books.add(book);
             }
         } catch (SQLException e) {
@@ -392,6 +414,7 @@ public class Librarian extends User {
         return copies;
     }
 
+<<<<<<< HEAD
     public static LinkedList<Object> get_all_copies_taken_by_user(int user_id) {
         LinkedList<Object> copies = new LinkedList<Object>();
         try {
@@ -447,9 +470,27 @@ public class Librarian extends User {
                     copies.add(book);
                 }
             }
+=======
+
+    public static int get_number_of_copies_of_book(int book_id) {
+        int copies=0;
+        try {
+            Statement stmt = db.con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM Copy where Id_of_original="+book_id);
+            while (rs.next()){
+                copies++;
+            }
+
+>>>>>>> 2d223b99a71e480d73cf78b7523798712828d56d
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return copies;
     }
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> 2d223b99a71e480d73cf78b7523798712828d56d
 }
