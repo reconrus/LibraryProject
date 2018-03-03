@@ -32,41 +32,45 @@
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </JFXButton>
-                              <Group id="text" layoutX="34.0" layoutY="68.0">
+                              <Group layoutX="45.0" layoutY="98.6552734375">
                                  <children>
-                                    <Text fx:id="cardNumber" fill="WHITE" layoutX="11.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Card Number" wrappingWidth="111.13671875">
+                                    <Text fx:id="cardNumber" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Card Number" wrappingWidth="111.13671875">
                                        <font>
                                           <Font size="17.0" />
                                        </font>
                                     </Text>
-                                    <Text fx:id="fullName" fill="WHITE" layoutX="11.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Full Name">
+                                    <Text fx:id="fullName" fill="WHITE" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Full Name">
                                        <font>
                                           <Font size="17.0" />
-                                       </font></Text>
-                                    <Text fx:id="phone" fill="WHITE" layoutX="11.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Phone">
+                                       </font>
+                                    </Text>
+                                    <Text fx:id="phone" fill="WHITE" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Phone">
                                        <font>
                                           <Font size="17.0" />
-                                       </font></Text>
-                                    <Text fx:id="address" fill="WHITE" layoutX="11.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Address" wrappingWidth="170.2138671875">
+                                       </font>
+                                    </Text>
+                                    <Text fx:id="address" fill="WHITE" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Address" wrappingWidth="170.2138671875">
+                                       <font>
+                                          <Font size="17.0" />
+                                       </font>
+                                    </Text>
+                                    <Text fx:id="type" fill="WHITE" layoutX="2.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type" wrappingWidth="90.2138671875">
                                        <font>
                                           <Font size="17.0" />
                                        </font>
                                     </Text>
                                  </children>
                               </Group>
-                              <Group layoutX="428.0" layoutY="119.0">
-                                 <children>
-                                    <JFXButton fx:id="copiesButton" onAction="#showCopies" text=" ">
-                                       <graphic>
-                                          <MaterialIconView fill="WHITE" glyphName="BOOK" size="60" text="" wrappingWidth="51.0" />
-                                       </graphic>
-                                    </JFXButton>
-                                    <Text fx:id="bookCount" fill="WHITE" layoutX="34.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
-                                       <font>
-                                          <Font size="17.0" />
-                                       </font></Text>
-                                 </children>
-                              </Group>
+                              <JFXButton fx:id="copiesButton" layoutX="428.0" layoutY="119.0" onAction="#showCopies" text=" ">
+                                 <graphic>
+                                    <MaterialIconView fill="WHITE" glyphName="BOOK" size="60" text="" wrappingWidth="51.0" />
+                                 </graphic>
+                              </JFXButton>
+                              <Text fx:id="bookCount" fill="WHITE" layoutX="462.0" layoutY="196.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+                                 <font>
+                                    <Font size="17.0" />
+                                 </font>
+                              </Text>
                            </children></AnchorPane>
                     </content>
                   </Tab>
@@ -81,6 +85,13 @@
                                  <left>
                                     <JFXListView prefHeight="360.0" prefWidth="124.0" style="-fx-background-color: #222429;" BorderPane.alignment="CENTER" />
                                  </left>
+                                 <bottom>
+                                    <JFXButton fx:id="reserve" onAction="#reserve" prefHeight="50.0" prefWidth="204.0" text="Reserve" BorderPane.alignment="CENTER">
+                                       <graphic>
+                                          <MaterialIconView fill="WHITE" glyphName="CHROME_READER_MODE" size="40" />
+                                       </graphic>
+                                    </JFXButton>
+                                 </bottom>
                               </BorderPane>
                            </children></AnchorPane>
                     </content>

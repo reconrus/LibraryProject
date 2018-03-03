@@ -17,6 +17,7 @@ import javafx.scene.control.CheckBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import main.java.librinno.ui.assist.Assist;
+import main.java.librinno.ui.patronScreen.PatronScreenController;
 
 
 public class LoginController {
@@ -59,8 +60,8 @@ public class LoginController {
 
 
     private void loadPatron() throws IOException {
-
         Assist.loadStage(getClass().getResource("../patronScreen/PatronScreen.fxml"));
-
+        // TODO: Закинуть объект patron входящего в систему
+        // PatronScreenController.setUserInfo();
     }
 }
