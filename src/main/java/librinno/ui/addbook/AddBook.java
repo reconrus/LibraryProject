@@ -7,7 +7,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import main.java.librinno.model.Book;
 import main.java.librinno.model.Database;
+import main.java.librinno.model.Librarian;
 import main.java.librinno.ui.assist.Assist;
+
+import java.sql.SQLException;
 
 public class AddBook {
 
@@ -51,7 +54,7 @@ public class AddBook {
     void cancel(ActionEvent event) { Assist.closeStage(cancel);}
 
     @FXML
-    void confirm(ActionEvent event) {
+    void confirm(ActionEvent event) throws SQLException {
         String bookTitle= name.getText();
         String bookPrice= price.getText();
         String bookAuthor= author.getText();
@@ -67,9 +70,7 @@ public class AddBook {
             Assist.error();
         }
         else{
-            Database db= new Database();
-            Book book= new Book(bookTitle,bookAuthor,bookPublisher,Integer.parseInt(bookEdition),Integer.parseInt(bookPrice),bookKeyWords,bestseller, reference, Integer.parseInt(bookYear));
-            db.book_creation(book);
+            Librarian.add_book(bookTitle,bookAuthor,bookPublisher,Integer.parseInt(bookEdition),Integer.parseInt(bookPrice),bookKeyWords,bestseller, reference, Integer.parseInt(bookYear),Integer.parseInt(bookAmount));
             Assist.closeStage(cancel);
         }
     }
