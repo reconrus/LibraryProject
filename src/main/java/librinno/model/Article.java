@@ -8,7 +8,7 @@ package main.java.librinno.model;
  *date
  * with setters and getters
  */
-public class Article extends Material{
+public class Article extends Material{ ////////////////////////////////////////
     private String journal;
     private String editor;
     private int[] date;

@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="dataSourceStorageLocal">
-    <data-source name="dmitrDbK@triniti.ru-hoster.com" uuid="7ff036ba-e5de-4715-8903-bba778239277">
-      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" />
-    </data-source>
+    <data-source name="dmitrDbK@triniti.ru-hoster.com" uuid="7ff036ba-e5de-4715-8903-bba778239277" />
   </component>
 </project>
