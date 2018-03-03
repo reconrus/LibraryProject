@@ -1,6 +1,9 @@
 package main.java.librinno.model;
 
 import java.sql.*;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.LinkedList;
 import java.util.Scanner;
 
@@ -62,41 +65,197 @@ public class Librarian extends User {
         }
     }
 
-    public void add_book() {
-        Book book = new Book();
+    public void add_book(String title, String author, String publisher, int edition, int price, String keyWords, Boolean is_bestseller,boolean reference,int year) {
+        /*
+        * To add book, you need to send all information about book
+        * ID will be created in DB with auto_increment
+        * time_left will be 999 and owner 0 - because only librarian(Id =0) can add books
+        * */
+        Book book = new Book(title,author,publisher,edition,price,keyWords,is_bestseller,reference,year);
         db.book_creation(book);
     }
-
+    public void add_article(String title,String author,int price, String keyWords, Boolean is_bestseller,
+                            boolean reference,String journal,String editor,int yearOfDate,int monthOfDate,int dayOfDate) throws SQLException {
+        /*
+        * To add article, you need to send all information about article
+        * ID will be created in DB with auto_increment
+        * time_left will be 999 and owner 0 - because only librarian(Id =0) can add articles
+        * */
+        Article article = new Article(title,author,price,keyWords,is_bestseller,reference,journal,editor,yearOfDate,monthOfDate,dayOfDate);
+        db.article_creation(article);
+    }
+    public void add_AV(String title,String author,int price, String keyWords, Boolean is_bestseller,boolean reference)throws SQLException{
+        AV av = new AV(title,author,price,keyWords,is_bestseller,reference);
+        db.av_creation(av);
+    }
+    public void delete_AV_by_id(int id){
+        try {
+            PreparedStatement pr = db.con.prepareStatement("DELETE from AV WHERE id=" + id);
+            pr.executeUpdate();
+            pr = db.con.prepareStatement("DELETE FROM Copy WHERE Id_of_original=" + id);
+            pr.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("AV with such id didn't found");
+        }
+    }
     public void delete_book_by_id(int id) {
 
         try {
             PreparedStatement pr = db.con.prepareStatement("DELETE from Books WHERE id=" + id);
             pr.executeUpdate();
+            pr = db.con.prepareStatement("DELETE FROM Copy WHERE Id_of_original=" + id);
+            pr.executeUpdate();
         } catch (SQLException e) {
             System.out.println("book with such id didn't found");
         }
     }
+    public void delete_article_by_id(int id){
+        try {
+            PreparedStatement pr = db.con.prepareStatement("DELETE from Articles WHERE id=" + id);
+            pr.executeUpdate();
+            pr = db.con.prepareStatement("DELETE FROM Copy WHERE Id_of_original=" + id);
+            pr.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("article with such id didn't found");
+        }
+    }
 
-
+    public void modify_AV(AV av){
+        try{
+            ArrayList arrayList = db.isAVAlreadyExist(av);
+            PreparedStatement pr = db.con.prepareStatement("UPDATE AV " +
+                    "SET Name=?,Author=?,Price=?,Keywords=?,is_bestseller=?,is_reference=? where id="+ arrayList.get(1));
+            pr.setString(1, av.getTitle());
+            pr.setString(2, av.getAuthor());
+            pr.setInt(3, av.getPrice());
+            pr.setString(4, av.getKeyWords());
+            pr.setBoolean(5, av.isIs_bestseller());
+            pr.setBoolean(6,av.isReference());
+            pr.executeUpdate();
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public void modify_article(Article article){
+        try{
+            ArrayList arrayList = db.isArticleAlreadyExist(article);
+            PreparedStatement pr = db.con.prepareStatement("UPDATE Articles " +
+                    "SET Name=?,Author=?,Price=?,Keywords=?,is_bestseller=?,is_reference=?,Journal=?,Editor=?,Date=? where id=" + arrayList.get(1));
+            pr.setString(1, article.getTitle());
+            pr.setString(2, article.getAuthor());
+            pr.setInt(3, article.getPrice());
+            pr.setString(4, article.getKeyWords());
+            pr.setBoolean(5, article.isIs_bestseller());
+            pr.setBoolean(6,article.isReference());
+            pr.setString(7,article.getJournal());
+            pr.setString(8,article.getEditor());
+            pr.setDate(9,java.sql.Date.valueOf(article.getDate()));
+            pr.executeUpdate();
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
     public void modify_book(Book book) {
         try {
+            ArrayList arrayList =db.isBookAlreadyExist(book);
             PreparedStatement pr = db.con.prepareStatement("UPDATE Books " +
-                    "SET Name=?,Author=?,Publisher=?,Edition=?,Price=?,Keywords=?,owner=?,is_bestseller=?,time_left=?,is_reference=? where id=" + book.getId());
+                    "SET Name=?,Author=?,Publisher=?,Edition=?,Price=?,Keywords=?,is_bestseller=?,is_reference=? where id=" + arrayList.get(1));
             pr.setString(1, book.getTitle());
             pr.setString(2, book.getAuthor());
             pr.setString(3, book.getPublisher());
             pr.setInt(4, book.getEdition());
             pr.setInt(5, book.getPrice());
             pr.setString(6, book.getKeyWords());
-            //пока только так,по идее считывать надо
-            pr.setInt(7, 0);
-            pr.setBoolean(8, book.get_is_bestseller());
-            pr.setInt(9, book.get_left_time());
-            pr.setBoolean(10, book.get_reference());
+            pr.setBoolean(7, book.isIs_bestseller());
+            pr.setBoolean(8, book.isReference());
             pr.executeUpdate();
+
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public ArrayList getAllDocuments(){
+        ArrayList arrayList=new ArrayList();
+
+        return arrayList;
+    }
+
+    public LinkedList get_all_AV(){
+        Database db = new Database();
+        LinkedList<AV> avs = new LinkedList<AV>();
+        try {
+            Statement stmt = db.con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM AV");
+            while (rs.next()){
+                String name = rs.getString("Name");
+                String author = rs.getString("Author");
+                int price =rs.getInt("Price");
+                String keyWord = rs.getString("Keywords");
+                boolean is_bestseller = rs.getBoolean("is_bestseller");
+                boolean is_reference = rs.getBoolean("is_reference");
+                AV av = new AV(name,author,price,keyWord,is_bestseller,is_reference);
+                avs.add(av);
+            }
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return avs;
+    }
+    public LinkedList get_all_articles(){
+        Database db = new Database();
+        LinkedList<Article> articles = new LinkedList<Article>();
+        try {
+            Statement stmt = db.con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM Articles");
+            while (rs.next()){
+                String name = rs.getString("Name");
+                String author = rs.getString("Author");
+                int price =rs.getInt("Price");
+                String keyWord = rs.getString("Keywords");
+                boolean is_bestseller = rs.getBoolean("is_bestseller");
+                boolean is_reference = rs.getBoolean("is_reference");
+                String journal = rs.getString("Journal");
+                String editor = rs.getString("Editor");
+                //LocalDate date =rs.getDate("Date").toLocalDate();
+                int yearDate =rs.getDate("Date").getYear();
+                int monthDate =rs.getDate("Date").getMonth();
+                int dayDate =rs.getDate("Date").getDay();
+                Article article = new Article(name,author,price,keyWord,is_bestseller,is_reference,journal,editor,yearDate,monthDate,dayDate);
+                articles.add(article);
+            }
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return articles;
+    }
+    public LinkedList get_all_books(){
+        Database db = new Database();
+        LinkedList<Book> books = new LinkedList<Book>();
+        LinkedList<Integer> numberOfBook = new LinkedList<Integer>();
+        try {
+            Statement stmt = db.con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM Books");
+            while (rs.next()){
+                int id=rs.getInt("id");
+
+                String name = rs.getString("Name");
+                String author = rs.getString("Author");
+                String publisher = rs.getString("Publisher");
+                int edition = rs.getInt("Edition");
+                int price =rs.getInt("Price");
+                String keyWord = rs.getString("Keywords");
+                boolean is_bestseller = rs.getBoolean("is_bestseller");
+                boolean is_reference = rs.getBoolean("is_reference");
+                int year = rs.getInt("Year");
+                Book book = new Book(name,author,publisher,edition,price,keyWord,is_bestseller,is_reference,year);
+                books.add(book);
+            }
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return books;
     }
 
     public static LinkedList<User> get_all_users() {

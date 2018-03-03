@@ -1,9 +1,7 @@
 package main.java.librinno.model;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
 
 /**
  * database with users in it
@@ -49,27 +47,184 @@ public class Database {
             e.printStackTrace();
         }
     }
-    public static void book_creation(Book book){
-        try {
-            prst=con.prepareStatement("insert into Books(id,Name,Author,Publisher,Edition,Price,Keywords,owner,is_bestseller,time_left,is_reference) values(?,?,?,?,?,?,?,?,?,?,?)");
-            prst.setInt(1,book.getId());
-            prst.setString(2,book.getTitle());
-            prst.setString(3,book.getAuthor());
-            prst.setString(4,book.getPublisher());
-            prst.setInt(5,book.getEdition());
-            prst.setInt(6,book.getPrice());
-            prst.setString(7,book.getKeyWords());
-            //owner
-            prst.setInt(8,0);
-            prst.setBoolean(9,book.get_is_bestseller());
-            prst.setInt(10,book.get_left_time());
-            prst.setBoolean(11,book.get_reference());
-            //еще owner
+    public void av_creation(AV av)throws SQLException{
+        ArrayList <Integer>arrayList =isAVAlreadyExist(av);
+        if (arrayList.get(0)==0) {
+            prst = con.prepareStatement("insert into AV(Name,Author,Price,Keywords,is_bestseller,is_reference) values(?,?,?,?,?,?)");
+            prst.setString(1, av.getTitle());
+            prst.setString(2, av.getAuthor());
+            prst.setInt   (3, av.getPrice());
+            prst.setString(4, av.getKeyWords());
+            prst.setBoolean(5, av.isIs_bestseller());
+            prst.setBoolean(6, av.isReference());
             prst.executeUpdate();
+
+            Statement stmt = con.createStatement();
+            ResultSet rsInside;
+            rsInside = stmt.executeQuery("SELECT id FROM AV");
+            int id_Of_material = 0;
+            while (rsInside.next())
+                id_Of_material = rsInside.getInt(1);
+            prst = con.prepareStatement("insert into Copy (id_of_original,Owner,Time_left) values(?,?,?)");
+
+            prst.setInt(1,id_Of_material);
+            prst.setInt(2,0);
+            prst.setInt(3,999);
+            prst.executeUpdate();
+        }else{
+            prst = con.prepareStatement("insert into Copy (id_of_original,Owner,Time_left) values(?,?,?)");
+            prst.setInt(1,arrayList.get(1));
+            prst.setInt(2,0);
+            prst.setInt(3,999);
+            prst.executeUpdate();
+        }
+    }
+    public  void article_creation(Article article)throws SQLException{
+        /*
+        * Сперва чекаем есть ли у нас уже такая статья,
+        * если есть то запоминаем ее ID и просто добавляе копию в таблицу копий
+        * если нет, то добавляем в таблицу Articles описание и одну копию в таблицу копий
+        * */
+        ArrayList <Integer>arrayList =isArticleAlreadyExist(article);
+        if (arrayList.get(0)==0) {
+            prst = con.prepareStatement("insert into Articles(Name,Author,Price,Keywords,is_bestseller,is_reference,Journal,Editor,Date) values(?,?,?,?,?,?,?,?,?)");
+            prst.setString(1, article.getTitle());
+            prst.setString(2, article.getAuthor());
+            prst.setInt   (3, article.getPrice());
+            prst.setString(4, article.getKeyWords());
+            prst.setBoolean(5, article.isIs_bestseller());
+            prst.setBoolean(6, article.isReference());
+            prst.setString(7,article.getJournal());
+            prst.setString(8,article.getEditor());
+            prst.setDate(9,java.sql.Date.valueOf(article.getDate()));
+            prst.executeUpdate();
+            //находим последний добавленный ID статьи и запоминаем его, чтоб потом кинуть его в таблицу копий
+            Statement stmt = con.createStatement();
+            ResultSet rsInside;
+            rsInside = stmt.executeQuery("SELECT id FROM Articles");
+            int id_Of_material = 0;
+            while (rsInside.next())
+                id_Of_material = rsInside.getInt(1);
+            prst = con.prepareStatement("insert into Copy (id_of_original,Owner,Time_left) values(?,?,?)");
+
+            prst.setInt(1,id_Of_material);
+            prst.setInt(2,0);
+            prst.setInt(3,999);
+            prst.executeUpdate();
+        }else{
+            prst = con.prepareStatement("insert into Copy (id_of_original,Owner,Time_left) values(?,?,?)");
+            prst.setInt(1,arrayList.get(1));
+            prst.setInt(2,0);
+            prst.setInt(3,999);
+            prst.executeUpdate();
+        }
+    }
+    public  void book_creation(Book book){
+        /*
+        * Сперва чекаем есть ли у нас уже такая книга,
+        * если есть то запоминаем ее ID и просто добавляе копию в таблицу копий
+        * если нет, то добавляем в таблицу Book описание и одну копию в таблицу копий
+        * */
+        try {
+            ArrayList <Integer>arrayList =isBookAlreadyExist(book);
+            if (arrayList.get(0)==0) {
+                prst = con.prepareStatement("insert into Books(Name,Author,Publisher,Edition,Price,Keywords,is_bestseller,is_reference,YEAR) values(?,?,?,?,?,?,?,?,?)");
+                prst.setString(1, book.getTitle());
+                prst.setString(2, book.getAuthor());
+                prst.setString(3, book.getPublisher());
+                prst.setInt   (4, book.getEdition());
+                prst.setInt   (5, book.getPrice());
+                prst.setString(6, book.getKeyWords());
+                prst.setBoolean(7, book.isIs_bestseller());
+                prst.setBoolean(8, book.isReference());
+                prst.setInt    (9, book.getYear());
+                prst.executeUpdate();
+                //находим последний добавленный ID книги и запоминаем его, чтоб потом кинуть его в таблицу копий
+                Statement stmt = con.createStatement();
+                ResultSet rsInside;
+                rsInside = stmt.executeQuery("SELECT id FROM Books");
+                int id_Of_material = 0;
+                while (rsInside.next())
+                    id_Of_material = rsInside.getInt(1);
+                //кидайем необходимую инфу в таблицу копий(id оригинала,id хозяина(так как мы только доавили, то это Admin(id=0), и время =999, так как книга в бибиотеке))
+                prst = con.prepareStatement("insert into Copy (id_of_original,Owner,Time_left) values(?,?,?)");
+                prst.setInt(1,id_Of_material);
+                prst.setInt(2,0);
+                prst.setInt(3,999);
+                prst.executeUpdate();
+
+            }else{
+                //кидаем id оригинала и остальную инфу
+                prst = con.prepareStatement("insert into Copy (id_of_original,Owner,Time_left) values(?,?,?)");
+                prst.setInt(1,arrayList.get(1));
+                prst.setInt(2,0);
+                prst.setInt(3,999);
+                prst.executeUpdate();
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
+    public ArrayList isAVAlreadyExist(AV av)throws SQLException{
+        ArrayList <Integer>arrayList = new ArrayList();
+        Statement stmt = con.createStatement();
+        ResultSet rs;
+        rs = stmt.executeQuery("SELECT * FROM AV");
+        while (rs.next()){
+            if (rs.getString(2).equals(av.getTitle()) && rs.getString(3).equals(av.getAuthor()) && rs.getInt(4) == av.getPrice() &&
+                    rs.getString(5).equals(av.getKeyWords()) && rs.getBoolean(6) == av.isIs_bestseller() && rs.getBoolean(7) == av.isReference()){
+                arrayList.add(1); // 1 = true
+                arrayList.add(rs.getInt(1));//save ID of founded book
+                return arrayList;
+            }
+        }
+        arrayList.add(0);
+        return arrayList;
+    }
+    public ArrayList isArticleAlreadyExist(Article article)throws SQLException{
+        /*
+        * Этот метод чекает, есть ли у нас в библиотеке такая статья
+        * возвращает лист, В первом элементе: int 1 - если да(уже есть такая статья), 0 - если нет
+        * на втором элементе возвращается ID найденной статьи(если она уже есть. В противном случае ничего там нет)
+        * */
+        ArrayList <Integer>arrayList = new ArrayList();
+        Statement stmt = con.createStatement();
+        ResultSet rs;
+        rs = stmt.executeQuery("SELECT * FROM Articles");
+        while (rs.next()){
+            if (rs.getString(2).equals(article.getTitle()) && rs.getString(3).equals(article.getAuthor()) && rs.getInt(4) == article.getPrice() &&
+            rs.getString(5).equals(article.getKeyWords()) && rs.getBoolean(6) == article.isIs_bestseller() && rs.getBoolean(7) == article.isReference()
+            && rs.getString(8).equals(article.getJournal()) && rs.getString(9).equals(article.getEditor()) && rs.getDate(10).toLocalDate().equals(article.getDate())){
+                arrayList.add(1); // 1 = true
+                arrayList.add(rs.getInt(1));//save ID of founded book
+                return arrayList;
+            }
+        }
+        arrayList.add(0);
+        return arrayList;
+    }
+    public ArrayList isBookAlreadyExist(Book book) throws SQLException {
+        /*
+        * Этот метод чекает, есть ли у нас в библиотеке такая книга
+        * возвращает лист, В первом элементе: int 1 - если да(уже есть такая книга), 0 - если нет
+        * на втором элементе возвращается ID найденной книги(если она уже есть, в противном случае ничего там нет)
+        * */
+        ArrayList <Integer>arrayList = new ArrayList();
+        Statement stmt = con.createStatement();
+        ResultSet rs;
+        rs = stmt.executeQuery("SELECT * FROM Books");
+        while (rs.next()){
+            if (rs.getString(2).equals(book.getTitle()) && rs.getString(3).equals(book.getAuthor()) && rs.getString(4).equals(book.getPublisher())
+            && rs.getInt(5) == book.getEdition() && rs.getInt(6) == book.getPrice() && rs.getString(7).equals(book.getKeyWords())
+                    && rs.getBoolean(8) == book.isIs_bestseller() && rs.getBoolean(9) == book.isReference() && rs.getInt(10) == book.getYear()){
+                arrayList.add(1); // 1 = true
+                arrayList.add(rs.getInt(1));//save ID of founded book
+                return arrayList;
+            }
+        }
+        arrayList.add(0);
+        return arrayList;
+    }
 
 }
