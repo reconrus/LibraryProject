@@ -1,5 +1,6 @@
 package main.java.librinno.model;
 
+import javax.xml.crypto.Data;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ public class Librarian extends User {
      * @param adress - where librarian lives(librarian is user too)
      * @param card_number - id of librarian
      */
-    private Database db = new Database();
+    private static Database db = new Database();
 
     public void Librarian(String name, String phone_number, String adress, int card_number) {
         this.name = name;
@@ -66,7 +67,7 @@ public class Librarian extends User {
         }
     }
 
-    public void add_CopiesOfMaterial(int id,int number){
+    public static void add_CopiesOfMaterial(int id,int number){
         try {if (number>0) {
                 Statement stmt = db.con.createStatement();
                 ResultSet rs;
@@ -89,7 +90,7 @@ public class Librarian extends User {
         }
     }
 
-    public void add_book(String title, String author, String publisher, int edition, int price, String keyWords, Boolean is_bestseller,boolean reference,int year,int amount) throws SQLException {
+    public static void add_book(String title, String author, String publisher, int edition, int price, String keyWords, Boolean is_bestseller,boolean reference,int year,int amount) throws SQLException {
         /*
         * To add book, you need to send all information about book
         * ID will be created in DB with auto_increment
@@ -188,7 +189,7 @@ public class Librarian extends User {
             e.printStackTrace();
         }
     }
-    public void modify_book(Book book) {
+    public static void modify_book(Book book) {
         try {
             ArrayList arrayList =db.isBookAlreadyExist(book);
             PreparedStatement pr = db.con.prepareStatement("UPDATE Books " +
@@ -213,7 +214,6 @@ public class Librarian extends User {
 
     public ArrayList get_all_AV(){
         ArrayList<ArrayList> AVWithNumber = new ArrayList<ArrayList>();
-        Database db = new Database();
         ArrayList<AV> avs = new ArrayList<AV>();
         ArrayList<Integer> numberOfAV = new ArrayList<Integer>();
         try {
@@ -251,7 +251,6 @@ public class Librarian extends User {
     }
     public ArrayList get_all_articles(){
         ArrayList<ArrayList> articleWithNumber = new ArrayList();
-        Database db = new Database();
         ArrayList<Article> articles = new ArrayList<Article>();
         ArrayList<Integer> numberOfArticle = new ArrayList<Integer>();
         try {
@@ -303,7 +302,6 @@ public class Librarian extends User {
          *      3: |book3|| 2|
         * */
 
-        Database db = new Database();
         ArrayList<Book> books = new ArrayList<Book>();
 
         try {
@@ -331,7 +329,7 @@ public class Librarian extends User {
                 boolean is_bestseller = rs.getBoolean("is_bestseller");
                 boolean is_reference = rs.getBoolean("is_reference");
                 int year = rs.getInt("Year");
-                Book book = new Book(name,author,publisher,edition,price,keyWord,is_bestseller,is_reference,year);
+                Book book = new Book(id,name,author,publisher,edition,price,keyWord,is_bestseller,is_reference,year);
                 books.add(book);
             }
         }catch (SQLException e) {
@@ -344,7 +342,6 @@ public class Librarian extends User {
     }
 
     public static LinkedList<User> get_all_users() {
-        Database db = new Database();
         LinkedList<User> users = new LinkedList<User>();
         try {
             Statement stmt = db.con.createStatement();
@@ -374,7 +371,6 @@ public class Librarian extends User {
     }
 
     public static int get_number_of_all_copies_taken_by_user(int user_id) {
-        Database db = new Database();
         int copies=0;
         try {
             Statement stmt = db.con.createStatement();

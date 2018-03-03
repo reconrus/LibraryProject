@@ -29,24 +29,7 @@ public class Material {
     public int getId() {
         return id;
     }
-    public void setId() {
-        //each card_number is individual in case of increasing there won't be identic id's
-        int max_id=0;
-        try {
-            Statement stmt=Database.con.createStatement();
-            //get infromation from database
-            ResultSet rs = stmt.executeQuery("SELECT id FROM Books");
-            while (rs.next()){
-                int id_an=rs.getInt("id");
-                if(id_an>max_id)
-                    max_id=id_an;
-            }
-            max_id++;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        this.id=max_id;
-    }
+    public void setId(int id) {this.id=id;}
     public String getTitle() {
         return title;
     }

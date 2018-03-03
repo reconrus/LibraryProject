@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javassist.compiler.ast.Keyword;
 import main.java.librinno.model.Book;
 import main.java.librinno.model.Database;
+import main.java.librinno.model.Librarian;
 import main.java.librinno.ui.assist.Assist;
 
 public class EditDoc {
@@ -77,6 +78,9 @@ public class EditDoc {
             bookEd.setIs_bestseller(bestseller);
             bookEd.setReference(reference);
             bookEd.setYear(Integer.parseInt(bookYear));
+
+            Librarian.modify_book(bookEd);
+
             Assist.closeStage(cancel);
         }
     }
@@ -88,7 +92,6 @@ public class EditDoc {
         edition.setText(""+book.getEdition());
         keyWords.setText(book.getKeyWords());
         publisher.setText(book.getPublisher());
-        name.setText(book.getTitle());
         year.setText(book.getYear()+"");
         isBestseller.setSelected(book.isIs_bestseller());
         isReference.setSelected(book.isReference());

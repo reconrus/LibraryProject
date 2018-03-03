@@ -7,26 +7,27 @@
 <?import javafx.scene.Group?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="371.0" prefWidth="355.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.librinno.ui.addbook.AddBook">
+<AnchorPane prefHeight="379.0" prefWidth="355.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.librinno.ui.addbook.AddBook">
    <children>
-      <Group layoutX="62.0" layoutY="30.0">
+      <Group layoutX="65.0" layoutY="33.0">
          <children>
             <JFXTextField fx:id="name" prefHeight="25.0" prefWidth="232.0" promptText="Title" />
             <JFXTextField fx:id="author" layoutY="34.0" prefHeight="25.0" prefWidth="232.0" promptText="Author" />
             <JFXTextField fx:id="publisher" layoutY="68.0" prefHeight="25.0" prefWidth="232.0" promptText="Publisher" />
             <JFXTextField fx:id="edition" layoutY="103.0" prefHeight="25.0" prefWidth="232.0" promptText="Edition" />
             <JFXTextField fx:id="price" layoutY="136.0" prefHeight="25.0" prefWidth="232.0" promptText="Price" />
-            <JFXTextField fx:id="keyWords" layoutY="170.0" prefHeight="25.0" prefWidth="232.0" promptText="Key Words" />
-            <JFXTextField fx:id="amount" layoutY="205.0" prefHeight="25.0" prefWidth="232.0" promptText="Amount" />
-            <JFXRadioButton fx:id="isBestseller" layoutX="-7.0" layoutY="245.0" prefHeight="17.0" prefWidth="95.0" text="Bestseller" />
-            <JFXRadioButton fx:id="isReference" layoutX="100.0" layoutY="245.0" prefHeight="17.0" prefWidth="111.0" text="Reference Book" />
+            <JFXTextField fx:id="keyWords" layoutY="170.0" onAction="#confirm" prefHeight="25.0" prefWidth="232.0" promptText="Key Words" />
+            <JFXTextField fx:id="year" layoutY="200.0" prefHeight="25.0" prefWidth="232.0" promptText="Year" />
+            <JFXTextField fx:id="amount" layoutX="1.0" layoutY="232.0" prefHeight="25.0" prefWidth="232.0" promptText="Amount of Copies" />
+            <JFXRadioButton fx:id="isBestseller" layoutX="-16.0" layoutY="270.0" prefHeight="17.0" prefWidth="95.0" text="Bestseller" />
+            <JFXRadioButton fx:id="isReference" layoutX="109.0" layoutY="270.0" prefHeight="17.0" prefWidth="111.0" text="Reference Book" />
+
          </children>
       </Group>
-      <JFXButton fx:id="cancel" layoutX="62.0" layoutY="313.0" onAction="#cancel" prefHeight="31.0" prefWidth="67.0" text="Cancel" />
-      <JFXButton fx:id="confirm" layoutX="220.0" layoutY="313.0" onAction="#confirm" prefHeight="31.0" prefWidth="74.0" text="Confirm" />
+      <JFXButton fx:id="cancel" layoutX="68.0" layoutY="332.0" onAction="#cancel" prefHeight="31.0" prefWidth="67.0" text="Cancel" />
+      <JFXButton fx:id="confirm" layoutX="224.0" layoutY="332.0" onAction="#confirm" prefHeight="31.0" prefWidth="74.0" text="Confirm" />
    </children>
    <stylesheets>
-      <URL value="@../../../../resources/theme.css" />
       <URL value="@../../../../resources/theme.css" />
    </stylesheets>
 </AnchorPane>

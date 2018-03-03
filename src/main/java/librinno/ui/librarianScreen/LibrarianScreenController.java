@@ -146,13 +146,13 @@ public class LibrarianScreenController {
 
     @FXML
     void addDoc(ActionEvent event) throws IOException {
-        Assist.loadStage(getClass().getResource("../addbook/addbook.fxml"));
+        Assist.loadStageWait(getClass().getResource("../addbook/addbook.fxml"));
 
     }
 
     @FXML
     void addPatron(ActionEvent event) throws IOException {
-        Assist.loadStage(getClass().getResource("../Register/register.fxml"));
+        Assist.loadStageWait(getClass().getResource("../Register/register.fxml"));
         showTableUser();
     }
 
@@ -183,7 +183,7 @@ public class LibrarianScreenController {
             Stage stage = new Stage(StageStyle.DECORATED);
             stage.setScene(new Scene(parent));
             stage.showAndWait();
-            showTableUser();
+            showTableDocuments();
         }
     }
 

@@ -13,16 +13,16 @@
    <children>
       <Group layoutX="62.0" layoutY="98.0">
          <children>
+            <JFXTextField fx:id="id" layoutY="-32.0" prefHeight="25.0" prefWidth="232.0" promptText="ID" />
             <JFXTextField fx:id="name" prefHeight="25.0" prefWidth="232.0" promptText="Title" />
             <JFXTextField fx:id="author" layoutY="34.0" prefHeight="25.0" prefWidth="232.0" promptText="Author" />
             <JFXTextField fx:id="publisher" layoutY="68.0" prefHeight="25.0" prefWidth="232.0" promptText="Publisher" />
             <JFXTextField fx:id="edition" layoutY="103.0" prefHeight="25.0" prefWidth="232.0" promptText="Edition" />
             <JFXTextField fx:id="price" layoutY="136.0" prefHeight="25.0" prefWidth="232.0" promptText="Price" />
             <JFXTextField fx:id="keyWords" layoutY="170.0" onAction="#confirm" prefHeight="25.0" prefWidth="232.0" promptText="Key Words" />
+            <JFXTextField fx:id="year" layoutY="200.0" prefHeight="25.0" prefWidth="232.0" promptText="Year" />
             <JFXRadioButton fx:id="isBestseller" layoutX="-7.0" layoutY="236.0" prefHeight="17.0" prefWidth="95.0" text="Bestseller" />
             <JFXRadioButton fx:id="isReference" layoutX="101.0" layoutY="236.0" prefHeight="17.0" prefWidth="111.0" text="Reference Book" />
-            <JFXTextField fx:id="id" layoutY="-32.0" prefHeight="25.0" prefWidth="232.0" promptText="ID" />
-            <JFXTextField fx:id="year" layoutY="200.0" prefHeight="25.0" prefWidth="232.0" promptText="Year" />
          </children>
       </Group>
       <JFXButton fx:id="cancel" layoutX="59.0" layoutY="361.0" onAction="#cancel" prefHeight="31.0" prefWidth="67.0" text="Cancel" />

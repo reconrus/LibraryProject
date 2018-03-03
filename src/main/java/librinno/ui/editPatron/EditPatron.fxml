@@ -13,12 +13,12 @@
    <children>
       <Group layoutX="49.0" layoutY="85.0">
          <children>
+            <JFXTextField fx:id="id" layoutY="-38.0" prefHeight="25.0" prefWidth="232.0" promptText="id" />
             <JFXTextField fx:id="name" prefHeight="25.0" prefWidth="232.0" promptText="Name" />
             <JFXPasswordField fx:id="password" layoutY="41.0" prefHeight="25.0" prefWidth="232.0" promptText="Password" />
             <JFXTextField fx:id="phone" layoutY="75.0" prefHeight="25.0" prefWidth="232.0" promptText="Phone" />
             <JFXTextField fx:id="address" layoutY="109.0" prefHeight="25.0" prefWidth="232.0" promptText="Address" />
             <JFXTextField fx:id="type" layoutY="144.0" prefHeight="25.0" prefWidth="232.0" promptText="Type" />
-            <JFXTextField fx:id="id" layoutY="-38.0" prefHeight="25.0" prefWidth="232.0" promptText="id" />
          </children>
       </Group>
       <JFXButton fx:id="cancel" layoutX="51.0" layoutY="277.0" onAction="#cancel" prefHeight="31.0" prefWidth="67.0" text="Cancel" />

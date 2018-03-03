@@ -30,6 +30,9 @@ public class AddBook {
     private JFXTextField keyWords;
 
     @FXML
+    private JFXTextField year;
+
+    @FXML
     private JFXRadioButton isBestseller;
 
     @FXML
@@ -56,14 +59,16 @@ public class AddBook {
         String bookKeyWords= keyWords.getText();
         String bookPublisher= publisher.getText();
         String bookAmount= amount.getText();
+        String bookYear = year.getText();
         Boolean bestseller= isBestseller.isArmed();
         Boolean reference= isReference.isArmed();
-        if ((bookAuthor.isEmpty())||(bookPrice.isEmpty())||(bookPublisher.isEmpty())||(bookTitle.isEmpty())){
+        if ((bookAuthor.isEmpty())||(bookPrice.isEmpty())||(bookPublisher.isEmpty())||(bookTitle.isEmpty())
+                || (bookEdition.isEmpty()) || (bookAmount.isEmpty())){
             Assist.error();
         }
         else{
             Database db= new Database();
-            //Book book= new Book(bookTitle,bookAuthor,bookPublisher,Integer.parseInt(bookEdition),Integer.parseInt(bookPrice),bookKeyWords,bestseller,999,false);
+            Book book= new Book(bookTitle,bookAuthor,bookPublisher,Integer.parseInt(bookEdition),Integer.parseInt(bookPrice),bookKeyWords,bestseller, reference, Integer.parseInt(bookYear) );
             //db.book_creation(book);
             Assist.closeStage(cancel);
         }
