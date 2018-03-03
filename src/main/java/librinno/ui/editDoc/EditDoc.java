@@ -63,17 +63,21 @@ public class EditDoc {
         String bookYear= year.getText();
         Boolean bestseller= isBestseller.isArmed();
         Boolean reference= isReference.isArmed();
-        bookEd.setTitle(bookTitle);
-        bookEd.setPrice(Integer.parseInt(bookPrice));
-        bookEd.setAuthor(bookAuthor);
-        bookEd.setEdition(Integer.parseInt(bookEdition));
-        bookEd.setKeyWords(bookKeyWords);
-        bookEd.setPublisher(bookPublisher);
-        bookEd.set_is_bestseller(bestseller);
-        bookEd.set_reference(reference);
-        bookEd.setYear(Integer.parseInt(bookYear));
-        Assist.closeStage(cancel);
-
+        if ((bookAuthor.isEmpty())||(bookPrice.isEmpty())||(bookPublisher.isEmpty())||(bookTitle.isEmpty())) {
+            Assist.error();
+        }
+        else {
+            bookEd.setTitle(bookTitle);
+            bookEd.setPrice(Integer.parseInt(bookPrice));
+            bookEd.setAuthor(bookAuthor);
+            bookEd.setEdition(Integer.parseInt(bookEdition));
+            bookEd.setKeyWords(bookKeyWords);
+            bookEd.setPublisher(bookPublisher);
+            bookEd.set_is_bestseller(bestseller);
+            bookEd.set_reference(reference);
+            bookEd.setYear(Integer.parseInt(bookYear));
+            Assist.closeStage(cancel);
+        }
     }
 
     public void passGUI(Book book){

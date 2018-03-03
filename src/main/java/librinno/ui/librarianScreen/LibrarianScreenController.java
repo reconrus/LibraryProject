@@ -16,10 +16,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import main.java.librinno.model.Book;
-import main.java.librinno.model.Database;
-import main.java.librinno.model.Librarian;
-import main.java.librinno.model.User;
+import main.java.librinno.model.*;
 import main.java.librinno.ui.Register.Register;
 import main.java.librinno.ui.addbook.AddBook;
 import main.java.librinno.ui.assist.Assist;
@@ -81,6 +78,25 @@ public class LibrarianScreenController {
     private TableColumn<User, String> userType;
 
     @FXML
+    private TableView<Copy> tableCopy;
+
+    @FXML
+    private TableColumn<Copy, Integer> idCopy;
+
+    @FXML
+    private TableColumn<Copy, String> authorCopy;
+
+    @FXML
+    private TableColumn<Copy, String> titleCopy;
+
+    @FXML
+    private TableColumn<Copy, String> statusCopy;
+
+    @FXML
+    private TableColumn<Copy, String> issuedTo;
+
+
+    @FXML
     void showTableUser(){
         userID.setCellValueFactory(new PropertyValueFactory<User,Integer>("card_number"));
         userName.setCellValueFactory(new PropertyValueFactory<User,String>("name"));
@@ -125,14 +141,16 @@ public class LibrarianScreenController {
     }
 
     @FXML
-    void deleteDoc(ActionEvent event) {
-
+    void deletePatron(ActionEvent event) {
+        User user= tableUser.getSelectionModel().getSelectedItem();
     }
+
 
     @FXML
-    void deletePatron(ActionEvent event) {
-
+    void deleteDoc(ActionEvent event) {
+        Book book= tableBook.getSelectionModel().getSelectedItem();
     }
+
 
     @FXML
     void editDoc() throws IOException {
@@ -153,18 +171,18 @@ public class LibrarianScreenController {
 
     @FXML
     void issue(ActionEvent event) throws IOException {
+        Book book= tableBook.getSelectionModel().getSelectedItem();
         Assist.loadStage(getClass().getResource("../issue/issue.fxml"));
-
     }
 
     @FXML
     void issueCopy(ActionEvent event) throws IOException{
-
+        Copy copy= tableCopy.getSelectionModel().getSelectedItem();
     }
 
     @FXML
     void returnDocument(ActionEvent event) throws IOException{
-
+        Copy copy= tableCopy.getSelectionModel().getSelectedItem();
     }
 
 }

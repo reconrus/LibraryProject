@@ -51,13 +51,18 @@ public class EditPatron {
         String addressText= address.getText();
         String phoneNum= phone.getText();
         String typeUs= type.getText();
-        userEd.set_adress(addressText);
-        userEd.set_name(user);
-        userEd.set_password(pass);
-        userEd.set_number(phoneNum);
-        userEd.set_type(typeUs);
-        Librarian.modify_user(userEd);
-        Assist.closeStage(confirm);
+        if ((user.isEmpty())||pass.isEmpty()||addressText.isEmpty()||phoneNum.isEmpty()){
+            Assist.error();
+        }
+        else {
+            userEd.set_adress(addressText);
+            userEd.set_name(user);
+            userEd.set_password(pass);
+            userEd.set_number(phoneNum);
+            userEd.set_type(typeUs);
+            Librarian.modify_user(userEd);
+            Assist.closeStage(confirm);
+        }
     }
 
 
