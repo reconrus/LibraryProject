@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) throws SQLException {
@@ -21,13 +22,8 @@ public class Main {
         //enter information which will be put in database
         Database db = new Database();
         Librarian l=new Librarian();
-        //db.user_creation(l);
-        System.out.println("Creating user:");
-        //l.add_user();
-        //l.add_book();
-        //l.modify_book(100);
-        Librarian.get_all_users();
-        //l.get_number_of_all_copies_taken_by_user(1);
+        
+
     }
 
 

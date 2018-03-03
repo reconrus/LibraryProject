@@ -16,12 +16,14 @@ import java.sql.Statement;
  * And all types are inherited from this class Material
  */
 public class Material {
-    private int id;
-    private String title;
-    private String author;
-    private int price;
-    private String KeyWords;
-
+    protected int id;
+    protected String title;
+    protected String author;
+    protected int price;
+    protected String KeyWords;
+    protected boolean reference;
+    protected boolean is_bestseller;
+    protected int number;
 
 
     public int getId() {
@@ -72,4 +74,19 @@ public class Material {
     public void setKeyWords(String keyWords) {
         KeyWords = keyWords;
     }
+    public boolean isIs_bestseller() {
+        return is_bestseller;
+    }
+    public void setIs_bestseller(boolean is_bestseller) {
+        this.is_bestseller = is_bestseller;
+    }
+    public boolean isReference() {
+        return reference;
+    }
+    public void setReference(boolean reference) {
+        this.reference = reference;
+    }
+
+    public void setNumber(int number){ this.number = number; }
+    public int getNumber(){ return this.number;}
 }

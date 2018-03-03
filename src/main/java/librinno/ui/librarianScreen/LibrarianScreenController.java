@@ -25,6 +25,7 @@ import main.java.librinno.ui.editPatron.EditPatron;
 
 import java.io.IOException;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class LibrarianScreenController {
@@ -45,7 +46,7 @@ public class LibrarianScreenController {
     private TableView<Book> tableBook;
 
     @FXML
-    private TableColumn<Book, String> id;
+    private TableColumn<Book, Integer> id;
 
     @FXML
     private TableColumn<Book, String> author;
@@ -57,7 +58,7 @@ public class LibrarianScreenController {
     private TableColumn<Book, String> publisher;
 
     @FXML
-    private TableColumn<Book, Boolean> avaliability;
+    private TableColumn<Book, Integer> avaliability;
 
     @FXML
     private TableView<User> tableUser;
@@ -112,6 +113,21 @@ public class LibrarianScreenController {
     }
 
     @FXML
+    void showTableDocuments(){
+        id.setCellValueFactory(new PropertyValueFactory<Book, Integer>("id"));
+        author.setCellValueFactory(new PropertyValueFactory<Book, String>("author"));
+        title.setCellValueFactory(new PropertyValueFactory<Book, String>("title"));
+        publisher.setCellValueFactory(new PropertyValueFactory<Book, String>("publisher"));
+        avaliability.setCellValueFactory(new PropertyValueFactory<Book, Integer>("number"));
+
+        ObservableList<User> list= FXCollections.observableArrayList();
+        ArrayList<Book> books = Librarian.get_all_books();
+
+        tableBook.getItems().setAll(books);
+    }
+
+
+    @FXML
     void editPatron() throws IOException {
         User user= tableUser.getSelectionModel().getSelectedItem();
         if (user==null){
@@ -137,7 +153,7 @@ public class LibrarianScreenController {
     @FXML
     void addPatron(ActionEvent event) throws IOException {
         Assist.loadStage(getClass().getResource("../Register/register.fxml"));
-
+        showTableUser();
     }
 
     @FXML
@@ -174,7 +190,20 @@ public class LibrarianScreenController {
     @FXML
     void issue(ActionEvent event) throws IOException {
         Book book= tableBook.getSelectionModel().getSelectedItem();
-        Assist.loadStage(getClass().getResource("../issue/issue.fxml"));
+
+        if (book==null){
+            Assist.error();
+        }else {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../issue/issue.fxml"));
+            Parent parent = loader.load();
+            EditDoc reg = (EditDoc) loader.getController();
+            reg.passGUI(book);
+            Stage stage = new Stage(StageStyle.DECORATED);
+            stage.setScene(new Scene(parent));
+            stage.showAndWait();
+            showTableUser();
+        }
+
     }
 
     @FXML
@@ -190,6 +219,7 @@ public class LibrarianScreenController {
     @FXML
     void initialize(){
         showTableUser();
+        showTableDocuments();
     }
 
 }
