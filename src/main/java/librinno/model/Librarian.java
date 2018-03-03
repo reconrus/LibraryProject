@@ -156,9 +156,8 @@ public class Librarian extends User {
     public void modify_AV(AV av){
 
         try{
-            ArrayList arrayList = db.isAVAlreadyExist(av);
             PreparedStatement pr = db.con.prepareStatement("UPDATE AV " +
-                    "SET Name=?,Author=?,Price=?,Keywords=?,is_bestseller=?,is_reference=? where id="+ arrayList.get(1));
+                    "SET Name=?,Author=?,Price=?,Keywords=?,is_bestseller=?,is_reference=? where id="+ av.getId());
             pr.setString(1, av.getTitle());
             pr.setString(2, av.getAuthor());
             pr.setInt(3, av.getPrice());
@@ -172,9 +171,8 @@ public class Librarian extends User {
     }
     public void modify_article(Article article){
         try{
-            ArrayList arrayList = db.isArticleAlreadyExist(article);
             PreparedStatement pr = db.con.prepareStatement("UPDATE Articles " +
-                    "SET Name=?,Author=?,Price=?,Keywords=?,is_bestseller=?,is_reference=?,Journal=?,Editor=?,Date=? where id=" + arrayList.get(1));
+                    "SET Name=?,Author=?,Price=?,Keywords=?,is_bestseller=?,is_reference=?,Journal=?,Editor=?,Date=? where id=" + article.getId());
             pr.setString(1, article.getTitle());
             pr.setString(2, article.getAuthor());
             pr.setInt(3, article.getPrice());
@@ -191,9 +189,8 @@ public class Librarian extends User {
     }
     public static void modify_book(Book book) {
         try {
-            ArrayList arrayList =db.isBookAlreadyExist(book);
             PreparedStatement pr = db.con.prepareStatement("UPDATE Books " +
-                    "SET Name=?,Author=?,Publisher=?,Edition=?,Price=?,Keywords=?,is_bestseller=?,is_reference=? where id=" + arrayList.get(1));
+                    "SET Name=?,Author=?,Publisher=?,Edition=?,Price=?,Keywords=?,is_bestseller=?,is_reference=? where id="+book.getId());
             pr.setString(1, book.getTitle());
             pr.setString(2, book.getAuthor());
             pr.setString(3, book.getPublisher());
