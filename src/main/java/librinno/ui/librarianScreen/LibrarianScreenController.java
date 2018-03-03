@@ -81,6 +81,11 @@ public class LibrarianScreenController {
     private TableColumn<User, String> userType;
 
     @FXML
+    void initialize(){
+        showTableUser();
+    }
+
+    @FXML
     void showTableUser(){
         userID.setCellValueFactory(new PropertyValueFactory<User,Integer>("card_number"));
         userName.setCellValueFactory(new PropertyValueFactory<User,String>("name"));
