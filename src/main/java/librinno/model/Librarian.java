@@ -131,7 +131,7 @@ public class Librarian extends User {
             System.out.println("AV with such id didn't found");
         }
     }
-    public void delete_book_by_id(int id) {
+    public static void delete_book_by_id(int id) {
 
         try {
             PreparedStatement pr = db.con.prepareStatement("DELETE from Books WHERE id=" + id);
@@ -326,7 +326,7 @@ public class Librarian extends User {
                 boolean is_bestseller = rs.getBoolean("is_bestseller");
                 boolean is_reference = rs.getBoolean("is_reference");
                 int year = rs.getInt("Year");
-                Book book = new Book(id,name,author,publisher,edition,price,keyWord,is_bestseller,is_reference,year);
+                Book book = new Book(id,name,author,publisher,edition,price,keyWord,is_bestseller,is_reference,year, get_number_of_copies_of_book(id));
                 books.add(book);
             }
         }catch (SQLException e) {
@@ -381,4 +381,23 @@ public class Librarian extends User {
         }
         return copies;
     }
+
+
+    public static int get_number_of_copies_of_book(int book_id) {
+        int copies=0;
+        try {
+            Statement stmt = db.con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM Copy where Id_of_original="+book_id);
+            while (rs.next()){
+                copies++;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return copies;
+    }
+
+
+
 }

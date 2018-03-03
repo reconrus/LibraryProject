@@ -22,6 +22,7 @@ import main.java.librinno.ui.addbook.AddBook;
 import main.java.librinno.ui.assist.Assist;
 import main.java.librinno.ui.editDoc.EditDoc;
 import main.java.librinno.ui.editPatron.EditPatron;
+import main.java.librinno.ui.issue.Issue;
 
 import java.io.IOException;
 import java.sql.ResultSet;
@@ -123,6 +124,7 @@ public class LibrarianScreenController {
         ObservableList<User> list= FXCollections.observableArrayList();
         ArrayList<Book> books = Librarian.get_all_books();
 
+
         tableBook.getItems().setAll(books);
     }
 
@@ -147,7 +149,7 @@ public class LibrarianScreenController {
     @FXML
     void addDoc(ActionEvent event) throws IOException {
         Assist.loadStageWait(getClass().getResource("../addbook/addbook.fxml"));
-
+        showTableDocuments();
     }
 
     @FXML
@@ -167,6 +169,8 @@ public class LibrarianScreenController {
     @FXML
     void deleteDoc(ActionEvent event) {
         Book book= tableBook.getSelectionModel().getSelectedItem();
+        Librarian.delete_book_by_id(book.getId());
+        showTableDocuments();
     }
 
 
@@ -196,7 +200,7 @@ public class LibrarianScreenController {
         }else {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../issue/issue.fxml"));
             Parent parent = loader.load();
-            EditDoc reg = (EditDoc) loader.getController();
+            Issue reg = (Issue) loader.getController();
             reg.passGUI(book);
             Stage stage = new Stage(StageStyle.DECORATED);
             stage.setScene(new Scene(parent));

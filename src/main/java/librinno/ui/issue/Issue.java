@@ -4,6 +4,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import main.java.librinno.model.Book;
 import main.java.librinno.ui.assist.Assist;
 
 public class Issue {
@@ -30,8 +31,12 @@ public class Issue {
         int book=Integer.parseInt(BookID.getText());
         int patron=Integer.getInteger(PatronID.getText());
 
-
         Assist.closeStage(give);
+    }
+
+    public void passGUI(Book book){
+        BookID.setText(String.valueOf(book.getId()));
+        BookID.setEditable(false);
     }
 
 }

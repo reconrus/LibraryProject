@@ -68,8 +68,8 @@ public class AddBook {
         }
         else{
             Database db= new Database();
-            Book book= new Book(bookTitle,bookAuthor,bookPublisher,Integer.parseInt(bookEdition),Integer.parseInt(bookPrice),bookKeyWords,bestseller, reference, Integer.parseInt(bookYear) );
-            //db.book_creation(book);
+            Book book= new Book(bookTitle,bookAuthor,bookPublisher,Integer.parseInt(bookEdition),Integer.parseInt(bookPrice),bookKeyWords,bestseller, reference, Integer.parseInt(bookYear));
+            db.book_creation(book);
             Assist.closeStage(cancel);
         }
     }
