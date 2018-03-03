@@ -36,6 +36,7 @@ public class Main {
         //l.add_article("TitleTest1","AuthorTest1",1,"KeyWords1",true,true,"TestJournal1","TestEditor1",2018,3,12);
         //l.modify_book(100);
         //Librarian.get_all_users();
+        //l.add_CopiesOfMaterial(110,3);
     }
 
 

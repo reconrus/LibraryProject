@@ -65,6 +65,27 @@ public class Librarian extends User {
         }
     }
 
+    public void add_CopiesOfMaterial(int id,int number){
+        try {
+            Statement stmt = db.con.createStatement();
+            ResultSet rs;
+            rs = stmt.executeQuery("SELECT Id_of_original FROM Copy");
+            while (rs.next()){
+                if (rs.getInt(1)==id){
+                    for (int i = 0; i <number ; i++) {
+                        PreparedStatement prst = db.con.prepareStatement("insert into Copy (id_of_original,Owner,Time_left) values(?,?,?)");
+                        prst.setInt(1, id);
+                        prst.setInt(2, 0);
+                        prst.setInt(3, 999);
+                        prst.executeUpdate();
+                    }
+                    return;
+                }
+            }
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
     public void add_book(String title, String author, String publisher, int edition, int price, String keyWords, Boolean is_bestseller,boolean reference,int year) {
         /*
         * To add book, you need to send all information about book
