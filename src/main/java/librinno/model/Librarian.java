@@ -48,7 +48,7 @@ public class Librarian extends User {
 
     public static void modify_user(User user) {
         try {
-            Database db= new Database();
+            Database db = new Database();
             PreparedStatement pr = db.con.prepareStatement("UPDATE Users_of_the_library " +
                     "SET Name=?,Address=?,Phone_number=?,Type=?,Password=? where Card_number=" + user.get_card_number());
             pr.setString(1, user.get_name());
@@ -128,4 +128,21 @@ public class Librarian extends User {
 
         return users;
     }
+
+    public static int get_number_of_all_copies_taken_by_user(int user_id) {
+        Database db = new Database();
+        int copies=0;
+        try {
+            Statement stmt = db.con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM Copy where Owner="+user_id);
+            while (rs.next()){
+                copies++;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return copies;
+    }
+
 }
