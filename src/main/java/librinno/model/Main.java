@@ -21,10 +21,20 @@ public class Main {
         //use for project
         //enter information which will be put in database
         Database db = new Database();
-        Librarian l=new Librarian();
+        Librarian l = new Librarian();
         //l.get_all_users();
         //System.out.println(l.get_all_copies_taken_by_user(1));
-        //System.out.println(l.get_all_copies_taken_by_user(1));
+        // System.out.println(l.get_all_copies_taken_by_user(1));
+
+        //for (int i = 0; i < l.get_all_copies_taken_by_user(1).size(); i++) {
+        //    try {
+        //        AV av = AV.class.cast(l.get_all_copies_taken_by_user(1).get(i));
+        //        System.out.println(av.getId()+" "+av.getTitle());
+        //    } catch (ClassCastException e) {
+        //        Book book = Book.class.cast(l.get_all_copies_taken_by_user(1).get(i));
+        //        System.out.println(book.getId());
+        //    }
+        //}
     }
 
 
