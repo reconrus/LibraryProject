@@ -160,9 +160,8 @@ public class Librarian extends User {
     public void modify_AV(AV av) {
 
         try {
-            ArrayList arrayList = db.isAVAlreadyExist(av);
             PreparedStatement pr = db.con.prepareStatement("UPDATE AV " +
-                    "SET Name=?,Author=?,Price=?,Keywords=?,is_bestseller=?,is_reference=? where id=" + arrayList.get(1));
+                    "SET Name=?,Author=?,Price=?,Keywords=?,is_bestseller=?,is_reference=? where id=" + av.getId());
             pr.setString(1, av.getTitle());
             pr.setString(2, av.getAuthor());
             pr.setInt(3, av.getPrice());
@@ -177,9 +176,8 @@ public class Librarian extends User {
 
     public void modify_article(Article article) {
         try {
-            ArrayList arrayList = db.isArticleAlreadyExist(article);
             PreparedStatement pr = db.con.prepareStatement("UPDATE Articles " +
-                    "SET Name=?,Author=?,Price=?,Keywords=?,is_bestseller=?,is_reference=?,Journal=?,Editor=?,Date=? where id=" + arrayList.get(1));
+                    "SET Name=?,Author=?,Price=?,Keywords=?,is_bestseller=?,is_reference=?,Journal=?,Editor=?,Date=? where id=" + article.getId());
             pr.setString(1, article.getTitle());
             pr.setString(2, article.getAuthor());
             pr.setInt(3, article.getPrice());
@@ -199,7 +197,7 @@ public class Librarian extends User {
         try {
             ArrayList arrayList = db.isBookAlreadyExist(book);
             PreparedStatement pr = db.con.prepareStatement("UPDATE Books " +
-                    "SET Name=?,Author=?,Publisher=?,Edition=?,Price=?,Keywords=?,is_bestseller=?,is_reference=? where id=" + arrayList.get(1));
+                    "SET Name=?,Author=?,Publisher=?,Edition=?,Price=?,Keywords=?,is_bestseller=?,is_reference=? where id=" + book.getId());
             pr.setString(1, book.getTitle());
             pr.setString(2, book.getAuthor());
             pr.setString(3, book.getPublisher());
@@ -336,7 +334,7 @@ public class Librarian extends User {
                 boolean is_bestseller = rs.getBoolean("is_bestseller");
                 boolean is_reference = rs.getBoolean("is_reference");
                 int year = rs.getInt("Year");
-                Book book = new Book(id, name, author, publisher, edition, price, keyWord, is_bestseller, is_reference, year,0);
+                Book book = new Book(id,name,author,publisher,edition,price,keyWord,is_bestseller,is_reference,year, get_number_of_copies_of_book(id));
                 books.add(book);
             }
         } catch (SQLException e) {
@@ -452,4 +450,21 @@ public class Librarian extends User {
         }
         return copies;
     }
+
+
+    public static int get_number_of_copies_of_book(int book_id) {
+        int copies=0;
+        try {
+            Statement stmt = db.con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM Copy where Id_of_original="+book_id);
+            while (rs.next()){
+                copies++;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return copies;
+    }
+
+
 }
