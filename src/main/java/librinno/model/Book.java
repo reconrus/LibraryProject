@@ -72,7 +72,8 @@ public class Book extends Material {
         setYear(year);
     }
 
-    public Book(int id, String title, String author, String publisher, int edition, int price, String keyWords, Boolean is_bestseller,boolean reference,int year) {
+    public Book(int id, String title, String author, String publisher, int edition, int price, String keyWords, boolean is_bestseller,boolean reference,int year, int amount) {
+
         setId(id);
         setTitle(title);
         setAuthor(author);
@@ -83,6 +84,7 @@ public class Book extends Material {
         setIs_bestseller(is_bestseller);
         setReference(reference);
         setYear(year);
+        setNumber(amount);
     }
 }
 

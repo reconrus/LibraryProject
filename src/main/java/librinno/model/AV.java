@@ -27,4 +27,14 @@ public class AV extends Material {
         setIs_bestseller(is_bestseller);
         setReference(reference);
     }
+    public AV(int id,String title,String author,int price, String keyWords, Boolean is_bestseller,
+              boolean reference){
+        setId(id);
+        setTitle(title);
+        setAuthor(author);
+        setPrice(price);
+        setKeyWords(keyWords);
+        setIs_bestseller(is_bestseller);
+        setReference(reference);
+    }
 }

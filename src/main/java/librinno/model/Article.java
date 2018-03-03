@@ -42,7 +42,19 @@ public class Article extends Material{ ////////////////////////////////////////
         setEditor(editor);
         setDate(yearOfDate,monthOfDate,dayOfDate);
     }
-
+    public Article(int id,String title,String author,int price, String keyWords, Boolean is_bestseller,
+                   boolean reference,String journal,String editor,int yearOfDate,int monthOfDate,int dayOfDate){
+        setId(id);
+        setTitle(title);
+        setAuthor(author);
+        setPrice(price);
+        setKeyWords(keyWords);
+        setIs_bestseller(is_bestseller);
+        setReference(reference);
+        setJournal(journal);
+        setEditor(editor);
+        setDate(yearOfDate,monthOfDate,dayOfDate);
+    }
     public String getJournal() {
         return journal;
     }
