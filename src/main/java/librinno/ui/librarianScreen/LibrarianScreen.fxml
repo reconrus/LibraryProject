@@ -95,7 +95,7 @@
                            </children></AnchorPane>
                      </content>
                   </Tab>
-                  <Tab onSelectionChanged="#showTableUser" text="Patrons">
+                  <Tab text="Patrons">
                      <content>
                         <BorderPane prefHeight="200.0" prefWidth="200.0" />
                      </content>

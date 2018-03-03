@@ -185,4 +185,9 @@ public class LibrarianScreenController {
         Copy copy= tableCopy.getSelectionModel().getSelectedItem();
     }
 
+    @FXML
+    void initialize(){
+        showTableUser();
+    }
+
 }
