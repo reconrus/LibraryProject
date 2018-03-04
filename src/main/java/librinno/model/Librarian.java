@@ -78,7 +78,7 @@ public class Librarian extends User {
             pr.setInt(1,0);
             pr.setInt(2,999);
             pr.setString(3, "In library");
-            pr.setDate(4,java.sql.Date.valueOf(LocalDate.of(9999,1,1)));
+            pr.setDate(4, java.sql.Date.valueOf(LocalDate.of(9999, 1, 1)));
             pr.executeUpdate();
             return true;
         }catch (SQLException e) {
@@ -86,6 +86,19 @@ public class Librarian extends User {
             return false;
         }
     }
+    public boolean requesReturnBook(int idOfCopyOfBook){
+        try {
+            Database db = new Database();
+            PreparedStatement pr = db.con.prepareStatement("UPDATE Copy SET Status=? WHERE Id_of_copy= " + idOfCopyOfBook);
+            pr.setString(1, "Returning");
+            pr.executeUpdate();
+            return true;
+        }catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     public static Book bookByID(int id){
         try{
             Statement stmt = db.con.createStatement();
