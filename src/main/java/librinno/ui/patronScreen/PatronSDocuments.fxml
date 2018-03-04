@@ -1,17 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.materialicons.MaterialIconView?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.librinno.ui.patronScreen.PatronSDocumentsController">
-   <children>
-      <TableView fx:id="tableDoc" prefHeight="340.0" prefWidth="600.0">
+<BorderPane prefHeight="449.0" prefWidth="369.0" stylesheets="@../../../../resources/theme.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.librinno.ui.patronScreen.PatronSDocumentsController">
+   <center>
+      <TableView fx:id="tableDoc" prefHeight="324.0" prefWidth="320.0" BorderPane.alignment="CENTER">
         <columns>
           <TableColumn fx:id="id" prefWidth="75.0" text="ID" />
-          <TableColumn fx:id="title" prefWidth="75.0" text="Title" />
+            <TableColumn fx:id="author" prefWidth="110.0" text="Author" />
+          <TableColumn fx:id="title" prefWidth="107.0" text="Title" />
+            <TableColumn fx:id="date" prefWidth="76.0" text="Return Date" />
         </columns>
       </TableView>
-   </children>
-</AnchorPane>
+   </center>
+   <bottom>
+      <JFXButton onAction="#returnCopy" prefHeight="48.0" prefWidth="185.0" stylesheets="@../../../../resources/theme.css" text="Return" BorderPane.alignment="CENTER">
+         <graphic>
+            <MaterialIconView fill="WHITE" glyphName="KEYBOARD_RETURN" size="40" />
+         </graphic>
+      </JFXButton>
+   </bottom>
+</BorderPane>

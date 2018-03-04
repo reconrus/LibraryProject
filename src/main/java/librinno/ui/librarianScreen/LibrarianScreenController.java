@@ -101,9 +101,6 @@ public class LibrarianScreenController {
     private TableColumn<Copy, String> issuedTo;
 
     @FXML
-    private TableColumn<Copy, String> retData;
-
-    @FXML
     void showTableUser(){
         userID.setCellValueFactory(new PropertyValueFactory<User,Integer>("card_number"));
         userName.setCellValueFactory(new PropertyValueFactory<User,String>("name"));
