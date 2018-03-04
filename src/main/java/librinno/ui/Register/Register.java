@@ -54,7 +54,7 @@ public class Register {
                 Database.user_creation(new User(user,phoneNum, addressText, "Student", pass));
             }
             else{
-                Database.user_creation(new User(user,phoneNum, addressText, "Faculity", pass));
+                Database.user_creation(new User(user,phoneNum, addressText, "Faculty", pass));
             }
             Assist.closeStage(confirm);
         }

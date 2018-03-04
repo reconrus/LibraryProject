@@ -6,6 +6,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
 import javafx.scene.text.Text;
+import main.java.librinno.model.Database;
+import main.java.librinno.model.Librarian;
 import main.java.librinno.model.User;
 import main.java.librinno.ui.assist.Assist;
 
@@ -49,7 +51,6 @@ public class PatronScreenController {
     private void logoutAction(ActionEvent event) throws IOException {
         Assist.closeStage(logout);
         Assist.loadStage(getClass().getResource("/main/java/librinno/ui/login/LoginScreen.fxml"));
-        System.out.println(user.get_name());
     }
 
     public void setUserInfo(User patron){
@@ -59,7 +60,7 @@ public class PatronScreenController {
         address.setText(patron.get_adress());
         type.setText(patron.get_type());
         user=patron;
-        //TODO: ?????????? ?????, ?????? ??????: bookCount.setText();
+        bookCount.setText(""+Librarian.get_number_of_all_copies_taken_by_user(patron.getCard_number()));
     }
 
     @FXML
