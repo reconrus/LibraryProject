@@ -66,7 +66,7 @@ public class AddBook {
         Boolean bestseller= isBestseller.isArmed();
         Boolean reference= isReference.isArmed();
         if ((bookAuthor.isEmpty())||(bookPrice.isEmpty())||(bookPublisher.isEmpty())||(bookTitle.isEmpty())
-                || (bookEdition.isEmpty()) || (bookAmount.isEmpty())){
+                || (bookEdition.isEmpty()) || (bookAmount.isEmpty())||(Integer.parseInt(bookAmount)>500)){
             Assist.error();
         }
         else{
