@@ -143,5 +143,6 @@ public class PatronScreenController {
             error.setContentText("There have been a mistake");
             error.showAndWait();
         }
+        showTableDocuments();
     }
 }
