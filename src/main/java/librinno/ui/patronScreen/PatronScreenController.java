@@ -130,6 +130,11 @@ public class PatronScreenController {
     @FXML
     private void reserve(ActionEvent event) throws IOException {
         Book book= tableBook.getSelectionModel().getSelectedItem();
+        if(book == null){
+            Assist.error();
+            return;
+        }
+
         Boolean flag = Librarian.checkOutBook(user,book.getId());
         if (flag){
             Alert error= new Alert(Alert.AlertType.CONFIRMATION);
@@ -140,7 +145,7 @@ public class PatronScreenController {
         else{
             Alert error= new Alert(Alert.AlertType.ERROR);
             error.setHeaderText("Error");
-            error.setContentText("There have been a mistake");
+            error.setContentText("There has been a mistake");
             error.showAndWait();
         }
         showTableDocuments();

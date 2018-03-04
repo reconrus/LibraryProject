@@ -7,7 +7,6 @@
 <?import de.jensd.fx.glyphs.materialicons.MaterialIconView?>
 <?import de.jensd.fx.glyphs.octicons.OctIconView?>
 <?import javafx.scene.Group?>
-<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="442.0" prefWidth="680.0" styleClass="root" stylesheets="@../../../../resources/theme.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.librinno.ui.login.LoginController">
@@ -26,6 +25,8 @@
             <JFXButton fx:id="login" layoutX="204.0" layoutY="99.0" onAction="#loginAction" text="Login" textFill="WHITE" />
          </children>
       </Group>
-      <CheckBox fx:id="isALibrarian" layoutX="304.0" layoutY="389.0" mnemonicParsing="false" text="Librarian?" textFill="WHITE" />
+      <JFXButton layoutX="189.0" layoutY="356.0" onAction="#setLibrarian" text="Librarian" />
+      <JFXButton layoutX="439.0" layoutY="356.0" onAction="#setStudent" text="Student" />
+      <JFXButton layoutX="314.0" layoutY="356.0" onAction="#setFaculty" text="Faculty" />
    </children>
 </AnchorPane>

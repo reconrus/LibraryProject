@@ -34,8 +34,6 @@ public class LoginController {
     private JFXTextField username;
     @FXML
     private JFXButton login;
-    @FXML
-    private CheckBox isALibrarian; //TODO needed to show both screens (librarian and patron) on the presentation
 
     public LoginController() {
     }
@@ -58,8 +56,6 @@ public class LoginController {
 
     @FXML
     private void loginAction(ActionEvent event) throws IOException, SQLException {
-        Boolean checkbox = isALibrarian.isSelected();
-
         String id = username.getText();
         String pass = password.getText();
 
@@ -92,6 +88,26 @@ public class LoginController {
         Assist.loadStage(getClass().getResource("../librarianScreen/LibrarianScreen.fxml"));
     }
 
+
+    /* FOR TESTs */
+
+    @FXML
+    private void setLibrarian(){
+        username.setText("33");
+        password.setText("124");
+    }
+
+    @FXML
+    private void setFaculty(){
+        username.setText("31");
+        password.setText("1");
+    }
+
+    @FXML
+    private void setStudent(){
+        username.setText("33");
+        password.setText("1");
+    }
 
 
 }
