@@ -512,6 +512,19 @@ public class Librarian extends User {
         int copies = 0;
         try {
             Statement stmt = db.con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM Copy where Id_of_original=" + book_id+" and Owner="+0);
+            while (rs.next()) {
+                copies++;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return copies;
+    }
+    public static int get_number_of_copies_of_book_with_taken(int book_id) {
+        int copies = 0;
+        try {
+            Statement stmt = db.con.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM Copy where Id_of_original=" + book_id);
             while (rs.next()) {
                 copies++;
@@ -521,6 +534,7 @@ public class Librarian extends User {
         }
         return copies;
     }
+
 
 
 }
