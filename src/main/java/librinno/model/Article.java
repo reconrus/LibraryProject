@@ -12,7 +12,7 @@ import java.util.Scanner;
  *date
  * with setters and getters
  */
-public class Article extends Material{ ////////////////////////////////////////
+public class Article extends Material{
     private String journal;
     private String editor;
     private LocalDate date;

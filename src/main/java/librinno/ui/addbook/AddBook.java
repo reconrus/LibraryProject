@@ -70,7 +70,7 @@ public class AddBook {
             Assist.error();
         }
         else{
-            Librarian.add_book(bookTitle,bookAuthor,bookPublisher,Integer.parseInt(bookEdition),Integer.parseInt(bookPrice),bookKeyWords,bestseller, reference, Integer.parseInt(bookYear),Integer.parseInt(bookAmount));
+            Librarian.add_book(bookTitle,bookAuthor,bookPublisher,Integer.parseInt(bookEdition),Integer.parseInt(bookPrice),bookKeyWords,bestseller, reference, Integer.parseInt(bookYear),Integer.parseInt(bookAmount),"In library");
             Assist.closeStage(cancel);
         }
     }
