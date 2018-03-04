@@ -199,6 +199,15 @@ public class Librarian extends User {
         }
     }
 
+    public static void deleteCopy(int id){
+        try {
+            PreparedStatement pr = db.con.prepareStatement("DELETE from Copy WHERE Id_of_copy=" + id);
+            pr.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void delete_book_by_id(int id) {
 
         try {
