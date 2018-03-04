@@ -20,21 +20,16 @@ public class Main {
         //it is typical version of creation
         //use for project
         //enter information which will be put in database
-        Database db = new Database();
+        //Database db = new Database();
         Librarian l = new Librarian();
         //l.get_all_users();
         //System.out.println(l.get_all_copies_taken_by_user(1));
         // System.out.println(l.get_all_copies_taken_by_user(1));
-
-        //for (int i = 0; i < l.get_all_copies_taken_by_user(1).size(); i++) {
-        //    try {
-        //        AV av = AV.class.cast(l.get_all_copies_taken_by_user(1).get(i));
-        //        System.out.println(av.getId()+" "+av.getTitle());
-        //    } catch (ClassCastException e) {
-        //        Book book = Book.class.cast(l.get_all_copies_taken_by_user(1).get(i));
-        //        System.out.println(book.getId());
-        //    }
-        //}
+       // for (int i = 0; i < Librarian.get_all_copies_taken_by_user(32).size(); i++) {
+       //        System.out.println(Librarian.get_all_copies_taken_by_user(32).get(i).getTitle());
+       // }
+      //  System.out.println(l.get_all_copies().size());
+        System.out.println(l.get_all_copies());
     }
 
 
