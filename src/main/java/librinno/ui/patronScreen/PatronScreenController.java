@@ -2,16 +2,24 @@ package main.java.librinno.ui.patronScreen;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTreeTableView;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
+import main.java.librinno.model.Book;
 import main.java.librinno.model.Database;
 import main.java.librinno.model.Librarian;
 import main.java.librinno.model.User;
 import main.java.librinno.ui.assist.Assist;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 /**
  *
  */
@@ -43,9 +51,43 @@ public class PatronScreenController {
 
     @FXML
     private Text type;
+    @FXML
+    private TableView<Book> tableBook;
 
     @FXML
-    private JFXTreeTableView<?> reserveTable;
+    private TableColumn<Book, Integer> id;
+
+    @FXML
+    private TableColumn<Book, String> author;
+
+    @FXML
+    private TableColumn<Book, String> title;
+
+    @FXML
+    private TableColumn<Book, String> publisher;
+
+    @FXML
+    private TableColumn<Book, Integer> avaliability;
+
+    @FXML
+    void showTableDocuments(){
+        id.setCellValueFactory(new PropertyValueFactory<Book, Integer>("id"));
+        author.setCellValueFactory(new PropertyValueFactory<Book, String>("author"));
+        title.setCellValueFactory(new PropertyValueFactory<Book, String>("title"));
+        publisher.setCellValueFactory(new PropertyValueFactory<Book, String>("publisher"));
+        avaliability.setCellValueFactory(new PropertyValueFactory<Book, Integer>("number"));
+
+        ObservableList<User> list= FXCollections.observableArrayList();
+        ArrayList<Book> books = Librarian.get_all_books();
+
+
+        tableBook.getItems().setAll(books);
+    }
+
+    @FXML
+    void initialize(){
+        showTableDocuments();
+    }
 
     @FXML
     private void logoutAction(ActionEvent event) throws IOException {
