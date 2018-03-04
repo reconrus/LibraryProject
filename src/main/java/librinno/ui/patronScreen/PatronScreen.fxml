@@ -55,7 +55,7 @@
                                           <Font size="17.0" />
                                        </font>
                                     </Text>
-                                    <Text fx:id="address" fill="WHITE" layoutX="2.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Address" wrappingWidth="90.2138671875">
+                                    <Text fx:id="address" fill="WHITE" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Address" wrappingWidth="90.2138671875">
                                        <font>
                                           <Font size="17.0" />
                                        </font>

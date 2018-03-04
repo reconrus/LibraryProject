@@ -62,6 +62,9 @@ public class LibrarianScreenController {
     private TableColumn<Book, Integer> avaliability;
 
     @FXML
+    private TableColumn<Book, Integer> total;
+
+    @FXML
     private TableView<User> tableUser;
 
     @FXML
@@ -97,7 +100,6 @@ public class LibrarianScreenController {
     @FXML
     private TableColumn<Copy, String> issuedTo;
 
-
     @FXML
     void showTableUser(){
         userID.setCellValueFactory(new PropertyValueFactory<User,Integer>("card_number"));
@@ -120,6 +122,7 @@ public class LibrarianScreenController {
         title.setCellValueFactory(new PropertyValueFactory<Book, String>("title"));
         publisher.setCellValueFactory(new PropertyValueFactory<Book, String>("publisher"));
         avaliability.setCellValueFactory(new PropertyValueFactory<Book, Integer>("number"));
+        total.setCellValueFactory(new PropertyValueFactory<Book, Integer>("total"));
 
         ObservableList<User> list= FXCollections.observableArrayList();
         ArrayList<Book> books = Librarian.get_all_books();
@@ -216,12 +219,12 @@ public class LibrarianScreenController {
     }
 
     @FXML
-    void issueCopy(ActionEvent event) throws IOException{
+    void returnDocument(ActionEvent event) throws IOException{
         Copy copy= tableCopy.getSelectionModel().getSelectedItem();
     }
 
     @FXML
-    void returnDocument(ActionEvent event) throws IOException{
+    void deleteCopy (ActionEvent event) throws IOException{
         Copy copy= tableCopy.getSelectionModel().getSelectedItem();
     }
 
