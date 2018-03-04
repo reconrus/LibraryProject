@@ -6,14 +6,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
 import javafx.scene.text.Text;
-import main.java.librinno.model.Patron;
 import main.java.librinno.model.User;
 import main.java.librinno.ui.assist.Assist;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
-
 /**
  *
  */
@@ -23,7 +19,7 @@ public class PatronScreenController {
     @FXML
     private JFXButton logout;
 
-    String userID;
+    User user;
 
     @FXML
     private JFXButton copiesButton;
@@ -50,18 +46,10 @@ public class PatronScreenController {
     private JFXTreeTableView<?> reserveTable;
 
     @FXML
-    void initialize(){
-        //cardNumber.setText(userID);
-        System.out.println(userID);
-    }
-
-    @FXML
     private void logoutAction(ActionEvent event) throws IOException {
         Assist.closeStage(logout);
-
-        //Show login screen
         Assist.loadStage(getClass().getResource("/main/java/librinno/ui/login/LoginScreen.fxml"));
-
+        System.out.println(user.get_name());
     }
 
     public void setUserInfo(User patron){
@@ -70,6 +58,7 @@ public class PatronScreenController {
         phone.setText(patron.get_number());
         address.setText(patron.get_adress());
         type.setText(patron.get_type());
+        user=patron;
         //TODO: ?????????? ?????, ?????? ??????: bookCount.setText();
     }
 
@@ -82,13 +71,6 @@ public class PatronScreenController {
 
     @FXML
     private void reserve(ActionEvent event){
-
-    }
-
-    public void passGUI(String id, String pass){
-        cardNumber.setText(id);
-        userID = id;
-        System.out.println(userID);
 
     }
 }
