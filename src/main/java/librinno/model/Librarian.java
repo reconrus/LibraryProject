@@ -97,7 +97,7 @@ public class Librarian extends User {
          * ID will be created in DB with auto_increment
          * time_left will be 999 and owner 0 - because only librarian(Id =0) can add books
          * */
-        Book book = new Book(title, author, publisher, edition, price, keyWords, is_bestseller, reference, year);
+        Book book = new Book(title, author, publisher, edition, price, keyWords, is_bestseller, reference, year, "In library");
         db.book_creation(book);
         ArrayList<Integer> arrayList = db.isBookAlreadyExist(book);
         add_CopiesOfMaterial(arrayList.get(1), amount - 1);
@@ -110,14 +110,14 @@ public class Librarian extends User {
          * ID will be created in DB with auto_increment
          * time_left will be 999 and owner 0 - because only librarian(Id =0) can add articles
          * */
-        Article article = new Article(title, author, price, keyWords, is_bestseller, reference, journal, editor, yearOfDate, monthOfDate, dayOfDate);
+        Article article = new Article(title, author, price, keyWords, is_bestseller, reference, journal, editor, yearOfDate, monthOfDate, dayOfDate, "In library");
         db.article_creation(article);
         ArrayList<Integer> arrayList = db.isArticleAlreadyExist(article);
         add_CopiesOfMaterial(arrayList.get(1), amount - 1);
     }
 
     public void add_AV(String title, String author, int price, String keyWords, Boolean is_bestseller, boolean reference, int amount) throws SQLException {
-        AV av = new AV(title, author, price, keyWords, is_bestseller, reference);
+        AV av = new AV(title, author, price, keyWords, is_bestseller, reference, "In library");
         db.av_creation(av);
         ArrayList<Integer> arrayList = db.isAVAlreadyExist(av);
         add_CopiesOfMaterial(arrayList.get(1), amount - 1);
