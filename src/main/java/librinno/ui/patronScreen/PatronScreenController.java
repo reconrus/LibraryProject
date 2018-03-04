@@ -115,9 +115,16 @@ public class PatronScreenController {
 
     @FXML
     private void showCopies(ActionEvent event)throws IOException{
-        Assist.loadStage(getClass().getResource("/main/java/librinno/ui/patronScreen/PatronSDocuments.fxml"));
 
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/main/java/librinno/ui/patronScreen/PatronSDocuments.fxml"));
+        Parent parent = loader.load();
 
+        PatronSDocumentsController controller = loader.getController();
+        controller.setId(user.get_card_number());
+
+        Stage stage = new Stage(StageStyle.DECORATED);
+        stage.setScene(new Scene(parent));
+        stage.show();
     }
 
     @FXML

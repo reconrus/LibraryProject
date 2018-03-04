@@ -8,10 +8,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import main.java.librinno.model.Book;
-import main.java.librinno.model.Copy;
-import main.java.librinno.model.Material;
-import main.java.librinno.model.User;
+import main.java.librinno.model.*;
 import main.java.librinno.ui.assist.Assist;
 
 import java.io.IOException;
@@ -38,7 +35,9 @@ public class PatronSDocumentsController {
     @FXML
     private static TableColumn<Material, String> status;
 
-    public static void showCopies(LinkedList<Material> copies) {
+    private int userId;
+
+    public void showCopies() {
 
         id.setCellValueFactory(new PropertyValueFactory<Material, Integer>("id"));
         author.setCellValueFactory(new PropertyValueFactory<Material,String>("author"));
@@ -46,6 +45,8 @@ public class PatronSDocumentsController {
         date.setCellValueFactory(new PropertyValueFactory<Material,String>("date"));
         status.setCellValueFactory(new PropertyValueFactory<Material,String>("status"));
         ObservableList<Material> list= FXCollections.observableArrayList();
+
+        LinkedList<Material> copies = Librarian.get_all_copies_taken_by_user(userId);
 
         list.addAll(copies);
 
@@ -57,4 +58,10 @@ public class PatronSDocumentsController {
     void returnDocument(ActionEvent event){
         Material copy = tableCopy.getSelectionModel().getSelectedItem();
     }
+
+    public void setId(int id){
+        userId = id;
+    }
+
+
 }

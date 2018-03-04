@@ -64,27 +64,28 @@ public class LoginController {
         String pass = password.getText();
 
         if(!id.isEmpty() && !pass.isEmpty()){
-            authorization(id, pass);
-            Assist.closeStage(login);
+            if(authorization(id, pass))
+                Assist.closeStage(login);
         }
         else Assist.authorizationError();
     }
 
-    void authorization(String id, String pass) throws SQLException, IOException {
+    boolean authorization(String id, String pass) throws SQLException, IOException {
 
         Database db = new Database();
         String type = db.authorization(Integer.parseInt(id), pass);
 
         if(type.equals("Librarian")) {
             loadLibrarian();
-            return;
+            return true;
         }
         if(type.equals("Student") || type.equals("Faculty")){
             loadPatron(id);
-            return;
+            return true;
         }
 
         Assist.authorizationError();
+        return false;
     }
 
     private void loadLibrarian() throws IOException {

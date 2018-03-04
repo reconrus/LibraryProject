@@ -124,7 +124,6 @@ public class LibrarianScreenController {
         ObservableList<User> list= FXCollections.observableArrayList();
         ArrayList<Book> books = Librarian.get_all_books();
 
-
         tableBook.getItems().setAll(books);
     }
 
