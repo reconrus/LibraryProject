@@ -3,12 +3,14 @@ package main.java.librinno.ui.patronScreen;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import main.java.librinno.model.Book;
 import main.java.librinno.model.Librarian;
 import main.java.librinno.model.Material;
+import main.java.librinno.ui.assist.Assist;
 
 import java.util.LinkedList;
 
@@ -29,7 +31,23 @@ public class PatronSDocumentsController {
     @FXML
     void returnCopy(){
         Material copy= tableDoc.getSelectionModel().getSelectedItem();
+        if(copy!=null){
 
+            if (Librarian.requestReturnBook(copy.getId())){
+                Alert error= new Alert(Alert.AlertType.CONFIRMATION);
+                error.setHeaderText("Success");
+                error.setContentText("Your request has been accepted");
+                error.showAndWait();
+            }
+            else{
+                Alert error= new Alert(Alert.AlertType.ERROR);
+                error.setHeaderText("Error");
+                error.setContentText("There has been a mistake");
+                error.showAndWait();
+            }
+
+            showTable();
+        }
     }
 
     void showTable(){
@@ -45,9 +63,6 @@ public class PatronSDocumentsController {
         tableDoc.getItems().setAll(list);
 
     }
-
-
-
 
     void setId(int id){
         userID=id;

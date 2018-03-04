@@ -139,7 +139,6 @@ public class PatronScreenController {
         if (flag){
             Alert error= new Alert(Alert.AlertType.CONFIRMATION);
             error.setHeaderText("Success");
-            error.setContentText("You've been given"+book.getId());
             error.showAndWait();
         }
         else{
