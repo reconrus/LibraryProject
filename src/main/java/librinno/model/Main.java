@@ -23,13 +23,13 @@ public class Main {
         //Database db = new Database();
         Librarian l = new Librarian();
         //l.get_all_users();
-        //System.out.println(l.get_all_copies_taken_by_user(1));
-        // System.out.println(l.get_all_copies_taken_by_user(1));
-       // for (int i = 0; i < Librarian.get_all_copies_taken_by_user(32).size(); i++) {
-       //        System.out.println(Librarian.get_all_copies_taken_by_user(32).get(i).getTitle());
-       // }
+       //System.out.println(l.get_all_copies_taken_by_user(1));
+       // System.out.println(l.get_all_copies_taken_by_user(1));
+        for (int i = 0; i < Librarian.get_all_copies_taken_by_user(35).size(); i++) {
+               System.out.println(Librarian.get_all_copies_taken_by_user(35).get(i).getDate());
+        }
       //  System.out.println(l.get_all_copies().size());
-        System.out.println(l.get_all_copies());
+       // System.out.println(l.get_all_copies());
     }
 
 

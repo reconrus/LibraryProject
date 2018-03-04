@@ -16,7 +16,7 @@ public class Article extends Material{
     private String journal;
     private String editor;
     private LocalDate date;
-
+    private LocalDate date_of_return;
     public Article(String title,String author,int price, String keyWords, Boolean is_bestseller,
                    boolean reference,String journal,String editor,int yearOfDate,int monthOfDate,int dayOfDate,String status){
         setTitle(title);
@@ -74,5 +74,11 @@ public class Article extends Material{
     }
     public void setDate(int year,int month,int day) {
         this.date =LocalDate.of(year,month,day);
+    }
+    public LocalDate get_return_date() {
+        return date_of_return;
+    }
+    public void set_return_date(int year,int month,int day) {
+        this.date_of_return =LocalDate.of(year,month,day);
     }
 }

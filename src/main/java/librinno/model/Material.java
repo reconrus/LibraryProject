@@ -3,6 +3,7 @@ package main.java.librinno.model;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 
 /**
  * Created by Ilnur Mamedbakov on 25.01.2018.
@@ -25,7 +26,14 @@ public class Material {
     public boolean is_bestseller;
     public int number;
     public String status;
+    private LocalDate date;
 
+    public LocalDate getDate() {
+        return date;
+    }
+    public void setDate(int year,int month,int day) {
+        this.date =LocalDate.of(year,month,day);
+    }
     public String getStatus() {
         return status;
     }
