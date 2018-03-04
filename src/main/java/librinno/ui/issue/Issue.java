@@ -33,7 +33,7 @@ public class Issue {
     @FXML
     void give(ActionEvent event) throws SQLException {
         int book=Integer.parseInt(BookID.getText());
-        int patron=Integer.getInteger(PatronID.getText());
+        int patron=Integer.parseInt(PatronID.getText());
         Database db= new Database();
         Librarian.checkOutBook(db.get_information_about_the_user(patron),book);
 
