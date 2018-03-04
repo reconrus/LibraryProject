@@ -40,6 +40,61 @@ public class Librarian extends User {
         }
     }
 
+    public boolean checkOutBook(User user,int idOfBook){
+        try {
+            Database db = new Database();
+            PreparedStatement pr = db.con.prepareStatement("UPDATE Copy SET Owner=?,Time_left=?,Status=? WHERE Id_of_original= " + idOfBook + " AND Status= 'In library' LIMIT 1 ");
+            Book book = bookByID(idOfBook);
+            if (!book.isReference()) {
+                pr.setInt(1, user.getCard_number());
+                if (user.get_type().equals("Student") && book.isIs_bestseller())
+                    pr.setInt(2, 14);//если студент и книга бестселлер, то ставим 14 дней
+                else if (user.get_type().equals("Student") && !book.isIs_bestseller())
+                    pr.setInt(2, 21);//если студент и книга бестселлер, то ставим 21 дней
+                else
+                    pr.setInt(2, 28);//это если факулти
+                pr.setString(3,"Issued");
+                pr.executeUpdate();
+                return true;
+            }else
+                return false;
+
+        }catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    public boolean returnBook(int idOfCopyOfBook){
+        try {
+            Database db = new Database();
+            PreparedStatement pr = db.con.prepareStatement("UPDATE Copy SET Owner=?,Time_left=?,Status=? WHERE Id_of_copy= " + idOfCopyOfBook);
+            pr.setInt(1,0);
+            pr.setInt(2,999);
+            pr.setString(3,"In library");
+            pr.executeUpdate();
+            return true;
+        }catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    public Book bookByID(int id){
+        try{
+            Statement stmt = db.con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM Books");
+            while (rs.next()) {
+                if (rs.getInt(1)==id){
+                    Book book = new Book(id,rs.getString(2),rs.getString(3),rs.getString(4),rs.getInt(5),rs.getInt(6),rs.getString(7),rs.getBoolean(8),rs.getBoolean(9),rs.getInt(10),1);
+                    return book;
+                }
+
+            }
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
     public static void delete_user_by_id(int user_id) {
         try {
             Database db = new Database();
@@ -394,7 +449,7 @@ public class Librarian extends User {
     }
 
     public static LinkedList<Material> get_all_copies_taken_by_user(int user_id) {
-        LinkedList<Material> copies = new LinkedList<>();
+        LinkedList<Material> copies = new LinkedList();
         try {
             Statement stmt = db.con.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM Copy where Owner=" + user_id);
