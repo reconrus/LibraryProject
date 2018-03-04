@@ -45,22 +45,7 @@ public class Book extends Material {
         this.publisher = publisher;
     }
 
-
-    Book() {
-        //now entering in simple form
-        //get information about user
-        Scanner sc = new Scanner(System.in);
-        setTitle(sc.next());
-        setAuthor(sc.next());
-        setPublisher(sc.next());
-        setEdition(sc.nextInt());
-        setPrice(sc.nextInt());
-        setKeyWords(sc.next());
-        setIs_bestseller(sc.nextBoolean());
-        setReference(sc.nextBoolean());
-    }
-
-    public Book(String title, String author, String publisher, int edition, int price, String keyWords, Boolean is_bestseller,boolean reference,int year) {
+    public Book(String title, String author, String publisher, int edition, int price, String keyWords, Boolean is_bestseller,boolean reference,int year,String status) {
         setTitle(title);
         setAuthor(author);
         setPublisher(publisher);
@@ -70,9 +55,10 @@ public class Book extends Material {
         setIs_bestseller(is_bestseller);
         setReference(reference);
         setYear(year);
+        setStatus(status);
     }
 
-    public Book(int id, String title, String author, String publisher, int edition, int price, String keyWords, boolean is_bestseller,boolean reference,int year, int amount) {
+    public Book(int id, String title, String author, String publisher, int edition, int price, String keyWords, boolean is_bestseller,boolean reference,int year, int amount,String status) {
         setId(id);
         setTitle(title);
         setAuthor(author);
@@ -84,6 +70,7 @@ public class Book extends Material {
         setReference(reference);
         setYear(year);
         setNumber(amount);
+        setStatus(status);
     }
 }
 

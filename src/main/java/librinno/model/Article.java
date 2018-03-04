@@ -17,21 +17,8 @@ public class Article extends Material{ ////////////////////////////////////////
     private String editor;
     private LocalDate date;
 
-    Article(){
-        Scanner sc = new Scanner(System.in);
-        setTitle(sc.next());
-        setAuthor(sc.next());
-        setPrice(sc.nextInt());
-        setKeyWords(sc.next());
-        setIs_bestseller(sc.nextBoolean());
-        setReference(sc.nextBoolean());
-        setJournal(sc.next());
-        setEditor(sc.next());
-        setDate(sc.nextInt(),sc.nextInt(),sc.nextInt());
-
-    }
     public Article(String title,String author,int price, String keyWords, Boolean is_bestseller,
-                   boolean reference,String journal,String editor,int yearOfDate,int monthOfDate,int dayOfDate){
+                   boolean reference,String journal,String editor,int yearOfDate,int monthOfDate,int dayOfDate,String status){
         setTitle(title);
         setAuthor(author);
         setPrice(price);
@@ -41,9 +28,10 @@ public class Article extends Material{ ////////////////////////////////////////
         setJournal(journal);
         setEditor(editor);
         setDate(yearOfDate,monthOfDate,dayOfDate);
+        setStatus(status);
     }
     public Article(int id,String title,String author,int price, String keyWords, Boolean is_bestseller,
-                   boolean reference,String journal,String editor,int yearOfDate,int monthOfDate,int dayOfDate){
+                   boolean reference,String journal,String editor,int yearOfDate,int monthOfDate,int dayOfDate,String status){
         setId(id);
         setTitle(title);
         setAuthor(author);
@@ -54,6 +42,7 @@ public class Article extends Material{ ////////////////////////////////////////
         setJournal(journal);
         setEditor(editor);
         setDate(yearOfDate,monthOfDate,dayOfDate);
+        setStatus(status);
     }
     public String getJournal() {
         return journal;

@@ -8,27 +8,18 @@ import java.util.Scanner;
  * AV already have all propirties in Class Material
  */
 public class AV extends Material {
-    AV(){
-        Scanner sc = new Scanner(System.in);
-        setTitle(sc.next());
-        setAuthor(sc.next());
-        setPrice(sc.nextInt());
-        setKeyWords(sc.next());
-        setIs_bestseller(sc.nextBoolean());
-        setReference(sc.nextBoolean());
-    }
-
     public AV(String title,String author,int price, String keyWords, Boolean is_bestseller,
-                   boolean reference){
+                   boolean reference,String status){
         setTitle(title);
         setAuthor(author);
         setPrice(price);
         setKeyWords(keyWords);
         setIs_bestseller(is_bestseller);
         setReference(reference);
+        setStatus(status);
     }
     public AV(int id,String title,String author,int price, String keyWords, Boolean is_bestseller,
-              boolean reference){
+              boolean reference,String status){
         setId(id);
         setTitle(title);
         setAuthor(author);
@@ -36,5 +27,6 @@ public class AV extends Material {
         setKeyWords(keyWords);
         setIs_bestseller(is_bestseller);
         setReference(reference);
+        setStatus(status);
     }
 }
