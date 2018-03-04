@@ -9,7 +9,27 @@ import java.util.Scanner;
  */
 public class AV extends Material {
     public AV(String title,String author,int price, String keyWords, Boolean is_bestseller,
-                   boolean reference,String status){
+               boolean reference,String status){
+        setTitle(title);
+        setAuthor(author);
+        setPrice(price);
+        setKeyWords(keyWords);
+        setIs_bestseller(is_bestseller);
+        setReference(reference);
+        setStatus(status);
+    }
+    public AV(String title,String author,int price, String keyWords, Boolean is_bestseller,
+              boolean reference){
+        setTitle(title);
+        setAuthor(author);
+        setPrice(price);
+        setKeyWords(keyWords);
+        setIs_bestseller(is_bestseller);
+        setReference(reference);
+    }
+    public AV(int id,String title,String author,int price, String keyWords, Boolean is_bestseller,
+               boolean reference,String status){
+        setId(id);
         setTitle(title);
         setAuthor(author);
         setPrice(price);
@@ -19,7 +39,7 @@ public class AV extends Material {
         setStatus(status);
     }
     public AV(int id,String title,String author,int price, String keyWords, Boolean is_bestseller,
-              boolean reference,String status){
+              boolean reference){
         setId(id);
         setTitle(title);
         setAuthor(author);
@@ -27,6 +47,5 @@ public class AV extends Material {
         setKeyWords(keyWords);
         setIs_bestseller(is_bestseller);
         setReference(reference);
-        setStatus(status);
     }
 }

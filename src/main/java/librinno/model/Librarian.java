@@ -81,6 +81,8 @@ public class Librarian extends User {
                             prst.setInt(2, 0);
                             prst.setInt(3, 999);
                             prst.executeUpdate();
+
+
                         }
                         return;
                     }
@@ -275,6 +277,7 @@ public class Librarian extends User {
                 String name = rs.getString("Name");
                 String author = rs.getString("Author");
                 int price = rs.getInt("Price");
+                String status = rs.getString("Status");
                 String keyWord = rs.getString("Keywords");
                 boolean is_bestseller = rs.getBoolean("is_bestseller");
                 boolean is_reference = rs.getBoolean("is_reference");
@@ -283,7 +286,7 @@ public class Librarian extends User {
                 int yearDate = rs.getDate("Date").getYear();
                 int monthDate = rs.getDate("Date").getMonth();
                 int dayDate = rs.getDate("Date").getDay();
-                Article article = new Article(name, author, price, keyWord, is_bestseller, is_reference, journal, editor, yearDate, monthDate, dayDate);
+                Article article = new Article(name, author, price, keyWord, is_bestseller, is_reference, journal, editor, yearDate, monthDate, dayDate, status);
                 articles.add(article);
                 numberOfArticle.add(number);
             }
@@ -334,7 +337,7 @@ public class Librarian extends User {
                 boolean is_bestseller = rs.getBoolean("is_bestseller");
                 boolean is_reference = rs.getBoolean("is_reference");
                 int year = rs.getInt("Year");
-                Book book = new Book(id,name,author,publisher,edition,price,keyWord,is_bestseller,is_reference,year, get_number_of_copies_of_book(id));
+                Book book = new Book(id, name, author, publisher, edition, price, keyWord, is_bestseller, is_reference, year, get_number_of_copies_of_book(id));
                 books.add(book);
             }
         } catch (SQLException e) {
@@ -395,12 +398,12 @@ public class Librarian extends User {
         try {
             Statement stmt = db.con.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM Copy where Owner=" + user_id);
-            while(rs.next()){
-                int original_id=rs.getInt("Id_of_original");
-                int copy_id=rs.getInt("Id_of_copy");
+            while (rs.next()) {
+                int original_id = rs.getInt("Id_of_original");
+                int copy_id = rs.getInt("Id_of_copy");
                 Statement articles_stmt = db.con.createStatement();
-                ResultSet articles_rs=articles_stmt.executeQuery("SELECT * FROM Articles where id=" + original_id);
-                while (articles_rs.next()){
+                ResultSet articles_rs = articles_stmt.executeQuery("SELECT * FROM Articles where id=" + original_id);
+                while (articles_rs.next()) {
                     String name = articles_rs.getString("Name");
                     String author = articles_rs.getString("Author");
                     int price = articles_rs.getInt("Price");
@@ -409,37 +412,37 @@ public class Librarian extends User {
                     boolean is_reference = articles_rs.getBoolean("is_reference");
                     String journal = articles_rs.getString("Journal");
                     String editor = articles_rs.getString("Editor");
-                    int yearDate =articles_rs.getDate("Date").getYear();
-                    int monthDate =articles_rs.getDate("Date").getMonth();
-                    int dayDate =articles_rs.getDate("Date").getDay();
-                    Article article=new Article(copy_id,name,author,price,keywords,is_bestseller,is_reference,journal,editor,yearDate,monthDate,dayDate);
+                    int yearDate = articles_rs.getDate("Date").getYear();
+                    int monthDate = articles_rs.getDate("Date").getMonth();
+                    int dayDate = articles_rs.getDate("Date").getDay();
+                    Article article = new Article(copy_id, name, author, price, keywords, is_bestseller, is_reference, journal, editor, yearDate, monthDate, dayDate);
                     copies.add(article);
                 }
                 Statement AV_stmt = db.con.createStatement();
-                ResultSet AV_rs=AV_stmt.executeQuery("SELECT * FROM AV where id=" + original_id);
-                while (AV_rs.next()){
+                ResultSet AV_rs = AV_stmt.executeQuery("SELECT * FROM AV where id=" + original_id);
+                while (AV_rs.next()) {
                     String name = AV_rs.getString("Name");
                     String author = AV_rs.getString("Author");
                     int price = AV_rs.getInt("Price");
                     String keywords = AV_rs.getString("Keywords");
                     boolean is_bestseller = AV_rs.getBoolean("is_bestseller");
                     boolean is_reference = AV_rs.getBoolean("is_reference");
-                    AV av=new AV(copy_id,name,author,price,keywords,is_bestseller,is_reference);
+                    AV av = new AV(copy_id, name, author, price, keywords, is_bestseller, is_reference);
                     copies.add(av);
                 }
                 Statement books_stmt = db.con.createStatement();
-                ResultSet books_rs=books_stmt.executeQuery("SELECT * FROM Books where id=" + original_id);
-                while (books_rs.next()){
+                ResultSet books_rs = books_stmt.executeQuery("SELECT * FROM Books where id=" + original_id);
+                while (books_rs.next()) {
                     String name = books_rs.getString("Name");
                     String author = books_rs.getString("Author");
-                    String publisher=books_rs.getString("Publisher");
+                    String publisher = books_rs.getString("Publisher");
                     int edition = books_rs.getInt("Edition");
                     int price = books_rs.getInt("Price");
                     String keywords = books_rs.getString("Keywords");
                     boolean is_bestseller = books_rs.getBoolean("is_bestseller");
                     boolean is_reference = books_rs.getBoolean("is_reference");
                     int year = books_rs.getInt("Year");
-                    Book book=new Book(copy_id,name,author,publisher,edition,price,keywords,is_bestseller,is_reference,year,0);
+                    Book book = new Book(copy_id, name, author, publisher, edition, price, keywords, is_bestseller, is_reference, year, 0);
                     copies.add(book);
                 }
             }
@@ -451,11 +454,11 @@ public class Librarian extends User {
 
 
     public static int get_number_of_copies_of_book(int book_id) {
-        int copies=0;
+        int copies = 0;
         try {
             Statement stmt = db.con.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM Copy where Id_of_original="+book_id);
-            while (rs.next()){
+            ResultSet rs = stmt.executeQuery("SELECT * FROM Copy where Id_of_original=" + book_id);
+            while (rs.next()) {
                 copies++;
             }
         } catch (SQLException e) {

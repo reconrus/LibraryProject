@@ -12,7 +12,7 @@ import java.util.Scanner;
  *date
  * with setters and getters
  */
-public class Article extends Material{ ////////////////////////////////////////
+public class Article extends Material{
     private String journal;
     private String editor;
     private LocalDate date;
@@ -31,7 +31,7 @@ public class Article extends Material{ ////////////////////////////////////////
         setStatus(status);
     }
     public Article(int id,String title,String author,int price, String keyWords, Boolean is_bestseller,
-                   boolean reference,String journal,String editor,int yearOfDate,int monthOfDate,int dayOfDate,String status){
+                    boolean reference,String journal,String editor,int yearOfDate,int monthOfDate,int dayOfDate,String status){
         setId(id);
         setTitle(title);
         setAuthor(author);
@@ -43,6 +43,19 @@ public class Article extends Material{ ////////////////////////////////////////
         setEditor(editor);
         setDate(yearOfDate,monthOfDate,dayOfDate);
         setStatus(status);
+    }
+    public Article(int id,String title,String author,int price, String keyWords, Boolean is_bestseller,
+                   boolean reference,String journal,String editor,int yearOfDate,int monthOfDate,int dayOfDate){
+        setId(id);
+        setTitle(title);
+        setAuthor(author);
+        setPrice(price);
+        setKeyWords(keyWords);
+        setIs_bestseller(is_bestseller);
+        setReference(reference);
+        setJournal(journal);
+        setEditor(editor);
+        setDate(yearOfDate,monthOfDate,dayOfDate);
     }
     public String getJournal() {
         return journal;
