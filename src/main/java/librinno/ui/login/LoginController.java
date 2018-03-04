@@ -40,13 +40,7 @@ public class LoginController {
     public LoginController() {
     }
 
-    @FXML
-    private void initialize() {
-
-    }
-
-    void loadPatron() throws IOException, SQLException {
-        String id = username.getText();
+    void loadPatron(String id) throws IOException, SQLException {
         if (id.isEmpty()) {
             Assist.error();
         } else {
@@ -69,19 +63,34 @@ public class LoginController {
         String id = username.getText();
         String pass = password.getText();
 
-        checkUser(id, pass);
-
-        Assist.closeStage(login);
-
-        if (checkbox)
-            loadLibrarian();
-        else loadPatron();
+        if(!id.isEmpty() && !pass.isEmpty()){
+            authorization(id, pass);
+            Assist.closeStage(login);
+        }
+        else Assist.authorizationError();
     }
 
-    void checkUser(String id, String pass) {
+    void authorization(String id, String pass) throws SQLException, IOException {
+
+        Database db = new Database();
+        String type = db.authorization(Integer.parseInt(id), pass);
+
+        if(type.equals("Librarian")) {
+            loadLibrarian();
+            return;
+        }
+        if(type.equals("Student") || type.equals("Faculty")){
+            loadPatron(id);
+            return;
+        }
+
+        Assist.authorizationError();
     }
 
     private void loadLibrarian() throws IOException {
         Assist.loadStage(getClass().getResource("../librarianScreen/LibrarianScreen.fxml"));
     }
+
+
+
 }

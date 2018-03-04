@@ -244,4 +244,18 @@ public class Database {
         User user = new User(name, address, Phonenumber, id, type, password);
         return user;
     }
+
+    public String authorization(int id, String pass) throws SQLException {
+
+        Statement stmt = con.createStatement();
+        ResultSet rs = stmt.executeQuery("SELECT  * FROM Users_of_the_library WHERE Card_number="+id);
+
+        if(rs.next()) {
+            String password = rs.getString("Password");
+            if(pass.equals(password)){
+                return rs.getString("Type");
+            }
+        }
+        return "";
+    }
 }

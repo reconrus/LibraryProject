@@ -41,4 +41,12 @@ public class Assist {
     public static void closeStage(Button butt){
         ((Stage) butt.getScene().getWindow()).close();
     }
+
+    public static void authorizationError(){
+        Alert error= new Alert(Alert.AlertType.ERROR);
+        error.setHeaderText("Error");
+        error.setContentText("Authorization error");
+        error.showAndWait();
+    }
+
 }
