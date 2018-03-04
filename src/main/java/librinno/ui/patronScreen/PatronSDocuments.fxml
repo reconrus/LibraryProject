@@ -1,41 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
-<?import de.jensd.fx.glyphs.materialicons.MaterialIconView?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="511.0" prefWidth="576.0" stylesheets="@../../../../resources/theme.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.librinno.ui.patronScreen.PatronSDocumentsController">
-   <center>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <children>
-            <TableView fx:id="tableCopy" prefHeight="348.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-              <columns>
-                  <TableColumn fx:id="id" prefWidth="75.0" text="ID" />
-                <TableColumn fx:id="author" prefWidth="141.0" text="Author" />
-                <TableColumn fx:id="title" prefWidth="167.0" text="Title" />
-                  <TableColumn fx:id="date" prefWidth="96.0" text="Till date" />
-                  <TableColumn fx:id="status" prefWidth="96.0" text="Status" />
-              </columns>
-            </TableView>
-         </children>
-      </AnchorPane>
-   </center>
-   <bottom>
-      <AnchorPane prefHeight="3.0" prefWidth="600.0" BorderPane.alignment="CENTER">
-         <children>
-            <JFXButton fx:id="returnButton" onAction="#returnDocument" stylesheets="@../../../../resources/theme.css" text="Return Document" textFill="WHITE" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
-               <font>
-                  <Font name="System Bold" size="16.0" />
-               </font>
-               <graphic>
-                  <MaterialIconView fill="WHITE" glyphName="KEYBOARD_RETURN" size="40" />
-               </graphic>
-            </JFXButton>
-         </children>
-      </AnchorPane>
-   </bottom>
-</BorderPane>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.librinno.ui.patronScreen.PatronSDocumentsController">
+   <children>
+      <TableView fx:id="tableDoc" prefHeight="340.0" prefWidth="600.0">
+        <columns>
+          <TableColumn fx:id="id" prefWidth="75.0" text="ID" />
+          <TableColumn fx:id="title" prefWidth="75.0" text="Title" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>
