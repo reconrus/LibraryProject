@@ -40,7 +40,7 @@ public class Librarian extends User {
         }
     }
 
-    public boolean checkOutBook(User user,int idOfBook){
+    public static boolean checkOutBook(User user,int idOfBook){
         try {
             Database db = new Database();
             PreparedStatement pr = db.con.prepareStatement("UPDATE Copy SET Owner=?,Time_left=?,Status=? WHERE Id_of_original= " + idOfBook + " AND Status= 'In library' LIMIT 1 ");
@@ -78,7 +78,7 @@ public class Librarian extends User {
             return false;
         }
     }
-    public Book bookByID(int id){
+    public static Book bookByID(int id){
         try{
             Statement stmt = db.con.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM Books");

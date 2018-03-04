@@ -7,15 +7,23 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import main.java.librinno.model.Book;
 import main.java.librinno.model.Database;
 import main.java.librinno.model.Librarian;
 import main.java.librinno.model.User;
 import main.java.librinno.ui.assist.Assist;
+import main.java.librinno.ui.editPatron.EditPatron;
+import main.java.librinno.ui.issue.Issue;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -113,7 +121,20 @@ public class PatronScreenController {
     }
 
     @FXML
-    private void reserve(ActionEvent event){
-
+    private void reserve(ActionEvent event) throws IOException {
+        Book book= tableBook.getSelectionModel().getSelectedItem();
+        Boolean flag = Librarian.checkOutBook(user,book.getId());
+        if (flag){
+            Alert error= new Alert(Alert.AlertType.CONFIRMATION);
+            error.setHeaderText("Success");
+            error.setContentText("You've been given"+book.getId());
+            error.showAndWait();
+        }
+        else{
+            Alert error= new Alert(Alert.AlertType.ERROR);
+            error.setHeaderText("Error");
+            error.setContentText("There have been a mistake");
+            error.showAndWait();
+        }
     }
 }
