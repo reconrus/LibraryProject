@@ -393,8 +393,8 @@ public class Librarian extends User {
         return copies;
     }
 
-    public static LinkedList<Object> get_all_copies_taken_by_user(int user_id) {
-        LinkedList<Object> copies = new LinkedList<>();
+    public static LinkedList<Material> get_all_copies_taken_by_user(int user_id) {
+        LinkedList<Material> copies = new LinkedList<>();
         try {
             Statement stmt = db.con.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM Copy where Owner=" + user_id);
@@ -416,7 +416,7 @@ public class Librarian extends User {
                     int monthDate = articles_rs.getDate("Date").getMonth();
                     int dayDate = articles_rs.getDate("Date").getDay();
                     Article article = new Article(copy_id, name, author, price, keywords, is_bestseller, is_reference, journal, editor, yearDate, monthDate, dayDate);
-                    copies.add(article);
+                    copies.add((Material)article);
                 }
                 Statement AV_stmt = db.con.createStatement();
                 ResultSet AV_rs = AV_stmt.executeQuery("SELECT * FROM AV where id=" + original_id);
@@ -428,7 +428,7 @@ public class Librarian extends User {
                     boolean is_bestseller = AV_rs.getBoolean("is_bestseller");
                     boolean is_reference = AV_rs.getBoolean("is_reference");
                     AV av = new AV(copy_id, name, author, price, keywords, is_bestseller, is_reference);
-                    copies.add(av);
+                    copies.add((Material)av);
                 }
                 Statement books_stmt = db.con.createStatement();
                 ResultSet books_rs = books_stmt.executeQuery("SELECT * FROM Books where id=" + original_id);
@@ -443,7 +443,7 @@ public class Librarian extends User {
                     boolean is_reference = books_rs.getBoolean("is_reference");
                     int year = books_rs.getInt("Year");
                     Book book = new Book(copy_id, name, author, publisher, edition, price, keywords, is_bestseller, is_reference, year, 0);
-                    copies.add(book);
+                    copies.add((Material)book);
                 }
             }
         } catch (SQLException e) {
