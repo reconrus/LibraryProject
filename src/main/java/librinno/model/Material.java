@@ -16,15 +16,15 @@ import java.sql.Statement;
  * And all types are inherited from this class Material
  */
 public class Material {
-    protected int id;
-    protected String title;
-    protected String author;
-    protected int price;
-    protected String KeyWords;
-    protected boolean reference;
-    protected boolean is_bestseller;
-    protected int number;
-    protected String status;
+    public int id;
+    public String title;
+    public String author;
+    public int price;
+    public String KeyWords;
+    public boolean reference;
+    public boolean is_bestseller;
+    public int number;
+    public String status;
 
     public String getStatus() {
         return status;

@@ -42,7 +42,7 @@ public class PatronSDocumentsController {
         id.setCellValueFactory(new PropertyValueFactory<Material, Integer>("id"));
         author.setCellValueFactory(new PropertyValueFactory<Material,String>("author"));
         title.setCellValueFactory(new PropertyValueFactory<Material,String>("title"));
-        date.setCellValueFactory(new PropertyValueFactory<Material,String>("date"));
+        //date.setCellValueFactory(new PropertyValueFactory<Material,String>("date"));
         status.setCellValueFactory(new PropertyValueFactory<Material,String>("status"));
         ObservableList<Material> list= FXCollections.observableArrayList();
 
@@ -58,6 +58,12 @@ public class PatronSDocumentsController {
     void returnDocument(ActionEvent event){
         Material copy = tableCopy.getSelectionModel().getSelectedItem();
     }
+
+    @FXML
+    private void initialize(){
+        showCopies();
+    }
+
 
     public void setId(int id){
         userId = id;
