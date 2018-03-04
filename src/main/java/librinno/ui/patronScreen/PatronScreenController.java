@@ -124,7 +124,10 @@ public class PatronScreenController {
 
         Stage stage = new Stage(StageStyle.DECORATED);
         stage.setScene(new Scene(parent));
-        stage.show();
+        stage.showAndWait();
+
+        showTableDocuments();
+        bookCount.setText(""+Librarian.get_number_of_all_copies_taken_by_user(user.getCard_number()));
     }
 
     @FXML
@@ -148,5 +151,6 @@ public class PatronScreenController {
             error.showAndWait();
         }
         showTableDocuments();
+        bookCount.setText(""+Librarian.get_number_of_all_copies_taken_by_user(user.getCard_number()));
     }
 }

@@ -172,20 +172,20 @@ public class LibrarianScreenController {
     @FXML
     void addPatron(ActionEvent event) throws IOException {
         Assist.loadStageWait(getClass().getResource("../Register/register.fxml"));
-        showTableUser();
+        showTables();
     }
 
     @FXML
     void addCopy(){
         Book book= tableBook.getSelectionModel().getSelectedItem();
         Librarian.add_CopiesOfMaterial(book.getId(),1);
-        showTableDocuments();
+        showTables();
     }
     @FXML
     void deletePatron(ActionEvent event) {
         User user= tableUser.getSelectionModel().getSelectedItem();
         Librarian.delete_user_by_id(user.card_number);
-        showTableUser();
+        showTables();
     }
 
 
@@ -193,7 +193,7 @@ public class LibrarianScreenController {
     void deleteDoc(ActionEvent event) {
         Book book= tableBook.getSelectionModel().getSelectedItem();
         Librarian.delete_book_by_id(book.getId());
-        showTableDocuments();
+        showTables();
     }
 
 
@@ -210,7 +210,7 @@ public class LibrarianScreenController {
             Stage stage = new Stage(StageStyle.DECORATED);
             stage.setScene(new Scene(parent));
             stage.showAndWait();
-            showTableDocuments();
+            showTables();
         }
     }
 
@@ -228,7 +228,7 @@ public class LibrarianScreenController {
             Stage stage = new Stage(StageStyle.DECORATED);
             stage.setScene(new Scene(parent));
             stage.showAndWait();
-            showTableUser();
+            showTables();
         }
 
     }
@@ -237,13 +237,19 @@ public class LibrarianScreenController {
     void returnDocument(ActionEvent event) throws IOException{
         Material copy= tableCopy.getSelectionModel().getSelectedItem();
         Librarian.returnBook(copy.getId());
-        showTableCopy();
+        showTables();
     }
 
     @FXML
     void deleteCopy (ActionEvent event) throws IOException{
         Material copy= tableCopy.getSelectionModel().getSelectedItem();
         Librarian.deleteCopy(copy.getId());
+        showTables();
+    }
+
+    private void showTables(){
+        showTableDocuments();
+        showTableUser();
         showTableCopy();
     }
 
