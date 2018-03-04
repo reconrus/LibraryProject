@@ -19,7 +19,6 @@ import java.util.ResourceBundle;
  */
 public class PatronScreenController {
 
-
     @FXML
     private JFXButton logout;
 
@@ -27,25 +26,27 @@ public class PatronScreenController {
     private JFXButton copiesButton;
 
     @FXML
-    private static Text cardNumber;
+    private  Text cardNumber;
 
     @FXML
-    private static Text fullName;
+    private  Text fullName;
 
     @FXML
-    private static Text phone;
+    private  Text phone;
 
     @FXML
-    private static Text address;
+    private  Text address;
 
     @FXML
-    private static Text bookCount;
+    private  Text bookCount;
 
     @FXML
-    private static Text type;
+    private  Text type;
 
     @FXML
     private JFXTreeTableView<?> reserveTable;
+
+    private User user;
 
     @FXML
     private void logoutAction(ActionEvent event) throws IOException {
@@ -56,24 +57,23 @@ public class PatronScreenController {
 
     }
 
-    public static void setUserInfo(Patron patron){
-        cardNumber.setText(String.valueOf(patron.get_card_number()));
-        fullName.setText(patron.get_name());
-        phone.setText(patron.get_number());
-        address.setText(patron.get_adress());
-        type.setText(patron.get_type());
+    public void setUserInfo(User user){
+        cardNumber.setText(String.valueOf(user.get_card_number()));
+        fullName.setText(user.get_name());
+        phone.setText(user.get_number());
+        address.setText(user.get_adress());
+        type.setText(user.get_type());
         //TODO: Количество копий, взятых юзером: bookCount.setText();
     }
 
     @FXML
     private void showCopies(ActionEvent event)throws IOException{
         Assist.loadStage(getClass().getResource("/main/java/librinno/ui/patronScreen/PatronSDocuments.fxml"));
-
-
     }
 
     @FXML
     private void reserve(ActionEvent event){
 
     }
+
 }

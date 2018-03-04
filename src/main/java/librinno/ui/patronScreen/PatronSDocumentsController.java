@@ -10,35 +10,42 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import main.java.librinno.model.Book;
 import main.java.librinno.model.Copy;
+import main.java.librinno.model.Material;
 import main.java.librinno.model.User;
 import main.java.librinno.ui.assist.Assist;
 
 import java.io.IOException;
 import java.util.LinkedList;
 
-/**
- *
- */
+
 public class PatronSDocumentsController {
 
     @FXML
-    private static TableView<Copy> tableCopy;
+    private static TableView<Material> tableCopy;
 
     @FXML
-    private static TableColumn<Copy, String> author;
+    private static TableColumn<Material, Integer> id;
 
     @FXML
-    private static TableColumn<Copy, String> title;
+    private static TableColumn<Material, String> author;
 
     @FXML
-    private static TableColumn<Copy, String> date;
+    private static TableColumn<Material, String> title;
 
-    public static void showCopies(LinkedList<Copy> copies) {
+    @FXML
+    private static TableColumn<Material, String> date;
 
-        author.setCellValueFactory(new PropertyValueFactory<Copy,String>("author"));
-        title.setCellValueFactory(new PropertyValueFactory<Copy,String>("title"));
-        date.setCellValueFactory(new PropertyValueFactory<Copy,String>("date"));
-        ObservableList<Copy> list= FXCollections.observableArrayList();
+    @FXML
+    private static TableColumn<Material, String> status;
+
+    public static void showCopies(LinkedList<Material> copies) {
+
+        id.setCellValueFactory(new PropertyValueFactory<Material, Integer>("id"));
+        author.setCellValueFactory(new PropertyValueFactory<Material,String>("author"));
+        title.setCellValueFactory(new PropertyValueFactory<Material,String>("title"));
+        date.setCellValueFactory(new PropertyValueFactory<Material,String>("date"));
+        status.setCellValueFactory(new PropertyValueFactory<Material,String>("status"));
+        ObservableList<Material> list= FXCollections.observableArrayList();
 
         list.addAll(copies);
 
@@ -48,6 +55,6 @@ public class PatronSDocumentsController {
 
     @FXML
     void returnDocument(ActionEvent event){
-        Copy copy = tableCopy.getSelectionModel().getSelectedItem();
+        Material copy = tableCopy.getSelectionModel().getSelectedItem();
     }
 }

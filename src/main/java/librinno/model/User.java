@@ -173,4 +173,7 @@ public String get_password(){
     public void giveID(int id){
         zaregID= id;
     }
+
+
+
 }

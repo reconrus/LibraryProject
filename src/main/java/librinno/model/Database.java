@@ -10,7 +10,7 @@ public class Database {
     //for connection to database
     //typical
     public String url = "jdbc:mysql://triniti.ru-hoster.com/dmitrDbK";
-        public String login = "dmitrDbK";
+    public String login = "dmitrDbK";
     public String password = "eQ1a5mg0Z7";
     public static PreparedStatement prst;
     public static Connection con;

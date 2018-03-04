@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,8 +17,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import main.java.librinno.model.Database;
+import main.java.librinno.model.Patron;
+import main.java.librinno.model.User;
 import main.java.librinno.ui.assist.Assist;
 import main.java.librinno.ui.patronScreen.PatronScreenController;
+
+import javax.xml.crypto.Data;
 
 
 public class LoginController {
@@ -39,19 +45,22 @@ public class LoginController {
     }
 
     @FXML
-    private void loginAction(ActionEvent event) throws IOException {
+    private void loginAction(ActionEvent event) throws IOException, SQLException, ClassNotFoundException {
         Boolean checkbox = isALibrarian.isSelected();
 
         String id=username.getText();
         String pass= password.getText();
-
-        //checkUser(id,pass);
 
         Assist.closeStage(login);
 
         if(checkbox)
             loadLibrarian();
         else loadPatron();
+
+
+        //TODO make an authorization. Different windows for different users
+
+
     }
 
     private void loadLibrarian() throws IOException {
@@ -59,9 +68,13 @@ public class LoginController {
     }
 
 
-    private void loadPatron() throws IOException {
-        Assist.loadStage(getClass().getResource("../patronScreen/PatronScreen.fxml"));
-        // TODO: Закинуть объект patron входящего в систему
-        // PatronScreenController.setUserInfo();
+    private void loadPatron() throws IOException, SQLException, ClassNotFoundException {
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../patronScreen/PatronScreen.fxml"));
+        Parent parent= loader.load();
+
+        Stage stage= new Stage(StageStyle.DECORATED);
+        stage.setScene(new Scene(parent));
+        stage.show();
     }
 }
