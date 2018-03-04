@@ -131,6 +131,12 @@ public class PatronScreenController {
     }
 
     @FXML
+    void refresh(){
+        showTableDocuments();
+        bookCount.setText(""+Librarian.get_number_of_all_copies_taken_by_user(user.getCard_number()));
+    }
+
+    @FXML
     private void reserve(ActionEvent event) throws IOException {
         Book book= tableBook.getSelectionModel().getSelectedItem();
         if(book == null){
@@ -150,7 +156,6 @@ public class PatronScreenController {
             error.setContentText("There has been a mistake");
             error.showAndWait();
         }
-        showTableDocuments();
-        bookCount.setText(""+Librarian.get_number_of_all_copies_taken_by_user(user.getCard_number()));
+        refresh();
     }
 }

@@ -247,6 +247,7 @@ public class LibrarianScreenController {
         showTables();
     }
 
+    @FXML
     private void showTables(){
         showTableDocuments();
         showTableUser();
