@@ -83,22 +83,22 @@ public class LibrarianScreenController {
     private TableColumn<User, String> userType;
 
     @FXML
-    private TableView<Copy> tableCopy;
+    private TableView<Material> tableCopy;
 
     @FXML
-    private TableColumn<Copy, Integer> idCopy;
+    private TableColumn<Material, Integer> idCopy;
 
     @FXML
-    private TableColumn<Copy, String> authorCopy;
+    private TableColumn<Material, String> authorCopy;
 
     @FXML
-    private TableColumn<Copy, String> titleCopy;
+    private TableColumn<Material, String> titleCopy;
 
     @FXML
-    private TableColumn<Copy, String> statusCopy;
+    private TableColumn<Material, String> statusCopy;
 
     @FXML
-    private TableColumn<Copy, String> issuedTo;
+    private TableColumn<Material, String> issuedTo;
 
     @FXML
     void showTableUser(){
@@ -130,6 +130,21 @@ public class LibrarianScreenController {
         tableBook.getItems().setAll(books);
     }
 
+    @FXML
+    void showTableCopy(){
+        idCopy.setCellValueFactory(new PropertyValueFactory<>("id"));
+        authorCopy.setCellValueFactory(new PropertyValueFactory<>("author"));
+        titleCopy.setCellValueFactory(new PropertyValueFactory<>("title"));
+        statusCopy.setCellValueFactory(new PropertyValueFactory<>("status"));
+        //issuedTo.setCellValueFactory(new PropertyValueFactory<>("date"));
+
+        ObservableList<Material> list= FXCollections.observableArrayList();
+        LinkedList<Material> docs= Librarian.get_all_copies();
+
+        list.addAll(docs);
+        tableCopy.getItems().setAll(list);
+
+    }
 
     @FXML
     void editPatron() throws IOException {
@@ -220,18 +235,19 @@ public class LibrarianScreenController {
 
     @FXML
     void returnDocument(ActionEvent event) throws IOException{
-        Copy copy= tableCopy.getSelectionModel().getSelectedItem();
+        Material copy= tableCopy.getSelectionModel().getSelectedItem();
     }
 
     @FXML
     void deleteCopy (ActionEvent event) throws IOException{
-        Copy copy= tableCopy.getSelectionModel().getSelectedItem();
+        Material copy= tableCopy.getSelectionModel().getSelectedItem();
     }
 
     @FXML
     void initialize(){
         showTableUser();
         showTableDocuments();
+        showTableCopy();
     }
 
 }
