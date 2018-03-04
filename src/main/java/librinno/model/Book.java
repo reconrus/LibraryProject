@@ -110,6 +110,22 @@ public class Book extends Material {
         setNumber(amount);
         setDate(date);
     }
+    public Book(int id, String title, String author, String publisher, int edition, int price, String keyWords, boolean is_bestseller,boolean reference,int year, int amount,LocalDate date,String status,int userid) {
+        setId(id);
+        setTitle(title);
+        setAuthor(author);
+        setPublisher(publisher);
+        setEdition(edition);
+        setPrice(price);
+        setKeyWords(keyWords);
+        setIs_bestseller(is_bestseller);
+        setReference(reference);
+        setYear(year);
+        setNumber(amount);
+        setDate(date);
+        setStatus(status);
+        setUserId(userid);
+    }
 }
 
 
