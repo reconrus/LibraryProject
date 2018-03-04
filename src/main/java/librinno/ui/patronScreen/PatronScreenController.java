@@ -19,34 +19,41 @@ import java.util.ResourceBundle;
  */
 public class PatronScreenController {
 
+
     @FXML
     private JFXButton logout;
+
+    String userID;
 
     @FXML
     private JFXButton copiesButton;
 
     @FXML
-    private  Text cardNumber;
+    public Text cardNumber;
 
     @FXML
-    private  Text fullName;
+    public  Text fullName;
 
     @FXML
     private  Text phone;
 
     @FXML
-    private  Text address;
+    private Text address;
 
     @FXML
-    private  Text bookCount;
+    private Text bookCount;
 
     @FXML
-    private  Text type;
+    private Text type;
 
     @FXML
     private JFXTreeTableView<?> reserveTable;
 
-    private User user;
+    @FXML
+    void initialize(){
+        //cardNumber.setText(userID);
+        System.out.println(userID);
+    }
 
     @FXML
     private void logoutAction(ActionEvent event) throws IOException {
@@ -57,18 +64,20 @@ public class PatronScreenController {
 
     }
 
-    public void setUserInfo(User user){
-        cardNumber.setText(String.valueOf(user.get_card_number()));
-        fullName.setText(user.get_name());
-        phone.setText(user.get_number());
-        address.setText(user.get_adress());
-        type.setText(user.get_type());
-        //TODO: Количество копий, взятых юзером: bookCount.setText();
+    public void setUserInfo(User patron){
+        cardNumber.setText(String.valueOf(patron.get_card_number()));
+        fullName.setText(patron.get_name());
+        phone.setText(patron.get_number());
+        address.setText(patron.get_adress());
+        type.setText(patron.get_type());
+        //TODO: ?????????? ?????, ?????? ??????: bookCount.setText();
     }
 
     @FXML
     private void showCopies(ActionEvent event)throws IOException{
         Assist.loadStage(getClass().getResource("/main/java/librinno/ui/patronScreen/PatronSDocuments.fxml"));
+
+
     }
 
     @FXML
@@ -76,4 +85,10 @@ public class PatronScreenController {
 
     }
 
+    public void passGUI(String id, String pass){
+        cardNumber.setText(id);
+        userID = id;
+        System.out.println(userID);
+
+    }
 }
