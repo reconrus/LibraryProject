@@ -18,6 +18,7 @@ public class Book extends Material {
     private boolean is_bestseller;
     private int left_time;
     private boolean reference;
+    private int total;
 
     public int get_left_time() {
         return left_time;
@@ -43,6 +44,13 @@ public class Book extends Material {
     }
     public void setPublisher(String publisher) {
         this.publisher = publisher;
+    }
+    public int getTotal() {
+        return total;
+    }
+
+    public void setTotal(int total) {
+        this.total = total;
     }
 
     public Book(String title, String author, String publisher, int edition, int price, String keyWords, Boolean is_bestseller,boolean reference,int year,String status) {
@@ -85,6 +93,23 @@ public class Book extends Material {
         setYear(year);
         setNumber(amount);
     }
+
+    public Book(int id, String title, String author, String publisher, int edition, int price, String keyWords, boolean is_bestseller,boolean reference,int year, int amount, int total) {
+        setId(id);
+        setTitle(title);
+        setAuthor(author);
+        setPublisher(publisher);
+        setEdition(edition);
+        setPrice(price);
+        setKeyWords(keyWords);
+        setIs_bestseller(is_bestseller);
+        setReference(reference);
+        setYear(year);
+        setNumber(amount);
+        setTotal(total);
+    }
+
+
 }
 
 

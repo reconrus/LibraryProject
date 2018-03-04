@@ -422,7 +422,7 @@ public class Librarian extends User {
                 boolean is_bestseller = rs.getBoolean("is_bestseller");
                 boolean is_reference = rs.getBoolean("is_reference");
                 int year = rs.getInt("Year");
-                Book book = new Book(id, name, author, publisher, edition, price, keyWord, is_bestseller, is_reference, year, get_number_of_copies_of_book(id));
+                Book book = new Book(id, name, author, publisher, edition, price, keyWord, is_bestseller, is_reference, year, get_number_of_copies_of_book(id), get_number_of_copies_of_book_with_taken(id));
                 books.add(book);
             }
         } catch (SQLException e) {

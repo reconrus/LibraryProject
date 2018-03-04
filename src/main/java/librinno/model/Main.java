@@ -29,7 +29,7 @@ public class Main {
        //        System.out.println(Librarian.get_all_copies_taken_by_user(32).get(i).getTitle());
        // }
       //  System.out.println(l.get_all_copies().size());
-        System.out.println(l.get_all_copies());
+        //System.out.println(l.get_all_copies());
     }
 
 

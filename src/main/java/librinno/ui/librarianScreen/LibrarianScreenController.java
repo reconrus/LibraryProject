@@ -62,6 +62,9 @@ public class LibrarianScreenController {
     private TableColumn<Book, Integer> avaliability;
 
     @FXML
+    private TableColumn<Book, Integer> total;
+
+    @FXML
     private TableView<User> tableUser;
 
     @FXML
@@ -120,11 +123,20 @@ public class LibrarianScreenController {
         title.setCellValueFactory(new PropertyValueFactory<Book, String>("title"));
         publisher.setCellValueFactory(new PropertyValueFactory<Book, String>("publisher"));
         avaliability.setCellValueFactory(new PropertyValueFactory<Book, Integer>("number"));
+        total.setCellValueFactory(new PropertyValueFactory<Book, Integer>("total"));
 
         ObservableList<User> list= FXCollections.observableArrayList();
         ArrayList<Book> books = Librarian.get_all_books();
 
         tableBook.getItems().setAll(books);
+    }
+
+    @FXML
+    void showTableCopy(){
+
+
+
+
     }
 
 
