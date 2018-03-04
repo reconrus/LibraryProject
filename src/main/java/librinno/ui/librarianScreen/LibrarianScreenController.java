@@ -100,6 +100,8 @@ public class LibrarianScreenController {
     @FXML
     private TableColumn<Copy, String> issuedTo;
 
+    @FXML
+    private TableColumn<Copy, String> retData;
 
     @FXML
     void showTableUser(){
@@ -129,14 +131,6 @@ public class LibrarianScreenController {
         ArrayList<Book> books = Librarian.get_all_books();
 
         tableBook.getItems().setAll(books);
-    }
-
-    @FXML
-    void showTableCopy(){
-
-
-
-
     }
 
 
@@ -228,12 +222,12 @@ public class LibrarianScreenController {
     }
 
     @FXML
-    void issueCopy(ActionEvent event) throws IOException{
+    void returnDocument(ActionEvent event) throws IOException{
         Copy copy= tableCopy.getSelectionModel().getSelectedItem();
     }
 
     @FXML
-    void returnDocument(ActionEvent event) throws IOException{
+    void deleteCopy (ActionEvent event) throws IOException{
         Copy copy= tableCopy.getSelectionModel().getSelectedItem();
     }
 

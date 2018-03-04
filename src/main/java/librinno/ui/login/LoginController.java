@@ -105,7 +105,7 @@ public class LoginController {
 
     @FXML
     private void setStudent(){
-        username.setText("33");
+        username.setText("32");
         password.setText("1");
     }
 
