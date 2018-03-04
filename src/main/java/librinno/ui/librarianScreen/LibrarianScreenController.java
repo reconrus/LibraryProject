@@ -159,6 +159,12 @@ public class LibrarianScreenController {
     }
 
     @FXML
+    void addCopy(){
+        Book book= tableBook.getSelectionModel().getSelectedItem();
+        Librarian.add_CopiesOfMaterial(book.getId(),1);
+        showTableDocuments();
+    }
+    @FXML
     void deletePatron(ActionEvent event) {
         User user= tableUser.getSelectionModel().getSelectedItem();
         Librarian.delete_user_by_id(user.card_number);
