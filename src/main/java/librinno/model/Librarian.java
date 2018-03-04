@@ -71,7 +71,7 @@ public class Librarian extends User {
             return false;
         }
     }
-    public boolean returnBook(int idOfCopyOfBook){
+    public static boolean returnBook(int idOfCopyOfBook){
         try {
             Database db = new Database();
             PreparedStatement pr = db.con.prepareStatement("UPDATE Copy SET Owner=?,Time_left=?,Status=?,Return_date=? WHERE Id_of_copy= " + idOfCopyOfBook);

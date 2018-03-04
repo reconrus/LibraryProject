@@ -98,7 +98,7 @@ public class LibrarianScreenController {
     private TableColumn<Material, String> statusCopy;
 
     @FXML
-    private TableColumn<Material, String> issuedTo;
+    private TableColumn<Material, Integer> issuedTo;
 
     @FXML
     void showTableUser(){
@@ -136,7 +136,7 @@ public class LibrarianScreenController {
         authorCopy.setCellValueFactory(new PropertyValueFactory<>("author"));
         titleCopy.setCellValueFactory(new PropertyValueFactory<>("title"));
         statusCopy.setCellValueFactory(new PropertyValueFactory<>("status"));
-        //issuedTo.setCellValueFactory(new PropertyValueFactory<>("date"));
+        issuedTo.setCellValueFactory(new PropertyValueFactory<>("userId"));
 
         ObservableList<Material> list= FXCollections.observableArrayList();
         LinkedList<Material> docs= Librarian.get_all_copies();
@@ -236,11 +236,15 @@ public class LibrarianScreenController {
     @FXML
     void returnDocument(ActionEvent event) throws IOException{
         Material copy= tableCopy.getSelectionModel().getSelectedItem();
+        Librarian.returnBook(copy.getId());
+        showTableCopy();
     }
 
     @FXML
     void deleteCopy (ActionEvent event) throws IOException{
         Material copy= tableCopy.getSelectionModel().getSelectedItem();
+        Librarian.deleteCopy(copy.getId());
+        showTableCopy();
     }
 
     @FXML

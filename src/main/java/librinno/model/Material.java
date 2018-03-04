@@ -27,7 +27,7 @@ public class Material {
     public int number;
     public String status;
     private LocalDate date;
-    private int userid;
+    private int userId;
     public LocalDate getDate() {
         return date;
     }
@@ -88,6 +88,6 @@ public class Material {
 
     public void setNumber(int number){ this.number = number; }
     public int getNumber(){ return this.number;}
-    public void setUserId(int userid){ this.userid = userid; }
-    public int getUserId(){ return this.userid;}
+    public void setUserId(int userId){ this.userId = userId; }
+    public int getUserId(){ return this.userId;}
 }
