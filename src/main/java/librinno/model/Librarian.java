@@ -564,7 +564,34 @@ public class Librarian extends User {
         }
         return copies;
     }
+    public static LinkedList<Material> get_all_copies() {
+        LinkedList<Material> copies = new LinkedList();
+        LinkedList<Integer> attended_id = new LinkedList<>();
+        try {
+            Statement stmt = db.con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM Copy");
+            while (rs.next()) {
+                int owner_id = rs.getInt("Owner");
+                attended_id.add(owner_id);
+                if (number_of_meetings(attended_id, owner_id)) {
+                    LinkedList<Material> owner_copies = get_all_copies_taken_by_user(owner_id);
+                    copies.addAll(owner_copies);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return copies;
+    }
 
-
+    private static boolean number_of_meetings(LinkedList<Integer> l, int id) {
+        int count = 0;
+        for (int i = 0; i < l.size(); i++) {
+            if (l.get(i) == id)
+                count++;
+        }
+        if (count > 1) return false;
+        else return true;
+    }
 
 }
