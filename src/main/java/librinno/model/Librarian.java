@@ -40,19 +40,26 @@ public class Librarian extends User {
         }
     }
 
-    public static boolean checkOutBook(User user,int idOfBook){
+    public boolean checkOutBook(User user,int idOfBook){
         try {
             Database db = new Database();
-            PreparedStatement pr = db.con.prepareStatement("UPDATE Copy SET Owner=?,Time_left=?,Status=? WHERE Id_of_original= " + idOfBook + " AND Status= 'In library' LIMIT 1 ");
+            PreparedStatement pr = db.con.prepareStatement("UPDATE Copy SET Owner=?,Time_left=?,Status=?,Return_date=? WHERE Id_of_original= " + idOfBook + " AND Status= 'In library' LIMIT 1 ");
             Book book = bookByID(idOfBook);
             if (!book.isReference()) {
                 pr.setInt(1, user.getCard_number());
-                if (user.get_type().equals("Student") && book.isIs_bestseller())
+                if (user.get_type().equals("Student") && book.isIs_bestseller()) {
                     pr.setInt(2, 14);//если студент и книга бестселлер, то ставим 14 дней
-                else if (user.get_type().equals("Student") && !book.isIs_bestseller())
+                    LocalDate returnDate =LocalDate.now().plusDays(14);
+                    pr.setDate(4,java.sql.Date.valueOf(returnDate));
+                }else if (user.get_type().equals("Student") && !book.isIs_bestseller()) {
                     pr.setInt(2, 21);//если студент и книга бестселлер, то ставим 21 дней
-                else
+                    LocalDate returnDate =LocalDate.now().plusDays(21);
+                    pr.setDate(4,java.sql.Date.valueOf(returnDate));
+                }else {
                     pr.setInt(2, 28);//это если факулти
+                    LocalDate returnDate =LocalDate.now().plusDays(28);
+                    pr.setDate(4,java.sql.Date.valueOf(returnDate));
+                }
                 pr.setString(3,"Issued");
                 pr.executeUpdate();
                 return true;
@@ -67,10 +74,11 @@ public class Librarian extends User {
     public boolean returnBook(int idOfCopyOfBook){
         try {
             Database db = new Database();
-            PreparedStatement pr = db.con.prepareStatement("UPDATE Copy SET Owner=?,Time_left=?,Status=? WHERE Id_of_copy= " + idOfCopyOfBook);
+            PreparedStatement pr = db.con.prepareStatement("UPDATE Copy SET Owner=?,Time_left=?,Status=?,Return_date=? WHERE Id_of_copy= " + idOfCopyOfBook);
             pr.setInt(1,0);
             pr.setInt(2,999);
-            pr.setString(3,"In library");
+            pr.setString(3, "In library");
+            pr.setDate(4,java.sql.Date.valueOf(LocalDate.of(9999,1,1)));
             pr.executeUpdate();
             return true;
         }catch (SQLException e) {
