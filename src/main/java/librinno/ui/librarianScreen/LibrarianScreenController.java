@@ -1,6 +1,7 @@
 package main.java.librinno.ui.librarianScreen;
 
 import com.jfoenix.controls.JFXButton;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -65,6 +66,11 @@ public class LibrarianScreenController {
     private TableColumn<Book, Integer> total;
 
     @FXML
+    private TableColumn<Book, Boolean> bestseller;
+    @FXML
+    private TableColumn<Book, Boolean> reference;
+
+    @FXML
     private TableView<User> tableUser;
 
     @FXML
@@ -123,6 +129,8 @@ public class LibrarianScreenController {
         publisher.setCellValueFactory(new PropertyValueFactory<Book, String>("publisher"));
         avaliability.setCellValueFactory(new PropertyValueFactory<Book, Integer>("number"));
         total.setCellValueFactory(new PropertyValueFactory<Book, Integer>("total"));
+        bestseller.setCellValueFactory(new PropertyValueFactory<Book, Boolean>("is_bestseller"));
+        reference.setCellValueFactory(new PropertyValueFactory<Book, Boolean>("reference"));
 
         ObservableList<User> list= FXCollections.observableArrayList();
         ArrayList<Book> books = Librarian.get_all_books();
