@@ -42,7 +42,7 @@ public class LoginController {
         if (id.isEmpty()) {
             Assist.error();
         } else {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/main/java/librinno/ui/patronScreen/patronScreen.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/main/java/librinno/ui/patronScreen/PatronScreen.fxml"));
             Parent parent = loader.load();
             PatronScreenController reg = (PatronScreenController) loader.getController();
             Database db = new Database();

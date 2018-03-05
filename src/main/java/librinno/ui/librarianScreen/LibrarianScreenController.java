@@ -173,7 +173,7 @@ public class LibrarianScreenController {
 
     @FXML
     void addDoc(ActionEvent event) throws IOException {
-        Assist.loadStageWait(getClass().getResource("/main/java/librinno/ui/addbook/addbook.fxml"));
+        Assist.loadStageWait(getClass().getResource("/main/java/librinno/ui/addbook/AddBook.fxml"));
         showTableDocuments();
     }
 
@@ -227,10 +227,10 @@ public class LibrarianScreenController {
         Book book= tableBook.getSelectionModel().getSelectedItem();
 
         if (book==null){
-            Assist.loadStageWait(getClass().getResource("/main/java/librinno/ui/issue/issue.fxml"));
+            Assist.loadStageWait(getClass().getResource("/main/java/librinno/ui/issue/Issue.fxml"));
             showTables();
         }else {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/main/java/librinno/ui/issue/issue.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/main/java/librinno/ui/issue/Issue.fxml"));
             Parent parent = loader.load();
             Issue reg = (Issue) loader.getController();
             reg.passGUI(book);
