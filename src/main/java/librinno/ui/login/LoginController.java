@@ -42,7 +42,7 @@ public class LoginController {
         if (id.isEmpty()) {
             Assist.error();
         } else {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../patronScreen/patronScreen.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/main/java/librinno/ui/patronScreen/patronScreen.fxml"));
             Parent parent = loader.load();
             PatronScreenController reg = (PatronScreenController) loader.getController();
             Database db = new Database();
@@ -85,7 +85,7 @@ public class LoginController {
     }
 
     private void loadLibrarian() throws IOException {
-        Assist.loadStage(getClass().getResource("../librarianScreen/LibrarianScreen.fxml"));
+        Assist.loadStage(getClass().getResource("/main/java/librinno/ui/librarianScreen/LibrarianScreen.fxml"));
     }
 
 

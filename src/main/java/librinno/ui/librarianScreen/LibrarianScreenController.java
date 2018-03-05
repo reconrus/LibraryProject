@@ -152,7 +152,7 @@ public class LibrarianScreenController {
         if (user==null){
             Assist.error();
         }else {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../editPatron/EditPatron.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/main/java/librinno/ui/editPatron/EditPatron.fxml"));
             Parent parent = loader.load();
             EditPatron reg = (EditPatron) loader.getController();
             reg.passGUI(user);
@@ -165,13 +165,13 @@ public class LibrarianScreenController {
 
     @FXML
     void addDoc(ActionEvent event) throws IOException {
-        Assist.loadStageWait(getClass().getResource("../addbook/addbook.fxml"));
+        Assist.loadStageWait(getClass().getResource("/main/java/librinno/ui/addbook/addbook.fxml"));
         showTableDocuments();
     }
 
     @FXML
     void addPatron(ActionEvent event) throws IOException {
-        Assist.loadStageWait(getClass().getResource("../Register/register.fxml"));
+        Assist.loadStageWait(getClass().getResource("/main/java/librinno/ui/Register/register.fxml"));
         showTables();
     }
 
@@ -203,7 +203,7 @@ public class LibrarianScreenController {
         if (book==null){
             Assist.error();
         }else {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../editDoc/EditDoc.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/main/java/librinno/ui/editDoc/EditDoc.fxml"));
             Parent parent = loader.load();
             EditDoc reg = (EditDoc) loader.getController();
             reg.passGUI(book);
@@ -219,10 +219,10 @@ public class LibrarianScreenController {
         Book book= tableBook.getSelectionModel().getSelectedItem();
 
         if (book==null){
-            Assist.loadStageWait(getClass().getResource("../issue/issue.fxml"));
+            Assist.loadStageWait(getClass().getResource("/main/java/librinno/ui/issue/issue.fxml"));
             showTables();
         }else {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../issue/issue.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/main/java/librinno/ui/issue/issue.fxml"));
             Parent parent = loader.load();
             Issue reg = (Issue) loader.getController();
             reg.passGUI(book);
