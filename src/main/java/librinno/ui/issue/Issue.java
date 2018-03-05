@@ -4,6 +4,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import main.java.librinno.model.Book;
 import main.java.librinno.model.Database;
 import main.java.librinno.model.Librarian;
@@ -35,8 +36,17 @@ public class Issue {
         int book=Integer.parseInt(BookID.getText());
         int patron=Integer.parseInt(PatronID.getText());
         Database db= new Database();
-        Librarian.checkOutBook(db.get_information_about_the_user(patron),book);
-
+        if(Librarian.checkOutBook(db.get_information_about_the_user(patron),book)){
+            Alert error= new Alert(Alert.AlertType.CONFIRMATION);
+            error.setHeaderText("Success");
+            error.showAndWait();
+        }
+        else{
+            Alert error= new Alert(Alert.AlertType.ERROR);
+            error.setHeaderText("Error");
+            error.setContentText("There has been a mistake");
+            error.showAndWait();
+        }
         Assist.closeStage(give);
     }
 

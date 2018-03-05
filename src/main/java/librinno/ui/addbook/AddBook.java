@@ -37,7 +37,7 @@ public class AddBook {
     private JFXTextField year;
 
     @FXML
-    private JFXRadioButton isBestseller;
+    private JFXCheckBox isBestseller;
 
     @FXML
     private JFXCheckBox isReference;
