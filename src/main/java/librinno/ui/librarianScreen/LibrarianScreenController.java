@@ -192,16 +192,20 @@ public class LibrarianScreenController {
     @FXML
     void deletePatron(ActionEvent event) {
         User user= tableUser.getSelectionModel().getSelectedItem();
-        Librarian.delete_user_by_id(user.card_number);
-        showTables();
+        if(user!=null) {
+            Librarian.delete_user_by_id(user.card_number);
+            showTables();
+        }
     }
 
 
     @FXML
     void deleteDoc(ActionEvent event) {
         Book book= tableBook.getSelectionModel().getSelectedItem();
-        Librarian.delete_book_by_id(book.getId());
-        showTables();
+        if(book != null) {
+            Librarian.delete_book_by_id(book.getId());
+            showTables();
+        }
     }
 
 
@@ -245,15 +249,19 @@ public class LibrarianScreenController {
     @FXML
     void returnDocument(ActionEvent event) throws IOException{
         Material copy= tableCopy.getSelectionModel().getSelectedItem();
-        Librarian.returnBook(copy.getId());
-        showTables();
+        if(copy!=null) {
+            Librarian.returnBook(copy.getId());
+            showTables();
+        }
     }
 
     @FXML
     void deleteCopy (ActionEvent event) throws IOException{
         Material copy= tableCopy.getSelectionModel().getSelectedItem();
-        Librarian.deleteCopy(copy.getId());
-        showTables();
+        if(copy!=null) {
+            Librarian.deleteCopy(copy.getId());
+            showTables();
+        }
     }
 
     @FXML
