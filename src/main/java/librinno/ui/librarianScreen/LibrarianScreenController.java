@@ -245,6 +245,21 @@ public class LibrarianScreenController {
         }
 
     }
+    @FXML
+    void showPatronCopies() throws IOException {
+        User user= tableUser.getSelectionModel().getSelectedItem();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/main/java/librinno/ui/librarianScreen/LibrarianPatronSDocuments.fxml"));
+        Parent parent = loader.load();
+
+        LibrarianPatronSCopiesController controller = loader.getController();
+        controller.setId(user.getCard_number());
+
+        Stage stage = new Stage(StageStyle.DECORATED);
+        stage.setScene(new Scene(parent));
+        stage.showAndWait();
+
+        showTables();
+    }
 
     @FXML
     void returnDocument(ActionEvent event) throws IOException{

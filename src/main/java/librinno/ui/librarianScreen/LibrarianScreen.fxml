@@ -169,6 +169,7 @@
                                        <contextMenu>
                                           <ContextMenu>
                                             <items>
+                                                <MenuItem mnemonicParsing="false" onAction="#showPatronCopies" text="Show Taken Documents" />
                                                 <MenuItem mnemonicParsing="false" onAction="#showTables" text="Refresh" />
                                                 <MenuItem mnemonicParsing="false" onAction="#deletePatron" text="Delete" />
                                               <MenuItem mnemonicParsing="false" onAction="#editPatron" text="Edit" />
