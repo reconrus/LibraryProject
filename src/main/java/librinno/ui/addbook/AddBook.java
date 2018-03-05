@@ -1,6 +1,7 @@
 package main.java.librinno.ui.addbook;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
@@ -39,7 +40,7 @@ public class AddBook {
     private JFXRadioButton isBestseller;
 
     @FXML
-    private JFXRadioButton isReference;
+    private JFXCheckBox isReference;
 
     @FXML
     private JFXButton confirm;
@@ -63,8 +64,8 @@ public class AddBook {
         String bookPublisher= publisher.getText();
         String bookAmount= amount.getText();
         String bookYear = year.getText();
-        Boolean bestseller= isBestseller.isArmed();
-        Boolean reference= isReference.isArmed();
+        Boolean bestseller= isBestseller.isSelected();
+        Boolean reference= isReference.isSelected();
         if ((bookAuthor.isEmpty())||(bookPrice.isEmpty())||(bookPublisher.isEmpty())||(bookTitle.isEmpty())
                 || (bookEdition.isEmpty()) || (bookAmount.isEmpty())||(Integer.parseInt(bookAmount)>500)){
             Assist.error();

@@ -82,6 +82,9 @@ public class Material {
     public boolean isReference() {
         return reference;
     }
+    public boolean getReference(){
+        return reference;
+    }
     public void setReference(boolean reference) {
         this.reference = reference;
     }

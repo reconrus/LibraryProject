@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXRadioButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import java.net.URL?>
 <?import javafx.scene.Group?>
@@ -21,8 +21,8 @@
             <JFXTextField fx:id="price" layoutY="136.0" prefHeight="25.0" prefWidth="232.0" promptText="Price" />
             <JFXTextField fx:id="keyWords" layoutY="170.0" onAction="#confirm" prefHeight="25.0" prefWidth="232.0" promptText="Key Words" />
             <JFXTextField fx:id="year" layoutY="200.0" prefHeight="25.0" prefWidth="232.0" promptText="Year" />
-            <JFXRadioButton fx:id="isBestseller" layoutX="-7.0" layoutY="236.0" prefHeight="17.0" prefWidth="95.0" text="Bestseller" />
-            <JFXRadioButton fx:id="isReference" layoutX="101.0" layoutY="236.0" prefHeight="17.0" prefWidth="111.0" text="Reference Book" />
+            <JFXCheckBox fx:id="isBestseller" layoutX="6.0" layoutY="236.0" text="Bestseller" />
+            <JFXCheckBox fx:id="isReference" layoutX="116.0" layoutY="236.0" text="Reference" />
          </children>
       </Group>
       <JFXButton fx:id="cancel" layoutX="59.0" layoutY="361.0" onAction="#cancel" prefHeight="31.0" prefWidth="67.0" text="Cancel" />

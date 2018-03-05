@@ -1,6 +1,7 @@
 package main.java.librinno.ui.editDoc;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
@@ -37,7 +38,7 @@ public class EditDoc {
     private JFXTextField year;
 
     @FXML
-    private JFXRadioButton isBestseller;
+    private JFXCheckBox isBestseller;
 
     @FXML
     private JFXButton confirm;
@@ -46,7 +47,7 @@ public class EditDoc {
     private JFXButton cancel;
     
     @FXML
-    private JFXRadioButton isReference;
+    private JFXCheckBox isReference;
 
     private Book bookEd;
 
@@ -62,8 +63,8 @@ public class EditDoc {
         String bookKeyWords= keyWords.getText();
         String bookPublisher= publisher.getText();
         String bookYear= year.getText();
-        Boolean bestseller= isBestseller.isArmed();
-        Boolean reference= isReference.isArmed();
+        Boolean bestseller= isBestseller.isSelected();
+        Boolean reference= isReference.isSelected();
 
         if ((bookAuthor.isEmpty())||(bookPrice.isEmpty())||(bookPublisher.isEmpty())||(bookTitle.isEmpty())) {
             Assist.error();
