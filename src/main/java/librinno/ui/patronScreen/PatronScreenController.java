@@ -76,6 +76,10 @@ public class PatronScreenController {
 
     @FXML
     private TableColumn<Book, Integer> avaliability;
+    @FXML
+    private TableColumn<Book, Boolean> bestseller;
+    @FXML
+    private TableColumn<Book, Boolean> reference;
 
     @FXML
     void showTableDocuments(){
@@ -84,8 +88,8 @@ public class PatronScreenController {
         title.setCellValueFactory(new PropertyValueFactory<Book, String>("title"));
         publisher.setCellValueFactory(new PropertyValueFactory<Book, String>("publisher"));
         avaliability.setCellValueFactory(new PropertyValueFactory<Book, Integer>("number"));
-
-        ObservableList<User> list= FXCollections.observableArrayList();
+        bestseller.setCellValueFactory(new PropertyValueFactory<Book, Boolean>("is_bestseller"));
+        reference.setCellValueFactory(new PropertyValueFactory<Book, Boolean>("reference"));
         ArrayList<Book> books = Librarian.get_all_books();
 
 
