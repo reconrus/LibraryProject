@@ -219,7 +219,8 @@ public class LibrarianScreenController {
         Book book= tableBook.getSelectionModel().getSelectedItem();
 
         if (book==null){
-            Assist.error();
+            Assist.loadStageWait(getClass().getResource("../issue/issue.fxml"));
+            showTables();
         }else {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../issue/issue.fxml"));
             Parent parent = loader.load();
