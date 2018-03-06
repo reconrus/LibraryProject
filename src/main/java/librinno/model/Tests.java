@@ -39,8 +39,14 @@ public class Tests {
             pr.executeUpdate();
             pr = db.con.prepareStatement("DELETE from Copy WHERE Id_of_original=" + arrayList3.get(1)+" LIMIT 1");
             pr.executeUpdate();
+            pr = db.con.prepareStatement("DELETE from Users_of_the_library WHERE Card_number=" + db.isUserAlreadyExist(user2).get(1));
+            pr.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public void tc5()throws SQLException{
+        boolean correct =l.checkOutBook(user2, (Integer) db.isBookAlreadyExist(book2).get(1));
     }
 }
