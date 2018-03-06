@@ -15,7 +15,6 @@ public class Article extends Material{
     private String journal;
     private String editor;
     private String date;
-    private String type;
     private boolean reference;
 
     public void setReference(boolean reference) {
@@ -97,12 +96,6 @@ public class Article extends Material{
     }
     public String getDate() {
         return date;
-    }
-    public void setType(String type){
-        this.type=type;
-    }
-    public String getType(){
-        return type;
     }
     public void setDate(String date) {
         this.date = date;
