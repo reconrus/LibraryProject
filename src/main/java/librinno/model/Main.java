@@ -25,9 +25,11 @@ public class Main {
         //l.get_all_users();
        //System.out.println(l.get_all_copies_taken_by_user(1));
        // System.out.println(l.get_all_copies_taken_by_user(1));
-        for (int i = 0; i < Librarian.get_all_copies_taken_by_user(1).size(); i++) {
-               System.out.println(Librarian.get_all_copies_taken_by_user(1).get(i).getType());
-        }
+       // for (int i = 0; i < Librarian.get_all_copies_taken_by_user(1).size(); i++) {
+       //        System.out.println(Librarian.get_all_copies_taken_by_user(1).get(i).getType());
+       // }
+        //l.delete_user_by_id(35);
+        //System.out.println(l.av_by_id(201).getAuthor());
       //  System.out.println(l.get_all_copies().size());
        // System.out.println(l.get_all_copies());
     }

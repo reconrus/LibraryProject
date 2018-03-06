@@ -1,5 +1,7 @@
 package main.java.librinno.model;
 
+import javafx.scene.control.Alert;
+
 import javax.xml.crypto.Data;
 import java.sql.*;
 import java.time.LocalDate;
@@ -40,7 +42,7 @@ public class Librarian extends User {
         }
     }
 
-    public static boolean checkOutBook(User user,int idOfBook){
+    public static boolean checkOutBook(User user, int idOfBook) {
         try {
             Database db = new Database();
             PreparedStatement pr = db.con.prepareStatement("UPDATE Copy SET Owner=?,Time_left=?,Status=?,Return_date=? WHERE Id_of_original= " + idOfBook + " AND Status= 'In library' LIMIT 1 ");
@@ -49,78 +51,123 @@ public class Librarian extends User {
                 pr.setInt(1, user.getCard_number());
                 if (user.get_type().equals("Student") && book.isIs_bestseller()) {
                     pr.setInt(2, 14);//если студент и книга бестселлер, то ставим 14 дней
-                    LocalDate returnDate =LocalDate.now().plusDays(14);
-                    pr.setDate(4,java.sql.Date.valueOf(returnDate));
-                }else if (user.get_type().equals("Student") && !book.isIs_bestseller()) {
+                    LocalDate returnDate = LocalDate.now().plusDays(14);
+                    pr.setDate(4, java.sql.Date.valueOf(returnDate));
+                } else if (user.get_type().equals("Student") && !book.isIs_bestseller()) {
                     pr.setInt(2, 21);//если студент и книга бестселлер, то ставим 21 дней
-                    LocalDate returnDate =LocalDate.now().plusDays(21);
-                    pr.setDate(4,java.sql.Date.valueOf(returnDate));
-                }else {
+                    LocalDate returnDate = LocalDate.now().plusDays(21);
+                    pr.setDate(4, java.sql.Date.valueOf(returnDate));
+                } else {
                     pr.setInt(2, 28);//это если факулти
-                    LocalDate returnDate =LocalDate.now().plusDays(28);
-                    pr.setDate(4,java.sql.Date.valueOf(returnDate));
+                    LocalDate returnDate = LocalDate.now().plusDays(28);
+                    pr.setDate(4, java.sql.Date.valueOf(returnDate));
                 }
-                pr.setString(3,"Issued");
+                pr.setString(3, "Issued");
                 pr.executeUpdate();
                 return true;
-            }else
+            } else
                 return false;
 
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
             return false;
         }
     }
-    public static boolean returnBook(int idOfCopyOfBook){
+
+    public static boolean returnBook(int idOfCopyOfBook) {
         try {
             Database db = new Database();
             PreparedStatement pr = db.con.prepareStatement("UPDATE Copy SET Owner=?,Time_left=?,Status=?,Return_date=? WHERE Id_of_copy= " + idOfCopyOfBook);
-            pr.setInt(1,0);
-            pr.setInt(2,999);
+            pr.setInt(1, 0);
+            pr.setInt(2, 999);
             pr.setString(3, "In library");
             pr.setDate(4, java.sql.Date.valueOf(LocalDate.of(9999, 1, 1)));
             pr.executeUpdate();
             return true;
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
             return false;
         }
     }
-    public static boolean requestReturnBook(int idOfCopyOfBook){
+
+    public static boolean requestReturnBook(int idOfCopyOfBook) {
         try {
             Database db = new Database();
             PreparedStatement pr = db.con.prepareStatement("UPDATE Copy SET Status=? WHERE Id_of_copy= " + idOfCopyOfBook);
             pr.setString(1, "Returning");
             pr.executeUpdate();
             return true;
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
             return false;
         }
     }
 
-    public static Book bookByID(int id){
-        try{
+    public static Book bookByID(int id) {
+        try {
             Statement stmt = db.con.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM Books");
+            ResultSet rs = stmt.executeQuery("SELECT * FROM Books where id="+id);
             while (rs.next()) {
-                if (rs.getInt(1)==id){
-                    Book book = new Book(id,rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getInt(6),rs.getString(7),rs.getBoolean(8),rs.getBoolean(9),rs.getInt(10),1);
+                    Book book = new Book(id, rs.getString(2),
+                            rs.getString(3), rs.getString(4),
+                            rs.getString(5), rs.getInt(6),
+                            rs.getString(7), rs.getBoolean(8),
+                            rs.getBoolean(9), rs.getInt(10), 1);
                     return book;
-                }
-
             }
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
     }
-
+    public static AV av_by_id(int id){
+        try {
+            Statement stmt = db.con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM AV where id="+id);
+            while (rs.next()) {
+                AV av = new AV(id, rs.getString("Name"),
+                        rs.getString("Author"), rs.getInt("Price"),
+                        rs.getString("Keywords"));
+                return av;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    public static Article article_by_id(int id){
+        try {
+            Statement stmt = db.con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM Articles where id="+id);
+            while (rs.next()) {
+                Article article = new Article(id, rs.getString("Name"),
+                        rs.getString("Author"), rs.getInt("Price"),
+                        rs.getString("Keywords"), rs.getBoolean("is_reference"),
+                        rs.getString("Journal"), rs.getString("Editor"),
+                        rs.getDate("Date").getYear(),
+                rs.getDate("Date").getMonth(),
+                rs.getDate("Date").getDay());
+                return article;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
     public static void delete_user_by_id(int user_id) {
         try {
             Database db = new Database();
-            PreparedStatement pr = db.con.prepareStatement("DELETE from Users_of_the_library WHERE Card_number=" + user_id);
-            pr.executeUpdate();
+            Statement stmt = db.con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM Copy where Owner=" + user_id);
+            if (rs.next()) {
+              Alert alert= new Alert(Alert.AlertType.ERROR);
+              alert.setHeaderText("Deletion");
+              alert.setContentText("User has taken materials");
+              alert.show();
+            } else {
+                PreparedStatement pr = db.con.prepareStatement("DELETE from Users_of_the_library WHERE Card_number=" + user_id);
+                pr.executeUpdate();
+            }
         } catch (SQLException e) {
             System.out.println("user with such id didn't found");
         }
@@ -212,7 +259,7 @@ public class Librarian extends User {
         }
     }
 
-    public static void deleteCopy(int id){
+    public static void deleteCopy(int id) {
         try {
             PreparedStatement pr = db.con.prepareStatement("DELETE from Copy WHERE Id_of_copy=" + id);
             pr.executeUpdate();
@@ -321,7 +368,7 @@ public class Librarian extends User {
                 String author = rs.getString("Author");
                 int price = rs.getInt("Price");
                 String keyWord = rs.getString("Keywords");
-                AV av = new AV(id,name, author, price, keyWord);
+                AV av = new AV(id, name, author, price, keyWord);
                 avs.add(av);
             }
         } catch (SQLException e) {
@@ -470,7 +517,7 @@ public class Librarian extends User {
             while (rs.next()) {
                 int original_id = rs.getInt("Id_of_original");
                 int copy_id = rs.getInt("Id_of_copy");
-                String status=rs.getString("Status");
+                String status = rs.getString("Status");
                 LocalDate date = rs.getDate("Return_date").toLocalDate();
                 Statement articles_stmt = db.con.createStatement();
                 ResultSet articles_rs = articles_stmt.executeQuery("SELECT * FROM Articles where id=" + original_id);
@@ -482,8 +529,8 @@ public class Librarian extends User {
                     boolean is_reference = articles_rs.getBoolean("is_reference");
                     String journal = articles_rs.getString("Journal");
                     String editor = articles_rs.getString("Editor");
-                    Article article = new Article("Article",copy_id, name, author, price, keywords, is_reference, journal, editor, date,status,user_id);
-                    copies.add((Material)article);
+                    Article article = new Article("Article", copy_id, name, author, price, keywords, is_reference, journal, editor, date, status, user_id);
+                    copies.add((Material) article);
                 }
                 Statement AV_stmt = db.con.createStatement();
                 ResultSet AV_rs = AV_stmt.executeQuery("SELECT * FROM AV where id=" + original_id);
@@ -492,8 +539,8 @@ public class Librarian extends User {
                     String author = AV_rs.getString("Author");
                     int price = AV_rs.getInt("Price");
                     String keywords = AV_rs.getString("Keywords");
-                    AV av = new AV("AV",copy_id, name, author, price, keywords,date,status,user_id);
-                    copies.add((Material)av);
+                    AV av = new AV("AV", copy_id, name, author, price, keywords, date, status, user_id);
+                    copies.add((Material) av);
                 }
                 Statement books_stmt = db.con.createStatement();
                 ResultSet books_rs = books_stmt.executeQuery("SELECT * FROM Books where id=" + original_id);
@@ -507,8 +554,8 @@ public class Librarian extends User {
                     boolean is_bestseller = books_rs.getBoolean("is_bestseller");
                     boolean is_reference = books_rs.getBoolean("is_reference");
                     int year = books_rs.getInt("Year");
-                    Book book = new Book("Book",copy_id, name, author, publisher, edition, price, keywords, is_bestseller, is_reference, year, 0,date,status,user_id);
-                    copies.add((Material)book);
+                    Book book = new Book("Book", copy_id, name, author, publisher, edition, price, keywords, is_bestseller, is_reference, year, 0, date, status, user_id);
+                    copies.add((Material) book);
                 }
             }
         } catch (SQLException e) {
@@ -522,7 +569,7 @@ public class Librarian extends User {
         int copies = 0;
         try {
             Statement stmt = db.con.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM Copy where Id_of_original=" + book_id+" and Owner="+0);
+            ResultSet rs = stmt.executeQuery("SELECT * FROM Copy where Id_of_original=" + book_id + " and Owner=" + 0);
             while (rs.next()) {
                 copies++;
             }
@@ -531,6 +578,7 @@ public class Librarian extends User {
         }
         return copies;
     }
+
     public static int get_number_of_copies_of_book_with_taken(int book_id) {
         int copies = 0;
         try {
@@ -544,6 +592,7 @@ public class Librarian extends User {
         }
         return copies;
     }
+
     public static LinkedList<Material> get_all_copies() {
         LinkedList<Material> copies = new LinkedList();
         LinkedList<Integer> attended_id = new LinkedList<>();
