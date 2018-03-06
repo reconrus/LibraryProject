@@ -92,6 +92,7 @@ public class AddBook {
 
     @FXML
     private JFXTextField avAmount;
+    @FXML
     private JFXButton confirm;
 
     @FXML

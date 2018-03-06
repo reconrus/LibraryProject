@@ -93,7 +93,7 @@ public class Database {
             prst.setBoolean(5, article.getReference());
             prst.setString(6,article.getJournal());
             prst.setString(7,article.getEditor());
-            prst.setDate(8,java.sql.Date.valueOf(article.getDate()));
+            prst.setString(8,article.getDate());
             prst.executeUpdate();
             //находим последний добавленный ID статьи и запоминаем его, чтоб потом кинуть его в таблицу копий
             Statement stmt = con.createStatement();
@@ -192,7 +192,7 @@ public class Database {
         while (rs.next()){
             if (rs.getString(2).equals(article.getTitle()) && rs.getString(3).equals(article.getAuthor()) && rs.getInt(4) == article.getPrice() &&
             rs.getString(5).equals(article.getKeyWords())  && rs.getBoolean(6) == article.getReference()
-            && rs.getString(7).equals(article.getJournal()) && rs.getString(8).equals(article.getEditor()) && rs.getDate(9).toLocalDate().equals(article.getDate())){
+            && rs.getString(7).equals(article.getJournal()) && rs.getString(8).equals(article.getEditor()) && rs.getDate(9).equals(article.getDate())){
                 arrayList.add(1); // 1 = true
                 arrayList.add(rs.getInt(1));//save ID of founded book
                 return arrayList;

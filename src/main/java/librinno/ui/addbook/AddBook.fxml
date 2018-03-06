@@ -13,7 +13,7 @@
    <children>
       <JFXTabPane prefHeight="390.0" prefWidth="372.0" AnchorPane.bottomAnchor="75.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <tabs>
-            <Tab styleClass=".tab" text="Book">
+            <Tab fx:id="bookTab" styleClass=".tab" text="Book">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="0.0" prefWidth="372.0">
                      <children>
@@ -36,14 +36,14 @@
                   </AnchorPane>
               </content>
             </Tab>
-            <Tab text="Article">
+            <Tab fx:id="articleTab" text="Article">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="410.0">
                      <children>
                         <Group layoutX="66.0" layoutY="28.0">
                            <children>
                               <JFXTextField fx:id="articleTitle" prefHeight="25.0" prefWidth="232.0" promptText="Title" />
-                              <JFXTextField fx:id="articleTitle" layoutY="34.0" prefHeight="25.0" prefWidth="232.0" promptText="Authors" />
+                              <JFXTextField fx:id="articleAuthors" layoutY="34.0" prefHeight="25.0" prefWidth="232.0" promptText="Authors" />
                               <JFXTextField fx:id="articleJournal" layoutY="68.0" prefHeight="25.0" prefWidth="232.0" promptText="Journal" />
                               <JFXTextField fx:id="articleDate" layoutY="103.0" prefHeight="25.0" prefWidth="232.0" promptText="Publication Date" />
                               <JFXTextField fx:id="articleEditors" layoutY="136.0" prefHeight="25.0" prefWidth="232.0" promptText="Editors" />
@@ -57,7 +57,7 @@
                   </AnchorPane>
                </content>
             </Tab>
-            <Tab text="A/V">
+            <Tab fx:id="AVTab" text="A/V">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="375.0">
                      <children>
@@ -67,7 +67,6 @@
                               <JFXTextField fx:id="avAuthor" layoutX="1.0" layoutY="103.0" prefHeight="25.0" prefWidth="232.0" promptText="Authors" />
                               <JFXTextField fx:id="avPrice" layoutY="136.0" prefHeight="25.0" prefWidth="232.0" promptText="Price" />
                               <JFXTextField fx:id="avKeyWords" layoutY="170.0" onAction="#confirm" prefHeight="25.0" prefWidth="232.0" promptText="Key Words" />
-                              <JFXTextField fx:id="avYear" layoutY="200.0" prefHeight="25.0" prefWidth="232.0" promptText="Year" />
                               <JFXTextField fx:id="avAmount" layoutX="1.0" layoutY="232.0" prefHeight="25.0" prefWidth="232.0" promptText="Amount of Copies" />
                            </children>
                         </Group>
