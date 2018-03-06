@@ -218,20 +218,43 @@ public class LibrarianScreenController {
 
     @FXML
     void editDoc() throws IOException {
-        Book book= (Book)tableBook.getSelectionModel().getSelectedItem();
-        if (book==null){
+        Material material = tableBook.getSelectionModel().getSelectedItem();
+        if (material==null){
             Assist.error();
         }else {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/main/java/librinno/ui/editDoc/EditBook.fxml"));
-            Parent parent = loader.load();
-            EditDoc reg = (EditDoc) loader.getController();
-            reg.passGUI(book);
+            FXMLLoader loader;
+            Parent parent;
+            if(material.getType().equals("Article")){
+                Article article = (Article) tableBook.getSelectionModel().getSelectedItem();
+                loader = new FXMLLoader(getClass().getResource("/main/java/librinno/ui/editDoc/EditArticle.fxml"));
+                parent = loader.load();
+                EditDoc reg = loader.getController();
+                //reg.passGUI(article);
+            }
+            else if(material.getType().equals("AV")){
+                AV av = (AV) tableBook.getSelectionModel().getSelectedItem();
+                //loader = new FXMLLoader(getClass().getResource("/main/java/librinno/ui/editDoc/EditAv.fxml"));
+                loader = new FXMLLoader(getClass().getResource("/main/java/librinno/ui/ShowDocInfo/ShowAVInfo.fxml"));
+                parent = loader.load();
+                //EditDoc reg = loader.getController();
+                ShowDocInfo jo = loader.getController();
+                //reg.passGUI(material);
+            }
+            else { //Book
+                Book book = (Book) tableBook.getSelectionModel().getSelectedItem();
+                loader = new FXMLLoader(getClass().getResource("/main/java/librinno/ui/editDoc/EditBook.fxml"));
+                 parent = loader.load();
+                EditDoc reg = loader.getController();
+                //reg.passGUI(material);
+            }
             Stage stage = new Stage(StageStyle.DECORATED);
             stage.setScene(new Scene(parent));
             stage.showAndWait();
             showTables();
         }
     }
+
+
 
     @FXML
     void issue(ActionEvent event) throws IOException {

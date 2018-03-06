@@ -291,8 +291,7 @@ public class Librarian extends User {
         }
     }
 
-    public void modify_AV(AV av) {
-
+    public static void modify_AV(AV av) {
         try {
             PreparedStatement pr = db.con.prepareStatement("UPDATE AV " +
                     "SET Name=?,Author=?,Price=?,Keywords=? where id=" + av.getId());
@@ -306,7 +305,7 @@ public class Librarian extends User {
         }
     }
 
-    public void modify_article(Article article) {
+    public static void modify_article(Article article) {
         try {
             PreparedStatement pr = db.con.prepareStatement("UPDATE Articles " +
                     "SET Name=?,Author=?,Price=?,Keywords=?,is_reference=?,Journal=?,Editor=?,Date=? where id=" + article.getId());

@@ -14,12 +14,12 @@ import java.time.LocalDate;
 public class Article extends Material{
     private String journal;
     private String editor;
-    private LocalDate date;
+    private String date;
     private String type;
     private boolean reference;
 
-    public void setReference(boolean regerence) {
-        this.reference = regerence;
+    public void setReference(boolean reference) {
+        this.reference = reference;
     }
 
     public boolean getReference(){
@@ -28,7 +28,7 @@ public class Article extends Material{
 
     private LocalDate date_of_return;
     public Article(String title,String author,int price, String keyWords,
-                   boolean reference,String journal,String editor,int yearOfDate,int monthOfDate,int dayOfDate,String status){
+                   boolean reference,String journal,String editor, String date,String status){
         setTitle(title);
         setAuthor(author);
         setPrice(price);
@@ -36,12 +36,12 @@ public class Article extends Material{
         setReference(reference);
         setJournal(journal);
         setEditor(editor);
-        setDate(yearOfDate,monthOfDate,dayOfDate);
+        setDate(date);
         setStatus(status);
         setType("Article");
     }
     public Article(int id,String title,String author,int price, String keyWords,
-                    boolean reference,String journal,String editor,int yearOfDate,int monthOfDate,int dayOfDate,String status){
+                    boolean reference,String journal,String editor, String date,String status){
         setId(id);
         setTitle(title);
         setAuthor(author);
@@ -50,12 +50,12 @@ public class Article extends Material{
         setReference(reference);
         setJournal(journal);
         setEditor(editor);
-        setDate(yearOfDate,monthOfDate,dayOfDate);
+        setDate(date);
         setStatus(status);
         setType("Article");
     }
     public Article(int id,String title,String author,int price, String keyWords,
-                   boolean reference,String journal,String editor,int yearOfDate,int monthOfDate,int dayOfDate){
+                   boolean reference,String journal,String editor, String date){
         setId(id);
         setTitle(title);
         setAuthor(author);
@@ -64,11 +64,11 @@ public class Article extends Material{
         setReference(reference);
         setJournal(journal);
         setEditor(editor);
-        setDate(yearOfDate,monthOfDate,dayOfDate);
+        setDate(date);
         setType("Article");
     }
     public Article(String type,int id,String title,String author,int price, String keyWords,
-                   boolean reference,String journal,String editor,LocalDate date, String status, int userid){
+                   boolean reference,String journal,String editor,String date, String status, int userid){
         setType(type);
         setId(id);
         setTitle(title);
@@ -95,7 +95,7 @@ public class Article extends Material{
     public void setEditor(String editor) {
         this.editor = editor;
     }
-    public LocalDate getDate() {
+    public String getDate() {
         return date;
     }
     public void setType(String type){
@@ -104,13 +104,7 @@ public class Article extends Material{
     public String getType(){
         return type;
     }
-    public void setDate(LocalDate date) {
+    public void setDate(String date) {
         this.date = date;
-    }
-    public LocalDate get_return_date() {
-        return date_of_return;
-    }
-    public void set_return_date(int year,int month,int day) {
-        this.date_of_return =LocalDate.of(year,month,day);
     }
 }
