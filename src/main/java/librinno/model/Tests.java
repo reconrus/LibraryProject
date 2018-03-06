@@ -1,5 +1,6 @@
 package main.java.librinno.model;
 
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -31,6 +32,15 @@ public class Tests {
     }
     public void tc2()throws SQLException {
         ArrayList arrayList =db.isBookAlreadyExist(book1);
+        ArrayList arrayList3 =db.isBookAlreadyExist(book3);
 
+        try {
+            PreparedStatement pr = db.con.prepareStatement("DELETE from Copy WHERE Id_of_original=" + arrayList.get(1)+" LIMIT 2");
+            pr.executeUpdate();
+            pr = db.con.prepareStatement("DELETE from Copy WHERE Id_of_original=" + arrayList3.get(1)+" LIMIT 1");
+            pr.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
