@@ -61,7 +61,6 @@ public class PatronSDocumentsController {
 
         list.addAll(docs);
         tableDoc.getItems().setAll(list);
-
     }
 
     void setId(int id){

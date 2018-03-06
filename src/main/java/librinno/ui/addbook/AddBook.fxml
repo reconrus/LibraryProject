@@ -2,30 +2,83 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXCheckBox?>
+<?import com.jfoenix.controls.JFXTabPane?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import java.net.URL?>
 <?import javafx.scene.Group?>
+<?import javafx.scene.control.Tab?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="379.0" prefWidth="355.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.librinno.ui.addbook.AddBook">
+<AnchorPane prefHeight="442.0" prefWidth="354.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.librinno.ui.addbook.AddBook">
    <children>
-      <Group layoutX="65.0" layoutY="33.0">
-         <children>
-            <JFXTextField fx:id="name" prefHeight="25.0" prefWidth="232.0" promptText="Title" />
-            <JFXTextField fx:id="author" layoutY="34.0" prefHeight="25.0" prefWidth="232.0" promptText="Author" />
-            <JFXTextField fx:id="publisher" layoutY="68.0" prefHeight="25.0" prefWidth="232.0" promptText="Publisher" />
-            <JFXTextField fx:id="edition" layoutY="103.0" prefHeight="25.0" prefWidth="232.0" promptText="Edition" />
-            <JFXTextField fx:id="price" layoutY="136.0" prefHeight="25.0" prefWidth="232.0" promptText="Price" />
-            <JFXTextField fx:id="keyWords" layoutY="170.0" onAction="#confirm" prefHeight="25.0" prefWidth="232.0" promptText="Key Words" />
-            <JFXTextField fx:id="year" layoutY="200.0" prefHeight="25.0" prefWidth="232.0" promptText="Year" />
-            <JFXTextField fx:id="amount" layoutX="1.0" layoutY="232.0" prefHeight="25.0" prefWidth="232.0" promptText="Amount of Copies" />
-            <JFXCheckBox fx:id="isBestseller" layoutY="271.0" text="Bestseller" />
-            <JFXCheckBox fx:id="isReference" layoutX="129.0" layoutY="271.0" text="Reference" />
-
-         </children>
-      </Group>
-      <JFXButton fx:id="cancel" layoutX="68.0" layoutY="332.0" onAction="#cancel" prefHeight="31.0" prefWidth="67.0" text="Cancel" />
-      <JFXButton fx:id="confirm" layoutX="224.0" layoutY="332.0" onAction="#confirm" prefHeight="31.0" prefWidth="74.0" text="Confirm" />
+      <JFXTabPane prefHeight="390.0" prefWidth="372.0" AnchorPane.bottomAnchor="75.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <tabs>
+            <Tab styleClass=".tab" text="Book">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="0.0" prefWidth="372.0">
+                     <children>
+                        <Group layoutX="66.0" layoutY="28.0">
+                           <children>
+                              <JFXTextField fx:id="name" prefHeight="25.0" prefWidth="232.0" promptText="Title" />
+                              <JFXTextField fx:id="author" layoutY="34.0" prefHeight="25.0" prefWidth="232.0" promptText="Author" />
+                              <JFXTextField fx:id="publisher" layoutY="68.0" prefHeight="25.0" prefWidth="232.0" promptText="Publisher" />
+                              <JFXTextField fx:id="edition" layoutY="103.0" prefHeight="25.0" prefWidth="232.0" promptText="Edition" />
+                              <JFXTextField fx:id="year" layoutY="136.0" prefHeight="25.0" prefWidth="232.0" promptText="Year" />
+                              <JFXTextField fx:id="keyWords" layoutY="170.0" onAction="#confirm" prefHeight="25.0" prefWidth="232.0" promptText="Key Words" />
+                              <JFXTextField fx:id="price" layoutY="200.0" prefHeight="25.0" prefWidth="232.0" promptText="Price" />
+                              <JFXTextField fx:id="amount" layoutX="1.0" layoutY="232.0" prefHeight="25.0" prefWidth="232.0" promptText="Amount of Copies" />
+                              <JFXCheckBox fx:id="isBestseller" layoutY="271.0" text="Bestseller" textFill="#5a5a5a" />
+                              <JFXCheckBox fx:id="isReference" layoutX="129.0" layoutY="271.0" text="Reference" textFill="#5a5a5a" />
+                  
+                           </children>
+                        </Group>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab text="Article">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="410.0">
+                     <children>
+                        <Group layoutX="66.0" layoutY="28.0">
+                           <children>
+                              <JFXTextField fx:id="articleTitle" prefHeight="25.0" prefWidth="232.0" promptText="Title" />
+                              <JFXTextField fx:id="articleTitle" layoutY="34.0" prefHeight="25.0" prefWidth="232.0" promptText="Authors" />
+                              <JFXTextField fx:id="articleJournal" layoutY="68.0" prefHeight="25.0" prefWidth="232.0" promptText="Journal" />
+                              <JFXTextField fx:id="journalDate" layoutY="103.0" prefHeight="25.0" prefWidth="232.0" promptText="Publication Date" />
+                              <JFXTextField fx:id="journalEditors" layoutY="136.0" prefHeight="25.0" prefWidth="232.0" promptText="Editors" />
+                              <JFXTextField fx:id="journalKeyWords" layoutY="170.0" onAction="#confirm" prefHeight="25.0" prefWidth="232.0" promptText="Key Words" />
+                              <JFXTextField fx:id="journalPrice" layoutY="200.0" prefHeight="25.0" prefWidth="232.0" promptText="Price" />
+                              <JFXTextField fx:id="journalAmount" layoutX="1.0" layoutY="232.0" prefHeight="25.0" prefWidth="232.0" promptText="Amount of Copies" />
+                              <JFXCheckBox fx:id="articleIsReference" layoutX="129.0" layoutY="271.0" text="Reference" textFill="#5a5a5a" />
+                           </children>
+                        </Group>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="A/V">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="375.0">
+                     <children>
+                        <Group layoutX="61.0" layoutY="-1.0">
+                           <children>
+                              <JFXTextField fx:id="avTitle" layoutX="1.0" layoutY="70.0" prefHeight="25.0" prefWidth="232.0" promptText="Title" />
+                              <JFXTextField fx:id="avAuthor" layoutX="1.0" layoutY="103.0" prefHeight="25.0" prefWidth="232.0" promptText="Authors" />
+                              <JFXTextField fx:id="avPrice" layoutY="136.0" prefHeight="25.0" prefWidth="232.0" promptText="Price" />
+                              <JFXTextField fx:id="avKeyWords" layoutY="170.0" onAction="#confirm" prefHeight="25.0" prefWidth="232.0" promptText="Key Words" />
+                              <JFXTextField fx:id="avYear" layoutY="200.0" prefHeight="25.0" prefWidth="232.0" promptText="Year" />
+                              <JFXTextField fx:id="avAmount" layoutX="1.0" layoutY="232.0" prefHeight="25.0" prefWidth="232.0" promptText="Amount of Copies" />
+                           </children>
+                        </Group>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+         </tabs>
+      </JFXTabPane>
+      <JFXButton fx:id="cancel" layoutX="68.0" layoutY="375.0" onAction="#cancel" prefHeight="31.0" prefWidth="67.0" text="Cancel" />
+      <JFXButton fx:id="confirm" layoutX="208.0" layoutY="375.0" onAction="#confirm" prefHeight="31.0" prefWidth="74.0" text="Confirm" />
    </children>
    <stylesheets>
       <URL value="@../../../../resources/theme.css" />

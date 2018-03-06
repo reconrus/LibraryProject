@@ -1,12 +1,8 @@
 package main.java.librinno.ui.librarianScreen;
 
 import com.jfoenix.controls.JFXButton;
-import com.sun.org.apache.xpath.internal.operations.Bool;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.ObservableSet;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,15 +14,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import main.java.librinno.model.*;
-import main.java.librinno.ui.Register.Register;
-import main.java.librinno.ui.addbook.AddBook;
 import main.java.librinno.ui.assist.Assist;
 import main.java.librinno.ui.editDoc.EditDoc;
 import main.java.librinno.ui.editPatron.EditPatron;
 import main.java.librinno.ui.issue.Issue;
 
 import java.io.IOException;
-import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
@@ -215,7 +208,7 @@ public class LibrarianScreenController {
         if (book==null){
             Assist.error();
         }else {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/main/java/librinno/ui/editDoc/EditDoc.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/main/java/librinno/ui/editDoc/EditBook.fxml"));
             Parent parent = loader.load();
             EditDoc reg = (EditDoc) loader.getController();
             reg.passGUI(book);
@@ -257,7 +250,6 @@ public class LibrarianScreenController {
         Stage stage = new Stage(StageStyle.DECORATED);
         stage.setScene(new Scene(parent));
         stage.showAndWait();
-
         showTables();
     }
 

@@ -37,3 +37,8 @@
     -fx-text-fill: White;
     -fx-text: White;
 }
+
+.tab {
+    -fx-pref-width: 114
+
+} 
