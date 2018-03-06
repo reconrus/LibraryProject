@@ -144,9 +144,7 @@ public class Librarian extends User {
                         rs.getString("Author"), rs.getInt("Price"),
                         rs.getString("Keywords"), rs.getBoolean("is_reference"),
                         rs.getString("Journal"), rs.getString("Editor"),
-                        rs.getDate("Date").getYear(),
-                rs.getDate("Date").getMonth(),
-                rs.getDate("Date").getDay());
+                        rs.getString("Date"));
                 return article;
             }
         } catch (SQLException e) {
@@ -229,13 +227,13 @@ public class Librarian extends User {
     }
 
     public void add_article(String title, String author, int price, String keyWords, Boolean is_bestseller,
-                            boolean reference, String journal, String editor, int yearOfDate, int monthOfDate, int dayOfDate, int amount) throws SQLException {
+                            boolean reference, String journal, String editor, String date, int amount) throws SQLException {
         /*
          * To add article, you need to send all information about article
          * ID will be created in DB with auto_increment
          * time_left will be 999 and owner 0 - because only librarian(Id =0) can add articles
          * */
-        Article article = new Article(title, author, price, keyWords, reference, journal, editor, yearOfDate, monthOfDate, dayOfDate, "In library");
+        Article article = new Article(title, author, price, keyWords, reference, journal, editor, date, "In library");
         db.article_creation(article);
         ArrayList<Integer> arrayList = db.isArticleAlreadyExist(article);
         add_CopiesOfMaterial(arrayList.get(1), amount - 1);
@@ -400,10 +398,8 @@ public class Librarian extends User {
                 boolean is_reference = rs.getBoolean("is_reference");
                 String journal = rs.getString("Journal");
                 String editor = rs.getString("Editor");
-                int yearDate = rs.getDate("Date").getYear();
-                int monthDate = rs.getDate("Date").getMonth();
-                int dayDate = rs.getDate("Date").getDay();
-                Article article = new Article(id,name, author, price, keyWord, is_reference, journal, editor, yearDate, monthDate, dayDate);
+                String date = rs.getString("Date");
+                Article article = new Article(id,name, author, price, keyWord, is_reference, journal, editor, date);
                 articles.add(article);
             }
         } catch (SQLException e) {
@@ -516,7 +512,7 @@ public class Librarian extends User {
                 int original_id = rs.getInt("Id_of_original");
                 int copy_id = rs.getInt("Id_of_copy");
                 String status = rs.getString("Status");
-                LocalDate date = rs.getDate("Return_date").toLocalDate();
+                LocalDate returnDate = rs.getDate("Return_date").toLocalDate();
                 Statement articles_stmt = db.con.createStatement();
                 ResultSet articles_rs = articles_stmt.executeQuery("SELECT * FROM Articles where id=" + original_id);
                 while (articles_rs.next()) {
@@ -527,7 +523,7 @@ public class Librarian extends User {
                     boolean is_reference = articles_rs.getBoolean("is_reference");
                     String journal = articles_rs.getString("Journal");
                     String editor = articles_rs.getString("Editor");
-                    Article article = new Article("Article", copy_id, name, author, price, keywords, is_reference, journal, editor, date, status, user_id);
+                    Article article = new Article("Article", copy_id, name, author, price, keywords, is_reference, journal, editor, returnDate, status, user_id);
                     copies.add((Material) article);
                 }
                 Statement AV_stmt = db.con.createStatement();
@@ -537,7 +533,7 @@ public class Librarian extends User {
                     String author = AV_rs.getString("Author");
                     int price = AV_rs.getInt("Price");
                     String keywords = AV_rs.getString("Keywords");
-                    AV av = new AV("AV", copy_id, name, author, price, keywords, date, status, user_id);
+                    AV av = new AV("AV", copy_id, name, author, price, keywords, returnDate, status, user_id);
                     copies.add((Material) av);
                 }
                 Statement books_stmt = db.con.createStatement();
@@ -552,7 +548,7 @@ public class Librarian extends User {
                     boolean is_bestseller = books_rs.getBoolean("is_bestseller");
                     boolean is_reference = books_rs.getBoolean("is_reference");
                     int year = books_rs.getInt("Year");
-                    Book book = new Book("Book", copy_id, name, author, publisher, edition, price, keywords, is_bestseller, is_reference, year, 0, date, status, user_id);
+                    Book book = new Book("Book", copy_id, name, author, publisher, edition, price, keywords, is_bestseller, is_reference, year, 0, returnDate, status, user_id);
                     copies.add((Material) book);
                 }
             }

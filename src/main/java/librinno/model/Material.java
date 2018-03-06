@@ -31,8 +31,11 @@ public class Material {
     public LocalDate getReturnDate() {
         return returnDate;
     }
-    public void setReturnDate(int year,int month,int day) {
+    /*public void setReturnDate(int year,int month,int day) {
         this.returnDate =LocalDate.of(year,month,day);
+    }*/
+    public void setReturnDate(LocalDate returnDate){
+        this.returnDate = returnDate;
     }
     public String getStatus() {
         return status;

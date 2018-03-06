@@ -6,13 +6,9 @@ import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import main.java.librinno.model.Article;
-import main.java.librinno.model.Book;
 import main.java.librinno.model.Librarian;
 import main.java.librinno.ui.assist.Assist;
 
-/**
- * Created by CoolHawk on 3/6/2018.
- */
 public class EditArticleController {
 
 

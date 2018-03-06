@@ -27,6 +27,7 @@ public class Article extends Material{
     }
 
     private LocalDate date_of_return;
+
     public Article(String title,String author,int price, String keyWords,
                    boolean reference,String journal,String editor, String date,String status){
         setTitle(title);
@@ -83,6 +84,40 @@ public class Article extends Material{
         setUserId(userid);
         setType("Article");
     }
+
+    public Article(String type,int id,String title,String author,int price, String keyWords,
+                   boolean reference,String journal,String editor, LocalDate returnDate, String status, int userid){
+        setType(type);
+        setId(id);
+        setTitle(title);
+        setAuthor(author);
+        setPrice(price);
+        setKeyWords(keyWords);
+        setReference(reference);
+        setJournal(journal);
+        setEditor(editor);
+        setReturnDate(returnDate);
+        setStatus(status);
+        setUserId(userid);
+        setType("Article");
+    }
+
+
+    public Article(int id,String title,String author,int price, String keyWords,
+                   boolean reference,String journal,String editor, LocalDate returnDate,String status){
+        setId(id);
+        setTitle(title);
+        setAuthor(author);
+        setPrice(price);
+        setKeyWords(keyWords);
+        setReference(reference);
+        setJournal(journal);
+        setEditor(editor);
+        setReturnDate(returnDate);
+        setStatus(status);
+        setType("Article");
+    }
+
     public String getJournal() {
         return journal;
     }
