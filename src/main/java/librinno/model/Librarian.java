@@ -2,13 +2,10 @@ package main.java.librinno.model;
 
 import javafx.scene.control.Alert;
 
-import javax.xml.crypto.Data;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.LinkedList;
-import java.util.Scanner;
 
 /**
  * librarian of library
@@ -108,12 +105,11 @@ public class Librarian extends User {
             Statement stmt = db.con.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM Books where id="+id);
             while (rs.next()) {
-                    Book book = new Book(id, rs.getString(2),
+                return new Book(id, rs.getString(2),
                             rs.getString(3), rs.getString(4),
                             rs.getString(5), rs.getInt(6),
                             rs.getString(7), rs.getBoolean(8),
                             rs.getBoolean(9), rs.getInt(10), 1);
-                    return book;
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -393,19 +389,7 @@ public class Librarian extends User {
                         number++;
                     }
                 }
-
-                String name = rs.getString("Name");
-                String author = rs.getString("Author");
-                int price = rs.getInt("Price");
-                String keyWord = rs.getString("Keywords");
-                boolean is_reference = rs.getBoolean("is_reference");
-                String journal = rs.getString("Journal");
-                String editor = rs.getString("Editor");
-                int yearDate = rs.getDate("Date").getYear();
-                int monthDate = rs.getDate("Date").getMonth();
-                int dayDate = rs.getDate("Date").getDay();
-                Article article = new Article(id,name, author, price, keyWord, is_reference, journal, editor, yearDate, monthDate, dayDate);
-                articles.add(article);
+                articles.add(new Article(id,rs.getString("Name"), rs.getString("Author"), rs.getInt("Price"), rs.getString("Keywords"), rs.getBoolean("is_reference"), rs.getString("Journal"), rs.getString("Editor"), rs.getDate("Date").getYear(), rs.getDate("Date").getMonth(), rs.getDate("Date").getDay()));
             }
         } catch (SQLException e) {
             e.printStackTrace();

@@ -14,6 +14,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import main.java.librinno.model.*;
+import main.java.librinno.ui.ShowDocInfo.ShowAVInfo;
+import main.java.librinno.ui.ShowDocInfo.ShowArticleInfo;
 import main.java.librinno.ui.ShowDocInfo.ShowDocInfo;
 import main.java.librinno.ui.assist.Assist;
 import main.java.librinno.ui.editDoc.EditDoc;
@@ -139,6 +141,38 @@ public class LibrarianScreenController {
             ShowDocInfo controller = loader.getController();
             controller.passGUI(material);
 
+            Stage stage = new Stage(StageStyle.DECORATED);
+            stage.setScene(new Scene(parent));
+            stage.showAndWait();
+        }
+    }
+
+    @FXML
+    void showBookInfo() throws IOException {
+        Material material = tableBook.getSelectionModel().getSelectedItem();
+        String mat=material.getType();
+        if (mat.equals("AV")) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/main/java/librinno/ui/ShowDocInfo/ShowAVInfo.fxml"));
+            Parent parent = loader.load();
+            ShowAVInfo reg = loader.getController();
+            reg.passGUI(Librarian.av_by_id(material.getId()));
+            Stage stage = new Stage(StageStyle.DECORATED);
+            stage.setScene(new Scene(parent));
+            stage.showAndWait();
+        }else if (mat.equals("Book")) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/main/java/librinno/ui/ShowDocInfo/ShowDocInfo.fxml"));
+            Parent parent = loader.load();
+            ShowDocInfo reg = loader.getController();
+            reg.passGUI(Librarian.bookByID(material.getId()));
+            Stage stage = new Stage(StageStyle.DECORATED);
+            stage.setScene(new Scene(parent));
+            stage.showAndWait();
+        }
+        else {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/main/java/librinno/ui/ShowDocInfo/ShowArticleInfo.fxml"));
+            Parent parent = loader.load();
+            ShowArticleInfo reg = loader.getController();
+            reg.passGUI(Librarian.article_by_id(material.getId()));
             Stage stage = new Stage(StageStyle.DECORATED);
             stage.setScene(new Scene(parent));
             stage.showAndWait();
@@ -288,7 +322,6 @@ public class LibrarianScreenController {
     @FXML
     private void showTables(){
         showTableDocuments();
-        showTableUser();
         showTableCopy();
     }
 

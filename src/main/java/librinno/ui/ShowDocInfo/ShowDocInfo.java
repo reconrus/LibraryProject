@@ -36,10 +36,6 @@ public class ShowDocInfo {
 
     @FXML
     private Text reference;
-    @FXML
-    private Text editor;
-    @FXML
-    private Text journal;
 
     @FXML
     private Text year;
@@ -48,6 +44,8 @@ public class ShowDocInfo {
     private JFXButton close;
 
     void passGUI(Book book){
+        System.out.println(book.isIs_bestseller());
+        System.out.println(book.getPublisher());
         title.setText(book.getTitle());
         id.setText(""+book.getId());
         Author.setText(book.getAuthor());
@@ -59,29 +57,14 @@ public class ShowDocInfo {
         price.setText(book.getPrice()+"");
         edition.setText(book.getEdition());
     }
-    void passGUI(AV av){
-        title.setText(av.getTitle());
-        id.setText(""+av.getId());
-        Author.setText(av.getTitle());
-        price.setText(av.getPrice()+"");
-        keyWords.setText(av.getKeyWords());
-    }
-    void passGUI(Article article){
-        title.setText(article.getTitle());
-        id.setText(""+article.getId());
-        Author.setText(article.getTitle());
-        price.setText(article.getPrice()+"");
-        keyWords.setText(article.getKeyWords());
-        reference.setText(article.getReference()+"");
-        year.setText(article.getDate()+"");
-        journal.setText(article.getJournal());
-        journal.setText(article.getEditor());
-    }
+
 
     public void passGUI(Material material){
-        if (material.getType().equals("AV")){
-            passGUI(Librarian.bookByID(material.getId()));
-        }
+        String s=material.getType();
+        System.out.println(s);
+        if (s.equals("AV")) passGUI(Librarian.av_by_id(material.getId()));
+        else if (s.equals("Book")) passGUI(Librarian.bookByID(material.getId()));
+        else passGUI(Librarian.article_by_id(material.getId()));
     }
 
     @FXML
