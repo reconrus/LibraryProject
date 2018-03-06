@@ -399,17 +399,6 @@ public class Librarian extends User {
     }
 
     public static ArrayList<Material> get_all_books() {
-        /*
-         * Возвращает два ArrayList'а в ArrayList'е, в первом элементе лист с объетками документа
-         * во втором элементе количество копий этого документа
-         * так и в get_all_articles() и get_all_AV()
-         * тип так: |0    ||1 |
-         *          ___________
-         *       1: |book1|| 4|
-         *      2: |book2|| 7|
-         *      3: |book3|| 2|
-         * */
-
         ArrayList<Material> books = new ArrayList<Material>();
 
         try {
@@ -443,9 +432,6 @@ public class Librarian extends User {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-//        for (int i = 0; i <bookWithNumber.get(0).size() ; i++)
-//            System.out.println(bookWithNumber.get(0).get(i)+" "+bookWithNumber.get(1).get(i));
         return books;
     }
 
@@ -468,13 +454,6 @@ public class Librarian extends User {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        //вам для удобства,чтобы видели,что брать
-        //for(int i=0;i<users.size();i++){
-        // System.out.println(users.get(i).get_name()+" "+users.get(i).get_adress()+
-        // " "+users.get(i).get_number()+" "+users.get(i).get_another_card_number()+" "+users.get(i).get_type()+" "+users.get(i).get_password());
-        // }
-
-
         return users;
     }
 
