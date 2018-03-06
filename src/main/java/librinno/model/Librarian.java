@@ -302,7 +302,7 @@ public class Librarian extends User {
     }
 
 
-    public ArrayList get_all_AV() {
+    public static ArrayList get_all_AV() {
         ArrayList<ArrayList> AVWithNumber = new ArrayList<ArrayList>();
         ArrayList<AV> avs = new ArrayList<AV>();
         ArrayList<Integer> numberOfAV = new ArrayList<Integer>();
@@ -340,7 +340,7 @@ public class Librarian extends User {
         return AVWithNumber;
     }
 
-    public ArrayList get_all_articles() {
+    public static ArrayList get_all_articles() {
         ArrayList<ArrayList> articleWithNumber = new ArrayList();
         ArrayList<Article> articles = new ArrayList<Article>();
         ArrayList<Integer> numberOfArticle = new ArrayList<Integer>();
