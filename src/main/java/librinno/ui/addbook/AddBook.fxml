@@ -13,7 +13,7 @@
    <children>
       <JFXTabPane prefHeight="390.0" prefWidth="372.0" AnchorPane.bottomAnchor="75.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <tabs>
-            <Tab fx:id="bookTab" styleClass=".tab" text="Book">
+            <Tab styleClass=".tab" text="Book">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="0.0" prefWidth="372.0">
                      <children>
@@ -36,14 +36,14 @@
                   </AnchorPane>
               </content>
             </Tab>
-            <Tab fx:id="articleTab" text="Article">
+            <Tab text="Article">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="410.0">
                      <children>
                         <Group layoutX="66.0" layoutY="28.0">
                            <children>
                               <JFXTextField fx:id="articleTitle" prefHeight="25.0" prefWidth="232.0" promptText="Title" />
-                              <JFXTextField fx:id="articleAuthors" layoutY="34.0" prefHeight="25.0" prefWidth="232.0" promptText="Authors" />
+                              <JFXTextField fx:id="articleTitle" layoutY="34.0" prefHeight="25.0" prefWidth="232.0" promptText="Authors" />
                               <JFXTextField fx:id="articleJournal" layoutY="68.0" prefHeight="25.0" prefWidth="232.0" promptText="Journal" />
                               <JFXTextField fx:id="articleDate" layoutY="103.0" prefHeight="25.0" prefWidth="232.0" promptText="Publication Date" />
                               <JFXTextField fx:id="articleEditors" layoutY="136.0" prefHeight="25.0" prefWidth="232.0" promptText="Editors" />
@@ -57,7 +57,7 @@
                   </AnchorPane>
                </content>
             </Tab>
-            <Tab fx:id="AVTab" text="A/V">
+            <Tab text="A/V">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="375.0">
                      <children>

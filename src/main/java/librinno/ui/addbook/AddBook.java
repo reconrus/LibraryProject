@@ -20,28 +20,25 @@ public class AddBook {
     private Tab bookTab;
 
     @FXML
-    private JFXTextField name;
-
-    @FXML
-    private JFXTextField author;
-
-    @FXML
     private JFXTextField publisher;
+
+    @FXML
+    private JFXTextField name;
 
     @FXML
     private JFXTextField edition;
 
     @FXML
-    private JFXTextField year;
-
-    @FXML
-    private JFXTextField keyWords;
+    private JFXTextField author;
 
     @FXML
     private JFXTextField price;
 
     @FXML
-    private JFXTextField amount;
+    private JFXTextField keyWords;
+
+    @FXML
+    private JFXTextField year;
 
     @FXML
     private JFXCheckBox isBestseller;
@@ -95,12 +92,16 @@ public class AddBook {
 
     @FXML
     private JFXTextField avAmount;
+    private JFXButton confirm;
 
     @FXML
     private JFXButton cancel;
 
     @FXML
-    private JFXButton confirm;
+    private JFXTextField amount;
+
+    @FXML
+    void cancel(ActionEvent event) { Assist.closeStage(cancel);}
 
     @FXML
     void confirm(ActionEvent event) throws SQLException {
