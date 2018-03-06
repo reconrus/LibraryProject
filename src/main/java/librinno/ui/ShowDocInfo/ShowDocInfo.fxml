@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="381.0" prefWidth="315.0" stylesheets="@../../../../resources/theme.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.librinno.ui.ShowDocInfo.ShowDocInfo">
+   <children>
+      <Text fx:id="title" fill="WHITE" layoutX="96.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Title" textAlignment="CENTER" wrappingWidth="122.13671875">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <Group layoutX="31.0" layoutY="82.0">
+         <children>
+            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="ID" wrappingWidth="17.13671875" />
+            <Text fill="WHITE" layoutX="1.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Author" wrappingWidth="41.13672045432031" />
+            <Text fill="WHITE" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Publisher" wrappingWidth="56.13672221451998" />
+            <Text fill="WHITE" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edition" wrappingWidth="41.1367204785347" />
+            <Text fill="WHITE" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price" wrappingWidth="41.1367204785347" />
+            <Text fill="WHITE" layoutY="124.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Key Words" wrappingWidth="63.13672573491931" />
+            <Text fill="WHITE" layoutX="1.0" layoutY="164.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bestseller" wrappingWidth="72.13671875" />
+            <Text fill="WHITE" layoutX="1.0" layoutY="188.05078125" strokeType="OUTSIDE" strokeWidth="0.0" text="Reference" wrappingWidth="72.13671863079071" />
+            <Text fill="WHITE" layoutX="1.0" layoutY="210.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Year" wrappingWidth="63.136728554964066" />
+         </children>
+      </Group>
+      <Text fx:id="id" fill="WHITE" layoutX="116.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="174.13671875" />
+      <Text fx:id="Author" fill="WHITE" layoutX="116.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="174.13671875" />
+      <Text fx:id="publisher" fill="WHITE" layoutX="116.0" layoutY="131.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="174.13671875" />
+      <Text fx:id="edition" fill="WHITE" layoutX="116.0" layoutY="156.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="174.13671875" />
+      <Text fx:id="price" fill="WHITE" layoutX="116.0" layoutY="183.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="174.13671875" />
+      <Text fx:id="keyWords" fill="WHITE" layoutX="116.0" layoutY="207.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="174.13671724498272" />
+      <Text fx:id="bestseller" fill="WHITE" layoutX="116.0" layoutY="248.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="174.13671724498272" />
+      <Text fx:id="reference" fill="WHITE" layoutX="116.0" layoutY="271.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="174.13671724498272" />
+      <Text fx:id="year" fill="WHITE" layoutX="116.0" layoutY="292.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="174.13671724498272" />
+      <JFXButton fx:id="close" layoutX="135.0" layoutY="327.0" onAction="#close" text="Close" />
+   </children>
+</AnchorPane>
