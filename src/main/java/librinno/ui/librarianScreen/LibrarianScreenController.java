@@ -125,15 +125,15 @@ public class LibrarianScreenController {
 
     @FXML
     void showTableDocuments(){
-        id.setCellValueFactory(new PropertyValueFactory<>("id"));
-        author.setCellValueFactory(new PropertyValueFactory<>("author"));
-        title.setCellValueFactory(new PropertyValueFactory<>("title"));
+        id.setCellValueFactory(new PropertyValueFactory("id"));
+        author.setCellValueFactory(new PropertyValueFactory("author"));
+        title.setCellValueFactory(new PropertyValueFactory("title"));
         //publisher.setCellValueFactory(new PropertyValueFactory<>("publisher"));
-        avaliability.setCellValueFactory(new PropertyValueFactory<>("number"));
-        total.setCellValueFactory(new PropertyValueFactory<>("total"));
-        bestseller.setCellValueFactory(new PropertyValueFactory<>("is_bestseller"));
-        reference.setCellValueFactory(new PropertyValueFactory<>("reference"));
-        bookType.setCellValueFactory(new PropertyValueFactory<>("type"));
+        avaliability.setCellValueFactory(new PropertyValueFactory("number"));
+        total.setCellValueFactory(new PropertyValueFactory("total"));
+        bestseller.setCellValueFactory(new PropertyValueFactory("is_bestseller"));
+        reference.setCellValueFactory(new PropertyValueFactory("reference"));
+        bookType.setCellValueFactory(new PropertyValueFactory("type"));
 
         ObservableList<Material> list= FXCollections.observableArrayList();
         list.addAll(Librarian.get_all_articles());
@@ -144,11 +144,11 @@ public class LibrarianScreenController {
 
     @FXML
     void showTableCopy(){
-        idCopy.setCellValueFactory(new PropertyValueFactory<>("id"));
-        authorCopy.setCellValueFactory(new PropertyValueFactory<>("author"));
-        titleCopy.setCellValueFactory(new PropertyValueFactory<>("title"));
-        statusCopy.setCellValueFactory(new PropertyValueFactory<>("status"));
-        issuedTo.setCellValueFactory(new PropertyValueFactory<>("userId"));
+        idCopy.setCellValueFactory(new PropertyValueFactory("id"));
+        authorCopy.setCellValueFactory(new PropertyValueFactory("author"));
+        titleCopy.setCellValueFactory(new PropertyValueFactory("title"));
+        statusCopy.setCellValueFactory(new PropertyValueFactory("status"));
+        issuedTo.setCellValueFactory(new PropertyValueFactory("userId"));
 
         ObservableList<Material> list= FXCollections.observableArrayList();
         LinkedList<Material> docs= Librarian.get_all_copies();
