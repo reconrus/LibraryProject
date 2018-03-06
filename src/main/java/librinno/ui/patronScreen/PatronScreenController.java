@@ -17,10 +17,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import main.java.librinno.model.Book;
-import main.java.librinno.model.Database;
-import main.java.librinno.model.Librarian;
-import main.java.librinno.model.User;
+import main.java.librinno.model.*;
 import main.java.librinno.ui.assist.Assist;
 import main.java.librinno.ui.editPatron.EditPatron;
 import main.java.librinno.ui.issue.Issue;
@@ -60,37 +57,31 @@ public class PatronScreenController {
     @FXML
     private Text type;
     @FXML
-    private TableView<Book> tableBook;
+    private TableView<Material> tableBook;
 
     @FXML
-    private TableColumn<Book, Integer> id;
+    private TableColumn<Material, Integer> id;
 
     @FXML
-    private TableColumn<Book, String> author;
+    private TableColumn<Material, String> author;
 
     @FXML
-    private TableColumn<Book, String> title;
+    private TableColumn<Material, String> title;
 
     @FXML
-    private TableColumn<Book, String> publisher;
+    private TableColumn<Material, String> publisher;
 
     @FXML
-    private TableColumn<Book, Integer> avaliability;
-    @FXML
-    private TableColumn<Book, Boolean> bestseller;
-    @FXML
-    private TableColumn<Book, Boolean> reference;
+    private TableColumn<Material, Integer> avaliability;
 
     @FXML
     void showTableDocuments(){
-        id.setCellValueFactory(new PropertyValueFactory<Book, Integer>("id"));
-        author.setCellValueFactory(new PropertyValueFactory<Book, String>("author"));
-        title.setCellValueFactory(new PropertyValueFactory<Book, String>("title"));
-        publisher.setCellValueFactory(new PropertyValueFactory<Book, String>("publisher"));
-        avaliability.setCellValueFactory(new PropertyValueFactory<Book, Integer>("number"));
-        bestseller.setCellValueFactory(new PropertyValueFactory<Book, Boolean>("is_bestseller"));
-        reference.setCellValueFactory(new PropertyValueFactory<Book, Boolean>("reference"));
-        ArrayList<Book> books = Librarian.get_all_books();
+        id.setCellValueFactory(new PropertyValueFactory<>("id"));
+        author.setCellValueFactory(new PropertyValueFactory<>("author"));
+        title.setCellValueFactory(new PropertyValueFactory<>("title"));
+        publisher.setCellValueFactory(new PropertyValueFactory<>("publisher"));
+        avaliability.setCellValueFactory(new PropertyValueFactory<>("number"));
+        ArrayList<Material> books = Librarian.get_all_books();
 
 
         tableBook.getItems().setAll(books);
@@ -142,7 +133,7 @@ public class PatronScreenController {
 
     @FXML
     private void reserve(ActionEvent event) throws IOException {
-        Book book= tableBook.getSelectionModel().getSelectedItem();
+        Material book= tableBook.getSelectionModel().getSelectedItem();
         if(book == null){
             Assist.error();
             return;

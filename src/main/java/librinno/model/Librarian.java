@@ -321,8 +321,6 @@ public class Librarian extends User {
                 String author = rs.getString("Author");
                 int price = rs.getInt("Price");
                 String keyWord = rs.getString("Keywords");
-                boolean is_bestseller = rs.getBoolean("is_bestseller");
-                boolean is_reference = rs.getBoolean("is_reference");
                 AV av = new AV(name, author, price, keyWord);
                 avs.add(av);
             }
@@ -354,7 +352,6 @@ public class Librarian extends User {
                 int price = rs.getInt("Price");
                 String status = rs.getString("Status");
                 String keyWord = rs.getString("Keywords");
-                boolean is_bestseller = rs.getBoolean("is_bestseller");
                 boolean is_reference = rs.getBoolean("is_reference");
                 String journal = rs.getString("Journal");
                 String editor = rs.getString("Editor");
@@ -482,7 +479,6 @@ public class Librarian extends User {
                     String author = articles_rs.getString("Author");
                     int price = articles_rs.getInt("Price");
                     String keywords = articles_rs.getString("Keywords");
-                    boolean is_bestseller = articles_rs.getBoolean("is_bestseller");
                     boolean is_reference = articles_rs.getBoolean("is_reference");
                     String journal = articles_rs.getString("Journal");
                     String editor = articles_rs.getString("Editor");
@@ -496,8 +492,6 @@ public class Librarian extends User {
                     String author = AV_rs.getString("Author");
                     int price = AV_rs.getInt("Price");
                     String keywords = AV_rs.getString("Keywords");
-                    boolean is_bestseller = AV_rs.getBoolean("is_bestseller");
-                    boolean is_reference = AV_rs.getBoolean("is_reference");
                     AV av = new AV("AV",copy_id, name, author, price, keywords,date,status,user_id);
                     copies.add((Material)av);
                 }
