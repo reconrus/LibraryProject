@@ -73,7 +73,7 @@ public class EditDoc {
             bookEd.setTitle(bookTitle);
             bookEd.setPrice(Integer.parseInt(bookPrice));
             bookEd.setAuthor(bookAuthor);
-            bookEd.setEdition(Integer.parseInt(bookEdition));
+            bookEd.setEdition(bookEdition);
             bookEd.setKeyWords(bookKeyWords);
             bookEd.setPublisher(bookPublisher);
             bookEd.setIs_bestseller(bestseller);

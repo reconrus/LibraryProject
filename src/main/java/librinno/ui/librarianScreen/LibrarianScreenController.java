@@ -38,30 +38,25 @@ public class LibrarianScreenController {
     private JFXButton editDoc;
 
     @FXML
-    private TableView<Book> tableBook;
+    private TableView<Material> tableBook;
 
     @FXML
-    private TableColumn<Book, Integer> id;
+    private TableColumn<Material, Integer> id;
 
     @FXML
-    private TableColumn<Book, String> author;
+    private TableColumn<Material, String> author;
 
     @FXML
-    private TableColumn<Book, String> title;
+    private TableColumn<Material, String> title;
 
     @FXML
-    private TableColumn<Book, String> publisher;
+    private TableColumn<Material, Integer> avaliability;
 
     @FXML
-    private TableColumn<Book, Integer> avaliability;
+    private TableColumn<Material, Integer> total;
 
     @FXML
-    private TableColumn<Book, Integer> total;
-
-    @FXML
-    private TableColumn<Book, Boolean> bestseller;
-    @FXML
-    private TableColumn<Book, Boolean> reference;
+    private TableColumn<Material, String> bookType;
 
     @FXML
     private TableView<User> tableUser;
@@ -116,28 +111,27 @@ public class LibrarianScreenController {
 
     @FXML
     void showTableDocuments(){
-        id.setCellValueFactory(new PropertyValueFactory<Book, Integer>("id"));
-        author.setCellValueFactory(new PropertyValueFactory<Book, String>("author"));
-        title.setCellValueFactory(new PropertyValueFactory<Book, String>("title"));
-        publisher.setCellValueFactory(new PropertyValueFactory<Book, String>("publisher"));
-        avaliability.setCellValueFactory(new PropertyValueFactory<Book, Integer>("number"));
-        total.setCellValueFactory(new PropertyValueFactory<Book, Integer>("total"));
-        bestseller.setCellValueFactory(new PropertyValueFactory<Book, Boolean>("is_bestseller"));
-        reference.setCellValueFactory(new PropertyValueFactory<Book, Boolean>("reference"));
+        id.setCellValueFactory(new PropertyValueFactory("id"));
+        author.setCellValueFactory(new PropertyValueFactory("author"));
+        title.setCellValueFactory(new PropertyValueFactory("title"));
+        avaliability.setCellValueFactory(new PropertyValueFactory("number"));
+        total.setCellValueFactory(new PropertyValueFactory("total"));
+        bookType.setCellValueFactory(new PropertyValueFactory("type"));
 
-        ObservableList<User> list= FXCollections.observableArrayList();
-        ArrayList<Book> books = Librarian.get_all_books();
-
-        tableBook.getItems().setAll(books);
+        ObservableList<Material> list= FXCollections.observableArrayList();
+        list.addAll(Librarian.get_all_articles());
+        list.addAll(Librarian.get_all_AV());
+        list.addAll(Librarian.get_all_books());
+        tableBook.getItems().setAll(list);
     }
 
     @FXML
     void showTableCopy(){
-        idCopy.setCellValueFactory(new PropertyValueFactory<>("id"));
-        authorCopy.setCellValueFactory(new PropertyValueFactory<>("author"));
-        titleCopy.setCellValueFactory(new PropertyValueFactory<>("title"));
-        statusCopy.setCellValueFactory(new PropertyValueFactory<>("status"));
-        issuedTo.setCellValueFactory(new PropertyValueFactory<>("userId"));
+        idCopy.setCellValueFactory(new PropertyValueFactory("id"));
+        authorCopy.setCellValueFactory(new PropertyValueFactory("author"));
+        titleCopy.setCellValueFactory(new PropertyValueFactory("title"));
+        statusCopy.setCellValueFactory(new PropertyValueFactory("status"));
+        issuedTo.setCellValueFactory(new PropertyValueFactory("userId"));
 
         ObservableList<Material> list= FXCollections.observableArrayList();
         LinkedList<Material> docs= Librarian.get_all_copies();
@@ -178,8 +172,8 @@ public class LibrarianScreenController {
 
     @FXML
     void addCopy(){
-        Book book= tableBook.getSelectionModel().getSelectedItem();
-        Librarian.add_CopiesOfMaterial(book.getId(),1);
+        Material material= tableBook.getSelectionModel().getSelectedItem();
+        Librarian.add_CopiesOfMaterial(material.getId(),1);
         showTables();
     }
     @FXML
@@ -194,7 +188,7 @@ public class LibrarianScreenController {
 
     @FXML
     void deleteDoc(ActionEvent event) {
-        Book book= tableBook.getSelectionModel().getSelectedItem();
+        Material book= tableBook.getSelectionModel().getSelectedItem();
         if(book != null) {
             Librarian.delete_book_by_id(book.getId());
             showTables();
@@ -204,7 +198,7 @@ public class LibrarianScreenController {
 
     @FXML
     void editDoc() throws IOException {
-        Book book= tableBook.getSelectionModel().getSelectedItem();
+        Book book= (Book)tableBook.getSelectionModel().getSelectedItem();
         if (book==null){
             Assist.error();
         }else {
@@ -221,7 +215,7 @@ public class LibrarianScreenController {
 
     @FXML
     void issue(ActionEvent event) throws IOException {
-        Book book= tableBook.getSelectionModel().getSelectedItem();
+        Material book= tableBook.getSelectionModel().getSelectedItem();
 
         if (book==null){
             Assist.loadStageWait(getClass().getResource("/main/java/librinno/ui/issue/Issue.fxml"));

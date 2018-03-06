@@ -105,7 +105,7 @@ public class Librarian extends User {
             ResultSet rs = stmt.executeQuery("SELECT * FROM Books");
             while (rs.next()) {
                 if (rs.getInt(1)==id){
-                    Book book = new Book(id,rs.getString(2),rs.getString(3),rs.getString(4),rs.getInt(5),rs.getInt(6),rs.getString(7),rs.getBoolean(8),rs.getBoolean(9),rs.getInt(10),1);
+                    Book book = new Book(id,rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getInt(6),rs.getString(7),rs.getBoolean(8),rs.getBoolean(9),rs.getInt(10),1);
                     return book;
                 }
 
@@ -169,7 +169,7 @@ public class Librarian extends User {
         }
     }
 
-    public static void add_book(String title, String author, String publisher, int edition, int price, String keyWords, Boolean is_bestseller, boolean reference, int year, int amount) throws SQLException {
+    public static void add_book(String title, String author, String publisher, String edition, int price, String keyWords, Boolean is_bestseller, boolean reference, int year, int amount) throws SQLException {
         /*
          * To add book, you need to send all information about book
          * ID will be created in DB with auto_increment
@@ -188,14 +188,14 @@ public class Librarian extends User {
          * ID will be created in DB with auto_increment
          * time_left will be 999 and owner 0 - because only librarian(Id =0) can add articles
          * */
-        Article article = new Article(title, author, price, keyWords, is_bestseller, reference, journal, editor, yearOfDate, monthOfDate, dayOfDate, "In library");
+        Article article = new Article(title, author, price, keyWords, reference, journal, editor, yearOfDate, monthOfDate, dayOfDate, "In library");
         db.article_creation(article);
         ArrayList<Integer> arrayList = db.isArticleAlreadyExist(article);
         add_CopiesOfMaterial(arrayList.get(1), amount - 1);
     }
 
     public void add_AV(String title, String author, int price, String keyWords, Boolean is_bestseller, boolean reference, int amount) throws SQLException {
-        AV av = new AV(title, author, price, keyWords, is_bestseller, reference, "In library");
+        AV av = new AV(title, author, price, keyWords, "In library");
         db.av_creation(av);
         ArrayList<Integer> arrayList = db.isAVAlreadyExist(av);
         add_CopiesOfMaterial(arrayList.get(1), amount - 1);
@@ -248,13 +248,11 @@ public class Librarian extends User {
 
         try {
             PreparedStatement pr = db.con.prepareStatement("UPDATE AV " +
-                    "SET Name=?,Author=?,Price=?,Keywords=?,is_bestseller=?,is_reference=? where id=" + av.getId());
+                    "SET Name=?,Author=?,Price=?,Keywords=? where id=" + av.getId());
             pr.setString(1, av.getTitle());
             pr.setString(2, av.getAuthor());
             pr.setInt(3, av.getPrice());
             pr.setString(4, av.getKeyWords());
-            pr.setBoolean(5, av.isIs_bestseller());
-            pr.setBoolean(6, av.isReference());
             pr.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -264,16 +262,15 @@ public class Librarian extends User {
     public void modify_article(Article article) {
         try {
             PreparedStatement pr = db.con.prepareStatement("UPDATE Articles " +
-                    "SET Name=?,Author=?,Price=?,Keywords=?,is_bestseller=?,is_reference=?,Journal=?,Editor=?,Date=? where id=" + article.getId());
+                    "SET Name=?,Author=?,Price=?,Keywords=?,is_reference=?,Journal=?,Editor=?,Date=? where id=" + article.getId());
             pr.setString(1, article.getTitle());
             pr.setString(2, article.getAuthor());
             pr.setInt(3, article.getPrice());
             pr.setString(4, article.getKeyWords());
-            pr.setBoolean(5, article.isIs_bestseller());
-            pr.setBoolean(6, article.isReference());
-            pr.setString(7, article.getJournal());
-            pr.setString(8, article.getEditor());
-            pr.setDate(9, java.sql.Date.valueOf(article.getDate()));
+            pr.setBoolean(5, article.getReference());
+            pr.setString(6, article.getJournal());
+            pr.setString(7, article.getEditor());
+            pr.setDate(8, java.sql.Date.valueOf(article.getDate()));
             pr.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -288,7 +285,7 @@ public class Librarian extends User {
             pr.setString(1, book.getTitle());
             pr.setString(2, book.getAuthor());
             pr.setString(3, book.getPublisher());
-            pr.setInt(4, book.getEdition());
+            pr.setString(4, book.getEdition());
             pr.setInt(5, book.getPrice());
             pr.setString(6, book.getKeyWords());
             pr.setBoolean(7, book.isIs_bestseller());
@@ -302,10 +299,8 @@ public class Librarian extends User {
     }
 
 
-    public ArrayList get_all_AV() {
-        ArrayList<ArrayList> AVWithNumber = new ArrayList<ArrayList>();
-        ArrayList<AV> avs = new ArrayList<AV>();
-        ArrayList<Integer> numberOfAV = new ArrayList<Integer>();
+    public static ArrayList<Material> get_all_AV() {
+        ArrayList<Material> avs = new ArrayList<Material>();
         try {
             Statement stmt = db.con.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM AV");
@@ -326,24 +321,17 @@ public class Librarian extends User {
                 String author = rs.getString("Author");
                 int price = rs.getInt("Price");
                 String keyWord = rs.getString("Keywords");
-                boolean is_bestseller = rs.getBoolean("is_bestseller");
-                boolean is_reference = rs.getBoolean("is_reference");
-                AV av = new AV(name, author, price, keyWord, is_bestseller, is_reference);
+                AV av = new AV(id,name, author, price, keyWord);
                 avs.add(av);
-                numberOfAV.add(number);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        AVWithNumber.add(avs);
-        AVWithNumber.add(numberOfAV);
-        return AVWithNumber;
+        return avs;
     }
 
-    public ArrayList get_all_articles() {
-        ArrayList<ArrayList> articleWithNumber = new ArrayList();
-        ArrayList<Article> articles = new ArrayList<Article>();
-        ArrayList<Integer> numberOfArticle = new ArrayList<Integer>();
+    public static ArrayList<Material> get_all_articles() {
+        ArrayList<Material> articles = new ArrayList<Material>();
         try {
             Statement stmt = db.con.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM Articles");
@@ -364,26 +352,22 @@ public class Librarian extends User {
                 int price = rs.getInt("Price");
                 String status = rs.getString("Status");
                 String keyWord = rs.getString("Keywords");
-                boolean is_bestseller = rs.getBoolean("is_bestseller");
                 boolean is_reference = rs.getBoolean("is_reference");
                 String journal = rs.getString("Journal");
                 String editor = rs.getString("Editor");
                 int yearDate = rs.getDate("Date").getYear();
                 int monthDate = rs.getDate("Date").getMonth();
                 int dayDate = rs.getDate("Date").getDay();
-                Article article = new Article(name, author, price, keyWord, is_bestseller, is_reference, journal, editor, yearDate, monthDate, dayDate, status);
+                Article article = new Article(name, author, price, keyWord, is_reference, journal, editor, yearDate, monthDate, dayDate, status);
                 articles.add(article);
-                numberOfArticle.add(number);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        articleWithNumber.add(articles);
-        articleWithNumber.add(numberOfArticle);
-        return articleWithNumber;
+        return articles;
     }
 
-    public static ArrayList<Book> get_all_books() {
+    public static ArrayList<Material> get_all_books() {
         /*
          * Возвращает два ArrayList'а в ArrayList'е, в первом элементе лист с объетками документа
          * во втором элементе количество копий этого документа
@@ -395,7 +379,7 @@ public class Librarian extends User {
          *      3: |book3|| 2|
          * */
 
-        ArrayList<Book> books = new ArrayList<Book>();
+        ArrayList<Material> books = new ArrayList<Material>();
 
         try {
             Statement stmt = db.con.createStatement();
@@ -416,7 +400,7 @@ public class Librarian extends User {
                 String name = rs.getString("Name");
                 String author = rs.getString("Author");
                 String publisher = rs.getString("Publisher");
-                int edition = rs.getInt("Edition");
+                String edition = rs.getString("Edition");
                 int price = rs.getInt("Price");
                 String keyWord = rs.getString("Keywords");
                 boolean is_bestseller = rs.getBoolean("is_bestseller");
@@ -495,11 +479,10 @@ public class Librarian extends User {
                     String author = articles_rs.getString("Author");
                     int price = articles_rs.getInt("Price");
                     String keywords = articles_rs.getString("Keywords");
-                    boolean is_bestseller = articles_rs.getBoolean("is_bestseller");
                     boolean is_reference = articles_rs.getBoolean("is_reference");
                     String journal = articles_rs.getString("Journal");
                     String editor = articles_rs.getString("Editor");
-                    Article article = new Article("Article",copy_id, name, author, price, keywords, is_bestseller, is_reference, journal, editor, date,status,user_id);
+                    Article article = new Article("Article",copy_id, name, author, price, keywords, is_reference, journal, editor, date,status,user_id);
                     copies.add((Material)article);
                 }
                 Statement AV_stmt = db.con.createStatement();
@@ -509,9 +492,7 @@ public class Librarian extends User {
                     String author = AV_rs.getString("Author");
                     int price = AV_rs.getInt("Price");
                     String keywords = AV_rs.getString("Keywords");
-                    boolean is_bestseller = AV_rs.getBoolean("is_bestseller");
-                    boolean is_reference = AV_rs.getBoolean("is_reference");
-                    AV av = new AV("AV",copy_id, name, author, price, keywords, is_bestseller, is_reference,date,status,user_id);
+                    AV av = new AV("AV",copy_id, name, author, price, keywords,date,status,user_id);
                     copies.add((Material)av);
                 }
                 Statement books_stmt = db.con.createStatement();
@@ -520,7 +501,7 @@ public class Librarian extends User {
                     String name = books_rs.getString("Name");
                     String author = books_rs.getString("Author");
                     String publisher = books_rs.getString("Publisher");
-                    int edition = books_rs.getInt("Edition");
+                    String edition = books_rs.getString("Edition");
                     int price = books_rs.getInt("Price");
                     String keywords = books_rs.getString("Keywords");
                     boolean is_bestseller = books_rs.getBoolean("is_bestseller");
@@ -592,5 +573,4 @@ public class Librarian extends User {
         if (count > 1) return false;
         else return true;
     }
-
 }

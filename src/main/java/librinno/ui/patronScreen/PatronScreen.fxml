@@ -100,8 +100,6 @@
                                           <TableColumn fx:id="title" prefWidth="75.0" text="Title" />
                                           <TableColumn fx:id="publisher" prefWidth="75.0" text="Publisher" />
                                           <TableColumn fx:id="avaliability" text="Avaliability" />
-                                          <TableColumn fx:id="bestseller" prefWidth="55.0" text="Besttseller" />
-                                          <TableColumn fx:id="reference" prefWidth="75.0" text="Reference" />
                                        </columns>
                                        <columnResizePolicy>
                                           <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

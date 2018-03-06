@@ -8,6 +8,7 @@ import javafx.scene.control.Alert;
 import main.java.librinno.model.Book;
 import main.java.librinno.model.Database;
 import main.java.librinno.model.Librarian;
+import main.java.librinno.model.Material;
 import main.java.librinno.ui.assist.Assist;
 
 import java.sql.SQLException;
@@ -50,7 +51,7 @@ public class Issue {
         Assist.closeStage(give);
     }
 
-    public void passGUI(Book book){
+    public void passGUI(Material book){
         BookID.setText(String.valueOf(book.getId()));
         BookID.setEditable(false);
     }

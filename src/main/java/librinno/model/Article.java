@@ -1,7 +1,6 @@
 package main.java.librinno.model;
 
 import java.time.LocalDate;
-import java.util.Scanner;
 
 /**
  * Created by Ilnur Mamedbakov on 03.02.2018.
@@ -17,48 +16,58 @@ public class Article extends Material{
     private String editor;
     private LocalDate date;
     private String type;
+    private boolean reference;
+
+    public void setReference(boolean regerence) {
+        this.reference = regerence;
+    }
+
+    public boolean getReference(){
+        return reference;
+    }
+
     private LocalDate date_of_return;
-    public Article(String title,String author,int price, String keyWords, Boolean is_bestseller,
+    public Article(String title,String author,int price, String keyWords,
                    boolean reference,String journal,String editor,int yearOfDate,int monthOfDate,int dayOfDate,String status){
         setTitle(title);
         setAuthor(author);
         setPrice(price);
         setKeyWords(keyWords);
-        setIs_bestseller(is_bestseller);
         setReference(reference);
         setJournal(journal);
         setEditor(editor);
         setDate(yearOfDate,monthOfDate,dayOfDate);
         setStatus(status);
+        setType("Article");
     }
-    public Article(int id,String title,String author,int price, String keyWords, Boolean is_bestseller,
+    public Article(int id,String title,String author,int price, String keyWords,
                     boolean reference,String journal,String editor,int yearOfDate,int monthOfDate,int dayOfDate,String status){
         setId(id);
         setTitle(title);
         setAuthor(author);
         setPrice(price);
         setKeyWords(keyWords);
-        setIs_bestseller(is_bestseller);
         setReference(reference);
         setJournal(journal);
         setEditor(editor);
         setDate(yearOfDate,monthOfDate,dayOfDate);
         setStatus(status);
+        setType("Article");
     }
-    public Article(int id,String title,String author,int price, String keyWords, Boolean is_bestseller,
+    public Article(int id,String title,String author,int price, String keyWords,
                    boolean reference,String journal,String editor,int yearOfDate,int monthOfDate,int dayOfDate){
         setId(id);
         setTitle(title);
         setAuthor(author);
         setPrice(price);
         setKeyWords(keyWords);
-        setIs_bestseller(is_bestseller);
         setReference(reference);
         setJournal(journal);
         setEditor(editor);
         setDate(yearOfDate,monthOfDate,dayOfDate);
+        setType("Article");
     }
-    public Article(String type,int id,String title,String author,int price, String keyWords, Boolean is_bestseller,
+    public Article(String type,int id,String title,String author,int price, String keyWords,
                    boolean reference,String journal,String editor,LocalDate date, String status, int userid){
         setType(type);
         setId(id);
@@ -66,13 +75,13 @@ public class Article extends Material{
         setAuthor(author);
         setPrice(price);
         setKeyWords(keyWords);
-        setIs_bestseller(is_bestseller);
         setReference(reference);
         setJournal(journal);
         setEditor(editor);
         setDate(date);
         setStatus(status);
         setUserId(userid);
+        setType("Article");
     }
     public String getJournal() {
         return journal;
