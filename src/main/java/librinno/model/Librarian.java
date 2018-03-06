@@ -105,7 +105,7 @@ public class Librarian extends User {
             ResultSet rs = stmt.executeQuery("SELECT * FROM Books");
             while (rs.next()) {
                 if (rs.getInt(1)==id){
-                    Book book = new Book(id,rs.getString(2),rs.getString(3),rs.getString(4),rs.getInt(5),rs.getInt(6),rs.getString(7),rs.getBoolean(8),rs.getBoolean(9),rs.getInt(10),1);
+                    Book book = new Book(id,rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getInt(6),rs.getString(7),rs.getBoolean(8),rs.getBoolean(9),rs.getInt(10),1);
                     return book;
                 }
 
@@ -169,7 +169,7 @@ public class Librarian extends User {
         }
     }
 
-    public static void add_book(String title, String author, String publisher, int edition, int price, String keyWords, Boolean is_bestseller, boolean reference, int year, int amount) throws SQLException {
+    public static void add_book(String title, String author, String publisher, String edition, int price, String keyWords, Boolean is_bestseller, boolean reference, int year, int amount) throws SQLException {
         /*
          * To add book, you need to send all information about book
          * ID will be created in DB with auto_increment
@@ -288,7 +288,7 @@ public class Librarian extends User {
             pr.setString(1, book.getTitle());
             pr.setString(2, book.getAuthor());
             pr.setString(3, book.getPublisher());
-            pr.setInt(4, book.getEdition());
+            pr.setString(4, book.getEdition());
             pr.setInt(5, book.getPrice());
             pr.setString(6, book.getKeyWords());
             pr.setBoolean(7, book.isIs_bestseller());
@@ -416,7 +416,7 @@ public class Librarian extends User {
                 String name = rs.getString("Name");
                 String author = rs.getString("Author");
                 String publisher = rs.getString("Publisher");
-                int edition = rs.getInt("Edition");
+                String edition = rs.getString("Edition");
                 int price = rs.getInt("Price");
                 String keyWord = rs.getString("Keywords");
                 boolean is_bestseller = rs.getBoolean("is_bestseller");
@@ -520,7 +520,7 @@ public class Librarian extends User {
                     String name = books_rs.getString("Name");
                     String author = books_rs.getString("Author");
                     String publisher = books_rs.getString("Publisher");
-                    int edition = books_rs.getInt("Edition");
+                    String edition = books_rs.getString("Edition");
                     int price = books_rs.getInt("Price");
                     String keywords = books_rs.getString("Keywords");
                     boolean is_bestseller = books_rs.getBoolean("is_bestseller");

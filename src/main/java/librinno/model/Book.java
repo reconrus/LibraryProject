@@ -15,7 +15,7 @@ import java.util.Scanner;
 public class Book extends Material {
     private String publisher;
     private int year;
-    private int edition;
+    private String edition;
     private boolean is_bestseller;
     private int left_time;
     private boolean reference;
@@ -48,11 +48,11 @@ public class Book extends Material {
         this.year = year;
     }
 
-    public int getEdition() {
+    public String getEdition() {
         return edition;
     }
 
-    public void setEdition(int edition) {
+    public void setEdition(String edition) {
         this.edition = edition;
     }
 
@@ -72,7 +72,7 @@ public class Book extends Material {
         this.total = total;
     }
 
-    public Book(String title, String author, String publisher, int edition, int price, String keyWords, Boolean is_bestseller, boolean reference, int year, String status) {
+    public Book(String title, String author, String publisher, String edition, int price, String keyWords, Boolean is_bestseller, boolean reference, int year, String status) {
         setTitle(title);
         setAuthor(author);
         setPublisher(publisher);
@@ -85,7 +85,7 @@ public class Book extends Material {
         setStatus(status);
     }
 
-    public Book(int id, String title, String author, String publisher, int edition, int price, String keyWords, boolean is_bestseller, boolean reference, int year, int amount, String status) {
+    public Book(int id, String title, String author, String publisher, String edition, int price, String keyWords, boolean is_bestseller, boolean reference, int year, int amount, String status) {
         setId(id);
         setTitle(title);
         setAuthor(author);
@@ -100,7 +100,7 @@ public class Book extends Material {
         setStatus(status);
     }
 
-    public Book(int id, String title, String author, String publisher, int edition, int price, String keyWords, boolean is_bestseller, boolean reference, int year, int amount) {
+    public Book(int id, String title, String author, String publisher, String edition, int price, String keyWords, boolean is_bestseller, boolean reference, int year, int amount) {
         setId(id);
         setTitle(title);
         setAuthor(author);
@@ -114,7 +114,7 @@ public class Book extends Material {
         setNumber(amount);
     }
 
-    public Book(int id, String title, String author, String publisher, int edition, int price, String keyWords, boolean is_bestseller, boolean reference, int year, int amount, LocalDate date) {
+    public Book(int id, String title, String author, String publisher, String edition, int price, String keyWords, boolean is_bestseller, boolean reference, int year, int amount, LocalDate date) {
         setId(id);
         setTitle(title);
         setAuthor(author);
@@ -128,7 +128,7 @@ public class Book extends Material {
         setNumber(amount);
         setDate(date);
     }
-    public Book(String book,int id, String title, String author, String publisher, int edition, int price, String keyWords, boolean is_bestseller, boolean reference, int year, int amount, LocalDate date, String status, int userid) {
+    public Book(String book,int id, String title, String author, String publisher, String edition, int price, String keyWords, boolean is_bestseller, boolean reference, int year, int amount, LocalDate date, String status, int userid) {
         setType(book);
         setId(id);
         setTitle(title);
@@ -152,7 +152,7 @@ public class Book extends Material {
     public String getType(){
         return type;
     }
-    public Book(int id, String title, String author, String publisher, int edition, int price, String keyWords, boolean is_bestseller, boolean reference, int year, int amount, int total) {
+    public Book(int id, String title, String author, String publisher, String edition, int price, String keyWords, boolean is_bestseller, boolean reference, int year, int amount, int total) {
         setId(id);
         setTitle(title);
         setAuthor(author);
