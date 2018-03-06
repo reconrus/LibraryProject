@@ -18,12 +18,13 @@ import main.java.librinno.ui.ShowDocInfo.ShowAVInfo;
 import main.java.librinno.ui.ShowDocInfo.ShowArticleInfo;
 import main.java.librinno.ui.ShowDocInfo.ShowDocInfo;
 import main.java.librinno.ui.assist.Assist;
-import main.java.librinno.ui.editDoc.EditDoc;
+import main.java.librinno.ui.editDoc.EditAVController;
+import main.java.librinno.ui.editDoc.EditArticleController;
+import main.java.librinno.ui.editDoc.EditBookController;
 import main.java.librinno.ui.editPatron.EditPatron;
 import main.java.librinno.ui.issue.Issue;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class LibrarianScreenController {
@@ -262,24 +263,22 @@ public class LibrarianScreenController {
                 Article article = (Article) tableBook.getSelectionModel().getSelectedItem();
                 loader = new FXMLLoader(getClass().getResource("/main/java/librinno/ui/editDoc/EditArticle.fxml"));
                 parent = loader.load();
-                EditDoc reg = loader.getController();
-                //reg.passGUI(article);
+                EditArticleController reg = loader.getController();
+                reg.passGUI(article);
             }
             else if(material.getType().equals("AV")){
                 AV av = (AV) tableBook.getSelectionModel().getSelectedItem();
-                //loader = new FXMLLoader(getClass().getResource("/main/java/librinno/ui/editDoc/EditAv.fxml"));
-                loader = new FXMLLoader(getClass().getResource("/main/java/librinno/ui/ShowDocInfo/ShowAVInfo.fxml"));
+                loader = new FXMLLoader(getClass().getResource("/main/java/librinno/ui/editDoc/EditAv.fxml"));
                 parent = loader.load();
-                //EditDoc reg = loader.getController();
-                ShowDocInfo jo = loader.getController();
-                //reg.passGUI(material);
+                EditAVController reg = loader.getController();
+                reg.passGUI(av);
             }
             else { //Book
                 Book book = (Book) tableBook.getSelectionModel().getSelectedItem();
                 loader = new FXMLLoader(getClass().getResource("/main/java/librinno/ui/editDoc/EditBook.fxml"));
-                 parent = loader.load();
-                EditDoc reg = loader.getController();
-                //reg.passGUI(material);
+                parent = loader.load();
+                EditBookController reg = loader.getController();
+                reg.passGUI(book);
             }
             Stage stage = new Stage(StageStyle.DECORATED);
             stage.setScene(new Scene(parent));

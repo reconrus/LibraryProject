@@ -5,16 +5,15 @@
 <?import javafx.scene.Group?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="366.0" prefWidth="352.0" stylesheets="@../../../../resources/theme.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.librinno.ui.editDoc.EditAV">
+<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="366.0" prefWidth="352.0" stylesheets="@../../../../resources/theme.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.librinno.ui.editDoc.EditAVController">
    <children>
       <Group layoutX="61.0" layoutY="35.0">
          <children>
+            <JFXTextField fx:id="avID" layoutX="1.0" layoutY="38.0" prefHeight="25.0" prefWidth="232.0" promptText="ID" />
             <JFXTextField fx:id="avTitle" layoutX="1.0" layoutY="70.0" prefHeight="25.0" prefWidth="232.0" promptText="Title" />
             <JFXTextField fx:id="avAuthor" layoutX="1.0" layoutY="103.0" prefHeight="25.0" prefWidth="232.0" promptText="Authors" />
             <JFXTextField fx:id="avPrice" layoutY="136.0" prefHeight="25.0" prefWidth="232.0" promptText="Price" />
-            <JFXTextField fx:id="avKeyWords" layoutY="170.0" onAction="#confirm" prefHeight="25.0" prefWidth="232.0" promptText="Key Words" />
-            <JFXTextField fx:id="avYear" layoutY="200.0" prefHeight="25.0" prefWidth="232.0" promptText="Year" />
-            <JFXTextField fx:id="avID" layoutX="1.0" layoutY="38.0" prefHeight="25.0" prefWidth="232.0" promptText="ID" />
+            <JFXTextField fx:id="avKeyWords" layoutY="170.0" prefHeight="25.0" prefWidth="232.0" promptText="Key Words" />
          </children>
       </Group>
       <JFXButton fx:id="cancel" layoutX="69.0" layoutY="300.0" onAction="#cancel" prefHeight="31.0" prefWidth="67.0" text="Cancel" />
