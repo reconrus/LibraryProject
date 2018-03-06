@@ -299,10 +299,8 @@ public class Librarian extends User {
     }
 
 
-    public static ArrayList get_all_AV() {
-        ArrayList<ArrayList> AVWithNumber = new ArrayList<ArrayList>();
-        ArrayList<AV> avs = new ArrayList<AV>();
-        ArrayList<Integer> numberOfAV = new ArrayList<Integer>();
+    public ArrayList<Material> get_all_AV() {
+        ArrayList<Material> avs = new ArrayList<Material>();
         try {
             Statement stmt = db.con.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM AV");
@@ -327,20 +325,15 @@ public class Librarian extends User {
                 boolean is_reference = rs.getBoolean("is_reference");
                 AV av = new AV(name, author, price, keyWord);
                 avs.add(av);
-                numberOfAV.add(number);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        AVWithNumber.add(avs);
-        AVWithNumber.add(numberOfAV);
-        return AVWithNumber;
+        return avs;
     }
 
-    public static ArrayList get_all_articles() {
-        ArrayList<ArrayList> articleWithNumber = new ArrayList();
-        ArrayList<Article> articles = new ArrayList<Article>();
-        ArrayList<Integer> numberOfArticle = new ArrayList<Integer>();
+    public ArrayList<Material> get_all_articles() {
+        ArrayList<Material> articles = new ArrayList<Material>();
         try {
             Statement stmt = db.con.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM Articles");
@@ -370,17 +363,14 @@ public class Librarian extends User {
                 int dayDate = rs.getDate("Date").getDay();
                 Article article = new Article(name, author, price, keyWord, is_reference, journal, editor, yearDate, monthDate, dayDate, status);
                 articles.add(article);
-                numberOfArticle.add(number);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        articleWithNumber.add(articles);
-        articleWithNumber.add(numberOfArticle);
-        return articleWithNumber;
+        return articles;
     }
 
-    public static ArrayList<Book> get_all_books() {
+    public static ArrayList<Material> get_all_books() {
         /*
          * Возвращает два ArrayList'а в ArrayList'е, в первом элементе лист с объетками документа
          * во втором элементе количество копий этого документа
@@ -392,7 +382,7 @@ public class Librarian extends User {
          *      3: |book3|| 2|
          * */
 
-        ArrayList<Book> books = new ArrayList<Book>();
+        ArrayList<Material> books = new ArrayList<Material>();
 
         try {
             Statement stmt = db.con.createStatement();
@@ -589,5 +579,4 @@ public class Librarian extends User {
         if (count > 1) return false;
         else return true;
     }
-
 }
