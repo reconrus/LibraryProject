@@ -16,12 +16,14 @@ public class AV extends Material {
         setPrice(price);
         setKeyWords(keyWords);
         setStatus(status);
+        setType("AV");
     }
     public AV(String title,String author,int price, String keyWords){
         setTitle(title);
         setAuthor(author);
         setPrice(price);
         setKeyWords(keyWords);
+        setType("AV");
     }
     public AV(String av, int id, String title, String author, int price, String keyWords,LocalDate date,String status,int userid){
         setType(av);
@@ -33,7 +35,7 @@ public class AV extends Material {
         setDate(date);
         setStatus(status);
         setUserId(userid);
-
+        setType("AV");
     }
     public AV(int id,String title,String author,int price, String keyWords ){
         setId(id);
@@ -41,6 +43,7 @@ public class AV extends Material {
         setAuthor(author);
         setPrice(price);
         setKeyWords(keyWords);
+        setType("AV");
     }
     public LocalDate getDate() {
         return date;

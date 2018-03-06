@@ -321,7 +321,7 @@ public class Librarian extends User {
                 String author = rs.getString("Author");
                 int price = rs.getInt("Price");
                 String keyWord = rs.getString("Keywords");
-                AV av = new AV(name, author, price, keyWord);
+                AV av = new AV(id,name, author, price, keyWord);
                 avs.add(av);
             }
         } catch (SQLException e) {

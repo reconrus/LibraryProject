@@ -97,6 +97,7 @@ public class Book extends Material {
         setReference(reference);
         setYear(year);
         setStatus(status);
+        setType("Book");
     }
 
     public Book(int id, String title, String author, String publisher, String edition, int price, String keyWords, boolean is_bestseller, boolean reference, int year, int amount, String status) {
@@ -112,6 +113,7 @@ public class Book extends Material {
         setYear(year);
         setNumber(amount);
         setStatus(status);
+        setType("Book");
     }
 
     public Book(int id, String title, String author, String publisher, String edition, int price, String keyWords, boolean is_bestseller, boolean reference, int year, int amount) {
@@ -126,6 +128,7 @@ public class Book extends Material {
         setReference(reference);
         setYear(year);
         setNumber(amount);
+        setType("Book");
     }
 
     public Book(int id, String title, String author, String publisher, String edition, int price, String keyWords, boolean is_bestseller, boolean reference, int year, int amount, LocalDate date) {
@@ -141,6 +144,7 @@ public class Book extends Material {
         setYear(year);
         setNumber(amount);
         setDate(date);
+        setType("Book");
     }
     public Book(String book,int id, String title, String author, String publisher, String edition, int price, String keyWords, boolean is_bestseller, boolean reference, int year, int amount, LocalDate date, String status, int userid) {
         setType(book);
@@ -158,6 +162,7 @@ public class Book extends Material {
         setDate(date);
         setStatus(status);
         setUserId(userid);
+        setType("Book");
     }
 
     public Book(int id, String title, String author, String publisher, String edition, int price, String keyWords, boolean is_bestseller, boolean reference, int year, int amount, int total) {
@@ -174,6 +179,7 @@ public class Book extends Material {
         setNumber(amount);
         setDate(date);
         setTotal(total);
+        setType("Book");
     }
 }
 

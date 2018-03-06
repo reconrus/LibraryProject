@@ -1,9 +1,6 @@
 package main.java.librinno.ui.patronScreen;
 
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXTreeTableView;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
@@ -19,9 +16,6 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import main.java.librinno.model.*;
 import main.java.librinno.ui.assist.Assist;
-import main.java.librinno.ui.editPatron.EditPatron;
-import main.java.librinno.ui.issue.Issue;
-
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -76,11 +70,11 @@ public class PatronScreenController {
 
     @FXML
     void showTableDocuments(){
-        id.setCellValueFactory(new PropertyValueFactory<>("id"));
-        author.setCellValueFactory(new PropertyValueFactory<>("author"));
-        title.setCellValueFactory(new PropertyValueFactory<>("title"));
-        publisher.setCellValueFactory(new PropertyValueFactory<>("publisher"));
-        avaliability.setCellValueFactory(new PropertyValueFactory<>("number"));
+        id.setCellValueFactory(new PropertyValueFactory("id"));
+        author.setCellValueFactory(new PropertyValueFactory("author"));
+        title.setCellValueFactory(new PropertyValueFactory("title"));
+        publisher.setCellValueFactory(new PropertyValueFactory("publisher"));
+        avaliability.setCellValueFactory(new PropertyValueFactory("number"));
         ArrayList<Material> books = Librarian.get_all_books();
 
 

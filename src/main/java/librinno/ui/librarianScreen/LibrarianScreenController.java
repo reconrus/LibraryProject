@@ -57,18 +57,11 @@ public class LibrarianScreenController {
     private TableColumn<Material, String> title;
 
     @FXML
-    private TableColumn<Material, String> publisher;
-
-    @FXML
     private TableColumn<Material, Integer> avaliability;
 
     @FXML
     private TableColumn<Material, Integer> total;
 
-    @FXML
-    private TableColumn<Material, Boolean> bestseller;
-    @FXML
-    private TableColumn<Material, Boolean> reference;
     @FXML
     private TableColumn<Material, String> bookType;
 
@@ -128,11 +121,8 @@ public class LibrarianScreenController {
         id.setCellValueFactory(new PropertyValueFactory("id"));
         author.setCellValueFactory(new PropertyValueFactory("author"));
         title.setCellValueFactory(new PropertyValueFactory("title"));
-        //publisher.setCellValueFactory(new PropertyValueFactory<>("publisher"));
         avaliability.setCellValueFactory(new PropertyValueFactory("number"));
         total.setCellValueFactory(new PropertyValueFactory("total"));
-        bestseller.setCellValueFactory(new PropertyValueFactory("is_bestseller"));
-        reference.setCellValueFactory(new PropertyValueFactory("reference"));
         bookType.setCellValueFactory(new PropertyValueFactory("type"));
 
         ObservableList<Material> list= FXCollections.observableArrayList();
