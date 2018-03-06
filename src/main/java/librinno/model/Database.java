@@ -223,6 +223,28 @@ public class Database {
         arrayList.add(0);
         return arrayList;
     }
+    public ArrayList isUserAlreadyExist(User user) throws SQLException {
+        /*
+         * Этот метод чекает, есть ли у нас в библиотеке такая книга
+         * возвращает лист, В первом элементе: int 1 - если да(уже есть такая книга), 0 - если нет
+         * на втором элементе возвращается ID найденной книги(если она уже есть, в противном случае ничего там нет)
+         * */
+        ArrayList <Integer>arrayList = new ArrayList();
+        Statement stmt = con.createStatement();
+        ResultSet rs;
+        rs = stmt.executeQuery("SELECT * FROM Users_of_the_library");
+        while (rs.next()){
+            if (rs.getString(1).equals(user.get_name()) && rs.getString(2).equals(user.get_adress())
+                    && rs.getString(3).equals(user.getPhone_Number())
+                    && rs.getString(5).equals(user.get_type()) && rs.getString(6).equals( user.get_password())){
+                arrayList.add(1); // 1 = true
+                arrayList.add(rs.getInt(4));//save ID of founded book
+                return arrayList;
+            }
+        }
+        arrayList.add(0);
+        return arrayList;
+    }
     public User get_information_about_the_user (int id) throws SQLException{
         Statement stmt=con.createStatement();
         ResultSet rs=stmt.executeQuery("SELECT * FROM Users_of_the_library WHERE Card_number="+id);
