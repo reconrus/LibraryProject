@@ -244,7 +244,7 @@ public class LibrarianScreenController {
     void deleteDoc(ActionEvent event) {
         Material book= tableBook.getSelectionModel().getSelectedItem();
         if(book != null) {
-            Librarian.delete_book_by_id(book.getId());
+            Librarian.deleteDoc(book);
             showTables();
         }
     }

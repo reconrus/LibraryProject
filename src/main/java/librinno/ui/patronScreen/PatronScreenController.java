@@ -99,7 +99,7 @@ public class PatronScreenController {
         address.setText(patron.get_adress());
         type.setText(patron.get_type());
         user=patron;
-        bookCount.setText(""+Librarian.get_number_of_all_copies_taken_by_user(patron.getCard_number()));
+        bookCount.setText(""+Librarian.getNumberOfAllCopiesTakenByUser(patron.getCard_number()));
     }
 
     @FXML
@@ -116,13 +116,13 @@ public class PatronScreenController {
         stage.showAndWait();
 
         showTableDocuments();
-        bookCount.setText(""+Librarian.get_number_of_all_copies_taken_by_user(user.getCard_number()));
+        bookCount.setText(""+Librarian.getNumberOfAllCopiesTakenByUser(user.getCard_number()));
     }
 
     @FXML
     void refresh(){
         showTableDocuments();
-        bookCount.setText(""+Librarian.get_number_of_all_copies_taken_by_user(user.getCard_number()));
+        bookCount.setText(""+Librarian.getNumberOfAllCopiesTakenByUser(user.getCard_number()));
     }
 
     @FXML

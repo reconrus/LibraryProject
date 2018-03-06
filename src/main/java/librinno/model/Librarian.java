@@ -103,23 +103,24 @@ public class Librarian extends User {
     public static Book bookByID(int id) {
         try {
             Statement stmt = db.con.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM Books where id="+id);
+            ResultSet rs = stmt.executeQuery("SELECT * FROM Books where id=" + id);
             while (rs.next()) {
                 return new Book(id, rs.getString(2),
-                            rs.getString(3), rs.getString(4),
-                            rs.getString(5), rs.getInt(6),
-                            rs.getString(7), rs.getBoolean(8),
-                            rs.getBoolean(9), rs.getInt(10), 1);
+                        rs.getString(3), rs.getString(4),
+                        rs.getString(5), rs.getInt(6),
+                        rs.getString(7), rs.getBoolean(8),
+                        rs.getBoolean(9), rs.getInt(10), 1);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
     }
-    public static AV av_by_id(int id){
+
+    public static AV av_by_id(int id) {
         try {
             Statement stmt = db.con.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM AV where id="+id);
+            ResultSet rs = stmt.executeQuery("SELECT * FROM AV where id=" + id);
             while (rs.next()) {
                 AV av = new AV(id, rs.getString("Name"),
                         rs.getString("Author"), rs.getInt("Price"),
@@ -131,10 +132,11 @@ public class Librarian extends User {
         }
         return null;
     }
-    public static Article article_by_id(int id){
+
+    public static Article article_by_id(int id) {
         try {
             Statement stmt = db.con.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM Articles where id="+id);
+            ResultSet rs = stmt.executeQuery("SELECT * FROM Articles where id=" + id);
             while (rs.next()) {
                 Article article = new Article(id, rs.getString("Name"),
                         rs.getString("Author"), rs.getInt("Price"),
@@ -148,16 +150,17 @@ public class Librarian extends User {
         }
         return null;
     }
+
     public static void delete_user_by_id(int user_id) {
         try {
             Database db = new Database();
             Statement stmt = db.con.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM Copy where Owner=" + user_id);
             if (rs.next()) {
-              Alert alert= new Alert(Alert.AlertType.ERROR);
-              alert.setHeaderText("Deletion");
-              alert.setContentText("User has taken materials");
-              alert.show();
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText("Deletion");
+                alert.setContentText("User has taken materials");
+                alert.show();
             } else {
                 PreparedStatement pr = db.con.prepareStatement("DELETE from Users_of_the_library WHERE Card_number=" + user_id);
                 pr.executeUpdate();
@@ -193,7 +196,7 @@ public class Librarian extends User {
                 while (rs.next()) {
                     if (rs.getInt(1) == id) {
                         for (int i = 0; i < number; i++) {
-                            PreparedStatement prst = db.con.prepareStatement("insert into Copy (id_of_original,Owner,Time_left) values(?,?,?)");
+                            PreparedStatement prst = db.con.prepareStatement("INSERT INTO Copy (id_of_original,Owner,Time_left) VALUES(?,?,?)");
                             prst.setInt(1, id);
                             prst.setInt(2, 0);
                             prst.setInt(3, 999);
@@ -242,7 +245,7 @@ public class Librarian extends User {
         add_CopiesOfMaterial(arrayList.get(1), amount - 1);
     }
 
-    public void delete_AV_by_id(int id) {
+    public static void deleteAVById(int id) {
         try {
             PreparedStatement pr = db.con.prepareStatement("DELETE from AV WHERE id=" + id);
             pr.executeUpdate();
@@ -262,7 +265,7 @@ public class Librarian extends User {
         }
     }
 
-    public static void delete_book_by_id(int id) {
+    public static void deleteBookById(int id) {
 
         try {
             PreparedStatement pr = db.con.prepareStatement("DELETE from Books WHERE id=" + id);
@@ -274,7 +277,7 @@ public class Librarian extends User {
         }
     }
 
-    public void delete_article_by_id(int id) {
+    public static void deleteArticleById(int id) {
         try {
             PreparedStatement pr = db.con.prepareStatement("DELETE from Articles WHERE id=" + id);
             pr.executeUpdate();
@@ -387,7 +390,7 @@ public class Librarian extends User {
                     }
                 }
 
-                articles.add(new Article(id,rs.getString("Name"), rs.getString("Author"), rs.getInt("Price"), rs.getString("Keywords"), rs.getBoolean("is_reference"), rs.getString("Journal"), rs.getString("Editor"), rs.getString("Date")));
+                articles.add(new Article(id, rs.getString("Name"), rs.getString("Author"), rs.getInt("Price"), rs.getString("Keywords"), rs.getBoolean("is_reference"), rs.getString("Journal"), rs.getString("Editor"), rs.getString("Date")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -434,7 +437,7 @@ public class Librarian extends User {
                 boolean is_bestseller = rs.getBoolean("is_bestseller");
                 boolean is_reference = rs.getBoolean("is_reference");
                 int year = rs.getInt("Year");
-                Book book = new Book(id, name, author, publisher, edition, price, keyWord, is_bestseller, is_reference, year, get_number_of_copies_of_book(id), get_number_of_copies_of_book_with_taken(id));
+                Book book = new Book(id, name, author, publisher, edition, price, keyWord, is_bestseller, is_reference, year, getNumberOfCopiesOfBook(id), getNumberOfCopiesOfWithTaken(id));
                 books.add(book);
             }
         } catch (SQLException e) {
@@ -450,7 +453,7 @@ public class Librarian extends User {
         LinkedList<User> users = new LinkedList<User>();
         try {
             Statement stmt = db.con.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM Users_of_the_library WHERE Type='Student' or Type='Faculty'");
+            ResultSet rs = stmt.executeQuery("SELECT * FROM Users_of_the_library WHERE Type='Student' OR Type='Faculty'");
 
             while (rs.next()) {
                 String name = rs.getString("Name");
@@ -475,7 +478,7 @@ public class Librarian extends User {
         return users;
     }
 
-    public static int get_number_of_all_copies_taken_by_user(int user_id) {
+    public static int getNumberOfAllCopiesTakenByUser(int user_id) {
         int copies = 0;
         try {
             Statement stmt = db.con.createStatement();
@@ -546,7 +549,7 @@ public class Librarian extends User {
     }
 
 
-    public static int get_number_of_copies_of_book(int book_id) {
+    public static int getNumberOfCopiesOfBook(int book_id) {
         int copies = 0;
         try {
             Statement stmt = db.con.createStatement();
@@ -560,7 +563,7 @@ public class Librarian extends User {
         return copies;
     }
 
-    public static int get_number_of_copies_of_book_with_taken(int book_id) {
+    public static int getNumberOfCopiesOfWithTaken(int book_id) {
         int copies = 0;
         try {
             Statement stmt = db.con.createStatement();
@@ -583,7 +586,7 @@ public class Librarian extends User {
             while (rs.next()) {
                 int owner_id = rs.getInt("Owner");
                 attended_id.add(owner_id);
-                if (number_of_meetings(attended_id, owner_id)) {
+                if (numberOfMeetings(attended_id, owner_id)) {
                     LinkedList<Material> owner_copies = get_all_copies_taken_by_user(owner_id);
                     copies.addAll(owner_copies);
                 }
@@ -594,7 +597,7 @@ public class Librarian extends User {
         return copies;
     }
 
-    private static boolean number_of_meetings(LinkedList<Integer> l, int id) {
+    private static boolean numberOfMeetings(LinkedList<Integer> l, int id) {
         int count = 0;
         for (int i = 0; i < l.size(); i++) {
             if (l.get(i) == id)
@@ -602,5 +605,11 @@ public class Librarian extends User {
         }
         if (count > 1) return false;
         else return true;
+    }
+
+    public static void deleteDoc(Material material) {
+        if (material.getType().equals("Book")) deleteBookById(material.getId());
+        else if (material.getType().equals("AV")) deleteAVById(material.getId());
+        else deleteArticleById(material.getId());
     }
 }
