@@ -397,7 +397,6 @@ public class Librarian extends User {
                 String name = rs.getString("Name");
                 String author = rs.getString("Author");
                 int price = rs.getInt("Price");
-                String status = rs.getString("Status");
                 String keyWord = rs.getString("Keywords");
                 boolean is_reference = rs.getBoolean("is_reference");
                 String journal = rs.getString("Journal");
@@ -405,7 +404,7 @@ public class Librarian extends User {
                 int yearDate = rs.getDate("Date").getYear();
                 int monthDate = rs.getDate("Date").getMonth();
                 int dayDate = rs.getDate("Date").getDay();
-                Article article = new Article(name, author, price, keyWord, is_reference, journal, editor, yearDate, monthDate, dayDate, status);
+                Article article = new Article(id,name, author, price, keyWord, is_reference, journal, editor, yearDate, monthDate, dayDate);
                 articles.add(article);
             }
         } catch (SQLException e) {
