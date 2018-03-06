@@ -20,7 +20,7 @@ public class Book extends Material {
     private int left_time;
     private boolean reference;
     private int total;
-
+    private String type;
     @Override
     public LocalDate getDate() {
         return date;
@@ -128,7 +128,8 @@ public class Book extends Material {
         setNumber(amount);
         setDate(date);
     }
-    public Book(int id, String title, String author, String publisher, int edition, int price, String keyWords, boolean is_bestseller, boolean reference, int year, int amount, LocalDate date, String status, int userid) {
+    public Book(String book,int id, String title, String author, String publisher, int edition, int price, String keyWords, boolean is_bestseller, boolean reference, int year, int amount, LocalDate date, String status, int userid) {
+        setType(book);
         setId(id);
         setTitle(title);
         setAuthor(author);
@@ -145,6 +146,12 @@ public class Book extends Material {
         setUserId(userid);
     }
 
+    public void setType(String type){
+        this.type=type;
+    }
+    public String getType(){
+        return type;
+    }
     public Book(int id, String title, String author, String publisher, int edition, int price, String keyWords, boolean is_bestseller, boolean reference, int year, int amount, int total) {
         setId(id);
         setTitle(title);

@@ -25,8 +25,8 @@ public class Main {
         //l.get_all_users();
        //System.out.println(l.get_all_copies_taken_by_user(1));
        // System.out.println(l.get_all_copies_taken_by_user(1));
-        for (int i = 0; i < Librarian.get_all_copies_taken_by_user(35).size(); i++) {
-               System.out.println(Librarian.get_all_copies_taken_by_user(35).get(i).getDate());
+        for (int i = 0; i < Librarian.get_all_copies_taken_by_user(1).size(); i++) {
+               System.out.println(Librarian.get_all_copies_taken_by_user(1).get(i).getType());
         }
       //  System.out.println(l.get_all_copies().size());
        // System.out.println(l.get_all_copies());

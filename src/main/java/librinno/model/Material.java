@@ -28,6 +28,7 @@ public class Material {
     public String status;
     private LocalDate date;
     private int userId;
+    private String type;
     public LocalDate getDate() {
         return date;
     }
@@ -89,6 +90,12 @@ public class Material {
         this.reference = reference;
     }
 
+    public void setType(String type){
+        this.type=type;
+    }
+    public String getType(){
+        return type;
+    }
     public void setNumber(int number){ this.number = number; }
     public int getNumber(){ return this.number;}
     public void setUserId(int userId){ this.userId = userId; }

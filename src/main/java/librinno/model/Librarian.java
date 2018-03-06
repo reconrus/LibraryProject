@@ -488,32 +488,32 @@ public class Librarian extends User {
                 int copy_id = rs.getInt("Id_of_copy");
                 String status=rs.getString("Status");
                 LocalDate date = rs.getDate("Return_date").toLocalDate();
-//                Statement articles_stmt = db.con.createStatement();
-//                ResultSet articles_rs = articles_stmt.executeQuery("SELECT * FROM Articles where id=" + original_id);
-//                while (articles_rs.next()) {
-//                    String name = articles_rs.getString("Name");
-//                    String author = articles_rs.getString("Author");
-//                    int price = articles_rs.getInt("Price");
-//                    String keywords = articles_rs.getString("Keywords");
-//                    boolean is_bestseller = articles_rs.getBoolean("is_bestseller");
-//                    boolean is_reference = articles_rs.getBoolean("is_reference");
-//                    String journal = articles_rs.getString("Journal");
-//                    String editor = articles_rs.getString("Editor");
-//                    Article article = new Article(copy_id, name, author, price, keywords, is_bestseller, is_reference, journal, editor, yearDate, monthDate, dayDate);
-//                    copies.add((Material)article);
-//                }
-//                Statement AV_stmt = db.con.createStatement();
-//                ResultSet AV_rs = AV_stmt.executeQuery("SELECT * FROM AV where id=" + original_id);
-//                while (AV_rs.next()) {
-//                    String name = AV_rs.getString("Name");
-//                    String author = AV_rs.getString("Author");
-//                    int price = AV_rs.getInt("Price");
-//                    String keywords = AV_rs.getString("Keywords");
-//                    boolean is_bestseller = AV_rs.getBoolean("is_bestseller");
-//                    boolean is_reference = AV_rs.getBoolean("is_reference");
-//                    AV av = new AV(copy_id, name, author, price, keywords, is_bestseller, is_reference);
-//                    copies.add((Material)av);
-//                }
+                Statement articles_stmt = db.con.createStatement();
+                ResultSet articles_rs = articles_stmt.executeQuery("SELECT * FROM Articles where id=" + original_id);
+                while (articles_rs.next()) {
+                    String name = articles_rs.getString("Name");
+                    String author = articles_rs.getString("Author");
+                    int price = articles_rs.getInt("Price");
+                    String keywords = articles_rs.getString("Keywords");
+                    boolean is_bestseller = articles_rs.getBoolean("is_bestseller");
+                    boolean is_reference = articles_rs.getBoolean("is_reference");
+                    String journal = articles_rs.getString("Journal");
+                    String editor = articles_rs.getString("Editor");
+                    Article article = new Article("Article",copy_id, name, author, price, keywords, is_bestseller, is_reference, journal, editor, date,status,user_id);
+                    copies.add((Material)article);
+                }
+                Statement AV_stmt = db.con.createStatement();
+                ResultSet AV_rs = AV_stmt.executeQuery("SELECT * FROM AV where id=" + original_id);
+                while (AV_rs.next()) {
+                    String name = AV_rs.getString("Name");
+                    String author = AV_rs.getString("Author");
+                    int price = AV_rs.getInt("Price");
+                    String keywords = AV_rs.getString("Keywords");
+                    boolean is_bestseller = AV_rs.getBoolean("is_bestseller");
+                    boolean is_reference = AV_rs.getBoolean("is_reference");
+                    AV av = new AV("AV",copy_id, name, author, price, keywords, is_bestseller, is_reference,date,status,user_id);
+                    copies.add((Material)av);
+                }
                 Statement books_stmt = db.con.createStatement();
                 ResultSet books_rs = books_stmt.executeQuery("SELECT * FROM Books where id=" + original_id);
                 while (books_rs.next()) {
@@ -526,7 +526,7 @@ public class Librarian extends User {
                     boolean is_bestseller = books_rs.getBoolean("is_bestseller");
                     boolean is_reference = books_rs.getBoolean("is_reference");
                     int year = books_rs.getInt("Year");
-                    Book book = new Book(copy_id, name, author, publisher, edition, price, keywords, is_bestseller, is_reference, year, 0,date,status,user_id);
+                    Book book = new Book("Book",copy_id, name, author, publisher, edition, price, keywords, is_bestseller, is_reference, year, 0,date,status,user_id);
                     copies.add((Material)book);
                 }
             }

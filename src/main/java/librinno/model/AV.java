@@ -1,5 +1,6 @@
 package main.java.librinno.model;
 
+import java.time.LocalDate;
 import java.util.Scanner;
 
 /**
@@ -8,6 +9,8 @@ import java.util.Scanner;
  * AV already have all propirties in Class Material
  */
 public class AV extends Material {
+    private LocalDate date;
+    private String type;
     public AV(String title,String author,int price, String keyWords, Boolean is_bestseller,
                boolean reference,String status){
         setTitle(title);
@@ -27,8 +30,9 @@ public class AV extends Material {
         setIs_bestseller(is_bestseller);
         setReference(reference);
     }
-    public AV(int id,String title,String author,int price, String keyWords, Boolean is_bestseller,
-               boolean reference,String status){
+    public AV(String av, int id, String title, String author, int price, String keyWords, Boolean is_bestseller,
+              boolean reference, LocalDate date,String status,int userid){
+        setType(av);
         setId(id);
         setTitle(title);
         setAuthor(author);
@@ -36,7 +40,10 @@ public class AV extends Material {
         setKeyWords(keyWords);
         setIs_bestseller(is_bestseller);
         setReference(reference);
+        setDate(date);
         setStatus(status);
+        setUserId(userid);
+
     }
     public AV(int id,String title,String author,int price, String keyWords, Boolean is_bestseller,
               boolean reference){
@@ -47,5 +54,18 @@ public class AV extends Material {
         setKeyWords(keyWords);
         setIs_bestseller(is_bestseller);
         setReference(reference);
+    }
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+    public void setType(String type){
+        this.type=type;
+    }
+    public String getType(){
+        return type;
     }
 }
