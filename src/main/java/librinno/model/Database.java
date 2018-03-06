@@ -132,7 +132,7 @@ public class Database {
                 prst.setString(1, book.getTitle());
                 prst.setString(2, book.getAuthor());
                 prst.setString(3, book.getPublisher());
-                prst.setInt   (4, book.getEdition());
+                prst.setString   (4, book.getEdition());
                 prst.setInt   (5, book.getPrice());
                 prst.setString(6, book.getKeyWords());
                 prst.setBoolean(7, book.isIs_bestseller());
@@ -216,7 +216,7 @@ public class Database {
         rs = stmt.executeQuery("SELECT * FROM Books");
         while (rs.next()){
             if (rs.getString(2).equals(book.getTitle()) && rs.getString(3).equals(book.getAuthor()) && rs.getString(4).equals(book.getPublisher())
-            && rs.getInt(5) == book.getEdition() && rs.getInt(6) == book.getPrice() && rs.getString(7).equals(book.getKeyWords())
+            && rs.getString(5) == book.getEdition() && rs.getInt(6) == book.getPrice() && rs.getString(7).equals(book.getKeyWords())
                     && rs.getBoolean(8) == book.isIs_bestseller() && rs.getBoolean(9) == book.isReference() && rs.getInt(10) == book.getYear()){
                 arrayList.add(1); // 1 = true
                 arrayList.add(rs.getInt(1));//save ID of founded book
