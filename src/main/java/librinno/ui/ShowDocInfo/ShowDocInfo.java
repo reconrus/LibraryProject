@@ -68,7 +68,7 @@ public class ShowDocInfo {
     }
 
     @FXML
-    public void cancel(ActionEvent event){
+    public void cancel(){
         Assist.closeStage(close);
     }
 

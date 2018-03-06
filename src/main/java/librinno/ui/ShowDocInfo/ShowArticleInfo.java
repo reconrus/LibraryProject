@@ -1,8 +1,12 @@
 package main.java.librinno.ui.ShowDocInfo;
 
+import com.jfoenix.controls.JFXButton;
 import javafx.fxml.FXML;
 import javafx.scene.text.Text;
 import main.java.librinno.model.Article;
+import main.java.librinno.ui.assist.Assist;
+
+import javax.swing.*;
 
 public class ShowArticleInfo {
     @FXML
@@ -27,6 +31,8 @@ public class ShowArticleInfo {
     private Text journal;
     @FXML
     private Text year;
+    @FXML
+    public JFXButton close;
 
     public void passGUI(Article article){
         title.setText(article.getTitle());
@@ -38,5 +44,10 @@ public class ShowArticleInfo {
         year.setText(article.getDate()+"");
         journal.setText(article.getJournal());
         editor.setText(article.getEditor());
+    }
+    @FXML
+    public void cancel(){
+        Assist.closeStage(close);
+
     }
 }

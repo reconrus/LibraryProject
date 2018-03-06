@@ -19,7 +19,6 @@ public class Book extends Material {
     private int left_time;
     private boolean reference;
     private int total;
-    @Override
     public LocalDate getDate() {
         return date;
     }
