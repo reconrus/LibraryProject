@@ -54,24 +54,26 @@ public class AddBook {
 
     @FXML
     private JFXTextField articleTitle;
+    @FXML
+    private JFXTextField articleAuthors;
 
     @FXML
     private JFXTextField articleJournal;
 
     @FXML
-    private JFXTextField journalDate;
+    private JFXTextField articleDate;
 
     @FXML
-    private JFXTextField journalEditors;
+    private JFXTextField articleEditors;
 
     @FXML
-    private JFXTextField journalKeyWords;
+    private JFXTextField articleKeyWords;
 
     @FXML
-    private JFXTextField journalPrice;
+    private JFXTextField articlePrice;
 
     @FXML
-    private JFXTextField journalAmount;
+    private JFXTextField articleAmount;
 
     @FXML
     private JFXCheckBox articleIsReference;
@@ -90,9 +92,6 @@ public class AddBook {
 
     @FXML
     private JFXTextField avKeyWords;
-
-    @FXML
-    private JFXTextField avYear;
 
     @FXML
     private JFXTextField avAmount;
@@ -123,19 +122,42 @@ public class AddBook {
                 Librarian.add_book(bookTitle, bookAuthor, bookPublisher, bookEdition, Integer.parseInt(bookPrice), bookKeyWords, bestseller, reference, Integer.parseInt(bookYear), Integer.parseInt(bookAmount));
                 Assist.closeStage(cancel);
             }
-        }
-        else if (articleTab.isSelected()){
-            String articleName = articleTitle.getText();
-            String bookPrice = price.getText();
-            String bookAuthor = author.getText();
-            String bookEdition = edition.getText();
-            String bookKeyWords = keyWords.getText();
-            String bookPublisher = publisher.getText();
-            String bookAmount = amount.getText();
-            String bookYear = year.getText();
-            Boolean bestseller = isBestseller.isSelected();
-            Boolean reference = isReference.isSelected();
+        } else if (articleTab.isSelected()) {
+            String title = articleTitle.getText();
+            String author = articleAuthors.getText();
+            String journal = articleJournal.getText();
+            String date = articleDate.getText();
+            String editors = articleEditors.getText();
+            String keyWords = articleKeyWords.getText();
+            String price = articlePrice.getText();
+            boolean isReference = articleIsReference.isSelected();
+            String amount = articleAmount.getText();
+            if ((author.isEmpty()) || (price.isEmpty()) || (journal.isEmpty()) || (title.isEmpty())
+                    || (editors.isEmpty()) || (amount.isEmpty()) || (Integer.parseInt(amount) > 500)) {
+                Assist.error();
+            } else {
+                Librarian.add_article(title, author, Integer.parseInt(price), keyWords, isReference, journal, editors, date, Integer.parseInt(amount));
+                Assist.closeStage(cancel);
+            }
+        } else {
+            String titleAV = avTitle.getText();
+            String authorAV = avAuthor.getText();
+            String keyWordsAV = avKeyWords.getText();
+            String priceAV = avPrice.getText();
+            String amountAV = avAmount.getText();
+            if ((authorAV.isEmpty()) || (priceAV.isEmpty()) || (titleAV.isEmpty())
+                    || (amountAV.isEmpty()) || (Integer.parseInt(amountAV) > 500)) {
+                Assist.error();
+            } else {
+                Librarian.add_AV(titleAV, authorAV, Integer.parseInt(priceAV), keyWordsAV, Integer.parseInt(amountAV));
+                Assist.closeStage(cancel);
+            }
         }
     }
 
+    @FXML
+    void cancel(){
+        Assist.closeStage(cancel);
+    }
 }
+

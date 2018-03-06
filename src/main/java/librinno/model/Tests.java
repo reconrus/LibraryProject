@@ -23,8 +23,8 @@ public class Tests {
         l.add_book(book2.getTitle(),book2.getAuthor(),book2.getPublisher(),book2.getEdition(),book2.getPrice(),book2.getKeyWords(),book2.isIs_bestseller(),book2.isReference(),book2.getYear(),2);
         l.add_book(book3.getTitle(),book3.getAuthor(),book3.getPublisher(),book3.getEdition(),book3.getPrice(),book3.getKeyWords(),book3.isIs_bestseller(),book3.isReference(),book3.getYear(),1);
 
-        l.add_AV(av1.getTitle(),av1.getAuthor(),av1.getPrice(),av1.getKeyWords(),false,false,1);
-        l.add_AV(av2.getTitle(),av2.getAuthor(),av2.getPrice(),av2.getKeyWords(),false,false,1);
+        l.add_AV(av1.getTitle(),av1.getAuthor(),av1.getPrice(),av1.getKeyWords(),1);
+        l.add_AV(av2.getTitle(),av2.getAuthor(),av2.getPrice(),av2.getKeyWords(),1);
 
         db.user_creation(user);
         db.user_creation(user2);

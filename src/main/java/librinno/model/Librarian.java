@@ -225,7 +225,7 @@ public class Librarian extends User {
         add_CopiesOfMaterial(arrayList.get(1), amount - 1);
     }
 
-    public void add_article(String title, String author, int price, String keyWords, Boolean is_bestseller,
+    public static void add_article(String title, String author, int price, String keyWords,
                             boolean reference, String journal, String editor, String date, int amount) throws SQLException {
         /*
          * To add article, you need to send all information about article
@@ -238,7 +238,7 @@ public class Librarian extends User {
         add_CopiesOfMaterial(arrayList.get(1), amount - 1);
     }
 
-    public void add_AV(String title, String author, int price, String keyWords, Boolean is_bestseller, boolean reference, int amount) throws SQLException {
+    public static void add_AV(String title, String author, int price, String keyWords, int amount) throws SQLException {
         AV av = new AV(title, author, price, keyWords, "In library");
         db.av_creation(av);
         ArrayList<Integer> arrayList = db.isAVAlreadyExist(av);
