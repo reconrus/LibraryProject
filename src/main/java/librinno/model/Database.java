@@ -192,7 +192,7 @@ public class Database {
         while (rs.next()){
             if (rs.getString(2).equals(article.getTitle()) && rs.getString(3).equals(article.getAuthor()) && rs.getInt(4) == article.getPrice() &&
             rs.getString(5).equals(article.getKeyWords())  && rs.getBoolean(6) == article.getReference()
-            && rs.getString(7).equals(article.getJournal()) && rs.getString(8).equals(article.getEditor()) && rs.getDate(9).equals(article.getDate())){
+            && rs.getString(7).equals(article.getJournal()) && rs.getString(8).equals(article.getEditor()) && rs.getString(9).equals(article.getDate())){
                 arrayList.add(1); // 1 = true
                 arrayList.add(rs.getInt(1));//save ID of founded book
                 return arrayList;
