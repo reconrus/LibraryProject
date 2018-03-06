@@ -21,15 +21,15 @@ public class Material {
     public String KeyWords;
     public int number;
     public String status;
-    private LocalDate date;
+    private LocalDate returnDate;
     private int userId;
     protected String type;
 
-    public LocalDate getDate() {
-        return date;
+    public LocalDate getReturnDate() {
+        return returnDate;
     }
-    public void setDate(int year,int month,int day) {
-        this.date =LocalDate.of(year,month,day);
+    public void setReturnDate(int year,int month,int day) {
+        this.returnDate =LocalDate.of(year,month,day);
     }
     public String getStatus() {
         return status;
