@@ -35,13 +35,13 @@ public class Database {
     public static void user_creation(User user) {
         try {
             //get all needed information
-            prst = con.prepareStatement("insert into Users_of_the_library(Name, Address, Phone_number, Card_number,Type,Password) values(?, ?, ?, ?,?,?)");
+            prst = con.prepareStatement("insert into Users_of_the_library(Name, Address, Phone_number,Type,Password) values(?, ?, ?,?,?)");
             prst.setString(1, user.get_name());
             prst.setString(2, user.get_adress());
             prst.setString(3, user.get_number());
-            prst.setInt(4, user.get_card_number());
-            prst.setString(5,user.get_type());
-            prst.setString(6,user.get_password());
+            //prst.setInt(4, user.get_card_number());
+            prst.setString(4,user.get_type());
+            prst.setString(5,user.get_password());
             prst.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
