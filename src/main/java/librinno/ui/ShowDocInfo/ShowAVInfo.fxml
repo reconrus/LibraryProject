@@ -6,7 +6,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="244.0" prefWidth="315.0" stylesheets="@../../../../resources/theme.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.librinno.ui.ShowDocInfo.ShowDocInfo">
+<AnchorPane prefHeight="244.0" prefWidth="315.0" stylesheets="@../../../../resources/theme.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.librinno.ui.ShowDocInfo.ShowAVInfo">
     <children>
         <Text fx:id="title" fill="WHITE" layoutX="96.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Title" textAlignment="CENTER" wrappingWidth="122.13671875">
             <font>
@@ -25,6 +25,6 @@
         <Text fx:id="Author" fill="WHITE" layoutX="116.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="174.13671875" />
         <Text fx:id="price" fill="WHITE" layoutX="116.0" layoutY="134.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="174.13671875" />
         <Text fx:id="keyWords" fill="WHITE" layoutX="116.0" layoutY="158.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="174.13671724498272" />
-        <JFXButton fx:id="close" layoutX="135.0" layoutY="205.0" onAction="#cancel" text="Close" />
+        <JFXButton layoutX="135.0" layoutY="205.0" onAction="#cancel" text="Close" />
     </children>
 </AnchorPane>
