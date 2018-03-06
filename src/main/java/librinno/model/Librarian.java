@@ -299,7 +299,7 @@ public class Librarian extends User {
     }
 
 
-    public ArrayList<Material> get_all_AV() {
+    public static ArrayList<Material> get_all_AV() {
         ArrayList<Material> avs = new ArrayList<Material>();
         try {
             Statement stmt = db.con.createStatement();
@@ -332,7 +332,7 @@ public class Librarian extends User {
         return avs;
     }
 
-    public ArrayList<Material> get_all_articles() {
+    public static ArrayList<Material> get_all_articles() {
         ArrayList<Material> articles = new ArrayList<Material>();
         try {
             Statement stmt = db.con.createStatement();

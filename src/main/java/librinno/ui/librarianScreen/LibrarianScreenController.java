@@ -136,18 +136,9 @@ public class LibrarianScreenController {
         bookType.setCellValueFactory(new PropertyValueFactory<>("type"));
 
         ObservableList<Material> list= FXCollections.observableArrayList();
-        ArrayList<Book> books = Librarian.get_all_books();
-        ArrayList<AV> av= Librarian.get_all_AV();
-        ArrayList<Article> articles= Librarian.get_all_articles();
-        for (int i=0; i<av.size(); i++){
-            list.add(av.get(i));
-        }
-        for (int i=0; i<books.size(); i++){
-            list.add(books.get(i));
-        }
-        for (int i=0; i<articles.size(); i++){
-            list.add(articles.get(i));
-        }
+        list.addAll(Librarian.get_all_articles());
+        list.addAll(Librarian.get_all_AV());
+        list.addAll(Librarian.get_all_books());
         tableBook.getItems().setAll(list);
     }
 

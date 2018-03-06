@@ -50,13 +50,11 @@ public class Database {
     public void av_creation(AV av)throws SQLException{
         ArrayList <Integer>arrayList =isAVAlreadyExist(av);
         if (arrayList.get(0)==0) {
-            prst = con.prepareStatement("insert into AV(Name,Author,Price,Keywords,is_bestseller,is_reference) values(?,?,?,?,?,?)");
+            prst = con.prepareStatement("insert into AV(Name,Author,Price,Keywords) values(?,?,?,?)");
             prst.setString(1, av.getTitle());
             prst.setString(2, av.getAuthor());
             prst.setInt   (3, av.getPrice());
             prst.setString(4, av.getKeyWords());
-            prst.setBoolean(5, av.isIs_bestseller());
-            prst.setBoolean(6, av.isReference());
             prst.executeUpdate();
 
             Statement stmt = con.createStatement();
@@ -87,16 +85,15 @@ public class Database {
         * */
         ArrayList <Integer>arrayList =isArticleAlreadyExist(article);
         if (arrayList.get(0)==0) {
-            prst = con.prepareStatement("insert into Articles(Name,Author,Price,Keywords,is_bestseller,is_reference,Journal,Editor,Date) values(?,?,?,?,?,?,?,?,?)");
+            prst = con.prepareStatement("insert into Articles(Name,Author,Price,Keywords,is_reference,Journal,Editor,Date) values(?,?,?,?,?,?,?,?)");
             prst.setString(1, article.getTitle());
             prst.setString(2, article.getAuthor());
             prst.setInt   (3, article.getPrice());
             prst.setString(4, article.getKeyWords());
-            prst.setBoolean(5, article.isIs_bestseller());
-            prst.setBoolean(6, article.isReference());
-            prst.setString(7,article.getJournal());
-            prst.setString(8,article.getEditor());
-            prst.setDate(9,java.sql.Date.valueOf(article.getDate()));
+            prst.setBoolean(5, article.getReference());
+            prst.setString(6,article.getJournal());
+            prst.setString(7,article.getEditor());
+            prst.setDate(8,java.sql.Date.valueOf(article.getDate()));
             prst.executeUpdate();
             //находим последний добавленный ID статьи и запоминаем его, чтоб потом кинуть его в таблицу копий
             Statement stmt = con.createStatement();
@@ -173,7 +170,7 @@ public class Database {
         rs = stmt.executeQuery("SELECT * FROM AV");
         while (rs.next()){
             if (rs.getString(2).equals(av.getTitle()) && rs.getString(3).equals(av.getAuthor()) && rs.getInt(4) == av.getPrice() &&
-                    rs.getString(5).equals(av.getKeyWords()) && rs.getBoolean(6) == av.isIs_bestseller() && rs.getBoolean(7) == av.isReference()){
+                    rs.getString(5).equals(av.getKeyWords())){
                 arrayList.add(1); // 1 = true
                 arrayList.add(rs.getInt(1));//save ID of founded book
                 return arrayList;
@@ -194,8 +191,8 @@ public class Database {
         rs = stmt.executeQuery("SELECT * FROM Articles");
         while (rs.next()){
             if (rs.getString(2).equals(article.getTitle()) && rs.getString(3).equals(article.getAuthor()) && rs.getInt(4) == article.getPrice() &&
-            rs.getString(5).equals(article.getKeyWords()) && rs.getBoolean(6) == article.isIs_bestseller() && rs.getBoolean(7) == article.isReference()
-            && rs.getString(8).equals(article.getJournal()) && rs.getString(9).equals(article.getEditor()) && rs.getDate(10).toLocalDate().equals(article.getDate())){
+            rs.getString(5).equals(article.getKeyWords())  && rs.getBoolean(6) == article.getReference()
+            && rs.getString(7).equals(article.getJournal()) && rs.getString(8).equals(article.getEditor()) && rs.getDate(9).toLocalDate().equals(article.getDate())){
                 arrayList.add(1); // 1 = true
                 arrayList.add(rs.getInt(1));//save ID of founded book
                 return arrayList;
