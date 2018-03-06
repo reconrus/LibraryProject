@@ -43,4 +43,34 @@ public class Tests {
             e.printStackTrace();
         }
     }
+    public void tc3() throws SQLException{
+        System.out.println(db.get_information_about_the_user(user.getCard_number()).get_name());
+        System.out.println(db.get_information_about_the_user(user.getCard_number()).get_adress());
+        System.out.println(db.get_information_about_the_user(user.getCard_number()).getPhone_Number());
+        System.out.println(db.get_information_about_the_user(user.getCard_number()).get_card_number());
+        System.out.println(db.get_information_about_the_user(user.getCard_number()).get_type());
+
+        System.out.println(db.get_information_about_the_user(user3.getCard_number()+2).get_name());
+        System.out.println(db.get_information_about_the_user(user3.getCard_number()+2).get_adress());
+        System.out.println(db.get_information_about_the_user(user3.getCard_number()+2).getPhone_Number());
+        System.out.println(db.get_information_about_the_user(user3.getCard_number()+2).get_card_number());
+        System.out.println(db.get_information_about_the_user(user3.getCard_number()+2).get_type());
+    }
+    public void tc4() throws SQLException{
+        if(db.isUserAlreadyExist(user2).size()==1){
+            System.out.println("Patron doesn't exist");
+        }
+        else{
+            System.out.println(db.get_information_about_the_user(user2.getCard_number()).get_name());
+            System.out.println(db.get_information_about_the_user(user2.getCard_number()).get_adress());
+            System.out.println(db.get_information_about_the_user(user2.getCard_number()).getPhone_Number());
+            System.out.println(db.get_information_about_the_user(user2.getCard_number()).get_card_number());
+            System.out.println(db.get_information_about_the_user(user2.getCard_number()).get_type());
+        }
+        System.out.println(db.get_information_about_the_user(user3.getCard_number()+2).get_name());
+        System.out.println(db.get_information_about_the_user(user3.getCard_number()+2).get_adress());
+        System.out.println(db.get_information_about_the_user(user3.getCard_number()+2).getPhone_Number());
+        System.out.println(db.get_information_about_the_user(user3.getCard_number()+2).get_card_number());
+        System.out.println(db.get_information_about_the_user(user3.getCard_number()+2).get_type());
+    }
 }
