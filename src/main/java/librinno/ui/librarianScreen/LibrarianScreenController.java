@@ -14,6 +14,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import main.java.librinno.model.*;
+import main.java.librinno.ui.ShowDocInfo.ShowDocInfo;
 import main.java.librinno.ui.assist.Assist;
 import main.java.librinno.ui.editDoc.EditDoc;
 import main.java.librinno.ui.editPatron.EditPatron;
@@ -123,6 +124,25 @@ public class LibrarianScreenController {
         list.addAll(Librarian.get_all_AV());
         list.addAll(Librarian.get_all_books());
         tableBook.getItems().setAll(list);
+    }
+
+    @FXML
+    void showDocInfo() throws IOException {
+        Material material= tableBook.getSelectionModel().getSelectedItem();
+        if (material==null){
+            Assist.error();
+        }
+        else{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/main/java/librinno/ui/patronScreen/PatronSDocuments.fxml"));
+            Parent parent = loader.load();
+
+            ShowDocInfo controller = loader.getController();
+            controller.passGUI(material);
+
+            Stage stage = new Stage(StageStyle.DECORATED);
+            stage.setScene(new Scene(parent));
+            stage.showAndWait();
+        }
     }
 
     @FXML

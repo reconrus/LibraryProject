@@ -3,9 +3,7 @@ package main.java.librinno.ui.ShowDocInfo;
 import com.jfoenix.controls.JFXButton;
 import javafx.fxml.FXML;
 import javafx.scene.text.Text;
-import main.java.librinno.model.AV;
-import main.java.librinno.model.Article;
-import main.java.librinno.model.Book;
+import main.java.librinno.model.*;
 import main.java.librinno.ui.assist.Assist;
 
 import java.awt.event.ActionEvent;
@@ -49,7 +47,6 @@ public class ShowDocInfo {
     @FXML
     private JFXButton close;
 
-    @FXML
     void passGUI(Book book){
         title.setText(book.getTitle());
         id.setText(""+book.getId());
@@ -62,8 +59,6 @@ public class ShowDocInfo {
         price.setText(book.getPrice()+"");
         edition.setText(book.getEdition());
     }
-
-    @FXML
     void passGUI(AV av){
         title.setText(av.getTitle());
         id.setText(""+av.getId());
@@ -71,7 +66,6 @@ public class ShowDocInfo {
         price.setText(av.getPrice()+"");
         keyWords.setText(av.getKeyWords());
     }
-    @FXML
     void passGUI(Article article){
         title.setText(article.getTitle());
         id.setText(""+article.getId());
@@ -80,11 +74,18 @@ public class ShowDocInfo {
         keyWords.setText(article.getKeyWords());
         reference.setText(article.getReference()+"");
         year.setText(article.getDate()+"");
+        journal.setText(article.getJournal());
+        journal.setText(article.getEditor());
+    }
 
+    public void passGUI(Material material){
+        if (material.getType().equals("AV")){
+            passGUI(Librarian.bookByID(material.getId()));
+        }
     }
 
     @FXML
-    public void close(ActionEvent event){
+    public void cancel(ActionEvent event){
         Assist.closeStage(close);
     }
 
