@@ -22,13 +22,12 @@ public class Material {
     public String author;
     public int price;
     public String KeyWords;
-    public boolean reference;
-    public boolean is_bestseller;
     public int number;
     public String status;
     private LocalDate date;
     private int userId;
-    private String type;
+    protected String type;
+
     public LocalDate getDate() {
         return date;
     }
@@ -73,21 +72,6 @@ public class Material {
 
     public void setKeyWords(String keyWords) {
         KeyWords = keyWords;
-    }
-    public boolean isIs_bestseller() {
-        return is_bestseller;
-    }
-    public void setIs_bestseller(boolean is_bestseller) {
-        this.is_bestseller = is_bestseller;
-    }
-    public boolean isReference() {
-        return reference;
-    }
-    public boolean getReference(){
-        return reference;
-    }
-    public void setReference(boolean reference) {
-        this.reference = reference;
     }
 
     public void setType(String type){

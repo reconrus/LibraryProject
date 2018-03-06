@@ -10,7 +10,6 @@ package main.java.librinno.model;
  * with setters and getters
  */
 import java.time.LocalDate;
-import java.util.Scanner;
 
 public class Book extends Material {
     private String publisher;
@@ -20,7 +19,6 @@ public class Book extends Material {
     private int left_time;
     private boolean reference;
     private int total;
-    private String type;
     @Override
     public LocalDate getDate() {
         return date;
@@ -31,6 +29,14 @@ public class Book extends Material {
     }
 
     private LocalDate date;
+
+    public boolean isIs_bestseller() {
+        return is_bestseller;
+    }
+
+    public boolean isReference(){
+        return reference;
+    }
 
     public int get_left_time() {
         return left_time;
@@ -66,6 +72,14 @@ public class Book extends Material {
 
     public int getTotal() {
         return total;
+    }
+
+    public void setIs_bestseller(boolean is_bestseller) {
+        this.is_bestseller = is_bestseller;
+    }
+
+    public void setReference(boolean reference) {
+        this.reference = reference;
     }
 
     public void setTotal(int total) {
@@ -146,12 +160,6 @@ public class Book extends Material {
         setUserId(userid);
     }
 
-    public void setType(String type){
-        this.type=type;
-    }
-    public String getType(){
-        return type;
-    }
     public Book(int id, String title, String author, String publisher, String edition, int price, String keyWords, boolean is_bestseller, boolean reference, int year, int amount, int total) {
         setId(id);
         setTitle(title);
