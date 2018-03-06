@@ -582,5 +582,4 @@ public class Librarian extends User {
         if (count > 1) return false;
         else return true;
     }
-   public
 }
