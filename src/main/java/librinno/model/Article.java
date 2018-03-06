@@ -38,6 +38,7 @@ public class Article extends Material{
         setEditor(editor);
         setDate(yearOfDate,monthOfDate,dayOfDate);
         setStatus(status);
+        setType("Article");
     }
     public Article(int id,String title,String author,int price, String keyWords,
                     boolean reference,String journal,String editor,int yearOfDate,int monthOfDate,int dayOfDate,String status){
@@ -51,6 +52,7 @@ public class Article extends Material{
         setEditor(editor);
         setDate(yearOfDate,monthOfDate,dayOfDate);
         setStatus(status);
+        setType("Article");
     }
     public Article(int id,String title,String author,int price, String keyWords,
                    boolean reference,String journal,String editor,int yearOfDate,int monthOfDate,int dayOfDate){
@@ -63,6 +65,7 @@ public class Article extends Material{
         setJournal(journal);
         setEditor(editor);
         setDate(yearOfDate,monthOfDate,dayOfDate);
+        setType("Article");
     }
     public Article(String type,int id,String title,String author,int price, String keyWords,
                    boolean reference,String journal,String editor,LocalDate date, String status, int userid){
@@ -78,6 +81,7 @@ public class Article extends Material{
         setDate(date);
         setStatus(status);
         setUserId(userid);
+        setType("Article");
     }
     public String getJournal() {
         return journal;
