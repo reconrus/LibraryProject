@@ -19,11 +19,12 @@ public class Material {
     public String author;
     public int price;
     public String KeyWords;
-    public int number;
     public String status;
     private LocalDate returnDate;
     private int userId;
     protected String type;
+    public int numberAvailable;
+    private int totalNumber;
 
     public LocalDate getReturnDate() {
         return returnDate;
@@ -80,8 +81,16 @@ public class Material {
     public String getType(){
         return type;
     }
-    public void setNumber(int number){ this.number = number; }
-    public int getNumber(){ return this.number;}
+    public void setNumberAvailable(int number){ this.numberAvailable = number; }
+    public int getNumberAvailable(){ return this.numberAvailable;}
     public void setUserId(int userId){ this.userId = userId; }
     public int getUserId(){ return this.userId;}
+
+    public int getTotalNumber() {
+        return totalNumber;
+    }
+
+    public void setTotalNumber(int totalNumber) {
+        this.totalNumber = totalNumber;
+    }
 }

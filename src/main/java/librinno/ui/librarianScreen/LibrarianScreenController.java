@@ -118,8 +118,8 @@ public class LibrarianScreenController {
         id.setCellValueFactory(new PropertyValueFactory("id"));
         author.setCellValueFactory(new PropertyValueFactory("author"));
         title.setCellValueFactory(new PropertyValueFactory("title"));
-        avaliability.setCellValueFactory(new PropertyValueFactory("number"));
-        total.setCellValueFactory(new PropertyValueFactory("total"));
+        avaliability.setCellValueFactory(new PropertyValueFactory("numberAvailable"));
+        total.setCellValueFactory(new PropertyValueFactory("totalNumber"));
         bookType.setCellValueFactory(new PropertyValueFactory("type"));
 
         ObservableList<Material> list= FXCollections.observableArrayList();

@@ -364,7 +364,7 @@ public class Librarian extends User {
                 String author = rs.getString("Author");
                 int price = rs.getInt("Price");
                 String keyWord = rs.getString("Keywords");
-                AV av = new AV(id, name, author, price, keyWord);
+                AV av = new AV(id, name, author, price, keyWord, getNumberOfCopiesOfBook(id), getNumberOfCopiesOfWithTaken(id));
                 avs.add(av);
             }
         } catch (SQLException e) {
@@ -390,7 +390,7 @@ public class Librarian extends User {
                     }
                 }
 
-                articles.add(new Article(id, rs.getString("Name"), rs.getString("Author"), rs.getInt("Price"), rs.getString("Keywords"), rs.getBoolean("is_reference"), rs.getString("Journal"), rs.getString("Editor"), rs.getString("Date")));
+                articles.add(new Article(id, rs.getString("Name"), rs.getString("Author"), rs.getInt("Price"), rs.getString("Keywords"), rs.getBoolean("is_reference"), rs.getString("Journal"), rs.getString("Editor"), rs.getString("Date"), getNumberOfCopiesOfBook(id), getNumberOfCopiesOfWithTaken(id)));
             }
         } catch (SQLException e) {
             e.printStackTrace();

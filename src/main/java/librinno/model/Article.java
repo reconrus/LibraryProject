@@ -67,6 +67,23 @@ public class Article extends Material{
         setDate(date);
         setType("Article");
     }
+
+    public Article(int id,String title,String author,int price, String keyWords,
+                   boolean reference,String journal,String editor, String date, int amountAvailable, int amountTotal){
+        setId(id);
+        setTitle(title);
+        setAuthor(author);
+        setPrice(price);
+        setKeyWords(keyWords);
+        setReference(reference);
+        setJournal(journal);
+        setEditor(editor);
+        setDate(date);
+        setType("Article");
+        setNumberAvailable(amountAvailable);
+        setTotalNumber(amountTotal);
+    }
+
     public Article(String type,int id,String title,String author,int price, String keyWords,
                    boolean reference,String journal,String editor,String date, String status, int userid){
         setType(type);

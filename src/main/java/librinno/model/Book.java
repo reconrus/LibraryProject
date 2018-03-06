@@ -18,7 +18,6 @@ public class Book extends Material {
     private boolean is_bestseller;
     private int left_time;
     private boolean reference;
-    private int total;
     public LocalDate getDate() {
         return date;
     }
@@ -69,20 +68,12 @@ public class Book extends Material {
         this.publisher = publisher;
     }
 
-    public int getTotal() {
-        return total;
-    }
-
     public void setIs_bestseller(boolean is_bestseller) {
         this.is_bestseller = is_bestseller;
     }
 
     public void setReference(boolean reference) {
         this.reference = reference;
-    }
-
-    public void setTotal(int total) {
-        this.total = total;
     }
 
     public Book(String title, String author, String publisher, String edition, int price, String keyWords, Boolean is_bestseller, boolean reference, int year, String status) {
@@ -110,7 +101,7 @@ public class Book extends Material {
         setIs_bestseller(is_bestseller);
         setReference(reference);
         setYear(year);
-        setNumber(amount);
+        setTotalNumber(amount);
         setStatus(status);
         setType("Book");
     }
@@ -126,7 +117,7 @@ public class Book extends Material {
         setIs_bestseller(is_bestseller);
         setReference(reference);
         setYear(year);
-        setNumber(amount);
+        setTotalNumber(amount);
         setType("Book");
     }
 
@@ -141,7 +132,7 @@ public class Book extends Material {
         setIs_bestseller(is_bestseller);
         setReference(reference);
         setYear(year);
-        setNumber(amount);
+        setTotalNumber(amount);
         setDate(date);
         setType("Book");
     }
@@ -157,7 +148,7 @@ public class Book extends Material {
         setIs_bestseller(is_bestseller);
         setReference(reference);
         setYear(year);
-        setNumber(amount);
+        setTotalNumber(amount);
         setDate(date);
         setStatus(status);
         setUserId(userid);
@@ -175,9 +166,9 @@ public class Book extends Material {
         setIs_bestseller(is_bestseller);
         setReference(reference);
         setYear(year);
-        setNumber(amount);
+        setNumberAvailable(amount);
         setDate(date);
-        setTotal(total);
+        setTotalNumber(total);
         setType("Book");
     }
 }

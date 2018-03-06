@@ -74,7 +74,7 @@ public class PatronScreenController {
         author.setCellValueFactory(new PropertyValueFactory("author"));
         title.setCellValueFactory(new PropertyValueFactory("title"));
         publisher.setCellValueFactory(new PropertyValueFactory("publisher"));
-        avaliability.setCellValueFactory(new PropertyValueFactory("number"));
+        avaliability.setCellValueFactory(new PropertyValueFactory("numberAvailable"));
         ArrayList<Material> books = Librarian.get_all_books();
 
 

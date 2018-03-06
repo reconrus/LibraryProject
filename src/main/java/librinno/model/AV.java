@@ -37,7 +37,18 @@ public class AV extends Material {
         setUserId(userid);
         setType("AV");
     }
-    public AV(int id,String title,String author,int price, String keyWords ){
+    public AV(int id,String title,String author,int price, String keyWords, int amountAvailable, int amountTotal){
+        setId(id);
+        setTitle(title);
+        setAuthor(author);
+        setPrice(price);
+        setKeyWords(keyWords);
+        setType("AV");
+        setNumberAvailable(amountAvailable);
+        setTotalNumber(amountTotal);
+    }
+
+    public AV(int id,String title,String author,int price, String keyWords){
         setId(id);
         setTitle(title);
         setAuthor(author);
@@ -45,6 +56,7 @@ public class AV extends Material {
         setKeyWords(keyWords);
         setType("AV");
     }
+
     public LocalDate getDate() {
         return date;
     }
