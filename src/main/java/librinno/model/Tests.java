@@ -179,16 +179,9 @@ public class Tests {
         System.out.println("tc4 assert success");
     }
 
-    public void tc5() {
-        try {
-            if ((Integer) db.isUserAlreadyExist(user2).get(0) == 1)
-                l.checkOutBook(user2, (Integer) db.isBookAlreadyExist(book2).get(1));
-            else
-                System.out.println("This user not in system");
-        } catch (SQLException e) {
-            System.out.println("This user not in system");
-            e.printStackTrace();
-        }
+    public void tc5() throws SQLException{
+        assert  (db.isUserAlreadyExist(user2).size() == 1);
+        System.out.println("tc5 success");
     }
 
     public void tc6() throws SQLException {
