@@ -3,6 +3,7 @@ package main.java.librinno.model;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 /**
  * Created by kor19 on 06.03.2018.
@@ -24,8 +25,8 @@ public class Tests {
         l.addBook(book2.getTitle(), book2.getAuthor(), book2.getPublisher(), book2.getEdition(), book2.getPrice(), book2.getKeyWords(), book2.getBestseller(), book2.getReference(), book2.getYear(), 2);
         l.addBook(book3.getTitle(), book3.getAuthor(), book3.getPublisher(), book3.getEdition(), book3.getPrice(), book3.getKeyWords(), book3.getBestseller(), book3.getReference(), book3.getYear(), 1);
 
-        l.addAV(av1.getTitle(), av1.getAuthor(), av1.getPrice(), av1.getKeyWords(), 1);
-        l.addAV(av2.getTitle(), av2.getAuthor(), av2.getPrice(), av2.getKeyWords(), 1);
+        l.addAV(av1.getTitle(),av1.getAuthor(),av1.getPrice(),av1.getKeyWords(),1);
+        l.addAV(av2.getTitle(),av2.getAuthor(),av2.getPrice(),av2.getKeyWords(),1);
 
 
         db.userCreation(user);
@@ -50,19 +51,17 @@ public class Tests {
     }
 
     public void tc3() throws SQLException {
-        System.out.println(db.getInformationAboutTheUser(user.getCard_number()).getName());
-        System.out.println(db.getInformationAboutTheUser(user.getCard_number()).getAdress());
-        System.out.println(db.getInformationAboutTheUser(user.getCard_number()).getPhoneNumber());
-        System.out.println(db.getInformationAboutTheUser(user.getCard_number()).getCard_Number());
-        System.out.println(db.getInformationAboutTheUser(user.getCard_number()).getType());
-        System.out.println("document checked-out,due date: " + l.getAllCopiesTakenByUser(user.getCard_number()));
 
-        System.out.println(db.getInformationAboutTheUser(user3.getCard_number() + 2).getName());
-        System.out.println(db.getInformationAboutTheUser(user3.getCard_number() + 2).getAdress());
-        System.out.println(db.getInformationAboutTheUser(user3.getCard_number() + 2).getPhoneNumber());
-        System.out.println(db.getInformationAboutTheUser(user3.getCard_number() + 2).getCard_Number());
-        System.out.println(db.getInformationAboutTheUser(user3.getCard_number() + 2).getType());
-        System.out.println("document checked-out,due date: " + l.getAllCopiesTakenByUser(user.getCard_number()));
+        System.out.println(db.getInformationAboutTheUser((Integer) db.isUserAlreadyExist(user).get(1)).getName());
+        System.out.println(db.getInformationAboutTheUser((Integer) db.isUserAlreadyExist(user).get(1)).getAdress());
+        System.out.println(db.getInformationAboutTheUser((Integer) db.isUserAlreadyExist(user).get(1)).getPhoneNumber());
+        System.out.println(db.getInformationAboutTheUser((Integer) db.isUserAlreadyExist(user).get(1)).getCard_number());
+        System.out.println(db.getInformationAboutTheUser((Integer) db.isUserAlreadyExist(user).get(1)).getType());
+        System.out.println(db.getInformationAboutTheUser((Integer) db.isUserAlreadyExist(user3).get(1)).getName());
+        System.out.println(db.getInformationAboutTheUser((Integer) db.isUserAlreadyExist(user3).get(1)).getAdress());
+        System.out.println(db.getInformationAboutTheUser((Integer) db.isUserAlreadyExist(user3).get(1)).getPhoneNumber());
+        System.out.println(db.getInformationAboutTheUser((Integer) db.isUserAlreadyExist(user3).get(1)).getCard_number());
+        System.out.println(db.getInformationAboutTheUser((Integer) db.isUserAlreadyExist(user3).get(1)).getType());
     }
 
     public void tc4() throws SQLException {
@@ -72,44 +71,49 @@ public class Tests {
             System.out.println(db.getInformationAboutTheUser(user2.getCard_number()).getName());
             System.out.println(db.getInformationAboutTheUser(user2.getCard_number()).getAdress());
             System.out.println(db.getInformationAboutTheUser(user2.getCard_number()).getPhoneNumber());
-            System.out.println(db.getInformationAboutTheUser(user2.getCard_number()).getCard_Number());
+            System.out.println(db.getInformationAboutTheUser(user2.getCard_number()).getCard_number());
             System.out.println(db.getInformationAboutTheUser(user2.getCard_number()).getType());
         }
-        System.out.println(db.getInformationAboutTheUser(user3.getCard_number() + 2).getName());
-        System.out.println(db.getInformationAboutTheUser(user3.getCard_number() + 2).getAdress());
-        System.out.println(db.getInformationAboutTheUser(user3.getCard_number() + 2).getPhoneNumber());
-        System.out.println(db.getInformationAboutTheUser(user3.getCard_number() + 2).getCard_Number());
-        System.out.println(db.getInformationAboutTheUser(user3.getCard_number() + 2).getType());
-        System.out.println("document checked-out,due date: " + l.getAllCopiesTakenByUser(user.getCard_number() + 2));
-
+        System.out.println(db.getInformationAboutTheUser((Integer) db.isUserAlreadyExist(user3).get(1)).getName());
+        System.out.println(db.getInformationAboutTheUser((Integer) db.isUserAlreadyExist(user3).get(1)).getAdress());
+        System.out.println(db.getInformationAboutTheUser((Integer) db.isUserAlreadyExist(user3).get(1)).getPhoneNumber());
+        System.out.println(db.getInformationAboutTheUser((Integer) db.isUserAlreadyExist(user3).get(1)).getCard_number());
+        System.out.println(db.getInformationAboutTheUser((Integer) db.isUserAlreadyExist(user3).get(1)).getType());
     }
 
-    public void tc5() throws SQLException {
-        boolean correct = l.checkOutBook(user2, (Integer) db.isBookAlreadyExist(book2).get(1));
+    public void tc5(){
+        try {
+            if ((Integer) db.isUserAlreadyExist(user2).get(0) == 1)
+                l.checkOutBook(user2, (Integer) db.isBookAlreadyExist(book2).get(1));
+            else
+                System.out.println("This user not in system");
+        } catch (SQLException e) {
+            System.out.println("This user not in system");
+            e.printStackTrace();
+        }
     }
 
-    public void tc7() throws SQLException {
-        boolean p1_correct1 = l.checkOutBook(user, (Integer) db.isBookAlreadyExist(book1).get(1));
-        boolean p1_correct2 = l.checkOutBook(user3, (Integer) db.isBookAlreadyExist(book2).get(1));
-        boolean p1_correct3 = l.checkOutBook(user3, (Integer) db.isBookAlreadyExist(book3).get(1));
-        boolean p1_correct_av = l.checkOutBook(user3, (Integer) db.isAVAlreadyExist(av1).get(1));
+    public void tc6()throws SQLException{
+        l.checkOutBook(user, (Integer) db.isBookAlreadyExist(book1).get(1));
+        l.checkOutBook(user3,(Integer) db.isBookAlreadyExist(book1).get(1));
+        l.checkOutBook(user, (Integer) db.isBookAlreadyExist(book2).get(1));
+        System.out.println(user.getName());
+        System.out.println(user.getAdress());
+        System.out.println(user.getPhoneNumber());
+        System.out.println(db.isUserAlreadyExist(user).get(1));
+        System.out.println(user.getType());
+        LinkedList<Material> linkedList=l.getAllCopiesTakenByUser((Integer) db.isUserAlreadyExist(user).get(1));
+        for (int i = 0; i <linkedList.size() ; i++)
+            System.out.println(linkedList.get(i).getTitle()+", "+linkedList.get(i).getReturnDate());
 
-        boolean p2_correct1 = l.checkOutBook(user, (Integer) db.isBookAlreadyExist(book1).get(1));
-        boolean p2_correct2 = l.checkOutBook(user3, (Integer) db.isBookAlreadyExist(book2).get(1));
-        boolean p2_correct_av = l.checkOutBook(user3, (Integer) db.isAVAlreadyExist(av2).get(1));
-        System.out.println(db.getInformationAboutTheUser(user.getCard_number()).getName());
-        System.out.println(db.getInformationAboutTheUser(user.getCard_number()).getAdress());
-        System.out.println(db.getInformationAboutTheUser(user.getCard_number()).getPhoneNumber());
-        System.out.println(db.getInformationAboutTheUser(user.getCard_number()).getCard_Number());
-        System.out.println(db.getInformationAboutTheUser(user.getCard_number()).getType());
-        System.out.println("document checked-out,due date: " + l.getAllCopiesTakenByUser(user.getCard_number()));
-
-        System.out.println(db.getInformationAboutTheUser(user3.getCard_number() + 1).getName());
-        System.out.println(db.getInformationAboutTheUser(user3.getCard_number() + 1).getAdress());
-        System.out.println(db.getInformationAboutTheUser(user3.getCard_number() + 1).getPhoneNumber());
-        System.out.println(db.getInformationAboutTheUser(user3.getCard_number() + 1).getCard_Number());
-        System.out.println(db.getInformationAboutTheUser(user3.getCard_number() + 1).getType());
-        System.out.println("document checked-out,due date: " + l.getAllCopiesTakenByUser(user2.getCard_number() + 1));
-
+        System.out.println(user3.getName());
+        System.out.println(user3.getAdress());
+        System.out.println(user3.getPhoneNumber());
+        System.out.println(db.isUserAlreadyExist(user3).get(1));
+        System.out.println(user3.getType());
+        LinkedList <Material>linkedList2=l.getAllCopiesTakenByUser((Integer) db.isUserAlreadyExist(user3).get(1)+1);
+        for (int i = 0; i <linkedList2.size() ; i++)
+            System.out.println(linkedList2.get(i).getTitle()+", "+linkedList2.get(i).getReturnDate());
     }
+
 }

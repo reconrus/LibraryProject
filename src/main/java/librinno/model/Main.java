@@ -32,7 +32,7 @@ public class Main {
         test.tc2();
         test.tc3();
         test.tc4();
-        test.tc7();
+        //test.tc7();
     }
 
 
