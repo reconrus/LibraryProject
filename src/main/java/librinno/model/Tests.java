@@ -176,26 +176,49 @@ public class Tests {
 
     public void tc6() throws SQLException {
         l.checkOutBook(user, (Integer) db.isBookAlreadyExist(book1).get(1));
-        l.checkOutBook(user3, (Integer) db.isBookAlreadyExist(book1).get(1));
-        l.checkOutBook(user, (Integer) db.isBookAlreadyExist(book2).get(1));
-        System.out.println(user.getName());
-        System.out.println(user.getAdress());
-        System.out.println(user.getPhoneNumber());
-        System.out.println(db.isUserAlreadyExist(user).get(1));
-        System.out.println(user.getType());
-        LinkedList<Material> linkedList = l.getAllCopiesTakenByUser((Integer) db.isUserAlreadyExist(user).get(1));
-        for (int i = 0; i < linkedList.size(); i++)
-            System.out.println(linkedList.get(i).getTitle() + ", " + linkedList.get(i).getReturnDate());
+        Statement stmt = db.con.createStatement();
+        ResultSet rs = stmt.executeQuery("SELECT * FROM Copy");
+        boolean b=false;
+        while (rs.next())
+            if (rs.getInt("Id_of_original")==(Integer)db.isBookAlreadyExist(book1).get(1) && rs.getInt("Owner")==(Integer)db.isUserAlreadyExist(user).get(1))
+                b=true;
+        assert (b);
 
-        System.out.println(user3.getName());
-        System.out.println(user3.getAdress());
-        System.out.println(user3.getPhoneNumber());
-        System.out.println(db.isUserAlreadyExist(user3).get(1));
-        System.out.println(user3.getType());
+        l.checkOutBook(user3, (Integer) db.isBookAlreadyExist(book1).get(1));
+        stmt = db.con.createStatement();
+        rs = stmt.executeQuery("SELECT * FROM Copy");
+        b=false;
+        while (rs.next())
+            if (rs.getInt("Id_of_original")==(Integer)db.isBookAlreadyExist(book1).get(1) && rs.getInt("Owner")==(Integer)db.isUserAlreadyExist(user3).get(1))
+                b=true;
+        assert (!b);//cause we have only one copy of b1, and this copy not in library
+
+        l.checkOutBook(user, (Integer) db.isBookAlreadyExist(book2).get(1));
+        stmt = db.con.createStatement();
+        rs = stmt.executeQuery("SELECT * FROM Copy");
+        b=false;
+        while (rs.next())
+            if (rs.getInt("Id_of_original")==(Integer)db.isBookAlreadyExist(book2).get(1) && rs.getInt("Owner")==(Integer)db.isUserAlreadyExist(user).get(1))
+                b=true;
+        assert (b);
+
+        assert (user.getName().equals(db.getInformationAboutTheUser((Integer) db.isUserAlreadyExist(user).get(1)).getName()));
+        assert (user.getAdress().equals(db.getInformationAboutTheUser((Integer) db.isUserAlreadyExist(user).get(1)).getAdress()));
+        assert (user.getPhoneNumber().equals(db.getInformationAboutTheUser((Integer) db.isUserAlreadyExist(user).get(1)).getPhoneNumber()));
+        assert (user.getCard_number() == db.getInformationAboutTheUser((Integer) db.isUserAlreadyExist(user).get(1)).getCard_number());
+        assert (user.getType().equals(db.getInformationAboutTheUser((Integer) db.isUserAlreadyExist(user).get(1)).getType()));
+        LinkedList<Material> linkedList = l.getAllCopiesTakenByUser((Integer) db.isUserAlreadyExist(user).get(1));
+        assert (linkedList.size()>1);
+        assert (user3.getName().equals(db.getInformationAboutTheUser((Integer) db.isUserAlreadyExist(user3).get(1)).getName()));
+        assert (user3.getAdress().equals(db.getInformationAboutTheUser((Integer) db.isUserAlreadyExist(user3).get(1)).getAdress()));
+        assert (user3.getPhoneNumber().equals(db.getInformationAboutTheUser((Integer) db.isUserAlreadyExist(user3).get(1)).getPhoneNumber()));
+        assert (user3.getCard_number() == db.getInformationAboutTheUser((Integer) db.isUserAlreadyExist(user3).get(1)).getCard_number());
+        assert (user3.getType().equals(db.getInformationAboutTheUser((Integer) db.isUserAlreadyExist(user3).get(1)).getType()));
         LinkedList<Material> linkedList2 = l.getAllCopiesTakenByUser((Integer) db.isUserAlreadyExist(user3).get(1) + 1);
-        for (int i = 0; i < linkedList2.size(); i++)
-            System.out.println(linkedList2.get(i).getTitle() + ", " + linkedList2.get(i).getReturnDate());
+        assert (linkedList2.size()>1);
+        System.out.println("tc6 success");
     }
+
 
     public void tc7() throws SQLException {
         l.checkOutBook(user, (Integer) db.isBookAlreadyExist(book1).get(1));
