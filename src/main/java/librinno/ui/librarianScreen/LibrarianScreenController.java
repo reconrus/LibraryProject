@@ -268,8 +268,6 @@ public class LibrarianScreenController {
         }
     }
 
-
-
     @FXML
     void issue(ActionEvent event) throws IOException {
         Material book= tableBook.getSelectionModel().getSelectedItem();

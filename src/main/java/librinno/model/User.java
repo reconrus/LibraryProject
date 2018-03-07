@@ -22,7 +22,7 @@ public class User {
         setName(name);
         setPhoneNumber(number);
         setAdress(address);
-        setCard_number();
+        //setCard_number();
         setType(type);
         setPassword(password);
     }
@@ -101,7 +101,7 @@ public class User {
     /**
      * increasing is number in system when registering
      */
-    public void setCard_number() {
+    /*public void setCard_number() {
         //each card_number is individual in case of increasing there won't be identic id's
         int max_id = 0;
         try {
@@ -119,7 +119,9 @@ public class User {
             e.printStackTrace();
         }
         this.card_number = max_id;
-    }
+    }*/
+
+
 
     public int getCard_Number() {
 

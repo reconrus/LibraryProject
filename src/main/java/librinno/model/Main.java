@@ -29,19 +29,29 @@ public class Main {
        // System.out.println(l.getAllCopies());
         Tests test=new Tests();
         test.dump();
-        //test.tc1();
+        test.tc1();
+        System.out.println("TC1 SUCCESS");
         test.dump();
-        //test.tc2();
+        test.tc2();
+        System.out.println("TC2 SUCCESS");
         test.dump();
-        //test.tc3();
+        test.tc3();
+        System.out.println("TC3 SUCCESS");
         test.dump();
-        //test.tc4();
+        test.tc4();
+        System.out.println("TC4 SUCCESS");
         test.dump();
-        //test.tc5();
+        test.tc5();
+        System.out.println("TC5 SUCCESS");
         test.dump();
-        //test.tc6();
+        test.tc6();
+        System.out.println("TC6 SUCCESS");
         test.dump();
-        //test.tc7();
+        test.tc7();
+        System.out.println("TC7 SUCCESS");
+        test.dump();
+        test.tc8();
+        System.out.println("TC8 SUCCESS");
         test.dump();
     }
 

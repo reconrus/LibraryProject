@@ -202,9 +202,10 @@ public class Database {
         arrayList.add(0);
         return arrayList;
     }
+
     public ArrayList isBookAlreadyExist(Book book) throws SQLException {
         /*
-        * Этот метод чекает, есть ли у нас в библиотеке такая книга
+        * Этот метод проверяет, есть ли у нас в библиотеке такая книга
         * возвращает лист, В первом элементе: int 1 - если да(уже есть такая книга), 0 - если нет
         * на втором элементе возвращается ID найденной книги(если она уже есть, в противном случае ничего там нет)
         * */
@@ -224,7 +225,7 @@ public class Database {
         arrayList.add(0);
         return arrayList;
     }
-    public ArrayList isUserAlreadyExist(User user) throws SQLException {
+    public static ArrayList isUserAlreadyExist(User user) throws SQLException {
         /*
          * Этот метод чекает, есть ли у нас в библиотеке такая книга
          * возвращает лист, В первом элементе: int 1 - если да(уже есть такая книга), 0 - если нет
