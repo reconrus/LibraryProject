@@ -8,9 +8,9 @@
 
 <AnchorPane prefHeight="381.0" prefWidth="315.0" stylesheets="@../../../../resources/theme.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.librinno.ui.ShowDocInfo.ShowDocInfo">
    <children>
-      <Text fx:id="title" fill="WHITE" layoutX="96.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Title" textAlignment="CENTER" wrappingWidth="122.13671875">
+      <Text fx:id="title" fill="WHITE" layoutX="96.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Title" textAlignment="CENTER" wrappingWidth="122.13671875">
          <font>
-            <Font size="20.0" />
+            <Font size="14.0" />
          </font>
       </Text>
       <Group layoutX="31.0" layoutY="82.0">
