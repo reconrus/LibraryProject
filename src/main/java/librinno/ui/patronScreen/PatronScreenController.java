@@ -162,7 +162,7 @@ public class PatronScreenController {
     @FXML
     private void reserve(ActionEvent event) throws IOException {
         Material book= tableBook.getSelectionModel().getSelectedItem();
-        if(book == null){
+        if((book == null)||(book.numberAvailable<1)){
             Assist.error();
             return;
         }
