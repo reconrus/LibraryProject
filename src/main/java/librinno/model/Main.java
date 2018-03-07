@@ -32,6 +32,12 @@ public class Main {
         //System.out.println(l.av_by_id(201).getAuthor());
       //  System.out.println(l.get_all_copies().size());
        // System.out.println(l.get_all_copies());
+        Tests test=new Tests();
+        test.tc1();
+        test.tc2();
+        test.tc3();
+        test.tc4();
+        test.tc7();
     }
 
 
