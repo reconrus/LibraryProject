@@ -170,20 +170,13 @@ public class Tests {
     }
 
     public void tc4() throws SQLException {
-        if (db.isUserAlreadyExist(user2).size() == 1) {
-            System.out.println("Patron doesn't exist");
-        } else {
-            System.out.println(db.getInformationAboutTheUser(user2.getCard_number()).getName());
-            System.out.println(db.getInformationAboutTheUser(user2.getCard_number()).getAdress());
-            System.out.println(db.getInformationAboutTheUser(user2.getCard_number()).getPhoneNumber());
-            System.out.println(db.getInformationAboutTheUser(user2.getCard_number()).getCard_number());
-            System.out.println(db.getInformationAboutTheUser(user2.getCard_number()).getType());
-        }
-        System.out.println(db.getInformationAboutTheUser((Integer) db.isUserAlreadyExist(user3).get(1)).getName());
-        System.out.println(db.getInformationAboutTheUser((Integer) db.isUserAlreadyExist(user3).get(1)).getAdress());
-        System.out.println(db.getInformationAboutTheUser((Integer) db.isUserAlreadyExist(user3).get(1)).getPhoneNumber());
-        System.out.println(db.getInformationAboutTheUser((Integer) db.isUserAlreadyExist(user3).get(1)).getCard_number());
-        System.out.println(db.getInformationAboutTheUser((Integer) db.isUserAlreadyExist(user3).get(1)).getType());
+        assert  (db.isUserAlreadyExist(user2).size() == 1);
+        assert (user3.getName().equals(db.getInformationAboutTheUser((Integer) db.isUserAlreadyExist(user3).get(1)).getName()));
+        assert (user3.getAdress().equals(db.getInformationAboutTheUser((Integer) db.isUserAlreadyExist(user3).get(1)).getAdress()));
+        assert (user3.getPhoneNumber().equals(db.getInformationAboutTheUser((Integer) db.isUserAlreadyExist(user3).get(1)).getPhoneNumber()));
+        assert (user3.getCard_number() == db.getInformationAboutTheUser((Integer) db.isUserAlreadyExist(user3).get(1)).getCard_number());
+        assert (user3.getType().equals(db.getInformationAboutTheUser((Integer) db.isUserAlreadyExist(user3).get(1)).getType()));
+        System.out.println("tc4 assert success");
     }
 
     public void tc5() {
