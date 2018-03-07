@@ -41,7 +41,7 @@ public class LibrarianPatronSCopiesController {
         id.setCellValueFactory(new PropertyValueFactory<Material, Integer>("id"));
         author.setCellValueFactory(new PropertyValueFactory<Material, String>("author"));
         title.setCellValueFactory(new PropertyValueFactory<Material, String>("title"));
-        date.setCellValueFactory(new PropertyValueFactory<Material, String>("date"));
+        date.setCellValueFactory(new PropertyValueFactory<Material, String>("returnDate"));
         ObservableList<Material> list= FXCollections.observableArrayList();
         LinkedList<Material> docs= Librarian.get_all_copies_taken_by_user(userID);
         list.addAll(docs);
