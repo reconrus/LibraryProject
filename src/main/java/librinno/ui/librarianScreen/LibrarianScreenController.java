@@ -203,7 +203,7 @@ public class LibrarianScreenController {
     @FXML
     void addPatron(ActionEvent event) throws IOException {
         Assist.loadStageWait(getClass().getResource("/main/java/librinno/ui/Register/register.fxml"));
-        showTables();
+        showTableUser();
     }
 
     @FXML
@@ -249,7 +249,7 @@ public class LibrarianScreenController {
             }
             else if(material.getType().equals("AV")){
                 AV av = (AV) tableBook.getSelectionModel().getSelectedItem();
-                loader = new FXMLLoader(getClass().getResource("/main/java/librinno/ui/editDoc/EditAv.fxml"));
+                loader = new FXMLLoader(getClass().getResource("/main/java/librinno/ui/editDoc/EditAV.fxml"));
                 parent = loader.load();
                 EditAVController reg = loader.getController();
                 reg.passGUI(av);

@@ -28,12 +28,24 @@ public class Main {
       //  System.out.println(l.getAllCopies().size());
        // System.out.println(l.getAllCopies());
         Tests test=new Tests();
-        test.tc1();
-        test.tc2();
-        test.tc3();
-        test.tc4();
+        test.dump();
+        //test.tc1();
+        test.dump();
+        //test.tc2();
+        test.dump();
+        //test.tc3();
+        test.dump();
+        //test.tc4();
+        test.dump();
+        //test.tc5();
+        test.dump();
+        //test.tc6();
+        test.dump();
         //test.tc7();
+        test.dump();
     }
+
+
 
 
 }

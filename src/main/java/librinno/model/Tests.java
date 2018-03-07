@@ -99,6 +99,7 @@ public class Tests {
 
 
     public void tc2() throws SQLException {
+        tc1();
         ArrayList arrayList = db.isBookAlreadyExist(book1);
         ArrayList arrayList3 = db.isBookAlreadyExist(book3);
 
@@ -142,6 +143,7 @@ public class Tests {
     }
 
     public void tc3() throws SQLException {
+        tc1();
         Statement stmt = db.con.createStatement();
         ResultSet rs = stmt.executeQuery("SELECT * FROM Users_of_the_library");
         while (rs.next()) {
@@ -160,6 +162,7 @@ public class Tests {
     }
 
     public void tc4() throws SQLException {
+        tc2();
         assert (db.isUserAlreadyExist(user2).size() == 1);
         assert (user3.getName().equals(db.getInformationAboutTheUser((Integer) db.isUserAlreadyExist(user3).get(1)).getName()));
         assert (user3.getAdress().equals(db.getInformationAboutTheUser((Integer) db.isUserAlreadyExist(user3).get(1)).getAdress()));
@@ -170,11 +173,13 @@ public class Tests {
     }
 
     public void tc5() throws SQLException {
+        tc2();
         assert (db.isUserAlreadyExist(user2).size() == 1);
         System.out.println("tc5 success");
     }
 
     public void tc6() throws SQLException {
+        tc2();
         l.checkOutBook(user, (Integer) db.isBookAlreadyExist(book1).get(1));
         Statement stmt = db.con.createStatement();
         ResultSet rs = stmt.executeQuery("SELECT * FROM Copy");
@@ -221,6 +226,7 @@ public class Tests {
 
 
     public void tc7() throws SQLException {
+        tc1();
         l.checkOutBook(user, (Integer) db.isBookAlreadyExist(book1).get(1));
         l.checkOutBook(user, (Integer) db.isBookAlreadyExist(book2).get(1));
         l.checkOutBook(user, (Integer) db.isBookAlreadyExist(book3).get(1));
@@ -288,4 +294,23 @@ public class Tests {
         assert (l.getAllCopiesTakenByUser(user.getCard_number()).size() >0);
         System.out.println("tc7 success");
     }
+
+    public void dump(){
+        try {
+            PreparedStatement pr = db.con.prepareStatement("DELETE from AV");
+            pr.executeUpdate();
+            pr = db.con.prepareStatement("DELETE from Copy");
+            pr.executeUpdate();
+            pr = db.con.prepareStatement("DELETE from Articles");
+            pr.executeUpdate();
+            pr = db.con.prepareStatement("DELETE from Books");
+            pr.executeUpdate();
+            pr = db.con.prepareStatement("DELETE FROM Users_of_the_library WHERE Card_number NOT IN (31,32,33)");
+            pr.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 }
