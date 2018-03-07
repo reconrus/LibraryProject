@@ -3,6 +3,7 @@ package main.java.librinno.model;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 /**
  * Created by kor19 on 06.03.2018.
@@ -50,17 +51,18 @@ public class Tests {
     }
 
     public void tc3() throws SQLException {
-        System.out.println(db.get_information_about_the_user(user.getCard_number()).get_name());
-        System.out.println(db.get_information_about_the_user(user.getCard_number()).get_adress());
-        System.out.println(db.get_information_about_the_user(user.getCard_number()).getPhone_Number());
-        System.out.println(db.get_information_about_the_user(user.getCard_number()).get_card_number());
-        System.out.println(db.get_information_about_the_user(user.getCard_number()).get_type());
 
-        System.out.println(db.get_information_about_the_user(user3.getCard_number() + 2).get_name());
-        System.out.println(db.get_information_about_the_user(user3.getCard_number() + 2).get_adress());
-        System.out.println(db.get_information_about_the_user(user3.getCard_number() + 2).getPhone_Number());
-        System.out.println(db.get_information_about_the_user(user3.getCard_number() + 2).get_card_number());
-        System.out.println(db.get_information_about_the_user(user3.getCard_number() + 2).get_type());
+        System.out.println(db.get_information_about_the_user((Integer) db.isUserAlreadyExist(user).get(1)).get_name());
+        System.out.println(db.get_information_about_the_user((Integer) db.isUserAlreadyExist(user).get(1)).get_adress());
+        System.out.println(db.get_information_about_the_user((Integer) db.isUserAlreadyExist(user).get(1)).getPhone_Number());
+        System.out.println(db.get_information_about_the_user((Integer) db.isUserAlreadyExist(user).get(1)).get_card_number());
+        System.out.println(db.get_information_about_the_user((Integer) db.isUserAlreadyExist(user).get(1)).get_type());
+
+        System.out.println(db.get_information_about_the_user((Integer) db.isUserAlreadyExist(user3).get(1)).get_name());
+        System.out.println(db.get_information_about_the_user((Integer) db.isUserAlreadyExist(user3).get(1)).get_adress());
+        System.out.println(db.get_information_about_the_user((Integer) db.isUserAlreadyExist(user3).get(1)).getPhone_Number());
+        System.out.println(db.get_information_about_the_user((Integer) db.isUserAlreadyExist(user3).get(1)).get_card_number());
+        System.out.println(db.get_information_about_the_user((Integer) db.isUserAlreadyExist(user3).get(1)).get_type());
     }
 
     public void tc4() throws SQLException {
@@ -73,14 +75,46 @@ public class Tests {
             System.out.println(db.get_information_about_the_user(user2.getCard_number()).get_card_number());
             System.out.println(db.get_information_about_the_user(user2.getCard_number()).get_type());
         }
-        System.out.println(db.get_information_about_the_user(user3.getCard_number() + 2).get_name());
-        System.out.println(db.get_information_about_the_user(user3.getCard_number() + 2).get_adress());
-        System.out.println(db.get_information_about_the_user(user3.getCard_number() + 2).getPhone_Number());
-        System.out.println(db.get_information_about_the_user(user3.getCard_number() + 2).get_card_number());
-        System.out.println(db.get_information_about_the_user(user3.getCard_number() + 2).get_type());
+        System.out.println(db.get_information_about_the_user((Integer) db.isUserAlreadyExist(user3).get(1)).get_name());
+        System.out.println(db.get_information_about_the_user((Integer) db.isUserAlreadyExist(user3).get(1)).get_adress());
+        System.out.println(db.get_information_about_the_user((Integer) db.isUserAlreadyExist(user3).get(1)).getPhone_Number());
+        System.out.println(db.get_information_about_the_user((Integer) db.isUserAlreadyExist(user3).get(1)).get_card_number());
+        System.out.println(db.get_information_about_the_user((Integer) db.isUserAlreadyExist(user3).get(1)).get_type());
     }
 
-    public void tc5() throws SQLException {
-        boolean correct = l.checkOutBook(user2, (Integer) db.isBookAlreadyExist(book2).get(1));
+    public void tc5(){
+        try {
+            if ((Integer) db.isUserAlreadyExist(user2).get(0) == 1)
+                l.checkOutBook(user2, (Integer) db.isBookAlreadyExist(book2).get(1));
+            else
+                System.out.println("This user not in system");
+        } catch (SQLException e) {
+            System.out.println("This user not in system");
+            e.printStackTrace();
+        }
     }
+
+    public void tc6()throws SQLException{
+        l.checkOutBook(user, (Integer) db.isBookAlreadyExist(book1).get(1));
+        l.checkOutBook(user3,(Integer) db.isBookAlreadyExist(book1).get(1));
+        l.checkOutBook(user, (Integer) db.isBookAlreadyExist(book2).get(1));
+        System.out.println(user.get_name());
+        System.out.println(user.get_adress());
+        System.out.println(user.getPhone_Number());
+        System.out.println(db.isUserAlreadyExist(user).get(1));
+        System.out.println(user.get_type());
+        LinkedList<Material> linkedList=l.get_all_copies_taken_by_user((Integer) db.isUserAlreadyExist(user).get(1));
+        for (int i = 0; i <linkedList.size() ; i++)
+            System.out.println(linkedList.get(i).getTitle()+", "+linkedList.get(i).getReturnDate());
+
+        System.out.println(user3.get_name());
+        System.out.println(user3.get_adress());
+        System.out.println(user3.getPhone_Number());
+        System.out.println(db.isUserAlreadyExist(user3).get(1));
+        System.out.println(user3.get_type());
+        LinkedList <Material>linkedList2=l.get_all_copies_taken_by_user((Integer) db.isUserAlreadyExist(user3).get(1)+1);
+        for (int i = 0; i <linkedList2.size() ; i++)
+            System.out.println(linkedList2.get(i).getTitle()+", "+linkedList2.get(i).getReturnDate());
+    }
+    
 }

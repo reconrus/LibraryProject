@@ -558,7 +558,7 @@ public class Librarian extends User {
 
     public static LinkedList<Material> get_all_copies() {
         LinkedList<Material> copies = new LinkedList();
-        LinkedList<Integer> attended_id = new LinkedList<>();
+        LinkedList<Integer> attended_id = new LinkedList();
         try {
             Statement stmt = db.con.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM Copy");
