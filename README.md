@@ -8,7 +8,7 @@ https://yadi.sk/d/-skindPZ3T8XBj
 
 Tests (LibraryProjectTest.exe):
 https://yadi.sk/d/a_jsc21L3T8XJx
-
+Execution might take time.
 
 Sincerely, 
 LibrInno team.
