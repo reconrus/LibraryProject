@@ -2,10 +2,13 @@
 
 Dear Alexander Naumchev,
 
-Please, follow link to download jar file of our application. 
+Please, follow link to downloa our application. To run: LibProject/Root/LibraryProject.exe.
 Also we will provide you the link to our database and log/pass. In purpose to help you to	track an execution of our program.
+https://yadi.sk/d/-skindPZ3T8XBj
 
-https://yadi.sk/d/Kc44akIN3T2e3i
+Tests (LibraryProjectTest.exe):
+https://yadi.sk/d/a_jsc21L3T8XJx
+
 
 Sincerely, 
 LibrInno team.
