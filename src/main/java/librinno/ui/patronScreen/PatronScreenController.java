@@ -63,9 +63,6 @@ public class PatronScreenController {
     private TableColumn<Material, String> title;
 
     @FXML
-    private TableColumn<Material, String> publisher;
-
-    @FXML
     private TableColumn<Material, Integer> avaliability;
 
     @FXML
@@ -73,11 +70,10 @@ public class PatronScreenController {
         id.setCellValueFactory(new PropertyValueFactory("id"));
         author.setCellValueFactory(new PropertyValueFactory("author"));
         title.setCellValueFactory(new PropertyValueFactory("title"));
-        publisher.setCellValueFactory(new PropertyValueFactory("publisher"));
         avaliability.setCellValueFactory(new PropertyValueFactory("numberAvailable"));
         ArrayList<Material> books = Librarian.get_all_books();
-
-
+        books.addAll(Librarian.get_all_articles());
+        books.addAll(Librarian.get_all_AV());
         tableBook.getItems().setAll(books);
     }
 
@@ -133,7 +129,7 @@ public class PatronScreenController {
             return;
         }
 
-        Boolean flag = Librarian.checkOutBook(user,book.getId());
+        Boolean flag = Librarian.checkOut(user,book.getId());
         if (flag){
             Alert error= new Alert(Alert.AlertType.CONFIRMATION);
             error.setHeaderText("Success");

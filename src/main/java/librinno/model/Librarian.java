@@ -71,6 +71,69 @@ public class Librarian extends User {
         }
     }
 
+    public static boolean checkOutAV(User user, int idOfAV) {
+        try {
+            Database db = new Database();
+            PreparedStatement pr = db.con.prepareStatement("UPDATE Copy SET Owner=?,Time_left=?,Status=?,Return_date=? WHERE Id_of_original= " + idOfAV + " AND Status= 'In library' LIMIT 1 ");
+            AV av = av_by_id(idOfAV);
+            pr.setInt(1, user.getCard_number());
+            pr.setInt(2, 14);
+            LocalDate returnDate = LocalDate.now().plusDays(14);
+            pr.setDate(4, java.sql.Date.valueOf(returnDate));
+            pr.setString(3, "Issued");
+            pr.executeUpdate();
+            return true;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public static boolean checkOutArticle(User user, int idOfArticle) {
+        try {
+            Database db = new Database();
+            PreparedStatement pr = db.con.prepareStatement("UPDATE Copy SET Owner=?,Time_left=?,Status=?,Return_date=? WHERE Id_of_original= " + idOfArticle + " AND Status= 'In library' LIMIT 1 ");
+            Article article = article_by_id(idOfArticle);
+            if (!article.getReference()) {
+                pr.setInt(1, user.getCard_number());
+                pr.setInt(2, 14);
+                LocalDate returnDate = LocalDate.now().plusDays(14);
+                pr.setDate(4, java.sql.Date.valueOf(returnDate));
+                pr.setString(3, "Issued");
+                pr.executeUpdate();
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+   public static boolean checkOut(User user, int idMaterial){
+       boolean success = false;
+       Statement stmt= null;
+       try {
+           stmt = db.con.createStatement();
+           ResultSet rs = stmt.executeQuery("SELECT * FROM Books WHERE id =" + idMaterial);
+           if(rs.next()){
+               success = checkOutBook(user, idMaterial);
+           }
+           rs = stmt.executeQuery("SELECT * FROM AV WHERE id =" + idMaterial);
+           if(rs.next()){
+               success = checkOutAV(user, idMaterial);
+           }
+           rs = stmt.executeQuery("SELECT * FROM Articles WHERE id =" + idMaterial);
+           if(rs.next()){
+               success = checkOutArticle(user, idMaterial);
+           }
+       } catch (SQLException e) {
+           e.printStackTrace();
+       }
+       return success;
+   }
+
     public static boolean returnBook(int idOfCopyOfBook) {
         try {
             Database db = new Database();
@@ -226,7 +289,7 @@ public class Librarian extends User {
     }
 
     public static void add_article(String title, String author, int price, String keyWords,
-                            boolean reference, String journal, String editor, String date, int amount) throws SQLException {
+                                   boolean reference, String journal, String editor, String date, int amount) throws SQLException {
         /*
          * To add article, you need to send all information about article
          * ID will be created in DB with auto_increment

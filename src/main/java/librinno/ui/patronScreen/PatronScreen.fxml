@@ -98,7 +98,6 @@
                                           <TableColumn fx:id="id" prefWidth="44.0" text="ID" />
                                           <TableColumn fx:id="author" prefWidth="92.0" text="Author" />
                                           <TableColumn fx:id="title" prefWidth="75.0" text="Title" />
-                                          <TableColumn fx:id="publisher" prefWidth="75.0" text="Publisher" />
                                           <TableColumn fx:id="avaliability" text="Avaliability" />
                                        </columns>
                                        <columnResizePolicy>
