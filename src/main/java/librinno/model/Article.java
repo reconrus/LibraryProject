@@ -25,8 +25,6 @@ public class Article extends Material{
         return reference;
     }
 
-    private LocalDate date_of_return;
-
     public Article(String title,String author,int price, String keyWords,
                    boolean reference,String journal,String editor, String date,String status){
         setTitle(title);

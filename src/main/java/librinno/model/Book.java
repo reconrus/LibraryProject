@@ -16,17 +16,7 @@ public class Book extends Material {
     private int year;
     private String edition;
     private boolean is_bestseller;
-    private int left_time;
     private boolean reference;
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
-
-    private LocalDate date;
 
     public boolean isIs_bestseller() {
         return is_bestseller;
@@ -34,14 +24,6 @@ public class Book extends Material {
 
     public boolean isReference(){
         return reference;
-    }
-
-    public int get_left_time() {
-        return left_time;
-    }
-
-    public void set_left_time(int left_time) {
-        this.left_time = left_time;
     }
 
     public int getYear() {
@@ -133,11 +115,11 @@ public class Book extends Material {
         setReference(reference);
         setYear(year);
         setTotalNumber(amount);
-        setDate(date);
+        setReturnDate(date);
         setType("Book");
     }
-    public Book(String book,int id, String title, String author, String publisher, String edition, int price, String keyWords, boolean is_bestseller, boolean reference, int year, int amount, LocalDate date, String status, int userid) {
-        setType(book);
+    public Book(String type,int id, String title, String author, String publisher, String edition, int price, String keyWords, boolean is_bestseller, boolean reference, int year, int amount, LocalDate date, String status, int userid) {
+        setType(type);
         setId(id);
         setTitle(title);
         setAuthor(author);
@@ -149,7 +131,7 @@ public class Book extends Material {
         setReference(reference);
         setYear(year);
         setTotalNumber(amount);
-        setDate(date);
+        setReturnDate(date);
         setStatus(status);
         setUserId(userid);
         setType("Book");
@@ -167,7 +149,6 @@ public class Book extends Material {
         setReference(reference);
         setYear(year);
         setNumberAvailable(amount);
-        setDate(date);
         setTotalNumber(total);
         setType("Book");
     }

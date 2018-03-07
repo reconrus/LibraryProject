@@ -9,7 +9,6 @@ import java.util.Scanner;
  * AV already have all propirties in Class Material
  */
 public class AV extends Material {
-    private LocalDate date;
     public AV(String title,String author,int price, String keyWords,String status){
         setTitle(title);
         setAuthor(author);
@@ -32,7 +31,7 @@ public class AV extends Material {
         setAuthor(author);
         setPrice(price);
         setKeyWords(keyWords);
-        setDate(date);
+        setReturnDate(date);
         setStatus(status);
         setUserId(userid);
         setType("AV");
@@ -57,11 +56,4 @@ public class AV extends Material {
         setType("AV");
     }
 
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
 }
