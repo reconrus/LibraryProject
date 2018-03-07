@@ -4,7 +4,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -43,7 +42,7 @@ public class LibrarianPatronSCopiesController {
         title.setCellValueFactory(new PropertyValueFactory<Material, String>("title"));
         date.setCellValueFactory(new PropertyValueFactory<Material, String>("date"));
         ObservableList<Material> list= FXCollections.observableArrayList();
-        LinkedList<Material> docs= Librarian.get_all_copies_taken_by_user(userID);
+        LinkedList<Material> docs= Librarian.getAllCopiesTakenByUser(userID);
         list.addAll(docs);
         tableDoc.getItems().setAll(list);
     }

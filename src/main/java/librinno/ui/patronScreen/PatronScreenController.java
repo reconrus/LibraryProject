@@ -78,9 +78,9 @@ public class PatronScreenController {
         title.setCellValueFactory(new PropertyValueFactory("title"));
         copyType.setCellValueFactory(new PropertyValueFactory("type"));
         avaliability.setCellValueFactory(new PropertyValueFactory("numberAvailable"));
-        ArrayList<Material> books = Librarian.get_all_books();
-        books.addAll(Librarian.get_all_articles());
-        books.addAll(Librarian.get_all_AV());
+        ArrayList<Material> books = Librarian.getAllBooks();
+        books.addAll(Librarian.getAllArticles());
+        books.addAll(Librarian.getAllAV());
         tableBook.getItems().setAll(books);
     }
 
@@ -92,7 +92,7 @@ public class PatronScreenController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/main/java/librinno/ui/ShowDocInfo/ShowAVInfo.fxml"));
             Parent parent = loader.load();
             ShowAVInfo reg = loader.getController();
-            reg.passGUI(Librarian.av_by_id(material.getId()));
+            reg.passGUI(Librarian.avById(material.getId()));
             Stage stage = new Stage(StageStyle.DECORATED);
             stage.setScene(new Scene(parent));
             stage.showAndWait();
@@ -109,7 +109,7 @@ public class PatronScreenController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/main/java/librinno/ui/ShowDocInfo/ShowArticleInfo.fxml"));
             Parent parent = loader.load();
             ShowArticleInfo reg = loader.getController();
-            reg.passGUI(Librarian.article_by_id(material.getId()));
+            reg.passGUI(Librarian.articleById(material.getId()));
             Stage stage = new Stage(StageStyle.DECORATED);
             stage.setScene(new Scene(parent));
             stage.showAndWait();
@@ -127,11 +127,11 @@ public class PatronScreenController {
     }
 
     public void setUserInfo(User patron){
-        cardNumber.setText(String.valueOf(patron.get_card_number()));
-        fullName.setText(patron.get_name());
-        phone.setText(patron.get_number());
-        address.setText(patron.get_adress());
-        type.setText(patron.get_type());
+        cardNumber.setText(String.valueOf(patron.getCard_Number()));
+        fullName.setText(patron.getName());
+        phone.setText(patron.getPhoneNumber());
+        address.setText(patron.getAdress());
+        type.setText(patron.getType());
         user=patron;
         bookCount.setText(""+Librarian.getNumberOfAllCopiesTakenByUser(patron.getCard_number()));
     }
@@ -143,7 +143,7 @@ public class PatronScreenController {
         Parent parent = loader.load();
 
         PatronSDocumentsController controller = loader.getController();
-        controller.setId(user.get_card_number());
+        controller.setId(user.getCard_Number());
 
         Stage stage = new Stage(StageStyle.DECORATED);
         stage.setScene(new Scene(parent));

@@ -22,16 +22,16 @@ public class Main {
         //enter information which will be put in database
         //Database db = new Database();
         Librarian l = new Librarian();
-        //l.get_all_users();
-       //System.out.println(l.get_all_copies_taken_by_user(1));
-       // System.out.println(l.get_all_copies_taken_by_user(1));
-       // for (int i = 0; i < Librarian.get_all_copies_taken_by_user(1).size(); i++) {
-       //        System.out.println(Librarian.get_all_copies_taken_by_user(1).get(i).getType());
+        //l.getAllUsers();
+       //System.out.println(l.getAllCopiesTakenByUser(1));
+       // System.out.println(l.getAllCopiesTakenByUser(1));
+       // for (int i = 0; i < Librarian.getAllCopiesTakenByUser(1).size(); i++) {
+       //        System.out.println(Librarian.getAllCopiesTakenByUser(1).get(i).getType());
        // }
-        //l.delete_user_by_id(35);
-        //System.out.println(l.av_by_id(201).getAuthor());
-      //  System.out.println(l.get_all_copies().size());
-       // System.out.println(l.get_all_copies());
+        //l.deleteUserById(35);
+        //System.out.println(l.avById(201).getAuthor());
+      //  System.out.println(l.getAllCopies().size());
+       // System.out.println(l.getAllCopies());
         Tests test=new Tests();
         test.tc1();
         test.tc2();

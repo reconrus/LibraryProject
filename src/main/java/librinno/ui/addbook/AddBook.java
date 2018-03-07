@@ -2,13 +2,10 @@ package main.java.librinno.ui.addbook;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
-import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Tab;
-import main.java.librinno.model.Book;
-import main.java.librinno.model.Database;
 import main.java.librinno.model.Librarian;
 import main.java.librinno.ui.assist.Assist;
 
@@ -121,7 +118,7 @@ public class AddBook {
                     || (bookEdition.isEmpty()) || (bookAmount.isEmpty()) || (Integer.parseInt(bookAmount) > 500)) {
                 Assist.error();
             } else {
-                Librarian.add_book(bookTitle, bookAuthor, bookPublisher, bookEdition, Integer.parseInt(bookPrice), bookKeyWords, bestseller, reference, Integer.parseInt(bookYear), Integer.parseInt(bookAmount));
+                Librarian.addBook(bookTitle, bookAuthor, bookPublisher, bookEdition, Integer.parseInt(bookPrice), bookKeyWords, bestseller, reference, Integer.parseInt(bookYear), Integer.parseInt(bookAmount));
                 Assist.closeStage(cancel);
             }
         } else if (articleTab.isSelected()) {
@@ -138,7 +135,7 @@ public class AddBook {
                     || (editors.isEmpty()) || (amount.isEmpty()) || (Integer.parseInt(amount) > 500)) {
                 Assist.error();
             } else {
-                Librarian.add_article(title, author, Integer.parseInt(price), keyWords, isReference, journal, editors, date, Integer.parseInt(amount));
+                Librarian.addArticle(title, author, Integer.parseInt(price), keyWords, isReference, journal, editors, date, Integer.parseInt(amount));
                 Assist.closeStage(cancel);
             }
         } else {
@@ -151,7 +148,7 @@ public class AddBook {
                     || (amountAV.isEmpty()) || (Integer.parseInt(amountAV) > 500)) {
                 Assist.error();
             } else {
-                Librarian.add_AV(titleAV, authorAV, Integer.parseInt(priceAV), keyWordsAV, Integer.parseInt(amountAV));
+                Librarian.addAV(titleAV, authorAV, Integer.parseInt(priceAV), keyWordsAV, Integer.parseInt(amountAV));
                 Assist.closeStage(cancel);
             }
         }

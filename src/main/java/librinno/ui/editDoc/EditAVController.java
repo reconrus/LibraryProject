@@ -1,7 +1,6 @@
 package main.java.librinno.ui.editDoc;
 
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -53,7 +52,7 @@ public class EditAVController {
             av.setKeyWords(keyWords);
             av.setPrice(Integer.parseInt(price));
 
-            Librarian.modify_AV(av);
+            Librarian.modifyAV(av);
             Assist.closeStage(cancel);
         }
     }

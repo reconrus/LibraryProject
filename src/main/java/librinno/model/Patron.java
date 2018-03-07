@@ -15,7 +15,7 @@ public class Patron extends User {
      */
     public void Patron(String name,String phone_number,String adress,int card_number){
         this.name=name;
-        this.Phone_Number=phone_number;
+        this.phoneNumber =phone_number;
         this.adress=adress;
         this.card_number=card_number;
     }

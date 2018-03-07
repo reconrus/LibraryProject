@@ -24,8 +24,7 @@ public class AV extends Material {
         setKeyWords(keyWords);
         setType("AV");
     }
-    public AV(String av, int id, String title, String author, int price, String keyWords,LocalDate date,String status,int userid){
-        setType(av);
+    public AV(int id, String title, String author, int price, String keyWords,LocalDate date,String status,int userid){
         setId(id);
         setTitle(title);
         setAuthor(author);

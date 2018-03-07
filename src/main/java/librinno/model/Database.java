@@ -32,22 +32,22 @@ public class Database {
      * getting users of database to project
      * @param user - user of library
      */
-    public static void user_creation(User user) {
+    public static void userCreation(User user) {
         try {
             //get all needed information
             prst = con.prepareStatement("insert into Users_of_the_library(Name, Address, Phone_number,Type,Password) values(?, ?, ?,?,?)");
-            prst.setString(1, user.get_name());
-            prst.setString(2, user.get_adress());
-            prst.setString(3, user.get_number());
-            //prst.setInt(4, user.get_card_number());
-            prst.setString(4,user.get_type());
-            prst.setString(5,user.get_password());
+            prst.setString(1, user.getName());
+            prst.setString(2, user.getAdress());
+            prst.setString(3, user.getPhoneNumber());
+            //prst.setInt(4, user.getCard_Number());
+            prst.setString(4,user.getType());
+            prst.setString(5,user.getPassword());
             prst.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    public void av_creation(AV av)throws SQLException{
+    public void avCreation(AV av)throws SQLException{
         ArrayList <Integer>arrayList =isAVAlreadyExist(av);
         if (arrayList.get(0)==0) {
             prst = con.prepareStatement("insert into AV(Name,Author,Price,Keywords) values(?,?,?,?)");
@@ -77,7 +77,7 @@ public class Database {
             prst.executeUpdate();
         }
     }
-    public  void article_creation(Article article)throws SQLException{
+    public  void articleCreation(Article article)throws SQLException{
         /*
         * Сперва чекаем есть ли у нас уже такая статья,
         * если есть то запоминаем ее ID и просто добавляе копию в таблицу копий
@@ -116,7 +116,7 @@ public class Database {
             prst.executeUpdate();
         }
     }
-    public  void book_creation(Book book){
+    public  void bookCreation(Book book){
         /*
         * Сперва чекаем есть ли у нас уже такая книга,
         * если есть то запоминаем ее ID и просто добавляе копию в таблицу копий
@@ -132,8 +132,8 @@ public class Database {
                 prst.setString   (4, book.getEdition());
                 prst.setInt   (5, book.getPrice());
                 prst.setString(6, book.getKeyWords());
-                prst.setBoolean(7, book.isIs_bestseller());
-                prst.setBoolean(8, book.isReference());
+                prst.setBoolean(7, book.getBestseller());
+                prst.setBoolean(8, book.getReference());
                 prst.setInt    (9, book.getYear());
                 prst.executeUpdate();
                 //находим последний добавленный ID книги и запоминаем его, чтоб потом кинуть его в таблицу копий
@@ -214,7 +214,7 @@ public class Database {
         while (rs.next()){
             if (rs.getString(2).equals(book.getTitle()) && rs.getString(3).equals(book.getAuthor()) && rs.getString(4).equals(book.getPublisher())
             && rs.getString(5).equals(book.getEdition()) && rs.getInt(6) == book.getPrice() && rs.getString(7).equals(book.getKeyWords())
-                    && rs.getBoolean(8) == book.isIs_bestseller() && rs.getBoolean(9) == book.isReference() && rs.getInt(10) == book.getYear()){
+                    && rs.getBoolean(8) == book.getBestseller() && rs.getBoolean(9) == book.getReference() && rs.getInt(10) == book.getYear()){
                 arrayList.add(1); // 1 = true
                 arrayList.add(rs.getInt(1));//save ID of founded book
                 return arrayList;
@@ -234,9 +234,9 @@ public class Database {
         ResultSet rs;
         rs = stmt.executeQuery("SELECT * FROM Users_of_the_library");
         while (rs.next()){
-            if (rs.getString(1).equals(user.get_name()) && rs.getString(2).equals(user.get_adress())
-                    && rs.getString(3).equals(user.getPhone_Number())
-                    && rs.getString(5).equals(user.get_type()) && rs.getString(6).equals( user.get_password())){
+            if (rs.getString(1).equals(user.getName()) && rs.getString(2).equals(user.getAdress())
+                    && rs.getString(3).equals(user.getPhoneNumber())
+                    && rs.getString(5).equals(user.getType()) && rs.getString(6).equals( user.getPassword())){
                 arrayList.add(1); // 1 = true
                 arrayList.add(rs.getInt(4));//save ID of founded book
                 return arrayList;
@@ -245,7 +245,7 @@ public class Database {
         arrayList.add(0);
         return arrayList;
     }
-    public User get_information_about_the_user (int id) throws SQLException{
+    public User getInformationAboutTheUser(int id) throws SQLException{
         Statement stmt=con.createStatement();
         ResultSet rs=stmt.executeQuery("SELECT * FROM Users_of_the_library WHERE Card_number="+id);
         String name="";

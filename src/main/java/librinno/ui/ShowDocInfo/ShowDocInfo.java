@@ -2,13 +2,9 @@ package main.java.librinno.ui.ShowDocInfo;
 
 import com.jfoenix.controls.JFXButton;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 import main.java.librinno.model.*;
 import main.java.librinno.ui.assist.Assist;
-
-import java.awt.event.ActionEvent;
 
 public class ShowDocInfo {
 
@@ -51,8 +47,8 @@ public class ShowDocInfo {
         Author.setText(book.getAuthor());
         publisher.setText(book.getPublisher());
         keyWords.setText(book.getKeyWords());
-        bestseller.setText(book.isIs_bestseller()+"");
-        reference.setText(book.isReference()+"");
+        bestseller.setText(book.getBestseller()+"");
+        reference.setText(book.getReference()+"");
         year.setText(book.getYear()+"");
         price.setText(book.getPrice()+"");
         edition.setText(book.getEdition());
@@ -61,9 +57,9 @@ public class ShowDocInfo {
 
     public void passGUI(Material material){
         String s=material.getType();
-        if (s.equals("AV")) passGUI(Librarian.av_by_id(material.getId()));
+        if (s.equals("AV")) passGUI(Librarian.avById(material.getId()));
         else if (s.equals("Book")) passGUI(Librarian.bookByID(material.getId()));
-        else passGUI(Librarian.article_by_id(material.getId()));
+        else passGUI(Librarian.articleById(material.getId()));
     }
 
     @FXML

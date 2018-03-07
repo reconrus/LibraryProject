@@ -51,10 +51,10 @@ public class Register {
         else{
             Database db= new Database();
             if (isStudent){
-                Database.user_creation(new User(user,phoneNum, addressText, "Student", pass));
+                Database.userCreation(new User(user,phoneNum, addressText, "Student", pass));
             }
             else{
-                Database.user_creation(new User(user,phoneNum, addressText, "Faculty", pass));
+                Database.userCreation(new User(user,phoneNum, addressText, "Faculty", pass));
             }
             Assist.closeStage(confirm);
         }

@@ -7,10 +7,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import main.java.librinno.model.Book;
 import main.java.librinno.model.Librarian;
 import main.java.librinno.model.Material;
-import main.java.librinno.ui.assist.Assist;
 
 import java.util.LinkedList;
 
@@ -57,7 +55,7 @@ public class PatronSDocumentsController {
         date.setCellValueFactory(new PropertyValueFactory<Material, String>("returnDate"));
 
         ObservableList<Material> list= FXCollections.observableArrayList();
-        LinkedList<Material> docs= Librarian.get_all_copies_taken_by_user(userID);
+        LinkedList<Material> docs= Librarian.getAllCopiesTakenByUser(userID);
 
         list.addAll(docs);
         tableDoc.getItems().setAll(list);

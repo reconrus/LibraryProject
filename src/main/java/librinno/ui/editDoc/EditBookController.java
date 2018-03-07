@@ -2,13 +2,10 @@ package main.java.librinno.ui.editDoc;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
-import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javassist.compiler.ast.Keyword;
 import main.java.librinno.model.Book;
-import main.java.librinno.model.Database;
 import main.java.librinno.model.Librarian;
 import main.java.librinno.ui.assist.Assist;
 
@@ -76,11 +73,11 @@ public class EditBookController {
             bookEd.setEdition(bookEdition);
             bookEd.setKeyWords(bookKeyWords);
             bookEd.setPublisher(bookPublisher);
-            bookEd.setIs_bestseller(bestseller);
+            bookEd.setBestseller(bestseller);
             bookEd.setReference(reference);
             bookEd.setYear(Integer.parseInt(bookYear));
 
-            Librarian.modify_book(bookEd);
+            Librarian.modifyBook(bookEd);
 
             Assist.closeStage(cancel);
         }
@@ -94,8 +91,8 @@ public class EditBookController {
         keyWords.setText(book.getKeyWords());
         publisher.setText(book.getPublisher());
         year.setText(book.getYear()+"");
-        isBestseller.setSelected(book.isIs_bestseller());
-        isReference.setSelected(book.isReference());
+        isBestseller.setSelected(book.getBestseller());
+        isReference.setSelected(book.getReference());
         id.setText(book.getId()+"");
         id.setEditable(false);
         bookEd=book;

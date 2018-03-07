@@ -23,20 +23,9 @@ public class Librarian extends User {
 
     public void Librarian(String name, String phone_number, String adress, int card_number) {
         this.name = name;
-        this.Phone_Number = phone_number;
+        this.phoneNumber = phone_number;
         this.adress = adress;
         this.card_number = card_number;
-    }
-
-    public void add_user() {
-        User user = new User();
-        db.user_creation(user);
-        try {
-            PreparedStatement pr = db.con.prepareStatement("UPDATE Users_of_the_library SET Type='User' WHERE Card_number=" + user.card_number);
-            pr.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println("Error while creating user");
-        }
     }
 
     public static boolean checkOutBook(User user, int idOfBook) {
@@ -44,13 +33,13 @@ public class Librarian extends User {
             Database db = new Database();
             PreparedStatement pr = db.con.prepareStatement("UPDATE Copy SET Owner=?,Time_left=?,Status=?,Return_date=? WHERE Id_of_original= " + idOfBook + " AND Status= 'In library' LIMIT 1 ");
             Book book = bookByID(idOfBook);
-            if (!book.isReference()) {
+            if (!book.getReference()) {
                 pr.setInt(1, user.getCard_number());
-                if (user.get_type().equals("Student") && book.isIs_bestseller()) {
+                if (user.getType().equals("Student") && book.getBestseller()) {
                     pr.setInt(2, 14);//если студент и книга бестселлер, то ставим 14 дней
                     LocalDate returnDate = LocalDate.now().plusDays(14);
                     pr.setDate(4, java.sql.Date.valueOf(returnDate));
-                } else if (user.get_type().equals("Student") && !book.isIs_bestseller()) {
+                } else if (user.getType().equals("Student") && !book.getBestseller()) {
                     pr.setInt(2, 21);//если студент и книга бестселлер, то ставим 21 дней
                     LocalDate returnDate = LocalDate.now().plusDays(21);
                     pr.setDate(4, java.sql.Date.valueOf(returnDate));
@@ -75,7 +64,7 @@ public class Librarian extends User {
         try {
             Database db = new Database();
             PreparedStatement pr = db.con.prepareStatement("UPDATE Copy SET Owner=?,Time_left=?,Status=?,Return_date=? WHERE Id_of_original= " + idOfAV + " AND Status= 'In library' LIMIT 1 ");
-            AV av = av_by_id(idOfAV);
+            AV av = avById(idOfAV);
             pr.setInt(1, user.getCard_number());
             pr.setInt(2, 14);
             LocalDate returnDate = LocalDate.now().plusDays(14);
@@ -94,7 +83,7 @@ public class Librarian extends User {
         try {
             Database db = new Database();
             PreparedStatement pr = db.con.prepareStatement("UPDATE Copy SET Owner=?,Time_left=?,Status=?,Return_date=? WHERE Id_of_original= " + idOfArticle + " AND Status= 'In library' LIMIT 1 ");
-            Article article = article_by_id(idOfArticle);
+            Article article = articleById(idOfArticle);
             if (!article.getReference()) {
                 pr.setInt(1, user.getCard_number());
                 pr.setInt(2, 14);
@@ -180,7 +169,7 @@ public class Librarian extends User {
         return null;
     }
 
-    public static AV av_by_id(int id) {
+    public static AV avById(int id) {
         try {
             Statement stmt = db.con.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM AV where id=" + id);
@@ -196,7 +185,7 @@ public class Librarian extends User {
         return null;
     }
 
-    public static Article article_by_id(int id) {
+    public static Article articleById(int id) {
         try {
             Statement stmt = db.con.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM Articles where id=" + id);
@@ -214,7 +203,7 @@ public class Librarian extends User {
         return null;
     }
 
-    public static void delete_user_by_id(int user_id) {
+    public static void deleteUserById(int user_id) {
         try {
             Database db = new Database();
             Statement stmt = db.con.createStatement();
@@ -234,23 +223,23 @@ public class Librarian extends User {
         //есть еще идея удалять по именам,но чтобы библиотекарю вылезло уведомление,мол,может удалиться более 1 юзера
     }
 
-    public static void modify_user(User user) {
+    public static void modifyUser(User user) {
         try {
             Database db = new Database();
             PreparedStatement pr = db.con.prepareStatement("UPDATE Users_of_the_library " +
-                    "SET Name=?,Address=?,Phone_number=?,Type=?,Password=? where Card_number=" + user.get_card_number());
-            pr.setString(1, user.get_name());
-            pr.setString(2, user.get_adress());
-            pr.setString(3, user.get_number());
-            pr.setString(4, user.get_type());
-            pr.setString(5, user.get_password());
+                    "SET Name=?,Address=?,Phone_number=?,Type=?,Password=? where Card_number=" + user.getCard_Number());
+            pr.setString(1, user.getName());
+            pr.setString(2, user.getAdress());
+            pr.setString(3, user.getPhoneNumber());
+            pr.setString(4, user.getType());
+            pr.setString(5, user.getPassword());
             pr.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public static void add_CopiesOfMaterial(int id, int number) {
+    public static void addCopiesOfMaterial(int id, int number) {
         try {
             if (number > 0) {
                 Statement stmt = db.con.createStatement();
@@ -276,36 +265,36 @@ public class Librarian extends User {
         }
     }
 
-    public static void add_book(String title, String author, String publisher, String edition, int price, String keyWords, Boolean is_bestseller, boolean reference, int year, int amount) throws SQLException {
+    public static void addBook(String title, String author, String publisher, String edition, int price, String keyWords, Boolean is_bestseller, boolean reference, int year, int amount) throws SQLException {
         /*
          * To add book, you need to send all information about book
          * ID will be created in DB with auto_increment
          * time_left will be 999 and owner 0 - because only librarian(Id =0) can add books
          * */
         Book book = new Book(title, author, publisher, edition, price, keyWords, is_bestseller, reference, year, "In library");
-        db.book_creation(book);
+        db.bookCreation(book);
         ArrayList<Integer> arrayList = db.isBookAlreadyExist(book);
-        add_CopiesOfMaterial(arrayList.get(1), amount - 1);
+        addCopiesOfMaterial(arrayList.get(1), amount - 1);
     }
 
-    public static void add_article(String title, String author, int price, String keyWords,
-                                   boolean reference, String journal, String editor, String date, int amount) throws SQLException {
+    public static void addArticle(String title, String author, int price, String keyWords,
+                                  boolean reference, String journal, String editor, String date, int amount) throws SQLException {
         /*
          * To add article, you need to send all information about article
          * ID will be created in DB with auto_increment
          * time_left will be 999 and owner 0 - because only librarian(Id =0) can add articles
          * */
         Article article = new Article(title, author, price, keyWords, reference, journal, editor, date, "In library");
-        db.article_creation(article);
+        db.articleCreation(article);
         ArrayList<Integer> arrayList = db.isArticleAlreadyExist(article);
-        add_CopiesOfMaterial(arrayList.get(1), amount - 1);
+        addCopiesOfMaterial(arrayList.get(1), amount - 1);
     }
 
-    public static void add_AV(String title, String author, int price, String keyWords, int amount) throws SQLException {
+    public static void addAV(String title, String author, int price, String keyWords, int amount) throws SQLException {
         AV av = new AV(title, author, price, keyWords, "In library");
-        db.av_creation(av);
+        db.avCreation(av);
         ArrayList<Integer> arrayList = db.isAVAlreadyExist(av);
-        add_CopiesOfMaterial(arrayList.get(1), amount - 1);
+        addCopiesOfMaterial(arrayList.get(1), amount - 1);
     }
 
     public static void deleteAVById(int id) {
@@ -351,7 +340,7 @@ public class Librarian extends User {
         }
     }
 
-    public static void modify_AV(AV av) {
+    public static void modifyAV(AV av) {
         try {
             PreparedStatement pr = db.con.prepareStatement("UPDATE AV " +
                     "SET Name=?,Author=?,Price=?,Keywords=? where id=" + av.getId());
@@ -365,7 +354,7 @@ public class Librarian extends User {
         }
     }
 
-    public static void modify_article(Article article) {
+    public static void modifyArticle(Article article) {
         try {
             PreparedStatement pr = db.con.prepareStatement("UPDATE Articles " +
                     "SET Name=?,Author=?,Price=?,Keywords=?,is_reference=?,Journal=?,Editor=?,Date=? where id=" + article.getId());
@@ -383,7 +372,7 @@ public class Librarian extends User {
         }
     }
 
-    public static void modify_book(Book book) {
+    public static void modifyBook(Book book) {
         try {
             ArrayList arrayList = db.isBookAlreadyExist(book);
             PreparedStatement pr = db.con.prepareStatement("UPDATE Books " +
@@ -394,8 +383,8 @@ public class Librarian extends User {
             pr.setString(4, book.getEdition());
             pr.setInt(5, book.getPrice());
             pr.setString(6, book.getKeyWords());
-            pr.setBoolean(7, book.isIs_bestseller());
-            pr.setBoolean(8, book.isReference());
+            pr.setBoolean(7, book.getBestseller());
+            pr.setBoolean(8, book.getReference());
             pr.executeUpdate();
 
 
@@ -405,7 +394,7 @@ public class Librarian extends User {
     }
 
 
-    public static ArrayList<Material> get_all_AV() {
+    public static ArrayList<Material> getAllAV() {
         ArrayList<Material> avs = new ArrayList<Material>();
         try {
             Statement stmt = db.con.createStatement();
@@ -436,7 +425,7 @@ public class Librarian extends User {
         return avs;
     }
 
-    public static ArrayList<Material> get_all_articles() {
+    public static ArrayList<Material> getAllArticles() {
         ArrayList<Material> articles = new ArrayList<Material>();
         try {
             Statement stmt = db.con.createStatement();
@@ -461,7 +450,7 @@ public class Librarian extends User {
         return articles;
     }
 
-    public static ArrayList<Material> get_all_books() {
+    public static ArrayList<Material> getAllBooks() {
         ArrayList<Material> books = new ArrayList<Material>();
 
         try {
@@ -498,7 +487,7 @@ public class Librarian extends User {
         return books;
     }
 
-    public static LinkedList<User> get_all_users() {
+    public static LinkedList<User> getAllUsers() {
         LinkedList<User> users = new LinkedList<User>();
         try {
             Statement stmt = db.con.createStatement();
@@ -535,7 +524,7 @@ public class Librarian extends User {
         return copies;
     }
 
-    public static LinkedList<Material> get_all_copies_taken_by_user(int user_id) {
+    public static LinkedList<Material> getAllCopiesTakenByUser(int user_id) {
         LinkedList<Material> copies = new LinkedList();
         try {
             Statement stmt = db.con.createStatement();
@@ -555,7 +544,7 @@ public class Librarian extends User {
                     boolean is_reference = articles_rs.getBoolean("is_reference");
                     String journal = articles_rs.getString("Journal");
                     String editor = articles_rs.getString("Editor");
-                    Article article = new Article("Article", copy_id, name, author, price, keywords, is_reference, journal, editor, returnDate, status, user_id);
+                    Article article = new Article(copy_id, name, author, price, keywords, is_reference, journal, editor, returnDate, status, user_id);
                     copies.add((Material) article);
                 }
                 Statement AV_stmt = db.con.createStatement();
@@ -565,7 +554,7 @@ public class Librarian extends User {
                     String author = AV_rs.getString("Author");
                     int price = AV_rs.getInt("Price");
                     String keywords = AV_rs.getString("Keywords");
-                    AV av = new AV("AV", copy_id, name, author, price, keywords, returnDate, status, user_id);
+                    AV av = new AV(copy_id, name, author, price, keywords, returnDate, status, user_id);
                     copies.add((Material) av);
                 }
                 Statement books_stmt = db.con.createStatement();
@@ -580,7 +569,7 @@ public class Librarian extends User {
                     boolean is_bestseller = books_rs.getBoolean("is_bestseller");
                     boolean is_reference = books_rs.getBoolean("is_reference");
                     int year = books_rs.getInt("Year");
-                    Book book = new Book("Book", copy_id, name, author, publisher, edition, price, keywords, is_bestseller, is_reference, year, 0, returnDate, status, user_id);
+                    Book book = new Book(copy_id, name, author, publisher, edition, price, keywords, is_bestseller, is_reference, year, 0, returnDate, status, user_id);
                     copies.add((Material) book);
                 }
             }
@@ -619,7 +608,7 @@ public class Librarian extends User {
         return copies;
     }
 
-    public static LinkedList<Material> get_all_copies() {
+    public static LinkedList<Material> getAllCopies() {
         LinkedList<Material> copies = new LinkedList();
         LinkedList<Integer> attended_id = new LinkedList<>();
         try {
@@ -629,7 +618,7 @@ public class Librarian extends User {
                 int owner_id = rs.getInt("Owner");
                 attended_id.add(owner_id);
                 if (numberOfMeetings(attended_id, owner_id)) {
-                    LinkedList<Material> owner_copies = get_all_copies_taken_by_user(owner_id);
+                    LinkedList<Material> owner_copies = getAllCopiesTakenByUser(owner_id);
                     copies.addAll(owner_copies);
                 }
             }

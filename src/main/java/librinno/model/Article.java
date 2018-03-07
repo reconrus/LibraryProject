@@ -82,9 +82,8 @@ public class Article extends Material{
         setTotalNumber(amountTotal);
     }
 
-    public Article(String type,int id,String title,String author,int price, String keyWords,
+    public Article(int id,String title,String author,int price, String keyWords,
                    boolean reference,String journal,String editor,String date, String status, int userid){
-        setType(type);
         setId(id);
         setTitle(title);
         setAuthor(author);
@@ -99,9 +98,8 @@ public class Article extends Material{
         setType("Article");
     }
 
-    public Article(String type,int id,String title,String author,int price, String keyWords,
+    public Article(int id,String title,String author,int price, String keyWords,
                    boolean reference,String journal,String editor, LocalDate returnDate, String status, int userid){
-        setType(type);
         setId(id);
         setTitle(title);
         setAuthor(author);

@@ -6,9 +6,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class Booking {
-    private boolean more_or_equal_than_one_copy_of_one_book = false;
+    private boolean moreOrEqualThanOneCopyOfOneBook = false;
 
-    public boolean check_out_by_author(int zaregID, String author) {
+    public boolean checkOutByAuthor(int zaregID, String author) {
         try {
             Statement stmt = Database.con.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT Author,id from Books");
@@ -20,7 +20,7 @@ public class Booking {
                     id = rs.getInt("id");
             }
             if (id != -1)
-                check_out(zaregID, id);
+                checkOut(zaregID, id);
             else return false;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -28,7 +28,7 @@ public class Booking {
         return true;
     }
 
-    public boolean check_out(int zaregID, int bookID) {
+    public boolean checkOut(int zaregID, int bookID) {
         try {
             Statement ps2 = Database.con.createStatement();
             ResultSet rs = ps2.executeQuery("SELECT Type from Users_of_the_library WHERE Card_number=" + zaregID);
@@ -49,7 +49,7 @@ public class Booking {
                     if (book.getInt("owner") != 0) {
                         System.out.println("user with id " + zaregID + " can't take books,because they have finished,come later");
                         return false;
-                    } else if (more_or_equal_than_one_copy_of_one_book) {
+                    } else if (moreOrEqualThanOneCopyOfOneBook) {
                         System.out.println("book is already taken by this user");
                         return false;
                     }else if(book.getBoolean("is_reference")){
@@ -60,9 +60,9 @@ public class Booking {
                         ResultSet equal_number = ps2.executeQuery("SELECT owner from Books");
                          while (equal_number.next()) {
                         if (equal_number.getInt("owner") == zaregID)
-                            more_or_equal_than_one_copy_of_one_book = true;
+                            moreOrEqualThanOneCopyOfOneBook = true;
                     }
-                        if(!more_or_equal_than_one_copy_of_one_book)
+                        if(!moreOrEqualThanOneCopyOfOneBook)
                         System.out.println("user with id " + zaregID + " takes a book");
                         else {
                             System.out.println("user with id " + zaregID + " can't take a book");

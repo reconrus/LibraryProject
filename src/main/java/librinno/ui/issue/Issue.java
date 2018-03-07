@@ -5,7 +5,6 @@ import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
-import main.java.librinno.model.Book;
 import main.java.librinno.model.Database;
 import main.java.librinno.model.Librarian;
 import main.java.librinno.model.Material;
@@ -37,7 +36,7 @@ public class Issue {
         int book=Integer.parseInt(BookID.getText());
         int patron=Integer.parseInt(PatronID.getText());
         Database db= new Database();
-        if(Librarian.checkOut(db.get_information_about_the_user(patron),book)){
+        if(Librarian.checkOut(db.getInformationAboutTheUser(patron),book)){
             Alert error= new Alert(Alert.AlertType.CONFIRMATION);
             error.setHeaderText("Success");
             error.showAndWait();

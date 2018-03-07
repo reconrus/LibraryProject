@@ -103,10 +103,10 @@ public class LibrarianScreenController {
         userID.setCellValueFactory(new PropertyValueFactory<User,Integer>("card_number"));
         userName.setCellValueFactory(new PropertyValueFactory<User,String>("name"));
         userAddress.setCellValueFactory(new PropertyValueFactory<User,String>("adress"));
-        userPhone.setCellValueFactory(new PropertyValueFactory<User,String>("Phone_Number"));
+        userPhone.setCellValueFactory(new PropertyValueFactory<User,String>("phoneNumber"));
         userType.setCellValueFactory(new PropertyValueFactory<User,String>("type"));
         ObservableList<User> list= FXCollections.observableArrayList();
-        LinkedList<User> users= Librarian.get_all_users();
+        LinkedList<User> users= Librarian.getAllUsers();
 
         list.addAll(users);
 
@@ -123,9 +123,9 @@ public class LibrarianScreenController {
         bookType.setCellValueFactory(new PropertyValueFactory("type"));
 
         ObservableList<Material> list= FXCollections.observableArrayList();
-        list.addAll(Librarian.get_all_articles());
-        list.addAll(Librarian.get_all_AV());
-        list.addAll(Librarian.get_all_books());
+        list.addAll(Librarian.getAllArticles());
+        list.addAll(Librarian.getAllAV());
+        list.addAll(Librarian.getAllBooks());
         tableBook.getItems().setAll(list);
     }
 
@@ -156,7 +156,7 @@ public class LibrarianScreenController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/main/java/librinno/ui/ShowDocInfo/ShowAVInfo.fxml"));
             Parent parent = loader.load();
             ShowAVInfo reg = loader.getController();
-            reg.passGUI(Librarian.av_by_id(material.getId()));
+            reg.passGUI(Librarian.avById(material.getId()));
             Stage stage = new Stage(StageStyle.DECORATED);
             stage.setScene(new Scene(parent));
             stage.showAndWait();
@@ -173,7 +173,7 @@ public class LibrarianScreenController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/main/java/librinno/ui/ShowDocInfo/ShowArticleInfo.fxml"));
             Parent parent = loader.load();
             ShowArticleInfo reg = loader.getController();
-            reg.passGUI(Librarian.article_by_id(material.getId()));
+            reg.passGUI(Librarian.articleById(material.getId()));
             Stage stage = new Stage(StageStyle.DECORATED);
             stage.setScene(new Scene(parent));
             stage.showAndWait();
@@ -189,7 +189,7 @@ public class LibrarianScreenController {
         issuedTo.setCellValueFactory(new PropertyValueFactory("userId"));
 
         ObservableList<Material> list= FXCollections.observableArrayList();
-        LinkedList<Material> docs= Librarian.get_all_copies();
+        LinkedList<Material> docs= Librarian.getAllCopies();
 
         list.addAll(docs);
         tableCopy.getItems().setAll(list);
@@ -228,14 +228,14 @@ public class LibrarianScreenController {
     @FXML
     void addCopy(){
         Material material= tableBook.getSelectionModel().getSelectedItem();
-        Librarian.add_CopiesOfMaterial(material.getId(),1);
+        Librarian.addCopiesOfMaterial(material.getId(),1);
         showTables();
     }
     @FXML
     void deletePatron(ActionEvent event) {
         User user= tableUser.getSelectionModel().getSelectedItem();
         if(user!=null) {
-            Librarian.delete_user_by_id(user.card_number);
+            Librarian.deleteUserById(user.card_number);
             showTableUser();
         }
     }

@@ -72,7 +72,7 @@ public class EditArticleController {
             article.setPrice(Integer.parseInt(price));
             article.setReference(isReference);
 
-            Librarian.modify_article(article);
+            Librarian.modifyArticle(article);
 
             Assist.closeStage(cancel);
         }

@@ -3,10 +3,8 @@ package main.java.librinno.ui.editPatron;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
-import com.jfoenix.controls.JFXToggleButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import main.java.librinno.model.Database;
 import main.java.librinno.model.Librarian;
 import main.java.librinno.model.User;
 import main.java.librinno.ui.assist.Assist;
@@ -55,12 +53,12 @@ public class EditPatron {
             Assist.error();
         }
         else {
-            userEd.set_adress(addressText);
-            userEd.set_name(user);
-            userEd.set_password(pass);
-            userEd.set_number(phoneNum);
-            userEd.set_type(typeUs);
-            Librarian.modify_user(userEd);
+            userEd.setAdress(addressText);
+            userEd.setName(user);
+            userEd.setPassword(pass);
+            userEd.setPhoneNumber(phoneNum);
+            userEd.setType(typeUs);
+            Librarian.modifyUser(userEd);
             Assist.closeStage(confirm);
         }
     }
@@ -68,11 +66,11 @@ public class EditPatron {
 
     public void passGUI(User user){
         name.setText(user.getName());
-        phone.setText(user.getPhone_Number());
-        password.setText(user.get_password());
+        phone.setText(user.getPhoneNumber());
+        password.setText(user.getPassword());
         address.setText(user.getAdress());
-        type.setText(user.get_type());
-        id.setText(user.get_another_card_number());
+        type.setText(user.getType());
+        id.setText(user.getCardNumberAsString());
         id.setEditable(false);
         userEd=user;
     }
