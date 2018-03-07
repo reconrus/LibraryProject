@@ -319,6 +319,14 @@ public class Librarian extends User {
             e.printStackTrace();
         }
     }
+    public static void deleteOneCopy(int id) {
+        try {
+            PreparedStatement pr = db.con.prepareStatement("DELETE from Copy WHERE Id_of_copy=" + id+" LIMIT 1");
+            pr.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
     public static void deleteBookById(int id) {
 

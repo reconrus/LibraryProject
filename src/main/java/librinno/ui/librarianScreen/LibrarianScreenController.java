@@ -130,25 +130,6 @@ public class LibrarianScreenController {
     }
 
     @FXML
-    void showDocInfo() throws IOException {
-        Material material= tableBook.getSelectionModel().getSelectedItem();
-        if (material==null){
-            Assist.error();
-        }
-        else{
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/main/java/librinno/ui/patronScreen/PatronSDocuments.fxml"));
-            Parent parent = loader.load();
-
-            ShowDocInfo controller = loader.getController();
-            controller.passGUI(material);
-
-            Stage stage = new Stage(StageStyle.DECORATED);
-            stage.setScene(new Scene(parent));
-            stage.showAndWait();
-        }
-    }
-
-    @FXML
     void showBookInfo() throws IOException {
         Material material = tableBook.getSelectionModel().getSelectedItem();
         String mat=material.getType();
@@ -336,7 +317,7 @@ public class LibrarianScreenController {
     void deleteCopy (ActionEvent event) throws IOException{
         Material copy= tableCopy.getSelectionModel().getSelectedItem();
         if(copy!=null) {
-            Librarian.deleteCopy(copy.getId());
+            Librarian.deleteOneCopy(copy.getId());
             showTables();
         }
     }
