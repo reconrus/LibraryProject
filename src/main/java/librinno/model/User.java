@@ -20,6 +20,21 @@ public class User {
     public String type;
     public String password;
 
+    /**
+     * creating user
+     */
+    User() {
+        // now entering in simple form
+        //get information about user
+        Scanner sc = new Scanner(System.in);
+        setName(sc.next());
+        setPhoneNumber(sc.next());
+        setAdress(sc.next());
+        setCard_number();
+        setType(sc.next());
+        setPassword(sc.next());
+    }
+
     public User(String name, String number, String address, String type, String password) {
         // now entering in simple form
         //get information about user
@@ -31,13 +46,13 @@ public class User {
         setPassword(password);
     }
 
-    public User(String name, String address, String number, int id, String type, String password) {
+    public User(String name, String address, String number, int cardnumber, String type, String password) {
         // now entering in simple form
         //get information about user
         setName(name);
         setPhoneNumber(number);
         setAdress(address);
-        setCardNumberAsString(id);
+        setCardNumberAsString(cardnumber);
         setType(type);
         setPassword(password);
     }
