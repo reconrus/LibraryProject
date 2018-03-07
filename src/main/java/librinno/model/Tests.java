@@ -35,7 +35,6 @@ public class Tests {
         db.userCreation(user2);
         db.userCreation(user3);
         Statement stmt = db.con.createStatement();
-        int count=0;
         ResultSet rs = stmt.executeQuery("SELECT * FROM Users_of_the_library");
         while (rs.next()) {
             assert  (rs.getString("Name").equals(user.getName()) &&
@@ -143,7 +142,20 @@ public class Tests {
     }
 
     public void tc3() throws SQLException {
-
+        Statement stmt = db.con.createStatement();
+        ResultSet rs = stmt.executeQuery("SELECT * FROM Users_of_the_library");
+        while (rs.next()) {
+            assert  (rs.getString("Name").equals(user.getName()) &&
+                    rs.getString("Address").equals(user.getAdress()) &&
+                    rs.getString("Phone_number").equals(user.getPhoneNumber()) &&
+                    rs.getString("Type").equals(user.getType()) &&
+                    rs.getString("Password").equals(user.getPassword()));
+            assert (rs.getString("Name").equals(user3.getName()) &&
+                    rs.getString("Address").equals(user3.getAdress()) &&
+                    rs.getString("Phone_number").equals(user3.getPhoneNumber()) &&
+                    rs.getString("Type").equals(user3.getType()) &&
+                    rs.getString("Password").equals(user3.getPassword()));
+        }
         System.out.println(db.getInformationAboutTheUser((Integer) db.isUserAlreadyExist(user).get(1)).getName());
         System.out.println(db.getInformationAboutTheUser((Integer) db.isUserAlreadyExist(user).get(1)).getAdress());
         System.out.println(db.getInformationAboutTheUser((Integer) db.isUserAlreadyExist(user).get(1)).getPhoneNumber());
@@ -154,6 +166,7 @@ public class Tests {
         System.out.println(db.getInformationAboutTheUser((Integer) db.isUserAlreadyExist(user3).get(1)).getPhoneNumber());
         System.out.println(db.getInformationAboutTheUser((Integer) db.isUserAlreadyExist(user3).get(1)).getCard_number());
         System.out.println(db.getInformationAboutTheUser((Integer) db.isUserAlreadyExist(user3).get(1)).getType());
+        System.out.println("tc3 success");
     }
 
     public void tc4() throws SQLException {
