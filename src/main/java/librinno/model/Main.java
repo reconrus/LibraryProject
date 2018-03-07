@@ -21,7 +21,7 @@ public class Main {
         //use for project
         //enter information which will be put in database
         //Database db = new Database();
-        Librarian l = new Librarian();
+        //Librarian l = new Librarian();
         //l.getAllUsers();
        //System.out.println(l.getAllCopiesTakenByUser(1));
        // System.out.println(l.getAllCopiesTakenByUser(1));

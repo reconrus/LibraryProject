@@ -6,6 +6,10 @@ package main.java.librinno.model;
 public class Patron extends User {
     public boolean is_facullty_member;
 
+    public Patron() {
+        super(name, address, number, id, type, password);
+    }
+
     /**
      * setter
      * @param name of patron

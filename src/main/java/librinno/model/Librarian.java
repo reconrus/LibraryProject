@@ -21,6 +21,10 @@ public class Librarian extends User {
      */
     private static Database db = new Database();
 
+    public Librarian(String name, String address, String number, int cardnumber, String type, String password) {
+        super(name, address, number, cardnumber, type, password);
+    }
+
     public void Librarian(String name, String phone_number, String adress, int card_number) {
         this.name = name;
         this.phoneNumber = phone_number;

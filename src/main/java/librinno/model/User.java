@@ -31,13 +31,13 @@ public class User {
         setPassword(password);
     }
 
-    public User(String name, String address, String number, int cardnumber, String type, String password) {
+    public User(String name, String address, String number, int id, String type, String password) {
         // now entering in simple form
         //get information about user
         setName(name);
         setPhoneNumber(number);
         setAdress(address);
-        setCardNumberAsString(cardnumber);
+        setCardNumberAsString(id);
         setType(type);
         setPassword(password);
     }

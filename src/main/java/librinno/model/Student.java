@@ -12,6 +12,7 @@ public class Student extends Patron{
      * @param card_number id number
      */
     Student(String name, String phone_number, String adress, int card_number) {
+        super();
         this.name = name;
         this.phoneNumber = phone_number;
         this.adress = adress;
