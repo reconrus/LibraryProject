@@ -37,7 +37,7 @@ public class Tests {
         Statement stmt = db.con.createStatement();
         ResultSet rs = stmt.executeQuery("SELECT * FROM Users_of_the_library");
         while (rs.next()) {
-            assert  (rs.getString("Name").equals(user.getName()) &&
+            assert (rs.getString("Name").equals(user.getName()) &&
                     rs.getString("Address").equals(user.getAdress()) &&
                     rs.getString("Phone_number").equals(user.getPhoneNumber()) &&
                     rs.getString("Type").equals(user.getType()) &&
@@ -83,15 +83,15 @@ public class Tests {
                     rs_book.getBoolean("is_reference") == book3.getReference() &&
                     rs_book.getInt("Year") == book3.getYear());
         }
-        ResultSet rs_av = stmt.executeQuery("SELECT * FROM Books");
-        while(rs_av.next()){
-            assert(rs_av.getString("Name").equals(av1.getTitle())&&
+        ResultSet rs_av = stmt.executeQuery("SELECT * FROM AV");
+        while (rs_av.next()) {
+            assert (rs_av.getString("Name").equals(av1.getTitle()) &&
                     rs_av.getString("Author").equals(av1.getAuthor()) &&
-                    rs_av.getInt("Price")==av1.getPrice() &&
+                    rs_av.getInt("Price") == av1.getPrice() &&
                     rs_av.getString("Keywords").equals(av1.getKeyWords()));
-            assert(rs_av.getString("Name").equals(av2.getTitle())&&
+            assert (rs_av.getString("Name").equals(av2.getTitle()) &&
                     rs_av.getString("Author").equals(av2.getAuthor()) &&
-                    rs_av.getInt("Price")==av2.getPrice() &&
+                    rs_av.getInt("Price") == av2.getPrice() &&
                     rs_av.getString("Keywords").equals(av2.getKeyWords()));
         }
         System.out.println("tc1 success");
@@ -108,33 +108,33 @@ public class Tests {
 
             Statement stmt = db.con.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT Id_of_original FROM Copy");
-            int i=0;
+            int i = 0;
             while (rs.next())
-                if (rs.getInt(1)==(Integer)arrayList.get(1))
+                if (rs.getInt(1) == (Integer) arrayList.get(1))
                     i++;
-            assert (i==1);
+            assert (i == 1);
 
             pr = db.con.prepareStatement("DELETE from Copy WHERE Id_of_original=" + arrayList3.get(1) + " LIMIT 1");
             pr.executeUpdate();
 
             stmt = db.con.createStatement();
             rs = stmt.executeQuery("SELECT Id_of_original FROM Copy");
-            i=0;
+            i = 0;
             while (rs.next())
-                if (rs.getInt(1)==(Integer)arrayList3.get(1))
+                if (rs.getInt(1) == (Integer) arrayList3.get(1))
                     i++;
-            assert (i==0);
+            assert (i == 0);
 
             pr = db.con.prepareStatement("DELETE from Users_of_the_library WHERE Card_number=" + db.isUserAlreadyExist(user2).get(1));
             pr.executeUpdate();
 
             stmt = db.con.createStatement();
             rs = stmt.executeQuery("SELECT Card_number FROM Users_of_the_library");
-            i=0;
+            i = 0;
             while (rs.next())
-                if (rs.getInt(1)==(Integer)db.isUserAlreadyExist(user2).get(1))
+                if (rs.getInt(1) == (Integer) db.isUserAlreadyExist(user2).get(1))
                     i++;
-            assert (i==0);
+            assert (i == 0);
             System.out.println("tc2 success");
         } catch (SQLException e) {
             e.printStackTrace();
@@ -145,7 +145,7 @@ public class Tests {
         Statement stmt = db.con.createStatement();
         ResultSet rs = stmt.executeQuery("SELECT * FROM Users_of_the_library");
         while (rs.next()) {
-            assert  (rs.getString("Name").equals(user.getName()) &&
+            assert (rs.getString("Name").equals(user.getName()) &&
                     rs.getString("Address").equals(user.getAdress()) &&
                     rs.getString("Phone_number").equals(user.getPhoneNumber()) &&
                     rs.getString("Type").equals(user.getType()) &&
@@ -156,21 +156,11 @@ public class Tests {
                     rs.getString("Type").equals(user3.getType()) &&
                     rs.getString("Password").equals(user3.getPassword()));
         }
-        System.out.println(db.getInformationAboutTheUser((Integer) db.isUserAlreadyExist(user).get(1)).getName());
-        System.out.println(db.getInformationAboutTheUser((Integer) db.isUserAlreadyExist(user).get(1)).getAdress());
-        System.out.println(db.getInformationAboutTheUser((Integer) db.isUserAlreadyExist(user).get(1)).getPhoneNumber());
-        System.out.println(db.getInformationAboutTheUser((Integer) db.isUserAlreadyExist(user).get(1)).getCard_number());
-        System.out.println(db.getInformationAboutTheUser((Integer) db.isUserAlreadyExist(user).get(1)).getType());
-        System.out.println(db.getInformationAboutTheUser((Integer) db.isUserAlreadyExist(user3).get(1)).getName());
-        System.out.println(db.getInformationAboutTheUser((Integer) db.isUserAlreadyExist(user3).get(1)).getAdress());
-        System.out.println(db.getInformationAboutTheUser((Integer) db.isUserAlreadyExist(user3).get(1)).getPhoneNumber());
-        System.out.println(db.getInformationAboutTheUser((Integer) db.isUserAlreadyExist(user3).get(1)).getCard_number());
-        System.out.println(db.getInformationAboutTheUser((Integer) db.isUserAlreadyExist(user3).get(1)).getType());
         System.out.println("tc3 success");
     }
 
     public void tc4() throws SQLException {
-        assert  (db.isUserAlreadyExist(user2).size() == 1);
+        assert (db.isUserAlreadyExist(user2).size() == 1);
         assert (user3.getName().equals(db.getInformationAboutTheUser((Integer) db.isUserAlreadyExist(user3).get(1)).getName()));
         assert (user3.getAdress().equals(db.getInformationAboutTheUser((Integer) db.isUserAlreadyExist(user3).get(1)).getAdress()));
         assert (user3.getPhoneNumber().equals(db.getInformationAboutTheUser((Integer) db.isUserAlreadyExist(user3).get(1)).getPhoneNumber()));
@@ -179,8 +169,8 @@ public class Tests {
         System.out.println("tc4 assert success");
     }
 
-    public void tc5() throws SQLException{
-        assert  (db.isUserAlreadyExist(user2).size() == 1);
+    public void tc5() throws SQLException {
+        assert (db.isUserAlreadyExist(user2).size() == 1);
         System.out.println("tc5 success");
     }
 
@@ -205,5 +195,74 @@ public class Tests {
         LinkedList<Material> linkedList2 = l.getAllCopiesTakenByUser((Integer) db.isUserAlreadyExist(user3).get(1) + 1);
         for (int i = 0; i < linkedList2.size(); i++)
             System.out.println(linkedList2.get(i).getTitle() + ", " + linkedList2.get(i).getReturnDate());
+    }
+
+    public void tc7() throws SQLException {
+        l.checkOutBook(user, (Integer) db.isBookAlreadyExist(book1).get(1));
+        l.checkOutBook(user, (Integer) db.isBookAlreadyExist(book2).get(1));
+        l.checkOutBook(user, (Integer) db.isBookAlreadyExist(book3).get(1));
+        l.checkOutAV(user, (Integer) db.isAVAlreadyExist(av1).get(1));
+
+        l.checkOutBook(user2, (Integer) db.isBookAlreadyExist(book1).get(1));
+        l.checkOutBook(user2, (Integer) db.isBookAlreadyExist(book1).get(1));
+        l.checkOutAV(user2, (Integer) db.isAVAlreadyExist(av2).get(1));
+        Statement stmt = db.con.createStatement();
+        ResultSet rs = stmt.executeQuery("SELECT * FROM Users_of_the_library");
+        while (rs.next()) {
+            assert (rs.getString("Name").equals(user.getName()) &&
+                    rs.getString("Address").equals(user.getAdress()) &&
+                    rs.getString("Phone_number").equals(user.getPhoneNumber()) &&
+                    rs.getString("Type").equals(user.getType()) &&
+                    rs.getString("Password").equals(user.getPassword()));
+            assert (rs.getString("Name").equals(user2.getName()) &&
+                    rs.getString("Address").equals(user2.getAdress()) &&
+                    rs.getString("Phone_number").equals(user2.getPhoneNumber()) &&
+                    rs.getString("Type").equals(user2.getType()) &&
+                    rs.getString("Password").equals(user2.getPassword()));
+        }
+        ResultSet rs_book = stmt.executeQuery("SELECT * FROM Books");
+        while (rs_book.next()) {
+            assert (rs_book.getString("Name").equals(book1.getTitle()) &&
+                    rs_book.getString("Author").equals(book1.getAuthor()) &&
+                    rs_book.getString("Publisher").equals(book1.getPublisher()) &&
+                    rs_book.getString("Edition").equals(book1.getEdition()) &&
+                    rs_book.getInt("Price") == book1.getPrice() &&
+                    rs_book.getString("Keywords").equals(book1.getKeyWords()) &&
+                    rs_book.getBoolean("is_bestseller") == book1.getBestseller() &&
+                    rs_book.getBoolean("is_reference") == book1.getReference() &&
+                    rs_book.getInt("Year") == book1.getYear());
+            assert (rs_book.getString("Name").equals(book2.getTitle()) &&
+                    rs_book.getString("Author").equals(book2.getAuthor()) &&
+                    rs_book.getString("Publisher").equals(book2.getPublisher()) &&
+                    rs_book.getString("Edition").equals(book2.getEdition()) &&
+                    rs_book.getInt("Price") == book2.getPrice() &&
+                    rs_book.getString("Keywords").equals(book2.getKeyWords()) &&
+                    rs_book.getBoolean("is_bestseller") == book2.getBestseller() &&
+                    rs_book.getBoolean("is_reference") == book2.getReference() &&
+                    rs_book.getInt("Year") == book2.getYear());
+            assert (rs_book.getString("Name").equals(book3.getTitle()) &&
+                    rs_book.getString("Author").equals(book3.getAuthor()) &&
+                    rs_book.getString("Publisher").equals(book3.getPublisher()) &&
+                    rs_book.getString("Edition").equals(book3.getEdition()) &&
+                    rs_book.getInt("Price") == book3.getPrice() &&
+                    rs_book.getString("Keywords").equals(book3.getKeyWords()) &&
+                    rs_book.getBoolean("is_bestseller") == book3.getBestseller() &&
+                    rs_book.getBoolean("is_reference") == book3.getReference() &&
+                    rs_book.getInt("Year") == book3.getYear());
+        }
+        ResultSet rs_av = stmt.executeQuery("SELECT * FROM Books");
+        while (rs_av.next()) {
+            assert (rs_av.getString("Name").equals(av1.getTitle()) &&
+                    rs_av.getString("Author").equals(av1.getAuthor()) &&
+                    rs_av.getInt("Price") == av1.getPrice() &&
+                    rs_av.getString("Keywords").equals(av1.getKeyWords()));
+            assert (rs_av.getString("Name").equals(av2.getTitle()) &&
+                    rs_av.getString("Author").equals(av2.getAuthor()) &&
+                    rs_av.getInt("Price") == av2.getPrice() &&
+                    rs_av.getString("Keywords").equals(av2.getKeyWords()));
+        }
+        assert (l.getAllCopiesTakenByUser(user.getCard_number()).size() >0);
+        assert (l.getAllCopiesTakenByUser(user.getCard_number()).size() >0);
+        System.out.println("tc7 success");
     }
 }
