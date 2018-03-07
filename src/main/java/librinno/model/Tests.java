@@ -106,10 +106,37 @@ public class Tests {
         try {
             PreparedStatement pr = db.con.prepareStatement("DELETE from Copy WHERE Id_of_original=" + arrayList.get(1) + " LIMIT 2");
             pr.executeUpdate();
+
+            Statement stmt = db.con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT Id_of_original FROM Copy");
+            int i=0;
+            while (rs.next())
+                if (rs.getInt(1)==(Integer)arrayList.get(1))
+                    i++;
+            assert (i==1);
+
             pr = db.con.prepareStatement("DELETE from Copy WHERE Id_of_original=" + arrayList3.get(1) + " LIMIT 1");
             pr.executeUpdate();
+
+            stmt = db.con.createStatement();
+            rs = stmt.executeQuery("SELECT Id_of_original FROM Copy");
+            i=0;
+            while (rs.next())
+                if (rs.getInt(1)==(Integer)arrayList3.get(1))
+                    i++;
+            assert (i==0);
+
             pr = db.con.prepareStatement("DELETE from Users_of_the_library WHERE Card_number=" + db.isUserAlreadyExist(user2).get(1));
             pr.executeUpdate();
+
+            stmt = db.con.createStatement();
+            rs = stmt.executeQuery("SELECT Card_number FROM Users_of_the_library");
+            i=0;
+            while (rs.next())
+                if (rs.getInt(1)==(Integer)db.isUserAlreadyExist(user2).get(1))
+                    i++;
+            assert (i==0);
+            System.out.println("tc2 success");
         } catch (SQLException e) {
             e.printStackTrace();
         }
