@@ -66,6 +66,9 @@ public class PatronScreenController {
     private TableColumn<Material, String> title;
 
     @FXML
+    private TableColumn<Material, String> copyType;
+
+    @FXML
     private TableColumn<Material, Integer> avaliability;
 
     @FXML
@@ -73,6 +76,7 @@ public class PatronScreenController {
         id.setCellValueFactory(new PropertyValueFactory("id"));
         author.setCellValueFactory(new PropertyValueFactory("author"));
         title.setCellValueFactory(new PropertyValueFactory("title"));
+        copyType.setCellValueFactory(new PropertyValueFactory("type"));
         avaliability.setCellValueFactory(new PropertyValueFactory("numberAvailable"));
         ArrayList<Material> books = Librarian.get_all_books();
         books.addAll(Librarian.get_all_articles());

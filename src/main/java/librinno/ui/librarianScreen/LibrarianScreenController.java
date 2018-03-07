@@ -236,7 +236,7 @@ public class LibrarianScreenController {
         User user= tableUser.getSelectionModel().getSelectedItem();
         if(user!=null) {
             Librarian.delete_user_by_id(user.card_number);
-            showTables();
+            showTableUser();
         }
     }
 
