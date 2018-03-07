@@ -46,8 +46,5 @@ public class ShowArticleInfo {
         editor.setText(article.getEditor());
     }
     @FXML
-    public void cancel(){
-        Assist.closeStage(close);
-
-    }
+    void close(javafx.event.ActionEvent event) { Assist.closeStage(close);}
 }

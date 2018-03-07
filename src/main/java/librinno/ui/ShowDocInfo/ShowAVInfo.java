@@ -34,8 +34,5 @@ public class ShowAVInfo {
     }
 
     @FXML
-    public void cancel(){
-        Assist.closeStage(close);
-
-    }
+    void cancel(javafx.event.ActionEvent event) { Assist.closeStage(close);}
 }
