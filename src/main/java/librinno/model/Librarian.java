@@ -1,7 +1,6 @@
 package main.java.librinno.model;
 
 import javafx.scene.control.Alert;
-
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;

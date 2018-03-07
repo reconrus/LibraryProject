@@ -1,43 +1,24 @@
 package main.java.librinno.model;
 
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Scanner;
 
 /**
  * user card in library
  */
 public class User {
-
-    //all needed information for library
     public String name;
     public String adress;
     public int card_number;
     public String phoneNumber;
-    public PreparedStatement pr_st;
     public String type;
     public String password;
 
     /**
      * creating user
      */
-    User() {
-        // now entering in simple form
-        //get information about user
-        Scanner sc = new Scanner(System.in);
-        setName(sc.next());
-        setPhoneNumber(sc.next());
-        setAdress(sc.next());
-        setCard_number();
-        setType(sc.next());
-        setPassword(sc.next());
-    }
-
     public User(String name, String number, String address, String type, String password) {
-        // now entering in simple form
-        //get information about user
         setName(name);
         setPhoneNumber(number);
         setAdress(address);
@@ -47,8 +28,6 @@ public class User {
     }
 
     public User(String name, String address, String number, int cardnumber, String type, String password) {
-        // now entering in simple form
-        //get information about user
         setName(name);
         setPhoneNumber(number);
         setAdress(address);
@@ -118,6 +97,7 @@ public class User {
     public void setAdress(String adress) {
         this.adress = adress;
     }
+
     /**
      * increasing is number in system when registering
      */
