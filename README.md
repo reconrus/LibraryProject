@@ -10,5 +10,7 @@ Tests (LibraryProjectTest.exe):
 https://yadi.sk/d/a_jsc21L3T8XJx
 Execution might take time.
 
+Internet connection is required.
+
 Sincerely, 
 LibrInno team.
