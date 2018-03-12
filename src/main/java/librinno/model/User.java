@@ -15,9 +15,9 @@ public class User {
     public String type;
     public String password;
 
-    /**
-     * creating user
-     */
+
+    //constructors for different cases
+    //in some situations not all information is needed
     public User(String name, String number, String address, String type, String password) {
         setName(name);
         setPhoneNumber(number);
@@ -35,7 +35,7 @@ public class User {
         setType(type);
         setPassword(password);
     }
-
+    //getters and setters
     public void setPassword(String password) {
         this.password = password;
     }

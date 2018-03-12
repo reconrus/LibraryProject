@@ -17,6 +17,7 @@ import java.util.LinkedList;
  * Test cases for D2.
  */
 public class Tests {
+    //creation of all needed information for tests
     Database db = new Database();
     Statement stmt = db.con.createStatement();
     Librarian l = new Librarian("1", "1", "1", 1, "1", "1");
@@ -32,6 +33,10 @@ public class Tests {
     public Tests() throws SQLException {
     }
 
+    /**
+     * first test
+     * @throws SQLException
+     */
     public void tc1() throws SQLException {
 
         l.addBook(book1.getTitle(), book1.getAuthor(), book1.getPublisher(), book1.getEdition(), book1.getPrice(), book1.getKeyWords(), book1.getBestseller(), book1.getReference(), book1.getYear(), 3);
@@ -53,7 +58,10 @@ public class Tests {
         rs.last();
         assertion(rs.getRow() == 4);
     }
-
+    /**
+     * second test
+     * @throws SQLException
+     */
     public void tc2() throws SQLException {
         tc1();
         //IsBookAlreadyExist outputs ArrayList of size 2 if the user is already in the system and list[1] == id of the user, of size 1 otherwise
@@ -77,18 +85,28 @@ public class Tests {
         rs.last();
         assertion(rs.getRow() == 3);
     }
-
+    /**
+     * third test
+     * @throws SQLException
+     */
     public void tc3() throws SQLException {
         tc1();
         assertion((Database.isUserAlreadyExist(user).size()+ Database.isUserAlreadyExist(user3).size())==4);
     }
-
+    /**
+     * fourth test
+     * @throws SQLException
+     */
     public void tc4() throws SQLException {
         tc2();
         assertion(Database.isUserAlreadyExist(user2).size()==1);
         assertion(Database.isUserAlreadyExist(user3).size()==2);
     }
 
+    /**
+     * fifth test
+     * @throws SQLException
+     */
     public void tc5() throws SQLException {
         tc2();
         assertion(db.isUserAlreadyExist(user2).size() == 1);
@@ -106,6 +124,10 @@ public class Tests {
         p3 checks out b2
      */
 
+    /**
+     * sixth test
+     * @throws SQLException
+     */
     public void tc6() throws SQLException {
         tc2();
         LocalDate march5 = LocalDate.of(2018, 03, 05);
@@ -150,6 +172,10 @@ public class Tests {
     }
 
 
+    /**
+     * seventh test
+     * @throws SQLException
+     */
     public void tc7() throws SQLException {
         tc1();
 
@@ -244,7 +270,10 @@ public class Tests {
         assertion(b);
     }
 
-
+    /**
+     * eights test
+     * @throws SQLException
+     */
     public void tc8() throws SQLException{
         tc1();
 
@@ -312,9 +341,9 @@ public class Tests {
     }
 
 
-
-
-
+    /**
+     * executing update in all tables
+     */
     public void dump(){
         try {
             PreparedStatement pr = db.con.prepareStatement("DELETE from AV");
@@ -332,14 +361,23 @@ public class Tests {
         }
     }
 
+    /**
+     * assert function
+     * because in typical way
+     * @param b
+     */
     public void assertion(boolean b){
-        if(!b) try{
-            throw new Exception("Test failed");
-        }catch (Exception e){
-            System.out.println("Test failed");
-        }
+        if(!b)
+            System.err.println("Test failed");
     }
 
+    /**
+     * special for tests because now time is taken from local PC
+     * @param user which user takes book
+     * @param idOfBook books id
+     * @param date time
+     * @return boolean value - success or not success
+     */
     public static boolean checkOutBook(User user, int idOfBook, LocalDate date) {
         try {
             Database db = new Database();
@@ -372,6 +410,13 @@ public class Tests {
         }
     }
 
+    /**
+     * the same method for AV
+     * @param user which user takes AV
+     * @param idOfAV what AV to take
+     * @param date time
+     * @return boolean value  - success or not
+     */
     public static boolean checkOutAV(User user, int idOfAV, LocalDate date) {
         try {
             Database db = new Database();

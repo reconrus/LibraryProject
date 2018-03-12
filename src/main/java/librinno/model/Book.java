@@ -17,7 +17,7 @@ public class Book extends Material {
     private String edition;
     private boolean bestseller;
     private boolean reference;
-
+    //getters and setters
     public boolean getBestseller() {
         return bestseller;
     }
@@ -58,6 +58,8 @@ public class Book extends Material {
         this.reference = reference;
     }
 
+    //constructors for different cases
+    //in some situations not all information is needed
     public Book(String title, String author, String publisher, String edition, int price, String keyWords, Boolean bestseller, boolean reference, int year, String status) {
         setTitle(title);
         setAuthor(author);

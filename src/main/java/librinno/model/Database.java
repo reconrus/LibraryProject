@@ -48,6 +48,12 @@ public class Database {
             e.printStackTrace();
         }
     }
+
+    /**
+     * creating AV
+     * @param av what to insert into table
+     * @throws SQLException
+     */
     public void avCreation(AV av)throws SQLException{
         ArrayList <Integer>arrayList =isAVAlreadyExist(av);
         if (arrayList.get(0)==0) {
@@ -78,12 +84,13 @@ public class Database {
             prst.executeUpdate();
         }
     }
+
+    /**
+     * the same method, but for Articles
+     * @param article what article to insert
+     * @throws SQLException
+     */
     public  void articleCreation(Article article)throws SQLException{
-        /*
-        * Сперва чекаем есть ли у нас уже такая статья,
-        * если есть то запоминаем ее ID и просто добавляе копию в таблицу копий
-        * если нет, то добавляем в таблицу Articles описание и одну копию в таблицу копий
-        * */
         ArrayList <Integer>arrayList =isArticleAlreadyExist(article);
         if (arrayList.get(0)==0) {
             prst = con.prepareStatement("insert into Articles(Name,Author,Price,Keywords,is_reference,Journal,Editor,Date) values(?,?,?,?,?,?,?,?)");
@@ -117,12 +124,12 @@ public class Database {
             prst.executeUpdate();
         }
     }
+
+    /**
+     * the same method,but for book
+     * @param book what book to insert
+     */
     public  void bookCreation(Book book){
-        /*
-        * Сперва чекаем есть ли у нас уже такая книга,
-        * если есть то запоминаем ее ID и просто добавляе копию в таблицу копий
-        * если нет, то добавляем в таблицу Book описание и одну копию в таблицу копий
-        * */
         try {
             ArrayList <Integer>arrayList =isBookAlreadyExist(book);
             if (arrayList.get(0)==0) {
@@ -164,6 +171,12 @@ public class Database {
         }
     }
 
+    /**
+     * checking for dublicate AVs
+     * @param av current av
+     * @return arraylist of boolean value and id of av
+     * @throws SQLException
+     */
     public ArrayList isAVAlreadyExist(AV av)throws SQLException{
         ArrayList <Integer>arrayList = new ArrayList();
         Statement stmt = con.createStatement();
@@ -180,6 +193,12 @@ public class Database {
         arrayList.add(0);
         return arrayList;
     }
+    /**
+     * checking for dublicate articles
+     * @param article current article
+     * @return arraylist of boolean value and id of article
+     * @throws SQLException
+     */
     public ArrayList isArticleAlreadyExist(Article article)throws SQLException{
         /*
         * Этот метод чекает, есть ли у нас в библиотеке такая статья
@@ -202,7 +221,12 @@ public class Database {
         arrayList.add(0);
         return arrayList;
     }
-
+    /**
+     * checking for dublicate books
+     * @param book current book
+     * @return arraylist of boolean value and id of book
+     * @throws SQLException
+     */
     public ArrayList isBookAlreadyExist(Book book) throws SQLException {
         /*
         * Этот метод проверяет, есть ли у нас в библиотеке такая книга
@@ -225,6 +249,13 @@ public class Database {
         arrayList.add(0);
         return arrayList;
     }
+
+    /**
+     * checking for created users
+     * @param user current user
+     * @return arraylist of boolean value and id
+     * @throws SQLException
+     */
     public static ArrayList isUserAlreadyExist(User user) throws SQLException {
         /*
          * Этот метод чекает, есть ли у нас в библиотеке такая книга
@@ -247,6 +278,13 @@ public class Database {
         arrayList.add(0);
         return arrayList;
     }
+
+    /**
+     * gets information about users
+     * @param id user's id
+     * @return user
+     * @throws SQLException
+     */
     public User getInformationAboutTheUser(int id) throws SQLException{
         Statement stmt=con.createStatement();
         ResultSet rs=stmt.executeQuery("SELECT * FROM Users_of_the_library WHERE Card_number="+id);
@@ -266,6 +304,13 @@ public class Database {
         return user;
     }
 
+    /**
+     * authorization of user
+     * @param id it's id
+     * @param pass password
+     * @return type of user
+     * @throws SQLException
+     */
     public String authorization(int id, String pass) throws SQLException {
 
         Statement stmt = con.createStatement();

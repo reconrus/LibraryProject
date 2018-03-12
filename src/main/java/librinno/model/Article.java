@@ -16,7 +16,7 @@ public class Article extends Material{
     private String editor;
     private String date;
     private boolean reference;
-
+    //getters and setters
     public void setReference(boolean reference) {
         this.reference = reference;
     }
@@ -25,6 +25,8 @@ public class Article extends Material{
         return reference;
     }
 
+    //constructors for different cases
+    //in some situations not all information is needed
     public Article(String title,String author,int price, String keyWords,
                    boolean reference,String journal,String editor, String date,String status){
         setTitle(title);
@@ -129,6 +131,7 @@ public class Article extends Material{
         setStatus(status);
         setType("Article");
     }
+    //getters and setters
 
     public String getJournal() {
         return journal;

@@ -25,7 +25,7 @@ public class Material {
     protected String type;
     public int numberAvailable;
     private int totalNumber;
-
+    //getters and setters
     public LocalDate getReturnDate() {
         return returnDate;
     }

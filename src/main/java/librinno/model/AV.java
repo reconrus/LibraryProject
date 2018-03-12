@@ -6,9 +6,11 @@ import java.util.Scanner;
 /**
  * Created by Ilnur Mamedbakov on 03.02.2018.
  * Class AV inherited from class Material
- * AV already have all propirties in Class Material
+ * AV already have all properties in Class Material
  */
 public class AV extends Material {
+    //constructors for different cases
+    //in some situations not all information is needed
     public AV(String title,String author,int price, String keyWords,String status){
         setTitle(title);
         setAuthor(author);
