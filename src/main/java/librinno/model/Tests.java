@@ -1,7 +1,5 @@
 package main.java.librinno.model;
 
-import org.omg.CORBA.INTERNAL;
-
 import javax.xml.crypto.Data;
 import java.io.IOException;
 import java.sql.PreparedStatement;

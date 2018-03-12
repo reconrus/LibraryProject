@@ -197,7 +197,7 @@ public class LibrarianScreenController {
     @FXML
     void addDoc(ActionEvent event) throws IOException {
         Assist.loadStageWait(getClass().getResource("/main/java/librinno/ui/addbook/AddBook.fxml"));
-        showTableDocuments();
+        showTables();
     }
 
     @FXML
