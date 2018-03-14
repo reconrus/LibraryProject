@@ -102,7 +102,7 @@ public class Main {
             String sql = "CREATE DATABASE IF NOT EXISTS dmitrDbK";
             stmt.executeUpdate(sql);
 
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/dmitrdbk",USER,PASS);
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/dmitrdbk?useSSL=false",USER,PASS);
             stmt = conn.createStatement();
 
             //create table Books
