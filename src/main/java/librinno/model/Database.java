@@ -7,12 +7,14 @@ import java.util.ArrayList;
 /**
  * database with users in it
  */
-public class Database {
+public class Database extends Main{
     //for connection to database
     //typical
     public String url = "jdbc:mysql://localhost:3306/dmitrdbk";
-    public String login = "dmitrDbK";
-    public String password = "eQ1a5mg0Z7";
+    //public String login = "dmitrDbK";
+    public String login =super.getUSER();
+    //public String password = "eQ1a5mg0Z7";
+    public String password =super.getPASS();
     public static PreparedStatement prst;
     public static Connection con;
     public static boolean is_best_seller;
