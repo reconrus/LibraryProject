@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class Database {
     //for connection to database
     //typical
-    public String url = "jdbc:mysql://triniti.ru-hoster.com/dmitrDbK";
+    public String url = "jdbc:mysql://localhost:3306/dmitrdbk";
     public String login = "dmitrDbK";
     public String password = "eQ1a5mg0Z7";
     public static PreparedStatement prst;
