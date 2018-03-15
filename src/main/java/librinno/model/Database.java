@@ -364,8 +364,13 @@ public class Database extends Main{
             //create table AV
             sql="CREATE TABLE IF NOT EXISTS AV(id int(255) AUTO_INCREMENT, Name VARCHAR(255), Author varchar(255),Price int(255),Keywords VARCHAR(255),PRIMARY KEY(id))";
             stmt.executeUpdate(sql);
-
-        }catch(SQLException se){
+            sql = "INSERT IGNORE INTO Users_of_the_library (Name,Address,Phone_number,Card_number,Type,Password) VALUES ('Librarian', 'Russia', '+79999999999',33,'Librarian','124')";
+            stmt.executeUpdate(sql);
+            sql = "INSERT IGNORE INTO Users_of_the_library (Name,Address,Phone_number,Card_number,Type,Password) VALUES ('Albert Einstein', 'Princeton, New Jersey, U.S.', '+79999999999',32,'Student','1')";
+            stmt.executeUpdate(sql);
+            sql = "INSERT IGNORE INTO Users_of_the_library (Name,Address,Phone_number,Card_number,Type,Password) VALUES ('Nikolay V. Shilov', 'Innopolis', '+79999999999',31,'Faculty','1')";
+            stmt.executeUpdate(sql);}
+            catch(SQLException se){
             se.printStackTrace();
         }catch(Exception e){
             e.printStackTrace();
