@@ -54,7 +54,7 @@ public class Tests {
 
         rs = stmt.executeQuery("SELECT * FROM Users_of_the_library WHERE Card_number NOT IN (31,32)");
         rs.last();
-        assertion(rs.getRow()==3);
+        assertion(rs.getRow() == 4);
     }
     /**
      * second test
@@ -81,7 +81,7 @@ public class Tests {
 
         rs = stmt.executeQuery("SELECT * FROM Users_of_the_library WHERE Card_number NOT IN (31,32)");
         rs.last();
-        assertion(rs.getRow() == 2);
+        assertion(rs.getRow() == 3);
     }
     /**
      * third test
@@ -352,7 +352,7 @@ public class Tests {
             pr.executeUpdate();
             pr = db.con.prepareStatement("DELETE from Books");
             pr.executeUpdate();
-            pr = db.con.prepareStatement("DELETE FROM Users_of_the_library");
+            pr = db.con.prepareStatement("DELETE FROM Users_of_the_library WHERE Card_number NOT IN (31,32,33)");
             pr.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
