@@ -28,7 +28,6 @@ public class Database extends Main{
             Class.forName("com.mysql.jdbc.Driver");
             con = DriverManager.getConnection(url, login, password);
         } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 
