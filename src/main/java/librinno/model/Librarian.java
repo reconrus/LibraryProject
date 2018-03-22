@@ -206,9 +206,54 @@ public class Librarian extends User {
     }
 
     /**
-     * get information about book by it's id
+     * get information about user by it's id
      * @param id book's id
      */
+    public static User UserById(int id) {
+        try {
+            Statement stmt = db.con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM Users_of_the_library where Card_number=" + id);
+            while (rs.next()) {
+                User user = new User(rs.getString("Name"),
+                        rs.getString("Address"), rs.getString("Phone_number"),
+                        rs.getInt("Card_number"),
+                        rs.getString("Type"),
+                        rs.getString("Password"));
+                return user;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    /**
+     * get information about material by it's id
+     * @param id book's id
+     */
+    public static Material MaterialByID(int id) {
+        Material material = null;
+        try {
+            Statement stmt = db.con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM Books where id=" + id);
+            if (rs.next()) {
+                material = bookByID(id);
+            } else {
+                rs = stmt.executeQuery("SELECT * FROM AV where id=" + id);
+                if (rs.next()) {
+                    material = avById(id);
+                } else {
+                    rs = stmt.executeQuery("SELECT * FROM Articles where id=" + id);
+                    if (rs.next()) {
+                        material = articleById(id);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return material;
+    }
+
     public static Book bookByID(int id) {
         try {
             Statement stmt = db.con.createStatement();

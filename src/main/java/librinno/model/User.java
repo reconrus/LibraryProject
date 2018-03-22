@@ -16,8 +16,21 @@ public class User {
     public String password;
 
 
+    private String queue_date;
+    public String  getDate() {
+        return ""+queue_date;
+    }
+    public void setDate(String  returnDate){
+        this.queue_date = returnDate;
+    }
     //constructors for different cases
     //in some situations not all information is needed
+    //for queue
+    public User(int card_number,String type,String queue_date){
+     setCardNumberAsString(card_number);
+     setType(type);
+     setDate(queue_date);
+    }
     public User(String name, String number, String address, String type, String password) {
         setName(name);
         setPhoneNumber(number);
@@ -35,6 +48,7 @@ public class User {
         setType(type);
         setPassword(password);
     }
+
     //getters and setters
     public void setPassword(String password) {
         this.password = password;
@@ -98,33 +112,9 @@ public class User {
         this.adress = adress;
     }
 
-    /**
-     * increasing is number in system when registering
-     */
-    /*public void setCard_number() {
-        //each card_number is individual in case of increasing there won't be identic id's
-        int max_id = 0;
-        try {
-            //Statement stmt = Database.con.createStatement();
-            Statement stmt = Database.con.createStatement();
-            //get infromation from database
-            ResultSet rs = stmt.executeQuery("SELECT card_number FROM Users_of_the_library");
-            while (rs.next()) {
-                int id = rs.getInt("card_number");
-                if (id > max_id)
-                    max_id = id;
-            }
-            max_id++;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        this.card_number = max_id;
-    }*/
-
-
-
     public int getCard_Number() {
 
         return card_number;
     }
+
 }
