@@ -1,6 +1,7 @@
 package main.java.librinno.model;
 
 import javafx.scene.control.Alert;
+
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -23,12 +24,13 @@ public class Librarian extends User {
 
     /**
      * librarian extends user so it is user too
-     * @param name librarian name
-     * @param address it's address
-     * @param number it's number
+     *
+     * @param name       librarian name
+     * @param address    it's address
+     * @param number     it's number
      * @param cardnumber it's id
-     * @param type it's type
-     * @param password it's password
+     * @param type       it's type
+     * @param password   it's password
      */
     public Librarian(String name, String address, String number, int cardnumber, String type, String password) {
         super(name, address, number, cardnumber, type, password);
@@ -47,7 +49,8 @@ public class Librarian extends User {
 
     /**
      * method for checking out books
-     * @param user to whom give a book
+     *
+     * @param user     to whom give a book
      * @param idOfBook which book to give
      * @return boolean value which will depend on success of checking out
      */
@@ -85,7 +88,8 @@ public class Librarian extends User {
 
     /**
      * the same operation, but for AV materials
-     * @param user who gets the AV
+     *
+     * @param user   who gets the AV
      * @param idOfAV which AV give to user
      * @return boolean value - success or not success of checking out
      */
@@ -110,7 +114,8 @@ public class Librarian extends User {
 
     /**
      * the same operation for Articles
-     * @param user who gets the Article
+     *
+     * @param user        who gets the Article
      * @param idOfArticle which article to give to user
      * @return boolean value - success or not on checking out
      */
@@ -138,35 +143,62 @@ public class Librarian extends User {
 
     /**
      * check out for user,combination of all check out methods for user
-     * @param user who check outs for material
+     *
+     * @param user       who check outs for material
      * @param idMaterial what material to check out
      * @return boolean value - success or not on checking out
      */
-   public static boolean checkOut(User user, int idMaterial){
-       boolean success = false;
-       Statement stmt= null;
-       try {
-           stmt = db.con.createStatement();
-           ResultSet rs = stmt.executeQuery("SELECT * FROM Books WHERE id =" + idMaterial);
-           if(rs.next()){
-               success = checkOutBook(user, idMaterial);
-           }
-           rs = stmt.executeQuery("SELECT * FROM AV WHERE id =" + idMaterial);
-           if(rs.next()){
-               success = checkOutAV(user, idMaterial);
-           }
-           rs = stmt.executeQuery("SELECT * FROM Articles WHERE id =" + idMaterial);
-           if(rs.next()){
-               success = checkOutArticle(user, idMaterial);
-           }
-       } catch (SQLException e) {
-           e.printStackTrace();
-       }
-       return success;
-   }
+    public static boolean checkOut(User user, int idMaterial) {
+        boolean success = false;
+        Statement stmt = null;
+        //если таблицы нет => происходит какая-то херня,ибо она должна быть
+        // значит юзер не бронил книгу
+        //но у нас такого не произойдёт
+        ResultSet queue = null;
+        try {
+            stmt = db.con.createStatement();
+            queue = stmt.executeQuery("SELECT * FROM queue_on_" + idMaterial + " LIMIT 1");
+        } catch (SQLException e) {
+            System.out.println("no available copies");
+            return success;
+        }
+        try {
+            stmt = db.con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM Books WHERE id =" + idMaterial);
+            if (queue!=null && queue.next() && queue.getInt("Card_number") == user.getCard_number()) {
+                if (rs.next()) {
+                    success = checkOutBook(user, idMaterial);
+                }
+                rs = stmt.executeQuery("SELECT * FROM AV WHERE id =" + idMaterial);
+                if (rs.next()) {
+                    success = checkOutAV(user, idMaterial);
+                }
+                rs = stmt.executeQuery("SELECT * FROM Articles WHERE id =" + idMaterial);
+                if (rs.next()) {
+                    success = checkOutArticle(user, idMaterial);
+                }
+                if (success) {
+                    PreparedStatement pr = db.con.prepareStatement("DELETE from queue_on_" + idMaterial + " LIMIT 1");
+                    pr.executeUpdate();
+                    rs = stmt.executeQuery("SELECT * FROM queue_on_" + idMaterial);
+                    rs.last();
+                    int count = rs.getRow();
+                    if(count==0) {
+                        stmt.executeUpdate("DROP TABLE queue_on_" + idMaterial);
+                    }
+                }
+            } else {
+                System.out.println("wait for your turn");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return success;
+    }
 
     /**
      * method for returning book
+     *
      * @param idOfCopyOfBook what book to return
      * @return boolean value - is operation successfull or not
      */
@@ -189,6 +221,7 @@ public class Librarian extends User {
     /**
      * method for librarian
      * librarian see's who wants to take a book
+     *
      * @param idOfCopyOfBook
      * @return
      */
@@ -207,6 +240,7 @@ public class Librarian extends User {
 
     /**
      * get information about user by it's id
+     *
      * @param id book's id
      */
     public static User UserById(int id) {
@@ -226,8 +260,10 @@ public class Librarian extends User {
         }
         return null;
     }
+
     /**
      * get information about material by it's id
+     *
      * @param id book's id
      */
     public static Material MaterialByID(int id) {
@@ -273,6 +309,7 @@ public class Librarian extends User {
 
     /**
      * the same method, but for AV
+     *
      * @param id of AV
      */
     public static AV avById(int id) {
@@ -314,6 +351,7 @@ public class Librarian extends User {
 
     /**
      * user deletion
+     *
      * @param user_id user's id for deletion
      */
     public static void deleteUserById(int user_id) {
@@ -338,6 +376,7 @@ public class Librarian extends User {
 
     /**
      * change information of the user
+     *
      * @param user whose information to change,search by id
      */
     public static void modifyUser(User user) {
@@ -358,7 +397,8 @@ public class Librarian extends User {
 
     /**
      * adds copies of material
-     * @param id of material
+     *
+     * @param id     of material
      * @param number how many copies to create
      */
     public static void addCopiesOfMaterial(int id, int number) {
@@ -389,6 +429,7 @@ public class Librarian extends User {
 
     /**
      * adding book to the library,with all parametres
+     *
      * @param title
      * @param author
      * @param publisher
@@ -415,6 +456,7 @@ public class Librarian extends User {
 
     /**
      * the same method but for Article
+     *
      * @param title
      * @param author
      * @param price
@@ -441,6 +483,7 @@ public class Librarian extends User {
 
     /**
      * The same method, but for AV
+     *
      * @param title
      * @param author
      * @param price
@@ -457,6 +500,7 @@ public class Librarian extends User {
 
     /**
      * deletion of AV
+     *
      * @param id unique key of Av for deletion
      */
     public static void deleteAVById(int id) {
@@ -472,11 +516,12 @@ public class Librarian extends User {
 
     /**
      * deletion of only 1 copy
+     *
      * @param id unique key of copy
      */
     public static void deleteOneCopy(int id) {
         try {
-            PreparedStatement pr = db.con.prepareStatement("DELETE from Copy WHERE Id_of_copy=" + id+" LIMIT 1");
+            PreparedStatement pr = db.con.prepareStatement("DELETE from Copy WHERE Id_of_copy=" + id + " LIMIT 1");
             pr.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -485,6 +530,7 @@ public class Librarian extends User {
 
     /**
      * the same method, but for books
+     *
      * @param id unique key of book
      */
     public static void deleteBookById(int id) {
@@ -500,7 +546,8 @@ public class Librarian extends User {
     }
 
     /**
-     *the same method, but for article
+     * the same method, but for article
+     *
      * @param id unique key of article
      */
     public static void deleteArticleById(int id) {
@@ -516,6 +563,7 @@ public class Librarian extends User {
 
     /**
      * change information of AV
+     *
      * @param av which av to change, search by id
      */
     public static void modifyAV(AV av) {
@@ -534,6 +582,7 @@ public class Librarian extends User {
 
     /**
      * the same method, but for Article
+     *
      * @param article what article to change,search by id
      */
     public static void modifyArticle(Article article) {
@@ -556,6 +605,7 @@ public class Librarian extends User {
 
     /**
      * the same method, but for books
+     *
      * @param book what book to change,search by id
      */
     public static void modifyBook(Book book) {
@@ -582,6 +632,7 @@ public class Librarian extends User {
 
     /**
      * gets all AV
+     *
      * @return arraylist of AV's
      */
     public static ArrayList<Material> getAllAV() {
@@ -617,6 +668,7 @@ public class Librarian extends User {
 
     /**
      * the same method, bud for Articles
+     *
      * @return arraylist of articles
      */
     public static ArrayList<Material> getAllArticles() {
@@ -646,6 +698,7 @@ public class Librarian extends User {
 
     /**
      * the same method, but for books
+     *
      * @return arraylist of books
      */
     public static ArrayList<Material> getAllBooks() {
@@ -687,6 +740,7 @@ public class Librarian extends User {
 
     /**
      * the same method, but for users ofthe library
+     *
      * @return linkedlist of users
      */
     public static LinkedList<User> getAllUsers() {
@@ -713,6 +767,7 @@ public class Librarian extends User {
 
     /**
      * gets the amount of taken materials by user
+     *
      * @param user_id which user has taken materials
      * @return the amount of taken copies
      */
@@ -733,6 +788,7 @@ public class Librarian extends User {
 
     /**
      * return all materials, taken by user
+     *
      * @param user_id what user has taken materials
      * @return linkedlist of taken copies
      */
@@ -794,6 +850,7 @@ public class Librarian extends User {
 
     /**
      * get the count of copies of the book
+     *
      * @param book_id which book has copies
      * @return the amount of copies taken by nobody
      */
@@ -810,8 +867,10 @@ public class Librarian extends User {
         }
         return copies;
     }
+
     /**
      * get the count of copies of the book
+     *
      * @param book_id which book has copies
      * @return the amount of all copies
      */
@@ -854,7 +913,8 @@ public class Librarian extends User {
 
     /**
      * gets the information if material has been already met
-     * @param l list of copies
+     *
+     * @param l  list of copies
      * @param id unique key of current material
      * @return boolean value - was met or not
      */
@@ -870,6 +930,7 @@ public class Librarian extends User {
 
     /**
      * deletion of material
+     *
      * @param material what material to delete
      */
     public static void deleteDoc(Material material) {

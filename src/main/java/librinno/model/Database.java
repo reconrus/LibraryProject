@@ -430,10 +430,11 @@ public class Database extends Main {
                         user=new User(cur_id,rs.getString("Type"),rs.getString("Reserving_time"));
                         pq.add(user);}
                     else{
-                        Alert error = new Alert(Alert.AlertType.INFORMATION);
-                        error.setHeaderText("Document");
-                        error.setContentText("You already reserved this book.");
-                        error.showAndWait();
+                        //Alert error = new Alert(Alert.AlertType.INFORMATION);
+                       // error.setHeaderText("Document");
+                       // error.setContentText("You already reserved this book.");
+                       // error.showAndWait();
+                        System.out.println("you are already in queue");
                     }
                     PreparedStatement pr = con.prepareStatement("TRUNCATE Queue_on_" + material_id);
                     pr.executeUpdate();
