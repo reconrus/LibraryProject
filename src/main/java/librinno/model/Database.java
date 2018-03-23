@@ -463,13 +463,19 @@ class UserTypeComparator implements Comparator<User> {
     //но это частично работает
     //ОНО РАБОТАЕТ!!!! КАК????
     public int compare(User x, User y) {
-        if (Math.abs(x.getType().length() - y.getType().length()) == 3 || Math.abs(x.getType().length() - y.getType().length()) == 2)
+        if (Math.abs(x.getType().length() - y.getType().length()) == 3 ||
+                Math.abs(x.getType().length() - y.getType().length()) == 2)
             return y.getType().compareTo(x.getType());
-        else if (Math.abs(x.getType().length() - y.getType().length()) == 5)
+        else if (Math.abs(x.getType().length() - y.getType().length()) == 5 ||
+                Math.abs(x.getType().length() - y.getType().length()) == 11)
             return x.getType().compareTo(y.getType());
         else if (Math.abs(x.getType().length() - y.getType().length()) == 8 || Math.abs(x.getType().length() - y.getType().length()) == 1)
             return x.getType().compareTo(y.getType());
         else if (Math.abs(x.getType().length() - y.getType().length()) == 7)
+            return y.getType().compareTo(x.getType());
+        else if (Math.abs(x.getType().length() - y.getType().length()) == 16)
+            return x.getType().compareTo(y.getType());
+        else if (Math.abs(x.getType().length() - y.getType().length()) == 9)
             return y.getType().compareTo(x.getType());
         else if (Math.abs(x.getType().length() - y.getType().length()) == 0) {
             return x.getDate().compareTo(y.getDate());
