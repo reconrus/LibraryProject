@@ -36,11 +36,8 @@ public class MainApp extends Application {
         Main.setPASS(sc.nextLine());
         Database db=new Database();
         db.creationLocalDB(Main.getUSER(),Main.getPASS());
-
-
-
-
         launch(args);
+
     }
 
 }

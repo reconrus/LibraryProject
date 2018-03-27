@@ -149,51 +149,57 @@ public class Librarian extends User {
      * @return boolean value - success or not on checking out
      */
     public static boolean checkOut(User user, int idMaterial) {
-        boolean success = false;
-        Statement stmt = null;
-        //если таблицы нет => происходит какая-то херня,ибо она должна быть
-        // значит юзер не бронил книгу
-        //но у нас такого не произойдёт
-        ResultSet queue = null;
         try {
-            stmt = db.con.createStatement();
-            queue = stmt.executeQuery("SELECT * FROM queue_on_" + idMaterial + " LIMIT 1");
-        } catch (SQLException e) {
-            System.out.println("no available copies");
+            boolean success = false;
+            Statement stmt = null;
+            //если таблицы нет => происходит какая-то херня,ибо она должна быть
+            // значит юзер не бронил книгу
+            //но у нас такого не произойдёт
+            ResultSet queue = null;
+            try {
+                stmt = db.con.createStatement();
+                queue = stmt.executeQuery("SELECT * FROM queue_on_" + idMaterial + " LIMIT 1");
+            } catch (SQLException e) {
+                System.out.println("no available copies");
+                return success;
+            }
+            try {
+                stmt = db.con.createStatement();
+                ResultSet rs = stmt.executeQuery("SELECT * FROM Books WHERE id =" + idMaterial);
+                if (queue != null && queue.next() && queue.getInt("Card_number") == user.getCard_number()) {
+                    if (rs.next()) {
+                        success = checkOutBook(user, idMaterial);
+                    }
+                    rs = stmt.executeQuery("SELECT * FROM AV WHERE id =" + idMaterial);
+                    if (rs.next()) {
+                        success = checkOutAV(user, idMaterial);
+                    }
+                    rs = stmt.executeQuery("SELECT * FROM Articles WHERE id =" + idMaterial);
+                    if (rs.next()) {
+                        success = checkOutArticle(user, idMaterial);
+                    }
+                    if (success) {
+                        PreparedStatement pr = db.con.prepareStatement("DELETE from queue_on_" + idMaterial + " LIMIT 1");
+                        pr.executeUpdate();
+                        rs = stmt.executeQuery("SELECT * FROM queue_on_" + idMaterial);
+                        rs.last();
+                        int count = rs.getRow();
+                        if (count == 0) {
+                            stmt.executeUpdate("DROP TABLE queue_on_" + idMaterial);
+                        }
+                    }
+                } else {
+                    System.out.println("wait for your turn");
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
             return success;
         }
-        try {
-            stmt = db.con.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM Books WHERE id =" + idMaterial);
-            if (queue!=null && queue.next() && queue.getInt("Card_number") == user.getCard_number()) {
-                if (rs.next()) {
-                    success = checkOutBook(user, idMaterial);
-                }
-                rs = stmt.executeQuery("SELECT * FROM AV WHERE id =" + idMaterial);
-                if (rs.next()) {
-                    success = checkOutAV(user, idMaterial);
-                }
-                rs = stmt.executeQuery("SELECT * FROM Articles WHERE id =" + idMaterial);
-                if (rs.next()) {
-                    success = checkOutArticle(user, idMaterial);
-                }
-                if (success) {
-                    PreparedStatement pr = db.con.prepareStatement("DELETE from queue_on_" + idMaterial + " LIMIT 1");
-                    pr.executeUpdate();
-                    rs = stmt.executeQuery("SELECT * FROM queue_on_" + idMaterial);
-                    rs.last();
-                    int count = rs.getRow();
-                    if(count==0) {
-                        stmt.executeUpdate("DROP TABLE queue_on_" + idMaterial);
-                    }
-                }
-            } else {
-                System.out.println("wait for your turn");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        catch (Exception e){
+            System.out.println("бибилиотекарь,ты ебобо");
+            return false;
         }
-        return success;
     }
 
     /**

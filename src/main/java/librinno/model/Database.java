@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Comparator;
 import java.util.PriorityQueue;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * database with users in it
@@ -21,13 +23,14 @@ public class Database extends Main {
     //typical
     public String url = "jdbc:mysql://localhost:3306/dmitrdbk?useSSL=false";
     //public String login = "dmitrDbK";
-    public String login =super.getUSER();
+    public String login = super.getUSER();
     //public String password = "eQ1a5mg0Z7";
-    public String password =super.getPASS();
+    public String password = super.getPASS();
     public static PreparedStatement prst;
     public static Connection con;
     public static boolean is_best_seller;
     public static PriorityQueue<User> pq;
+
     /**
      * connecting to mysql database
      */
@@ -42,6 +45,7 @@ public class Database extends Main {
 
     /**
      * getting users of database to project
+     *
      * @param user - user of library
      */
     public static void userCreation(User user) {
@@ -52,8 +56,8 @@ public class Database extends Main {
             prst.setString(2, user.getAdress());
             prst.setString(3, user.getPhoneNumber());
             //prst.setInt(4, user.getCard_Number());
-            prst.setString(4,user.getType());
-            prst.setString(5,user.getPassword());
+            prst.setString(4, user.getType());
+            prst.setString(5, user.getPassword());
             prst.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -62,16 +66,17 @@ public class Database extends Main {
 
     /**
      * creating AV
+     *
      * @param av what to insert into table
      * @throws SQLException
      */
-    public void avCreation(AV av)throws SQLException{
-        ArrayList <Integer>arrayList =isAVAlreadyExist(av);
-        if (arrayList.get(0)==0) {
+    public void avCreation(AV av) throws SQLException {
+        ArrayList<Integer> arrayList = isAVAlreadyExist(av);
+        if (arrayList.get(0) == 0) {
             prst = con.prepareStatement("insert into AV(Name,Author,Price,Keywords) values(?,?,?,?)");
             prst.setString(1, av.getTitle());
             prst.setString(2, av.getAuthor());
-            prst.setInt   (3, av.getPrice());
+            prst.setInt(3, av.getPrice());
             prst.setString(4, av.getKeyWords());
             prst.executeUpdate();
 
@@ -83,36 +88,37 @@ public class Database extends Main {
                 id_Of_material = rsInside.getInt(1);
             prst = con.prepareStatement("insert into Copy (id_of_original,Owner,Time_left) values(?,?,?)");
 
-            prst.setInt(1,id_Of_material);
-            prst.setInt(2,0);
-            prst.setInt(3,999);
+            prst.setInt(1, id_Of_material);
+            prst.setInt(2, 0);
+            prst.setInt(3, 999);
             prst.executeUpdate();
-        }else{
+        } else {
             prst = con.prepareStatement("insert into Copy (id_of_original,Owner,Time_left) values(?,?,?)");
-            prst.setInt(1,arrayList.get(1));
-            prst.setInt(2,0);
-            prst.setInt(3,999);
+            prst.setInt(1, arrayList.get(1));
+            prst.setInt(2, 0);
+            prst.setInt(3, 999);
             prst.executeUpdate();
         }
     }
 
     /**
      * the same method, but for Articles
+     *
      * @param article what article to insert
      * @throws SQLException
      */
-    public  void articleCreation(Article article)throws SQLException{
-        ArrayList <Integer>arrayList =isArticleAlreadyExist(article);
-        if (arrayList.get(0)==0) {
+    public void articleCreation(Article article) throws SQLException {
+        ArrayList<Integer> arrayList = isArticleAlreadyExist(article);
+        if (arrayList.get(0) == 0) {
             prst = con.prepareStatement("insert into Articles(Name,Author,Price,Keywords,is_reference,Journal,Editor,Date) values(?,?,?,?,?,?,?,?)");
             prst.setString(1, article.getTitle());
             prst.setString(2, article.getAuthor());
-            prst.setInt   (3, article.getPrice());
+            prst.setInt(3, article.getPrice());
             prst.setString(4, article.getKeyWords());
             prst.setBoolean(5, article.getReference());
-            prst.setString(6,article.getJournal());
-            prst.setString(7,article.getEditor());
-            prst.setString(8,article.getDate());
+            prst.setString(6, article.getJournal());
+            prst.setString(7, article.getEditor());
+            prst.setString(8, article.getDate());
             prst.executeUpdate();
             //находим последний добавленный ID статьи и запоминаем его, чтоб потом кинуть его в таблицу копий
             Statement stmt = con.createStatement();
@@ -123,15 +129,15 @@ public class Database extends Main {
                 id_Of_material = rsInside.getInt(1);
             prst = con.prepareStatement("insert into Copy (id_of_original,Owner,Time_left) values(?,?,?)");
 
-            prst.setInt(1,id_Of_material);
-            prst.setInt(2,0);
-            prst.setInt(3,999);
+            prst.setInt(1, id_Of_material);
+            prst.setInt(2, 0);
+            prst.setInt(3, 999);
             prst.executeUpdate();
-        }else{
+        } else {
             prst = con.prepareStatement("insert into Copy (id_of_original,Owner,Time_left) values(?,?,?)");
-            prst.setInt(1,arrayList.get(1));
-            prst.setInt(2,0);
-            prst.setInt(3,999);
+            prst.setInt(1, arrayList.get(1));
+            prst.setInt(2, 0);
+            prst.setInt(3, 999);
             prst.executeUpdate();
         }
     }
@@ -141,16 +147,16 @@ public class Database extends Main {
      *
      * @param book what book to insert
      */
-    public  void bookCreation(Book book){
+    public void bookCreation(Book book) {
         try {
-            ArrayList <Integer>arrayList =isBookAlreadyExist(book);
-            if (arrayList.get(0)==0) {
+            ArrayList<Integer> arrayList = isBookAlreadyExist(book);
+            if (arrayList.get(0) == 0) {
                 prst = con.prepareStatement("insert into Books(Name,Author,Publisher,Edition,Price,Keywords,is_bestseller,is_reference,YEAR) values(?,?,?,?,?,?,?,?,?)");
                 prst.setString(1, book.getTitle());
                 prst.setString(2, book.getAuthor());
                 prst.setString(3, book.getPublisher());
-                prst.setString   (4, book.getEdition());
-                prst.setInt   (5, book.getPrice());
+                prst.setString(4, book.getEdition());
+                prst.setInt(5, book.getPrice());
                 prst.setString(6, book.getKeyWords());
                 prst.setBoolean(7, book.getBestseller());
                 prst.setBoolean(8, book.getReference());
@@ -417,7 +423,7 @@ public class Database extends Main {
             User user = l.UserById(user_id);
             DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss.S");
             Calendar cal = Calendar.getInstance();
-            User needed_user=new User(user.getCard_number(),user.getType(),dateFormat.format(cal.getTime()));
+            User needed_user = new User(user.getCard_number(), user.getType(), dateFormat.format(cal.getTime()), null);
             pq.add(needed_user);
             String query = "SELECT * FROM Queue_on_" + material_id;
             ResultSet rs = null;
@@ -426,14 +432,14 @@ public class Database extends Main {
                 rs = stmt.executeQuery(query);
                 while (rs.next()) {
                     int cur_id = rs.getInt("Card_number");
-                    if (cur_id != user_id){
-                        user=new User(cur_id,rs.getString("Type"),rs.getString("Reserving_time"));
-                        pq.add(user);}
-                    else{
+                    if (cur_id != user_id) {
+                        user = new User(cur_id, rs.getString("Type"), rs.getString("Reserving_time"), null);
+                        pq.add(user);
+                    } else {
                         //Alert error = new Alert(Alert.AlertType.INFORMATION);
-                       // error.setHeaderText("Document");
-                       // error.setContentText("You already reserved this book.");
-                       // error.showAndWait();
+                        // error.setHeaderText("Document");
+                        // error.setContentText("You already reserved this book.");
+                        // error.showAndWait();
                         System.out.println("you are already in queue");
                     }
                     PreparedStatement pr = con.prepareStatement("TRUNCATE Queue_on_" + material_id);
@@ -454,7 +460,58 @@ public class Database extends Main {
             e.printStackTrace();
         }
     }
+
+    public static void notification(int user_id) {
+        User user = null;
+        User needed_user = null;
+        ArrayList<String> all_notes = new ArrayList<>();
+        try {
+            DatabaseMetaData md = con.getMetaData();
+            Statement stmt = con.createStatement();
+            ResultSet rs = md.getTables(null, null, "queue%", null);
+            while (rs.next()) {
+                String table_name = rs.getString(3);
+                ResultSet table_rs = stmt.executeQuery("SELECT * FROM " + table_name + " LIMIT 1");
+                if (table_rs.next() && user_id == table_rs.getInt("Card_number")) {
+                    //пока только так,потом отредактирую
+                    Pattern pat = Pattern.compile("[-]?[0-9]+(.[0-9]+)?");
+                    Matcher matcher = pat.matcher(table_name);
+                    String id = "";
+                    while (matcher.find()) {
+                        id = matcher.group();
+                    }
+                    String note = "You can get material with id " + id;
+                    all_notes.add(note);
+                    user = user_in_queue(user_id, Integer.parseInt(id));
+                    needed_user = new User(user.getCard_Number(), user.getType(), user.getDate(), all_notes);
+                }
+            }
+            if (needed_user != null)
+                for (int i = 0; i < needed_user.get_notifications().size(); i++) {
+                    System.out.println(needed_user.get_notifications().get(i));
+                }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static User user_in_queue(int user_id, int queue_id) {
+        try {
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM queue_on_" + queue_id + " where Card_number=" + user_id);
+            while (rs.next()) {
+                ArrayList<String> tmp = new ArrayList<>();
+                User user = new User(user_id, rs.getString("Type"),
+                        rs.getString("Reserving_time"), tmp);
+                return user;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
+
 
 class UserTypeComparator implements Comparator<User> {
     @Override
@@ -462,6 +519,9 @@ class UserTypeComparator implements Comparator<User> {
     //....
     //но это частично работает
     //ОНО РАБОТАЕТ!!!! КАК????
+    //вячеслав,не трогай это, пожалуйста,это работает НЕ ТРОГАЙ
+    //ВЯЧЕСЛАВ УЙДИ ОТ ЭТОГО КЛАСCА
+    //ЭТО РАБОТАЕТ,НЕ ТРОГАЙ
     public int compare(User x, User y) {
         if (Math.abs(x.getType().length() - y.getType().length()) == 3 ||
                 Math.abs(x.getType().length() - y.getType().length()) == 2)

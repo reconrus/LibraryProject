@@ -3,6 +3,7 @@ package main.java.librinno.model;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 /**
  * user card in library
@@ -14,23 +15,28 @@ public class User {
     public String phoneNumber;
     public String type;
     public String password;
-
+    public ArrayList<String> notification=new ArrayList<>();
 
     private String queue_date;
-    public String  getDate() {
-        return ""+queue_date;
+
+    public String getDate() {
+        return "" + queue_date;
     }
-    public void setDate(String  returnDate){
+
+    public void setDate(String returnDate) {
         this.queue_date = returnDate;
     }
+
     //constructors for different cases
     //in some situations not all information is needed
     //for queue
-    public User(int card_number,String type,String queue_date){
-     setCardNumberAsString(card_number);
-     setType(type);
-     setDate(queue_date);
+    public User(int card_number, String type, String queue_date,ArrayList<String> notification) {
+        setCardNumberAsString(card_number);
+        setType(type);
+        setDate(queue_date);
+        set_notifications(notification);
     }
+
     public User(String name, String number, String address, String type, String password) {
         setName(name);
         setPhoneNumber(number);
@@ -117,4 +123,12 @@ public class User {
         return card_number;
     }
 
+    public ArrayList<String> get_notifications() {
+        return notification;
+    }
+
+    public void set_notifications(ArrayList<String> notification) {
+        this.notification = notification;
+
+    }
 }
