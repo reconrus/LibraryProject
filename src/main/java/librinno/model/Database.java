@@ -461,7 +461,7 @@ public class Database extends Main {
         }
     }
 
-    public static void notification(int user_id) {
+    public static ArrayList<String> notification(int user_id) {
         User user = null;
         User needed_user = null;
         ArrayList<String> all_notes = new ArrayList<>();
@@ -487,12 +487,11 @@ public class Database extends Main {
                 }
             }
             if (needed_user != null)
-                for (int i = 0; i < needed_user.get_notifications().size(); i++) {
-                    System.out.println(needed_user.get_notifications().get(i));
-                }
+                return needed_user.get_notifications();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return all_notes;
     }
 
     public static User user_in_queue(int user_id, int queue_id) {
