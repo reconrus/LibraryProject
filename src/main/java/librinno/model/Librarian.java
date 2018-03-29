@@ -152,9 +152,6 @@ public class Librarian extends User {
         try {
             boolean success = false;
             Statement stmt = null;
-            //если таблицы нет => происходит какая-то херня,ибо она должна быть
-            // значит юзер не бронил книгу
-            //но у нас такого не произойдёт
             ResultSet queue = null;
             try {
                 stmt = db.con.createStatement();

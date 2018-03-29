@@ -12,17 +12,15 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 public class SendEmail {
-    private static String USER_NAME = "Konev1999D";  // GMail user name (just the part before "@gmail.com")
-    private static String PASSWORD = "itisonlyforinazuma"; // GMail password
-    private static String RECIPIENT = "Konev1999D@mail.ru";
+    private static String USER_NAME = "librinno";
+    private static String PASSWORD = "thebestteamever";
 
     public static void send() {
         String from = USER_NAME;
         String pass = PASSWORD;
-        String[] to = { RECIPIENT }; // list of recipient email addresses
-        String subject = "Java send mail example";
-        String body = "Welcome to JavaMail!";
-
+        String[] to = { "Konev1999D@mail.ru","pizdez_144@mail.ru","dmitrokon@mail.ru" };
+        String subject = "You can get reserved material";
+        String body = "нормальный текст будет добавлен позже";
         sendFromGMail(from, pass, to, subject, body);
     }
 
@@ -42,8 +40,6 @@ public class SendEmail {
         try {
             message.setFrom(new InternetAddress(from));
             InternetAddress[] toAddress = new InternetAddress[to.length];
-
-            // To get the array of addresses
             for( int i = 0; i < to.length; i++ ) {
                 toAddress[i] = new InternetAddress(to[i]);
             }
