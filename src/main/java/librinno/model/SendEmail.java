@@ -1,11 +1,8 @@
-package main;
+package main.java.librinno.model;
 
-import java.util.Date;
 import java.util.Properties;
-import javax.mail.Authenticator;
 import javax.mail.Message;
 import javax.mail.MessagingException;
-import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.AddressException;
@@ -18,9 +15,11 @@ public class SendEmail {
     public static void send() {
         String from = USER_NAME;
         String pass = PASSWORD;
-        String[] to = { "Konev1999D@mail.ru","pizdez_144@mail.ru","dmitrokon@mail.ru" };
+        Database db=new Database();
+        String[] to = db.send_email().toArray(new String[db.send_email().size()]);
+        //String[] to = { "Konev1999D@mail.ru","pizdez_144@mail.ru","dmitrokon@mail.ru" };
         String subject = "You can get reserved material";
-        String body = "нормальный текст будет добавлен позже";
+        String body = "Вы зарезервировали книгу";
         sendFromGMail(from, pass, to, subject, body);
     }
 

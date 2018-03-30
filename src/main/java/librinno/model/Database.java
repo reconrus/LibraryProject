@@ -448,6 +448,7 @@ public class Database extends Main {
             } catch (SQLException exc) {
                 sql = "CREATE TABLE IF NOT EXISTS Queue_on_" + material_id + "(Card_number int(255) ," +
                         " Type VARCHAR(30), Reserving_time VARCHAR(30))";
+                //здесь создаём таблицу и сразу уведомление юзеру должно быть
                 stmt.executeUpdate(sql);
             }
             while (pq.size() > 0) {
@@ -461,7 +462,7 @@ public class Database extends Main {
         }
     }
 
-    public static ArrayList<String> notification(int user_id) {
+    public static ArrayList<String> notification() {
         User user = null;
         User needed_user = null;
         ArrayList<String> all_notes = new ArrayList<>();
@@ -472,7 +473,7 @@ public class Database extends Main {
             while (rs.next()) {
                 String table_name = rs.getString(3);
                 ResultSet table_rs = stmt.executeQuery("SELECT * FROM " + table_name + " LIMIT 1");
-                if (table_rs.next() && user_id == table_rs.getInt("Card_number")) {
+                if (table_rs.next()) {
                     //пока только так,потом отредактирую
                     Pattern pat = Pattern.compile("[-]?[0-9]+(.[0-9]+)?");
                     Matcher matcher = pat.matcher(table_name);
@@ -480,7 +481,8 @@ public class Database extends Main {
                     while (matcher.find()) {
                         id = matcher.group();
                     }
-                    String note = "You can get material with id " + id;
+                    int user_id=table_rs.getInt("Card_number");
+                    String note = "User: "+user_id +" You can get material with id " + id;
                     all_notes.add(note);
                     user = user_in_queue(user_id, Integer.parseInt(id));
                     needed_user = new User(user.getCard_Number(), user.getType(), user.getDate(), all_notes);
@@ -489,11 +491,36 @@ public class Database extends Main {
             if (needed_user != null)
                 return needed_user.get_notifications();
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("no available copies");
         }
         return all_notes;
     }
-
+    public static ArrayList<String> send_email() {
+        User user = null;
+        ArrayList<String> emails = new ArrayList<>();
+        try {
+            DatabaseMetaData md = con.getMetaData();
+            Statement stmt = con.createStatement();
+            ResultSet rs = md.getTables(null, null, "queue%", null);
+            while (rs.next()) {
+                String table_name = rs.getString(3);
+                try {
+                    ResultSet table_rs = stmt.executeQuery("SELECT * FROM " + table_name + " LIMIT 1");
+                    if (table_rs.next()) {
+                        int user_id = table_rs.getInt("Card_number");
+                        Librarian l = new Librarian(null, null, null, 999, null, null);
+                        user = l.UserById(user_id);
+                        emails.add(user.getName());
+                    }
+                }
+                catch (SQLException e){
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("no available copies");
+        }
+        return emails;
+    }
     public static User user_in_queue(int user_id, int queue_id) {
         try {
             Statement stmt = con.createStatement();
@@ -521,6 +548,8 @@ class UserTypeComparator implements Comparator<User> {
     //вячеслав,не трогай это, пожалуйста,это работает НЕ ТРОГАЙ
     //ВЯЧЕСЛАВ УЙДИ ОТ ЭТОГО КЛАСCА
     //ЭТО РАБОТАЕТ,НЕ ТРОГАЙ
+    //ПОДУМАЙ ТРИЖДЫ ПЕРЕД ТЕМ,КАК МЕНЯТЬ ЭТО
+    //кто-нибудь уберите вячеслава от этого компаратора,пожалуйста
     public int compare(User x, User y) {
         if (Math.abs(x.getType().length() - y.getType().length()) == 3 ||
                 Math.abs(x.getType().length() - y.getType().length()) == 2)
