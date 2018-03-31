@@ -2,30 +2,32 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXRadioButton?>
 <?import com.jfoenix.controls.JFXTextField?>
-<?import com.jfoenix.controls.JFXToggleButton?>
 <?import javafx.scene.Group?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="333.0" prefWidth="355.0" stylesheets="@../../../../resources/theme.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.librinno.ui.Register.Register">
+<AnchorPane prefHeight="391.0" prefWidth="350.0" stylesheets="@../../../../resources/theme.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.librinno.ui.Register.Register">
    <children>
-      <Group layoutX="62.0" layoutY="51.0">
+      <Group layoutX="67.0" layoutY="36.0">
          <children>
-            <JFXTextField fx:id="name" prefHeight="25.0" prefWidth="232.0" promptText="Name" />
+            <JFXTextField fx:id="name" layoutY="9.0" prefHeight="25.0" prefWidth="232.0" promptText="Name" />
             <JFXPasswordField fx:id="password" layoutY="41.0" prefHeight="25.0" prefWidth="232.0" promptText="Password" />
             <JFXTextField fx:id="phone" layoutY="75.0" prefHeight="25.0" prefWidth="232.0" promptText="Phone" />
-            <JFXTextField fx:id="address" layoutY="109.0" prefHeight="25.0" prefWidth="232.0" promptText="Address" />
-            <AnchorPane layoutY="153.0" prefHeight="65.0" prefWidth="232.0">
+            <JFXTextField fx:id="address" layoutY="108.0" prefHeight="25.0" prefWidth="232.0" promptText="Address" />
+            <JFXTextField fx:id="email" layoutY="141.0" prefHeight="25.0" prefWidth="232.0" promptText="E-mail " />
+            <AnchorPane layoutY="193.0" prefHeight="65.0" prefWidth="232.0">
                <children>
-                  <Text fill="WHITE" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Teacher" wrappingWidth="67.13671875" />
-                  <Text fill="WHITE" layoutX="176.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Student" />
-                  <JFXToggleButton fx:id="isStudent" layoutX="77.0" layoutY="3.0" prefHeight="0.0" prefWidth="0.0" text=" " />
+                  <JFXRadioButton fx:id="isStudent" layoutX="-15.0" layoutY="6.0" text="Student" textFill="#4d4d4d" />
+                  <JFXRadioButton fx:id="isProfessor" layoutX="119.0" layoutY="6.0" text="Professor" textFill="#4d4d4d" />
+                  <JFXRadioButton fx:id="isInstructor" layoutX="-15.0" layoutY="34.0" text="Instructor" textFill="#4d4d4d" />
+                  <JFXRadioButton fx:id="isTA" layoutX="119.0" layoutY="34.0" text="Teacher Assistant" textFill="#4d4d4d" />
+                  <JFXRadioButton fx:id="isVisitingProfessor" layoutX="-15.0" layoutY="61.0" text="Visiting Professor" textFill="#4d4d4d" />
                </children>
             </AnchorPane>
          </children>
       </Group>
-      <JFXButton fx:id="cancel" layoutX="62.0" layoutY="280.0" onAction="#cancel" prefHeight="31.0" prefWidth="67.0" text="Cancel" />
-      <JFXButton fx:id="confirm" layoutX="219.0" layoutY="269.0" onAction="#confirm" prefHeight="47.0" prefWidth="75.0" text="Confirm" />
+      <JFXButton fx:id="cancel" layoutX="52.0" layoutY="338.0" onAction="#cancel" prefHeight="31.0" prefWidth="67.0" text="Cancel" />
+      <JFXButton fx:id="confirm" layoutX="239.0" layoutY="330.0" onAction="#confirm" prefHeight="47.0" prefWidth="75.0" text="Confirm" />
    </children>
 </AnchorPane>

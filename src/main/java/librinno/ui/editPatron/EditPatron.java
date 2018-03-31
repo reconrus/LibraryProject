@@ -2,9 +2,11 @@ package main.java.librinno.ui.editPatron;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
+import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.ToggleGroup;
 import main.java.librinno.model.Librarian;
 import main.java.librinno.model.User;
 import main.java.librinno.ui.assist.Assist;
@@ -29,7 +31,18 @@ public class EditPatron {
     private JFXTextField address;
 
     @FXML
-    private JFXTextField type;
+    private JFXTextField email;
+
+    @FXML
+    private JFXRadioButton isStudent;
+    @FXML
+    private JFXRadioButton isProfessor;
+    @FXML
+    private JFXRadioButton isInstructor;
+    @FXML
+    private JFXRadioButton isTA;
+    @FXML
+    private JFXRadioButton isVisitingProfessor;
 
     @FXML
     private JFXButton confirm;
@@ -48,8 +61,9 @@ public class EditPatron {
         String pass= password.getText();
         String addressText= address.getText();
         String phoneNum= phone.getText();
-        String typeUs= type.getText();
-        if ((user.isEmpty())||pass.isEmpty()||addressText.isEmpty()||phoneNum.isEmpty()){
+        String mail = email.getText();
+        String type = (isStudent.isSelected())?User.student:(isProfessor.isSelected())?User.professor:(isInstructor.isSelected())?User.instructor:(isTA.isSelected())?User.ta:User.vProfessor;
+        if ((user.isEmpty())||pass.isEmpty()||addressText.isEmpty()||phoneNum.isEmpty() || mail.isEmpty()){
             Assist.error();
         }
         else {
@@ -57,7 +71,8 @@ public class EditPatron {
             userEd.setName(user);
             userEd.setPassword(pass);
             userEd.setPhoneNumber(phoneNum);
-            userEd.setType(typeUs);
+            userEd.setType(type);
+            //TODO userEd.setEmail(mail);
             Librarian.modifyUser(userEd);
             Assist.closeStage(confirm);
         }
@@ -65,15 +80,36 @@ public class EditPatron {
 
 
     public void passGUI(User user){
+        id.setText(user.getCardNumberAsString());
+        id.setEditable(false);
         name.setText(user.getName());
         phone.setText(user.getPhoneNumber());
         password.setText(user.getPassword());
         address.setText(user.getAdress());
-        type.setText(user.getType());
-        id.setText(user.getCardNumberAsString());
-        id.setEditable(false);
+        //TODO email.setText(user.getEmail());
+        String type = user.getType();
+        if(type.equals(User.student)) isStudent.setSelected(true);
+        if(type.equals(User.professor)) isProfessor.setSelected(true);
+        if(type.equals(User.instructor)) isInstructor.setSelected(true);
+        if(type.equals(User.ta)) isTA.setSelected(true);
+        if(type.equals(User.vProfessor)) isVisitingProfessor.setSelected(true);
+
         userEd=user;
     }
+
+    @FXML
+    void initialize(){
+
+        final ToggleGroup types = new ToggleGroup();
+
+        isStudent.setToggleGroup(types);
+        isProfessor.setToggleGroup(types);
+        isInstructor.setToggleGroup(types);
+        isTA.setToggleGroup(types);
+        isVisitingProfessor.setToggleGroup(types);
+
+    }
+
 
 
 }

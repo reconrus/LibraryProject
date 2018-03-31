@@ -9,6 +9,14 @@ import java.util.ArrayList;
  * user card in library
  */
 public class User {
+    //TODO Check Types
+    public static final String student = "Student";
+    public static final String professor = "Professor";
+    public static final String instructor = "Instructor";
+    public static final String ta = "TA";
+    public static final String vProfessor = "Visiting Professor";
+
+
     public String name;
     public String adress;
     public int card_number;
