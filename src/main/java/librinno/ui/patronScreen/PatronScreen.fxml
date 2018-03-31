@@ -35,7 +35,7 @@
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </JFXButton>
-                              <Group layoutX="45.0" layoutY="98.6552734375">
+                              <Group layoutX="45.0" layoutY="96.0" AnchorPane.bottomAnchor="132.7333984375" AnchorPane.leftAnchor="45.0" AnchorPane.rightAnchor="384.7861328125" AnchorPane.topAnchor="77.6552734375">
                                  <children>
                                     <Text fx:id="cardNumber" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Card Number" wrappingWidth="111.13671875">
                                        <font>
@@ -64,16 +64,20 @@
                                     </Text>
                                  </children>
                               </Group>
-                              <JFXButton fx:id="copiesButton" layoutX="428.0" layoutY="119.0" onAction="#showCopies" text=" ">
-                                 <graphic>
-                                    <MaterialIconView fill="WHITE" glyphName="BOOK" size="60" text="" wrappingWidth="51.0" />
-                                 </graphic>
-                              </JFXButton>
-                              <Text fx:id="bookCount" fill="WHITE" layoutX="462.0" layoutY="196.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
-                                 <font>
-                                    <Font size="17.0" />
-                                 </font>
-                              </Text>
+                              <Group layoutX="428.0" layoutY="119.0" AnchorPane.bottomAnchor="173.0" AnchorPane.leftAnchor="428.0" AnchorPane.rightAnchor="97.0" AnchorPane.topAnchor="119.0">
+                                 <children>
+                                    <JFXButton fx:id="copiesButton" onAction="#showCopies" text=" ">
+                                       <graphic>
+                                          <MaterialIconView fill="WHITE" glyphName="BOOK" size="60" text="" wrappingWidth="51.0" />
+                                       </graphic>
+                                    </JFXButton>
+                                    <Text fx:id="bookCount" fill="WHITE" layoutX="33.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+                                       <font>
+                                          <Font size="17.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                              </Group>
                            </children></AnchorPane>
                     </content>
                   </Tab>

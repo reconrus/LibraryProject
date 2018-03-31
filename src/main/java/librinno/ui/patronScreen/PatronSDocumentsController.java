@@ -2,6 +2,7 @@ package main.java.librinno.ui.patronScreen;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
@@ -25,6 +26,11 @@ public class PatronSDocumentsController {
     private TableColumn<Material, String> title;
     @FXML
     private TableColumn<Material, String> date;
+
+    @FXML
+    void renewCopy(ActionEvent event) {
+
+    }
 
     @FXML
     void returnCopy(){

@@ -31,7 +31,7 @@
                                  <bottom>
                                     <AnchorPane prefHeight="33.0" prefWidth="612.0" style="-fx-background-color: #222429;" BorderPane.alignment="CENTER">
                                        <children>
-                                          <JFXButton fx:id="addDoc" layoutX="132.0" layoutY="1.0" onAction="#addDoc" text="Add" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="28.0">
+                                          <JFXButton fx:id="addDoc" layoutX="132.0" layoutY="1.0" onAction="#addDoc" text="Add" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="28.0" AnchorPane.rightAnchor="484.0" AnchorPane.topAnchor="6.0">
                                              <graphic>
                                                 <Icons525View fill="WHITE" glyphName="BOOKS" size="40">
                                                    <effect>
@@ -43,7 +43,7 @@
                                                 <Font name="System Bold" size="16.0" />
                                              </font>
                                           </JFXButton>
-                                          <JFXButton fx:id="issue" layoutX="153.0" layoutY="4.0" onAction="#issue" prefHeight="54.0" prefWidth="122.0" text="Issue" textFill="WHITE" AnchorPane.bottomAnchor="4.0">
+                                          <JFXButton fx:id="issue" layoutX="153.0" layoutY="4.0" onAction="#issue" prefHeight="54.0" prefWidth="122.0" text="Issue" textFill="WHITE" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="153.0" AnchorPane.rightAnchor="337.0" AnchorPane.topAnchor="0.0">
                                              <font>
                                                 <Font name="System Bold" size="16.0" />
                                              </font>
@@ -51,7 +51,7 @@
                                                 <MaterialDesignIconView fill="WHITE" glyphName="LIBRARY" size="40" />
                                              </graphic>
                                           </JFXButton>
-                                          <JFXButton fx:id="editDoc" layoutX="306.0" onAction="#editDoc" prefHeight="54.0" prefWidth="122.0" text="Edit" textFill="WHITE">
+                                          <JFXButton fx:id="editDoc" layoutX="325.0" onAction="#editDoc" prefHeight="54.0" prefWidth="122.0" text="Edit" textFill="WHITE" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="325.0" AnchorPane.rightAnchor="165.0" AnchorPane.topAnchor="0.0">
                                              <font>
                                                 <Font name="System Bold" size="16.0" />
                                              </font>
@@ -59,7 +59,7 @@
                                                 <MaterialIconView fill="WHITE" glyphName="EDIT" size="40" />
                                              </graphic>
                                           </JFXButton>
-                                          <JFXButton fx:id="deleteDoc" layoutX="485.0" layoutY="6.0" onAction="#deleteDoc" text="Delete" textFill="WHITE" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="14.0">
+                                          <JFXButton fx:id="deleteDoc" layoutX="485.0" layoutY="6.0" onAction="#deleteDoc" text="Delete" textFill="WHITE" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="486.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="4.0">
                                              <graphic>
                                                 <Icons525View fill="WHITE" glyphName="REMOVE" size="37">
                                                    <effect>
@@ -118,7 +118,7 @@
                                  <bottom>
                                     <AnchorPane prefHeight="0.0" prefWidth="612.0" BorderPane.alignment="CENTER">
                                        <children>
-                                          <JFXButton fx:id="addPatron" layoutX="28.0" layoutY="7.0" onAction="#addPatron" text="Add" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="28.0">
+                                          <JFXButton fx:id="addPatron" layoutX="28.0" layoutY="7.0" onAction="#addPatron" text="Add" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="28.0" AnchorPane.rightAnchor="486.0" AnchorPane.topAnchor="4.0">
                                              <font>
                                                 <Font name="System Bold" size="16.0" />
                                              </font>
@@ -130,7 +130,7 @@
                                                 </Icons525View>
                                              </graphic>
                                           </JFXButton>
-                                          <JFXButton fx:id="editPatron" layoutX="245.0" layoutY="-2.0" onAction="#editPatron" prefHeight="54.0" prefWidth="122.0" text="Edit" textFill="WHITE" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="250.0">
+                                          <JFXButton fx:id="editPatron" layoutX="245.0" layoutY="-2.0" onAction="#editPatron" prefHeight="54.0" prefWidth="122.0" text="Edit" textFill="WHITE" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="2.0">
                                              <font>
                                                 <Font name="System Bold" size="16.0" />
                                              </font>
@@ -138,7 +138,7 @@
                                                 <MaterialIconView fill="WHITE" glyphName="EDIT" size="40" />
                                              </graphic>
                                           </JFXButton>
-                                          <JFXButton fx:id="deletePatron" layoutX="485.0" layoutY="6.0" onAction="#deletePatron" text="Delete" textFill="WHITE" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="14.0">
+                                          <JFXButton fx:id="deletePatron" layoutX="485.0" layoutY="6.0" onAction="#deletePatron" text="Delete" textFill="WHITE" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="486.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="2.0">
                                              <font>
                                                 <Font name="System Bold" size="16.0" />
                                              </font>
@@ -189,7 +189,7 @@
                                  <bottom>
                                     <AnchorPane prefHeight="0.0" prefWidth="612.0" BorderPane.alignment="CENTER">
                                        <children>
-                                          <JFXButton fx:id="returnButton" onAction="#returnDocument" text="Return Copy" textFill="WHITE" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="28.0">
+                                          <JFXButton fx:id="returnButton" layoutX="122.0" layoutY="3.0" onAction="#returnDocument" text="Return Copy" textFill="WHITE" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="122.0" AnchorPane.rightAnchor="330.0" AnchorPane.topAnchor="3.0">
                                              <font>
                                                 <Font name="System Bold" size="16.0" />
                                              </font>
@@ -197,7 +197,7 @@
                                                 <MaterialIconView fill="WHITE" glyphName="KEYBOARD_RETURN" size="40" />
                                              </graphic>
                                           </JFXButton>
-                                          <JFXButton fx:id="delete" layoutX="485.0" layoutY="6.0" onAction="#deleteCopy" text="Delete" textFill="WHITE" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="14.0">
+                                          <JFXButton fx:id="delete" layoutX="390.0" layoutY="3.0" onAction="#deleteCopy" text="Delete" textFill="WHITE" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="390.0" AnchorPane.rightAnchor="107.0" AnchorPane.topAnchor="3.0">
                                              <font>
                                                 <Font name="System Bold" size="16.0" />
                                              </font>
