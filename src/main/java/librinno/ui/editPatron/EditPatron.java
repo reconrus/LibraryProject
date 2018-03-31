@@ -67,14 +67,17 @@ public class EditPatron {
             Assist.error();
         }
         else {
-            userEd.setAdress(addressText);
-            userEd.setName(user);
-            userEd.setPassword(pass);
-            userEd.setPhoneNumber(phoneNum);
-            userEd.setType(type);
-            //TODO userEd.setEmail(mail);
-            Librarian.modifyUser(userEd);
-            Assist.closeStage(confirm);
+            if(Assist.isValidEmailAddress(mail)) {
+                userEd.setAdress(addressText);
+                userEd.setName(user);
+                userEd.setPassword(pass);
+                userEd.setPhoneNumber(phoneNum);
+                userEd.setType(type);
+                //TODO userEd.setEmail(mail);
+                Librarian.modifyUser(userEd);
+                Assist.closeStage(confirm);
+            }
+            else Assist.emailError();
         }
     }
 

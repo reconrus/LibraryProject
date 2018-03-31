@@ -8,6 +8,8 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
 import java.io.IOException;
 import java.net.URL;
 
@@ -46,6 +48,24 @@ public class Assist {
         error.setHeaderText("Error");
         error.setContentText("Authorization error");
         error.showAndWait();
+    }
+
+    public static void emailError(){
+        Alert error= new Alert(Alert.AlertType.ERROR);
+        error.setHeaderText("Error");
+        error.setContentText("Wrong e-mail");
+        error.showAndWait();
+    }
+
+    public static boolean isValidEmailAddress(String email) {
+        boolean result = true;
+        try {
+            InternetAddress emailAddr = new InternetAddress(email);
+            emailAddr.validate();
+        } catch (AddressException ex) {
+            result = false;
+        }
+        return result;
     }
 
 }
