@@ -26,6 +26,8 @@ public class PatronSDocumentsController {
     private TableColumn<Material, String> title;
     @FXML
     private TableColumn<Material, String> date;
+    @FXML
+    private TableColumn<Material, String> fine;
 
     @FXML
     void renewCopy(ActionEvent event) {
