@@ -29,6 +29,10 @@ import java.util.LinkedList;
 
 public class LibrarianScreenController {
 
+
+    @FXML
+    private JFXButton logout;
+
     @FXML
     private JFXButton addDoc;
 
@@ -318,6 +322,12 @@ public class LibrarianScreenController {
             Librarian.deleteOneCopy(copy.getId());
             showTables();
         }
+    }
+
+    @FXML
+    private void logoutAction(ActionEvent event) throws IOException {
+        Assist.closeStage(logout);
+        Assist.loadStage(getClass().getResource("/main/java/librinno/ui/login/LoginScreen.fxml"));
     }
 
     @FXML

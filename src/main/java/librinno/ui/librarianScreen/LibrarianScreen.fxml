@@ -17,231 +17,245 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="427.0" prefWidth="612.0" styleClass="root" stylesheets="@../../../../resources/theme.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.librinno.ui.librarianScreen.LibrarianScreenController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="427.0" prefWidth="612.0" styleClass="root" stylesheets="@../../../../resources/theme.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.librinno.ui.librarianScreen.LibrarianScreenController">
    <children>
       <BorderPane prefHeight="200.0" prefWidth="200.0">
          <center>
-            <JFXTabPane BorderPane.alignment="CENTER">
-               <tabs>
-                  <Tab text="Documents">
-                     <content>
-                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
-                           <children>
-                              <BorderPane prefHeight="387.0" prefWidth="612.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                 <bottom>
-                                    <AnchorPane prefHeight="33.0" prefWidth="612.0" style="-fx-background-color: #222429;" BorderPane.alignment="CENTER">
-                                       <children>
-                                          <JFXButton fx:id="addDoc" layoutX="132.0" layoutY="1.0" onAction="#addDoc" text="Add" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="28.0" AnchorPane.rightAnchor="484.0" AnchorPane.topAnchor="6.0">
-                                             <graphic>
-                                                <Icons525View fill="WHITE" glyphName="BOOKS" size="40">
-                                                   <effect>
-                                                      <Glow />
-                                                   </effect>
-                                                </Icons525View>
-                                             </graphic>
-                                             <font>
-                                                <Font name="System Bold" size="16.0" />
-                                             </font>
-                                          </JFXButton>
-                                          <JFXButton fx:id="issue" layoutX="153.0" layoutY="4.0" onAction="#issue" prefHeight="54.0" prefWidth="122.0" text="Issue" textFill="WHITE" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="153.0" AnchorPane.rightAnchor="337.0" AnchorPane.topAnchor="0.0">
-                                             <font>
-                                                <Font name="System Bold" size="16.0" />
-                                             </font>
-                                             <graphic>
-                                                <MaterialDesignIconView fill="WHITE" glyphName="LIBRARY" size="40" />
-                                             </graphic>
-                                          </JFXButton>
-                                          <JFXButton fx:id="editDoc" layoutX="325.0" onAction="#editDoc" prefHeight="54.0" prefWidth="122.0" text="Edit" textFill="WHITE" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="325.0" AnchorPane.rightAnchor="165.0" AnchorPane.topAnchor="0.0">
-                                             <font>
-                                                <Font name="System Bold" size="16.0" />
-                                             </font>
-                                             <graphic>
-                                                <MaterialIconView fill="WHITE" glyphName="EDIT" size="40" />
-                                             </graphic>
-                                          </JFXButton>
-                                          <JFXButton fx:id="deleteDoc" layoutX="485.0" layoutY="6.0" onAction="#deleteDoc" text="Delete" textFill="WHITE" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="486.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="4.0">
-                                             <graphic>
-                                                <Icons525View fill="WHITE" glyphName="REMOVE" size="37">
-                                                   <effect>
-                                                      <Glow />
-                                                   </effect>
-                                                </Icons525View>
-                                             </graphic>
-                                             <font>
-                                                <Font name="System Bold" size="16.0" />
-                                             </font>
-                                          </JFXButton>
-                                       </children>
-                                    </AnchorPane>
-                                 </bottom>
-                                 <left>
-                                    <JFXListView prefHeight="333.0" prefWidth="137.0" style="-fx-background-color: #222429;" BorderPane.alignment="CENTER" />
-                                 </left>
-                                 <center>
-                                    <TableView fx:id="tableBook" editable="true" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-                                      <columns>
-                                        <TableColumn fx:id="id" prefWidth="59.0" text="ID" />
-                                        <TableColumn fx:id="author" prefWidth="66.0" text="Author" />
-                                          <TableColumn fx:id="title" prefWidth="123.0" text="Title" />
-                                          <TableColumn fx:id="bookType" prefWidth="105.0" text="Type" />
-                                          <TableColumn fx:id="avaliability" prefWidth="75.0" text="Available" />
-                                          <TableColumn fx:id="total" prefWidth="75.0" text="Total" />
-                                      </columns>
-                                       <columnResizePolicy>
-                                          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                                       </columnResizePolicy>
-                                       <contextMenu>
-                                          <ContextMenu>
-                                            <items>
-                                                <MenuItem mnemonicParsing="false" onAction="#showTables" text="Refresh" />
-                                                <MenuItem mnemonicParsing="false" onAction="#addCopy" text="Add Copy" />
-                                                <MenuItem mnemonicParsing="false" onAction="#deleteDoc" text="Delete" />
-                                                <MenuItem mnemonicParsing="false" onAction="#showBookInfo" text="Show Info" />
-                                              <MenuItem mnemonicParsing="false" onAction="#editDoc" text="Edit" />
-                                            </items>
-                                          </ContextMenu>
-                                       </contextMenu>
-                                    </TableView>
-                                 </center>
-                              </BorderPane>
-                           </children></AnchorPane>
-                     </content>
-                  </Tab>
-                  <Tab text="Patrons">
-                     <content>
-                        <BorderPane prefHeight="200.0" prefWidth="200.0" />
-                     </content>
-                     <content>
-                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
-                           <children>
-                              <BorderPane prefHeight="387.0" prefWidth="612.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                 <bottom>
-                                    <AnchorPane prefHeight="0.0" prefWidth="612.0" BorderPane.alignment="CENTER">
-                                       <children>
-                                          <JFXButton fx:id="addPatron" layoutX="28.0" layoutY="7.0" onAction="#addPatron" text="Add" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="28.0" AnchorPane.rightAnchor="486.0" AnchorPane.topAnchor="4.0">
-                                             <font>
-                                                <Font name="System Bold" size="16.0" />
-                                             </font>
-                                             <graphic>
-                                                <Icons525View fill="WHITE" glyphName="USER_PLUS" size="40">
-                                                   <effect>
-                                                      <Glow />
-                                                   </effect>
-                                                </Icons525View>
-                                             </graphic>
-                                          </JFXButton>
-                                          <JFXButton fx:id="editPatron" layoutX="245.0" layoutY="-2.0" onAction="#editPatron" prefHeight="54.0" prefWidth="122.0" text="Edit" textFill="WHITE" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="2.0">
-                                             <font>
-                                                <Font name="System Bold" size="16.0" />
-                                             </font>
-                                             <graphic>
-                                                <MaterialIconView fill="WHITE" glyphName="EDIT" size="40" />
-                                             </graphic>
-                                          </JFXButton>
-                                          <JFXButton fx:id="deletePatron" layoutX="485.0" layoutY="6.0" onAction="#deletePatron" text="Delete" textFill="WHITE" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="486.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="2.0">
-                                             <font>
-                                                <Font name="System Bold" size="16.0" />
-                                             </font>
-                                             <graphic>
-                                                <Icons525View fill="WHITE" glyphName="REMOVE" size="37">
-                                                   <effect>
-                                                      <Glow />
-                                                   </effect>
-                                                </Icons525View>
-                                             </graphic>
-                                          </JFXButton>
-                                       </children>
-                                    </AnchorPane>
-                                 </bottom>
-                                 <center>
-                                    <TableView fx:id="tableUser" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-                                      <columns>
-                                        <TableColumn fx:id="userID" prefWidth="75.0" text="ID" />
-                                        <TableColumn fx:id="userName" prefWidth="75.0" text="Name" />
-                                          <TableColumn fx:id="userPhone" prefWidth="75.0" text="Phone" />
-                                          <TableColumn fx:id="userAddress" prefWidth="75.0" text="Address" />
-                                          <TableColumn fx:id="userType" prefWidth="75.0" text="Type" />
-                                      </columns>
-                                       <columnResizePolicy>
-                                          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                                       </columnResizePolicy>
-                                       <contextMenu>
-                                          <ContextMenu>
-                                            <items>
-                                                <MenuItem mnemonicParsing="false" onAction="#showPatronCopies" text="Show Taken Documents" />
-                                                <MenuItem mnemonicParsing="false" onAction="#showTableUser" text="Refresh" />
-                                                <MenuItem mnemonicParsing="false" onAction="#deletePatron" text="Delete" />
-                                              <MenuItem mnemonicParsing="false" onAction="#editPatron" text="Edit" />
-                                            </items>
-                                          </ContextMenu>
-                                       </contextMenu>
-                                    </TableView>
-                                 </center>
-                              </BorderPane>
-                           </children></AnchorPane>
-                     </content>
-                  </Tab>
-                  <Tab onSelectionChanged="#showTableUser" text="Copies ">
-                     <content>
-                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
-                           <children>
-                              <BorderPane prefHeight="387.0" prefWidth="612.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                 <bottom>
-                                    <AnchorPane prefHeight="0.0" prefWidth="612.0" BorderPane.alignment="CENTER">
-                                       <children>
-                                          <JFXButton fx:id="returnButton" layoutX="122.0" layoutY="3.0" onAction="#returnDocument" text="Return Copy" textFill="WHITE" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="122.0" AnchorPane.rightAnchor="330.0" AnchorPane.topAnchor="3.0">
-                                             <font>
-                                                <Font name="System Bold" size="16.0" />
-                                             </font>
-                                             <graphic>
-                                                <MaterialIconView fill="WHITE" glyphName="KEYBOARD_RETURN" size="40" />
-                                             </graphic>
-                                          </JFXButton>
-                                          <JFXButton fx:id="delete" layoutX="390.0" layoutY="3.0" onAction="#deleteCopy" text="Delete" textFill="WHITE" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="390.0" AnchorPane.rightAnchor="107.0" AnchorPane.topAnchor="3.0">
-                                             <font>
-                                                <Font name="System Bold" size="16.0" />
-                                             </font>
-                                             <graphic>
-                                                <Icons525View fx:id="issueCopy" fill="WHITE" glyphName="REMOVE" size="40">
-                                                   <effect>
-                                                      <Glow />
-                                                   </effect>
-                                                </Icons525View>
-                                             </graphic>
-                                          </JFXButton>
-                                       </children>
-                                    </AnchorPane>
-                                 </bottom>
-                                 <center>
-                                    <TableView fx:id="tableCopy" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-                                       <columns>
-                                          <TableColumn fx:id="idCopy" prefWidth="62.0" text="ID" />
-                                          <TableColumn fx:id="authorCopy" prefWidth="182.0" text="Author" />
-                                          <TableColumn fx:id="titleCopy" prefWidth="144.0" text="Title" />
-                                          <TableColumn fx:id="statusCopy" prefWidth="142.0" text="Status" />
-                                          <TableColumn fx:id="issuedTo" prefWidth="61.0" text="Issued to" />
-                                       </columns>
-                                       <columnResizePolicy>
-                                          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                                       </columnResizePolicy>
-                                       <contextMenu>
-                                          <ContextMenu>
-                                             <items>
-                                                <MenuItem mnemonicParsing="false" onAction="#showTables" text="Refresh" />
-                                                <MenuItem mnemonicParsing="false" onAction="#deleteDoc" text="Delete" />
-                                                <MenuItem mnemonicParsing="false" onAction="#editPatron" text="Edit" />
-                                             </items>
-                                          </ContextMenu>
-                                       </contextMenu>
-                                    </TableView>
-                                 </center>
-                              </BorderPane>
-                           </children>
-                        </AnchorPane>
-                     </content>
-                  </Tab>
-               </tabs>
-            </JFXTabPane>
+            <AnchorPane BorderPane.alignment="CENTER">
+               <children>
+                  <JFXTabPane prefHeight="427.2" prefWidth="612.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <tabs>
+                        <Tab styleClass=".tab" text="Documents">
+                           <content>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <BorderPane prefHeight="387.0" prefWidth="612.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <bottom>
+                                          <AnchorPane prefHeight="33.0" prefWidth="612.0" style="-fx-background-color: #222429;" BorderPane.alignment="CENTER">
+                                             <children>
+                                                <JFXButton fx:id="addDoc" layoutX="132.0" layoutY="1.0" onAction="#addDoc" text="Add" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="28.0" AnchorPane.rightAnchor="484.0" AnchorPane.topAnchor="6.0">
+                                                   <graphic>
+                                                      <Icons525View fill="WHITE" glyphName="BOOKS" size="40">
+                                                         <effect>
+                                                            <Glow />
+                                                         </effect>
+                                                      </Icons525View>
+                                                   </graphic>
+                                                   <font>
+                                                      <Font name="System Bold" size="16.0" />
+                                                   </font>
+                                                </JFXButton>
+                                                <JFXButton fx:id="issue" layoutX="153.0" layoutY="4.0" onAction="#issue" prefHeight="54.0" prefWidth="122.0" text="Issue" textFill="WHITE" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="153.0" AnchorPane.rightAnchor="337.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font name="System Bold" size="16.0" />
+                                                   </font>
+                                                   <graphic>
+                                                      <MaterialDesignIconView fill="WHITE" glyphName="LIBRARY" size="40" />
+                                                   </graphic>
+                                                </JFXButton>
+                                                <JFXButton fx:id="editDoc" layoutX="325.0" onAction="#editDoc" prefHeight="54.0" prefWidth="122.0" text="Edit" textFill="WHITE" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="325.0" AnchorPane.rightAnchor="165.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font name="System Bold" size="16.0" />
+                                                   </font>
+                                                   <graphic>
+                                                      <MaterialIconView fill="WHITE" glyphName="EDIT" size="40" />
+                                                   </graphic>
+                                                </JFXButton>
+                                                <JFXButton fx:id="deleteDoc" layoutX="485.0" layoutY="6.0" onAction="#deleteDoc" text="Delete" textFill="WHITE" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="486.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="4.0">
+                                                   <graphic>
+                                                      <Icons525View fill="WHITE" glyphName="REMOVE" size="37">
+                                                         <effect>
+                                                            <Glow />
+                                                         </effect>
+                                                      </Icons525View>
+                                                   </graphic>
+                                                   <font>
+                                                      <Font name="System Bold" size="16.0" />
+                                                   </font>
+                                                </JFXButton>
+                                             </children>
+                                          </AnchorPane>
+                                       </bottom>
+                                       <left>
+                                          <JFXListView prefHeight="333.0" prefWidth="137.0" style="-fx-background-color: #222429;" BorderPane.alignment="CENTER" />
+                                       </left>
+                                       <center>
+                                          <TableView fx:id="tableBook" editable="true" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                            <columns>
+                                              <TableColumn fx:id="id" prefWidth="59.0" text="ID" />
+                                              <TableColumn fx:id="author" prefWidth="66.0" text="Author" />
+                                                <TableColumn fx:id="title" prefWidth="123.0" text="Title" />
+                                                <TableColumn fx:id="bookType" prefWidth="105.0" text="Type" />
+                                                <TableColumn fx:id="avaliability" prefWidth="75.0" text="Available" />
+                                                <TableColumn fx:id="total" prefWidth="75.0" text="Total" />
+                                            </columns>
+                                             <columnResizePolicy>
+                                                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                             </columnResizePolicy>
+                                             <contextMenu>
+                                                <ContextMenu>
+                                                  <items>
+                                                      <MenuItem mnemonicParsing="false" onAction="#showTables" text="Refresh" />
+                                                      <MenuItem mnemonicParsing="false" onAction="#addCopy" text="Add Copy" />
+                                                      <MenuItem mnemonicParsing="false" onAction="#deleteDoc" text="Delete" />
+                                                      <MenuItem mnemonicParsing="false" onAction="#showBookInfo" text="Show Info" />
+                                                    <MenuItem mnemonicParsing="false" onAction="#editDoc" text="Edit" />
+                                                  </items>
+                                                </ContextMenu>
+                                             </contextMenu>
+                                          </TableView>
+                                       </center>
+                                    </BorderPane>
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </Tab>
+                        <Tab styleClass=".tab" text="Patrons">
+                           <content>
+                              <BorderPane prefHeight="200.0" prefWidth="200.0" />
+                           </content>
+                           <content>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <BorderPane prefHeight="387.0" prefWidth="612.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <bottom>
+                                          <AnchorPane prefHeight="0.0" prefWidth="612.0" BorderPane.alignment="CENTER">
+                                             <children>
+                                                <JFXButton fx:id="addPatron" layoutX="28.0" layoutY="7.0" onAction="#addPatron" text="Add" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="28.0" AnchorPane.rightAnchor="486.0" AnchorPane.topAnchor="4.0">
+                                                   <font>
+                                                      <Font name="System Bold" size="16.0" />
+                                                   </font>
+                                                   <graphic>
+                                                      <Icons525View fill="WHITE" glyphName="USER_PLUS" size="40">
+                                                         <effect>
+                                                            <Glow />
+                                                         </effect>
+                                                      </Icons525View>
+                                                   </graphic>
+                                                </JFXButton>
+                                                <JFXButton fx:id="editPatron" layoutX="245.0" layoutY="-2.0" onAction="#editPatron" prefHeight="54.0" prefWidth="122.0" text="Edit" textFill="WHITE" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="2.0">
+                                                   <font>
+                                                      <Font name="System Bold" size="16.0" />
+                                                   </font>
+                                                   <graphic>
+                                                      <MaterialIconView fill="WHITE" glyphName="EDIT" size="40" />
+                                                   </graphic>
+                                                </JFXButton>
+                                                <JFXButton fx:id="deletePatron" layoutX="485.0" layoutY="6.0" onAction="#deletePatron" text="Delete" textFill="WHITE" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="486.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="2.0">
+                                                   <font>
+                                                      <Font name="System Bold" size="16.0" />
+                                                   </font>
+                                                   <graphic>
+                                                      <Icons525View fill="WHITE" glyphName="REMOVE" size="37">
+                                                         <effect>
+                                                            <Glow />
+                                                         </effect>
+                                                      </Icons525View>
+                                                   </graphic>
+                                                </JFXButton>
+                                             </children>
+                                          </AnchorPane>
+                                       </bottom>
+                                       <center>
+                                          <TableView fx:id="tableUser" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                            <columns>
+                                              <TableColumn fx:id="userID" prefWidth="75.0" text="ID" />
+                                              <TableColumn fx:id="userName" prefWidth="75.0" text="Name" />
+                                                <TableColumn fx:id="userPhone" prefWidth="75.0" text="Phone" />
+                                                <TableColumn fx:id="userAddress" prefWidth="75.0" text="Address" />
+                                                <TableColumn fx:id="userType" prefWidth="75.0" text="Type" />
+                                            </columns>
+                                             <columnResizePolicy>
+                                                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                             </columnResizePolicy>
+                                             <contextMenu>
+                                                <ContextMenu>
+                                                  <items>
+                                                      <MenuItem mnemonicParsing="false" onAction="#showPatronCopies" text="Show Taken Documents" />
+                                                      <MenuItem mnemonicParsing="false" onAction="#showTableUser" text="Refresh" />
+                                                      <MenuItem mnemonicParsing="false" onAction="#deletePatron" text="Delete" />
+                                                    <MenuItem mnemonicParsing="false" onAction="#editPatron" text="Edit" />
+                                                  </items>
+                                                </ContextMenu>
+                                             </contextMenu>
+                                          </TableView>
+                                       </center>
+                                    </BorderPane>
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </Tab>
+                        <Tab onSelectionChanged="#showTableUser" styleClass=".tab" text="Copies ">
+                           <content>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <BorderPane prefHeight="387.0" prefWidth="612.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <bottom>
+                                          <AnchorPane prefHeight="0.0" prefWidth="612.0" BorderPane.alignment="CENTER">
+                                             <children>
+                                                <JFXButton fx:id="returnButton" layoutX="122.0" layoutY="3.0" onAction="#returnDocument" text="Return Copy" textFill="WHITE" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="122.0" AnchorPane.rightAnchor="330.0" AnchorPane.topAnchor="3.0">
+                                                   <font>
+                                                      <Font name="System Bold" size="16.0" />
+                                                   </font>
+                                                   <graphic>
+                                                      <MaterialIconView fill="WHITE" glyphName="KEYBOARD_RETURN" size="40" />
+                                                   </graphic>
+                                                </JFXButton>
+                                                <JFXButton fx:id="delete" layoutX="390.0" layoutY="3.0" onAction="#deleteCopy" text="Delete" textFill="WHITE" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="390.0" AnchorPane.rightAnchor="107.0" AnchorPane.topAnchor="3.0">
+                                                   <font>
+                                                      <Font name="System Bold" size="16.0" />
+                                                   </font>
+                                                   <graphic>
+                                                      <Icons525View fx:id="issueCopy" fill="WHITE" glyphName="REMOVE" size="40">
+                                                         <effect>
+                                                            <Glow />
+                                                         </effect>
+                                                      </Icons525View>
+                                                   </graphic>
+                                                </JFXButton>
+                                             </children>
+                                          </AnchorPane>
+                                       </bottom>
+                                       <center>
+                                          <TableView fx:id="tableCopy" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                             <columns>
+                                                <TableColumn fx:id="idCopy" prefWidth="62.0" text="ID" />
+                                                <TableColumn fx:id="authorCopy" prefWidth="182.0" text="Author" />
+                                                <TableColumn fx:id="titleCopy" prefWidth="144.0" text="Title" />
+                                                <TableColumn fx:id="statusCopy" prefWidth="142.0" text="Status" />
+                                                <TableColumn fx:id="issuedTo" prefWidth="61.0" text="Issued to" />
+                                             </columns>
+                                             <columnResizePolicy>
+                                                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                             </columnResizePolicy>
+                                             <contextMenu>
+                                                <ContextMenu>
+                                                   <items>
+                                                      <MenuItem mnemonicParsing="false" onAction="#showTables" text="Refresh" />
+                                                      <MenuItem mnemonicParsing="false" onAction="#deleteDoc" text="Delete" />
+                                                      <MenuItem mnemonicParsing="false" onAction="#editPatron" text="Edit" />
+                                                   </items>
+                                                </ContextMenu>
+                                             </contextMenu>
+                                          </TableView>
+                                       </center>
+                                    </BorderPane>
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </Tab>
+                     </tabs>
+                  </JFXTabPane>
+                  <JFXButton fx:id="logout" layoutX="518.0" layoutY="8.0" onAction="#logoutAction" text="Log OUT" textAlignment="CENTER" textFill="WHITE" AnchorPane.rightAnchor="7.600000000000023" AnchorPane.topAnchor="8.0">
+                     <graphic>
+                        <MaterialDesignIconView fill="WHITE" glyphName="LOGOUT" size="17" />
+                     </graphic>
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </AnchorPane>
          </center>
       </BorderPane>
    </children>
