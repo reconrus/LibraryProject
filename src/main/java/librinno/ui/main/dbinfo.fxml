@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane prefHeight="271.0" prefWidth="302.0" stylesheets="@../../../../resources/theme.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.librinno.ui.main.dbinfoClass">
+   <children>
+      <JFXTextField fx:id="url" layoutX="70.0" layoutY="83.0" prefHeight="25.0" prefWidth="161.0" promptText="URL" text="jdbc:mysql://localhost:3306" />
+      <JFXTextField fx:id="user" layoutX="70.0" layoutY="129.0" prefHeight="25.0" prefWidth="161.0" promptText="Username" />
+      <JFXTextField fx:id="pass" layoutX="70.0" layoutY="172.0" prefHeight="25.0" prefWidth="161.0" promptText="Password" />
+      <Text fill="WHITE" layoutX="43.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter your Database Information">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Text>
+      <JFXButton fx:id="confirm" layoutX="121.0" layoutY="219.0" onAction="#confirm" text="Confirm" />
+   </children>
+</AnchorPane>

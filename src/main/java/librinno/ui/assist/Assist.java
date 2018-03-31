@@ -26,7 +26,6 @@ public class Assist {
         stage.showAndWait();
     }
 
-
     public static void loadScreen(URL fxml, Button butt) throws IOException {
         Parent parent= FXMLLoader.load(fxml);
         ((Stage) butt.getScene().getWindow()).setScene(new Scene(parent));

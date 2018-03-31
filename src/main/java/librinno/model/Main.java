@@ -9,10 +9,18 @@ import java.util.Date;
 
 
 public class Main {
-    static final String DB_URL = "jdbc:mysql://localhost/?useSSL=false";
+    static String DB_URL;
 
     private static String USER;
     private static String PASS;
+
+    public static String getDbUrl() {
+        return DB_URL;
+    }
+
+    public static void setDbUrl(String dbUrl) {
+        DB_URL = dbUrl+"/dmitrdbk?useSSL=false";
+    }
 
     public static final String getPASS() {
         return PASS;
