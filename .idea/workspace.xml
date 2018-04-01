@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bbc7c2d5-398f-4d60-a540-ee2965b7e505" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/librinno/model/Database.java" afterPath="$PROJECT_DIR$/src/main/java/librinno/model/Database.java" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/librinno/model/Librarian.java" afterPath="$PROJECT_DIR$/src/main/java/librinno/model/Librarian.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/test/" />
@@ -18,23 +19,30 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/librinno/model/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="9" column="0" lean-forward="true" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+            <state relative-caret-position="135">
+              <caret line="8" column="0" lean-forward="true" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
               <folding>
-                <element signature="e#341#342#0" expanded="true" />
-                <element signature="e#370#371#0" expanded="true" />
-                <element signature="e#419#420#0" expanded="true" />
-                <element signature="e#474#475#0" expanded="true" />
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Librarian.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Article.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/librinno/model/Article.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-996">
+              <caret line="13" column="13" lean-forward="false" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Librarian.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/librinno/model/Librarian.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="82">
-              <caret line="15" column="13" lean-forward="false" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+            <state relative-caret-position="289">
+              <caret line="118" column="0" lean-forward="true" selection-start-line="118" selection-start-column="0" selection-end-line="118" selection-end-column="0" />
               <folding>
                 <element signature="docComment;class#Librarian#0" expanded="false" />
                 <element signature="docComment;field#db#0;class#Librarian#0" expanded="false" />
@@ -50,7 +58,6 @@
                 <element signature="docComment;method#checkOutArticle#0;class#Librarian#0" expanded="false" />
                 <element signature="method#checkOutArticle#0;class#Librarian#0" expanded="false" />
                 <element signature="docComment;method#checkOut#0;class#Librarian#0" expanded="false" />
-                <element signature="method#checkOut#0;class#Librarian#0" expanded="false" />
                 <element signature="docComment;method#returnBook#0;class#Librarian#0" expanded="false" />
                 <element signature="method#returnBook#0;class#Librarian#0" expanded="false" />
                 <element signature="docComment;method#requestReturnBook#0;class#Librarian#0" expanded="false" />
@@ -112,19 +119,73 @@
                 <element signature="method#numberOfMeetings#0;class#Librarian#0" expanded="false" />
                 <element signature="docComment;method#deleteDoc#0;class#Librarian#0" expanded="false" />
                 <element signature="method#deleteDoc#0;class#Librarian#0" expanded="false" />
-                <marker date="1522580274189" expanded="true" signature="1805:1911" ph="UPDATE Copy... " />
-                <marker date="1522580274189" expanded="true" signature="1966:2004" ph="SELECT * FRO... Copy" />
-                <marker date="1522580274189" expanded="true" signature="2842:2872" ph="SELECT * FRO... Books" />
+                <marker date="1522594157864" expanded="true" signature="1856:1962" ph="UPDATE Copy... " />
+                <marker date="1522594157864" expanded="true" signature="2017:2055" ph="SELECT * FRO... Copy" />
+                <marker date="1522594157864" expanded="true" signature="2893:2923" ph="SELECT * FRO... Books" />
+                <marker date="1522594157864" expanded="true" signature="4709:4747" ph="SELECT * FRO... Copy" />
+                <marker date="1522594157864" expanded="true" signature="5201:5231" ph="SELECT * FRO... Books" />
+                <marker date="1522594157864" expanded="true" signature="5419:5446" ph="SELECT * FRO... av" />
+                <marker date="1522594157864" expanded="true" signature="5634:5667" ph="SELECT * FRO... articles" />
+                <marker date="1522594157864" expanded="true" signature="6687:6817" ph="UPDATE Copy... " />
+                <marker date="1522594157864" expanded="true" signature="8756:8884" ph="UPDATE Copy... " />
+                <marker date="1522594157864" expanded="true" signature="10033:10166" ph="UPDATE Copy... " />
+                <marker date="1522594157864" expanded="true" signature="11637:11686" ph="SELECT * FRO... queue_on_missingValue" />
+                <marker date="1522594157864" expanded="true" signature="12064:12094" ph="SELECT * FRO... Books" />
+                <marker date="1522594157864" expanded="true" signature="12280:12307" ph="SELECT * FRO... AV" />
+                <marker date="1522594157864" expanded="true" signature="12491:12524" ph="SELECT * FRO... Articles" />
+                <marker date="1522594157864" expanded="true" signature="12848:12895" ph="DELETE from queue_on_missingValue... " />
+                <marker date="1522594157864" expanded="true" signature="13171:13230" ph="UPDATE queue_on_missingValue... " />
+                <marker date="1522594157864" expanded="true" signature="13435:13458" ph="SELECT * FRO... queue_on_missingValue" />
+                <marker date="1522594157864" expanded="true" signature="13606:13626" ph="DROP TABLE q... " />
+                <marker date="1522594157864" expanded="true" signature="14397:14485" ph="UPDATE Copy... " />
+                <marker date="1522594157864" expanded="true" signature="15213:15256" ph="UPDATE Copy... " />
+                <marker date="1522594157864" expanded="true" signature="15739:15792" ph="SELECT * FRO... Users_of_the_library" />
+                <marker date="1522594157864" expanded="true" signature="16612:16641" ph="SELECT * FRO... Books" />
+                <marker date="1522594157864" expanded="true" signature="16781:16807" ph="SELECT * FRO... AV" />
+                <marker date="1522594157864" expanded="true" signature="16961:16993" ph="SELECT * FRO... Articles" />
+                <marker date="1522594157864" expanded="true" signature="17412:17441" ph="SELECT * FRO... Books" />
+                <marker date="1522594157864" expanded="true" signature="18122:18148" ph="SELECT * FRO... AV" />
+                <marker date="1522594157864" expanded="true" signature="18735:18767" ph="SELECT * FRO... Articles" />
+                <marker date="1522594157864" expanded="true" signature="19600:19631" ph="SELECT * FRO... Copy" />
+                <marker date="1522594157864" expanded="true" signature="19968:20019" ph="DELETE from Users_of_the_library... " />
+                <marker date="1522594157864" expanded="true" signature="20603:20728" ph="UPDATE Users_of_the_library... " />
+                <marker date="1522594157864" expanded="true" signature="21483:21514" ph="SELECT Id_of... Copy" />
+                <marker date="1522594157864" expanded="true" signature="21737:21800" ph="INSERT INTO Copy... " />
+                <marker date="1522594157864" expanded="true" signature="25063:25087" ph="DELETE from AV... " />
+                <marker date="1522594157864" expanded="true" signature="25170:25208" ph="DELETE FROM Copy... " />
+                <marker date="1522594157864" expanded="true" signature="25576:25628" ph="DELETE from Copy... " />
+                <marker date="1522594157864" expanded="true" signature="25969:25996" ph="DELETE from Books... " />
+                <marker date="1522594157864" expanded="true" signature="26079:26117" ph="DELETE FROM Copy... " />
+                <marker date="1522594157864" expanded="true" signature="26503:26533" ph="DELETE from Articles... " />
+                <marker date="1522594157864" expanded="true" signature="26616:26654" ph="DELETE FROM Copy... " />
+                <marker date="1522594157864" expanded="true" signature="27036:27119" ph="UPDATE AV... " />
+                <marker date="1522594157864" expanded="true" signature="27681:27811" ph="UPDATE Articles... " />
+                <marker date="1522594157864" expanded="true" signature="28668:28807" ph="UPDATE Books... " />
+                <marker date="1522594157864" expanded="true" signature="29634:29650" ph="SELECT * FRO... AV" />
+                <marker date="1522594157864" expanded="true" signature="29894:29912" ph="SELECT * FRO... Copy" />
+                <marker date="1522594157864" expanded="true" signature="30921:30943" ph="SELECT * FRO... Articles" />
+                <marker date="1522594157864" expanded="true" signature="31186:31204" ph="SELECT * FRO... Copy" />
+                <marker date="1522594157864" expanded="true" signature="32138:32157" ph="SELECT * FRO... Books" />
+                <marker date="1522594157864" expanded="true" signature="32401:32419" ph="SELECT * FRO... Copy" />
+                <marker date="1522594157864" expanded="true" signature="33798:33871" ph="SELECT * FRO... Users_of_the_library" />
+                <marker date="1522594157864" expanded="true" signature="34922:34953" ph="SELECT * FRO... Copy" />
+                <marker date="1522594157864" expanded="true" signature="35557:35588" ph="SELECT * FRO... Copy" />
+                <marker date="1522594157864" expanded="true" signature="36024:36056" ph="SELECT * FRO... Articles" />
+                <marker date="1522594157864" expanded="true" signature="36949:36975" ph="SELECT * FRO... AV" />
+                <marker date="1522594157864" expanded="true" signature="37573:37602" ph="SELECT * FRO... Books" />
+                <marker date="1522594157864" expanded="true" signature="38997:39063" ph="SELECT * FRO... Copy" />
+                <marker date="1522594157864" expanded="true" signature="39606:39646" ph="SELECT * FRO... Copy" />
+                <marker date="1522594157864" expanded="true" signature="40183:40201" ph="SELECT * FRO... Copy" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Database.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Database.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/librinno/model/Database.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="109">
-              <caret line="32" column="0" lean-forward="true" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+            <state relative-caret-position="245">
+              <caret line="73" column="0" lean-forward="false" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
               <folding>
                 <element signature="docComment;method#Database#0;class#Database#0" expanded="false" />
                 <element signature="method#Database#0;class#Database#0" expanded="false" />
@@ -154,42 +215,6 @@
                 <element signature="method#send_email#0;class#Database#0" expanded="false" />
                 <element signature="method#user_in_queue#0;class#Database#0" expanded="false" />
                 <element signature="class#UserTypeComparator#0" expanded="false" />
-                <marker date="1522581805662" expanded="true" signature="1430:1533" ph="insert into Users_of_the_library... " />
-                <marker date="1522581805662" expanded="true" signature="2309:2367" ph="insert into AV... " />
-                <marker date="1522581805662" expanded="true" signature="2717:2734" ph="SELECT id FR... AV" />
-                <marker date="1522581805662" expanded="true" signature="2904:2978" ph="insert into Copy... " />
-                <marker date="1522581805662" expanded="true" signature="3220:3294" ph="insert into Copy... " />
-                <marker date="1522581805662" expanded="true" signature="3853:3958" ph="insert into Articles... " />
-                <marker date="1522581805662" expanded="true" signature="4648:4671" ph="SELECT id FR... Articles" />
-                <marker date="1522581805662" expanded="true" signature="4841:4915" ph="insert into Copy... " />
-                <marker date="1522581805662" expanded="true" signature="5157:5231" ph="insert into Copy... " />
-                <marker date="1522581805662" expanded="true" signature="5742:5863" ph="insert into Books... " />
-                <marker date="1522581805662" expanded="true" signature="6638:6658" ph="SELECT id FR... Books" />
-                <marker date="1522581805662" expanded="true" signature="7016:7090" ph="insert into Copy... " />
-                <marker date="1522581805662" expanded="true" signature="7415:7489" ph="insert into Copy... " />
-                <marker date="1522581805662" expanded="true" signature="8186:8202" ph="SELECT * FRO... AV" />
-                <marker date="1522581805662" expanded="true" signature="9403:9425" ph="SELECT * FRO... Articles" />
-                <marker date="1522581805662" expanded="true" signature="10831:10850" ph="SELECT * FRO... Books" />
-                <marker date="1522581805662" expanded="true" signature="12266:12300" ph="SELECT * FRO... Users_of_the_library" />
-                <marker date="1522581805662" expanded="true" signature="13141:13194" ph="SELECT * FRO... Users_of_the_library" />
-                <marker date="1522581805662" expanded="true" signature="14126:14180" ph="SELECT * FRO... Users_of_the_library" />
-                <marker date="1522581805662" expanded="true" signature="14741:14779" ph="CREATE DATAB... dmitrDbK" />
-                <marker date="1522581805662" expanded="true" signature="15029:15330" ph="CREATE TABLE... Books" />
-                <marker date="1522581805662" expanded="true" signature="15422:15714" ph="CREATE TABLE... Copy" />
-                <marker date="1522581805662" expanded="true" signature="15807:16071" ph="CREATE TABLE... Users_of_the_library" />
-                <marker date="1522581805662" expanded="true" signature="16167:16431" ph="CREATE TABLE... Articles" />
-                <marker date="1522581805662" expanded="true" signature="16521:16671" ph="CREATE TABLE... AV" />
-                <marker date="1522581805662" expanded="true" signature="16730:16918" ph="INSERT IGNOR... Users_of_the_library" />
-                <marker date="1522581805662" expanded="true" signature="16977:17188" ph="INSERT IGNOR... Users_of_the_library" />
-                <marker date="1522581805662" expanded="true" signature="17247:17443" ph="INSERT IGNOR... Users_of_the_library" />
-                <marker date="1522581805662" expanded="true" signature="18768:18791" ph="SELECT * FRO... Queue_on_missingValue" />
-                <marker date="1522581805662" expanded="true" signature="19706:19724" ph="TRUNCATE Que... " />
-                <marker date="1522581805662" expanded="true" signature="19864:20121" ph="CREATE TABLE... Queue_on_missingValue" />
-                <marker date="1522581805662" expanded="true" signature="20488:20805" ph="INSERT INTO Queue_on_missingValue... " />
-                <marker date="1522581805662" expanded="true" signature="20951:21215" ph="INSERT INTO Queue_on_missingValue... " />
-                <marker date="1522581805662" expanded="true" signature="21906:21946" ph="SELECT * FRO... missingValue" />
-                <marker date="1522581805662" expanded="true" signature="23671:23711" ph="SELECT * FRO... missingValue" />
-                <marker date="1522581805662" expanded="true" signature="24856:24914" ph="SELECT * FRO... queue_on_missingValue" />
               </folding>
             </state>
           </provider>
@@ -208,7 +233,7 @@
       <file leaf-file-name="Book.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/librinno/model/Book.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-156">
+            <state relative-caret-position="44">
               <caret line="13" column="13" lean-forward="false" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
               <folding>
                 <element signature="method#Book#0;class#Book#0" expanded="false" />
@@ -237,6 +262,7 @@
       <find>DB_URL</find>
       <find>CanRenew</find>
       <find>return</find>
+      <find>select</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -257,8 +283,8 @@
         <option value="$PROJECT_DIR$/src/main/java/librinno/ui/librarianScreen/LibrarianPatronSCopiesController.java" />
         <option value="$PROJECT_DIR$/src/main/java/librinno/ui/patronScreen/PatronScreen.fxml" />
         <option value="$PROJECT_DIR$/src/main/java/librinno/ui/patronScreen/PatronSDocumentsController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/librinno/model/Librarian.java" />
         <option value="$PROJECT_DIR$/src/main/java/librinno/model/Database.java" />
+        <option value="$PROJECT_DIR$/src/main/java/librinno/model/Librarian.java" />
         <option value="$PROJECT_DIR$/src/main/java/librinno/model/Main.java" />
       </list>
     </option>
@@ -508,12 +534,12 @@
       <option name="presentableId" value="Default" />
       <updated>1521114161401</updated>
       <workItem from="1521114162885" duration="55000" />
-      <workItem from="1522568249830" duration="13620000" />
+      <workItem from="1522568249830" duration="20552000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="21435000" />
+    <option name="totallyTimeSpent" value="28367000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
@@ -521,14 +547,14 @@
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32935917" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32935917" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23397914" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2548435" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -566,10 +592,7 @@
         <state relative-caret-position="221">
           <caret line="21" column="48" lean-forward="false" selection-start-line="21" selection-start-column="48" selection-end-line="21" selection-end-column="48" />
           <folding>
-            <element signature="e#341#342#0" expanded="true" />
-            <element signature="e#370#371#0" expanded="true" />
-            <element signature="e#419#420#0" expanded="true" />
-            <element signature="e#474#475#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -579,7 +602,7 @@
         <state relative-caret-position="255">
           <caret line="15" column="27" lean-forward="false" selection-start-line="15" selection-start-column="27" selection-end-line="15" selection-end-column="27" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -627,10 +650,7 @@
         <state relative-caret-position="119">
           <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
           <folding>
-            <element signature="e#341#342#0" expanded="true" />
-            <element signature="e#370#371#0" expanded="true" />
-            <element signature="e#419#420#0" expanded="true" />
-            <element signature="e#474#475#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -640,10 +660,7 @@
         <state relative-caret-position="-208">
           <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
           <folding>
-            <element signature="e#341#342#0" expanded="true" />
-            <element signature="e#370#371#0" expanded="true" />
-            <element signature="e#419#420#0" expanded="true" />
-            <element signature="e#474#475#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -698,7 +715,7 @@
         <state relative-caret-position="17">
           <caret line="15" column="27" lean-forward="false" selection-start-line="15" selection-start-column="27" selection-end-line="15" selection-end-column="27" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -757,9 +774,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/librinno/model/Article.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-996">
+          <caret line="13" column="13" lean-forward="false" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/librinno/model/Book.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-156">
+        <state relative-caret-position="44">
           <caret line="13" column="13" lean-forward="false" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
           <folding>
             <element signature="method#Book#0;class#Book#0" expanded="false" />
@@ -772,10 +797,57 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/librinno/model/Database.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="245">
+          <caret line="73" column="0" lean-forward="false" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
+          <folding>
+            <element signature="docComment;method#Database#0;class#Database#0" expanded="false" />
+            <element signature="method#Database#0;class#Database#0" expanded="false" />
+            <element signature="docComment;method#userCreation#0;class#Database#0" expanded="false" />
+            <element signature="method#userCreation#0;class#Database#0" expanded="false" />
+            <element signature="docComment;method#avCreation#0;class#Database#0" expanded="false" />
+            <element signature="method#avCreation#0;class#Database#0" expanded="false" />
+            <element signature="docComment;method#articleCreation#0;class#Database#0" expanded="false" />
+            <element signature="method#articleCreation#0;class#Database#0" expanded="false" />
+            <element signature="docComment;method#bookCreation#0;class#Database#0" expanded="false" />
+            <element signature="method#bookCreation#0;class#Database#0" expanded="false" />
+            <element signature="docComment;method#isAVAlreadyExist#0;class#Database#0" expanded="false" />
+            <element signature="method#isAVAlreadyExist#0;class#Database#0" expanded="false" />
+            <element signature="docComment;method#isArticleAlreadyExist#0;class#Database#0" expanded="false" />
+            <element signature="method#isArticleAlreadyExist#0;class#Database#0" expanded="false" />
+            <element signature="docComment;method#isBookAlreadyExist#0;class#Database#0" expanded="false" />
+            <element signature="method#isBookAlreadyExist#0;class#Database#0" expanded="false" />
+            <element signature="docComment;method#isUserAlreadyExist#0;class#Database#0" expanded="false" />
+            <element signature="method#isUserAlreadyExist#0;class#Database#0" expanded="false" />
+            <element signature="docComment;method#getInformationAboutTheUser#0;class#Database#0" expanded="false" />
+            <element signature="method#getInformationAboutTheUser#0;class#Database#0" expanded="false" />
+            <element signature="docComment;method#authorization#0;class#Database#0" expanded="false" />
+            <element signature="method#authorization#0;class#Database#0" expanded="false" />
+            <element signature="method#creationLocalDB#0;class#Database#0" expanded="false" />
+            <element signature="method#queue_on_material#0;class#Database#0" expanded="false" />
+            <element signature="method#notification#0;class#Database#0" expanded="false" />
+            <element signature="method#send_email#0;class#Database#0" expanded="false" />
+            <element signature="method#user_in_queue#0;class#Database#0" expanded="false" />
+            <element signature="class#UserTypeComparator#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/librinno/model/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="8" column="0" lean-forward="true" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/librinno/model/Librarian.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="82">
-          <caret line="15" column="13" lean-forward="false" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+        <state relative-caret-position="289">
+          <caret line="118" column="0" lean-forward="true" selection-start-line="118" selection-start-column="0" selection-end-line="118" selection-end-column="0" />
           <folding>
             <element signature="docComment;class#Librarian#0" expanded="false" />
             <element signature="docComment;field#db#0;class#Librarian#0" expanded="false" />
@@ -791,7 +863,6 @@
             <element signature="docComment;method#checkOutArticle#0;class#Librarian#0" expanded="false" />
             <element signature="method#checkOutArticle#0;class#Librarian#0" expanded="false" />
             <element signature="docComment;method#checkOut#0;class#Librarian#0" expanded="false" />
-            <element signature="method#checkOut#0;class#Librarian#0" expanded="false" />
             <element signature="docComment;method#returnBook#0;class#Librarian#0" expanded="false" />
             <element signature="method#returnBook#0;class#Librarian#0" expanded="false" />
             <element signature="docComment;method#requestReturnBook#0;class#Librarian#0" expanded="false" />
@@ -853,95 +924,63 @@
             <element signature="method#numberOfMeetings#0;class#Librarian#0" expanded="false" />
             <element signature="docComment;method#deleteDoc#0;class#Librarian#0" expanded="false" />
             <element signature="method#deleteDoc#0;class#Librarian#0" expanded="false" />
-            <marker date="1522580274189" expanded="true" signature="1805:1911" ph="UPDATE Copy... " />
-            <marker date="1522580274189" expanded="true" signature="1966:2004" ph="SELECT * FRO... Copy" />
-            <marker date="1522580274189" expanded="true" signature="2842:2872" ph="SELECT * FRO... Books" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/librinno/model/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="9" column="0" lean-forward="true" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-          <folding>
-            <element signature="e#341#342#0" expanded="true" />
-            <element signature="e#370#371#0" expanded="true" />
-            <element signature="e#419#420#0" expanded="true" />
-            <element signature="e#474#475#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/librinno/model/Database.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="109">
-          <caret line="32" column="0" lean-forward="true" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
-          <folding>
-            <element signature="docComment;method#Database#0;class#Database#0" expanded="false" />
-            <element signature="method#Database#0;class#Database#0" expanded="false" />
-            <element signature="docComment;method#userCreation#0;class#Database#0" expanded="false" />
-            <element signature="method#userCreation#0;class#Database#0" expanded="false" />
-            <element signature="docComment;method#avCreation#0;class#Database#0" expanded="false" />
-            <element signature="method#avCreation#0;class#Database#0" expanded="false" />
-            <element signature="docComment;method#articleCreation#0;class#Database#0" expanded="false" />
-            <element signature="method#articleCreation#0;class#Database#0" expanded="false" />
-            <element signature="docComment;method#bookCreation#0;class#Database#0" expanded="false" />
-            <element signature="method#bookCreation#0;class#Database#0" expanded="false" />
-            <element signature="docComment;method#isAVAlreadyExist#0;class#Database#0" expanded="false" />
-            <element signature="method#isAVAlreadyExist#0;class#Database#0" expanded="false" />
-            <element signature="docComment;method#isArticleAlreadyExist#0;class#Database#0" expanded="false" />
-            <element signature="method#isArticleAlreadyExist#0;class#Database#0" expanded="false" />
-            <element signature="docComment;method#isBookAlreadyExist#0;class#Database#0" expanded="false" />
-            <element signature="method#isBookAlreadyExist#0;class#Database#0" expanded="false" />
-            <element signature="docComment;method#isUserAlreadyExist#0;class#Database#0" expanded="false" />
-            <element signature="method#isUserAlreadyExist#0;class#Database#0" expanded="false" />
-            <element signature="docComment;method#getInformationAboutTheUser#0;class#Database#0" expanded="false" />
-            <element signature="method#getInformationAboutTheUser#0;class#Database#0" expanded="false" />
-            <element signature="docComment;method#authorization#0;class#Database#0" expanded="false" />
-            <element signature="method#authorization#0;class#Database#0" expanded="false" />
-            <element signature="method#creationLocalDB#0;class#Database#0" expanded="false" />
-            <element signature="method#queue_on_material#0;class#Database#0" expanded="false" />
-            <element signature="method#notification#0;class#Database#0" expanded="false" />
-            <element signature="method#send_email#0;class#Database#0" expanded="false" />
-            <element signature="method#user_in_queue#0;class#Database#0" expanded="false" />
-            <element signature="class#UserTypeComparator#0" expanded="false" />
-            <marker date="1522581805662" expanded="true" signature="1430:1533" ph="insert into Users_of_the_library... " />
-            <marker date="1522581805662" expanded="true" signature="2309:2367" ph="insert into AV... " />
-            <marker date="1522581805662" expanded="true" signature="2717:2734" ph="SELECT id FR... AV" />
-            <marker date="1522581805662" expanded="true" signature="2904:2978" ph="insert into Copy... " />
-            <marker date="1522581805662" expanded="true" signature="3220:3294" ph="insert into Copy... " />
-            <marker date="1522581805662" expanded="true" signature="3853:3958" ph="insert into Articles... " />
-            <marker date="1522581805662" expanded="true" signature="4648:4671" ph="SELECT id FR... Articles" />
-            <marker date="1522581805662" expanded="true" signature="4841:4915" ph="insert into Copy... " />
-            <marker date="1522581805662" expanded="true" signature="5157:5231" ph="insert into Copy... " />
-            <marker date="1522581805662" expanded="true" signature="5742:5863" ph="insert into Books... " />
-            <marker date="1522581805662" expanded="true" signature="6638:6658" ph="SELECT id FR... Books" />
-            <marker date="1522581805662" expanded="true" signature="7016:7090" ph="insert into Copy... " />
-            <marker date="1522581805662" expanded="true" signature="7415:7489" ph="insert into Copy... " />
-            <marker date="1522581805662" expanded="true" signature="8186:8202" ph="SELECT * FRO... AV" />
-            <marker date="1522581805662" expanded="true" signature="9403:9425" ph="SELECT * FRO... Articles" />
-            <marker date="1522581805662" expanded="true" signature="10831:10850" ph="SELECT * FRO... Books" />
-            <marker date="1522581805662" expanded="true" signature="12266:12300" ph="SELECT * FRO... Users_of_the_library" />
-            <marker date="1522581805662" expanded="true" signature="13141:13194" ph="SELECT * FRO... Users_of_the_library" />
-            <marker date="1522581805662" expanded="true" signature="14126:14180" ph="SELECT * FRO... Users_of_the_library" />
-            <marker date="1522581805662" expanded="true" signature="14741:14779" ph="CREATE DATAB... dmitrDbK" />
-            <marker date="1522581805662" expanded="true" signature="15029:15330" ph="CREATE TABLE... Books" />
-            <marker date="1522581805662" expanded="true" signature="15422:15714" ph="CREATE TABLE... Copy" />
-            <marker date="1522581805662" expanded="true" signature="15807:16071" ph="CREATE TABLE... Users_of_the_library" />
-            <marker date="1522581805662" expanded="true" signature="16167:16431" ph="CREATE TABLE... Articles" />
-            <marker date="1522581805662" expanded="true" signature="16521:16671" ph="CREATE TABLE... AV" />
-            <marker date="1522581805662" expanded="true" signature="16730:16918" ph="INSERT IGNOR... Users_of_the_library" />
-            <marker date="1522581805662" expanded="true" signature="16977:17188" ph="INSERT IGNOR... Users_of_the_library" />
-            <marker date="1522581805662" expanded="true" signature="17247:17443" ph="INSERT IGNOR... Users_of_the_library" />
-            <marker date="1522581805662" expanded="true" signature="18768:18791" ph="SELECT * FRO... Queue_on_missingValue" />
-            <marker date="1522581805662" expanded="true" signature="19706:19724" ph="TRUNCATE Que... " />
-            <marker date="1522581805662" expanded="true" signature="19864:20121" ph="CREATE TABLE... Queue_on_missingValue" />
-            <marker date="1522581805662" expanded="true" signature="20488:20805" ph="INSERT INTO Queue_on_missingValue... " />
-            <marker date="1522581805662" expanded="true" signature="20951:21215" ph="INSERT INTO Queue_on_missingValue... " />
-            <marker date="1522581805662" expanded="true" signature="21906:21946" ph="SELECT * FRO... missingValue" />
-            <marker date="1522581805662" expanded="true" signature="23671:23711" ph="SELECT * FRO... missingValue" />
-            <marker date="1522581805662" expanded="true" signature="24856:24914" ph="SELECT * FRO... queue_on_missingValue" />
+            <marker date="1522594157864" expanded="true" signature="1856:1962" ph="UPDATE Copy... " />
+            <marker date="1522594157864" expanded="true" signature="2017:2055" ph="SELECT * FRO... Copy" />
+            <marker date="1522594157864" expanded="true" signature="2893:2923" ph="SELECT * FRO... Books" />
+            <marker date="1522594157864" expanded="true" signature="4709:4747" ph="SELECT * FRO... Copy" />
+            <marker date="1522594157864" expanded="true" signature="5201:5231" ph="SELECT * FRO... Books" />
+            <marker date="1522594157864" expanded="true" signature="5419:5446" ph="SELECT * FRO... av" />
+            <marker date="1522594157864" expanded="true" signature="5634:5667" ph="SELECT * FRO... articles" />
+            <marker date="1522594157864" expanded="true" signature="6687:6817" ph="UPDATE Copy... " />
+            <marker date="1522594157864" expanded="true" signature="8756:8884" ph="UPDATE Copy... " />
+            <marker date="1522594157864" expanded="true" signature="10033:10166" ph="UPDATE Copy... " />
+            <marker date="1522594157864" expanded="true" signature="11637:11686" ph="SELECT * FRO... queue_on_missingValue" />
+            <marker date="1522594157864" expanded="true" signature="12064:12094" ph="SELECT * FRO... Books" />
+            <marker date="1522594157864" expanded="true" signature="12280:12307" ph="SELECT * FRO... AV" />
+            <marker date="1522594157864" expanded="true" signature="12491:12524" ph="SELECT * FRO... Articles" />
+            <marker date="1522594157864" expanded="true" signature="12848:12895" ph="DELETE from queue_on_missingValue... " />
+            <marker date="1522594157864" expanded="true" signature="13171:13230" ph="UPDATE queue_on_missingValue... " />
+            <marker date="1522594157864" expanded="true" signature="13435:13458" ph="SELECT * FRO... queue_on_missingValue" />
+            <marker date="1522594157864" expanded="true" signature="13606:13626" ph="DROP TABLE q... " />
+            <marker date="1522594157864" expanded="true" signature="14397:14485" ph="UPDATE Copy... " />
+            <marker date="1522594157864" expanded="true" signature="15213:15256" ph="UPDATE Copy... " />
+            <marker date="1522594157864" expanded="true" signature="15739:15792" ph="SELECT * FRO... Users_of_the_library" />
+            <marker date="1522594157864" expanded="true" signature="16612:16641" ph="SELECT * FRO... Books" />
+            <marker date="1522594157864" expanded="true" signature="16781:16807" ph="SELECT * FRO... AV" />
+            <marker date="1522594157864" expanded="true" signature="16961:16993" ph="SELECT * FRO... Articles" />
+            <marker date="1522594157864" expanded="true" signature="17412:17441" ph="SELECT * FRO... Books" />
+            <marker date="1522594157864" expanded="true" signature="18122:18148" ph="SELECT * FRO... AV" />
+            <marker date="1522594157864" expanded="true" signature="18735:18767" ph="SELECT * FRO... Articles" />
+            <marker date="1522594157864" expanded="true" signature="19600:19631" ph="SELECT * FRO... Copy" />
+            <marker date="1522594157864" expanded="true" signature="19968:20019" ph="DELETE from Users_of_the_library... " />
+            <marker date="1522594157864" expanded="true" signature="20603:20728" ph="UPDATE Users_of_the_library... " />
+            <marker date="1522594157864" expanded="true" signature="21483:21514" ph="SELECT Id_of... Copy" />
+            <marker date="1522594157864" expanded="true" signature="21737:21800" ph="INSERT INTO Copy... " />
+            <marker date="1522594157864" expanded="true" signature="25063:25087" ph="DELETE from AV... " />
+            <marker date="1522594157864" expanded="true" signature="25170:25208" ph="DELETE FROM Copy... " />
+            <marker date="1522594157864" expanded="true" signature="25576:25628" ph="DELETE from Copy... " />
+            <marker date="1522594157864" expanded="true" signature="25969:25996" ph="DELETE from Books... " />
+            <marker date="1522594157864" expanded="true" signature="26079:26117" ph="DELETE FROM Copy... " />
+            <marker date="1522594157864" expanded="true" signature="26503:26533" ph="DELETE from Articles... " />
+            <marker date="1522594157864" expanded="true" signature="26616:26654" ph="DELETE FROM Copy... " />
+            <marker date="1522594157864" expanded="true" signature="27036:27119" ph="UPDATE AV... " />
+            <marker date="1522594157864" expanded="true" signature="27681:27811" ph="UPDATE Articles... " />
+            <marker date="1522594157864" expanded="true" signature="28668:28807" ph="UPDATE Books... " />
+            <marker date="1522594157864" expanded="true" signature="29634:29650" ph="SELECT * FRO... AV" />
+            <marker date="1522594157864" expanded="true" signature="29894:29912" ph="SELECT * FRO... Copy" />
+            <marker date="1522594157864" expanded="true" signature="30921:30943" ph="SELECT * FRO... Articles" />
+            <marker date="1522594157864" expanded="true" signature="31186:31204" ph="SELECT * FRO... Copy" />
+            <marker date="1522594157864" expanded="true" signature="32138:32157" ph="SELECT * FRO... Books" />
+            <marker date="1522594157864" expanded="true" signature="32401:32419" ph="SELECT * FRO... Copy" />
+            <marker date="1522594157864" expanded="true" signature="33798:33871" ph="SELECT * FRO... Users_of_the_library" />
+            <marker date="1522594157864" expanded="true" signature="34922:34953" ph="SELECT * FRO... Copy" />
+            <marker date="1522594157864" expanded="true" signature="35557:35588" ph="SELECT * FRO... Copy" />
+            <marker date="1522594157864" expanded="true" signature="36024:36056" ph="SELECT * FRO... Articles" />
+            <marker date="1522594157864" expanded="true" signature="36949:36975" ph="SELECT * FRO... AV" />
+            <marker date="1522594157864" expanded="true" signature="37573:37602" ph="SELECT * FRO... Books" />
+            <marker date="1522594157864" expanded="true" signature="38997:39063" ph="SELECT * FRO... Copy" />
+            <marker date="1522594157864" expanded="true" signature="39606:39646" ph="SELECT * FRO... Copy" />
+            <marker date="1522594157864" expanded="true" signature="40183:40201" ph="SELECT * FRO... Copy" />
           </folding>
         </state>
       </provider>
