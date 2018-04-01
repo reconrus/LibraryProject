@@ -283,6 +283,20 @@ public class Librarian extends User {
         }
     }
 
+    private static boolean isFreeCopyExist(int idMaterial){
+        try{
+            Statement stmt = db.con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM Copy WHERE Status = 'In library' ");
+            while (rs.next()){
+                if (rs.getInt("Id_of_original") == idMaterial)
+                    return true;
+            }
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    
     /**
      * check out for user,combination of all check out methods for user
      *
@@ -305,18 +319,25 @@ public class Librarian extends User {
             }
             try {
                 stmt = db.con.createStatement();
+
                 if (queue != null && queue.next() && queue.getInt("Card_number") == user.getCard_number()) {
                     ResultSet rs = stmt.executeQuery("SELECT * FROM Books WHERE id =" + idMaterial);
-                    if (rs.next()) {
-                        success = checkOutBook(user, idMaterial);
+                    if (rs.next() ) {
+                        if (isFreeCopyExist(idMaterial))
+                            success = checkOutBook(user, idMaterial);
+                        else return false;
                     }
                     rs = stmt.executeQuery("SELECT * FROM AV WHERE id =" + idMaterial);
                     if (rs.next()) {
-                        success = checkOutAV(user, idMaterial);
+                        if (isFreeCopyExist(idMaterial))
+                            success = checkOutAV(user, idMaterial);
+                        else return false;
                     }
                     rs = stmt.executeQuery("SELECT * FROM Articles WHERE id =" + idMaterial);
                     if (rs.next()) {
-                        success = checkOutArticle(user, idMaterial);
+                        if (isFreeCopyExist(idMaterial))
+                            success = checkOutArticle(user, idMaterial);
+                        else return false;
                     }
                     if (success) {
                         if(getNumberOfCopiesOfBook(idMaterial)>=0) {
