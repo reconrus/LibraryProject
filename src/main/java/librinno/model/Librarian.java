@@ -52,6 +52,19 @@ public class Librarian extends User {
         this.card_number = card_number;
     }
 
+    public static void outstandingRequest(int idOfMaterial){
+
+        try {
+            PreparedStatement pr = db.con.prepareStatement("UPDATE Copy SET Time_left=?,Return_date=?,CanRenew=? WHERE Id_of_original= " + idOfMaterial + " AND Status = 'Issued'");
+            pr.setInt(1,0);
+            pr.setDate(2,java.sql.Date.valueOf(LocalDate.now()));
+            pr.setBoolean(3,false);
+            pr.executeUpdate();
+            pr.executeUpdate("DROP TABLE Queue_on_" + idOfMaterial);
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
     public static boolean renew(User user,int idOfRenewCopy){
         int oldTimeLeft = 0;
         LocalDate oldReturnDate = null;
