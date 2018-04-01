@@ -22,6 +22,10 @@ public class Main {
         DB_URL = dbUrl+"/dmitrdbk?useSSL=false";
     }
 
+    public static void setDbUrlwodbk(String dbUrl){
+        DB_URL = dbUrl;
+    }
+
     public static final String getPASS() {
         return PASS;
     }

@@ -28,7 +28,6 @@ public class Database extends Main {
     public String password = super.getPASS();
     public static PreparedStatement prst;
     public static Connection con;
-    public static boolean is_best_seller;
     public static PriorityQueue<User> pq;
 
     /**
@@ -365,13 +364,15 @@ public class Database extends Main {
         Statement stmt = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            conn = DriverManager.getConnection(DB_URL, user, pass);
+            conn = DriverManager.getConnection(Main.getDbUrl(), user, pass);
             stmt = conn.createStatement();
 
             String sql = "CREATE DATABASE IF NOT EXISTS dmitrDbK";
             stmt.executeUpdate(sql);
 
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/dmitrdbk?useSSL=false", user, pass);
+            Main.setDbUrl(Main.getDbUrl());
+
+            conn = DriverManager.getConnection(Main.getDbUrl(), user, pass);
             stmt = conn.createStatement();
 
             //create table Books

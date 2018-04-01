@@ -25,6 +25,7 @@ public class Material {
     protected String type;
     public int numberAvailable;
     private int totalNumber;
+    private int fine;
     //getters and setters
     public LocalDate getReturnDate() {
         return returnDate;
@@ -89,5 +90,13 @@ public class Material {
 
     public void setTotalNumber(int totalNumber) {
         this.totalNumber = totalNumber;
+    }
+
+    public int getFine() {
+        return fine;
+    }
+
+    public void setFine() {
+        this.fine = Librarian.fine(this.id);
     }
 }

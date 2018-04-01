@@ -61,6 +61,7 @@ public class PatronSDocumentsController {
         author.setCellValueFactory(new PropertyValueFactory<Material, String>("author"));
         title.setCellValueFactory(new PropertyValueFactory<Material, String>("title"));
         date.setCellValueFactory(new PropertyValueFactory<Material, String>("returnDate"));
+        fine.setCellValueFactory(new PropertyValueFactory<Material, String>("fine"));
 
         ObservableList<Material> list= FXCollections.observableArrayList();
         LinkedList<Material> docs= Librarian.getAllCopiesTakenByUser(userID);

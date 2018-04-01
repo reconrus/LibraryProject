@@ -954,6 +954,7 @@ public class Librarian extends User {
                     String journal = articles_rs.getString("Journal");
                     String editor = articles_rs.getString("Editor");
                     Article article = new Article(copy_id, name, author, price, keywords, is_reference, journal, editor, returnDate, status, user_id);
+                    article.setFine();
                     copies.add((Material) article);
                 }
                 Statement AV_stmt = db.con.createStatement();
@@ -964,6 +965,7 @@ public class Librarian extends User {
                     int price = AV_rs.getInt("Price");
                     String keywords = AV_rs.getString("Keywords");
                     AV av = new AV(copy_id, name, author, price, keywords, returnDate, status, user_id);
+                    av.setFine();
                     copies.add((Material) av);
                 }
                 Statement books_stmt = db.con.createStatement();
@@ -979,6 +981,7 @@ public class Librarian extends User {
                     boolean is_reference = books_rs.getBoolean("is_reference");
                     int year = books_rs.getInt("Year");
                     Book book = new Book(copy_id, name, author, publisher, edition, price, keywords, is_bestseller, is_reference, year, 0, returnDate, status, user_id);
+                    book.setFine();
                     copies.add((Material) book);
                 }
             }

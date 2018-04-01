@@ -19,25 +19,23 @@ import java.util.Scanner;
  */
 public class MainApp extends Application {
 
-
-
-
     @Override
     public void start(Stage primaryStage) throws Exception {
         Path filePath_1 = Paths.get("dbinf.txt");
         if (!Files.exists(filePath_1)) {
-            Parent parent= FXMLLoader.load(getClass().getResource("/main/java/librinno/ui/main/dbinfo.fxml"));
-            Stage stage= new Stage(StageStyle.DECORATED);
+            Parent parent = FXMLLoader.load(getClass().getResource("/main/java/librinno/ui/main/dbinfo.fxml"));
+            Stage stage = new Stage(StageStyle.DECORATED);
             stage.setScene(new Scene(parent));
             stage.showAndWait();
         }
         Scanner sc = new Scanner(new File("dbinf.txt"));
-        Main.setDbUrl(sc.nextLine());
+        Main.setDbUrlwodbk(sc.nextLine());
         Main.setUSER(sc.nextLine());
         Main.setPASS(sc.nextLine());
         sc.close();
         Database db = new Database();
         db.creationLocalDB(Main.getUSER(), Main.getPASS());
+
 
         Parent root = FXMLLoader.load(getClass().getResource("/main/java/librinno/ui/login/LoginScreen.fxml"));
 
