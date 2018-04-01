@@ -8,6 +8,8 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import main.java.librinno.model.Database;
 import main.java.librinno.model.Main;
+import main.java.librinno.model.Notification_thread;
+
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -36,19 +38,18 @@ public class MainApp extends Application {
         Database db = new Database();
         db.creationLocalDB(Main.getUSER(), Main.getPASS());
 
-
         Parent root = FXMLLoader.load(getClass().getResource("/main/java/librinno/ui/login/LoginScreen.fxml"));
 
         Scene scene = new Scene(root);
 
         primaryStage.setScene(scene);
         primaryStage.show();
-
     }
 
     public static void main(String[] args) {
         launch(args);
-
+        Notification_thread nthread=new Notification_thread();
+        nthread.run();
     }
 
 }

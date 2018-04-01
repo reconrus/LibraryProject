@@ -306,7 +306,7 @@ public class Librarian extends User {
                         success = checkOutArticle(user, idMaterial);
                     }
                     if (success) {
-                        if(getNumberOfCopiesOfBook(idMaterial)>0) {
+                        if(getNumberOfCopiesOfBook(idMaterial)>=0) {
                             PreparedStatement pr = db.con.prepareStatement("DELETE from queue_on_" + idMaterial + " LIMIT 1");
                             pr.executeUpdate();
                             DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss.S");
