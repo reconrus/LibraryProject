@@ -1,5 +1,7 @@
 package main.java.librinno.model;
 
+import java.util.LinkedList;
+
 public class Notification_thread extends Thread {
     public Notification_thread() {
     }
@@ -9,10 +11,6 @@ public class Notification_thread extends Thread {
     @Override
     public void run() {
         while (true) {
-            for (int i = 0; i < db.notification().size(); i++)
-                System.out.println(db.notification().get(i));
-            //break;
-            //db.notification();
             send_email();
         }
     }

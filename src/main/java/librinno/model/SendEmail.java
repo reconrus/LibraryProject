@@ -17,7 +17,6 @@ public class SendEmail {
         String pass = PASSWORD;
         Database db=new Database();
         String[] to = db.send_email().toArray(new String[db.send_email().size()]);
-        //String[] to = { "Konev1999D@mail.ru","pizdez_144@mail.ru","dmitrokon@mail.ru" };
         String subject = "You can get reserved material";
         String body = "Вы зарезервировали книгу";
         sendFromGMail(from, pass, to, subject, body);
@@ -44,6 +43,7 @@ public class SendEmail {
             }
 
             for( int i = 0; i < toAddress.length; i++) {
+                
                 message.addRecipient(Message.RecipientType.TO, toAddress[i]);
             }
 

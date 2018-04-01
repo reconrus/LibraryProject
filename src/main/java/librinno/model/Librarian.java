@@ -3,8 +3,11 @@ package main.java.librinno.model;
 import javafx.scene.control.Alert;
 
 import java.sql.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.LinkedList;
 
 /**
@@ -32,8 +35,8 @@ public class Librarian extends User {
      * @param type       it's type
      * @param password   it's password
      */
-    public Librarian(String name, String address, String number, int cardnumber, String type, String password) {
-        super(name, address, number, cardnumber, type, password);
+    public Librarian(String name, String address, String number, int cardnumber, String type, String password,String email) {
+        super(name, address, number, cardnumber, type, password,email);
     }
 
     /**
@@ -162,8 +165,8 @@ public class Librarian extends User {
             }
             try {
                 stmt = db.con.createStatement();
-                ResultSet rs = stmt.executeQuery("SELECT * FROM Books WHERE id =" + idMaterial);
                 if (queue != null && queue.next() && queue.getInt("Card_number") == user.getCard_number()) {
+                    ResultSet rs = stmt.executeQuery("SELECT * FROM Books WHERE id =" + idMaterial);
                     if (rs.next()) {
                         success = checkOutBook(user, idMaterial);
                     }
@@ -176,12 +179,18 @@ public class Librarian extends User {
                         success = checkOutArticle(user, idMaterial);
                     }
                     if (success) {
-                        PreparedStatement pr = db.con.prepareStatement("DELETE from queue_on_" + idMaterial + " LIMIT 1");
-                        pr.executeUpdate();
+                        if(getNumberOfCopiesOfBook(idMaterial)>0) {
+                            PreparedStatement pr = db.con.prepareStatement("DELETE from queue_on_" + idMaterial + " LIMIT 1");
+                            pr.executeUpdate();
+                            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss.S");
+                            Calendar cal = Calendar.getInstance();
+                            pr = db.con.prepareStatement("UPDATE queue_on_" + idMaterial + " SET First_time=? LIMIT 1");
+                            pr.setString(1, dateFormat.format(cal.getTime()));
+                            pr.executeUpdate();
+                        }
                         rs = stmt.executeQuery("SELECT * FROM queue_on_" + idMaterial);
                         rs.last();
-                        int count = rs.getRow();
-                        if (count == 0) {
+                        if (rs.getRow() == 0) {
                             stmt.executeUpdate("DROP TABLE queue_on_" + idMaterial);
                         }
                     }
@@ -255,7 +264,8 @@ public class Librarian extends User {
                         rs.getString("Address"), rs.getString("Phone_number"),
                         rs.getInt("Card_number"),
                         rs.getString("Type"),
-                        rs.getString("Password"));
+                        rs.getString("Password"),
+                        rs.getString("Email"));
                 return user;
             }
         } catch (SQLException e) {
@@ -742,7 +752,7 @@ public class Librarian extends User {
     }
 
     /**
-     * the same method, but for users ofthe library
+     * the same method, but for users of the library
      *
      * @return linkedlist of users
      */
@@ -759,7 +769,8 @@ public class Librarian extends User {
                 int id = rs.getInt("Card_number");
                 String type = rs.getString("Type");
                 String password = rs.getString("Password");
-                User user = new User(name, address, Phonenumber, id, type, password);
+                String email=rs.getString("Email");
+                User user = new User(name, address, Phonenumber, id, type, password,email);
                 users.add(user);
             }
         } catch (SQLException e) {

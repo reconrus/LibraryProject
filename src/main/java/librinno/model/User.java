@@ -23,6 +23,7 @@ public class User {
     public String phoneNumber;
     public String type;
     public String password;
+    public String email;
     public ArrayList<String> notification=new ArrayList<>();
 
     private String queue_date;
@@ -38,11 +39,12 @@ public class User {
     //constructors for different cases
     //in some situations not all information is needed
     //for queue
-    public User(int card_number, String type, String queue_date,ArrayList<String> notification) {
+    public User(int card_number, String type, String queue_date,ArrayList<String> notification,String email) {
         setCardNumberAsString(card_number);
         setType(type);
         setDate(queue_date);
         set_notifications(notification);
+        setEmail(email);
     }
 
     public User(String name, String number, String address, String type, String password) {
@@ -54,13 +56,14 @@ public class User {
         setPassword(password);
     }
 
-    public User(String name, String address, String number, int cardnumber, String type, String password) {
+    public User(String name, String address, String number, int cardnumber, String type, String password,String email) {
         setName(name);
         setPhoneNumber(number);
         setAdress(address);
         setCardNumberAsString(cardnumber);
         setType(type);
         setPassword(password);
+        setEmail(email);
     }
 
     //getters and setters
@@ -103,7 +106,10 @@ public class User {
     public String getPhoneNumber() {
         return phoneNumber;
     }
-
+    public String getEmail() {
+        return email;
+    }
+    public void setEmail(String email){this.email=email;}
     /**
      * @param name of user
      */

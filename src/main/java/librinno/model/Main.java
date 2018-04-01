@@ -46,6 +46,7 @@ public class Main {
         setUSER(sc.nextLine());
         System.out.println("Write your password in MySQL:");
         setPASS(sc.nextLine());
+        setDbUrl("jdbc:mysql://localhost:3306");
         Database db = new Database();
         db.creationLocalDB(getUSER(), getPASS());
 
@@ -55,7 +56,6 @@ public class Main {
         // test.tc1();
         /*System.out.println("TC1 SUCCESS");
         test.dump();
-
         test.tc2();
         System.out.println("TC2 SUCCESS");
         test.dump();
@@ -96,7 +96,7 @@ public class Main {
         while (!pq.isEmpty())
             System.out.println(pq.poll());
             */
-      //db.queue_on_material(1, 31);
+        //db.queue_on_material(1, 31);
         //db.queue_on_material(1, 32);
         //db.queue_on_material(1, 33);
         //db.queue_on_material(1, 37);
@@ -104,16 +104,22 @@ public class Main {
         //db.queue_on_material(1,38);
         //db.queue_on_material(1, 32);
         //db.queue_on_material(500, 38);
-        //Librarian l = new Librarian("1", "1", "1", 123123, "123", "12`3");
+       // Librarian l = new Librarian("1", "1", "1", 123123, "123", "12`3","1");
         //User user=l.UserById(35);
         //User user2=l.UserById(37);
-        //User user3=l.UserById(32);
+       // User user3=l.UserById(32);
         //l.checkOut(user,500);
         ////l.checkOut(user,37);
-        //l.checkOut(user3,1);
+       // l.checkOut(user3,1);
         //db.notification(36);
         //db.notification(33);
         //db.notification(32);
+        //Notification_thread my=new Notification_thread();
+       // my.run();
+        SendEmail send = new SendEmail();
+        send.send();
+        //for(int i=0;i<db.send_email().size();i++)
+        //    System.out.println(db.send_email().get(i));
 
     }
 }

@@ -51,13 +51,14 @@ public class Database extends Main {
     public static void userCreation(User user) {
         try {
             //get all needed information
-            prst = con.prepareStatement("insert into Users_of_the_library(Name, Address, Phone_number,Type,Password) values(?, ?, ?,?,?)");
+            prst = con.prepareStatement("insert into Users_of_the_library(Name, Address, Phone_number,Type,Password,Email) values(?, ?, ?,?,?,?)");
             prst.setString(1, user.getName());
             prst.setString(2, user.getAdress());
             prst.setString(3, user.getPhoneNumber());
             //prst.setInt(4, user.getCard_Number());
             prst.setString(4, user.getType());
             prst.setString(5, user.getPassword());
+            prst.setString(6,user.getEmail());
             prst.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -318,14 +319,16 @@ public class Database extends Main {
         String Phonenumber = "";
         String type = "";
         String password = "";
+        String email="";
         while (rs.next()) {
             name = rs.getString("Name");
             address = rs.getString("Address");
             Phonenumber = rs.getString("Phone_number");
             type = rs.getString("Type");
             password = rs.getString("Password");
+            email=rs.getString("Email");
         }
-        User user = new User(name, address, Phonenumber, id, type, password);
+        User user = new User(name, address, Phonenumber, id, type, password,email);
         return user;
     }
 
@@ -377,7 +380,7 @@ public class Database extends Main {
 
             //create table Users
             sql = "CREATE TABLE IF NOT EXISTS Users_of_the_library(Name VARCHAR(30) , Address VARCHAR(30) , Phone_number VARCHAR(255) , Card_number int(255) AUTO_INCREMENT ," +
-                    " Type VARCHAR(30), Password VARCHAR(30) , PRIMARY KEY(Card_number))";
+                    " Type VARCHAR(30), Password VARCHAR(30),Email VARCHAR(30) , PRIMARY KEY(Card_number))";
             stmt.executeUpdate(sql);
 
             //create table Articles
@@ -388,11 +391,11 @@ public class Database extends Main {
             //create table AV
             sql = "CREATE TABLE IF NOT EXISTS AV(id int(255) AUTO_INCREMENT, Name VARCHAR(255), Author varchar(255),Price int(255),Keywords VARCHAR(255),PRIMARY KEY(id))";
             stmt.executeUpdate(sql);
-            sql = "INSERT IGNORE INTO Users_of_the_library (Name,Address,Phone_number,Card_number,Type,Password) VALUES ('Librarian', 'Russia', '+79999999999',33,'Librarian','124')";
+            sql = "INSERT IGNORE INTO Users_of_the_library (Name,Address,Phone_number,Card_number,Type,Password,Email) VALUES ('Librarian', 'Russia', '+79999999999',33,'Librarian','124','Konev1999D@mail.ru')";
             stmt.executeUpdate(sql);
-            sql = "INSERT IGNORE INTO Users_of_the_library (Name,Address,Phone_number,Card_number,Type,Password) VALUES ('Albert Einstein', 'Princeton, New Jersey, U.S.', '+79999999999',32,'Student','1')";
+            sql = "INSERT IGNORE INTO Users_of_the_library (Name,Address,Phone_number,Card_number,Type,Password,Email) VALUES ('Albert Einstein', 'Princeton, New Jersey, U.S.', '+79999999999',32,'Student','1','pizdez_144@mail.ru')";
             stmt.executeUpdate(sql);
-            sql = "INSERT IGNORE INTO Users_of_the_library (Name,Address,Phone_number,Card_number,Type,Password) VALUES ('Nikolay V. Shilov', 'Innopolis', '+79999999999',31,'Professor','1')";
+            sql = "INSERT IGNORE INTO Users_of_the_library (Name,Address,Phone_number,Card_number,Type,Password,Email) VALUES ('Nikolay V. Shilov', 'Innopolis', '+79999999999',31,'Professor','1','dmitrokon@mail.ru')";
             stmt.executeUpdate(sql);
         } catch (SQLException se) {
             se.printStackTrace();
@@ -417,13 +420,13 @@ public class Database extends Main {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Statement stmt = con.createStatement();
-            Librarian l = new Librarian("1", "1", "1", 0, "Librarian", "1");
+            Librarian l = new Librarian("1", "1", "1", 0, "Librarian", "1","1");
             Comparator<User> comparator = new UserTypeComparator();
             pq = new PriorityQueue<User>(l.getAllUsers().size(), comparator);
             User user = l.UserById(user_id);
             DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss.S");
             Calendar cal = Calendar.getInstance();
-            User needed_user = new User(user.getCard_number(), user.getType(), dateFormat.format(cal.getTime()), null);
+            User needed_user = new User(user.getCard_number(), user.getType(), dateFormat.format(cal.getTime()), null,user.getEmail());
             pq.add(needed_user);
             String query = "SELECT * FROM Queue_on_" + material_id;
             ResultSet rs = null;
@@ -433,7 +436,7 @@ public class Database extends Main {
                 while (rs.next()) {
                     int cur_id = rs.getInt("Card_number");
                     if (cur_id != user_id) {
-                        user = new User(cur_id, rs.getString("Type"), rs.getString("Reserving_time"), null);
+                        user = new User(cur_id, rs.getString("Type"), rs.getString("Reserving_time"), null,rs.getString("Email"));
                         pq.add(user);
                     } else {
                         //Alert error = new Alert(Alert.AlertType.INFORMATION);
@@ -447,15 +450,26 @@ public class Database extends Main {
                 }
             } catch (SQLException exc) {
                 sql = "CREATE TABLE IF NOT EXISTS Queue_on_" + material_id + "(Card_number int(255) ," +
-                        " Type VARCHAR(30), Reserving_time VARCHAR(30))";
-                //здесь создаём таблицу и сразу уведомление юзеру должно быть
+                        " Type VARCHAR(30), Reserving_time VARCHAR(30),First_time VARCHAR(30) DEFAULT 'null',is_sended TINYINT(1) DEFAULT '0',Email VARCHAR(30) DEFAULT 'none')";
                 stmt.executeUpdate(sql);
             }
+            int counter=1;
             while (pq.size() > 0) {
                 User cur_user = pq.poll();
-                sql = "INSERT INTO Queue_on_" + material_id + " (Card_number,Type,Reserving_time) " +
-                        "VALUES ('" + cur_user.getCard_number() + "', '" + cur_user.getType() + "', '" + cur_user.getDate() + "')";
-                stmt.executeUpdate(sql);
+                DateFormat first_date = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss.S");
+                Calendar cal2 = Calendar.getInstance();
+                if(counter==1) {
+                    sql = "INSERT INTO Queue_on_" + material_id + " (Card_number,Type,Reserving_time,First_time,is_sended,Email) " +
+                            "VALUES ('" + cur_user.getCard_number() + "', '" + cur_user.getType() + "', '" + cur_user.getDate() +"', '"+dateFormat.format(cal.getTime()) + "', '"+0+"', '"+cur_user.getEmail()+" ')";
+                    stmt.executeUpdate(sql);
+                    counter++;
+                }
+                else{
+                    sql = "INSERT INTO Queue_on_" + material_id + " (Card_number,Type,Reserving_time,First_time) " +
+                            "VALUES ('" + cur_user.getCard_number() + "', '" + cur_user.getType() + "', '" + cur_user.getDate() +"', '"+first_date.format(cal2.getTime())+" ')";
+                    stmt.executeUpdate(sql);
+                    counter++;
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -481,11 +495,14 @@ public class Database extends Main {
                     while (matcher.find()) {
                         id = matcher.group();
                     }
-                    int user_id=table_rs.getInt("Card_number");
-                    String note = "User: "+user_id +" You can get material with id " + id;
-                    all_notes.add(note);
+                    Librarian l = new Librarian(null, null, null, 999, null, null,null);
+                    int user_id = table_rs.getInt("Card_number");
+                    if(l.getNumberOfCopiesOfBook(Integer.parseInt(id))>0) {
+                        String note = "User: " + user_id + " You can get material with id " + id;
+                        all_notes.add(note);
+                    }
                     user = user_in_queue(user_id, Integer.parseInt(id));
-                    needed_user = new User(user.getCard_Number(), user.getType(), user.getDate(), all_notes);
+                    needed_user = new User(user.getCard_Number(), user.getType(), user.getDate(), all_notes,user.getEmail());
                 }
             }
             if (needed_user != null)
@@ -507,10 +524,17 @@ public class Database extends Main {
                 try {
                     ResultSet table_rs = stmt.executeQuery("SELECT * FROM " + table_name + " LIMIT 1");
                     if (table_rs.next()) {
+                        Pattern pat = Pattern.compile("[-]?[0-9]+(.[0-9]+)?");
+                        Matcher matcher = pat.matcher(table_name);
+                        String table_id = "";
+                        while (matcher.find()) {
+                            table_id = matcher.group();
+                        }
                         int user_id = table_rs.getInt("Card_number");
-                        Librarian l = new Librarian(null, null, null, 999, null, null);
+                        Librarian l = new Librarian(null, null, null, 999, null, null,null);
                         user = l.UserById(user_id);
-                        emails.add(user.getName());
+                        if(l.getNumberOfCopiesOfBook(Integer.parseInt(table_id))>0)
+                            emails.add(user.getEmail());
                     }
                 }
                 catch (SQLException e){
@@ -528,7 +552,7 @@ public class Database extends Main {
             while (rs.next()) {
                 ArrayList<String> tmp = new ArrayList<>();
                 User user = new User(user_id, rs.getString("Type"),
-                        rs.getString("Reserving_time"), tmp);
+                        rs.getString("Reserving_time"), tmp,rs.getString("Email"));
                 return user;
             }
         } catch (SQLException e) {
