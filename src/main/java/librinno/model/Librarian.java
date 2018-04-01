@@ -286,11 +286,8 @@ public class Librarian extends User {
     private static boolean isFreeCopyExist(int idMaterial){
         try{
             Statement stmt = db.con.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM Copy WHERE Status = 'In library' ");
-            while (rs.next()){
-                if (rs.getInt("Id_of_original") == idMaterial)
-                    return true;
-            }
+            ResultSet rs = stmt.executeQuery("SELECT * FROM Copy WHERE Status = 'In library' AND Id_of_original= " + idMaterial);
+            if(rs.getRow() != 0) return true;
         }catch (SQLException e) {
             e.printStackTrace();
         }

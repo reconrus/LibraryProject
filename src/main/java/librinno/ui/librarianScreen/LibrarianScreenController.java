@@ -103,6 +103,9 @@ public class LibrarianScreenController {
     private TableColumn<Material, Integer> issuedTo;
 
     @FXML
+    private TableColumn<Material, Integer> fine;
+
+    @FXML
     void showTableUser(){
         userID.setCellValueFactory(new PropertyValueFactory<User,Integer>("card_number"));
         userName.setCellValueFactory(new PropertyValueFactory<User,String>("name"));
@@ -172,6 +175,8 @@ public class LibrarianScreenController {
         titleCopy.setCellValueFactory(new PropertyValueFactory("title"));
         statusCopy.setCellValueFactory(new PropertyValueFactory("status"));
         issuedTo.setCellValueFactory(new PropertyValueFactory("userId"));
+        fine.setCellValueFactory(new PropertyValueFactory("fine"));
+
 
         ObservableList<Material> list= FXCollections.observableArrayList();
         LinkedList<Material> docs= Librarian.getAllCopies();
