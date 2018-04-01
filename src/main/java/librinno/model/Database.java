@@ -87,17 +87,19 @@ public class Database extends Main {
             int id_Of_material = 0;
             while (rsInside.next())
                 id_Of_material = rsInside.getInt(1);
-            prst = con.prepareStatement("insert into Copy (id_of_original,Owner,Time_left) values(?,?,?)");
+            prst = con.prepareStatement("insert into Copy (id_of_original,Owner,Time_left,CanRenew) values(?,?,?,?)");
 
             prst.setInt(1, id_Of_material);
             prst.setInt(2, 0);
             prst.setInt(3, 999);
+            prst.setBoolean(4,true);
             prst.executeUpdate();
         } else {
-            prst = con.prepareStatement("insert into Copy (id_of_original,Owner,Time_left) values(?,?,?)");
+            prst = con.prepareStatement("insert into Copy (id_of_original,Owner,Time_left,CanRenew) values(?,?,?,?)");
             prst.setInt(1, arrayList.get(1));
             prst.setInt(2, 0);
             prst.setInt(3, 999);
+            prst.setBoolean(4,true);
             prst.executeUpdate();
         }
     }
@@ -128,17 +130,19 @@ public class Database extends Main {
             int id_Of_material = 0;
             while (rsInside.next())
                 id_Of_material = rsInside.getInt(1);
-            prst = con.prepareStatement("insert into Copy (id_of_original,Owner,Time_left) values(?,?,?)");
+            prst = con.prepareStatement("insert into Copy (id_of_original,Owner,Time_left,CanRenew) values(?,?,?,?)");
 
             prst.setInt(1, id_Of_material);
             prst.setInt(2, 0);
             prst.setInt(3, 999);
+            prst.setBoolean(4,true);
             prst.executeUpdate();
         } else {
-            prst = con.prepareStatement("insert into Copy (id_of_original,Owner,Time_left) values(?,?,?)");
+            prst = con.prepareStatement("insert into Copy (id_of_original,Owner,Time_left,CanRenew) values(?,?,?,?)");
             prst.setInt(1, arrayList.get(1));
             prst.setInt(2, 0);
             prst.setInt(3, 999);
+            prst.setBoolean(4,true);
             prst.executeUpdate();
         }
     }
@@ -171,18 +175,20 @@ public class Database extends Main {
                 while (rsInside.next())
                     id_Of_material = rsInside.getInt(1);
                 //кидайем необходимую инфу в таблицу копий(id оригинала,id хозяина(так как мы только доавили, то это Admin(id=0), и время =999, так как книга в бибиотеке))
-                prst = con.prepareStatement("insert into Copy (id_of_original,Owner,Time_left) values(?,?,?)");
+                prst = con.prepareStatement("insert into Copy (id_of_original,Owner,Time_left,CanRenew) values(?,?,?,?)");
                 prst.setInt(1, id_Of_material);
                 prst.setInt(2, 0);
                 prst.setInt(3, 999);
+                prst.setBoolean(4,true);
                 prst.executeUpdate();
 
             } else {
                 //кидаем id оригинала и остальную инфу
-                prst = con.prepareStatement("insert into Copy (id_of_original,Owner,Time_left) values(?,?,?)");
+                prst = con.prepareStatement("insert into Copy (id_of_original,Owner,Time_left,CanRenew) values(?,?,?,?)");
                 prst.setInt(1, arrayList.get(1));
                 prst.setInt(2, 0);
                 prst.setInt(3, 999);
+                prst.setBoolean(4,true);
                 prst.executeUpdate();
             }
         } catch (SQLException e) {
