@@ -44,12 +44,12 @@ public class MainApp extends Application {
 
         primaryStage.setScene(scene);
         primaryStage.show();
+        Notification_thread nthread = new Notification_thread();
+        nthread.start();
     }
 
     public static void main(String[] args) {
-        launch(args);
-        Notification_thread nthread=new Notification_thread();
-        nthread.run();
+            launch(args);
     }
 
 }

@@ -73,7 +73,8 @@ public class SendEmail extends Database {
                             if (numberOfMeetings(all_emails, message.getAllRecipients()[k].toString()))
                                 all_emails.add(message.getAllRecipients()[k]);
                     }
-                    catch (NullPointerException e){}
+                    catch (NullPointerException e){
+                    }
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
