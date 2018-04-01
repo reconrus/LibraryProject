@@ -22,7 +22,12 @@ public class SendEmail extends Database {
         String body = "Вы зарезервировали книгу";
         sendFromGMail(from, pass, to, subject, body);
     }
-
+    public static void sendToOne(String email,String subject,String body) {
+        String from = USER_NAME;
+        String pass = PASSWORD;
+        String[] to = {email};
+        sendFromGMail(from, pass, to, subject, body);
+    }
     private static void sendFromGMail(String from, String pass, String[] to, String subject, String body) {
         Properties props = System.getProperties();
         String host = "smtp.gmail.com";
