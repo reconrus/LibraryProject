@@ -302,11 +302,12 @@ public class Librarian extends User {
     public static boolean returnBook(int idOfCopyOfBook) {
         try {
             Database db = new Database();
-            PreparedStatement pr = db.con.prepareStatement("UPDATE Copy SET Owner=?,Time_left=?,Status=?,Return_date=? WHERE Id_of_copy= " + idOfCopyOfBook);
+            PreparedStatement pr = db.con.prepareStatement("UPDATE Copy SET Owner=?,Time_left=?,Status=?,Return_date=?,CanRenew=? WHERE Id_of_copy= " + idOfCopyOfBook);
             pr.setInt(1, 0);
             pr.setInt(2, 999);
             pr.setString(3, "In library");
             pr.setDate(4, java.sql.Date.valueOf(LocalDate.of(9999, 1, 1)));
+            pr.setBoolean(5,true);
             pr.executeUpdate();
             return true;
         } catch (SQLException e) {
