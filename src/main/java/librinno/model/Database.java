@@ -375,7 +375,7 @@ public class Database extends Main {
 
             //create table Copy
             sql = "CREATE TABLE IF NOT EXISTS Copy(Id_of_copy INT(255) AUTO_INCREMENT,Id_of_original INT(255) , Owner INT(255) , " +
-                    "Time_left int(11) , Status VARCHAR(255) default 'In library', Return_date DATE DEFAULT '9999-01-01', PRIMARY KEY(Id_of_copy) )";
+                    "Time_left int(11) , Status VARCHAR(255) default 'In library', Return_date DATE DEFAULT '9999-01-01',CanRenew TINYINT(1) DEFAULT '1',PRIMARY KEY(Id_of_copy) )";
             stmt.executeUpdate(sql);
 
             //create table Users
