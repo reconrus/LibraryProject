@@ -21,7 +21,7 @@ public class Database extends Main {
 
     //for connection to database
     //typical
-    public String url = super.getDbUrl();
+    public String url = super.getDbUrlwdbk();
     //public String login = "dmitrDbK";
     public String login = super.getUSER();
     //public String password = "eQ1a5mg0Z7";
@@ -370,9 +370,7 @@ public class Database extends Main {
             String sql = "CREATE DATABASE IF NOT EXISTS dmitrDbK";
             stmt.executeUpdate(sql);
 
-            Main.setDbUrl(Main.getDbUrl());
-
-            conn = DriverManager.getConnection(Main.getDbUrl(), user, pass);
+            conn = DriverManager.getConnection(Main.getDbUrlwdbk(), user, pass);
             stmt = conn.createStatement();
 
             //create table Books
@@ -472,8 +470,8 @@ public class Database extends Main {
                     counter++;
                 }
                 else{
-                    sql = "INSERT INTO Queue_on_" + material_id + " (Card_number,Type,Reserving_time,First_time) " +
-                            "VALUES ('" + cur_user.getCard_number() + "', '" + cur_user.getType() + "', '" + cur_user.getDate() +"', '"+first_date.format(cal2.getTime())+" ')";
+                    sql = "INSERT INTO Queue_on_" + material_id + " (Card_number,Type,Reserving_time,First_time,Email) " +
+                            "VALUES ('" + cur_user.getCard_number() + "', '" + cur_user.getType() + "', '" + cur_user.getDate() +"', '"+first_date.format(cal2.getTime())+"', '"+cur_user.getEmail()+" ')";
                     stmt.executeUpdate(sql);
                     counter++;
                 }

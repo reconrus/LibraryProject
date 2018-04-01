@@ -17,12 +17,11 @@ public class Main {
     public static String getDbUrl() {
         return DB_URL;
     }
-
-    public static void setDbUrl(String dbUrl) {
-        DB_URL = dbUrl+"/dmitrdbk?useSSL=false";
+    public static String getDbUrlwdbk() {
+        return DB_URL+ "/dmitrdbk?useSSL=false";
     }
 
-    public static void setDbUrlwodbk(String dbUrl){
+    public static void setDbUrl(String dbUrl) {
         DB_URL = dbUrl;
     }
 
@@ -100,9 +99,9 @@ public class Main {
         while (!pq.isEmpty())
             System.out.println(pq.poll());
             */
-        //db.queue_on_material(1, 31);
-        //db.queue_on_material(1, 32);
-        //db.queue_on_material(1, 33);
+        db.queue_on_material(1, 31);
+        db.queue_on_material(1, 32);
+        db.queue_on_material(1, 33);
         //db.queue_on_material(1, 37);
         //db.queue_on_material(1, 36);
         //db.queue_on_material(1,38);
@@ -121,10 +120,10 @@ public class Main {
         //Notification_thread my=new Notification_thread();
        // my.run();
         SendEmail send = new SendEmail();
-        while(true)
-        send.send();
-        //for(int i=0;i<db.send_email().size();i++)
-        //    System.out.println(db.send_email().get(i));
+        //while(true)
+        //send.send();
+        for(int i=0;i<db.send_email().size();i++)
+            System.out.println(db.send_email().get(i));
 
     }
 }

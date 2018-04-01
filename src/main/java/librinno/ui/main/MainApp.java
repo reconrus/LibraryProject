@@ -29,7 +29,7 @@ public class MainApp extends Application {
             stage.showAndWait();
         }
         Scanner sc = new Scanner(new File("dbinf.txt"));
-        Main.setDbUrlwodbk(sc.nextLine());
+        Main.setDbUrl(sc.nextLine());
         Main.setUSER(sc.nextLine());
         Main.setPASS(sc.nextLine());
         sc.close();
