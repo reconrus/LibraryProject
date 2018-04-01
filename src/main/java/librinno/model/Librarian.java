@@ -278,6 +278,7 @@ public class Librarian extends User {
      * @return boolean value - success or not on checking out
      */
     public static boolean checkOut(User user, int idMaterial) {
+        db.queue_on_material(idMaterial,user.getCard_number());
         try {
             boolean success = false;
             Statement stmt = null;
