@@ -117,6 +117,7 @@ public class Main {
         //Notification_thread my=new Notification_thread();
        // my.run();
         SendEmail send = new SendEmail();
+        while(true)
         send.send();
         //for(int i=0;i<db.send_email().size();i++)
         //    System.out.println(db.send_email().get(i));
