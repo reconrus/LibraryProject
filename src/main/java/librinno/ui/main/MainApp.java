@@ -20,6 +20,7 @@ import java.util.Scanner;
  *
  */
 public class MainApp extends Application {
+    private static Notification_thread nthread = new Notification_thread();
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -44,12 +45,13 @@ public class MainApp extends Application {
 
         primaryStage.setScene(scene);
         primaryStage.show();
-        Notification_thread nthread = new Notification_thread();
+        nthread = new Notification_thread();
         nthread.start();
     }
 
     public static void main(String[] args) {
             launch(args);
+            nthread.interrupt();
     }
 
 }
