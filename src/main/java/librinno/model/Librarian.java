@@ -287,6 +287,7 @@ public class Librarian extends User {
         try{
             Statement stmt = db.con.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM Copy WHERE Status = 'In library' AND Id_of_original= " + idMaterial);
+            rs.last();
             if(rs.getRow() != 0) return true;
         }catch (SQLException e) {
             e.printStackTrace();
@@ -321,19 +322,19 @@ public class Librarian extends User {
                     if (rs.next() ) {
                         if (isFreeCopyExist(idMaterial))
                             success = checkOutBook(user, idMaterial)?1:0;
-                        else return 0;
+                        else success =  0;
                     }
                     rs = stmt.executeQuery("SELECT * FROM AV WHERE id =" + idMaterial);
                     if (rs.next()) {
                         if (isFreeCopyExist(idMaterial))
                             success = checkOutAV(user, idMaterial)?1:0;
-                        else return 0;
+                        else success = 0;
                     }
                     rs = stmt.executeQuery("SELECT * FROM Articles WHERE id =" + idMaterial);
                     if (rs.next()) {
                         if (isFreeCopyExist(idMaterial))
                             success = checkOutArticle(user, idMaterial)?1:0;
-                        else return 0;
+                        else success =  0;
                     }
                     if (success == 1) {
                         if(getNumberOfCopiesOfBook(idMaterial)>=0) {
