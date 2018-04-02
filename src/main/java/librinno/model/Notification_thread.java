@@ -43,17 +43,12 @@ public class Notification_thread extends Thread {
                         java.util.Date dt = new java.util.Date();
                         java.text.SimpleDateFormat dateFormat =
                                 new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                        //String currentTime = dateFormat.format(dt);
-                        //System.out.println(dt.toString());
-                        //System.out.println(currentTime);
                         Date date = dateFormat.parse(table_rs.getString("First_time"));
                         Date tomorrow = new Date(date.getTime() + (1000 * 60 * 60 * 24));
                         if (dt.after(tomorrow)) {
-                            PreparedStatement pr = db.con.prepareStatement("DELETE from" + table_name + " LIMIT 1");
+                            PreparedStatement pr = db.con.prepareStatement("DELETE from " + table_name + " LIMIT 1");
                             pr.executeUpdate();
                         }
-                        //System.out.println(date);
-                        //System.out.println(tomorrow);
                     }
                 } catch (SQLException e) {
                     e.printStackTrace();
