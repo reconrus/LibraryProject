@@ -60,7 +60,22 @@ public class Librarian extends User {
             pr.setDate(2,java.sql.Date.valueOf(LocalDate.now()));
             pr.setBoolean(3,false);
             pr.executeUpdate();
-            pr.executeUpdate("DROP TABLE Queue_on_" + idOfMaterial);
+
+            ResultSet rs = pr.executeQuery("SELECT  * FROM Copy WHERE Id_of_original= " + idOfMaterial);
+            int owner;
+            while (rs.next()){
+                owner = rs.getInt("Owner");
+                Statement stmt = db.con.createStatement();
+                ResultSet rs2 = stmt.executeQuery("SELECT  * FROM users_of_the_library WHERE Card_number= " + owner);
+                String email = null;
+                while (rs2.next()){
+                    email=rs2.getString("Email");
+                }
+                SendEmail sendEmail = new SendEmail();
+                sendEmail.sendToOne(email,"Return book.","Urgently return the book throughout the day! Because of outstanding request.");
+            }
+
+            pr.executeUpdate("DROP TABLE IF EXISTS Queue_on_" + idOfMaterial);
         }catch (SQLException e) {
             e.printStackTrace();
         }
