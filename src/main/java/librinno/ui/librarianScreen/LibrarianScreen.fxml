@@ -193,7 +193,7 @@
                                        <bottom>
                                           <AnchorPane prefHeight="0.0" prefWidth="612.0" BorderPane.alignment="CENTER">
                                              <children>
-                                                <JFXButton fx:id="returnButton" layoutX="122.0" layoutY="3.0" onAction="#returnDocument" text="Return Copy" textFill="WHITE" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="122.0" AnchorPane.rightAnchor="330.0" AnchorPane.topAnchor="3.0">
+                                                <JFXButton fx:id="returnButton" layoutX="14.0" layoutY="3.0" onAction="#returnDocument" text="Return Copy" textFill="WHITE" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="438.0" AnchorPane.topAnchor="3.0">
                                                    <font>
                                                       <Font name="System Bold" size="16.0" />
                                                    </font>
@@ -201,7 +201,15 @@
                                                       <MaterialIconView fill="WHITE" glyphName="KEYBOARD_RETURN" size="40" />
                                                    </graphic>
                                                 </JFXButton>
-                                                <JFXButton fx:id="delete" layoutX="390.0" layoutY="3.0" onAction="#deleteCopy" text="Delete" textFill="WHITE" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="390.0" AnchorPane.rightAnchor="107.0" AnchorPane.topAnchor="3.0">
+                                                <JFXButton fx:id="returnButton1" layoutX="209.0" layoutY="2.0" onAction="#outstandingRequest" text="Oustanding Request" textFill="WHITE" AnchorPane.bottomAnchor="3.6000000000000014" AnchorPane.leftAnchor="209.0" AnchorPane.rightAnchor="183.8" AnchorPane.topAnchor="2.0">
+                                                   <font>
+                                                      <Font name="System Bold" size="16.0" />
+                                                   </font>
+                                                   <graphic>
+                                                      <MaterialIconView fill="WHITE" glyphName="LOCK" size="40" />
+                                                   </graphic>
+                                                </JFXButton>
+                                                <JFXButton fx:id="delete" layoutX="476.0" layoutY="2.0" onAction="#deleteCopy" text="Delete" textFill="WHITE" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="476.0" AnchorPane.rightAnchor="21.0" AnchorPane.topAnchor="2.0">
                                                    <font>
                                                       <Font name="System Bold" size="16.0" />
                                                    </font>

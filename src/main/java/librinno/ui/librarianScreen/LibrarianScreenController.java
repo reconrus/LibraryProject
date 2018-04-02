@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -333,6 +334,16 @@ public class LibrarianScreenController {
     private void logoutAction(ActionEvent event) throws IOException {
         Assist.closeStage(logout);
         Assist.loadStage(getClass().getResource("/main/java/librinno/ui/login/LoginScreen.fxml"));
+    }
+
+    @FXML
+    private void outstandingRequest(){
+        Material copy= tableCopy.getSelectionModel().getSelectedItem();
+        Librarian.outstandingRequest(copy.getId());
+        Alert error = new Alert(Alert.AlertType.CONFIRMATION);
+        error.setHeaderText("Success");
+        error.showAndWait();
+        showTables();
     }
 
     @FXML
