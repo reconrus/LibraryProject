@@ -20,8 +20,7 @@ import java.util.Scanner;
  *
  */
 public class MainApp extends Application {
-    private static Notification_thread nthread = new Notification_thread();
-
+    private static Notification_thread nthread;
     @Override
     public void start(Stage primaryStage) throws Exception {
         Path filePath_1 = Paths.get("dbinf.txt");
@@ -48,7 +47,6 @@ public class MainApp extends Application {
         nthread = new Notification_thread();
         nthread.start();
     }
-
     public static void main(String[] args) {
             launch(args);
             nthread.interrupt();

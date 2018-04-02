@@ -10,7 +10,7 @@ public class Notification_thread extends Thread {
 
     @Override
     public void run() {
-        while (true) {
+        while (!isInterrupted()) {
             send_email();
         }
     }
