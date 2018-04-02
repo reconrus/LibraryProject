@@ -75,7 +75,7 @@ public class Librarian extends User {
                 sendEmail.sendToOne(email,"Return book.","Urgently return the book throughout the day! Because of outstanding request.");
             }
 
-            pr.executeUpdate("DROP TABLE IF EXISTS Queue_on_" + idOfMaterial);
+            pr.executeUpdate("DROP TABLE IF EXISTS queue_on_" + idOfMaterial);
         }catch (SQLException e) {
             e.printStackTrace();
         }
@@ -569,12 +569,13 @@ public class Librarian extends User {
         try {
             Database db = new Database();
             PreparedStatement pr = db.con.prepareStatement("UPDATE Users_of_the_library " +
-                    "SET Name=?,Address=?,Phone_number=?,Type=?,Password=? where Card_number=" + user.getCard_Number());
+                    "SET Name=?,Address=?,Phone_number=?,Type=?,Password=?, Email=? where Card_number=" + user.getCard_Number());
             pr.setString(1, user.getName());
             pr.setString(2, user.getAdress());
             pr.setString(3, user.getPhoneNumber());
             pr.setString(4, user.getType());
             pr.setString(5, user.getPassword());
+            pr.setString(6, user.getEmail());
             pr.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -1035,6 +1036,36 @@ public class Librarian extends User {
             e.printStackTrace();
         }
         return copies;
+    }
+
+
+    public static ArrayList<User> getQueue(int materialID){
+        ArrayList <User> queue = new ArrayList<>();
+        try {
+            Statement stmt = db.con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM queue_on_" + materialID);
+            while (rs.next()) {
+                int id = rs.getInt("Card_number");
+                String resTime = rs.getString("Reserving_time");
+                Boolean isNotified = rs.getBoolean("is_sended");
+                User user = new User(id, resTime, isNotified);
+
+                queue.add(user);
+            }
+
+            for(int i = 0; i < queue.size(); i++) {
+                rs = stmt.executeQuery("SELECT * FROM users_of_the_library WHERE Card_number=" + queue.get(i).getCard_Number());
+
+                while (rs.next()) {
+                    String name = rs.getString("Name");
+                    queue.get(i).setName(name);
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return queue;
     }
 
 

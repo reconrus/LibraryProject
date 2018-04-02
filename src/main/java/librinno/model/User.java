@@ -24,9 +24,18 @@ public class User {
     public String type;
     public String password;
     public String email;
+    public Boolean isNotified;
     public ArrayList<String> notification=new ArrayList<>();
 
-    private String queue_date;
+    public String queue_date;
+
+    public void setQueue_date(String queue_date) {
+        this.queue_date = queue_date;
+    }
+
+    public String getQueue_date() {
+        return queue_date;
+    }
 
     public String getDate() {
         return "" + queue_date;
@@ -46,6 +55,13 @@ public class User {
         set_notifications(notification);
         setEmail(email);
     }
+
+    public User(int card_number, String reservationDate, Boolean isNotified) {
+        setCardNumberAsString(card_number);
+        setDate(reservationDate);
+        setIsNotified(isNotified);
+    }
+
 
     public User(String name, String number, String address, String type, String password, String email) {
         setName(name);
@@ -143,5 +159,13 @@ public class User {
     public void set_notifications(ArrayList<String> notification) {
         this.notification = notification;
 
+    }
+
+    public Boolean getIsNotified() {
+        return isNotified;
+    }
+
+    public void setIsNotified(Boolean notified) {
+        isNotified = notified;
     }
 }

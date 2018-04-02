@@ -347,6 +347,21 @@ public class LibrarianScreenController {
     }
 
     @FXML
+    private void showQueue() throws IOException {
+        Material material = tableBook.getSelectionModel().getSelectedItem();
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/main/java/librinno/ui/librarianScreen/Queue.fxml"));
+        Parent parent = loader.load();
+
+        QueueController controller = loader.getController();
+        controller.setID(material.getId());
+
+        Stage stage = new Stage();
+        stage.setScene(new Scene(parent));
+        stage.showAndWait();
+    }
+
+    @FXML
     private void showTables(){
         showTableDocuments();
         showTableCopy();

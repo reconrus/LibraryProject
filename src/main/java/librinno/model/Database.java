@@ -517,6 +517,8 @@ public class Database extends Main {
         }
         return all_notes;
     }
+
+
     public static ArrayList<String> send_email() {
         User user = null;
         ArrayList<String> emails = new ArrayList<>();
