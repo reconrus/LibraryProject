@@ -455,7 +455,7 @@ public class Database extends Main {
                 }
             } catch (SQLException exc) {
                 sql = "CREATE TABLE IF NOT EXISTS Queue_on_" + material_id + "(Card_number int(255) ," +
-                        " Type VARCHAR(30), Reserving_time VARCHAR(30),First_time VARCHAR(30) DEFAULT 'null',is_sended TINYINT(1) DEFAULT '0',Email VARCHAR(30) DEFAULT 'none')";
+                        " Type VARCHAR(30), Reserving_time VARCHAR(30),First_time DATETIME,is_sended TINYINT(1) DEFAULT '0',Email VARCHAR(30) DEFAULT 'none')";
                 stmt.executeUpdate(sql);
             }
             int counter=1;
