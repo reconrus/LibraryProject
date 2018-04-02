@@ -143,7 +143,7 @@ public class PatronScreenController {
         Parent parent = loader.load();
 
         PatronSDocumentsController controller = loader.getController();
-        controller.setId(user.getCard_Number());
+        controller.setUser(user);
 
         Stage stage = new Stage(StageStyle.DECORATED);
         stage.setScene(new Scene(parent));

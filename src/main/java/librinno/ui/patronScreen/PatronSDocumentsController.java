@@ -10,11 +10,12 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import main.java.librinno.model.Librarian;
 import main.java.librinno.model.Material;
+import main.java.librinno.model.User;
 
 import java.util.LinkedList;
 
 public class PatronSDocumentsController {
-    private int userID;
+    private User user;
     @FXML
     private TableView<Material> tableDoc;
 
@@ -31,7 +32,24 @@ public class PatronSDocumentsController {
 
     @FXML
     void renewCopy(ActionEvent event) {
+        Material copy= tableDoc.getSelectionModel().getSelectedItem();
+        if(copy!=null){
 
+            if (Librarian.renew(user, copy.getId())){
+                Alert error= new Alert(Alert.AlertType.CONFIRMATION);
+                error.setHeaderText("Success");
+                error.setContentText("Your request has been accepted");
+                error.showAndWait();
+            }
+            else{
+                Alert error= new Alert(Alert.AlertType.ERROR);
+                error.setHeaderText("Error");
+                error.setContentText("You are not able to renew");
+                error.showAndWait();
+            }
+
+            showTable();
+        }
     }
 
     @FXML
@@ -64,14 +82,14 @@ public class PatronSDocumentsController {
         fine.setCellValueFactory(new PropertyValueFactory<Material, String>("fine"));
 
         ObservableList<Material> list= FXCollections.observableArrayList();
-        LinkedList<Material> docs= Librarian.getAllCopiesTakenByUser(userID);
+        LinkedList<Material> docs= Librarian.getAllCopiesTakenByUser(user.getCard_number());
 
         list.addAll(docs);
         tableDoc.getItems().setAll(list);
     }
 
-    void setId(int id){
-        userID=id;
+    void setUser(User user){
+        this.user = user;
         showTable();
     }
 

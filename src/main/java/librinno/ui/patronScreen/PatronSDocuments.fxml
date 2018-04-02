@@ -27,7 +27,7 @@
                   <MaterialIconView fill="WHITE" glyphName="KEYBOARD_RETURN" size="40" />
                </graphic>
             </JFXButton>
-            <JFXButton layoutX="185.0" onAction="#returnCopy" prefHeight="48.0" prefWidth="185.0" stylesheets="@../../../../resources/theme.css" text="Renew" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="185.0" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="0.0">
+            <JFXButton layoutX="185.0" onAction="#renewCopy" prefHeight="48.0" prefWidth="185.0" stylesheets="@../../../../resources/theme.css" text="Renew" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="185.0" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="0.0">
                <graphic>
                   <MaterialIconView fill="WHITE" glyphName="SYNC" size="40" />
                </graphic>
