@@ -19,14 +19,55 @@ public class SendEmail extends Database {
         String pass = PASSWORD;
         String[] to = send_email().toArray(new String[send_email().size()]);
         String subject = "You can get reserved material";
-        String body = "Вы зарезервировали книгу";
+        String body = "You can get the material,which you wanted to took.\n" +
+                "You have 24 hours to get document.";
         sendFromGMail(from, pass, to, subject, body);
     }
     public static void sendToOne(String email,String subject,String body) {
         String from = USER_NAME;
         String pass = PASSWORD;
         String[] to = {email};
-        sendFromGMail(from, pass, to, subject, body);
+        sending_to_one(from, pass, to, subject, body);
+    }
+    private static void sending_to_one(String from, String pass, String[] to, String subject, String body) {
+        Properties props = System.getProperties();
+        String host = "smtp.gmail.com";
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.host", host);
+        props.put("mail.smtp.user", from);
+        props.put("mail.smtp.password", pass);
+        props.put("mail.smtp.port", "587");
+        props.put("mail.smtp.auth", "true");
+
+        Session session = Session.getDefaultInstance(props);
+        MimeMessage message = new MimeMessage(session);
+
+        try {
+            message.setFrom(new InternetAddress(from));
+            InternetAddress[] toAddress = new InternetAddress[to.length];
+
+            // To get the array of addresses
+            for( int i = 0; i < to.length; i++ ) {
+                toAddress[i] = new InternetAddress(to[i]);
+            }
+
+            for( int i = 0; i < toAddress.length; i++) {
+                message.addRecipient(Message.RecipientType.TO, toAddress[i]);
+            }
+
+            message.setSubject(subject);
+            message.setText(body);
+            Transport transport = session.getTransport("smtp");
+            transport.connect(host, from, pass);
+            transport.sendMessage(message, message.getAllRecipients());
+            transport.close();
+        }
+        catch (AddressException ae) {
+            ae.printStackTrace();
+        }
+        catch (MessagingException me) {
+            me.printStackTrace();
+        }
     }
     private static void sendFromGMail(String from, String pass, String[] to, String subject, String body) {
         Properties props = System.getProperties();
