@@ -299,20 +299,19 @@ public class Librarian extends User {
      *
      * @param user       who check outs for material
      * @param idMaterial what material to check out
-     * @return boolean value - success or not on checking out
+     * @return -1 error, 0 - user added in the queue, 1 - book is checked out
      */
-    public static boolean checkOut(User user, int idMaterial) {
-        db.queue_on_material(idMaterial,user.getCard_number());
+    public static int checkOut(User user, int idMaterial) {
         try {
-            boolean success = false;
+            db.queue_on_material(idMaterial,user.getCard_number());
+            int success = -1;
             Statement stmt = null;
             ResultSet queue = null;
             try {
                 stmt = db.con.createStatement();
                 queue = stmt.executeQuery("SELECT * FROM queue_on_" + idMaterial + " LIMIT 1");
             } catch (SQLException e) {
-                System.out.println("no available copies");
-                return success;
+                return -1;
             }
             try {
                 stmt = db.con.createStatement();
@@ -321,22 +320,22 @@ public class Librarian extends User {
                     ResultSet rs = stmt.executeQuery("SELECT * FROM Books WHERE id =" + idMaterial);
                     if (rs.next() ) {
                         if (isFreeCopyExist(idMaterial))
-                            success = checkOutBook(user, idMaterial);
-                        else return false;
+                            success = checkOutBook(user, idMaterial)?1:0;
+                        else return 0;
                     }
                     rs = stmt.executeQuery("SELECT * FROM AV WHERE id =" + idMaterial);
                     if (rs.next()) {
                         if (isFreeCopyExist(idMaterial))
-                            success = checkOutAV(user, idMaterial);
-                        else return false;
+                            success = checkOutAV(user, idMaterial)?1:0;
+                        else return 0;
                     }
                     rs = stmt.executeQuery("SELECT * FROM Articles WHERE id =" + idMaterial);
                     if (rs.next()) {
                         if (isFreeCopyExist(idMaterial))
-                            success = checkOutArticle(user, idMaterial);
-                        else return false;
+                            success = checkOutArticle(user, idMaterial)?1:0;
+                        else return 0;
                     }
-                    if (success) {
+                    if (success == 1) {
                         if(getNumberOfCopiesOfBook(idMaterial)>=0) {
                             PreparedStatement pr = db.con.prepareStatement("DELETE from queue_on_" + idMaterial + " LIMIT 1");
                             pr.executeUpdate();
@@ -353,7 +352,7 @@ public class Librarian extends User {
                         }
                     }
                 } else {
-                    System.out.println("wait for your turn");
+                    //System.out.println("wait for your turn");
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -361,8 +360,7 @@ public class Librarian extends User {
             return success;
         }
         catch (Exception e){
-            System.out.println("бибилиотекарь,ты ебобо");
-            return false;
+            return -1;
         }
     }
 

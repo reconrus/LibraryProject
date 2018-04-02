@@ -167,18 +167,25 @@ public class PatronScreenController {
             return;
         }
 
-        Boolean flag = Librarian.checkOut(user,book.getId());
-        if (flag){
-            Alert error= new Alert(Alert.AlertType.CONFIRMATION);
-            error.setHeaderText("Success");
-            error.showAndWait();
+        int flag = Librarian.checkOut(user,book.getId());
+
+        Alert error;
+
+        switch(flag){
+            case -1: error= new Alert(Alert.AlertType.ERROR);
+                error.setHeaderText("Error");
+                error.setContentText("There has been a mistake");
+                break;
+            case 0: error = new Alert(Alert.AlertType.CONFIRMATION);
+                error.setHeaderText("Success");
+                error.setContentText("You are in the queue");
+                break;
+            default: error = new Alert(Alert.AlertType.CONFIRMATION);
+                error.setHeaderText("Success");
         }
-        else{
-            Alert error= new Alert(Alert.AlertType.ERROR);
-            error.setHeaderText("Error");
-            error.setContentText("There has been a mistake");
-            error.showAndWait();
-        }
+
+        error.showAndWait();
+
         refresh();
     }
 }

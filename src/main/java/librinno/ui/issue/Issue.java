@@ -36,17 +36,24 @@ public class Issue {
         int book=Integer.parseInt(BookID.getText());
         int patron=Integer.parseInt(PatronID.getText());
         Database db= new Database();
-        if(Librarian.checkOut(db.getInformationAboutTheUser(patron),book)){
-            Alert error= new Alert(Alert.AlertType.CONFIRMATION);
-            error.setHeaderText("Success");
-            error.showAndWait();
+
+        Alert error;
+
+        switch (Librarian.checkOut(db.getInformationAboutTheUser(patron),book)){
+            case -1: error= new Alert(Alert.AlertType.ERROR);
+                error.setHeaderText("Error");
+                error.setContentText("There has been a mistake");
+                break;
+            case 0: error = new Alert(Alert.AlertType.CONFIRMATION);
+                error.setHeaderText("Success");
+                error.setContentText("User is in the queue");
+                break;
+            default: error = new Alert(Alert.AlertType.CONFIRMATION);
+                error.setHeaderText("Success");
         }
-        else{
-            Alert error= new Alert(Alert.AlertType.ERROR);
-            error.setHeaderText("Error");
-            error.setContentText("There has been a mistake");
-            error.showAndWait();
-        }
+
+        error.showAndWait();
+
         Assist.closeStage(give);
     }
 
