@@ -24,9 +24,9 @@ public class Tests {
     Book book3 = new Book("The Mythical Man-month", "Brooks,Jr., Frederick P", "Addison-Wesley Longman Publishing Co., Inc.", "Second edition", 1, "b3", false, true, 1995, "In library");
     AV av1 = new AV("Null References: The Billion Dollar Mistake", ": Tony Hoare", 1, "av1");
     AV av2 = new AV("Information Entropy", "Claude Shannon", 1, "av2");
-    User user = new User("Sergey Afonso", "30001", "Via Margutta, 3", "Faculty", "p1");
-    User user2 = new User("Nadia Teixeira", "30002", "Via Sacra, 13", "Student", "p2");
-    User user3 = new User("Elvira Espindola", "30003", "Via del Corso, 22", "Student", "p3");
+    User user = new User("Sergey Afonso", "30001", "Via Margutta, 3", "Faculty", "p1", "1@1.r");
+    User user2 = new User("Nadia Teixeira", "30002", "Via Sacra, 13", "Student", "p2", "2@2.r");
+    User user3 = new User("Elvira Espindola", "30003", "Via del Corso, 22", "Student", "p3", "3@3.r");
 
     public Tests() throws SQLException {
     }

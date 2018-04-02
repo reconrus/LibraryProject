@@ -47,11 +47,10 @@ public class User {
         setEmail(email);
     }
 
-    public User(String name, String number, String address, String type, String password) {
+    public User(String name, String number, String address, String type, String password, String email) {
         setName(name);
         setPhoneNumber(number);
         setAdress(address);
-        //setCard_number();
         setType(type);
         setPassword(password);
     }

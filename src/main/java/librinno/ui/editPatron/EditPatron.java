@@ -73,7 +73,7 @@ public class EditPatron {
                 userEd.setPassword(pass);
                 userEd.setPhoneNumber(phoneNum);
                 userEd.setType(type);
-                //TODO userEd.setEmail(mail);
+                userEd.setEmail(mail);
                 Librarian.modifyUser(userEd);
                 Assist.closeStage(confirm);
             }
@@ -89,7 +89,7 @@ public class EditPatron {
         phone.setText(user.getPhoneNumber());
         password.setText(user.getPassword());
         address.setText(user.getAdress());
-        //TODO email.setText(user.getEmail());
+        email.setText(user.getEmail());
         String type = user.getType();
         if(type.equals(User.student)) isStudent.setSelected(true);
         if(type.equals(User.professor)) isProfessor.setSelected(true);
