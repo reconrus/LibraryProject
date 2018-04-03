@@ -34,17 +34,20 @@ public class Tests {
     public Tests() throws SQLException {
     }
 
+    private void initially() throws SQLException{
+
+        l.addBook(book1.getTitle(), book1.getAuthor(), book1.getPublisher(), book1.getEdition(), book1.getPrice(), book1.getKeyWords(), book1.getBestseller(), book1.getReference(), book1.getYear(), 3);
+        l.addBook(book2.getTitle(), book2.getAuthor(), book2.getPublisher(), book2.getEdition(), book2.getPrice(), book2.getKeyWords(), book2.getBestseller(), book2.getReference(), book2.getYear(), 3);
+        l.addAV(av1.getTitle(), av1.getAuthor(), av1.getPrice(), av1.getKeyWords(), 2);
+
+
+    }
+
     /**
      * first test
      * @throws SQLException
      */
     public void tc1() throws SQLException {
-
-        l.addBook(book1.getTitle(), book1.getAuthor(), book1.getPublisher(), book1.getEdition(), book1.getPrice(), book1.getKeyWords(), book1.getBestseller(), book1.getReference(), book1.getYear(), 3);
-        l.addBook(book2.getTitle(), book2.getAuthor(), book2.getPublisher(), book2.getEdition(), book2.getPrice(), book2.getKeyWords(), book2.getBestseller(), book2.getReference(), book2.getYear(), 2);
-        l.addBook(book3.getTitle(), book3.getAuthor(), book3.getPublisher(), book3.getEdition(), book3.getPrice(), book3.getKeyWords(), book3.getBestseller(), book3.getReference(), book3.getYear(), 1);
-        l.addAV(av1.getTitle(), av1.getAuthor(), av1.getPrice(), av1.getKeyWords(), 1);
-        l.addAV(av2.getTitle(), av2.getAuthor(), av2.getPrice(), av2.getKeyWords(), 1);
 
 
         ResultSet rs = stmt.executeQuery("SELECT * FROM Copy");
@@ -427,6 +430,6 @@ public class Tests {
         }
     }
 
-    
+
 
 }
