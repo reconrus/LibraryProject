@@ -133,8 +133,6 @@ public class Tests {
         p1doc = l.getAllCopiesTakenByUser(p1.getCard_number());
         sdoc = l.getAllCopiesTakenByUser(s.getCard_number());
         vdoc = l.getAllCopiesTakenByUser(v.getCard_number());
-
-        System.out.println(p1doc.get(0).getReturnDate());
         assert (p1doc.get(0).getReturnDate().equals(LocalDate.parse("2018-04-30")));
         assert (sdoc.get(0).getReturnDate().equals(LocalDate.parse("2018-04-02")));
         assert (vdoc.get(0).getReturnDate().equals(LocalDate.parse("2018-04-02")));
@@ -182,13 +180,14 @@ public class Tests {
         LinkedList<Material> p2doc = l.getAllCopiesTakenByUser(p2.getCard_number());
         l.returnBook(p2doc.get(0).getId());
         LinkedList<Material> p2docAfter = l.getAllCopiesTakenByUser(p2.getCard_number());
-        ResultSet rs= stmt.executeQuery("SELECT * FROM queue_on_"+ d3.getId());
+
         ArrayList<User> usQueue= l.getQueue(d3.getId());
         assert (usQueue.get(0).getCard_number()==s.getCard_number());
         assert (usQueue.get(1).getCard_number()==v.getCard_number());
         assert (usQueue.get(2).getCard_number()==p3.getCard_number());
         Thread.sleep(3000);
         ArrayList temp= new ArrayList();
+        ResultSet rs= stmt.executeQuery("SELECT * FROM queue_on_"+ d3.getId());
         while (rs.next()){
             temp.add(rs.getString("is_sended"));
         }

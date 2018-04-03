@@ -86,8 +86,9 @@ public class SendEmail extends Database {
                 message.setFrom(new InternetAddress(from));
             InternetAddress[] toAddress = new InternetAddress[to.length];
             for (int i = 0; i < to.length; i++) {
+                try {
                     toAddress[i] = new InternetAddress(to[i]);
-
+                } catch (NullPointerException e){}
             }
             for (int i = 0; i < toAddress.length; i++) {
                 try {

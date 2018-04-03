@@ -21,6 +21,11 @@ public class Notification_thread extends Thread {
         while (!isInterrupted()) {
             send_email();
             hours24Deletion();
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                break;
+            }
         }
     }
 
@@ -51,7 +56,6 @@ public class Notification_thread extends Thread {
                         }
                     }
                 } catch (SQLException e) {
-                    e.printStackTrace();
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }

@@ -17,13 +17,16 @@ public class Main {
     public static String getDbUrl() {
         return DB_URL;
     }
+
     public static String getDbUrlwdbk() {
-        return DB_URL+ "/dmitrdbk?useSSL=false";
+        return DB_URL + "/dmitrdbk?useSSL=false";
     }
 
     public static void setDbUrl(String dbUrl) {
         DB_URL = dbUrl;
     }
+
+    private static Notification_thread nthread;
 
     public static final String getPASS() {
         return PASS;
@@ -41,7 +44,7 @@ public class Main {
         Main.USER = USER;
     }
 
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) throws SQLException, InterruptedException {
 
         //We need know your login and password in local server MySQL
         Scanner sc = new Scanner(System.in);
@@ -52,78 +55,29 @@ public class Main {
         setDbUrl("jdbc:mysql://localhost:3306");
         Database db = new Database();
         db.creationLocalDB(getUSER(), getPASS());
-
-
-        //Tests test=new Tests();
-        // test.dump();
-        // test.tc1();
-        /*System.out.println("TC1 SUCCESS");
-        test.dump();
+        Notification_thread my = new Notification_thread();
+        my.start();
+        Tests test = new Tests();
+        test.tc1();
+        System.out.println("Test 1 success");
         test.tc2();
-        System.out.println("TC2 SUCCESS");
-        test.dump();
+        System.out.println("Test 2 success");
         test.tc3();
-        System.out.println("TC3 SUCCESS");
-        test.dump();
+        System.out.println("Test 3 success");
         test.tc4();
-        System.out.println("TC4 SUCCESS");
-        test.dump();
+        System.out.println("Test 4 success");
         test.tc5();
-        System.out.println("TC5 SUCCESS");
-        test.dump();
+        System.out.println("Test 5 success");
         test.tc6();
-        System.out.println("TC6 SUCCESS");
-        test.dump();
+        System.out.println("Test 6 success");
         test.tc7();
-        System.out.println("TC7 SUCCESS");
-        test.dump();
+        System.out.println("Test 7 success");
         test.tc8();
-        System.out.println("TC8 SUCCESS");
-        test.dump();
-        */
-        /*String student = "Student";
-        String instructor = "Instructor";
-        String TA = "TA";
-        String professor = "Professor";
-        Comparator<String> comparator = new StringLengthComparator();
-        PriorityQueue<String> pq =
-                new PriorityQueue<String>(10, comparator);
-        pq.add(professor);
-        pq.add(TA);
-        pq.add(instructor);
-        pq.add(student);
-        pq.add(professor);
-        pq.add(TA);
-        pq.add(instructor);
-        pq.add(student);
-        while (!pq.isEmpty())
-            System.out.println(pq.poll());
-            */
-        db.queue_on_material(1, 31);
-        db.queue_on_material(1, 32);
-        db.queue_on_material(1, 33);
-        //db.queue_on_material(1, 37);
-        //db.queue_on_material(1, 36);
-        //db.queue_on_material(1,38);
-        //db.queue_on_material(1, 32);
-        //db.queue_on_material(500, 38);
-       // Librarian l = new Librarian("1", "1", "1", 123123, "123", "12`3","1");
-        //User user=l.UserById(35);
-        //User user2=l.UserById(37);
-       // User user3=l.UserById(32);
-        //l.checkOut(user,500);
-        ////l.checkOut(user,37);
-       // l.checkOut(user3,1);
-        //db.notification(36);
-        //db.notification(33);
-        //db.notification(32);
-        //Notification_thread my=new Notification_thread();
-       // my.run();
-        SendEmail send = new SendEmail();
-        //while(true)
-        //send.send();
-        for(int i=0;i<db.send_email().size();i++)
-            System.out.println(db.send_email().get(i));
-
+        System.out.println("Test 8 success");
+        test.tc9();
+        System.out.println("Test 9 success");
+        test.tc10();
+        System.out.println("Test 10 success");
+        my.interrupt();
     }
 }
