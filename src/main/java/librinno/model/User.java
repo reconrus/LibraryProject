@@ -69,6 +69,7 @@ public class User {
         setAdress(address);
         setType(type);
         setPassword(password);
+        setEmail(email);
     }
 
     public User(String name, String address, String number, int cardnumber, String type, String password,String email) {

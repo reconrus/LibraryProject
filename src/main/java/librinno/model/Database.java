@@ -54,10 +54,9 @@ public class Database extends Main {
             prst.setString(1, user.getName());
             prst.setString(2, user.getAdress());
             prst.setString(3, user.getPhoneNumber());
-            //prst.setInt(4, user.getCard_Number());
             prst.setString(4, user.getType());
             prst.setString(5, user.getPassword());
-            prst.setString(6,user.getEmail());
+            prst.setString(6, user.getEmail());
             prst.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
