@@ -114,6 +114,15 @@ public class Tests {
         assert (vdoc.get(0).getReturnDate().equals(LocalDate.parse("2018-04-05")));
 
     }
+    public void tc5() throws SQLException{
+        dump();
+        initially();
+        l.checkOut(p1,d3.getId());
+        l.checkOut(s,d3.getId());
+        l.checkOut(v,d3.getId());
+        assert (l.getQueue(d3.getId()).size() == 1 && l.getQueue(d3.getId()).get(0).getName().equals("Veronika Rama"));
+    }
+
     /**
      * executing update in all tables
      */
@@ -129,6 +138,7 @@ public class Tests {
             pr.executeUpdate();
             pr = db.con.prepareStatement("DELETE FROM Users_of_the_library");
             pr.executeUpdate();
+            //TODO pr = db.con.prepareStatement("DELETE FROM ") delete queue tables
         } catch (SQLException e) {
             e.printStackTrace();
         }
