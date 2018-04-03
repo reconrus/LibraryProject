@@ -22,16 +22,21 @@ public class Notification_thread extends Thread {
             send_email();
             hours24Deletion();
             try {
-                Thread.sleep(3000);
-            } catch (InterruptedException e) {
+                Thread.sleep(1);
+            }
+            catch (NullPointerException e){}
+            catch (InterruptedException e) {
                 break;
             }
         }
     }
 
     public void send_email() {
-        SendEmail sendEmail = new SendEmail();
-        sendEmail.send();
+        try {
+            SendEmail sendEmail = new SendEmail();
+            sendEmail.send();
+        }
+        catch (NullPointerException n){}
     }
 
     public void hours24Deletion() {
