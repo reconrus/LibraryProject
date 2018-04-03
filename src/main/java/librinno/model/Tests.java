@@ -152,12 +152,23 @@ public class Tests {
         assert (usQueue.get(2).getCard_number()==p3.getCard_number());
     }
 
-    public void tc8() throws SQLException{
+    public void tc8() throws SQLException, InterruptedException {
         tc6();
         LinkedList<Material> p2doc = l.getAllCopiesTakenByUser(p2.getCard_number());
         l.returnBook(p2doc.get(0).getId());
-        ResultSet rs= stmt.executeQuery("SELECT * FROM queue_on_"+ p2doc);
-        //assert();
+        LinkedList<Material> p2docAfter = l.getAllCopiesTakenByUser(p2.getCard_number());
+        ResultSet rs= stmt.executeQuery("SELECT * FROM queue_on_"+ d3.getId());
+        ArrayList temp= new ArrayList();
+        while (rs.next()){
+            temp.add(rs.getString("is_sended"));
+        }
+        ArrayList<User> usQueue= l.getQueue(d3.getId());
+        assert (usQueue.get(0).getCard_number()==s.getCard_number());
+        assert (usQueue.get(1).getCard_number()==v.getCard_number());
+        assert (usQueue.get(2).getCard_number()==p3.getCard_number());
+        Thread.sleep(10000);
+        assert(temp.get(0).equals("1"));
+        assert(p2docAfter.size()==0);
     }
 
     /**
