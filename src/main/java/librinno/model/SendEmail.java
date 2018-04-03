@@ -68,6 +68,7 @@ public class SendEmail extends Database {
         catch (MessagingException me) {
             me.printStackTrace();
         }
+        catch (NullPointerException e){}
     }
     private static void sendFromGMail(String from, String pass, String[] to, String subject, String body) throws NullPointerException {
         Properties props = System.getProperties();
