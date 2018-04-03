@@ -17,6 +17,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import main.java.librinno.model.Database;
+import main.java.librinno.model.User;
 import main.java.librinno.ui.assist.Assist;
 import main.java.librinno.ui.patronScreen.PatronScreenController;
 
@@ -69,7 +70,7 @@ public class LoginController {
             loadLibrarian();
             return true;
         }
-        if(type.equals("Student") || type.equals("Faculty")){
+        if(type.equals(User.student) || type.equals(User.professor) || type.equals(User.instructor) || type.equals(User.ta) || type.equals(User.vProfessor)){
             loadPatron(id);
             return true;
         }
