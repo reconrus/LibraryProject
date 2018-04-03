@@ -19,14 +19,17 @@ public class Tests {
     Database db = new Database();
     Statement stmt = db.con.createStatement();
     Librarian l = new Librarian("1", "1", "1", 1, "1", "1",null);
-    Book book1 = new Book("Introduction to Algorithms", "Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest and Clifford Stein", "MIT Press", "Third edition", 1, "b1", false, false, 2009, "In library");
-    Book book2 = new Book("Design Patterns: Elements of Reusable Object-Oriented Software", "Erich Gamma, Ralph Johnson, John Vlissides, Richard Helm", " Addison-Wesley Professional", "First edition", 1, "b2", true, false, 2003, "In library");
-    Book book3 = new Book("The Mythical Man-month", "Brooks,Jr., Frederick P", "Addison-Wesley Longman Publishing Co., Inc.", "Second edition", 1, "b3", false, true, 1995, "In library");
-    AV av1 = new AV("Null References: The Billion Dollar Mistake", ": Tony Hoare", 1, "av1");
-    AV av2 = new AV("Information Entropy", "Claude Shannon", 1, "av2");
-    User user = new User("Sergey Afonso", "30001", "Via Margutta, 3", "Faculty", "p1", "1@1.r");
-    User user2 = new User("Nadia Teixeira", "30002", "Via Sacra, 13", "Student", "p2", "2@2.r");
-    User user3 = new User("Elvira Espindola", "30003", "Via del Corso, 22", "Student", "p3", "3@3.r");
+    Book book1 = new Book("Introduction to Algorithms", "Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest and Clifford Stein", "MIT Press", "Third edition", 5000, "b1", false, false, 2009, "In library");
+    Book book2 = new Book("Design Patterns: Elements of Reusable Object-Oriented Software", "Erich Gamma, Ralph Johnson, John Vlissides, Richard Helm", " Addison-Wesley Professional", "First edition", 1700, "b2", true, false, 2003, "In library");
+    //Book book3 = new Book("The Mythical Man-month", "Brooks,Jr., Frederick P", "Addison-Wesley Longman Publishing Co., Inc.", "Second edition", 1, "b3", false, true, 1995, "In library");
+    AV av1 = new AV("Null References: The Billion Dollar Mistake", ": Tony Hoare", 700, "av1");
+    //AV av2 = new AV("Information Entropy", "Claude Shannon", 1, "av2");
+    User p1 = new User("Sergey Afonso", "30001", "Via Margutta, 3", User.professor, "p1", "1@1.r");
+    User p2 = new User("Nadia Teixeira", "30002", "Via Sacra, 13", User.professor, "p2", "2@2.r");
+    User p3 = new User("Elvira Espindola", "30003", "Via del Corso, 22", User.professor, "p3", "3@3.r");
+    User s = new User("Andrey Velo", "30004", "Avenida Mazatlan 250", User.student, "s", "s@s.r");
+    User v = new User("Veronika Rama", "30005", "Stret Atocha, 27", User.vProfessor, "vp", "vp@vp.r");
+
 
     public Tests() throws SQLException {
     }
@@ -46,7 +49,7 @@ public class Tests {
 
         ResultSet rs = stmt.executeQuery("SELECT * FROM Copy");
         rs.last();
-        assertion(rs.getRow() == 8);
+        assert(rs.getRow() == 8);
 
         db.userCreation(user);
         db.userCreation(user2);
@@ -54,7 +57,7 @@ public class Tests {
 
         rs = stmt.executeQuery("SELECT * FROM Users_of_the_library WHERE Card_number NOT IN (31,32)");
         rs.last();
-        assertion(rs.getRow()==3);
+        assert(rs.getRow()==3);
     }
     /**
      * second test
@@ -74,14 +77,14 @@ public class Tests {
 
         ResultSet rs = stmt.executeQuery("SELECT * FROM Copy");
         rs.last();
-        assertion(rs.getRow() == 5);
+        assert(rs.getRow() == 5);
 
         pr = db.con.prepareStatement("DELETE from Users_of_the_library WHERE Card_number=" + db.isUserAlreadyExist(user2).get(1));
         pr.executeUpdate();
 
         rs = stmt.executeQuery("SELECT * FROM Users_of_the_library WHERE Card_number NOT IN (31,32)");
         rs.last();
-        assertion(rs.getRow() == 2);
+        assert(rs.getRow() == 2);
     }
     /**
      * third test
@@ -89,7 +92,7 @@ public class Tests {
      */
     public void tc3() throws SQLException {
         tc1();
-        assertion((Database.isUserAlreadyExist(user).size()+ Database.isUserAlreadyExist(user3).size())==4);
+        assert((Database.isUserAlreadyExist(user).size()+ Database.isUserAlreadyExist(user3).size())==4);
     }
     /**
      * fourth test
@@ -97,8 +100,8 @@ public class Tests {
      */
     public void tc4() throws SQLException {
         tc2();
-        assertion(Database.isUserAlreadyExist(user2).size()==1);
-        assertion(Database.isUserAlreadyExist(user3).size()==2);
+        assert(Database.isUserAlreadyExist(user2).size()==1);
+        assert(Database.isUserAlreadyExist(user3).size()==2);
     }
 
     /**
@@ -107,7 +110,7 @@ public class Tests {
      */
     public void tc5() throws SQLException {
         tc2();
-        assertion(db.isUserAlreadyExist(user2).size() == 1);
+        assert(db.isUserAlreadyExist(user2).size() == 1);
     }
 
 
@@ -150,14 +153,14 @@ public class Tests {
             if (rs.getInt("Id_of_original")==idBook1 && rs.getInt("Owner")==idUser &&
                     rs.getDate("Return_date").toLocalDate().equals(march5.plusDays(28)) );
                 b=true;
-        assertion(b);
+        assert(b);
 
         rs = stmt.executeQuery("SELECT * FROM Copy WHERE Id_of_original =" + idBook1 +" AND Owner="+idUser3);
         b=false;
         while (rs.next())
             if (rs.getInt("Id_of_original")==idBook1 && rs.getInt("Owner")==idUser3)
                 b=true;
-        assertion(!b);//cause we have only one copy of b1, and this copy not in library
+        assert(!b);//cause we have only one copy of b1, and this copy not in library
 
 
         rs = stmt.executeQuery("SELECT * FROM Copy WHERE Id_of_original =" + idBook2 +" AND Owner="+idUser3);
@@ -166,7 +169,7 @@ public class Tests {
             if (rs.getInt("Id_of_original")==idBook2 && rs.getInt("Owner")==idUser3 &&
                     rs.getDate("Return_date").toLocalDate().equals(march5.plusDays(14))) //b2 is a bestseller
                 b=true;
-        assertion(b);
+        assert(b);
     }
 
 
@@ -213,7 +216,7 @@ public class Tests {
             if (rs.getInt("Id_of_original")==idBook1 && rs.getInt("Owner")==idUser &&
                     rs.getDate("Return_date").toLocalDate().equals(march5.plusDays(28)))
                         b=true;
-        assertion(b);
+        assert(b);
 
         rs = stmt.executeQuery("SELECT * FROM Copy WHERE Id_of_original =" + idBook2 +" AND Owner="+idUser);
         b=false;
@@ -221,14 +224,14 @@ public class Tests {
             if (rs.getInt("Id_of_original")==idBook2 && rs.getInt("Owner")==idUser &&
                     rs.getDate("Return_date").toLocalDate().equals(march5.plusDays(28)))
                 b=true;
-        assertion(b);
+        assert(b);
 
         rs = stmt.executeQuery("SELECT * FROM Copy WHERE Id_of_original =" + idBook3 +" AND Owner="+idUser);
         b=false;
         while (rs.next())
             if (rs.getInt("Id_of_original")==idBook2 && rs.getInt("Owner")==idUser)
                 b=true;
-        assertion(!b); //b3 is a reference
+        assert(!b); //b3 is a reference
 
         rs = stmt.executeQuery("SELECT * FROM Copy WHERE Id_of_original =" + idAV1 +" AND Owner="+idUser);
         b=false;
@@ -236,7 +239,7 @@ public class Tests {
             if (rs.getInt("Id_of_original")==idAV1 && rs.getInt("Owner")==idUser &&
                     rs.getDate("Return_date").toLocalDate().equals(march5.plusDays(14)))
                 b=true;
-        assertion(b);
+        assert(b);
 
 
         // P2
@@ -248,7 +251,7 @@ public class Tests {
             if (rs.getInt("Id_of_original")==idBook1 && rs.getInt("Owner")==idUser2 &&
                     rs.getDate("Return_date").toLocalDate().equals(march5.plusDays(21)))
                         b=true;
-        assertion(b);
+        assert(b);
 
         rs = stmt.executeQuery("SELECT * FROM Copy WHERE Id_of_original =" + idBook2 +" AND Owner="+idUser2);
 
@@ -257,7 +260,7 @@ public class Tests {
             if (rs.getInt("Id_of_original")==idBook2 && rs.getInt("Owner")==idUser2 &&
                     rs.getDate("Return_date").toLocalDate().equals(march5.plusDays(14))) // b2 is a bestseller
                         b=true;
-        assertion(b);
+        assert(b);
 
         rs = stmt.executeQuery("SELECT * FROM Copy WHERE Id_of_original =" + idAV2 +" AND Owner="+idUser2);
         b=false;
@@ -265,7 +268,7 @@ public class Tests {
             if (rs.getInt("Id_of_original")==idAV2 && rs.getInt("Owner")==idUser2 &&
                     rs.getDate("Return_date").toLocalDate().equals(march5.plusDays(14)))
                 b=true;
-        assertion(b);
+        assert(b);
     }
 
     /**
@@ -308,7 +311,7 @@ public class Tests {
             if (rs.getInt("Id_of_original")==idBook2 && rs.getInt("Owner")==idUser &&
                     Period.between(rs.getDate("Return_date").toLocalDate(), march5).equals(m5f2))
                         b=true;
-        assertion(b);
+        assert(b);
 
         rs = stmt.executeQuery("SELECT * FROM Copy WHERE Id_of_original =" + idBook1 +" AND Owner="+idUser2);
 
@@ -317,7 +320,7 @@ public class Tests {
             if (rs.getInt("Id_of_original")==idBook1 && rs.getInt("Owner")==idUser2 &&
                     Period.between(rs.getDate("Return_date").toLocalDate(), march5).equals(m5f5))
                          b=true;
-        assertion(b);
+        assert(b);
 
         rs = stmt.executeQuery("SELECT * FROM Copy WHERE Id_of_original =" + idBook1 +" AND Owner="+idUser);
 
@@ -326,7 +329,7 @@ public class Tests {
             if (rs.getInt("Id_of_original")==idBook1 && rs.getInt("Owner")==idUser &&
                     Period.between(rs.getDate("Return_date").toLocalDate(), march5).equals(m5f9))
                          b=true;
-        assertion(b);
+        assert(b);
 
         rs = stmt.executeQuery("SELECT * FROM Copy WHERE Id_of_original =" + idAV1 +" AND Owner="+idUser2);
 
@@ -335,7 +338,7 @@ public class Tests {
             if (rs.getInt("Id_of_original")==idAV1 && rs.getInt("Owner")==idUser2 &&
                     Period.between(rs.getDate("Return_date").toLocalDate(), march5).equals(m5f17))
                         b=true;
-        assertion(b);
+        assert(b);
     }
 
 
@@ -357,16 +360,6 @@ public class Tests {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
-
-    /**
-     * assert function
-     * because in typical way
-     * @param b
-     */
-    public void assertion(boolean b){
-        if(!b)
-            System.err.println("Test failed");
     }
 
     /**
@@ -434,5 +427,6 @@ public class Tests {
         }
     }
 
+    
 
 }
