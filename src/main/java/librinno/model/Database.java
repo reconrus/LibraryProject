@@ -26,15 +26,14 @@ public class Database extends Main {
     public String login = super.getUSER();
     //public String password = "eQ1a5mg0Z7";
     public String password = super.getPASS();
-    public static PreparedStatement prst;
-    public static Connection con;
+    public static PreparedStatement prst=null;
+    public static Connection con=null;
     public static PriorityQueue<User> pq;
 
     /**
      * connecting to mysql database
      */
     public Database() {
-        prst = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
             con = DriverManager.getConnection(url, login, password);
@@ -56,7 +55,7 @@ public class Database extends Main {
             prst.setString(3, user.getPhoneNumber());
             prst.setString(4, user.getType());
             prst.setString(5, user.getPassword());
-            prst.setString(6, user.getEmail());
+            prst.setString(6,user.getEmail());
             prst.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
