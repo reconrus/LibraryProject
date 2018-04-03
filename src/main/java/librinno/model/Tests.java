@@ -115,7 +115,7 @@ public class Tests {
         LocalDate now = LocalDate.parse("2018-04-02");
         l.checkOutWithData(s,d2.getId(),date);
         l.checkOutWithData(v,d2.getId(),date);
-        ArrayList<String> emails=l.outstandingRequestWithDate(d2.getId(),date);
+        ArrayList<ArrayList<String>> emails=l.outstandingRequestWithDate(d2.getId(),date);
         l.renew(p1,d1.getId());
         l.renew(s,d2.getId());
         l.renew(v,d2.getId());
@@ -151,7 +151,18 @@ public class Tests {
         assert (usQueue.get(1).getCard_number()==v.getCard_number());
         assert (usQueue.get(2).getCard_number()==p3.getCard_number());
     }
-
+    public void tc7() throws SQLException{
+        tc6();
+        LocalDate now = LocalDate.parse("2018-04-02");
+        ArrayList<String> with_already_taken_book=l.outstandingRequestWithDate(d3.getId(),now).get(0);
+        assert (l.getQueue(d3.getId()).size() == 0);
+        assert (with_already_taken_book.get(0).equals(p1.getEmail()));
+        assert (with_already_taken_book.get(1).equals(p2.getEmail()));
+        ArrayList<String> waiting_for_book=l.outstandingRequestWithDate(d3.getId(),now).get(1);
+        assert (waiting_for_book.get(0).equals(s.getEmail()));
+        assert (waiting_for_book.get(1).equals(v.getEmail()));
+        assert (waiting_for_book.get(2).equals(p3.getEmail()));
+    }
     public void tc8() throws SQLException, InterruptedException {
         tc6();
         LinkedList<Material> p2doc = l.getAllCopiesTakenByUser(p2.getCard_number());

@@ -80,8 +80,9 @@ public class Librarian extends User {
             e.printStackTrace();
         }
     }
-    public static ArrayList<String>  outstandingRequestWithDate(int idOfMaterial,LocalDate date){
+    public static ArrayList<ArrayList<String>>  outstandingRequestWithDate(int idOfMaterial,LocalDate date){
         ArrayList<String> emails=new ArrayList<>();
+        ArrayList<String> book_no_available=new ArrayList<>();
         try {
             PreparedStatement pr = db.con.prepareStatement("UPDATE Copy SET Time_left=?,Return_date=?,CanRenew=? WHERE Id_of_original= " + idOfMaterial + " AND Status = 'Issued'");
             pr.setInt(1,0);
@@ -103,12 +104,21 @@ public class Librarian extends User {
                 SendEmail sendEmail = new SendEmail();
                 sendEmail.sendToOne(email,"Return book.","Urgently return the book throughout the day! Because of outstanding request.");
             }
-
+            rs=pr.executeQuery("SELECT * FROM queue_on_"+idOfMaterial);
+            while(rs.next()){
+                String email=rs.getString("Email");
+                book_no_available.add(email);
+                SendEmail send=new SendEmail();
+                send.sendToOne(email,"Material is not available","Material,which you reserved,now is not available.You are removed from waiting list");
+            }
             pr.executeUpdate("DROP TABLE IF EXISTS queue_on_" + idOfMaterial);
         }catch (SQLException e) {
             e.printStackTrace();
         }
-        return emails;
+        ArrayList<ArrayList<String>> all_emails=new ArrayList<>();
+        all_emails.add(emails);
+        all_emails.add(book_no_available);
+        return all_emails;
     }
 
     public static boolean renewWithDate(User user,int idOfRenewCopy,LocalDate date){
