@@ -108,9 +108,9 @@ public class Librarian extends User {
             e.printStackTrace();
         }
     }
-    public static boolean renew(User user,int idOfRenewCopy){
+
+    public static boolean renewWithDate(User user,int idOfRenewCopy,LocalDate date){
         int oldTimeLeft = 0;
-        LocalDate oldReturnDate = null;
         boolean oldCanRenew=false;
 
         try{
@@ -119,14 +119,13 @@ public class Librarian extends User {
             ResultSet rs = pr.executeQuery("SELECT  * FROM Copy WHERE Id_of_copy= " + idOfRenewCopy);
             while (rs.next()) {
                 oldTimeLeft = rs.getInt("Time_left");
-                oldReturnDate = rs.getDate("Return_date").toLocalDate();
                 oldCanRenew = rs.getBoolean("CanRenew");
             }
 
             if (user.getType().equals("Visiting Professor")) {
                 //если визитинг профессор, то он всегда все берет только на одну неделю
                 pr.setInt(1,oldTimeLeft+7);
-                pr.setDate(2,java.sql.Date.valueOf(oldReturnDate.plusDays(7)));
+                pr.setDate(2,java.sql.Date.valueOf(date.plusDays(7)));
                 pr.setBoolean(3,true);
                 pr.executeUpdate();
                 return true;
@@ -138,27 +137,91 @@ public class Librarian extends User {
                     //если книга, то уже смотрим на тип юзера и книгу
                     if (user.getType().equals("Student") && rs.getBoolean("is_bestseller")){
                         pr.setInt(1,oldTimeLeft+14);
-                        pr.setDate(2,java.sql.Date.valueOf(oldReturnDate.plusDays(14)));
+                        pr.setDate(2,java.sql.Date.valueOf(date.plusDays(14)));
                         pr.setBoolean(3,false);
                         pr.executeUpdate();
                         return true;
 
                     } else if(user.getType().equals("Student") && !rs.getBoolean("is_bestseller")){
                         pr.setInt(1,oldTimeLeft+21);
-                        pr.setDate(2,java.sql.Date.valueOf(oldReturnDate.plusDays(21)));
+                        pr.setDate(2,java.sql.Date.valueOf(date.plusDays(21)));
                         pr.setBoolean(3,false);
                         pr.executeUpdate();
                         return true;
                     } else {
                         pr.setInt(1,oldTimeLeft+28);
-                        pr.setDate(2,java.sql.Date.valueOf(oldReturnDate.plusDays(28)));
+                        pr.setDate(2,java.sql.Date.valueOf(date.plusDays(28)));
                         pr.setBoolean(3,false);
                         pr.executeUpdate();
                         return true;
                     }
                 } else {
                     pr.setInt(1,oldTimeLeft+14);
-                    pr.setDate(2,java.sql.Date.valueOf(oldReturnDate.plusDays(14)));
+                    pr.setDate(2,java.sql.Date.valueOf(date.plusDays(14)));
+                    pr.setBoolean(3,false);
+                    pr.executeUpdate();
+                    return true;
+                }
+
+
+            }
+            return false;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public static boolean renew(User user,int idOfRenewCopy){
+        int oldTimeLeft = 0;
+        boolean oldCanRenew=false;
+
+        try{
+            Database db = new Database();
+            PreparedStatement pr = db.con.prepareStatement("UPDATE Copy SET Time_left=?,Return_date=?,CanRenew=? WHERE Id_of_copy= " + idOfRenewCopy + " AND CanRenew=" + true);
+            ResultSet rs = pr.executeQuery("SELECT  * FROM Copy WHERE Id_of_copy= " + idOfRenewCopy);
+            while (rs.next()) {
+                oldTimeLeft = rs.getInt("Time_left");
+                oldCanRenew = rs.getBoolean("CanRenew");
+            }
+
+            if (user.getType().equals("Visiting Professor")) {
+                //если визитинг профессор, то он всегда все берет только на одну неделю
+                pr.setInt(1,oldTimeLeft+7);
+                pr.setDate(2,java.sql.Date.valueOf(LocalDate.now().plusDays(7)));
+                pr.setBoolean(3,true);
+                pr.executeUpdate();
+                return true;
+
+            } else if (oldCanRenew){//если это не ВизПроф, то чекаем обновлял ли он до этого(если обновлял то false, если может обновить, то true)
+                Statement stmt = db.con.createStatement();
+                rs = stmt.executeQuery("SELECT * FROM Books WHERE id =" + idOfRenewCopy);
+                if (rs.next()) {
+                    //если книга, то уже смотрим на тип юзера и книгу
+                    if (user.getType().equals("Student") && rs.getBoolean("is_bestseller")){
+                        pr.setInt(1,oldTimeLeft+14);
+                        pr.setDate(2,java.sql.Date.valueOf(LocalDate.now().plusDays(14)));
+                        pr.setBoolean(3,false);
+                        pr.executeUpdate();
+                        return true;
+
+                    } else if(user.getType().equals("Student") && !rs.getBoolean("is_bestseller")){
+                        pr.setInt(1,oldTimeLeft+21);
+                        pr.setDate(2,java.sql.Date.valueOf(LocalDate.now().plusDays(21)));
+                        pr.setBoolean(3,false);
+                        pr.executeUpdate();
+                        return true;
+                    } else {
+                        pr.setInt(1,oldTimeLeft+28);
+                        pr.setDate(2,java.sql.Date.valueOf(LocalDate.now().plusDays(28)));
+                        pr.setBoolean(3,false);
+                        pr.executeUpdate();
+                        return true;
+                    }
+                } else {
+                    pr.setInt(1,oldTimeLeft+14);
+                    pr.setDate(2,java.sql.Date.valueOf(LocalDate.now().plusDays(14)));
                     pr.setBoolean(3,false);
                     pr.executeUpdate();
                     return true;
