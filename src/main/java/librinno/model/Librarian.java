@@ -126,7 +126,6 @@ public class Librarian extends User {
     }
 
     public static boolean renewWithDate(User user,int idOfRenewCopy,LocalDate date){
-        int oldTimeLeft = 0;
         boolean oldCanRenew=false;
         int idOfOriginal=0;
 
@@ -135,14 +134,13 @@ public class Librarian extends User {
             PreparedStatement pr = db.con.prepareStatement("UPDATE Copy SET Time_left=?,Return_date=?,CanRenew=? WHERE Id_of_copy= " + idOfRenewCopy + " AND CanRenew=" + true);
             ResultSet rs = pr.executeQuery("SELECT  * FROM Copy WHERE Id_of_copy= " + idOfRenewCopy);
             while (rs.next()) {
-                oldTimeLeft = rs.getInt("Time_left");
                 oldCanRenew = rs.getBoolean("CanRenew");
                 idOfOriginal = rs.getInt("Id_of_original");
             }
 
             if (user.getType().equals("Visiting Professor")) {
                 //если визитинг профессор, то он всегда все берет только на одну неделю
-                pr.setInt(1,oldTimeLeft+7); //TODO ВРЕМЯ ПРИБАВЛЯЕТСЯ К СТАРОМУ, А НЕ ОБНОВЛЯЕТСЯ
+                pr.setInt(1,7);
                 pr.setDate(2,java.sql.Date.valueOf(date.plusDays(7)));
                 pr.setBoolean(3,true);
                 pr.executeUpdate();
@@ -154,27 +152,27 @@ public class Librarian extends User {
                 if (rs.next()) {
                     //если книга, то уже смотрим на тип юзера и книгу
                     if (user.getType().equals("Student") && rs.getBoolean("is_bestseller")){
-                        pr.setInt(1,oldTimeLeft+14); //TODO ВРЕМЯ ПРИБАВЛЯЕТСЯ К СТАРОМУ, А НЕ ОБНОВЛЯЕТСЯ
+                        pr.setInt(1,14);
                         pr.setDate(2,java.sql.Date.valueOf(date.plusDays(14)));
                         pr.setBoolean(3,false);
                         pr.executeUpdate();
                         return true;
 
                     } else if(user.getType().equals("Student") && !rs.getBoolean("is_bestseller")){
-                        pr.setInt(1,oldTimeLeft+21); //TODO ВРЕМЯ ПРИБАВЛЯЕТСЯ К СТАРОМУ, А НЕ ОБНОВЛЯЕТСЯ
+                        pr.setInt(1,21);
                         pr.setDate(2,java.sql.Date.valueOf(date.plusDays(21)));
                         pr.setBoolean(3,false);
                         pr.executeUpdate();
                         return true;
                     } else {
-                        pr.setInt(1,oldTimeLeft+28); //TODO ВРЕМЯ ПРИБАВЛЯЕТСЯ К СТАРОМУ, А НЕ ОБНОВЛЯЕТСЯ
+                        pr.setInt(1,28);
                         pr.setDate(2,java.sql.Date.valueOf(date.plusDays(28)));
                         pr.setBoolean(3,false);
                         pr.executeUpdate();
                         return true;
                     }
                 } else {
-                    pr.setInt(1,oldTimeLeft+14);
+                    pr.setInt(1,14);
                     pr.setDate(2,java.sql.Date.valueOf(date.plusDays(14)));
                     pr.setBoolean(3,false);
                     pr.executeUpdate();
@@ -192,7 +190,6 @@ public class Librarian extends User {
     }
 
     public static boolean renew(User user,int idOfRenewCopy){
-        int oldTimeLeft = 0;
         boolean oldCanRenew=false;
         int idOfOriginal=0;
         try{
@@ -200,7 +197,6 @@ public class Librarian extends User {
             PreparedStatement pr = db.con.prepareStatement("UPDATE Copy SET Time_left=?,Return_date=?,CanRenew=? WHERE Id_of_copy= " + idOfRenewCopy + " AND CanRenew=" + true);
             ResultSet rs = pr.executeQuery("SELECT  * FROM Copy WHERE Id_of_copy= " + idOfRenewCopy);
             while (rs.next()) {
-                oldTimeLeft = rs.getInt("Time_left");
                 oldCanRenew = rs.getBoolean("CanRenew");
                 idOfOriginal = rs.getInt("Id_of_original");
 
@@ -208,7 +204,7 @@ public class Librarian extends User {
 
             if (user.getType().equals("Visiting Professor")) {
                 //если визитинг профессор, то он всегда все берет только на одну неделю
-                pr.setInt(1,oldTimeLeft+7);
+                pr.setInt(1,7);
                 pr.setDate(2,java.sql.Date.valueOf(LocalDate.now().plusDays(7)));
                 pr.setBoolean(3,true);
                 pr.executeUpdate();
@@ -220,27 +216,27 @@ public class Librarian extends User {
                 if (rs.next()) {
                     //если книга, то уже смотрим на тип юзера и книгу
                     if (user.getType().equals("Student") && rs.getBoolean("is_bestseller")){
-                        pr.setInt(1,oldTimeLeft+14);
+                        pr.setInt(1,14);
                         pr.setDate(2,java.sql.Date.valueOf(LocalDate.now().plusDays(14)));
                         pr.setBoolean(3,false);
                         pr.executeUpdate();
                         return true;
 
                     } else if(user.getType().equals("Student") && !rs.getBoolean("is_bestseller")){
-                        pr.setInt(1,oldTimeLeft+21);
+                        pr.setInt(1,21);
                         pr.setDate(2,java.sql.Date.valueOf(LocalDate.now().plusDays(21)));
                         pr.setBoolean(3,false);
                         pr.executeUpdate();
                         return true;
                     } else {
-                        pr.setInt(1,oldTimeLeft+28);
+                        pr.setInt(1,28);
                         pr.setDate(2,java.sql.Date.valueOf(LocalDate.now().plusDays(28)));
                         pr.setBoolean(3,false);
                         pr.executeUpdate();
                         return true;
                     }
                 } else {
-                    pr.setInt(1,oldTimeLeft+14);
+                    pr.setInt(1,14);
                     pr.setDate(2,java.sql.Date.valueOf(LocalDate.now().plusDays(14)));
                     pr.setBoolean(3,false);
                     pr.executeUpdate();
