@@ -199,6 +199,33 @@ public class Tests {
 
     }
 
+
+    public void tc10() throws SQLException{
+
+        dump();
+        initially();
+
+        LocalDate date = LocalDate.of(2018,3,26);
+        Librarian.checkOutWithData(p1, d1.getId(), date );
+        Librarian.checkOutWithData(v, d1.getId(), date);
+
+        date = LocalDate.of(2018,3,29);
+        Librarian.renewWithDate(p1, Librarian.getAllCopiesTakenByUser(p1.getCard_number()).get(0).getId(), date);
+        Librarian.renewWithDate(v, Librarian.getAllCopiesTakenByUser(v.getCard_number()).get(0).getId(), date);
+
+        Librarian.renew(p1, Librarian.getAllCopiesTakenByUser(p1.getCard_number()).get(0).getId());
+        Librarian.renew(v, Librarian.getAllCopiesTakenByUser(v.getCard_number()).get(0).getId());
+
+        LinkedList<Material> p1Copy = Librarian.getAllCopiesTakenByUser(p1.getCard_number());
+        LinkedList<Material> vCopy = Librarian.getAllCopiesTakenByUser(v.getCard_number());
+
+        assert (p1Copy.size() == 1 && p1Copy.get(0).getTitle().equals("Introduction to Algorithms") && p1Copy.get(0).getReturnDate().isEqual(date.plusDays(28)));
+        assert (vCopy.size() == 1 && vCopy.get(0).getTitle().equals("Introduction to Algorithms") && vCopy.get(0).getReturnDate().isEqual(date.plusDays(7)));
+
+    }
+
+
+
     /**
      * executing update in all tables
      */
