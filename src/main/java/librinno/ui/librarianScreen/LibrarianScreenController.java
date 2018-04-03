@@ -338,8 +338,8 @@ public class LibrarianScreenController {
 
     @FXML
     private void outstandingRequest(){
-        Material copy= tableCopy.getSelectionModel().getSelectedItem();
-        Librarian.outstandingRequest(copy.getId());
+        Material doc= tableBook.getSelectionModel().getSelectedItem();
+        Librarian.outstandingRequest(doc.getId());
         Alert error = new Alert(Alert.AlertType.CONFIRMATION);
         error.setHeaderText("Success");
         error.showAndWait();
