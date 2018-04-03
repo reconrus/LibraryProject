@@ -1,6 +1,7 @@
 package main.java.librinno.model;
 
 import java.time.LocalDate;
+import static java.time.temporal.ChronoUnit.DAYS;
 
 /**
  * Created by Ilnur Mamedbakov on 25.01.2018.
@@ -26,6 +27,7 @@ public class Material {
     public int numberAvailable;
     private int totalNumber;
     private int fine;
+
     //getters and setters
     public LocalDate getReturnDate() {
         return returnDate;
@@ -59,6 +61,14 @@ public class Material {
     }
     public String getAuthor() {
         return author;
+    }
+    public int getOverdue(User whoTook,LocalDate now) {
+        if (whoTook.getType()=="Professor"){
+            return 0;
+        }
+        else{
+            return (int) DAYS.between(returnDate, now);
+        }
     }
 
     public void setAuthor(String author) {
