@@ -3,10 +3,7 @@ package main.java.librinno.model;
 import static java.time.temporal.ChronoUnit.DAYS;
 import javax.xml.crypto.Data;
 import java.io.IOException;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
@@ -123,6 +120,22 @@ public class Tests {
         assert (l.getQueue(d3.getId()).size() == 1 && l.getQueue(d3.getId()).get(0).getName().equals("Veronika Rama"));
     }
 
+    public void tc6() throws SQLException {
+        dump();
+        initially();
+        LocalDate date = LocalDate.parse("2018-03-29");
+        LocalDate now = LocalDate.parse("2018-04-02");
+        l.checkOutWithData(p1,d3.getId(),date);
+        l.checkOutWithData(p2,d3.getId(),date);
+        l.checkOutWithData(s,d3.getId(),date);
+        l.checkOutWithData(v,d3.getId(),date);
+        l.checkOutWithData(p3,d3.getId(),date);
+        ArrayList<User> usQueue= l.getQueue(d3.getId());
+        assert (usQueue.get(0).getCard_number()==s.getCard_number());
+        assert (usQueue.get(1).getCard_number()==v.getCard_number());
+        assert (usQueue.get(2).getCard_number()==p3.getCard_number());
+    }
+
     /**
      * executing update in all tables
      */
@@ -138,7 +151,12 @@ public class Tests {
             pr.executeUpdate();
             pr = db.con.prepareStatement("DELETE FROM Users_of_the_library");
             pr.executeUpdate();
-            //TODO pr = db.con.prepareStatement("DELETE FROM ") delete queue tables
+            DatabaseMetaData md = db.con.getMetaData();
+            ResultSet rs = md.getTables(null, null, "queue%", null);
+            while (rs.next()) {
+                String table_name = rs.getString(3);
+                pr.executeUpdate("DROP TABLE IF EXISTS "+table_name);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
