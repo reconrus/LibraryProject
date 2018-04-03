@@ -19,10 +19,10 @@ public class Tests {
     Database db = new Database();
     Statement stmt = db.con.createStatement();
     Librarian l = new Librarian("1", "1", "1", 1, "1", "1",null);
-    Book book1 = new Book("Introduction to Algorithms", "Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest and Clifford Stein", "MIT Press", "Third edition", 5000, "b1", false, false, 2009, "In library");
-    Book book2 = new Book("Design Patterns: Elements of Reusable Object-Oriented Software", "Erich Gamma, Ralph Johnson, John Vlissides, Richard Helm", " Addison-Wesley Professional", "First edition", 1700, "b2", true, false, 2003, "In library");
+    Book d1 = new Book("Introduction to Algorithms", "Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest and Clifford Stein", "MIT Press", "Third edition", 5000, "b1", false, false, 2009, "In library");
+    Book d2 = new Book("Design Patterns: Elements of Reusable Object-Oriented Software", "Erich Gamma, Ralph Johnson, John Vlissides, Richard Helm", " Addison-Wesley Professional", "First edition", 1700, "b2", true, false, 2003, "In library");
     //Book book3 = new Book("The Mythical Man-month", "Brooks,Jr., Frederick P", "Addison-Wesley Longman Publishing Co., Inc.", "Second edition", 1, "b3", false, true, 1995, "In library");
-    AV av1 = new AV("Null References: The Billion Dollar Mistake", ": Tony Hoare", 700, "av1");
+    AV d3 = new AV("Null References: The Billion Dollar Mistake", ": Tony Hoare", 700, "av1");
     //AV av2 = new AV("Information Entropy", "Claude Shannon", 1, "av2");
     User p1 = new User("Sergey Afonso", "30001", "Via Margutta, 3", User.professor, "p1", "1@1.r");
     User p2 = new User("Nadia Teixeira", "30002", "Via Sacra, 13", User.professor, "p2", "2@2.r");
@@ -36,11 +36,9 @@ public class Tests {
 
     private void initially() throws SQLException{
 
-        l.addBook(book1.getTitle(), book1.getAuthor(), book1.getPublisher(), book1.getEdition(), book1.getPrice(), book1.getKeyWords(), book1.getBestseller(), book1.getReference(), book1.getYear(), 3);
-        l.addBook(book2.getTitle(), book2.getAuthor(), book2.getPublisher(), book2.getEdition(), book2.getPrice(), book2.getKeyWords(), book2.getBestseller(), book2.getReference(), book2.getYear(), 3);
-        l.addAV(av1.getTitle(), av1.getAuthor(), av1.getPrice(), av1.getKeyWords(), 2);
-
-
+        l.addBook(d1.getTitle(), d1.getAuthor(), d1.getPublisher(), d1.getEdition(), d1.getPrice(), d1.getKeyWords(), d1.getBestseller(), d1.getReference(), d1.getYear(), 3);
+        l.addBook(d2.getTitle(), d2.getAuthor(), d2.getPublisher(), d2.getEdition(), d2.getPrice(), d2.getKeyWords(), d2.getBestseller(), d2.getReference(), d2.getYear(), 3);
+        l.addAV(d3.getTitle(), d3.getAuthor(), d3.getPrice(), d3.getKeyWords(), 2);
     }
 
     /**
@@ -54,9 +52,9 @@ public class Tests {
         rs.last();
         assert(rs.getRow() == 8);
 
-        db.userCreation(user);
-        db.userCreation(user2);
-        db.userCreation(user3);
+        db.userCreation(p1);
+        db.userCreation(p2);
+        db.userCreation(p3);
 
         rs = stmt.executeQuery("SELECT * FROM Users_of_the_library WHERE Card_number NOT IN (31,32)");
         rs.last();
@@ -69,7 +67,7 @@ public class Tests {
     public void tc2() throws SQLException {
         tc1();
         //IsBookAlreadyExist outputs ArrayList of size 2 if the user is already in the system and list[1] == id of the user, of size 1 otherwise
-        ArrayList arrayList = db.isBookAlreadyExist(book1);
+        ArrayList arrayList = db.isBookAlreadyExist(d1);
         ArrayList arrayList3 = db.isBookAlreadyExist(book3);
 
         PreparedStatement pr = db.con.prepareStatement("DELETE from Copy WHERE Id_of_original=" + arrayList.get(1) + " LIMIT 2");
@@ -136,8 +134,8 @@ public class Tests {
         tc2();
         LocalDate march5 = LocalDate.of(2018, 03, 05);
 
-        int idBook1 = (Integer)db.isBookAlreadyExist(book1).get(1);
-        int idBook2 = (Integer)db.isBookAlreadyExist(book2).get(1);
+        int idBook1 = (Integer)db.isBookAlreadyExist(d1).get(1);
+        int idBook2 = (Integer)db.isBookAlreadyExist(d2).get(1);
         int idUser = (Integer)db.isUserAlreadyExist(user).get(1);
         int idUser3 = (Integer)db.isUserAlreadyExist(user3).get(1);
 
@@ -185,11 +183,11 @@ public class Tests {
 
         LocalDate march5 = LocalDate.of(2018, 03, 05);
 
-        int idBook1 = (Integer)db.isBookAlreadyExist(book1).get(1);
-        int idBook2 = (Integer)db.isBookAlreadyExist(book2).get(1);
+        int idBook1 = (Integer)db.isBookAlreadyExist(d1).get(1);
+        int idBook2 = (Integer)db.isBookAlreadyExist(d2).get(1);
         int idBook3 = (Integer)db.isBookAlreadyExist(book3).get(1);
 
-        int idAV1 = (Integer)db.isAVAlreadyExist(av1).get(1);
+        int idAV1 = (Integer)db.isAVAlreadyExist(d3).get(1);
         int idAV2 = (Integer)db.isAVAlreadyExist(av2).get(1);
 
         int idUser = (Integer)db.isUserAlreadyExist(user).get(1);
@@ -287,9 +285,9 @@ public class Tests {
         LocalDate february17 = LocalDate.of(2018, 02, 17);
         LocalDate march5 = LocalDate.of(2018, 03, 05);
 
-        int idBook1 = (Integer)db.isBookAlreadyExist(book1).get(1);
-        int idBook2 = (Integer)db.isBookAlreadyExist(book2).get(1);
-        int idAV1 = (Integer)db.isAVAlreadyExist(av1).get(1);
+        int idBook1 = (Integer)db.isBookAlreadyExist(d1).get(1);
+        int idBook2 = (Integer)db.isBookAlreadyExist(d2).get(1);
+        int idAV1 = (Integer)db.isAVAlreadyExist(d3).get(1);
 
         int idUser = (Integer)db.isUserAlreadyExist(user).get(1);
         int idUser2 = (Integer)db.isUserAlreadyExist(user2).get(1);
