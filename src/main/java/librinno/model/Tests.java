@@ -186,6 +186,19 @@ public class Tests {
         assert(p2docAfter.size()==0);
     }
 
+    public void tc9() throws SQLException {
+        dump();
+        initially();
+        tc6();
+        l.renewWithDate(p1,l.getAllCopiesTakenByUser(p1.getCard_number()).get(0).getId(),LocalDate.of(2018,4,16));
+
+        assert (l.getAllCopiesTakenByUser(p1.getCard_number()).get(0).getReturnDate().equals(LocalDate.of(2018,4,30)));
+        assert(l.getQueue(d3.getId()).get(0).getName().equals("Andrey Velo"));
+        assert(l.getQueue(d3.getId()).get(1).getName().equals("Veronika Rama"));
+        assert(l.getQueue(d3.getId()).get(2).getName().equals("Elvira Espindola"));
+
+    }
+
     /**
      * executing update in all tables
      */
