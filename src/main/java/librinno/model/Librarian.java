@@ -178,7 +178,7 @@ public class Librarian extends User {
     public static boolean renew(User user,int idOfRenewCopy){
         int oldTimeLeft = 0;
         boolean oldCanRenew=false;
-
+        int idOfOriginal=0;
         try{
             Database db = new Database();
             PreparedStatement pr = db.con.prepareStatement("UPDATE Copy SET Time_left=?,Return_date=?,CanRenew=? WHERE Id_of_copy= " + idOfRenewCopy + " AND CanRenew=" + true);
@@ -186,6 +186,8 @@ public class Librarian extends User {
             while (rs.next()) {
                 oldTimeLeft = rs.getInt("Time_left");
                 oldCanRenew = rs.getBoolean("CanRenew");
+                idOfOriginal = rs.getInt("Id_of_original");
+
             }
 
             if (user.getType().equals("Visiting Professor")) {
@@ -198,7 +200,7 @@ public class Librarian extends User {
 
             } else if (oldCanRenew){//если это не ВизПроф, то чекаем обновлял ли он до этого(если обновлял то false, если может обновить, то true)
                 Statement stmt = db.con.createStatement();
-                rs = stmt.executeQuery("SELECT * FROM Books WHERE id =" + idOfRenewCopy);
+                rs = stmt.executeQuery("SELECT * FROM Books WHERE id =" + idOfOriginal);
                 if (rs.next()) {
                     //если книга, то уже смотрим на тип юзера и книгу
                     if (user.getType().equals("Student") && rs.getBoolean("is_bestseller")){

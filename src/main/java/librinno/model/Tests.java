@@ -91,6 +91,22 @@ public class Tests {
         assert ((vdoc.get(1).getOverdue(v,now)==21)&&(l.fineWithDate(vdoc.get(1).getId(),now)==1700));
 
     }
+    public void tc3() throws SQLException {
+        dump();
+        initially();
+        LocalDate date = LocalDate.of(2018,3,29);
+        l.checkOutWithData(p1,d1.getId(),date);
+        l.checkOutWithData(s,d2.getId(),date);
+        l.checkOutWithData(v,d2.getId(),date);
+
+        l.renew(p1,l.getAllCopiesTakenByUser(p1.getCard_number()).get(0).getId());
+        l.renew(s,l.getAllCopiesTakenByUser(s.getCard_number()).get(0).getId());
+        l.renew(v,l.getAllCopiesTakenByUser(v.getCard_number()).get(0).getId());
+
+        assert (l.getAllCopiesTakenByUser(p1.getCard_number()).get(0).getReturnDate().equals(LocalDate.of(2018,4,30)));
+        assert (l.getAllCopiesTakenByUser(s.getCard_number()).get(0).getReturnDate().equals(LocalDate.of(2018,4,16)));
+        assert (l.getAllCopiesTakenByUser(v.getCard_number()).get(0).getReturnDate().equals(LocalDate.of(2018,4,9)));
+    }
 
     public void tc4() throws SQLException {
         dump();
