@@ -99,7 +99,7 @@ public class Tests {
         LocalDate now = LocalDate.parse("2018-04-02");
         l.checkOutWithData(s,d2.getId(),date);
         l.checkOutWithData(v,d2.getId(),date);
-        l.outstandingRequest(d2.getId());
+        l.outstandingRequestWithDate(d2.getId(),date);
         l.renew(p1,d1.getId());
         l.renew(s,d2.getId());
         l.renew(v,d2.getId());
@@ -134,6 +134,14 @@ public class Tests {
         assert (usQueue.get(0).getCard_number()==s.getCard_number());
         assert (usQueue.get(1).getCard_number()==v.getCard_number());
         assert (usQueue.get(2).getCard_number()==p3.getCard_number());
+    }
+
+    public void tc8() throws SQLException{
+        tc6();
+        LinkedList<Material> p2doc = l.getAllCopiesTakenByUser(p2.getCard_number());
+        l.returnBook(p2doc.get(0).getId());
+        ResultSet rs= stmt.executeQuery("SELECT * FROM queue_on_"+ p2doc);
+        //assert();
     }
 
     /**
