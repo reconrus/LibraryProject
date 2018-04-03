@@ -92,11 +92,11 @@ public class Librarian extends User {
 
             ResultSet rs = pr.executeQuery("SELECT  * FROM Copy WHERE Id_of_original= " + idOfMaterial);
             int owner;
-            while (rs.next()){
+            while (rs.next() && rs.getInt("Owner")!=0){
                 owner = rs.getInt("Owner");
                 Statement stmt = db.con.createStatement();
                 ResultSet rs2 = stmt.executeQuery("SELECT  * FROM users_of_the_library WHERE Card_number= " + owner);
-                String email = null;
+                String email = "";
                 while (rs2.next()){
                     email=rs2.getString("Email");
                     emails.add(email);
@@ -104,12 +104,16 @@ public class Librarian extends User {
                 SendEmail sendEmail = new SendEmail();
                 sendEmail.sendToOne(email,"Return book.","Urgently return the book throughout the day! Because of outstanding request.");
             }
-            rs=pr.executeQuery("SELECT * FROM queue_on_"+idOfMaterial);
-            while(rs.next()){
-                String email=rs.getString("Email");
-                book_no_available.add(email);
-                SendEmail send=new SendEmail();
-                send.sendToOne(email,"Material is not available","Material,which you reserved,now is not available.You are removed from waiting list");
+            try {
+                rs = pr.executeQuery("SELECT * FROM queue_on_" + idOfMaterial);
+                while (rs.next()) {
+                    String email = rs.getString("Email");
+                    book_no_available.add(email);
+                    SendEmail send = new SendEmail();
+                    send.sendToOne(email, "Material is not available", "Material,which you reserved,now is not available.You are removed from waiting list");
+                }
+            }
+            catch (SQLException e){
             }
             pr.executeUpdate("DROP TABLE IF EXISTS queue_on_" + idOfMaterial);
         }catch (SQLException e) {
@@ -1358,7 +1362,7 @@ public class Librarian extends User {
             }
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            return queue;
         }
         return queue;
     }

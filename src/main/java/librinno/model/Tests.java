@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 /**
- * Test cases for D2.
+ * Test cases for D3.
  */
 public class Tests {
     //creation of all needed information for tests
@@ -117,15 +117,17 @@ public class Tests {
         initially();
         LocalDate date = LocalDate.parse("2018-05-29");
         LocalDate now = LocalDate.parse("2018-04-02");
+        l.checkOutWithData(p1,d1.getId(),date);
         l.checkOutWithData(s,d2.getId(),date);
         l.checkOutWithData(v,d2.getId(),date);
-        ArrayList<ArrayList<String>> emails=l.outstandingRequestWithDate(d2.getId(),date);
-        l.renew(p1,d1.getId());
-        l.renew(s,d2.getId());
-        l.renew(v,d2.getId());
+        ArrayList<ArrayList<String>> emails=l.outstandingRequestWithDate(d2.getId(),now);
+        l.renewWithDate(p1,d1.getId(),now);
+        l.renewWithDate(s,d2.getId(),now);
+        l.renewWithDate(v,d2.getId(),now);
         LinkedList<Material> p1doc = l.getAllCopiesTakenByUser(p1.getCard_number());
         LinkedList<Material> sdoc = l.getAllCopiesTakenByUser(s.getCard_number());
         LinkedList<Material> vdoc = l.getAllCopiesTakenByUser(v.getCard_number());
+        System.out.println(p1doc.get(0).getReturnDate());
         assert (p1doc.get(0).getReturnDate().equals(LocalDate.parse("2018-04-30")));
         assert (sdoc.get(0).getReturnDate().equals(LocalDate.parse("2018-04-12")));
         assert (vdoc.get(0).getReturnDate().equals(LocalDate.parse("2018-04-05")));
@@ -158,14 +160,15 @@ public class Tests {
     public void tc7() throws SQLException{
         tc6();
         LocalDate now = LocalDate.parse("2018-04-02");
-        ArrayList<String> with_already_taken_book=l.outstandingRequestWithDate(d3.getId(),now).get(0);
+        ArrayList<ArrayList<String>> all_emails=l.outstandingRequestWithDate(d3.getId(),now);
+        ArrayList<String> with_already_taken_book=all_emails.get(0);
+        ArrayList<String> waiting_for_book= all_emails.get(1);
         assert (l.getQueue(d3.getId()).size() == 0);
         assert (with_already_taken_book.get(0).equals(p1.getEmail()));
         assert (with_already_taken_book.get(1).equals(p2.getEmail()));
-        ArrayList<String> waiting_for_book=l.outstandingRequestWithDate(d3.getId(),now).get(1);
-        assert (waiting_for_book.get(0).equals(s.getEmail()));
-        assert (waiting_for_book.get(1).equals(v.getEmail()));
-        assert (waiting_for_book.get(2).equals(p3.getEmail()));
+        assert (waiting_for_book.get(0).replaceAll(" ","").equals(s.getEmail()));
+        assert (waiting_for_book.get(1).replaceAll(" ","").equals(v.getEmail()));
+        assert (waiting_for_book.get(2).replaceAll(" ","").equals(p3.getEmail()));
     }
     public void tc8() throws SQLException, InterruptedException {
         tc6();
@@ -198,8 +201,6 @@ public class Tests {
         assert(l.getQueue(d3.getId()).get(2).getName().equals("Elvira Espindola"));
 
     }
-
-
     public void tc10() throws SQLException{
 
         dump();
@@ -223,8 +224,6 @@ public class Tests {
         assert (vCopy.size() == 1 && vCopy.get(0).getTitle().equals("Introduction to Algorithms") && vCopy.get(0).getReturnDate().isEqual(date.plusDays(7)));
 
     }
-
-
 
     /**
      * executing update in all tables
@@ -251,7 +250,6 @@ public class Tests {
             e.printStackTrace();
         }
     }
-
 
 
 }
