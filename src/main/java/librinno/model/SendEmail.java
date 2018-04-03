@@ -69,7 +69,7 @@ public class SendEmail extends Database {
             me.printStackTrace();
         }
     }
-    private static void sendFromGMail(String from, String pass, String[] to, String subject, String body) {
+    private static void sendFromGMail(String from, String pass, String[] to, String subject, String body) throws NullPointerException {
         Properties props = System.getProperties();
         String host = "smtp.gmail.com";
         props.put("mail.smtp.starttls.enable", "true");
@@ -94,26 +94,29 @@ public class SendEmail extends Database {
                     DatabaseMetaData md = con.getMetaData();
                     Statement stmt = con.createStatement();
                     ResultSet rs = md.getTables(null, null, "queue%", null);
-                    while (rs.next()) {
-                        String table_name = rs.getString(3);
-                        ResultSet table_rs = stmt.executeQuery("SELECT * FROM " + table_name + " LIMIT 1");
-                        while (table_rs.next()) {
-                            String email = table_rs.getString("Email");
-                            String address = toAddress[i].toString().toLowerCase();
-                            boolean bool = table_rs.getInt("is_sended") == 0;
-                            if (emailsEquals(email, address) && bool) {
-                                PreparedStatement pr = con.prepareStatement("UPDATE " + table_name + " SET is_sended=? LIMIT 1");
-                                pr.setInt(1, 1);
-                                pr.executeUpdate();
-                                //косяк!!!!
-                                message.addRecipient(Message.RecipientType.TO, toAddress[i]);
-                                message.setSubject(subject);
-                                message.setText(body);
-                                transport = session.getTransport("smtp");
-                                transport.connect(host, from, pass);
+                    try {
+                        while (rs.next()) {
+                            String table_name = rs.getString(3);
+                            ResultSet table_rs = stmt.executeQuery("SELECT * FROM " + table_name + " LIMIT 1");
+                            while (table_rs.next()) {
+                                String email = table_rs.getString("Email");
+                                String address = toAddress[i].toString().toLowerCase();
+                                boolean bool = table_rs.getInt("is_sended") == 0;
+                                if (emailsEquals(email, address) && bool) {
+                                    PreparedStatement pr = con.prepareStatement("UPDATE " + table_name + " SET is_sended=? LIMIT 1");
+                                    pr.setInt(1, 1);
+                                    pr.executeUpdate();
+                                    //косяк!!!!
+                                    message.addRecipient(Message.RecipientType.TO, toAddress[i]);
+                                    message.setSubject(subject);
+                                    message.setText(body);
+                                    transport = session.getTransport("smtp");
+                                    transport.connect(host, from, pass);
+                                }
                             }
                         }
                     }
+                    catch (SQLException e){}
                     try {
                         for (int k = 0; k < message.getAllRecipients().length; k++)
                             if (numberOfMeetings(all_emails, message.getAllRecipients()[k].toString()))
