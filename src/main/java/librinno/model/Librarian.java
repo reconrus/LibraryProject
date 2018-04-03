@@ -80,6 +80,34 @@ public class Librarian extends User {
             e.printStackTrace();
         }
     }
+    public static void outstandingRequestWithDate(int idOfMaterial,LocalDate date){
+
+        try {
+            PreparedStatement pr = db.con.prepareStatement("UPDATE Copy SET Time_left=?,Return_date=?,CanRenew=? WHERE Id_of_original= " + idOfMaterial + " AND Status = 'Issued'");
+            pr.setInt(1,0);
+            pr.setDate(2,java.sql.Date.valueOf(date));
+            pr.setBoolean(3,false);
+            pr.executeUpdate();
+
+            ResultSet rs = pr.executeQuery("SELECT  * FROM Copy WHERE Id_of_original= " + idOfMaterial);
+            int owner;
+            while (rs.next()){
+                owner = rs.getInt("Owner");
+                Statement stmt = db.con.createStatement();
+                ResultSet rs2 = stmt.executeQuery("SELECT  * FROM users_of_the_library WHERE Card_number= " + owner);
+                String email = null;
+                while (rs2.next()){
+                    email=rs2.getString("Email");
+                }
+                SendEmail sendEmail = new SendEmail();
+                sendEmail.sendToOne(email,"Return book.","Urgently return the book throughout the day! Because of outstanding request.");
+            }
+
+            pr.executeUpdate("DROP TABLE IF EXISTS queue_on_" + idOfMaterial);
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
     public static boolean renew(User user,int idOfRenewCopy){
         int oldTimeLeft = 0;
         LocalDate oldReturnDate = null;
