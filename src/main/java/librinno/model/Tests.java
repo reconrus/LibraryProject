@@ -177,6 +177,8 @@ public class Tests {
     }
     public void tc8() throws SQLException, InterruptedException {
         tc6();
+        Notification_thread my=new Notification_thread();
+        my.start();
         LinkedList<Material> p2doc = l.getAllCopiesTakenByUser(p2.getCard_number());
         l.returnBook(p2doc.get(0).getId());
         LinkedList<Material> p2docAfter = l.getAllCopiesTakenByUser(p2.getCard_number());
@@ -193,6 +195,7 @@ public class Tests {
         }
         assert(temp.get(0).equals("1"));
         assert(p2docAfter.size()==0);
+        my.interrupt();
     }
 
     public void tc9() throws SQLException {

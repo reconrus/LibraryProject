@@ -10,7 +10,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 public class SendEmail extends Database {
-    private static String USER_NAME = "librinno";
+    private static String USER_NAME = "librinno1";
     private static String PASSWORD = "thebestteamever";
     private static ArrayList<Address> all_emails = new ArrayList<>();
 
