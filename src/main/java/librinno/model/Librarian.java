@@ -142,7 +142,7 @@ public class Librarian extends User {
 
             if (user.getType().equals("Visiting Professor")) {
                 //если визитинг профессор, то он всегда все берет только на одну неделю
-                pr.setInt(1,oldTimeLeft+7);
+                pr.setInt(1,oldTimeLeft+7); //TODO ВРЕМЯ ПРИБАВЛЯЕТСЯ К СТАРОМУ, А НЕ ОБНОВЛЯЕТСЯ
                 pr.setDate(2,java.sql.Date.valueOf(date.plusDays(7)));
                 pr.setBoolean(3,true);
                 pr.executeUpdate();
@@ -154,20 +154,20 @@ public class Librarian extends User {
                 if (rs.next()) {
                     //если книга, то уже смотрим на тип юзера и книгу
                     if (user.getType().equals("Student") && rs.getBoolean("is_bestseller")){
-                        pr.setInt(1,oldTimeLeft+14);
+                        pr.setInt(1,oldTimeLeft+14); //TODO ВРЕМЯ ПРИБАВЛЯЕТСЯ К СТАРОМУ, А НЕ ОБНОВЛЯЕТСЯ
                         pr.setDate(2,java.sql.Date.valueOf(date.plusDays(14)));
                         pr.setBoolean(3,false);
                         pr.executeUpdate();
                         return true;
 
                     } else if(user.getType().equals("Student") && !rs.getBoolean("is_bestseller")){
-                        pr.setInt(1,oldTimeLeft+21);
+                        pr.setInt(1,oldTimeLeft+21); //TODO ВРЕМЯ ПРИБАВЛЯЕТСЯ К СТАРОМУ, А НЕ ОБНОВЛЯЕТСЯ
                         pr.setDate(2,java.sql.Date.valueOf(date.plusDays(21)));
                         pr.setBoolean(3,false);
                         pr.executeUpdate();
                         return true;
                     } else {
-                        pr.setInt(1,oldTimeLeft+28);
+                        pr.setInt(1,oldTimeLeft+28); //TODO ВРЕМЯ ПРИБАВЛЯЕТСЯ К СТАРОМУ, А НЕ ОБНОВЛЯЕТСЯ
                         pr.setDate(2,java.sql.Date.valueOf(date.plusDays(28)));
                         pr.setBoolean(3,false);
                         pr.executeUpdate();

@@ -115,22 +115,29 @@ public class Tests {
     public void tc4() throws SQLException {
         dump();
         initially();
-        LocalDate date = LocalDate.parse("2018-05-29");
+        LocalDate date = LocalDate.parse("2018-03-29");
         LocalDate now = LocalDate.parse("2018-04-02");
         l.checkOutWithData(p1,d1.getId(),date);
         l.checkOutWithData(s,d2.getId(),date);
         l.checkOutWithData(v,d2.getId(),date);
         ArrayList<ArrayList<String>> emails=l.outstandingRequestWithDate(d2.getId(),now);
-        l.renewWithDate(p1,d1.getId(),now);
-        l.renewWithDate(s,d2.getId(),now);
-        l.renewWithDate(v,d2.getId(),now);
+
         LinkedList<Material> p1doc = l.getAllCopiesTakenByUser(p1.getCard_number());
         LinkedList<Material> sdoc = l.getAllCopiesTakenByUser(s.getCard_number());
         LinkedList<Material> vdoc = l.getAllCopiesTakenByUser(v.getCard_number());
+
+        l.renewWithDate(p1, p1doc.get(0).getId(),now);
+        l.renewWithDate(s, sdoc.get(0).getId() ,now);
+        l.renewWithDate(v, vdoc.get(0).getId(),now);
+
+        p1doc = l.getAllCopiesTakenByUser(p1.getCard_number());
+        sdoc = l.getAllCopiesTakenByUser(s.getCard_number());
+        vdoc = l.getAllCopiesTakenByUser(v.getCard_number());
+
         System.out.println(p1doc.get(0).getReturnDate());
         assert (p1doc.get(0).getReturnDate().equals(LocalDate.parse("2018-04-30")));
-        assert (sdoc.get(0).getReturnDate().equals(LocalDate.parse("2018-04-12")));
-        assert (vdoc.get(0).getReturnDate().equals(LocalDate.parse("2018-04-05")));
+        assert (sdoc.get(0).getReturnDate().equals(LocalDate.parse("2018-04-02")));
+        assert (vdoc.get(0).getReturnDate().equals(LocalDate.parse("2018-04-02")));
 
     }
     public void tc5() throws SQLException{
@@ -221,7 +228,7 @@ public class Tests {
         LinkedList<Material> vCopy = Librarian.getAllCopiesTakenByUser(v.getCard_number());
 
         assert (p1Copy.size() == 1 && p1Copy.get(0).getTitle().equals("Introduction to Algorithms") && p1Copy.get(0).getReturnDate().isEqual(date.plusDays(28)));
-        assert (vCopy.size() == 1 && vCopy.get(0).getTitle().equals("Introduction to Algorithms") && vCopy.get(0).getReturnDate().isEqual(date.plusDays(7)));
+        assert (vCopy.size() == 1 && vCopy.get(0).getTitle().equals("Introduction to Algorithms") && vCopy.get(0).getReturnDate().isEqual(LocalDate.now().plusDays(7)));
 
     }
 
