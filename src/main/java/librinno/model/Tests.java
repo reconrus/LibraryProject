@@ -99,9 +99,13 @@ public class Tests {
         l.checkOutWithData(s,d2.getId(),date);
         l.checkOutWithData(v,d2.getId(),date);
 
-        l.renew(p1,l.getAllCopiesTakenByUser(p1.getCard_number()).get(0).getId());
-        l.renew(s,l.getAllCopiesTakenByUser(s.getCard_number()).get(0).getId());
-        l.renew(v,l.getAllCopiesTakenByUser(v.getCard_number()).get(0).getId());
+        LocalDate date2 = LocalDate.of(2018,4,2);
+
+
+        l.renewWithDate(p1,l.getAllCopiesTakenByUser(p1.getCard_number()).get(0).getId(),date2);
+        l.renewWithDate(s,l.getAllCopiesTakenByUser(s.getCard_number()).get(0).getId(),date2);
+        l.renewWithDate(v,l.getAllCopiesTakenByUser(v.getCard_number()).get(0).getId(),date2);
+
 
         assert (l.getAllCopiesTakenByUser(p1.getCard_number()).get(0).getReturnDate().equals(LocalDate.of(2018,4,30)));
         assert (l.getAllCopiesTakenByUser(s.getCard_number()).get(0).getReturnDate().equals(LocalDate.of(2018,4,16)));
