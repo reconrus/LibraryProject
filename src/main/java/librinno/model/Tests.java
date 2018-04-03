@@ -115,7 +115,7 @@ public class Tests {
         LocalDate now = LocalDate.parse("2018-04-02");
         l.checkOutWithData(s,d2.getId(),date);
         l.checkOutWithData(v,d2.getId(),date);
-        l.outstandingRequestWithDate(d2.getId(),date);
+        ArrayList<String> emails=l.outstandingRequestWithDate(d2.getId(),date);
         l.renew(p1,d1.getId());
         l.renew(s,d2.getId());
         l.renew(v,d2.getId());

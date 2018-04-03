@@ -80,8 +80,8 @@ public class Librarian extends User {
             e.printStackTrace();
         }
     }
-    public static void outstandingRequestWithDate(int idOfMaterial,LocalDate date){
-
+    public static ArrayList<String>  outstandingRequestWithDate(int idOfMaterial,LocalDate date){
+        ArrayList<String> emails=new ArrayList<>();
         try {
             PreparedStatement pr = db.con.prepareStatement("UPDATE Copy SET Time_left=?,Return_date=?,CanRenew=? WHERE Id_of_original= " + idOfMaterial + " AND Status = 'Issued'");
             pr.setInt(1,0);
@@ -98,6 +98,7 @@ public class Librarian extends User {
                 String email = null;
                 while (rs2.next()){
                     email=rs2.getString("Email");
+                    emails.add(email);
                 }
                 SendEmail sendEmail = new SendEmail();
                 sendEmail.sendToOne(email,"Return book.","Urgently return the book throughout the day! Because of outstanding request.");
@@ -107,6 +108,7 @@ public class Librarian extends User {
         }catch (SQLException e) {
             e.printStackTrace();
         }
+        return emails;
     }
 
     public static boolean renewWithDate(User user,int idOfRenewCopy,LocalDate date){
