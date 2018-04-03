@@ -54,7 +54,22 @@ public class Tests {
         s.setCardNumberAsString((Integer)db.isUserAlreadyExist(s).get(1));
         v.setCardNumberAsString((Integer)db.isUserAlreadyExist(v).get(1));
     }
-
+    public void tc1() throws SQLException {
+        dump();
+        initially();
+        ResultSet rs = stmt.executeQuery("SELECT * FROM Copy");
+        rs.last();
+        assert (rs.getRow() == 8);
+        rs = stmt.executeQuery("SELECT * FROM Users_of_the_library WHERE Card_number NOT IN (31,32)");
+        rs.last();
+        assert (rs.getRow() == 5);
+        LocalDate date = LocalDate.parse("2018-03-05");
+        l.checkOutWithData(p1, d1.getId(), date);
+        l.checkOutWithData(p1, d2.getId(), date);
+        l.returnBook(d2.getId());
+        assert (l.fineWithDate(l.getAllCopiesTakenByUser(p1.getCard_number()).get(0).getId(), date)) == 0;
+        assert (l.getAllCopiesTakenByUser(p1.getCard_number()).get(0).getOverdue(p1, date)) == 0;
+    }
     public void tc2() throws SQLException {
         dump();
         initially();
