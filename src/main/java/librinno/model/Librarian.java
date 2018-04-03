@@ -934,7 +934,7 @@ public class Librarian extends User {
         LinkedList<User> users = new LinkedList<User>();
         try {
             Statement stmt = db.con.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM Users_of_the_library WHERE Type='Student' OR Type='Faculty'");
+            ResultSet rs = stmt.executeQuery("SELECT * FROM Users_of_the_library WHERE Type<>'Librarian'");
 
             while (rs.next()) {
                 String name = rs.getString("Name");
