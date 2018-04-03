@@ -388,15 +388,15 @@ public class Database extends Main {
 
             //create table Articles
             sql = "CREATE TABLE IF NOT EXISTS Articles(id int(255) AUTO_INCREMENT, Name VARCHAR(255),Author VARCHAR(255),Price INT(11), Keywords VARCHAR(255),is_reference tinyint(1)," +
-                    "Journal VARCHAR(255),Editor VARCHAR(255),Date VARCHAR(255),PRIMARY KEY(id) )";
+                    "Journal VARCHAR(255),Editor VARCHAR(255),Date VARCHAR(255),PRIMARY KEY(id) ) AUTO_INCREMENT=5000";
             stmt.executeUpdate(sql);
 
             //create table AV
-            sql = "CREATE TABLE IF NOT EXISTS AV(id int(255) AUTO_INCREMENT, Name VARCHAR(255), Author varchar(255),Price int(255),Keywords VARCHAR(255),PRIMARY KEY(id))";
+            sql = "CREATE TABLE IF NOT EXISTS AV(id int(255) AUTO_INCREMENT, Name VARCHAR(255), Author varchar(255),Price int(255),Keywords VARCHAR(255),PRIMARY KEY(id)) AUTO_INCREMENT=10000";
             stmt.executeUpdate(sql);
             sql = "INSERT IGNORE INTO Users_of_the_library (Name,Address,Phone_number,Card_number,Type,Password,Email) VALUES ('Librarian', 'Russia', '+79999999999',33,'Librarian','124','Konev1999D@mail.ru')";
             stmt.executeUpdate(sql);
-            sql = "INSERT IGNORE INTO Users_of_the_library (Name,Address,Phone_number,Card_number,Type,Password,Email) VALUES ('Albert Einstein', 'Princeton, New Jersey, U.S.', '+79999999999',32,'Student','1','pizdez_144@mail.ru')";
+            sql = "INSERT IGNORE INTO Users_of_the_library (Name,Address,Phone_number,Card_number,Type,Password,Email) VALUES ('Albert Einstein', 'Princeton, New Jersey, U.S.', '+79999999999',32,'Student','1','Konev1999D@gmail.com')";
             stmt.executeUpdate(sql);
             sql = "INSERT IGNORE INTO Users_of_the_library (Name,Address,Phone_number,Card_number,Type,Password,Email) VALUES ('Nikolay V. Shilov', 'Innopolis', '+79999999999',31,'Professor','1','dmitrokon@mail.ru')";
             stmt.executeUpdate(sql);
