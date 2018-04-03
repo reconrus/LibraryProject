@@ -226,7 +226,41 @@ public class Librarian extends User {
             return false;
         }
     }
+    public static boolean checkOutBookWithData(User user, int idOfBook,LocalDate date) {
+        try {
+            Database db = new Database();
+            PreparedStatement pr = db.con.prepareStatement("UPDATE Copy SET Owner=?,Time_left=?,Status=?,Return_date=? WHERE Id_of_original= " + idOfBook + " AND Status= 'In library' LIMIT 1 ");
+            Book book = bookByID(idOfBook);
+            if (!book.getReference()) {
+                pr.setInt(1, user.getCard_number());
+                if (user.getType().equals("Student") && book.getBestseller()) {
+                    pr.setInt(2, 14);//если студент и книга бестселлер, то ставим 14 дней
+                    LocalDate returnDate = date.plusDays(14);
+                    pr.setDate(4, java.sql.Date.valueOf(returnDate));
+                } else if (user.getType().equals("Student") && !book.getBestseller()) {
+                    pr.setInt(2, 21);//если студент и книга бестселлер, то ставим 21 дней
+                    LocalDate returnDate = date.plusDays(21);
+                    pr.setDate(4, java.sql.Date.valueOf(returnDate));
+                } else if (user.getType().equals("Visiting Professor")) {
+                    pr.setInt(2, 7);
+                    LocalDate returnDate = date.plusDays(7);
+                    pr.setDate(4, java.sql.Date.valueOf(returnDate));
+                } else {
+                    pr.setInt(2, 28);//это если факулти
+                    LocalDate returnDate = date.plusDays(28);
+                    pr.setDate(4, java.sql.Date.valueOf(returnDate));
+                }
+                pr.setString(3, "Issued");
+                pr.executeUpdate();
+                return true;
+            } else
+                return false;
 
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
     /**
      * the same operation, but for AV materials
      *
@@ -260,7 +294,32 @@ public class Librarian extends User {
             return false;
         }
     }
+    public static boolean checkOutAVWithData(User user, int idOfAV,LocalDate date) {
+        try {
+            Database db = new Database();
+            PreparedStatement pr = db.con.prepareStatement("UPDATE Copy SET Owner=?,Time_left=?,Status=?,Return_date=? WHERE Id_of_original= " + idOfAV + " AND Status= 'In library' LIMIT 1 ");
+            AV av = avById(idOfAV);
+            pr.setInt(1, user.getCard_number());
+            if (user.getType().equals("Visiting Professor")) {
 
+                pr.setInt(2, 7);
+                LocalDate returnDate = date.plusDays(7);
+                pr.setDate(4, java.sql.Date.valueOf(returnDate));
+
+            } else {
+                pr.setInt(2, 14);
+                LocalDate returnDate = date.plusDays(14);
+                pr.setDate(4, java.sql.Date.valueOf(returnDate));
+            }
+            pr.setString(3, "Issued");
+            pr.executeUpdate();
+            return true;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
     /**
      * the same operation for Articles
      *
@@ -297,7 +356,35 @@ public class Librarian extends User {
             return false;
         }
     }
+    public static boolean checkOutArticleWithData(User user, int idOfArticle,LocalDate date) {
+        try {
+            Database db = new Database();
+            PreparedStatement pr = db.con.prepareStatement("UPDATE Copy SET Owner=?,Time_left=?,Status=?,Return_date=? WHERE Id_of_original= " + idOfArticle + " AND Status= 'In library' LIMIT 1 ");
+            Article article = articleById(idOfArticle);
+            if (!article.getReference()) {
+                pr.setInt(1, user.getCard_number());
+                if (user.getType().equals("Visiting Professor")) {
 
+                    pr.setInt(2, 7);
+                    LocalDate returnDate = date.plusDays(7);
+                    pr.setDate(4, java.sql.Date.valueOf(returnDate));
+
+                } else {
+                    pr.setInt(2, 14);
+                    LocalDate returnDate = date.plusDays(14);
+                    pr.setDate(4, java.sql.Date.valueOf(returnDate));
+                }
+                pr.setString(3, "Issued");
+                pr.executeUpdate();
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
     private static boolean isFreeCopyExist(int idMaterial){
         try{
             Statement stmt = db.con.createStatement();
@@ -379,7 +466,68 @@ public class Librarian extends User {
             return -1;
         }
     }
+    public static int checkOutWithData(User user, int idMaterial,LocalDate date) {
+        try {
+            db.queue_on_material(idMaterial,user.getCard_number());
+            int success = -1;
+            Statement stmt = null;
+            ResultSet queue = null;
+            try {
+                stmt = db.con.createStatement();
+                queue = stmt.executeQuery("SELECT * FROM queue_on_" + idMaterial + " LIMIT 1");
+            } catch (SQLException e) {
+                return -1;
+            }
+            try {
+                stmt = db.con.createStatement();
 
+                if (queue != null && queue.next() && queue.getInt("Card_number") == user.getCard_number()) {
+                    ResultSet rs = stmt.executeQuery("SELECT * FROM Books WHERE id =" + idMaterial);
+                    if (rs.next() ) {
+                        if (isFreeCopyExist(idMaterial))
+                            success = checkOutBookWithData(user, idMaterial,date)?1:0;
+                        else success =  0;
+                    }
+                    rs = stmt.executeQuery("SELECT * FROM AV WHERE id =" + idMaterial);
+                    if (rs.next()) {
+                        if (isFreeCopyExist(idMaterial))
+                            success = checkOutAVWithData(user, idMaterial,date)?1:0;
+                        else success = 0;
+                    }
+                    rs = stmt.executeQuery("SELECT * FROM Articles WHERE id =" + idMaterial);
+                    if (rs.next()) {
+                        if (isFreeCopyExist(idMaterial))
+                            success = checkOutArticleWithData(user, idMaterial,date)?1:0;
+                        else success =  0;
+                    }
+                    if (success == 1) {
+                        if(getNumberOfCopiesOfBook(idMaterial)>=0) {
+                            PreparedStatement pr = db.con.prepareStatement("DELETE from queue_on_" + idMaterial + " LIMIT 1");
+                            pr.executeUpdate();
+                            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss.S");
+                            Calendar cal = Calendar.getInstance();
+                            pr = db.con.prepareStatement("UPDATE queue_on_" + idMaterial + " SET First_time=? LIMIT 1");
+                            pr.setString(1, dateFormat.format(cal.getTime()));
+                            pr.executeUpdate();
+                        }
+                        rs = stmt.executeQuery("SELECT * FROM queue_on_" + idMaterial);
+                        rs.last();
+                        if (rs.getRow() == 0) {
+                            stmt.executeUpdate("DROP TABLE queue_on_" + idMaterial);
+                        }
+                    }
+                } else {
+                    //System.out.println("wait for your turn");
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            return success;
+        }
+        catch (Exception e){
+            return -1;
+        }
+    }
     /**
      * method for returning book
      *
