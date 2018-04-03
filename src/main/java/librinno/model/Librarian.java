@@ -184,6 +184,45 @@ public class Librarian extends User {
         }
         return 0;
     }
+    public static int fineWithDate(int idOfCopy,LocalDate date){
+        try {
+            Statement stmt = db.con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT  * FROM Copy WHERE Id_of_copy= " + idOfCopy);
+            while (rs.next()) {
+                if (date.isAfter(rs.getDate("Return_date").toLocalDate())) {
+                    int penaltyDays = (int) DAYS.between(rs.getDate("Return_date").toLocalDate(), date);
+                    int fine = 0;
+                    int price = 0;
+                    int id_of_original_material = rs.getInt("Id_of_original");
+                    ResultSet rs2 = stmt.executeQuery("SELECT * FROM Books WHERE id =" + id_of_original_material);
+                    if (rs2.next()) {
+                        price = rs2.getInt("Price");
+                    }
+                    rs2 = stmt.executeQuery("SELECT * FROM av WHERE id =" + id_of_original_material);
+                    if (rs2.next()) {
+                        price = rs2.getInt("Price");
+                    }
+                    rs2 = stmt.executeQuery("SELECT * FROM articles WHERE id =" + id_of_original_material);
+                    if (rs2.next()) {
+                        price = rs2.getInt("Price");
+                    }
+                    while (fine < price && penaltyDays > 0) {
+                        if (fine + 100 > price) {
+                            fine = price;
+                        } else
+                            fine += 100;
+                        penaltyDays--;
+                    }
+
+                    return fine;
+                }
+            }
+            return 0;
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
     /**
      * method for checking out books
      *
