@@ -3,10 +3,7 @@ package main.java.librinno.model;
 import static java.time.temporal.ChronoUnit.DAYS;
 import javax.xml.crypto.Data;
 import java.io.IOException;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
@@ -138,7 +135,12 @@ public class Tests {
             pr.executeUpdate();
             pr = db.con.prepareStatement("DELETE FROM Users_of_the_library");
             pr.executeUpdate();
-            //TODO pr = db.con.prepareStatement("DELETE FROM ") delete queue tables
+            DatabaseMetaData md = db.con.getMetaData();
+            ResultSet rs = md.getTables(null, null, "queue%", null);
+            while (rs.next()) {
+                String table_name = rs.getString(3);
+                pr.executeUpdate("DROP TABLE IF EXISTS "+table_name);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
