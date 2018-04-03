@@ -12,6 +12,10 @@ If you have a problem with Java SDK:
 
 For setting up version of Java press ctrl+Alt+Shift+S. Here in SDK choose projectSDK, choose compile output folder. Then go to libraries menu and here press “+” Java and choose “lib” folder which lies in the root folder and press ok, press apply, close window and run main class for tests and MainApp for GUI version.
 
+How to activate asserts in tests: 
+Choose Run -> Edit configurations -> VM Options: "-ea" (without quotes) for Main Class
+
+
 Please, follow links to download our application. Yandex disk: https://yadi.sk/d/RAVQ1B2h3TPjBk or Google Drive: https://drive.google.com/open?id=1sABNXhXzWo7h8EWzKIhBlfFxueJaRBKO
 
 Sincerely, LibrInno team.
