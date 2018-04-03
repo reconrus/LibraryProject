@@ -99,6 +99,7 @@ public class Librarian extends User {
                 //если визитинг профессор, то он всегда все берет только на одну неделю
                 pr.setInt(1,oldTimeLeft+7);
                 pr.setDate(2,java.sql.Date.valueOf(oldReturnDate.plusDays(7)));
+                pr.setBoolean(3,true);
                 pr.executeUpdate();
                 return true;
 
