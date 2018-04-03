@@ -63,7 +63,7 @@ public class Material {
         return author;
     }
     public int getOverdue(User whoTook,LocalDate now) {
-        if (whoTook.getType()=="Professor"){
+        if (whoTook.getType().equals("Professor")){
             return 0;
         }
         else{
