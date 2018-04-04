@@ -570,15 +570,6 @@ public class Database extends Main {
 
 class UserTypeComparator implements Comparator<User> {
     @Override
-    //это пиздец как костыльно и я не ебу как это работает
-    //....
-    //но это частично работает
-    //ОНО РАБОТАЕТ!!!! КАК????
-    //вячеслав,не трогай это, пожалуйста,это работает НЕ ТРОГАЙ
-    //ВЯЧЕСЛАВ УЙДИ ОТ ЭТОГО КЛАСCА
-    //ЭТО РАБОТАЕТ,НЕ ТРОГАЙ
-    //ПОДУМАЙ ТРИЖДЫ ПЕРЕД ТЕМ,КАК МЕНЯТЬ ЭТО
-    //кто-нибудь уберите вячеслава от этого компаратора,пожалуйста
     public int compare(User x, User y) {
         if (Math.abs(x.getType().length() - y.getType().length()) == 3 ||
                 Math.abs(x.getType().length() - y.getType().length()) == 2)

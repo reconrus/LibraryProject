@@ -55,8 +55,6 @@ public class Main {
         setDbUrl("jdbc:mysql://localhost:3306");
         Database db = new Database();
         db.creationLocalDB(getUSER(), getPASS());
-        //Notification_thread my = new Notification_thread();
-        //my.start();
         Tests test = new Tests();
         test.tc1();
         System.out.println("Test 1 success");
@@ -87,6 +85,5 @@ public class Main {
         Thread.sleep(1000);
         test.tc10();
         System.out.println("Test 10 success");
-        //my.interrupt();
     }
 }

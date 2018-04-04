@@ -52,6 +52,12 @@ public class Librarian extends User {
         this.card_number = card_number;
     }
 
+    /**
+     * sending email to people who have taken book
+     * also deleting queue for this material and sending email to people who was in queue
+     * and sending email to people who was in queue
+     * @param idOfMaterial id of material
+     */
     public static void outstandingRequest(int idOfMaterial){
 
         try {
@@ -80,6 +86,13 @@ public class Librarian extends User {
             e.printStackTrace();
         }
     }
+
+    /**
+     * the same method but for tests
+     * @param idOfMaterial material id
+     * @param date date for tests
+     * @return arraylistof arraylist of emails
+     */
     public static ArrayList<ArrayList<String>>  outstandingRequestWithDate(int idOfMaterial,LocalDate date){
         ArrayList<String> emails=new ArrayList<>();
         ArrayList<String> book_no_available=new ArrayList<>();

@@ -62,7 +62,6 @@ public class Register {
 
             if(Assist.isValidEmailAddress(mail)) {
                 Database db = new Database();
-                //TODO Fix userCreation for nonstudents
                 Database.userCreation(new User(user, phoneNum, addressText, type, pass, mail));
                 Assist.closeStage(confirm);
             }
