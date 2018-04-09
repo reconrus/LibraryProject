@@ -16,6 +16,7 @@ import static java.time.temporal.ChronoUnit.DAYS;
  * librarian of library
  */
 public class Librarian extends User {
+    private String privileges;
     /**
      * setter
      *
@@ -39,6 +40,17 @@ public class Librarian extends User {
      */
     public Librarian(String name, String address, String number, int cardnumber, String type, String password,String email) {
         super(name, address, number, cardnumber, type, password,email);
+        String[] typeArr= type.split(" ");
+        setType(typeArr[0]);
+        setPrivileges(typeArr[1]);
+    }
+
+    public void setPrivileges(String privileges) {
+        this.privileges = privileges;
+    }
+
+    public String getPrivileges() {
+        return privileges;
     }
 
     /**
@@ -1254,6 +1266,28 @@ public class Librarian extends User {
                 String email=rs.getString("Email");
                 User user = new User(name, address, Phonenumber, id, type, password,email);
                 users.add(user);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return users;
+    }
+
+    public static LinkedList<Librarian> getAllLibrarians() {
+        LinkedList<Librarian> users = new LinkedList<Librarian>();
+        try {
+            Statement stmt = db.con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM Users_of_the_library WHERE Type = 'Librarian Priv1' or Type = 'Librarian Priv2' or Type = 'Librarian Priv3'" );
+
+            while (rs.next()) {
+                String name = rs.getString("Name");
+                String address = rs.getString("Address");
+                String Phonenumber = rs.getString("Phone_number");
+                int id = rs.getInt("Card_number");
+                String type = rs.getString("Type");
+                String password = rs.getString("Password");
+                String email=rs.getString("Email");
+                users.add(new Librarian(name, address, Phonenumber, id, type, password,email));
             }
         } catch (SQLException e) {
             e.printStackTrace();

@@ -67,6 +67,11 @@ public class LoginController {
         Database db = new Database();
         String type = db.authorization(Integer.parseInt(id), pass);
 
+        if(type.equals("Admin")) {
+            loadAdmin();
+            return true;
+        }
+
         if((type.equals("Librarian Priv1"))||(type.equals("Librarian Priv2"))||(type.equals("Librarian Priv3"))) {
             loadLibrarian(id);
             return true;
@@ -80,8 +85,8 @@ public class LoginController {
         return false;
     }
 
-    private void loadLibrarian() throws IOException {
-        Assist.loadStage(getClass().getResource("/main/java/librinno/ui/librarianScreen/LibrarianScreen.fxml"));
+    private void loadAdmin() throws IOException {
+        Assist.loadStage(getClass().getResource("/main/java/librinno/ui/adminScreen/AdminScreen.fxml"));
     }
 
     private void loadLibrarian(String id) throws IOException, SQLException {
@@ -92,7 +97,7 @@ public class LoginController {
             Parent parent = loader.load();
             LibrarianScreenController reg = loader.getController();
             Database db = new Database();
-            reg.setLibrarianInfo(db.getInformationAboutTheUser(Integer.parseInt(id)));
+            reg.setLibrarianInfo(db.getInformationAboutTheLibrarian(Integer.parseInt(id)));
             Stage stage = new Stage(StageStyle.DECORATED);
             stage.setScene(new Scene(parent));
             stage.show();

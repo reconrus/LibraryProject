@@ -34,7 +34,7 @@ public class LibrarianScreenController {
     @FXML
     private JFXButton logout;
 
-    User user;
+    Librarian user;
 
     @FXML
     private JFXButton addDoc;
@@ -108,8 +108,8 @@ public class LibrarianScreenController {
     @FXML
     private TableColumn<Material, Integer> fine;
 
-    public void setLibrarianInfo(User patron){
-        user=patron;
+    public void setLibrarianInfo(Librarian librarian){
+        user=librarian;
     }
 
 
@@ -213,7 +213,7 @@ public class LibrarianScreenController {
 
     @FXML
     void addDoc(ActionEvent event) throws IOException {
-        if (user.getType().equals("Librarian Priv1")){
+        if (user.getPrivileges().equals("Priv1")){
             Assist.error("Access Denied", "Your privilege level is insufficient.");
             return;
         }
@@ -223,7 +223,7 @@ public class LibrarianScreenController {
 
     @FXML
     void addPatron(ActionEvent event) throws IOException {
-        if (user.getType().equals("Librarian Priv1")){
+        if (user.getPrivileges().equals("Priv1")){
             Assist.error("Access Denied", "Your privilege level is insufficient.");
             return;
         }
@@ -239,7 +239,7 @@ public class LibrarianScreenController {
     }
     @FXML
     void deletePatron(ActionEvent event) {
-        if (!user.getType().equals("Librarian Priv3")){
+        if (!user.getPrivileges().equals("Priv3")){
             Assist.error("Access Denied", "Your privilege level is insufficient.");
             return;
         }
@@ -253,7 +253,7 @@ public class LibrarianScreenController {
 
     @FXML
     void deleteDoc(ActionEvent event) {
-        if (!user.getType().equals("Librarian Priv3")){
+        if (!user.getPrivileges().equals("Priv3")){
             Assist.error("Access Denied", "Your privilege level is insufficient.");
             return;
         }

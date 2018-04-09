@@ -350,6 +350,25 @@ public class Database extends Main {
         User user = new User(name, address, Phonenumber, id, type, password,email);
         return user;
     }
+    public Librarian getInformationAboutTheLibrarian(int id) throws SQLException {
+        Statement stmt = con.createStatement();
+        ResultSet rs = stmt.executeQuery("SELECT * FROM Users_of_the_library WHERE Card_number=" + id);
+        String name = "";
+        String address = "";
+        String Phonenumber = "";
+        String type = "";
+        String password = "";
+        String email="";
+        while (rs.next()) {
+            name = rs.getString("Name");
+            address = rs.getString("Address");
+            Phonenumber = rs.getString("Phone_number");
+            type = rs.getString("Type");
+            password = rs.getString("Password");
+            email=rs.getString("Email");
+        }
+        return new Librarian(name, address, Phonenumber, id, type, password,email);
+    }
 
     /**
      * authorization of user
