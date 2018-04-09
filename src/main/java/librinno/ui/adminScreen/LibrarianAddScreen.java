@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ToggleGroup;
 import main.java.librinno.model.Database;
 import main.java.librinno.model.Librarian;
+import main.java.librinno.model.User;
 import main.java.librinno.ui.assist.Assist;
 
 public class LibrarianAddScreen {
@@ -65,7 +66,7 @@ public class LibrarianAddScreen {
         else {
             if(Assist.isValidEmailAddress(mail)) {
                 Database db = new Database();
-                Database.userCreation(new Librarian(user, phoneNum, addressText, 10000,"Librarian "+privilege, pass, mail));
+                db.userCreation(new User(user, phoneNum, addressText, 10000,"Librarian "+privilege, pass, mail));
                 Assist.closeStage(confirm);
             }
             else Assist.emailError();
