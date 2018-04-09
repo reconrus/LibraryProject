@@ -49,19 +49,35 @@ public class Database extends Main {
     public static void userCreation(User user) {
         try {
             //get all needed information
-            prst = con.prepareStatement("insert into Users_of_the_library(Name, Address, Phone_number,Type,Password,Email) values(?, ?, ?,?,?,?)");
+            prst = con.prepareStatement("insert into Users_of_the_library(Name, Address, Phone_number,Type,Password,Email,Privilege) values(?, ?, ?,?,?,?,?)");
             prst.setString(1, user.getName());
             prst.setString(2, user.getAdress());
             prst.setString(3, user.getPhoneNumber());
             prst.setString(4, user.getType());
             prst.setString(5, user.getPassword());
             prst.setString(6,user.getEmail());
+            prst.setString(7,user.get_privilege());
             prst.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
+    public static void admin_creation(Admin admin) {
+        try {
+            Database db = new Database();
+            Statement stmt = db.con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT COUNT(*) FROM users_of_the_library WHERE Type = 'Admin'");
+            if(rs.next() && rs.getInt("COUNT(*)")<1){
+                userCreation(admin);
+            }
+            else{
+                System.out.println("there is already admin");
+            }
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
     /**
      * creating AV
      *
@@ -323,6 +339,7 @@ public class Database extends Main {
         String type = "";
         String password = "";
         String email="";
+        String privilege="";
         while (rs.next()) {
             name = rs.getString("Name");
             address = rs.getString("Address");
@@ -330,8 +347,9 @@ public class Database extends Main {
             type = rs.getString("Type");
             password = rs.getString("Password");
             email=rs.getString("Email");
+            privilege=rs.getString("Privilege");
         }
-        User user = new User(name, address, Phonenumber, id, type, password,email);
+        User user = new User(name, address, Phonenumber, id, type, password,email,privilege);
         return user;
     }
 
@@ -383,7 +401,7 @@ public class Database extends Main {
 
             //create table Users
             sql = "CREATE TABLE IF NOT EXISTS Users_of_the_library(Name VARCHAR(30) , Address VARCHAR(30) , Phone_number VARCHAR(255) , Card_number int(255) AUTO_INCREMENT ," +
-                    " Type VARCHAR(30), Password VARCHAR(30),Email VARCHAR(30) , PRIMARY KEY(Card_number))";
+                    " Type VARCHAR(30), Password VARCHAR(30),Email VARCHAR(30),Privilege VARCHAR(30) DEFAULT '-', PRIMARY KEY(Card_number))";
             stmt.executeUpdate(sql);
 
             //create table Articles
@@ -423,7 +441,7 @@ public class Database extends Main {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Statement stmt = con.createStatement();
-            Librarian l = new Librarian("1", "1", "1", 0, "Librarian", "1","1");
+            Librarian l = new Librarian("1", "1", "1", 0, "Librarian", "1","1","-");
             Comparator<User> comparator = new UserTypeComparator();
             pq = new PriorityQueue<User>(l.getAllUsers().size(), comparator);
             User user = l.UserById(user_id);
@@ -498,7 +516,7 @@ public class Database extends Main {
                     while (matcher.find()) {
                         id = matcher.group();
                     }
-                    Librarian l = new Librarian(null, null, null, 999, null, null,null);
+                    Librarian l = new Librarian(null, null, null, 999, null, null,null,null);
                     int user_id = table_rs.getInt("Card_number");
                     if(l.getNumberOfCopiesOfBook(Integer.parseInt(id))>0) {
                         String note = "User: " + user_id + " You can get material with id " + id;
@@ -536,7 +554,7 @@ public class Database extends Main {
                             table_id = matcher.group();
                         }
                         int user_id = table_rs.getInt("Card_number");
-                        Librarian l = new Librarian(null, null, null, 999, null, null,null);
+                        Librarian l = new Librarian(null, null, null, 999, null, null,null,null);
                         user = l.UserById(user_id);
                         if(l.getNumberOfCopiesOfBook(Integer.parseInt(table_id))>0)
                             emails.add(user.getEmail());

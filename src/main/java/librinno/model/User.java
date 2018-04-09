@@ -25,9 +25,15 @@ public class User {
     public String email;
     public Boolean isNotified;
     public ArrayList<String> notification=new ArrayList<>();
-
+    public String privilege;
     public String queue_date;
+    public void set_privilege (String privilege) {
+        this.privilege = privilege;
+    }
 
+    public String get_privilege() {
+        return privilege;
+    }
     public void setQueue_date(String queue_date) {
         this.queue_date = queue_date;
     }
@@ -43,7 +49,7 @@ public class User {
     public void setDate(String returnDate) {
         this.queue_date = returnDate;
     }
-
+    public User(){}
     //constructors for different cases
     //in some situations not all information is needed
     //for queue
@@ -62,16 +68,17 @@ public class User {
     }
 
 
-    public User(String name, String number, String address, String type, String password, String email) {
+    public User(String name, String number, String address, String type, String password, String email,String privilege) {
         setName(name);
         setPhoneNumber(number);
         setAdress(address);
         setType(type);
         setPassword(password);
         setEmail(email);
+        set_privilege(privilege);
     }
 
-    public User(String name, String address, String number, int cardnumber, String type, String password,String email) {
+    public User(String name, String address, String number, int cardnumber, String type, String password,String email,String privilege) {
         setName(name);
         setPhoneNumber(number);
         setAdress(address);
@@ -79,6 +86,7 @@ public class User {
         setType(type);
         setPassword(password);
         setEmail(email);
+        set_privilege(privilege);
     }
 
     //getters and setters
