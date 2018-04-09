@@ -34,6 +34,8 @@ public class LibrarianScreenController {
     @FXML
     private JFXButton logout;
 
+    User user;
+
     @FXML
     private JFXButton addDoc;
 
@@ -105,6 +107,11 @@ public class LibrarianScreenController {
 
     @FXML
     private TableColumn<Material, Integer> fine;
+
+    public void setLibrarianInfo(User patron){
+        user=patron;
+    }
+
 
     @FXML
     void showTableUser(){
@@ -206,12 +213,20 @@ public class LibrarianScreenController {
 
     @FXML
     void addDoc(ActionEvent event) throws IOException {
+        if (user.getType().equals("Librarian Priv1")){
+            Assist.error("Access Denied", "Your privilege level is insufficient.");
+            return;
+        }
         Assist.loadStageWait(getClass().getResource("/main/java/librinno/ui/addbook/AddBook.fxml"));
         showTables();
     }
 
     @FXML
     void addPatron(ActionEvent event) throws IOException {
+        if (user.getType().equals("Librarian Priv1")){
+            Assist.error("Access Denied", "Your privilege level is insufficient.");
+            return;
+        }
         Assist.loadStageWait(getClass().getResource("/main/java/librinno/ui/Register/register.fxml"));
         showTableUser();
     }
@@ -224,6 +239,10 @@ public class LibrarianScreenController {
     }
     @FXML
     void deletePatron(ActionEvent event) {
+        if (!user.getType().equals("Librarian Priv3")){
+            Assist.error("Access Denied", "Your privilege level is insufficient.");
+            return;
+        }
         User user= tableUser.getSelectionModel().getSelectedItem();
         if(user!=null) {
             Librarian.deleteUserById(user.card_number);
@@ -234,6 +253,10 @@ public class LibrarianScreenController {
 
     @FXML
     void deleteDoc(ActionEvent event) {
+        if (!user.getType().equals("Librarian Priv3")){
+            Assist.error("Access Denied", "Your privilege level is insufficient.");
+            return;
+        }
         Material book= tableBook.getSelectionModel().getSelectedItem();
         if(book != null) {
             Librarian.deleteDoc(book);

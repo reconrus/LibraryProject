@@ -19,6 +19,7 @@ import javafx.stage.StageStyle;
 import main.java.librinno.model.Database;
 import main.java.librinno.model.User;
 import main.java.librinno.ui.assist.Assist;
+import main.java.librinno.ui.librarianScreen.LibrarianScreenController;
 import main.java.librinno.ui.patronScreen.PatronScreenController;
 
 
@@ -66,8 +67,8 @@ public class LoginController {
         Database db = new Database();
         String type = db.authorization(Integer.parseInt(id), pass);
 
-        if(type.equals("Librarian")) {
-            loadLibrarian();
+        if((type.equals("Librarian Priv1"))||(type.equals("Librarian Priv2"))||(type.equals("Librarian Priv3"))) {
+            loadLibrarian(id);
             return true;
         }
         if(type.equals(User.student) || type.equals(User.professor) || type.equals(User.instructor) || type.equals(User.ta) || type.equals(User.vProfessor)){
@@ -81,6 +82,22 @@ public class LoginController {
 
     private void loadLibrarian() throws IOException {
         Assist.loadStage(getClass().getResource("/main/java/librinno/ui/librarianScreen/LibrarianScreen.fxml"));
+    }
+
+    private void loadLibrarian(String id) throws IOException, SQLException {
+        if (id.isEmpty()) {
+            Assist.error();
+        } else {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/main/java/librinno/ui/librarianScreen/LibrarianScreen.fxml"));
+            Parent parent = loader.load();
+            LibrarianScreenController reg = loader.getController();
+            Database db = new Database();
+            reg.setLibrarianInfo(db.getInformationAboutTheUser(Integer.parseInt(id)));
+            Stage stage = new Stage(StageStyle.DECORATED);
+            stage.setScene(new Scene(parent));
+            stage.show();
+            Assist.closeStage(login);
+        }
     }
 
 

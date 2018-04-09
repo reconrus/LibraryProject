@@ -39,6 +39,12 @@ public class Assist {
         error.setContentText("You left empty blanks.");
         error.showAndWait();
     }
+    public static void error(String header, String body){
+        Alert error= new Alert(Alert.AlertType.ERROR);
+        error.setHeaderText(header);
+        error.setContentText(body);
+        error.showAndWait();
+    }
     public static void closeStage(Button butt){
         ((Stage) butt.getScene().getWindow()).close();
     }
