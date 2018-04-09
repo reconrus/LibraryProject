@@ -26,20 +26,30 @@ public class Librarian extends User {
      */
     //creating database for working with it
     private static Database db = new Database();
-    public Librarian(String name, String address, String number, int cardnumber, String type, String password,String email,String privilege) {
-        super(name, address, number, cardnumber, type, password,email,"Priv1");
+
+    /**
+     * librarian extends user so it is user too
+     *
+     * @param name       librarian name
+     * @param address    it's address
+     * @param number     it's number
+     * @param cardnumber it's id
+     * @param type       it's type
+     * @param password   it's password
+     */
+    public Librarian(String name, String address, String number, int cardnumber, String type, String password,String email) {
+        super(name, address, number, cardnumber, type, password,email);
     }
 
     /**
      * all parametres are the same, but not with full information
      * because it will not be needed
      */
-    public void Librarian(String name, String phone_number, String adress, int card_number,String privilege) {
+    public void Librarian(String name, String phone_number, String adress, int card_number) {
         this.name = name;
         this.phoneNumber = phone_number;
         this.adress = adress;
         this.card_number = card_number;
-        this.privilege=privilege;
     }
 
     /**
@@ -736,8 +746,7 @@ public class Librarian extends User {
                         rs.getInt("Card_number"),
                         rs.getString("Type"),
                         rs.getString("Password"),
-                        rs.getString("Email"),
-                        rs.getString("Privilege"));
+                        rs.getString("Email"));
                 return user;
             }
         } catch (SQLException e) {
@@ -868,14 +877,13 @@ public class Librarian extends User {
         try {
             Database db = new Database();
             PreparedStatement pr = db.con.prepareStatement("UPDATE Users_of_the_library " +
-                    "SET Name=?,Address=?,Phone_number=?,Type=?,Password=?, Email=?,Privilege=? where Card_number=" + user.getCard_Number());
+                    "SET Name=?,Address=?,Phone_number=?,Type=?,Password=?, Email=? where Card_number=" + user.getCard_Number());
             pr.setString(1, user.getName());
             pr.setString(2, user.getAdress());
             pr.setString(3, user.getPhoneNumber());
             pr.setString(4, user.getType());
             pr.setString(5, user.getPassword());
             pr.setString(6, user.getEmail());
-            pr.setString(7,user.get_privilege());
             pr.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -1244,8 +1252,7 @@ public class Librarian extends User {
                 String type = rs.getString("Type");
                 String password = rs.getString("Password");
                 String email=rs.getString("Email");
-                String privilege=rs.getString("Privilege");
-                User user = new User(name, address, Phonenumber, id, type, password,email,privilege);
+                User user = new User(name, address, Phonenumber, id, type, password,email);
                 users.add(user);
             }
         } catch (SQLException e) {

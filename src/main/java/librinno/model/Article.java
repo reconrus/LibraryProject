@@ -132,6 +132,7 @@ public class Article extends Material{
         setType("Article");
     }
     //getters and setters
+
     public String getJournal() {
         return journal;
     }

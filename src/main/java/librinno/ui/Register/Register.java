@@ -62,7 +62,7 @@ public class Register {
 
             if(Assist.isValidEmailAddress(mail)) {
                 Database db = new Database();
-                Database.userCreation(new User(user, phoneNum, addressText, type, pass, mail,""));
+                Database.userCreation(new User(user, phoneNum, addressText, type, pass, mail));
                 Assist.closeStage(confirm);
             }
             else Assist.emailError();
