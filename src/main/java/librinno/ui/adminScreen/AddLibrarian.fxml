@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXRadioButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import java.net.URL?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="376.0" prefWidth="334.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.librinno.ui.adminScreen.LibrarianAddScreen">
+   <children>
+      <Group layoutX="49.0" layoutY="66.0">
+            <JFXTextField fx:id="name" prefHeight="25.0" prefWidth="232.0" promptText="Name" />
+            <JFXPasswordField fx:id="password" layoutY="41.0" prefHeight="25.0" prefWidth="232.0" promptText="Password" />
+            <JFXTextField fx:id="phone" layoutY="75.0" prefHeight="25.0" prefWidth="232.0" promptText="Phone" />
+            <JFXTextField fx:id="address" layoutY="109.0" prefHeight="25.0" prefWidth="232.0" promptText="Address" />
+         <JFXTextField fx:id="email" layoutY="141.0" prefHeight="25.0" prefWidth="232.0" promptText="E-mail " />
+         <AnchorPane layoutY="191.0" prefHeight="65.0" prefWidth="232.0">
+            <children>
+               <JFXRadioButton fx:id="lev1" layoutX="-15.0" layoutY="6.0" text="Level 1" textFill="#4d4d4d" />
+               <JFXRadioButton fx:id="lev2" layoutX="119.0" layoutY="6.0" text="Level 2" textFill="#4d4d4d" />
+               <JFXRadioButton fx:id="lev3" layoutX="-15.0" layoutY="34.0" text="Level 3" textFill="#4d4d4d" />
+            </children>
+         </AnchorPane>
+         <JFXButton fx:id="confirm" layoutX="178.0" layoutY="256.0" onAction="#confirm" prefHeight="31.0" prefWidth="75.0" text="Confirm" />
+         <JFXButton fx:id="cancel" layoutX="-15.0" layoutY="256.0" onAction="#cancel" prefHeight="31.0" prefWidth="67.0" text="Cancel" />
+      </Group>
+      <Text fill="WHITE" layoutX="51.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter new values" textAlignment="CENTER" wrappingWidth="231.99999779462814">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+   </children>
+   <stylesheets>
+      <URL value="@../../../../resources/theme.css" />
+      <URL value="@../../../../resources/theme.css" />
+   </stylesheets>
+</AnchorPane>

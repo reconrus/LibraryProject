@@ -16,6 +16,10 @@ import static java.time.temporal.ChronoUnit.DAYS;
  * librarian of library
  */
 public class Librarian extends User {
+
+    public static final String lev1 = "Priv1";
+    public static final String lev2 = "Priv2";
+    public static final String lev3 = "Priv3";
     private String privileges;
     /**
      * setter

@@ -5,17 +5,24 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import main.java.librinno.model.Librarian;
 import main.java.librinno.model.User;
 import main.java.librinno.ui.assist.Assist;
+import main.java.librinno.ui.editPatron.EditPatron;
+import main.java.librinno.ui.librarianScreen.LibrarianScreenController;
 
 import java.io.IOException;
 import java.util.LinkedList;
 
-public class adminScreenController {
+public class AdminScreenController {
 
     @FXML
     private JFXButton addPatron;
@@ -71,17 +78,34 @@ public class adminScreenController {
 
     @FXML
     void addPatron(ActionEvent event) throws IOException {
-        Assist.loadStageWait(getClass().getResource("/main/java/librinno/ui/Register/register.fxml"));
+        Assist.loadStageWait(getClass().getResource("/main/java/librinno/ui/adminScreen/AddLibrarian.fxml"));
         showTableUser();
     }
 
     @FXML
     void deletePatron(ActionEvent event) {
-
+        User user= tableUser.getSelectionModel().getSelectedItem();
+        if(user!=null) {
+            Librarian.deleteUserById(user.card_number);
+            showTableUser();
+        }
     }
 
     @FXML
-    void editPatron(ActionEvent event) {
+    void editPatron(ActionEvent event) throws IOException {
+        Librarian user= tableUser.getSelectionModel().getSelectedItem();
+        if (user==null){
+            Assist.error();
+        }else {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/main/java/librinno/ui/adminScreen/EditLibrarian.fxml"));
+            Parent parent = loader.load();
+            LibrarianEditScreen reg = loader.getController();
+            reg.passGUI(user);
+            Stage stage = new Stage(StageStyle.DECORATED);
+            stage.setScene(new Scene(parent));
+            stage.showAndWait();
+            showTableUser();
+        }
 
     }
 
