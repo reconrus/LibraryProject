@@ -40,6 +40,22 @@ public class Database extends Main {
         } catch (Exception e) {
         }
     }
+    public static void admin_creation(Admin admin) {
+        try {
+            Database db = new Database();
+            Statement stmt = db.con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT COUNT(*) FROM users_of_the_library WHERE Type = 'Admin'");
+            if(rs.next() && rs.getInt("COUNT(*)")<1){
+                userCreation(admin);
+            }
+            else{
+                System.out.println("there is already admin");
+            }
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
 
     /**
      * getting users of database to project
