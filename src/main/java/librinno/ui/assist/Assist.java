@@ -74,4 +74,11 @@ public class Assist {
         return result;
     }
 
+    public static void dbCreationlError(){
+        Alert error= new Alert(Alert.AlertType.ERROR);
+        error.setHeaderText("Database Creation Error");
+        error.setContentText("Wrong Database Information");
+        error.showAndWait();
+    }
+
 }

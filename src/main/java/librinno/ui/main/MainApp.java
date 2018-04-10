@@ -31,17 +31,17 @@ public class MainApp extends Application {
             Stage stage = new Stage(StageStyle.DECORATED);
             stage.setScene(new Scene(parent));
             stage.showAndWait();
-        }
-        Scanner sc = new Scanner(new File("dbinf.txt"));
-        Main.setDbUrl(sc.nextLine());
-        Main.setUSER(sc.nextLine());
-        Main.setPASS(sc.nextLine());
-        sc.close();
-        Database db = new Database();
-        db.creationLocalDB(Main.getUSER(), Main.getPASS());
-        if (first)
             Assist.loadStageWait(getClass().getResource("/main/java/librinno/ui/adminCreation/AdminCreation.fxml"));
-
+        }
+        else {
+            Scanner sc = new Scanner(new File("dbinf.txt"));
+            Main.setDbUrl(sc.nextLine());
+            Main.setUSER(sc.nextLine());
+            Main.setPASS(sc.nextLine());
+            sc.close();
+            Database db = new Database();
+            db.creationLocalDB(Main.getUSER(), Main.getPASS());
+        }
 
         Parent root = FXMLLoader.load(getClass().getResource("/main/java/librinno/ui/login/LoginScreen.fxml"));
 
