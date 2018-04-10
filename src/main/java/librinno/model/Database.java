@@ -412,7 +412,7 @@ public class Database extends Main {
         if (rs.next()) {
             String password = rs.getString("Password");
             if (pass.equals(password)) {
-                LOGGER.trace("User with id "+id+ " have logged in system");
+                LOGGER.trace("User with id "+id+ " has logged in system");
                 return rs.getString("Type");
             }
         }
@@ -512,7 +512,7 @@ public class Database extends Main {
                         // error.setHeaderText("Document");
                         // error.setContentText("You already reserved this book.");
                         // error.showAndWait();
-                        LOGGER.trace("User with id "+cur_id+" is already in queue");
+                        LOGGER.trace("User with id "+cur_id+" tried to reserve book more than once,but he is already in queue");
                     }
                     PreparedStatement pr = con.prepareStatement("TRUNCATE Queue_on_" + material_id);
                     pr.executeUpdate();
@@ -615,7 +615,7 @@ public class Database extends Main {
         } catch (SQLException e) {
             System.out.println("no available copies");
         }
-        LOGGER.trace("Got emails for sending notifications");
+        LOGGER.trace("Got emails for sending notifications of all types");
         return emails;
     }
     public static User user_in_queue(int user_id, int queue_id) {
