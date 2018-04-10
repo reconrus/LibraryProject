@@ -325,7 +325,6 @@ public class Librarian extends User {
                     return fine;
                 }
             }
-            LOGGER.trace("Counted fine for "+ idOfCopy);
             return 0;
         }catch (SQLException e) {
             LOGGER.error("Error in fine operation");
@@ -648,6 +647,7 @@ public class Librarian extends User {
                         rs.last();
                         if (rs.getRow() == 0) {
                             stmt.executeUpdate("DROP TABLE queue_on_" + idMaterial);
+                            LOGGER.trace("There is no people awaiting for material "+idMaterial+". Queue is deleted.");
                         }
                     }
                 } else {
@@ -746,7 +746,7 @@ public class Librarian extends User {
             pr.setDate(4, java.sql.Date.valueOf(LocalDate.of(9999, 1, 1)));
             pr.setBoolean(5,true);
             pr.executeUpdate();
-            LOGGER.trace("Material with id "+idOfCopyOfBook+" is returned");
+            LOGGER.trace("Material with copy id "+idOfCopyOfBook+" is returned");
             return true;
         } catch (SQLException e) {
             LOGGER.error("Error of returning material "+idOfCopyOfBook);
@@ -998,7 +998,7 @@ public class Librarian extends User {
             db.bookCreation(book);
             ArrayList<Integer> arrayList = db.isBookAlreadyExist(book);
             addCopiesOfMaterial(arrayList.get(1), amount - 1);
-            LOGGER.trace("Added book with id "+ book.getId()+" to the library");
+            LOGGER.trace("Added book to the library");
         }
         catch (SQLException e){
             LOGGER.error("Error in adding book");
@@ -1032,7 +1032,7 @@ public class Librarian extends User {
             db.articleCreation(article);
             ArrayList<Integer> arrayList = db.isArticleAlreadyExist(article);
             addCopiesOfMaterial(arrayList.get(1), amount - 1);
-            LOGGER.trace("Added Article with id "+article.getId()+" to the library");
+            LOGGER.trace("Added Article to the library");
         }
         catch(SQLException e){
             LOGGER.error("Error in adding article");
@@ -1056,7 +1056,7 @@ public class Librarian extends User {
             db.avCreation(av);
             ArrayList<Integer> arrayList = db.isAVAlreadyExist(av);
             addCopiesOfMaterial(arrayList.get(1), amount - 1);
-            LOGGER.trace("Added AV with id "+av.getId()+" to the library");
+            LOGGER.trace("Added AV to the library");
         }
         catch (SQLException e){
             LOGGER.error("Error in creating av");

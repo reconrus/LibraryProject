@@ -8,17 +8,13 @@ import javax.mail.*;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
 
 public class SendEmail extends Database {
     private static String USER_NAME = "librinno1";
     private static String PASSWORD = "thebestteamever";
     private static ArrayList<Address> all_emails = new ArrayList<>();
-    public static final Logger LOGGER = Logger.getLogger("GLOBAL");
 
     public static void send() {
-        PropertyConfigurator.configure("log4j.properties");
         String from = USER_NAME;
         String pass = PASSWORD;
         String[] to = send_email().toArray(new String[send_email().size()]);
@@ -26,16 +22,12 @@ public class SendEmail extends Database {
         String body = "You can get the material,which you wanted to took.\n" +
                 "You have 24 hours to get document.";
         sendFromGMail(from, pass, to, subject, body);
-        if(to.length>0)
-            LOGGER.trace("Sent emails for people in queue");
-    }
+        }
     public static void sendToOne(String email,String subject,String body) {
         String from = USER_NAME;
         String pass = PASSWORD;
         String[] to = {email};
         sending_to_one(from, pass, to, subject, body);
-        if(to.length>0)
-            LOGGER.trace("Sent message to "+to[0]);
     }
     private static void sending_to_one(String from, String pass, String[] to, String subject, String body) {
         Properties props = System.getProperties();

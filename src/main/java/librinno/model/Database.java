@@ -39,7 +39,6 @@ public class Database extends Main {
             con = DriverManager.getConnection(url, login, password);
             PropertyConfigurator.configure("log4j.properties");
         } catch (Exception e) {
-            LOGGER.error("Error in creating database");
         }
     }
     public static void admin_creation(Admin admin) {
@@ -79,7 +78,7 @@ public class Database extends Main {
             prst.setString(5, user.getPassword());
             prst.setString(6,user.getEmail());
             prst.executeUpdate();
-            LOGGER.trace("User with id "+user.getCard_number()+" added");
+            LOGGER.trace("User created");
         } catch (Exception e) {
             LOGGER.error("Error in adding user");
         }
@@ -102,7 +101,7 @@ public class Database extends Main {
                 prst.setInt(3, av.getPrice());
                 prst.setString(4, av.getKeyWords());
                 prst.executeUpdate();
-                LOGGER.trace("AV with id "+av.getId()+" added");
+                LOGGER.trace("AV created");
                 Statement stmt = con.createStatement();
                 ResultSet rsInside;
                 rsInside = stmt.executeQuery("SELECT id FROM AV");
@@ -116,7 +115,7 @@ public class Database extends Main {
                 prst.setInt(3, 999);
                 prst.setBoolean(4, true);
                 prst.executeUpdate();
-                LOGGER.trace("Copies of AV with id "+av.getId()+" added");
+                LOGGER.trace("Copies of AV added");
 
             } else {
                 prst = con.prepareStatement("insert into Copy (id_of_original,Owner,Time_left,CanRenew) values(?,?,?,?)");
@@ -155,7 +154,7 @@ public class Database extends Main {
                 prst.setString(7, article.getEditor());
                 prst.setString(8, article.getDate());
                 prst.executeUpdate();
-                LOGGER.trace("Article with id "+article.getId()+" added");
+                LOGGER.trace("Article created");
                 //находим последний добавленный ID статьи и запоминаем его, чтоб потом кинуть его в таблицу копий
                 Statement stmt = con.createStatement();
                 ResultSet rsInside;
@@ -170,7 +169,7 @@ public class Database extends Main {
                 prst.setInt(3, 999);
                 prst.setBoolean(4, true);
                 prst.executeUpdate();
-                LOGGER.trace("Copies of Article with id "+article.getId()+" added");
+                LOGGER.trace("Copies of Article added");
             } else {
                 prst = con.prepareStatement("insert into Copy (id_of_original,Owner,Time_left,CanRenew) values(?,?,?,?)");
                 prst.setInt(1, arrayList.get(1));
@@ -178,7 +177,7 @@ public class Database extends Main {
                 prst.setInt(3, 999);
                 prst.setBoolean(4, true);
                 prst.executeUpdate();
-                LOGGER.trace("Copies of Article with id "+article.getId()+" added");
+                LOGGER.trace("Copies of Article added");
             }
         }
         catch (SQLException e){
@@ -207,7 +206,7 @@ public class Database extends Main {
                 prst.setBoolean(8, book.getReference());
                 prst.setInt(9, book.getYear());
                 prst.executeUpdate();
-                LOGGER.trace("Article with id "+book.getId()+" added");
+                LOGGER.trace("Book created");
                 //находим последний добавленный ID книги и запоминаем его, чтоб потом кинуть его в таблицу копий
                 Statement stmt = con.createStatement();
                 ResultSet rsInside;
@@ -222,7 +221,7 @@ public class Database extends Main {
                 prst.setInt(3, 999);
                 prst.setBoolean(4,true);
                 prst.executeUpdate();
-                LOGGER.trace("Copies of Book with id "+book.getId()+" added");
+                LOGGER.trace("Copies of Book added");
             } else {
                 //кидаем id оригинала и остальную инфу
                 prst = con.prepareStatement("insert into Copy (id_of_original,Owner,Time_left,CanRenew) values(?,?,?,?)");
@@ -231,7 +230,7 @@ public class Database extends Main {
                 prst.setInt(3, 999);
                 prst.setBoolean(4,true);
                 prst.executeUpdate();
-                LOGGER.trace("Copies of Book with id "+book.getId()+" added");
+                LOGGER.trace("Copies of Book added");
             }
         } catch (SQLException e) {
             LOGGER.error("Error in creating book");
@@ -466,7 +465,7 @@ public class Database extends Main {
             stmt.executeUpdate(sql);
             sql = "INSERT IGNORE INTO Users_of_the_library (Name,Address,Phone_number,Card_number,Type,Password,Email) VALUES ('Nikolay V. Shilov', 'Innopolis', '+79999999999',31,'Professor','1','dmitrokon@mail.ru')";
             stmt.executeUpdate(sql);
-            LOGGER.trace("Local database created");
+            LOGGER.trace("Local database connected");
             return true;
         } catch (SQLException se) {
             LOGGER.error("Error in creating local database");
@@ -621,7 +620,6 @@ public class Database extends Main {
         } catch (SQLException e) {
             LOGGER.trace("No available copies of material");
         }
-        LOGGER.trace("Got emails for sending notifications of all types");
         return emails;
     }
     public static User user_in_queue(int user_id, int queue_id) {
