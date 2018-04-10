@@ -419,7 +419,7 @@ public class Database extends Main {
         return "";
     }
 
-    public static void creationLocalDB(String user, String pass) {
+    public static boolean creationLocalDB(String user, String pass) {
         Connection conn = null;
         Statement stmt = null;
         try {
@@ -463,10 +463,13 @@ public class Database extends Main {
             sql = "INSERT IGNORE INTO Users_of_the_library (Name,Address,Phone_number,Card_number,Type,Password,Email) VALUES ('Nikolay V. Shilov', 'Innopolis', '+79999999999',31,'Professor','1','dmitrokon@mail.ru')";
             stmt.executeUpdate(sql);
             LOGGER.trace("Local database created");
+            return true;
         } catch (SQLException se) {
             LOGGER.error("Error in creating local database");
+            return false;
         } catch (Exception e) {
             LOGGER.error("Error in creating local database");
+            return false;
         } finally {
             try {
                 if (stmt != null)
