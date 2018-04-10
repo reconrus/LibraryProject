@@ -1,5 +1,8 @@
 package main.java.librinno.model;
 
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -14,6 +17,7 @@ public class User {
     public static final String instructor = "Instructor";
     public static final String ta = "TA";
     public static final String vProfessor = "Visiting Professor";
+    public static final Logger LOGGER = Logger.getLogger("GLOBAL");
 
 
     public String name;

@@ -1,5 +1,7 @@
 package main.java.librinno.model;
 
+import org.apache.log4j.PropertyConfigurator;
+
 import java.sql.*;
 
 public class Admin extends User {
@@ -20,8 +22,11 @@ public class Admin extends User {
             pr.setString(5, user.getPassword());
             pr.setString(6, user.getEmail());
             pr.executeUpdate();
+            PropertyConfigurator.configure("log4j.properties");
+            LOGGER.trace("Librarian with id "+user.getCard_number()+" was modified");
         } catch (SQLException e) {
             e.printStackTrace();
+            LOGGER.error("Error in librarian modification");
         }
     }
 
@@ -30,8 +35,9 @@ public class Admin extends User {
             Database db = new Database();
             PreparedStatement pr = db.con.prepareStatement("DELETE from Users_of_the_library WHERE Card_number=" + user_id+" and Type= 'Librarian'");
             pr.executeUpdate();
+            LOGGER.trace("Librarian with id "+user_id+" was deleted");
         } catch (SQLException e) {
-            System.out.println("librarian not found");
+            LOGGER.error("Error in librarian modification,librarian not found");
         }
     }
     public static void add_librarian(User user) {
@@ -45,8 +51,10 @@ public class Admin extends User {
             prst.setString(5, user.getPassword());
             prst.setString(6,user.getEmail());
             prst.executeUpdate();
+            LOGGER.trace("Librarian with id "+user.getCard_number()+" was added");
         } catch (Exception e) {
             e.printStackTrace();
+            LOGGER.error("Error in librarian adding");
         }
     }
 }

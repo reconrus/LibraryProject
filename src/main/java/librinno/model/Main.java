@@ -1,5 +1,7 @@
 package main.java.librinno.model;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.sql.*;
 import java.text.DateFormat;
@@ -7,12 +9,15 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.Date;
 
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
+
 
 public class Main {
     static String DB_URL;
-
     private static String USER;
     private static String PASS;
+    private static final Logger LOGGER = Logger.getLogger("GLOBAL");
 
     public static String getDbUrl() {
         return DB_URL;
@@ -45,7 +50,7 @@ public class Main {
     }
 
     public static void main(String[] args) throws SQLException, InterruptedException {
-
+        PropertyConfigurator.configure("log4j.properties");
         //We need know your login and password in local server MySQL
         Scanner sc = new Scanner(System.in);
         System.out.println("Write your login in MySQL:");
@@ -55,35 +60,8 @@ public class Main {
         setDbUrl("jdbc:mysql://localhost:3306");
         Database db = new Database();
         db.creationLocalDB(getUSER(), getPASS());
-        Tests test = new Tests();
-        test.tc1();
-        System.out.println("Test 1 success");
-        Thread.sleep(1000);
-        test.tc2();
-        System.out.println("Test 2 success");
-        Thread.sleep(1000);
-        test.tc3();
-        System.out.println("Test 3 success");
-        Thread.sleep(1000);
-        test.tc4();
-        System.out.println("Test 4 success");
-        Thread.sleep(1000);
-        test.tc5();
-        System.out.println("Test 5 success");
-        Thread.sleep(1000);
-        test.tc6();
-        System.out.println("Test 6 success");
-        Thread.sleep(1000);
-        test.tc7();
-        System.out.println("Test 7 success");
-        Thread.sleep(1000);
-        test.tc8();
-        System.out.println("Test 8 success");
-        Thread.sleep(1000);
-        test.tc9();
-        System.out.println("Test 9 success");
-        Thread.sleep(1000);
-        test.tc10();
-        System.out.println("Test 10 success");
+        Admin admin=new Admin("123","123","123",123,"123","123","123");
+
+        db.admin_creation(admin);
     }
 }

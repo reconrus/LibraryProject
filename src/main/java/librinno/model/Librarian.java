@@ -9,6 +9,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.LinkedList;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 
 import static java.time.temporal.ChronoUnit.DAYS;
 
@@ -16,7 +18,7 @@ import static java.time.temporal.ChronoUnit.DAYS;
  * librarian of library
  */
 public class Librarian extends User {
-
+    public static final Logger LOGGER = Logger.getLogger("GLOBAL");
     public static final String lev1 = "Priv1";
     public static final String lev2 = "Priv2";
     public static final String lev3 = "Priv3";
@@ -107,7 +109,7 @@ public class Librarian extends User {
      * the same method but for tests
      * @param idOfMaterial material id
      * @param date date for tests
-     * @return arraylistof arraylist of emails
+     * @return arraylist of arraylist of emails
      */
     public static ArrayList<ArrayList<String>>  outstandingRequestWithDate(int idOfMaterial,LocalDate date){
         ArrayList<String> emails=new ArrayList<>();
