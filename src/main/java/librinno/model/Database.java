@@ -38,27 +38,26 @@ public class Database extends Main {
             Class.forName("com.mysql.jdbc.Driver");
             con = DriverManager.getConnection(url, login, password);
             PropertyConfigurator.configure("log4j.properties");
-            LOGGER.trace("Database created");
         } catch (Exception e) {
             LOGGER.error("Error in creating database");
         }
     }
     public static void admin_creation(Admin admin) {
+        PropertyConfigurator.configure("log4j.properties");
         try {
             Database db = new Database();
             Statement stmt = db.con.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT COUNT(*) FROM users_of_the_library WHERE Type = 'Admin'");
-            LOGGER.trace("admin with id "+admin.getCard_Number()+ " added");
             if(rs.next() && rs.getInt("COUNT(*)")<1){
                 userCreation(admin);
+                LOGGER.trace("admin with id "+admin.getCard_Number()+ " added");
+
             }
             else{
-                System.out.println("there is already one admin");
                 LOGGER.info("there is already one admin");
             }
         }
         catch (SQLException e){
-            e.printStackTrace();
             LOGGER.error("error in adding admin");
         }
     }
@@ -69,6 +68,7 @@ public class Database extends Main {
      * @param user - user of library
      */
     public static void userCreation(User user) {
+        PropertyConfigurator.configure("log4j.properties");
         try {
             //get all needed information
             prst = con.prepareStatement("insert into Users_of_the_library(Name, Address, Phone_number,Type,Password,Email) values(?, ?, ?,?,?,?)");
@@ -92,6 +92,7 @@ public class Database extends Main {
      * @throws SQLException
      */
     public void avCreation(AV av){
+        PropertyConfigurator.configure("log4j.properties");
         try {
             ArrayList<Integer> arrayList = isAVAlreadyExist(av);
             if (arrayList.get(0) == 0) {
@@ -140,6 +141,7 @@ public class Database extends Main {
      * @throws SQLException
      */
     public void articleCreation(Article article){
+        PropertyConfigurator.configure("log4j.properties");
         try {
             ArrayList<Integer> arrayList = isArticleAlreadyExist(article);
             if (arrayList.get(0) == 0) {
@@ -190,6 +192,7 @@ public class Database extends Main {
      * @param book what book to insert
      */
     public void bookCreation(Book book) {
+        PropertyConfigurator.configure("log4j.properties");
         try {
             ArrayList<Integer> arrayList = isBookAlreadyExist(book);
             if (arrayList.get(0) == 0) {
@@ -405,7 +408,7 @@ public class Database extends Main {
      * @throws SQLException
      */
     public String authorization(int id, String pass) throws SQLException {
-
+        PropertyConfigurator.configure("log4j.properties");
         Statement stmt = con.createStatement();
         ResultSet rs = stmt.executeQuery("SELECT  * FROM Users_of_the_library WHERE Card_number=" + id);
 
@@ -420,6 +423,7 @@ public class Database extends Main {
     }
 
     public static boolean creationLocalDB(String user, String pass) {
+        PropertyConfigurator.configure("log4j.properties");
         Connection conn = null;
         Statement stmt = null;
         try {
@@ -486,10 +490,11 @@ public class Database extends Main {
     }
 
     public static void queue_on_material(int material_id, int user_id) {
+        PropertyConfigurator.configure("log4j.properties");
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Statement stmt = con.createStatement();
-            Librarian l = new Librarian("1", "1", "1", 0, "Librarian", "1","1");
+             Librarian l = new Librarian("1", "1", "1", 0, "Librarian Priv3", "1","1");
             Comparator<User> comparator = new UserTypeComparator();
             pq = new PriorityQueue<User>(l.getAllUsers().size(), comparator);
             User user = l.UserById(user_id);
@@ -585,6 +590,7 @@ public class Database extends Main {
 
 
     public static ArrayList<String> send_email() {
+        PropertyConfigurator.configure("log4j.properties");
         User user = null;
         ArrayList<String> emails = new ArrayList<>();
         try {
@@ -613,7 +619,7 @@ public class Database extends Main {
                 }
             }
         } catch (SQLException e) {
-            System.out.println("no available copies");
+            LOGGER.trace("No available copies of material");
         }
         LOGGER.trace("Got emails for sending notifications of all types");
         return emails;

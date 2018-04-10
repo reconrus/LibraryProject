@@ -77,7 +77,7 @@ public class Librarian extends User {
      * @param idOfMaterial id of material
      */
     public static void outstandingRequest(int idOfMaterial){
-
+        PropertyConfigurator.configure("log4j.properties");
         try {
             PreparedStatement pr = db.con.prepareStatement("UPDATE Copy SET Time_left=?,Return_date=?,CanRenew=? WHERE Id_of_original= " + idOfMaterial + " AND Status = 'Issued'");
             pr.setInt(1,0);
@@ -222,6 +222,7 @@ public class Librarian extends User {
     }
 
     public static boolean renew(User user,int idOfRenewCopy){
+        PropertyConfigurator.configure("log4j.properties");
         boolean oldCanRenew=false;
         int idOfOriginal=0;
         try{
@@ -252,12 +253,14 @@ public class Librarian extends User {
                         pr.setDate(2,java.sql.Date.valueOf(LocalDate.now().plusDays(14)));
                         pr.setBoolean(3,false);
                         pr.executeUpdate();
+                        LOGGER.trace("user with id "+ user.getCard_number()+" renewed copy with id "+idOfRenewCopy);
                         return true;
 
                     } else if(user.getType().equals("Student") && !rs.getBoolean("is_bestseller")){
                         pr.setInt(1,21);
                         pr.setDate(2,java.sql.Date.valueOf(LocalDate.now().plusDays(21)));
                         pr.setBoolean(3,false);
+                        LOGGER.trace("user with id "+ user.getCard_number()+" renewed copy with id "+idOfRenewCopy);
                         pr.executeUpdate();
                         return true;
                     } else {
@@ -265,6 +268,7 @@ public class Librarian extends User {
                         pr.setDate(2,java.sql.Date.valueOf(LocalDate.now().plusDays(28)));
                         pr.setBoolean(3,false);
                         pr.executeUpdate();
+                        LOGGER.trace("user with id "+ user.getCard_number()+" renewed copy with id "+idOfRenewCopy);
                         return true;
                     }
                 } else {
@@ -272,12 +276,13 @@ public class Librarian extends User {
                     pr.setDate(2,java.sql.Date.valueOf(LocalDate.now().plusDays(14)));
                     pr.setBoolean(3,false);
                     pr.executeUpdate();
+                    LOGGER.trace("user with id "+ user.getCard_number()+" renewed copy with id "+idOfRenewCopy);
                     return true;
                 }
 
 
             }
-            LOGGER.trace("user with id "+ user.getCard_number()+" renewed copy with id "+idOfRenewCopy);
+            LOGGER.trace("user with id "+ user.getCard_number()+"didn't renew copy with id "+idOfRenewCopy);
             return false;
 
         } catch (SQLException e) {
@@ -287,6 +292,7 @@ public class Librarian extends User {
     }
 
     public static int fine(int idOfCopy){
+        PropertyConfigurator.configure("log4j.properties");
         try {
             Statement stmt = db.con.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT  * FROM Copy WHERE Id_of_copy= " + idOfCopy);
@@ -319,10 +325,10 @@ public class Librarian extends User {
                     return fine;
                 }
             }
-            LOGGER.trace("counted fine for "+ idOfCopy);
+            LOGGER.trace("Counted fine for "+ idOfCopy);
             return 0;
         }catch (SQLException e) {
-            LOGGER.error("error in fine operation");
+            LOGGER.error("Error in fine operation");
         }
         return 0;
     }
@@ -373,6 +379,7 @@ public class Librarian extends User {
      * @return boolean value which will depend on success of checking out
      */
     public static boolean checkOutBook(User user, int idOfBook) {
+        PropertyConfigurator.configure("log4j.properties");
         try {
             Database db = new Database();
             PreparedStatement pr = db.con.prepareStatement("UPDATE Copy SET Owner=?,Time_left=?,Status=?,Return_date=? WHERE Id_of_original= " + idOfBook + " AND Status= 'In library' LIMIT 1 ");
@@ -398,13 +405,13 @@ public class Librarian extends User {
                 }
                 pr.setString(3, "Issued");
                 pr.executeUpdate();
-                LOGGER.trace("copy of book with id "+idOfBook+" was given to user with id "+user.getCard_number());
+                LOGGER.trace("Copy of book with id "+idOfBook+" was given to user with id "+user.getCard_number());
                 return true;
             } else{
-                LOGGER.trace("copy of book with id "+idOfBook+" wasn't given to user with id "+user.getCard_number());
+                LOGGER.trace("Copy of book with id "+idOfBook+" wasn't given to user with id "+user.getCard_number());
                 return false;}
         } catch (SQLException e) {
-            LOGGER.error("error in checking out book");
+            LOGGER.error("Error in checking out book");
             return false;
         }
     }
@@ -451,6 +458,7 @@ public class Librarian extends User {
      * @return boolean value - success or not success of checking out
      */
     public static boolean checkOutAV(User user, int idOfAV) {
+        PropertyConfigurator.configure("log4j.properties");
         try {
             Database db = new Database();
             PreparedStatement pr = db.con.prepareStatement("UPDATE Copy SET Owner=?,Time_left=?,Status=?,Return_date=? WHERE Id_of_original= " + idOfAV + " AND Status= 'In library' LIMIT 1 ");
@@ -469,12 +477,12 @@ public class Librarian extends User {
             }
             pr.setString(3, "Issued");
             pr.executeUpdate();
-            LOGGER.trace("copy of av with id "+idOfAV+" was given to user with id "+user.getCard_number());
+            LOGGER.trace("Copy of av with id "+idOfAV+" was given to user with id "+user.getCard_number());
             return true;
 
         } catch (SQLException e) {
             e.printStackTrace();
-            LOGGER.trace("copy of av with id "+idOfAV+" wasn't given to user with id "+user.getCard_number());
+            LOGGER.trace("Copy of av with id "+idOfAV+" wasn't given to user with id "+user.getCard_number());
             return false;
         }
     }
@@ -512,6 +520,7 @@ public class Librarian extends User {
      * @return boolean value - success or not on checking out
      */
     public static boolean checkOutArticle(User user, int idOfArticle) {
+        PropertyConfigurator.configure("log4j.properties");
         try {
             Database db = new Database();
             PreparedStatement pr = db.con.prepareStatement("UPDATE Copy SET Owner=?,Time_left=?,Status=?,Return_date=? WHERE Id_of_original= " + idOfArticle + " AND Status= 'In library' LIMIT 1 ");
@@ -531,12 +540,14 @@ public class Librarian extends User {
                 }
                 pr.setString(3, "Issued");
                 pr.executeUpdate();
+                LOGGER.trace("Article with id "+idOfArticle+" was checked out to user with id "+user.getCard_number());
                 return true;
             } else {
+                LOGGER.trace("Article with id "+idOfArticle+" wasn't checked out to user with id "+user.getCard_number());
                 return false;
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error("Error during checking out Article");
             return false;
         }
     }
@@ -589,6 +600,7 @@ public class Librarian extends User {
      * @return -1 error, 0 - user added in the queue, 1 - book is checked out
      */
     public static int checkOut(User user, int idMaterial) {
+        PropertyConfigurator.configure("log4j.properties");
         try {
             db.queue_on_material(idMaterial,user.getCard_number());
             int success = -1;
@@ -639,14 +651,19 @@ public class Librarian extends User {
                         }
                     }
                 } else {
-                    //System.out.println("wait for your turn");
+                    LOGGER.trace("To early for user with id "+user.getCard_number()+" to get material with id "+idMaterial);
                 }
             } catch (SQLException e) {
-                e.printStackTrace();
+               LOGGER.error("Error in checking out of "+idMaterial);
             }
+            if(success==1)
+                LOGGER.trace("Successful checking out of "+idMaterial+" to user "+user.getCard_number());
+            if(success==0)
+                LOGGER.trace("User with id "+user.getCard_number()+" joining a queue on material with id "+idMaterial);
             return success;
         }
         catch (Exception e){
+            LOGGER.error("Error in checking out");
             return -1;
         }
     }
@@ -719,6 +736,7 @@ public class Librarian extends User {
      * @return boolean value - is operation successfull or not
      */
     public static boolean returnBook(int idOfCopyOfBook) {
+        PropertyConfigurator.configure("log4j.properties");
         try {
             Database db = new Database();
             PreparedStatement pr = db.con.prepareStatement("UPDATE Copy SET Owner=?,Time_left=?,Status=?,Return_date=?,CanRenew=? WHERE Id_of_copy= " + idOfCopyOfBook);
@@ -728,9 +746,10 @@ public class Librarian extends User {
             pr.setDate(4, java.sql.Date.valueOf(LocalDate.of(9999, 1, 1)));
             pr.setBoolean(5,true);
             pr.executeUpdate();
+            LOGGER.trace("Material with id "+idOfCopyOfBook+" is returned");
             return true;
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error("Error of returning material "+idOfCopyOfBook);
             return false;
         }
     }
@@ -743,14 +762,16 @@ public class Librarian extends User {
      * @return
      */
     public static boolean requestReturnBook(int idOfCopyOfBook) {
+        PropertyConfigurator.configure("log4j.properties");
         try {
             Database db = new Database();
             PreparedStatement pr = db.con.prepareStatement("UPDATE Copy SET Status=? WHERE Id_of_copy= " + idOfCopyOfBook);
             pr.setString(1, "Returning");
             pr.executeUpdate();
+            LOGGER.trace("Successful request on "+idOfCopyOfBook);
             return true;
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error("Error of request");
             return false;
         }
     }
@@ -873,6 +894,7 @@ public class Librarian extends User {
      * @param user_id user's id for deletion
      */
     public static void deleteUserById(int user_id) {
+        PropertyConfigurator.configure("log4j.properties");
         try {
             Database db = new Database();
             Statement stmt = db.con.createStatement();
@@ -882,14 +904,15 @@ public class Librarian extends User {
                 alert.setHeaderText("Deletion");
                 alert.setContentText("User has taken materials");
                 alert.show();
+                LOGGER.error("Attempt to delete user with id "+user_id+".Reason of not deleting: he has taken materials");
             } else {
                 PreparedStatement pr = db.con.prepareStatement("DELETE from Users_of_the_library WHERE Card_number=" + user_id);
+                LOGGER.trace("Successful deletion of user with id "+user_id);
                 pr.executeUpdate();
             }
         } catch (SQLException e) {
-            System.out.println("user with such id didn't found");
+            LOGGER.error("user with id "+user_id+"isn't found");
         }
-        //есть еще идея удалять по именам,но чтобы библиотекарю вылезло уведомление,мол,может удалиться более 1 юзера
     }
 
     /**
@@ -898,6 +921,7 @@ public class Librarian extends User {
      * @param user whose information to change,search by id
      */
     public static void modifyUser(User user) {
+        PropertyConfigurator.configure("log4j.properties");
         try {
             Database db = new Database();
             PreparedStatement pr = db.con.prepareStatement("UPDATE Users_of_the_library " +
@@ -909,8 +933,9 @@ public class Librarian extends User {
             pr.setString(5, user.getPassword());
             pr.setString(6, user.getEmail());
             pr.executeUpdate();
+            LOGGER.trace("Successful modification of user with id "+user.getCard_number());
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error("Error in modification of user");
         }
     }
 
@@ -921,6 +946,7 @@ public class Librarian extends User {
      * @param number how many copies to create
      */
     public static void addCopiesOfMaterial(int id, int number) {
+        PropertyConfigurator.configure("log4j.properties");
         try {
             if (number > 0) {
                 Statement stmt = db.con.createStatement();
@@ -934,15 +960,14 @@ public class Librarian extends User {
                             prst.setInt(2, 0);
                             prst.setInt(3, 999);
                             prst.executeUpdate();
-
-
                         }
+                        LOGGER.trace("Added "+number +" copies of material "+id);
                         return;
                     }
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error("Error in adding copies");
         }
     }
 
@@ -961,16 +986,23 @@ public class Librarian extends User {
      * @param amount
      * @throws SQLException
      */
-    public static void addBook(String title, String author, String publisher, String edition, int price, String keyWords, Boolean is_bestseller, boolean reference, int year, int amount) throws SQLException {
+    public static void addBook(String title, String author, String publisher, String edition, int price, String keyWords, Boolean is_bestseller, boolean reference, int year, int amount){
         /*
          * To add book, you need to send all information about book
          * ID will be created in DB with auto_increment
          * time_left will be 999 and owner 0 - because only librarian(Id =0) can add books
          * */
-        Book book = new Book(title, author, publisher, edition, price, keyWords, is_bestseller, reference, year, "In library");
-        db.bookCreation(book);
-        ArrayList<Integer> arrayList = db.isBookAlreadyExist(book);
-        addCopiesOfMaterial(arrayList.get(1), amount - 1);
+        PropertyConfigurator.configure("log4j.properties");
+        try {
+            Book book = new Book(title, author, publisher, edition, price, keyWords, is_bestseller, reference, year, "In library");
+            db.bookCreation(book);
+            ArrayList<Integer> arrayList = db.isBookAlreadyExist(book);
+            addCopiesOfMaterial(arrayList.get(1), amount - 1);
+            LOGGER.trace("Added book with id "+ book.getId()+" to the library");
+        }
+        catch (SQLException e){
+            LOGGER.error("Error in adding book");
+        }
     }
 
     /**
@@ -988,16 +1020,23 @@ public class Librarian extends User {
      * @throws SQLException
      */
     public static void addArticle(String title, String author, int price, String keyWords,
-                                  boolean reference, String journal, String editor, String date, int amount) throws SQLException {
+                                  boolean reference, String journal, String editor, String date, int amount){
         /*
          * To add article, you need to send all information about article
          * ID will be created in DB with auto_increment
          * time_left will be 999 and owner 0 - because only librarian(Id =0) can add articles
          * */
-        Article article = new Article(title, author, price, keyWords, reference, journal, editor, date, "In library");
-        db.articleCreation(article);
-        ArrayList<Integer> arrayList = db.isArticleAlreadyExist(article);
-        addCopiesOfMaterial(arrayList.get(1), amount - 1);
+        PropertyConfigurator.configure("log4j.properties");
+        try {
+            Article article = new Article(title, author, price, keyWords, reference, journal, editor, date, "In library");
+            db.articleCreation(article);
+            ArrayList<Integer> arrayList = db.isArticleAlreadyExist(article);
+            addCopiesOfMaterial(arrayList.get(1), amount - 1);
+            LOGGER.trace("Added Article with id "+article.getId()+" to the library");
+        }
+        catch(SQLException e){
+            LOGGER.error("Error in adding article");
+        }
     }
 
     /**
@@ -1010,11 +1049,18 @@ public class Librarian extends User {
      * @param amount
      * @throws SQLException
      */
-    public static void addAV(String title, String author, int price, String keyWords, int amount) throws SQLException {
-        AV av = new AV(title, author, price, keyWords, "In library");
-        db.avCreation(av);
-        ArrayList<Integer> arrayList = db.isAVAlreadyExist(av);
-        addCopiesOfMaterial(arrayList.get(1), amount - 1);
+    public static void addAV(String title, String author, int price, String keyWords, int amount){
+        PropertyConfigurator.configure("log4j.properties");
+        try {
+            AV av = new AV(title, author, price, keyWords, "In library");
+            db.avCreation(av);
+            ArrayList<Integer> arrayList = db.isAVAlreadyExist(av);
+            addCopiesOfMaterial(arrayList.get(1), amount - 1);
+            LOGGER.trace("Added AV with id "+av.getId()+" to the library");
+        }
+        catch (SQLException e){
+            LOGGER.error("Error in creating av");
+        }
     }
 
     /**
@@ -1023,13 +1069,15 @@ public class Librarian extends User {
      * @param id unique key of Av for deletion
      */
     public static void deleteAVById(int id) {
+        PropertyConfigurator.configure("log4j.properties");
         try {
             PreparedStatement pr = db.con.prepareStatement("DELETE from AV WHERE id=" + id);
             pr.executeUpdate();
             pr = db.con.prepareStatement("DELETE FROM Copy WHERE Id_of_original=" + id);
             pr.executeUpdate();
+            LOGGER.trace("Successful deletion of AV with id "+id);
         } catch (SQLException e) {
-            System.out.println("AV with such id didn't found");
+            LOGGER.error("AV with id "+id+" isn't found");
         }
     }
 
@@ -1039,11 +1087,13 @@ public class Librarian extends User {
      * @param id unique key of copy
      */
     public static void deleteOneCopy(int id) {
+        PropertyConfigurator.configure("log4j.properties");
         try {
             PreparedStatement pr = db.con.prepareStatement("DELETE from Copy WHERE Id_of_copy=" + id + " LIMIT 1");
             pr.executeUpdate();
+            LOGGER.trace("Successful deletion of Copy with id "+id);
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error("Copy with id "+id+" isn't found");
         }
     }
 
@@ -1053,14 +1103,16 @@ public class Librarian extends User {
      * @param id unique key of book
      */
     public static void deleteBookById(int id) {
+        PropertyConfigurator.configure("log4j.properties");
 
         try {
             PreparedStatement pr = db.con.prepareStatement("DELETE from Books WHERE id=" + id);
             pr.executeUpdate();
             pr = db.con.prepareStatement("DELETE FROM Copy WHERE Id_of_original=" + id);
             pr.executeUpdate();
+            LOGGER.trace("Successful deletion of Book with id "+id);
         } catch (SQLException e) {
-            System.out.println("book with such id didn't found");
+            LOGGER.error("Book with id "+id+" isn't found");
         }
     }
 
@@ -1070,13 +1122,15 @@ public class Librarian extends User {
      * @param id unique key of article
      */
     public static void deleteArticleById(int id) {
+        PropertyConfigurator.configure("log4j.properties");
         try {
             PreparedStatement pr = db.con.prepareStatement("DELETE from Articles WHERE id=" + id);
             pr.executeUpdate();
             pr = db.con.prepareStatement("DELETE FROM Copy WHERE Id_of_original=" + id);
             pr.executeUpdate();
+            LOGGER.trace("Successful deletion of Article with id "+id);
         } catch (SQLException e) {
-            System.out.println("article with such id didn't found");
+            LOGGER.error("Article with id "+id+" isn't found");
         }
     }
 
@@ -1086,6 +1140,7 @@ public class Librarian extends User {
      * @param av which av to change, search by id
      */
     public static void modifyAV(AV av) {
+        PropertyConfigurator.configure("log4j.properties");
         try {
             PreparedStatement pr = db.con.prepareStatement("UPDATE AV " +
                     "SET Name=?,Author=?,Price=?,Keywords=? where id=" + av.getId());
@@ -1094,8 +1149,9 @@ public class Librarian extends User {
             pr.setInt(3, av.getPrice());
             pr.setString(4, av.getKeyWords());
             pr.executeUpdate();
+            LOGGER.trace("Modification of AV with id "+av.getId());
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error("AV with id "+av.getId()+" isn't found");
         }
     }
 
@@ -1105,6 +1161,7 @@ public class Librarian extends User {
      * @param article what article to change,search by id
      */
     public static void modifyArticle(Article article) {
+        PropertyConfigurator.configure("log4j.properties");
         try {
             PreparedStatement pr = db.con.prepareStatement("UPDATE Articles " +
                     "SET Name=?,Author=?,Price=?,Keywords=?,is_reference=?,Journal=?,Editor=?,Date=? where id=" + article.getId());
@@ -1117,8 +1174,9 @@ public class Librarian extends User {
             pr.setString(7, article.getEditor());
             pr.setDate(8, java.sql.Date.valueOf(article.getDate()));
             pr.executeUpdate();
+            LOGGER.trace("Modification of Article with id "+article.getId());
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error("AV with id "+article.getId()+" isn't found");
         }
     }
 
@@ -1128,6 +1186,7 @@ public class Librarian extends User {
      * @param book what book to change,search by id
      */
     public static void modifyBook(Book book) {
+        PropertyConfigurator.configure("log4j.properties");
         try {
             ArrayList arrayList = db.isBookAlreadyExist(book);
             PreparedStatement pr = db.con.prepareStatement("UPDATE Books " +
@@ -1141,10 +1200,9 @@ public class Librarian extends User {
             pr.setBoolean(7, book.getBestseller());
             pr.setBoolean(8, book.getReference());
             pr.executeUpdate();
-
-
+            LOGGER.trace("Modification of Book with id "+book.getId());
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error("Book with id "+book.getId()+" isn't found");
         }
     }
 
@@ -1403,7 +1461,6 @@ public class Librarian extends User {
                 String resTime = rs.getString("Reserving_time");
                 Boolean isNotified = rs.getBoolean("is_sended");
                 User user = new User(id, resTime, isNotified);
-
                 queue.add(user);
             }
 
