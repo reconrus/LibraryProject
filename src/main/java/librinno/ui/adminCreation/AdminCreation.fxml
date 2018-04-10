@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="310.0" prefWidth="330.0" stylesheets="@../../../../resources/theme.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.librinno.ui.adminCreation.AdminCreationController">
+   <children>
+      <Group layoutX="49.0" layoutY="34.0">
+         <children>
+            <JFXTextField fx:id="name" layoutY="9.0" prefHeight="25.0" prefWidth="232.0" promptText="Name" />
+            <JFXPasswordField fx:id="password" layoutY="41.0" prefHeight="25.0" prefWidth="232.0" promptText="Password" />
+            <JFXTextField fx:id="phone" layoutY="75.0" prefHeight="25.0" prefWidth="232.0" promptText="Phone" />
+            <JFXTextField fx:id="address" layoutY="108.0" prefHeight="25.0" prefWidth="232.0" promptText="Address" />
+            <JFXTextField fx:id="email" layoutY="141.0" prefHeight="25.0" prefWidth="232.0" promptText="E-mail " />
+         </children>
+      </Group>
+      <JFXButton fx:id="cancel" layoutX="49.0" layoutY="248.0" onAction="#cancel" prefHeight="31.0" prefWidth="67.0" text="Cancel" />
+      <JFXButton fx:id="confirm" layoutX="214.0" layoutY="248.0" onAction="#confirm" prefHeight="31.0" prefWidth="67.0" text="Confirm" />
+   </children>
+</AnchorPane>

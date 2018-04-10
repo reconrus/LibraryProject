@@ -1,18 +1,15 @@
-package main.java.librinno.ui.adminScreen;
+package main.java.librinno.ui.adminCreation;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
-import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.ToggleGroup;
+import main.java.librinno.model.Admin;
 import main.java.librinno.model.Database;
-import main.java.librinno.model.Librarian;
-import main.java.librinno.model.User;
 import main.java.librinno.ui.assist.Assist;
 
-public class LibrarianAddScreen {
+public class AdminCreationController {
 
     @FXML
     private JFXTextField name;
@@ -30,20 +27,10 @@ public class LibrarianAddScreen {
     private JFXTextField email;
 
     @FXML
-    private JFXRadioButton lev1;
-
-    @FXML
-    private JFXRadioButton lev2;
-
-    @FXML
-    private JFXRadioButton lev3;
+    private JFXButton cancel;
 
     @FXML
     private JFXButton confirm;
-
-    @FXML
-    private JFXButton cancel;
-
 
     @FXML
     void cancel(ActionEvent event) {
@@ -57,28 +44,16 @@ public class LibrarianAddScreen {
         String addressText= address.getText();
         String phoneNum= phone.getText();
         String mail = email.getText();
-        String privilege = (lev1.isSelected())? Librarian.lev1:(lev2.isSelected())?Librarian.lev2:Librarian.lev3;
         if ((user.isEmpty())||pass.isEmpty()||addressText.isEmpty()||phoneNum.isEmpty() || mail.isEmpty()){
             Assist.error();
         }
-        else {
+        else{
             if(Assist.isValidEmailAddress(mail)) {
-                Database db = new Database();
-                db.userCreation(new User(user, phoneNum, addressText, 10000,"Librarian "+privilege, pass, mail));
+                Database.admin_creation(new Admin(user, phoneNum, addressText,1,"Admin",  pass, mail));
                 Assist.closeStage(confirm);
             }
             else Assist.emailError();
         }
     }
 
-    @FXML
-    void initialize(){
-
-        final ToggleGroup types = new ToggleGroup();
-
-        lev1.setToggleGroup(types);
-        lev2.setToggleGroup(types);
-        lev3.setToggleGroup(types);
-
-    }
 }

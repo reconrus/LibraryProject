@@ -1,6 +1,7 @@
 package main.java.librinno.ui.main;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,7 +19,7 @@ public class dbinfoClass {
     private JFXTextField user;
 
     @FXML
-    private JFXTextField pass;
+    private JFXPasswordField pass;
     @FXML
     private JFXButton confirm;
 
