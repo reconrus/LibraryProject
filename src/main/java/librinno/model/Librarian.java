@@ -100,6 +100,7 @@ public class Librarian extends User {
             }
 
             pr.executeUpdate("DROP TABLE IF EXISTS queue_on_" + idOfMaterial);
+            LOGGER.trace("Librarian made an outstanding request");
         }catch (SQLException e) {
             e.printStackTrace();
         }
@@ -276,10 +277,11 @@ public class Librarian extends User {
 
 
             }
+            LOGGER.trace("user with id "+ user.getCard_number()+" renewed copy with id "+idOfRenewCopy);
             return false;
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error("error in renew operation");
             return false;
         }
     }
@@ -317,9 +319,10 @@ public class Librarian extends User {
                     return fine;
                 }
             }
+            LOGGER.trace("counted fine for "+ idOfCopy);
             return 0;
         }catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error("error in fine operation");
         }
         return 0;
     }
@@ -395,12 +398,13 @@ public class Librarian extends User {
                 }
                 pr.setString(3, "Issued");
                 pr.executeUpdate();
+                LOGGER.trace("copy of book with id "+idOfBook+" was given to user with id "+user.getCard_number());
                 return true;
-            } else
-                return false;
-
+            } else{
+                LOGGER.trace("copy of book with id "+idOfBook+" wasn't given to user with id "+user.getCard_number());
+                return false;}
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error("error in checking out book");
             return false;
         }
     }
@@ -465,10 +469,12 @@ public class Librarian extends User {
             }
             pr.setString(3, "Issued");
             pr.executeUpdate();
+            LOGGER.trace("copy of av with id "+idOfAV+" was given to user with id "+user.getCard_number());
             return true;
 
         } catch (SQLException e) {
             e.printStackTrace();
+            LOGGER.trace("copy of av with id "+idOfAV+" wasn't given to user with id "+user.getCard_number());
             return false;
         }
     }
