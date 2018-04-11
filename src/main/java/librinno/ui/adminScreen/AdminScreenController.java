@@ -1,6 +1,7 @@
 package main.java.librinno.ui.adminScreen;
 
 import com.jfoenix.controls.JFXButton;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -19,8 +20,12 @@ import main.java.librinno.ui.assist.Assist;
 import main.java.librinno.ui.editPatron.EditPatron;
 import main.java.librinno.ui.librarianScreen.LibrarianScreenController;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.Scanner;
 
 public class AdminScreenController {
 
@@ -55,12 +60,22 @@ public class AdminScreenController {
     private TableColumn<Librarian, String> privilege;
 
     @FXML
+    private TableView<LogsForTable> logs;
+
+    @FXML
+    private TableColumn<LogsForTable, String> events;
+
+    @FXML
+    private TableColumn<LogsForTable, String> date;
+
+    @FXML
     private JFXButton logout;
 
 
     @FXML
-    void initialize(){
+    void initialize() throws FileNotFoundException {
         showTableUser();
+        showLogs();
     }
     @FXML
     void showTableUser(){
@@ -113,6 +128,17 @@ public class AdminScreenController {
     private void logoutAction(ActionEvent event) throws IOException {
         Assist.closeStage(logout);
         Assist.loadStage(getClass().getResource("/main/java/librinno/ui/login/LoginScreen.fxml"));
+    }
+
+    @FXML
+    void showLogs() throws FileNotFoundException {
+        Scanner sc= new Scanner(new File("myproject.log"));
+        ArrayList<LogsForTable> arr= new ArrayList<>();
+        while (sc.hasNext()) arr.add(new LogsForTable(sc.nextLine()));
+        date.setCellValueFactory(new PropertyValueFactory("date"));
+        events.setCellValueFactory(new PropertyValueFactory("event"));
+        logs.getItems().setAll(arr);
+
     }
 
     @FXML

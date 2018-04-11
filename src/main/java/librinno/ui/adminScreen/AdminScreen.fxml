@@ -102,6 +102,30 @@
                               </AnchorPane>
                            </content>
                         </Tab>
+                        <Tab text="Logs">
+                          <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <BorderPane prefHeight="387.0" prefWidth="612.0">
+                                       <center>
+                                          <TableView fx:id="logs" prefHeight="325.0" prefWidth="612.0" BorderPane.alignment="CENTER">
+                                            <columns>
+                                                <TableColumn fx:id="date" maxWidth="750.0" prefWidth="100.0" text="Date" />
+                                              <TableColumn fx:id="events" prefWidth="75.0" text="Event" />
+                                            </columns>
+                                             <columnResizePolicy>
+                                                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                             </columnResizePolicy>
+                                          </TableView>
+                                       </center>
+                                       <bottom>
+                                          <AnchorPane prefHeight="60.0" prefWidth="612.0" BorderPane.alignment="CENTER" />
+                                       </bottom>
+                                    </BorderPane>
+                                 </children>
+                              </AnchorPane>
+                          </content>
+                        </Tab>
                      </tabs>
                   </JFXTabPane>
                   <JFXButton fx:id="logout" layoutX="518.0" layoutY="8.0" onAction="#logoutAction" text="Log OUT" textAlignment="CENTER" textFill="WHITE" AnchorPane.rightAnchor="7.600000000000023" AnchorPane.topAnchor="8.0">
