@@ -148,5 +148,91 @@ public class Search {
         }
         return arrayList;
     }
+    public static ArrayList<AV> avByAuthor(String author){
+        //вводится строка из авторов разделенных запятыми. Метод сам распарсивает их на отдельных авторов.
+        PropertyConfigurator.configure("log4j.properties");
+        ArrayList<AV> arrayList = new ArrayList();
+        ArrayList<String> authorList = new ArrayList(separateIntoList(author));
+        Statement stmt = null;
+        try {
+            stmt = db.con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT  * FROM av");
+            while (rs.next()){
+                for (int i = 0; i <authorList.size() ; i++) {
+                    if (rs.getString("Author").toLowerCase().indexOf(authorList.get(i).toLowerCase())>=0){
+                        AV av = new AV(rs.getInt("id"),rs.getString("Name"),rs.getString("Author"),rs.getInt("Price"),rs.getString("Keywords"));
+                        arrayList.add(av);
+                        break;//чтоб не добавлять по несколько раз один и тот же материал
+                    }
+                }
+            }
+            if (arrayList.size()>0)
+                LOGGER.trace("Found this author(authors) in AV DB");
+            else
+                LOGGER.trace("Didn't Found this author(authors) in AV DB");
+        } catch (SQLException e) {
+            LOGGER.error("Error in searching author(authors) of AV");
+            e.printStackTrace();
+        }
+        return arrayList;
+    }
+    public static ArrayList<AV> avByPrice(int price){
+        PropertyConfigurator.configure("log4j.properties");
+        ArrayList<AV> arrayList = new ArrayList();
+        Statement stmt = null;
+        try{
+            stmt = db.con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT  * FROM av");
+            while (rs.next()) {
+                if (rs.getInt("Price")==price){
+                    AV av = new AV(rs.getString("Name"),rs.getString("Author"),rs.getInt("Price"),rs.getString("Keywords"));
+                    arrayList.add(av);
+                }
+            }
+            if (arrayList.size()>0)
+                LOGGER.trace("Found this price in AV DB");
+            else
+                LOGGER.trace("Didn't Found this price in AV DB");
+        }catch (SQLException e) {
+            LOGGER.error("Error in searching price of AV");
+            e.printStackTrace();
+        }
+        return arrayList;
+    }
+    public static ArrayList<AV> avByKeyWords(String keyWords){
+        //вводится строка из кейвордов разделенных запятыми. Метод сам распарсивает их на отдельные кейворды.
+        PropertyConfigurator.configure("log4j.properties");
+        ArrayList<AV> arrayList = new ArrayList();
+        ArrayList<String> authorList = new ArrayList(separateIntoList(keyWords));
+        Statement stmt = null;
+        try {
+            stmt = db.con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT  * FROM av");
+            while (rs.next()){
+                for (int i = 0; i <authorList.size() ; i++) {//перебираю все распарсенные кейВорды
+                    if (rs.getString("Keywords").toLowerCase().indexOf(authorList.get(i).toLowerCase())>=0){
+                        AV av = new AV(rs.getInt("id"),rs.getString("Name"),rs.getString("Author"),rs.getInt("Price"),rs.getString("Keywords"));
+                        arrayList.add(av);
+                        break;
+                    }
+                }
+            }
+            if (arrayList.size()>0)
+                LOGGER.trace("Found this keyWord(keyWords) in AV DB");
+            else
+                LOGGER.trace("Didn't Found this keyWord(keyWords) in AV DB");
+        } catch (SQLException e) {
+            LOGGER.error("Error in searching keyWord(keyWords) of AV");
+            e.printStackTrace();
+        }
+        return arrayList;
+    }
     
+    private static ArrayList<String> separateIntoList(String line){
+        ArrayList<String> arrayList = new ArrayList<>();
+        for(String word:line.split(",")){
+            arrayList.add(word.trim());
+        }
+        return arrayList;
+    }
 }
