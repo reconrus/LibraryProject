@@ -195,16 +195,17 @@ public class Search {
                     arrayList.add(db.getInformationAboutTheUser(rs.getInt("Card_number")));
 
             }
+            if (arrayList.size() > 0)
+                LOGGER.trace("Found user in DB");
+            else
+                LOGGER.trace("Didn't Found this user in DB");
         }catch (SQLException e) {
             LOGGER.error("Error in searching email of User");
             e.printStackTrace();
         }
-        if (arrayList.size() > 0)
-            LOGGER.trace("Found user in DB");
-        else
-            LOGGER.trace("Didn't Found this user in DB");
         return arrayList;
     }
+
 
     public static ArrayList<AV> avByName(String name){
         PropertyConfigurator.configure("log4j.properties");
@@ -318,6 +319,7 @@ public class Search {
             LOGGER.trace("keyWords is empty");
         return arrayList;
     }
+
 
     public static ArrayList<Article> articleByName(String name) {
         PropertyConfigurator.configure("log4j.properties");
@@ -553,6 +555,7 @@ public class Search {
         return arrayList;
     }
 
+
     public static ArrayList<Book> bookByName(String name) {
         Librarian l = new Librarian(null, null, null, 999, null, null,null);
         PropertyConfigurator.configure("log4j.properties");
@@ -662,6 +665,131 @@ public class Search {
             LOGGER.trace("edition is empty");
         return arrayList;
     }
+    public static ArrayList<Book> bookByPrice(int price) {
+        Librarian l = new Librarian(null, null, null, 999, null, null,null);
+        PropertyConfigurator.configure("log4j.properties");
+        ArrayList<Book> arrayList = new ArrayList();
+            Statement stmt = null;
+            try {
+                stmt = db.con.createStatement();
+                ResultSet rs = stmt.executeQuery("SELECT  * FROM books");
+                while (rs.next()) {
+                    if (rs.getInt("Price")==price) {
+                        arrayList.add(l.bookByID(rs.getInt("id")));
+                    }
+                }
+                if (arrayList.size() > 0)
+                    LOGGER.trace("Found this price in Book DB");
+                else
+                    LOGGER.trace("Didn't Found this price in Book DB");
+            } catch (SQLException e) {
+                LOGGER.error("Error in searching price of Book");
+                e.printStackTrace();
+            }
+        return arrayList;
+    }
+    public static ArrayList<Book> bookByKeywords (String keyword){
+        //вводится строка из авторов разделенных запятыми. Метод сам распарсивает их на отдельных авторов.
+        Librarian l = new Librarian(null, null, null, 999, null, null,null);
+        PropertyConfigurator.configure("log4j.properties");
+        ArrayList<Book> arrayList = new ArrayList();
+        ArrayList<String> keyWordList = new ArrayList(separateIntoList(keyword));
+        if (!keyword.trim().isEmpty()) {
+            Statement stmt = null;
+            try {
+                stmt = db.con.createStatement();
+                ResultSet rs = stmt.executeQuery("SELECT  * FROM books");
+                while (rs.next()) {
+                    for (int i = 0; i < keyWordList.size(); i++) {
+                        if (rs.getString("Keywords").toLowerCase().indexOf(keyWordList.get(i).toLowerCase()) >= 0) {
+                            arrayList.add(l.bookByID(rs.getInt("id")));
+                            break;//чтоб не добавлять по несколько раз один и тот же материал
+                        }
+                    }
+                }
+                if (arrayList.size() > 0)
+                    LOGGER.trace("Found this keyWord(keyWords) in Books DB");
+                else
+                    LOGGER.trace("Didn't Found this keyWord(keyWords) in Books DB");
+            } catch (SQLException e) {
+                LOGGER.error("Error in searching keyWord(keyWords) of Books");
+                e.printStackTrace();
+            }
+        }else
+            LOGGER.trace("keyWord is empty");
+        return arrayList;
+    }
+    public static ArrayList<Book> bookByBestSeller(boolean isBestSeller) {
+        Librarian l = new Librarian(null, null, null, 999, null, null,null);
+        PropertyConfigurator.configure("log4j.properties");
+        ArrayList<Book> arrayList = new ArrayList();
+        Statement stmt = null;
+        try {
+            stmt = db.con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT  * FROM books");
+            while (rs.next()) {
+                if (rs.getBoolean("is_bestseller")==isBestSeller) {
+                    arrayList.add(l.bookByID(rs.getInt("id")));
+                }
+            }
+            if (arrayList.size() > 0)
+                LOGGER.trace("Found this isBestSeller in Book DB");
+            else
+                LOGGER.trace("Didn't Found this isBestSeller in Book DB");
+        } catch (SQLException e) {
+            LOGGER.error("Error in searching isBestSeller of Book");
+            e.printStackTrace();
+        }
+        return arrayList;
+    }
+    public static ArrayList<Book> bookByReference(boolean isReference) {
+        Librarian l = new Librarian(null, null, null, 999, null, null,null);
+        PropertyConfigurator.configure("log4j.properties");
+        ArrayList<Book> arrayList = new ArrayList();
+        Statement stmt = null;
+        try {
+            stmt = db.con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT  * FROM books");
+            while (rs.next()) {
+                if (rs.getBoolean("is_reference")==isReference) {
+                    arrayList.add(l.bookByID(rs.getInt("id")));
+                }
+            }
+            if (arrayList.size() > 0)
+                LOGGER.trace("Found this isReference in Book DB");
+            else
+                LOGGER.trace("Didn't Found this isReference in Book DB");
+        } catch (SQLException e) {
+            LOGGER.error("Error in searching isReference of Book");
+            e.printStackTrace();
+        }
+        return arrayList;
+    }
+    public static ArrayList<Book> bookByYear(int year) {
+        Librarian l = new Librarian(null, null, null, 999, null, null,null);
+        PropertyConfigurator.configure("log4j.properties");
+        ArrayList<Book> arrayList = new ArrayList();
+        Statement stmt = null;
+        try {
+            stmt = db.con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT  * FROM books");
+            while (rs.next()) {
+                if (rs.getInt("Year")==year) {
+                    arrayList.add(l.bookByID(rs.getInt("id")));
+                }
+            }
+            if (arrayList.size() > 0)
+                LOGGER.trace("Found this year in Book DB");
+            else
+                LOGGER.trace("Didn't Found this year in Book DB");
+        } catch (SQLException e) {
+            LOGGER.error("Error in searching year of Book");
+            e.printStackTrace();
+        }
+        return arrayList;
+    }
+
+
 
     private static ArrayList<String> separateIntoList(String line){
         ArrayList<String> arrayList = new ArrayList<>();
