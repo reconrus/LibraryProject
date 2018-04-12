@@ -1,5 +1,6 @@
 package main.java.librinno.model;
 
+import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
 import java.sql.*;
@@ -10,6 +11,7 @@ public class Admin extends User {
         super(name, address, number, cardnumber, type, password, email);
     }
     public static void modify_librarian(User user) {
+        PropertyConfigurator.configure("log4j.properties");
         try {
             Database db = new Database();
             PreparedStatement pr = db.con.prepareStatement("UPDATE Users_of_the_library " +
@@ -22,7 +24,6 @@ public class Admin extends User {
             pr.setString(5, user.getPassword());
             pr.setString(6, user.getEmail());
             pr.executeUpdate();
-            PropertyConfigurator.configure("log4j.properties");
             LOGGER.trace("Librarian with id "+user.getCard_number()+" was modified");
         } catch (SQLException e) {
             e.printStackTrace();
@@ -31,6 +32,7 @@ public class Admin extends User {
     }
 
     public static void delete_librarian(int user_id) {
+        PropertyConfigurator.configure("log4j.properties");
         try {
             Database db = new Database();
             PreparedStatement pr = db.con.prepareStatement("DELETE from Users_of_the_library WHERE Card_number=" + user_id+" and Type= 'Librarian'");
@@ -41,6 +43,7 @@ public class Admin extends User {
         }
     }
     public static void add_librarian(User user) {
+        PropertyConfigurator.configure("log4j.properties");
         try {
             Database db=new Database();
             prst = db.con.prepareStatement("insert into Users_of_the_library(Name, Address, Phone_number,Type,Password,Email,Privilege) values(?, ?, ?,?,?,?,?)");
