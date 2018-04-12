@@ -569,8 +569,7 @@ public class Database extends Main {
                     while (matcher.find()) {
                         id = matcher.group();
                     }
-                    Librarian l = new Librarian(null, null, null, 999, null, null,null);
-                    //TODO Дим, а этот конструктор не надо заменить на этот?: Librarian l = new Librarian("1", "1", "1", 0, "Librarian Priv3", "1","1");
+                    Librarian l = new Librarian("1", "1", "1", 0, "Librarian Priv3", "1","1");
                     int user_id = table_rs.getInt("Card_number");
                     if(l.getNumberOfCopiesOfBook(Integer.parseInt(id))>0) {
                         String note = "User: " + user_id + " You can get material with id " + id;
@@ -609,8 +608,7 @@ public class Database extends Main {
                             table_id = matcher.group();
                         }
                         int user_id = table_rs.getInt("Card_number");
-                        Librarian l = new Librarian(null, null, null, 999, null, null,null);
-                        //TODO Дим, а этот конструктор не надо заменить на этот?: Librarian l = new Librarian("1", "1", "1", 0, "Librarian Priv3", "1","1");
+                        Librarian l = new Librarian("1", "1", "1", 0, "Librarian Priv3", "1","1");
                         user = l.UserById(user_id);
                         if(l.getNumberOfCopiesOfBook(Integer.parseInt(table_id))>0)
                             emails.add(user.getEmail());
