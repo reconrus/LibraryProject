@@ -14,6 +14,87 @@ public class Search {
     private static Database db = new Database();
     public Search(){}
 
+
+    public static ArrayList<Material> materialByWord(String requiredMaterial){
+        Librarian l = new Librarian("1", "1", "1", 0, "Librarian Priv3", "1","1");
+        ArrayList<Material> arrayList= new ArrayList();
+        Statement stmt = null;
+        try {
+            stmt = db.con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT  * FROM av");
+            while (rs.next()) {
+                if (rs.getString("Name").trim().toLowerCase().indexOf(requiredMaterial.trim().toLowerCase())>=0) {
+                    arrayList.add(l.avById(rs.getInt("id")));
+                    continue;
+                }
+                if (rs.getString("Author").trim().toLowerCase().indexOf(requiredMaterial.trim().toLowerCase())>=0) {
+                    arrayList.add(l.avById(rs.getInt("id")));
+                    continue;
+                }
+                if (rs.getString("Keywords").trim().toLowerCase().indexOf(requiredMaterial.trim().toLowerCase())>=0) {
+                    arrayList.add(l.avById(rs.getInt("id")));
+                    continue;
+                }
+            }
+            ResultSet rs2 = stmt.executeQuery("SELECT  * FROM articles");
+            while (rs2.next()) {
+                if (rs2.getString("Name").trim().toLowerCase().indexOf(requiredMaterial.trim().toLowerCase())>=0){
+                    arrayList.add(l.articleById(rs2.getInt("id")));
+                    continue;
+                }
+                if (rs2.getString("Author").trim().toLowerCase().indexOf(requiredMaterial.trim().toLowerCase())>=0){
+                    arrayList.add(l.articleById(rs2.getInt("id")));
+                    continue;
+                }
+                if (rs2.getString("Keywords").trim().toLowerCase().indexOf(requiredMaterial.trim().toLowerCase())>=0){
+                    arrayList.add(l.articleById(rs2.getInt("id")));
+                    continue;
+                }
+                if (rs2.getString("Journal").trim().toLowerCase().indexOf(requiredMaterial.trim().toLowerCase())>=0){
+                    arrayList.add(l.articleById(rs2.getInt("id")));
+                    continue;
+                }
+                if (rs2.getString("Editor").trim().toLowerCase().indexOf(requiredMaterial.trim().toLowerCase())>=0){
+                    arrayList.add(l.articleById(rs2.getInt("id")));
+                    continue;
+                }
+            }
+            ResultSet rs3 = stmt.executeQuery("SELECT  * FROM books");
+            while (rs3.next()) {
+                if (rs3.getString("Name").trim().toLowerCase().indexOf(requiredMaterial.trim().toLowerCase())>=0){
+                    arrayList.add(l.bookByID(rs3.getInt("id")));
+                    continue;
+                }
+                if (rs3.getString("Author").trim().toLowerCase().indexOf(requiredMaterial.trim().toLowerCase())>=0){
+                    arrayList.add(l.bookByID(rs3.getInt("id")));
+                    continue;
+                }
+                if (rs3.getString("Publisher").trim().toLowerCase().indexOf(requiredMaterial.trim().toLowerCase())>=0){
+                    arrayList.add(l.bookByID(rs3.getInt("id")));
+                    continue;
+                }
+                if (rs3.getString("Keywords").trim().toLowerCase().indexOf(requiredMaterial.trim().toLowerCase())>=0){
+                    arrayList.add(l.bookByID(rs3.getInt("id")));
+                    continue;
+                }
+                if (rs3.getString("Edition").trim().toLowerCase().indexOf(requiredMaterial.trim().toLowerCase())>=0){
+                    arrayList.add(l.bookByID(rs3.getInt("id")));
+                    continue;
+                }
+            }
+            if (arrayList.size() > 0)
+                LOGGER.trace("Found this keyWord(keyWords) in AV DB");
+            else
+                LOGGER.trace("Didn't Found this keyWord(keyWords) in AV DB");
+        }catch (SQLException e) {
+            LOGGER.error("Error in searching  of material");
+            e.printStackTrace();
+        }
+
+
+        return arrayList;
+    }
+
     public static ArrayList<User> userByName(String name){
         PropertyConfigurator.configure("log4j.properties");
         ArrayList<User> arrayList = new ArrayList();
@@ -557,7 +638,7 @@ public class Search {
 
 
     public static ArrayList<Book> bookByName(String name) {
-        Librarian l = new Librarian(null, null, null, 999, null, null,null);
+        Librarian l = new Librarian("1", "1", "1", 0, "Librarian Priv3", "1","1");
         PropertyConfigurator.configure("log4j.properties");
         ArrayList<Book> arrayList = new ArrayList();
         if (!name.trim().isEmpty()) {
@@ -584,7 +665,7 @@ public class Search {
     }
     public static ArrayList<Book> bookByAuthor (String author){
         //вводится строка из авторов разделенных запятыми. Метод сам распарсивает их на отдельных авторов.
-        Librarian l = new Librarian(null, null, null, 999, null, null,null);
+        Librarian l = new Librarian("1", "1", "1", 0, "Librarian Priv3", "1","1");
         PropertyConfigurator.configure("log4j.properties");
         ArrayList<Book> arrayList = new ArrayList();
         ArrayList<String> authorList = new ArrayList(separateIntoList(author));
@@ -614,7 +695,7 @@ public class Search {
         return arrayList;
     }
     public static ArrayList<Book> bookByPublisher(String publisher) {
-        Librarian l = new Librarian(null, null, null, 999, null, null,null);
+        Librarian l = new Librarian("1", "1", "1", 0, "Librarian Priv3", "1","1");
         PropertyConfigurator.configure("log4j.properties");
         ArrayList<Book> arrayList = new ArrayList();
         if (!publisher.trim().isEmpty()) {
@@ -640,7 +721,7 @@ public class Search {
         return arrayList;
     }
     public static ArrayList<Book> bookByEdition(String edition) {
-        Librarian l = new Librarian(null, null, null, 999, null, null,null);
+        Librarian l = new Librarian("1", "1", "1", 0, "Librarian Priv3", "1","1");
         PropertyConfigurator.configure("log4j.properties");
         ArrayList<Book> arrayList = new ArrayList();
         if (!edition.trim().isEmpty()) {
@@ -666,7 +747,7 @@ public class Search {
         return arrayList;
     }
     public static ArrayList<Book> bookByPrice(int price) {
-        Librarian l = new Librarian(null, null, null, 999, null, null,null);
+        Librarian l = new Librarian("1", "1", "1", 0, "Librarian Priv3", "1","1");
         PropertyConfigurator.configure("log4j.properties");
         ArrayList<Book> arrayList = new ArrayList();
             Statement stmt = null;
@@ -690,7 +771,7 @@ public class Search {
     }
     public static ArrayList<Book> bookByKeywords (String keyword){
         //вводится строка из авторов разделенных запятыми. Метод сам распарсивает их на отдельных авторов.
-        Librarian l = new Librarian(null, null, null, 999, null, null,null);
+        Librarian l = new Librarian("1", "1", "1", 0, "Librarian Priv3", "1","1");
         PropertyConfigurator.configure("log4j.properties");
         ArrayList<Book> arrayList = new ArrayList();
         ArrayList<String> keyWordList = new ArrayList(separateIntoList(keyword));
@@ -720,7 +801,7 @@ public class Search {
         return arrayList;
     }
     public static ArrayList<Book> bookByBestSeller(boolean isBestSeller) {
-        Librarian l = new Librarian(null, null, null, 999, null, null,null);
+        Librarian l = new Librarian("1", "1", "1", 0, "Librarian Priv3", "1","1");
         PropertyConfigurator.configure("log4j.properties");
         ArrayList<Book> arrayList = new ArrayList();
         Statement stmt = null;
@@ -743,7 +824,7 @@ public class Search {
         return arrayList;
     }
     public static ArrayList<Book> bookByReference(boolean isReference) {
-        Librarian l = new Librarian(null, null, null, 999, null, null,null);
+        Librarian l = new Librarian("1", "1", "1", 0, "Librarian Priv3", "1","1");
         PropertyConfigurator.configure("log4j.properties");
         ArrayList<Book> arrayList = new ArrayList();
         Statement stmt = null;
@@ -766,7 +847,7 @@ public class Search {
         return arrayList;
     }
     public static ArrayList<Book> bookByYear(int year) {
-        Librarian l = new Librarian(null, null, null, 999, null, null,null);
+        Librarian l = new Librarian("1", "1", "1", 0, "Librarian Priv3", "1","1");
         PropertyConfigurator.configure("log4j.properties");
         ArrayList<Book> arrayList = new ArrayList();
         Statement stmt = null;
