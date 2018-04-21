@@ -1,21 +1,24 @@
 package main.java.librinno.model;
 
 import java.sql.*;
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.LinkedList;
 
+/**
+ * Second thread for sending emails to users
+ */
 public class Notification_thread extends Thread {
+    /**
+     * constructor
+     */
     public Notification_thread() {
     }
 
     Database db = new Database();
 
+    /**
+     * main, launching method
+     */
     @Override
     public void run() {
         while (!isInterrupted()) {
@@ -31,6 +34,9 @@ public class Notification_thread extends Thread {
         }
     }
 
+    /**
+     * sending emails t users
+     */
     public void send_email() {
         try {
             SendEmail sendEmail = new SendEmail();
@@ -39,6 +45,9 @@ public class Notification_thread extends Thread {
         catch (NullPointerException n){}
     }
 
+    /**
+     * deletion of the user from the queue after 24 hours
+     */
     public void hours24Deletion() {
         Database db = new Database();
         try {

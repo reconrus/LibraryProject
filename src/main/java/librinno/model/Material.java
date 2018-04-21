@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import static java.time.temporal.ChronoUnit.DAYS;
 
 /**
- * Created by Ilnur Mamedbakov on 25.01.2018.
  * All types of materials have a few same properties:
  *id
  *title
@@ -15,6 +14,7 @@ import static java.time.temporal.ChronoUnit.DAYS;
  * And all types are inherited from this class Material
  */
 public class Material {
+    //properties of material
     public int id;
     public String title;
     public String author;
@@ -62,6 +62,9 @@ public class Material {
     public String getAuthor() {
         return author;
     }
+    public void setAuthor(String author) {
+        this.author = author;
+    }
     public int getOverdue(User whoTook,LocalDate now) {
         if (whoTook.getType().equals("Professor")){
             return 0;
@@ -71,9 +74,6 @@ public class Material {
         }
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
-    }
 
     public String getKeyWords() {
         return KeyWords;
@@ -83,16 +83,16 @@ public class Material {
         KeyWords = keyWords;
     }
 
-    public void setType(String type){
-        this.type=type;
-    }
     public String getType(){
         return type;
     }
-    public void setNumberAvailable(int number){ this.numberAvailable = number; }
+    public void setType(String type){
+        this.type=type;
+    }
     public int getNumberAvailable(){ return this.numberAvailable;}
-    public void setUserId(int userId){ this.userId = userId; }
+    public void setNumberAvailable(int number){ this.numberAvailable = number; }
     public int getUserId(){ return this.userId;}
+    public void setUserId(int userId){ this.userId = userId; }
 
     public int getTotalNumber() {
         return totalNumber;

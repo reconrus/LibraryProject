@@ -9,11 +9,19 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+/**
+ * Sending emails to users of the library
+ * Sending take place from librinno1@gmail.com
+ */
 public class SendEmail extends Database {
+    //Base properties for sending
     private static String USER_NAME = "librinno1";
     private static String PASSWORD = "thebestteamever";
     private static ArrayList<Address> all_emails = new ArrayList<>();
 
+    /**
+     * getting all emails from database
+     */
     public static void send() {
         String from = USER_NAME;
         String pass = PASSWORD;
@@ -23,12 +31,27 @@ public class SendEmail extends Database {
                 "You have 24 hours to get document.";
         sendFromGMail(from, pass, to, subject, body);
         }
+
+    /**
+     * @param email who will receive letter
+     * @param subject header
+     * @param body main text
+     */
     public static void sendToOne(String email,String subject,String body) {
         String from = USER_NAME;
         String pass = PASSWORD;
         String[] to = {email};
         sending_to_one(from, pass, to, subject, body);
     }
+
+    /**
+     * main operation for sending email to one
+     * @param from main mail from which everything is sent
+     * @param pass password
+     * @param to who is receiver
+     * @param subject header
+     * @param body main text
+     */
     private static void sending_to_one(String from, String pass, String[] to, String subject, String body) {
         Properties props = System.getProperties();
         String host = "smtp.gmail.com";
@@ -70,6 +93,16 @@ public class SendEmail extends Database {
         }
         catch (NullPointerException e){}
     }
+
+    /**
+     * sending emails to a group of users
+     * @param from main mail from which everything is sent
+     * @param pass password
+     * @param to all receivers
+     * @param subject header
+     * @param body main text
+     * @throws NullPointerException in case if there are no receivers
+     */
     private static void sendFromGMail(String from, String pass, String[] to, String subject, String body) throws NullPointerException {
         Properties props = System.getProperties();
         String host = "smtp.gmail.com";
@@ -145,6 +178,12 @@ public class SendEmail extends Database {
 
     }
 
+    /**
+     * checking for equality of emails
+     * @param email1 first email
+     * @param email2 second email
+     * @return if they are equal or not
+     */
     private static boolean emailsEquals(String email1, String email2) {
         Pattern address = Pattern.compile("([\\w\\.]+)@([\\w\\.]+\\.\\w+)");
         Matcher match1 = address.matcher(email1);
@@ -161,10 +200,16 @@ public class SendEmail extends Database {
         }
     }
 
-    private static boolean numberOfMeetings(ArrayList<Address> l, String id) {
+    /**
+     * checking if email was already met
+     * @param all where to check for meeting
+     * @param email current email
+     * @return if was met or not
+     */
+    private static boolean numberOfMeetings(ArrayList<Address> all, String email) {
         int count = 0;
-        for (int i = 0; i < l.size(); i++) {
-            if (l.get(i).toString().equals(id))
+        for (int i = 0; i < all.size(); i++) {
+            if (all.get(i).toString().equals(email))
                 count++;
         }
         if (count > 1) return false;
