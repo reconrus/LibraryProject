@@ -113,6 +113,9 @@ public class EditPatron {
     }
 
 
+    /**
+     * makes toogle buttons exclude each other
+     */
     @FXML
     void initialize(){
 

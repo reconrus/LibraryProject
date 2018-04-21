@@ -7,7 +7,7 @@
 <?import javafx.scene.Group?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="391.0" prefWidth="350.0" stylesheets="@../../../../resources/theme.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.librinno.ui.Register.Register">
+<AnchorPane prefHeight="391.0" prefWidth="350.0" stylesheets="@../../../../resources/theme.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.librinno.ui.AddPatron.AddPatronController">
    <children>
       <Group layoutX="67.0" layoutY="36.0">
          <children>

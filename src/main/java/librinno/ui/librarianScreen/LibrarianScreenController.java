@@ -227,7 +227,7 @@ public class LibrarianScreenController {
             Assist.error("Access Denied", "Your privilege level is insufficient.");
             return;
         }
-        Assist.loadStageWait(getClass().getResource("/main/java/librinno/ui/Register/register.fxml"));
+        Assist.loadStageWait(getClass().getResource("/main/java/librinno/ui/AddPatron/AddPatron.fxml"));
         showTableUser();
     }
 

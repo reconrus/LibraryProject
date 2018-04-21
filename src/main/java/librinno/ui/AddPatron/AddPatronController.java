@@ -1,4 +1,4 @@
-package main.java.librinno.ui.Register;
+package main.java.librinno.ui.AddPatron;
 
 import com.jfoenix.controls.*;
 import javafx.event.ActionEvent;
@@ -8,7 +8,7 @@ import main.java.librinno.model.Database;
 import main.java.librinno.model.User;
 import main.java.librinno.ui.assist.Assist;
 
-public class Register {
+public class AddPatronController {
 
     @FXML
     private JFXTextField phone;
@@ -69,6 +69,9 @@ public class Register {
         }
     }
 
+    /**
+     * makes toogle buttons exclude each other
+     */
     @FXML
     void initialize(){
         final ToggleGroup types = new ToggleGroup();
