@@ -17,6 +17,8 @@ public class User {
     public static final String instructor = "Instructor";
     public static final String ta = "TA";
     public static final String vProfessor = "Visiting Professor";
+
+
     public static final Logger LOGGER = Logger.getLogger("GLOBAL");
 
 
