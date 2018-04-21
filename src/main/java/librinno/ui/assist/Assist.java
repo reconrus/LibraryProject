@@ -56,6 +56,13 @@ public class Assist {
         error.showAndWait();
     }
 
+    public static void wrongIDError(){
+        Alert error= new Alert(Alert.AlertType.ERROR);
+        error.setHeaderText("Error");
+        error.setContentText("ID should contain only numerical symbols");
+        error.showAndWait();
+    }
+
     public static void emailError(){
         Alert error= new Alert(Alert.AlertType.ERROR);
         error.setHeaderText("Error");

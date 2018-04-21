@@ -5,9 +5,12 @@ import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import main.java.librinno.model.Admin;
 import main.java.librinno.model.Database;
 import main.java.librinno.ui.assist.Assist;
+
+import javax.xml.crypto.Data;
 
 public class AdminCreationController {
 
@@ -50,10 +53,16 @@ public class AdminCreationController {
         else{
             if(Assist.isValidEmailAddress(mail)) {
                 Database.admin_creation(new Admin(user, phoneNum, addressText,1,"Admin",  pass, mail));
+                int id = Database.getAdminID();
+                Alert idAlert = new Alert(Alert.AlertType.CONFIRMATION);
+                idAlert.setHeaderText("Admin created");
+                idAlert.setContentText("Admin's ID: " + String.valueOf(id));
+                idAlert.showAndWait();
                 Assist.closeStage(confirm);
             }
             else Assist.emailError();
         }
+
     }
 
 }

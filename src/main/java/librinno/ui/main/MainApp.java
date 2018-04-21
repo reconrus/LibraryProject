@@ -22,10 +22,12 @@ import java.util.Scanner;
  */
 public class MainApp extends Application {
     private static Notification_thread nthread;
+
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Path filePath_1 = Paths.get("dbinf.txt");
-        boolean first=!Files.exists(filePath_1);
+        Path filePath = Paths.get("dbinf.txt");
+        //TODO Если файл пустой или неверная инфа о бд, то всё пропало, всё пропало.
+        boolean first=!Files.exists(filePath);
         if (first) {
             Parent parent = FXMLLoader.load(getClass().getResource("/main/java/librinno/ui/main/dbinfo.fxml"));
             Stage stage = new Stage(StageStyle.DECORATED);

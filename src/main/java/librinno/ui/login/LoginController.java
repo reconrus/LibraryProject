@@ -65,23 +65,32 @@ public class LoginController {
     boolean authorization(String id, String pass) throws SQLException, IOException {
 
         Database db = new Database();
-        String type = db.authorization(Integer.parseInt(id), pass);
 
-        if(type.equals("Admin")) {
-            loadAdmin();
-            return true;
+        //If id contains non-numerical symbols, catches exception
+        try{
+            String type= db.authorization(Integer.parseInt(id), pass);
+
+            if(type.equals("Admin")) {
+                loadAdmin();
+                return true;
+            }
+
+            if((type.equals("Librarian Priv1"))||(type.equals("Librarian Priv2"))||(type.equals("Librarian Priv3"))) {
+                loadLibrarian(id);
+                return true;
+            }
+            if(type.equals(User.student) || type.equals(User.professor) || type.equals(User.instructor) || type.equals(User.ta) || type.equals(User.vProfessor)){
+                loadPatron(id);
+                return true;
+            }
+
+            Assist.authorizationError();
+
+        }
+        catch (NumberFormatException e){
+            Assist.wrongIDError();
         }
 
-        if((type.equals("Librarian Priv1"))||(type.equals("Librarian Priv2"))||(type.equals("Librarian Priv3"))) {
-            loadLibrarian(id);
-            return true;
-        }
-        if(type.equals(User.student) || type.equals(User.professor) || type.equals(User.instructor) || type.equals(User.ta) || type.equals(User.vProfessor)){
-            loadPatron(id);
-            return true;
-        }
-
-        Assist.authorizationError();
         return false;
     }
 

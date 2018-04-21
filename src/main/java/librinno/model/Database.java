@@ -706,7 +706,7 @@ public class Database extends Main {
      * gets id of admin
      * @return id of admin
      */
-    public static int get_admin_id(){
+    public static int getAdminID(){
         int id=0;
         try{
             Statement stmt=con.createStatement();
