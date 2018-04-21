@@ -14,6 +14,11 @@ import java.io.IOException;
 import java.net.URL;
 
 public class Assist {
+    /**
+     * loads stage from given URL
+     * @param fxml - URL of the stage you want to load
+     * @throws IOException
+     */
     public static void loadStage(URL fxml) throws IOException {
         Parent parent= FXMLLoader.load(fxml);
         Stage stage= new Stage(StageStyle.DECORATED);
@@ -21,6 +26,11 @@ public class Assist {
         stage.show();
     }
 
+    /**
+     * loads stage from given URL and permits code(following lines in method-caller) from executing until stage is closed
+     * @param fxml - URL of the stage you want to load
+     * @throws IOException
+     */
     public static void loadStageWait(URL fxml) throws IOException {
         Parent parent= FXMLLoader.load(fxml);
         Stage stage= new Stage(StageStyle.DECORATED);
@@ -28,48 +38,66 @@ public class Assist {
         stage.showAndWait();
     }
 
-    public static void loadScreen(URL fxml, Button butt) throws IOException {
-        Parent parent= FXMLLoader.load(fxml);
-        ((Stage) butt.getScene().getWindow()).setScene(new Scene(parent));
-
-    }
-    public static void error(){
-        Alert error= new Alert(Alert.AlertType.ERROR);
-        error.setHeaderText("Error");
-        error.setContentText("You left empty blanks.");
-        error.showAndWait();
-    }
+    /**
+     * shows error screen to user with given parameters
+     * @param header - header of the error
+     * @param body - message you want to show
+     */
     public static void error(String header, String body){
         Alert error= new Alert(Alert.AlertType.ERROR);
         error.setHeaderText(header);
         error.setContentText(body);
         error.showAndWait();
     }
+
+    /**
+     * shows error screen to user
+     */
+    public static void error(){
+        error("Error", "You left empty fields");
+    }
+
+    /**
+     * closes stage where this button exists
+     * @param butt - button from the screen you want to close
+     */
     public static void closeStage(Button butt){
         ((Stage) butt.getScene().getWindow()).close();
     }
 
+    /**
+     * shows user error if he made an error while logging in
+     */
     public static void authorizationError(){
-        Alert error= new Alert(Alert.AlertType.ERROR);
-        error.setHeaderText("Error");
-        error.setContentText("Authorization error");
-        error.showAndWait();
+        error("Error","Authorization error");
     }
 
+    /**
+     * shows an error to user if in ID field of login screen he wrote any symbols aside from integers
+     */
     public static void wrongIDError(){
-        Alert error= new Alert(Alert.AlertType.ERROR);
-        error.setHeaderText("Error");
-        error.setContentText("ID should contain only numerical symbols");
-        error.showAndWait();
+        error("Error", "ID should contain only numerical symbols");
     }
 
+    /**
+     * shows an error to a user if he wrote wrong type of e-mail
+     */
     public static void emailError(){
-        Alert error= new Alert(Alert.AlertType.ERROR);
-        error.setHeaderText("Error");
-        error.setContentText("Wrong e-mail");
-        error.showAndWait();
+        error("Error","Wrong e-mail");
     }
 
+    /**
+     * show error if user wrote false information about database
+     */
+    public static void dbCreationError(){
+        error("Database Creation Error","Wrong Database Information");
+    }
+
+    /**
+     * verifies email address passed to it and shows an error if it's wrong
+     * @param email
+     * @return
+     */
     public static boolean isValidEmailAddress(String email) {
         boolean result = true;
         try {
@@ -79,13 +107,6 @@ public class Assist {
             result = false;
         }
         return result;
-    }
-
-    public static void dbCreationlError(){
-        Alert error= new Alert(Alert.AlertType.ERROR);
-        error.setHeaderText("Database Creation Error");
-        error.setContentText("Wrong Database Information");
-        error.showAndWait();
     }
 
 }

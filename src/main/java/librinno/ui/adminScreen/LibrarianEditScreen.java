@@ -12,6 +12,7 @@ import main.java.librinno.ui.assist.Assist;
 
 public class LibrarianEditScreen {
 
+    //current librarian we want to modify
     private Librarian librarianEd;
 
     @FXML
@@ -47,12 +48,19 @@ public class LibrarianEditScreen {
     @FXML
     private JFXButton cancel;
 
-
+    /**
+     * closes window without any modification
+     * @param event
+     */
     @FXML
     void cancel(ActionEvent event) {
         Assist.closeStage(cancel);
     }
 
+    /**
+     * modifies information about user in database and closes window
+     * @param event
+     */
     @FXML
     void confirm(ActionEvent event) {
         String user= name.getText();
@@ -81,7 +89,10 @@ public class LibrarianEditScreen {
         }
     }
 
-
+    /**
+     * passes information about the librarian to LibrarianEdit screen so that fields were containing current information
+     * @param librarian
+     */
     public void passGUI(Librarian librarian){
         id.setText(librarian.getCardNumberAsString());
         id.setEditable(false);
@@ -98,6 +109,9 @@ public class LibrarianEditScreen {
         librarianEd=librarian;
     }
 
+    /**
+     * makes toogle buttons exclude each other
+     */
     @FXML
     void initialize(){
 

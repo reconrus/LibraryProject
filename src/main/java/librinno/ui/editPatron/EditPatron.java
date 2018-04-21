@@ -50,11 +50,19 @@ public class EditPatron {
     @FXML
     private JFXButton cancel;
 
+    /**
+     * closes window without any modification
+     * @param event
+     */
     @FXML
     void cancel(ActionEvent event) {
         Assist.closeStage(cancel);
     }
 
+    /**
+     * modifies information about patron in database and closes window
+     * @param event
+     */
     @FXML
     void confirm(ActionEvent event) {
         String user= name.getText();
@@ -82,6 +90,10 @@ public class EditPatron {
     }
 
 
+    /**
+     * passes information about the patron to EditPatron screen so that fields were containing current information
+     * @param user
+     */
     public void passGUI(User user){
         id.setText(user.getCardNumberAsString());
         id.setEditable(false);
@@ -99,6 +111,7 @@ public class EditPatron {
 
         userEd=user;
     }
+
 
     @FXML
     void initialize(){

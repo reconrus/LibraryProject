@@ -44,12 +44,19 @@ public class LibrarianAddScreen {
     @FXML
     private JFXButton cancel;
 
-
+    /**
+     * closes LibrarianAddScreen without any action
+     * @param event
+     */
     @FXML
     void cancel(ActionEvent event) {
         Assist.closeStage(cancel);
     }
 
+    /**
+     * adds librarian to database and closes LibrarianAddScreen
+     * @param event
+     */
     @FXML
     void confirm(ActionEvent event) {
         String user= name.getText();
@@ -71,6 +78,9 @@ public class LibrarianAddScreen {
         }
     }
 
+    /**
+     * makes toogle buttons exclude each over
+     */
     @FXML
     void initialize(){
 

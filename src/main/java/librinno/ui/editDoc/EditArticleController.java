@@ -45,9 +45,17 @@ public class EditArticleController {
 
     private Article article;
 
+    /**
+     * closes window without any modification
+     * @param event
+     */
     @FXML
     void cancel(ActionEvent event) { Assist.closeStage(cancel);}
 
+    /**
+     * modifies information about article in database and closes window
+     * @param event
+     */
     @FXML
     void confirm(ActionEvent event) {
         String title= articleTitle.getText();
@@ -78,6 +86,10 @@ public class EditArticleController {
         }
     }
 
+    /**
+     * passes information about the article to EditArticle screen so that fields were containing current information
+     * @param article
+     */
     public void passGUI(Article article){
         articleID.setText(article.getId()+"");
         articleID.setEditable(false);

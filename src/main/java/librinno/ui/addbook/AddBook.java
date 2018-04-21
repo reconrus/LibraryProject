@@ -90,17 +90,16 @@ public class AddBook {
     @FXML
     private JFXTextField avAmount;
     @FXML
-    private JFXButton confirm;
-
-    @FXML
     private JFXButton cancel;
 
     @FXML
     private JFXTextField amount;
 
-    @FXML
-    void cancel(ActionEvent event) { Assist.closeStage(cancel);}
-
+    /**
+     * reads information from fields, adds book to database, closes window
+     * @param event
+     * @throws SQLException
+     */
     @FXML
     void confirm(ActionEvent event) throws SQLException {
         if (bookTab.isSelected()) {
@@ -154,6 +153,9 @@ public class AddBook {
         }
     }
 
+    /**
+     * closes window without adding book to database
+     */
     @FXML
     void cancel(){
         Assist.closeStage(cancel);

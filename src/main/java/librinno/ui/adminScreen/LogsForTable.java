@@ -1,5 +1,6 @@
 package main.java.librinno.ui.adminScreen;
 
+//this class is used to make logs applicable to show in tables
 public class LogsForTable {
     private String date;
     private String event;

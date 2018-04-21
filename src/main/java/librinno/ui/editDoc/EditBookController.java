@@ -48,9 +48,17 @@ public class EditBookController {
 
     private Book bookEd;
 
+    /**
+     * closes window without any modification
+     * @param event
+     */
     @FXML
     void cancel(ActionEvent event) { Assist.closeStage(cancel);}
 
+    /**
+     * modifies information about book in database and closes window
+     * @param event
+     */
     @FXML
     void confirm(ActionEvent event) {
         String bookTitle= name.getText();
@@ -83,6 +91,10 @@ public class EditBookController {
         }
     }
 
+    /**
+     * passes information about the book to EditBook screen so that fields were containing current information
+     * @param book
+     */
     public void passGUI(Book book){
         name.setText(book.getTitle());
         price.setText(""+book.getPrice());

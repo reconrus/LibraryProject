@@ -9,7 +9,6 @@ import main.java.librinno.model.Database;
 import main.java.librinno.model.Main;
 import main.java.librinno.ui.assist.Assist;
 
-import javax.xml.crypto.Data;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -46,7 +45,7 @@ public class dbinfoClass {
         else{
             user.setText("");
             pass.setText("");
-            Assist.dbCreationlError();
+            Assist.dbCreationError();
         }
 
 

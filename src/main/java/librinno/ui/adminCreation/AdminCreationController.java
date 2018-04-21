@@ -35,11 +35,19 @@ public class AdminCreationController {
     @FXML
     private JFXButton confirm;
 
+    /**
+     * closes window without adding admin to database
+     * @param event
+     */
     @FXML
     void cancel(ActionEvent event) {
         Assist.closeStage(cancel);
     }
 
+    /**
+     * reads information from fields, adds admin to database, closes window
+     * @param event
+     */
     @FXML
     void confirm(ActionEvent event) {
         String user= name.getText();

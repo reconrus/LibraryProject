@@ -77,7 +77,7 @@
          </tabs>
       </JFXTabPane>
       <JFXButton fx:id="cancel" layoutX="68.0" layoutY="375.0" onAction="#cancel" prefHeight="31.0" prefWidth="67.0" text="Cancel" />
-      <JFXButton fx:id="confirm" layoutX="208.0" layoutY="375.0" onAction="#confirm" prefHeight="31.0" prefWidth="74.0" text="Confirm" />
+      <JFXButton layoutX="208.0" layoutY="375.0" onAction="#confirm" prefHeight="31.0" prefWidth="74.0" text="Confirm" />
    </children>
    <stylesheets>
       <URL value="@../../../../resources/theme.css" />

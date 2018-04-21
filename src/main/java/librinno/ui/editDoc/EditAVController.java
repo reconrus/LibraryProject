@@ -34,9 +34,17 @@ public class EditAVController {
 
     private AV av;
 
+    /**
+     * closes window without any modification
+     * @param event
+     */
     @FXML
     void cancel(ActionEvent event) { Assist.closeStage(cancel);}
 
+    /**
+     * modifies information about av in database and closes window
+     * @param event
+     */
     @FXML
     void confirm(ActionEvent event) {
         String title= avTitle.getText();
@@ -57,6 +65,10 @@ public class EditAVController {
         }
     }
 
+    /**
+     * passes information about the article to EditAV screen so that fields were containing current information
+     * @param av
+     */
     public void passGUI(AV av){
         avID.setText(av.getId()+"");
         avID.setEditable(false);
