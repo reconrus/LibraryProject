@@ -701,6 +701,24 @@ public class Database extends Main {
         }
         return null;
     }
+
+    /**
+     * gets id of admin
+     * @return id of admin
+     */
+    public static int get_admin_id(){
+        int id=0;
+        try{
+            Statement stmt=con.createStatement();
+            ResultSet rs=stmt.executeQuery("SELECT * FROM users_of_the_library WHERE Type ='Admin' LIMIT 1");
+            while(rs.next()){
+                id=rs.getInt("Card_number");
+            }
+        }
+        catch (SQLException e){
+        }
+        return id;
+    }
 }
 
 /**
