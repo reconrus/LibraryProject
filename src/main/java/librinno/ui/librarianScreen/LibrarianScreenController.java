@@ -389,6 +389,8 @@ public class LibrarianScreenController {
     }
 
     @FXML
+    void search(){};//TODO
+    @FXML
     void initialize(){
         showTableUser();
         showTableDocuments();

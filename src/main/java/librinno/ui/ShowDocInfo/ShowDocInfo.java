@@ -45,7 +45,7 @@ public class ShowDocInfo {
      * passes information about the book to ShowBookInfo screen so that fields were containing current information
      * @param book
      */
-    void passGUI(Book book){
+    public void passGUI(Book book){
         title.setText(book.getTitle());
         id.setText(""+book.getId());
         Author.setText(book.getAuthor());

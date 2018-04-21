@@ -160,6 +160,14 @@ public class PatronScreenController {
     }
 
     @FXML
+    void search(){};//TODO
+
+    @FXML
+    void showTables(){ //TODO
+
+    }
+
+    @FXML
     private void reserve(ActionEvent event) throws IOException {
         Material book= tableBook.getSelectionModel().getSelectedItem();
         if((book == null)||(book.numberAvailable<1)){
