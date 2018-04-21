@@ -41,6 +41,12 @@ public class Database extends Main {
         } catch (Exception e) {
         }
     }
+
+    /**
+     * Adding new admin in database
+     *
+     * @param admin - admin that we want to create
+     */
     public static void admin_creation(Admin admin) {
         PropertyConfigurator.configure("log4j.properties");
         try {
@@ -62,9 +68,9 @@ public class Database extends Main {
     }
 
     /**
-     * getting users of database to project
+     * Adding new user in database
      *
-     * @param user - user of library
+     * @param user - user that we want to add
      */
     public static void userCreation(User user) {
         PropertyConfigurator.configure("log4j.properties");
@@ -85,9 +91,12 @@ public class Database extends Main {
     }
 
     /**
-     * creating AV
+     * Adding AV in DB
+     * Description:
+     * if AV not already in DB than creating AV in database,
+     *   else: add copy of this AV
      *
-     * @param av what to insert into table
+     * @param av that to insert into table
      * @throws SQLException
      */
     public void avCreation(AV av){
@@ -124,7 +133,6 @@ public class Database extends Main {
                 prst.setInt(3, 999);
                 prst.setBoolean(4, true);
                 prst.executeUpdate();
-                //TODO ильнур,чё за хрень тут творится?
                 LOGGER.trace("Copies of AV with id "+av.getId()+" added");
             }
         }
@@ -134,9 +142,12 @@ public class Database extends Main {
     }
 
     /**
-     * the same method, but for Articles
+     * Adding article in DB
+     * Description:
+     * if article not already in DB than creating article in database,
+     *   else: add copy of this article
      *
-     * @param article what article to insert
+     * @param article that we want to add
      * @throws SQLException
      */
     public void articleCreation(Article article){
@@ -186,9 +197,12 @@ public class Database extends Main {
     }
 
     /**
-     * the same method,but for book
+     * Adding book in DB
+     * Description:
+     * if book not already in DB than creating book in database,
+     *   else: add copy of this book
      *
-     * @param book what book to insert
+     * @param book that we want to add
      */
     public void bookCreation(Book book) {
         PropertyConfigurator.configure("log4j.properties");
@@ -239,6 +253,9 @@ public class Database extends Main {
 
     /**
      * checking for dublicate AVs
+     * Description:
+     * If av already exist than return arrayList and in arrayList[0]-1(find),arrayList[1]-id of AV
+     *   else: arrayList and arrayList[0]-0(not find)
      *
      * @param av current av
      * @return arraylist of boolean value and id of av
@@ -263,6 +280,9 @@ public class Database extends Main {
 
     /**
      * checking for dublicate articles
+     * Description:
+     * If article already exist than return arrayList and in arrayList[0]-1(find),arrayList[1]-id of article
+     *   else: arrayList and arrayList[0]-0(not find)
      *
      * @param article current article
      * @return arraylist of boolean value and id of article
@@ -293,9 +313,12 @@ public class Database extends Main {
 
     /**
      * checking for dublicate books
+     * Description:
+     * If book already exist than return arrayList and in arrayList[0]-1(find),arrayList[1]-id of book
+     *   else: arrayList and arrayList[0]-0(not find)
      *
-     * @param book current book
-     * @return arraylist of boolean value and id of book
+     * @param book current article
+     * @return arraylist of boolean value and id of article
      * @throws SQLException
      */
     public ArrayList isBookAlreadyExist(Book book) throws SQLException {
@@ -322,10 +345,13 @@ public class Database extends Main {
     }
 
     /**
-     * checking for created users
+     * checking for dublicate users
+     * Description:
+     * If user already exist than return arrayList and in arrayList[0]-1(find),arrayList[1]-id of user
+     *   else: arrayList and arrayList[0]-0(not find)
      *
      * @param user current user
-     * @return arraylist of boolean value and id
+     * @return arraylist of boolean value and id of user
      * @throws SQLException
      */
     public static ArrayList isUserAlreadyExist(User user) throws SQLException {
@@ -352,7 +378,7 @@ public class Database extends Main {
     }
 
     /**
-     * gets information about users
+     * Gets object User with all information about him
      *
      * @param id user's id
      * @return user
@@ -378,6 +404,13 @@ public class Database extends Main {
         User user = new User(name, address, Phonenumber, id, type, password,email);
         return user;
     }
+    /**
+     * Gets object Librarian with all information about him
+     *
+     * @param id Librarian's id
+     * @return Librarian
+     * @throws SQLException
+     */
     public Librarian getInformationAboutTheLibrarian(int id) throws SQLException {
         Statement stmt = con.createStatement();
         ResultSet rs = stmt.executeQuery("SELECT * FROM Users_of_the_library WHERE Card_number=" + id);
@@ -399,7 +432,10 @@ public class Database extends Main {
     }
 
     /**
-     * authorization of user
+     * Authorization of user
+     * Description:
+     * if all correct than return type of user
+     *   else: return empty string
      *
      * @param id   it's id
      * @param pass password
@@ -421,6 +457,16 @@ public class Database extends Main {
         return "";
     }
 
+    /**
+     * Creating local dataBase(mySQL) on computer of user(with him account in mySQL)
+     * Description:
+     * if our database is not yet created than: create dataBase and
+     *   create all tables, and add 3 default users
+     *
+     * @param user
+     * @param pass
+     * @return
+     */
     public static boolean creationLocalDB(String user, String pass) {
         PropertyConfigurator.configure("log4j.properties");
         Connection conn = null;
@@ -488,6 +534,12 @@ public class Database extends Main {
         }
     }
 
+    /**
+     * Creating queue on material that user want to take
+     *
+     * @param material_id
+     * @param user_id
+     */
     public static void queue_on_material(int material_id, int user_id) {
         PropertyConfigurator.configure("log4j.properties");
         try {
@@ -587,7 +639,11 @@ public class Database extends Main {
         return all_notes;
     }
 
-
+    /**
+     * Checking queue for sending letters to people
+     *
+     * @return ArrayList with emails of people for who we need to send letter
+     */
     public static ArrayList<String> send_email() {
         PropertyConfigurator.configure("log4j.properties");
         User user = null;
@@ -622,6 +678,14 @@ public class Database extends Main {
         }
         return emails;
     }
+
+    /**
+     * Gets object user by his id from queue
+     *
+     * @param user_id
+     * @param queue_id
+     * @return User
+     */
     public static User user_in_queue(int user_id, int queue_id) {
         try {
             Statement stmt = con.createStatement();
@@ -639,7 +703,9 @@ public class Database extends Main {
     }
 }
 
-
+/**
+ * Comparator for sorting users in queue with their type
+ */
 class UserTypeComparator implements Comparator<User> {
     @Override
     public int compare(User x, User y) {
