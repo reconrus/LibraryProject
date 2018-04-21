@@ -12,7 +12,7 @@ import main.java.librinno.ui.assist.Assist;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class dbinfoClass {
+public class DBInfoClass {
 
     @FXML
     private JFXTextField url;

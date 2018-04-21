@@ -41,6 +41,10 @@ public class ShowDocInfo {
     @FXML
     private JFXButton close;
 
+    /**
+     * passes information about the book to ShowBookInfo screen so that fields were containing current information
+     * @param book
+     */
     void passGUI(Book book){
         title.setText(book.getTitle());
         id.setText(""+book.getId());
@@ -54,14 +58,10 @@ public class ShowDocInfo {
         edition.setText(book.getEdition());
     }
 
-
-    public void passGUI(Material material){
-        String s=material.getType();
-        if (s.equals("AV")) passGUI(Librarian.avById(material.getId()));
-        else if (s.equals("Book")) passGUI(Librarian.bookByID(material.getId()));
-        else passGUI(Librarian.articleById(material.getId()));
-    }
-
+    /**
+     * closes window
+     * @param event
+     */
     @FXML
     void cancel(javafx.event.ActionEvent event) { Assist.closeStage(close);}
 

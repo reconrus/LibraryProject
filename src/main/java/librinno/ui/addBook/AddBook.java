@@ -1,4 +1,4 @@
-package main.java.librinno.ui.addbook;
+package main.java.librinno.ui.addBook;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;

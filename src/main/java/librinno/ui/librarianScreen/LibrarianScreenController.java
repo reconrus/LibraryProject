@@ -217,7 +217,7 @@ public class LibrarianScreenController {
             Assist.error("Access Denied", "Your privilege level is insufficient.");
             return;
         }
-        Assist.loadStageWait(getClass().getResource("/main/java/librinno/ui/addbook/AddBook.fxml"));
+        Assist.loadStageWait(getClass().getResource("/main/java/librinno/ui/addBook/AddBook.fxml"));
         showTables();
     }
 
@@ -227,7 +227,7 @@ public class LibrarianScreenController {
             Assist.error("Access Denied", "Your privilege level is insufficient.");
             return;
         }
-        Assist.loadStageWait(getClass().getResource("/main/java/librinno/ui/AddPatron/AddPatron.fxml"));
+        Assist.loadStageWait(getClass().getResource("/main/java/librinno/ui/addPatron/AddPatron.fxml"));
         showTableUser();
     }
 
@@ -250,7 +250,6 @@ public class LibrarianScreenController {
         }
     }
 
-
     @FXML
     void deleteDoc(ActionEvent event) {
         if (!user.getPrivileges().equals("Priv3")){
@@ -263,7 +262,6 @@ public class LibrarianScreenController {
             showTables();
         }
     }
-
 
     @FXML
     void editDoc() throws IOException {

@@ -25,6 +25,10 @@ public class ShowAVInfo {
     @FXML
     private JFXButton close;
 
+    /**
+     * passes information about the av to ShowAVInfo screen so that fields were containing current information
+     * @param av
+     */
     public void passGUI(AV av){
         title.setText(av.getTitle());
         id.setText(""+av.getId());
@@ -33,6 +37,10 @@ public class ShowAVInfo {
         keyWords.setText(av.getKeyWords());
     }
 
+    /**
+     * closes window
+     * @param event
+     */
     @FXML
     void cancel(javafx.event.ActionEvent event) { Assist.closeStage(close);}
 }

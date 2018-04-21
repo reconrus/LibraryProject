@@ -7,7 +7,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="271.0" prefWidth="302.0" stylesheets="@../../../../resources/theme.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.librinno.ui.main.dbinfoClass">
+<AnchorPane prefHeight="271.0" prefWidth="302.0" stylesheets="@../../../../resources/theme.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.librinno.ui.main.DBInfoClass">
    <children>
       <JFXTextField fx:id="url" layoutX="70.0" layoutY="83.0" prefHeight="25.0" prefWidth="161.0" promptText="URL" text="jdbc:mysql://localhost:3306" />
       <JFXTextField fx:id="user" layoutX="70.0" layoutY="129.0" prefHeight="25.0" prefWidth="161.0" promptText="Username" />

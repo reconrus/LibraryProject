@@ -1,4 +1,4 @@
-package main.java.librinno.ui.AddPatron;
+package main.java.librinno.ui.addPatron;
 
 import com.jfoenix.controls.*;
 import javafx.event.ActionEvent;
@@ -42,11 +42,19 @@ public class AddPatronController {
     @FXML
     private JFXButton cancel;
 
+    /**
+     * closes window without adding patron to database
+     * @param event
+     */
     @FXML
     void cancel(ActionEvent event) {
         Assist.closeStage(cancel);
     }
 
+    /**
+     * adds patron to database and closes the window
+     * @param event
+     */
     @FXML
     void confirm(ActionEvent event) {
         String user= name.getText();

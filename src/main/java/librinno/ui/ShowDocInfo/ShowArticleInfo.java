@@ -34,6 +34,10 @@ public class ShowArticleInfo {
     @FXML
     public JFXButton close;
 
+    /**
+     * passes information about the article to ShowArticleInfo screen so that fields were containing current information
+     * @param article
+     */
     public void passGUI(Article article){
         title.setText(article.getTitle());
         id.setText(""+article.getId());
@@ -45,6 +49,11 @@ public class ShowArticleInfo {
         journal.setText(article.getJournal());
         editor.setText(article.getEditor());
     }
+
+    /**
+     * closes window
+     * @param event
+     */
     @FXML
     void close(javafx.event.ActionEvent event) { Assist.closeStage(close);}
 }

@@ -29,7 +29,7 @@ public class MainApp extends Application {
         //TODO Если файл пустой или неверная инфа о бд, то всё пропало, всё пропало.
         boolean first=!Files.exists(filePath);
         if (first) {
-            Parent parent = FXMLLoader.load(getClass().getResource("/main/java/librinno/ui/main/dbinfo.fxml"));
+            Parent parent = FXMLLoader.load(getClass().getResource("/main/java/librinno/ui/main/DBInfo.fxml"));
             Stage stage = new Stage(StageStyle.DECORATED);
             stage.setScene(new Scene(parent));
             stage.showAndWait();
