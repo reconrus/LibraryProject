@@ -1,9 +1,6 @@
 package main.java.librinno.ui.adminScreen;
 
 import com.jfoenix.controls.JFXButton;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,8 +14,6 @@ import javafx.stage.StageStyle;
 import main.java.librinno.model.Librarian;
 import main.java.librinno.model.User;
 import main.java.librinno.ui.assist.Assist;
-import main.java.librinno.ui.editPatron.EditPatron;
-import main.java.librinno.ui.librarianScreen.LibrarianScreenController;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -71,14 +66,22 @@ public class AdminScreenController {
     @FXML
     private JFXButton logout;
 
-
+    /**
+     * after opening admin screen it will show table of users and table of Logs
+     *
+     * @throws FileNotFoundException
+     */
     @FXML
     void initialize() throws FileNotFoundException {
-        showTableUser();
+        showTableLibrarian();
         showLogs();
     }
+
+    /**
+     * gets table of users from database and shows it in table
+     */
     @FXML
-    void showTableUser(){
+    void showTableLibrarian(){
         userID.setCellValueFactory(new PropertyValueFactory("card_number"));
         userName.setCellValueFactory(new PropertyValueFactory("name"));
         userAddress.setCellValueFactory(new PropertyValueFactory("adress"));
@@ -90,24 +93,38 @@ public class AdminScreenController {
         tableUser.getItems().setAll(users);
     }
 
-
+    /**
+     * displays screen for adding Patron
+     *
+     * @param event
+     * @throws IOException
+     */
     @FXML
-    void addPatron(ActionEvent event) throws IOException {
+    void addLibrarian(ActionEvent event) throws IOException {
         Assist.loadStageWait(getClass().getResource("/main/java/librinno/ui/adminScreen/AddLibrarian.fxml"));
-        showTableUser();
+        showTableLibrarian();
     }
 
+    /**
+     * deletes user from database
+     * @param event
+     */
     @FXML
-    void deletePatron(ActionEvent event) {
+    void deleteLibrarian(ActionEvent event) {
         User user= tableUser.getSelectionModel().getSelectedItem();
         if(user!=null) {
             Librarian.deleteUserById(user.card_number);
-            showTableUser();
+            showTableLibrarian();
         }
     }
 
+    /**
+     * displays screen for editing Librarian information
+     * @param event
+     * @throws IOException
+     */
     @FXML
-    void editPatron(ActionEvent event) throws IOException {
+    void editLibrarian(ActionEvent event) throws IOException {
         Librarian user= tableUser.getSelectionModel().getSelectedItem();
         if (user==null){
             Assist.error();
@@ -119,17 +136,26 @@ public class AdminScreenController {
             Stage stage = new Stage(StageStyle.DECORATED);
             stage.setScene(new Scene(parent));
             stage.showAndWait();
-            showTableUser();
+            showTableLibrarian();
         }
 
     }
 
+    /**
+     * exits from admin screen and returns to login screen
+     * @param event
+     * @throws IOException
+     */
     @FXML
     private void logoutAction(ActionEvent event) throws IOException {
         Assist.closeStage(logout);
         Assist.loadStage(getClass().getResource("/main/java/librinno/ui/login/LoginScreen.fxml"));
     }
 
+    /**
+     * gets logs from log file and displays it in table
+     * @throws FileNotFoundException
+     */
     @FXML
     void showLogs() throws FileNotFoundException {
         Scanner sc= new Scanner(new File("myproject.log"));
@@ -141,9 +167,14 @@ public class AdminScreenController {
 
     }
 
+    /**
+     * method to call method showTableLibrarian() on button pushed
+     *
+     * @param event
+     */
     @FXML
-    void showTableUser(ActionEvent event) {
-        showTableUser();
+    void showTableLibrarian(ActionEvent event) {
+        showTableLibrarian();
     }
 
 }

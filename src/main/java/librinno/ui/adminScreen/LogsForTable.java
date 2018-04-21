@@ -4,6 +4,10 @@ public class LogsForTable {
     private String date;
     private String event;
 
+    /**
+     * parses string of log to arr of dates and events so it could be displayed in table
+     * @param a
+     */
     public LogsForTable(String a){
         String[] arr= a.split(",");
         this.setDate(arr[0]);

@@ -95,16 +95,16 @@ public class Search {
         return arrayList;
     }
 
-    public static ArrayList<User> userByName(String name){
+    public static ArrayList<User> userByTitle(String title){
         PropertyConfigurator.configure("log4j.properties");
         ArrayList<User> arrayList = new ArrayList();
-        if (!name.trim().isEmpty()) {
+        if (!title.trim().isEmpty()) {
             Statement stmt = null;
             try {
                 stmt = db.con.createStatement();
                 ResultSet rs = stmt.executeQuery("SELECT  * FROM users_of_the_library");
                 while (rs.next()) {
-                    if (rs.getString("Name").toLowerCase().indexOf(name.toLowerCase()) >= 0) {
+                    if (rs.getString("Name").toLowerCase().indexOf(title.toLowerCase()) >= 0) {
                         arrayList.add(db.getInformationAboutTheUser(rs.getInt("Card_number")));
                     }
                 }
@@ -288,17 +288,17 @@ public class Search {
     }
 
 
-    public static ArrayList<AV> avByName(String name){
+    public static ArrayList<AV> avByTitle(String title){
         PropertyConfigurator.configure("log4j.properties");
         ArrayList<AV> arrayList = new ArrayList();
-        if (!name.trim().isEmpty()) {
+        if (!title.trim().isEmpty()) {
 
             Statement stmt = null;
             try {
                 stmt = db.con.createStatement();
                 ResultSet rs = stmt.executeQuery("SELECT  * FROM av");
                 while (rs.next()) {
-                    if (rs.getString("Name").toLowerCase().indexOf(name.toLowerCase()) >= 0) {
+                    if (rs.getString("Name").toLowerCase().indexOf(title.toLowerCase()) >= 0) {
                         AV av = new AV(rs.getString("Name"), rs.getString("Author"), rs.getInt("Price"), rs.getString("Keywords"));
                         arrayList.add(av);
                     }
@@ -402,17 +402,17 @@ public class Search {
     }
 
 
-    public static ArrayList<Article> articleByName(String name) {
+    public static ArrayList<Article> articleByTitle(String title) {
         PropertyConfigurator.configure("log4j.properties");
         ArrayList<Article> arrayList = new ArrayList();
-        if (!name.trim().isEmpty()) {
+        if (!title.trim().isEmpty()) {
 
             Statement stmt = null;
             try {
                 stmt = db.con.createStatement();
                 ResultSet rs = stmt.executeQuery("SELECT  * FROM articles");
                 while (rs.next()) {
-                    if (rs.getString("Name").toLowerCase().indexOf(name.toLowerCase()) >= 0) {
+                    if (rs.getString("Name").toLowerCase().indexOf(title.toLowerCase()) >= 0) {
                         Article article = new Article(rs.getInt("id"), rs.getString("Name"), rs.getString("Author"),
                                 rs.getInt("Price"), rs.getString("Keywords"), rs.getBoolean("is_reference"),
                                 rs.getString("Journal"), rs.getString("Editor"), rs.getString("Date"));
@@ -637,17 +637,17 @@ public class Search {
     }
 
 
-    public static ArrayList<Book> bookByName(String name) {
+    public static ArrayList<Book> bookByTitle(String title) {
         Librarian l = new Librarian("1", "1", "1", 0, "Librarian Priv3", "1","1");
         PropertyConfigurator.configure("log4j.properties");
         ArrayList<Book> arrayList = new ArrayList();
-        if (!name.trim().isEmpty()) {
+        if (!title.trim().isEmpty()) {
             Statement stmt = null;
             try {
                 stmt = db.con.createStatement();
                 ResultSet rs = stmt.executeQuery("SELECT  * FROM books");
                 while (rs.next()) {
-                    if (rs.getString("Name").toLowerCase().indexOf(name.toLowerCase()) >= 0) {
+                    if (rs.getString("Name").toLowerCase().indexOf(title.toLowerCase()) >= 0) {
                         arrayList.add(l.bookByID(rs.getInt("id")));
                     }
                 }

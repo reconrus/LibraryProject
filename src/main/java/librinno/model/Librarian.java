@@ -15,10 +15,12 @@ import org.apache.log4j.PropertyConfigurator;
 import static java.time.temporal.ChronoUnit.DAYS;
 
 /**
- * librarian of library
+ * librarian of current library
  */
 public class Librarian extends User {
+    //include logger for maintenance of logs
     public static final Logger LOGGER = Logger.getLogger("GLOBAL");
+    //librarian privileges
     public static final String lev1 = "Priv1";
     public static final String lev2 = "Priv2";
     public static final String lev3 = "Priv3";
@@ -27,11 +29,11 @@ public class Librarian extends User {
      * setter
      *
      * @param name - name of librarian
-     * @param phone_number - number os librarian
-     * @param adress - where librarian lives(librarian is user too)
+     * @param phone_number - number of librarian
+     * @param adress - where librarian lives
      * @param card_number - id of librarian
      */
-    //creating database for working with it
+    //creating database for working
     private static Database db = new Database();
 
     /**
@@ -50,7 +52,7 @@ public class Librarian extends User {
         setType(typeArr[0]);
         setPrivileges(typeArr[1]);
     }
-
+    //getters and setters of privileges
     public void setPrivileges(String privileges) {
         this.privileges = privileges;
     }
@@ -60,7 +62,7 @@ public class Librarian extends User {
     }
 
     /**
-     * all parametres are the same, but not with full information
+     * all parameters are the same, but not with full information
      * because it will not be needed
      */
     public void Librarian(String name, String phone_number, String adress, int card_number) {
@@ -71,9 +73,9 @@ public class Librarian extends User {
     }
 
     /**
-     * sending email to people who have taken book
-     * also deleting queue for this material and sending email to people who was in queue
-     * and sending email to people who was in queue
+     * sending email to people who took material with request to return it
+     * and to people who was in queue with request that material is not available anymore
+     * also deleting queue for this material
      * @param idOfMaterial id of material
      */
     public static void outstandingRequest(int idOfMaterial){
@@ -106,12 +108,6 @@ public class Librarian extends User {
         }
     }
 
-    /**
-     * the same method but for tests
-     * @param idOfMaterial material id
-     * @param date date for tests
-     * @return arraylist of arraylist of emails
-     */
     public static ArrayList<ArrayList<String>>  outstandingRequestWithDate(int idOfMaterial,LocalDate date){
         ArrayList<String> emails=new ArrayList<>();
         ArrayList<String> book_no_available=new ArrayList<>();
@@ -221,6 +217,12 @@ public class Librarian extends User {
         }
     }
 
+    /**
+     * renew of information of material
+     * @param user which user renews information
+     * @param idOfRenewCopy current copy of material
+     * @return if renew was successful or not
+     */
     public static boolean renew(User user,int idOfRenewCopy){
         PropertyConfigurator.configure("log4j.properties");
         boolean oldCanRenew=false;
@@ -234,20 +236,17 @@ public class Librarian extends User {
                 idOfOriginal = rs.getInt("Id_of_original");
 
             }
-
             if (user.getType().equals("Visiting Professor")) {
-                //если визитинг профессор, то он всегда все берет только на одну неделю
                 pr.setInt(1,7);
                 pr.setDate(2,java.sql.Date.valueOf(LocalDate.now().plusDays(7)));
                 pr.setBoolean(3,true);
                 pr.executeUpdate();
                 return true;
 
-            } else if (oldCanRenew){//если это не ВизПроф, то чекаем обновлял ли он до этого(если обновлял то false, если может обновить, то true)
+            } else if (oldCanRenew){
                 Statement stmt = db.con.createStatement();
                 rs = stmt.executeQuery("SELECT * FROM Books WHERE id =" + idOfOriginal);
                 if (rs.next()) {
-                    //если книга, то уже смотрим на тип юзера и книгу
                     if (user.getType().equals("Student") && rs.getBoolean("is_bestseller")){
                         pr.setInt(1,14);
                         pr.setDate(2,java.sql.Date.valueOf(LocalDate.now().plusDays(14)));
@@ -279,8 +278,6 @@ public class Librarian extends User {
                     LOGGER.trace("user with id "+ user.getCard_number()+" renewed copy with id "+idOfRenewCopy);
                     return true;
                 }
-
-
             }
             LOGGER.trace("user with id "+ user.getCard_number()+"didn't renew copy with id "+idOfRenewCopy);
             return false;
@@ -291,6 +288,11 @@ public class Librarian extends User {
         }
     }
 
+    /**
+     * fine for expiration of material
+     * @param idOfCopy current copy
+     * @return current amount of money of expiration
+     */
     public static int fine(int idOfCopy){
         PropertyConfigurator.configure("log4j.properties");
         try {
@@ -373,7 +375,7 @@ public class Librarian extends User {
     /**
      * method for checking out books
      *
-     * @param user     to whom give a book
+     * @param user to whom give a book
      * @param idOfBook which book to give
      * @return boolean value which will depend on success of checking out
      */
@@ -450,7 +452,7 @@ public class Librarian extends User {
         }
     }
     /**
-     * the same operation, but for AV materials
+     * method for checking out AVs
      *
      * @param user   who gets the AV
      * @param idOfAV which AV give to user
@@ -512,9 +514,9 @@ public class Librarian extends User {
         }
     }
     /**
-     * the same operation for Articles
+     * method for checking out articles
      *
-     * @param user        who gets the Article
+     * @param user who gets the articles
      * @param idOfArticle which article to give to user
      * @return boolean value - success or not on checking out
      */
@@ -579,6 +581,12 @@ public class Librarian extends User {
             return false;
         }
     }
+
+    /**
+     * checking for availability of copies of material
+     * @param idMaterial which copy of material to find
+     * @return if was found or not
+     */
     private static boolean isFreeCopyExist(int idMaterial){
         try{
             Statement stmt = db.con.createStatement();
@@ -590,11 +598,11 @@ public class Librarian extends User {
         }
         return false;
     }
-    
+
     /**
-     * check out for user,combination of all check out methods for user
+     * check out for user,combination of all check out methods
      *
-     * @param user       who check outs for material
+     * @param user who check outs for material
      * @param idMaterial what material to check out
      * @return -1 error, 0 - user added in the queue, 1 - book is checked out
      */
@@ -732,8 +740,8 @@ public class Librarian extends User {
     /**
      * method for returning book
      *
-     * @param idOfCopyOfBook what book to return
-     * @return boolean value - is operation successfull or not
+     * @param idOfCopyOfBook which book to return
+     * @return boolean value - is operation successful or not
      */
     public static boolean returnBook(int idOfCopyOfBook) {
         PropertyConfigurator.configure("log4j.properties");
@@ -759,7 +767,7 @@ public class Librarian extends User {
      * librarian see's who wants to take a book
      *
      * @param idOfCopyOfBook
-     * @return
+     * @return if request was successful or not
      */
     public static boolean requestReturnBook(int idOfCopyOfBook) {
         PropertyConfigurator.configure("log4j.properties");
@@ -779,7 +787,7 @@ public class Librarian extends User {
     /**
      * get information about user by it's id
      *
-     * @param id book's id
+     * @param id user's id
      */
     public static User UserById(int id) {
         try {
@@ -829,6 +837,10 @@ public class Librarian extends User {
         return material;
     }
 
+    /**
+     * get information about the book by it's id
+     * @param id id of book
+     */
     public static Book bookByID(int id) {
         try {
             Statement stmt = db.con.createStatement();
@@ -847,9 +859,8 @@ public class Librarian extends User {
     }
 
     /**
-     * the same method, but for AV
-     *
-     * @param id of AV
+     * get information about the AV by it's id
+     * @param id id of AV
      */
     public static AV avById(int id) {
         try {
@@ -868,7 +879,8 @@ public class Librarian extends User {
     }
 
     /**
-     * @param id the same, but for articles
+     * get information about the article by it's id
+     * @param id id of article
      */
     public static Article articleById(int id) {
         try {
@@ -889,7 +901,7 @@ public class Librarian extends User {
     }
 
     /**
-     * user deletion
+     * deletion of the user
      *
      * @param user_id user's id for deletion
      */
@@ -942,8 +954,8 @@ public class Librarian extends User {
     /**
      * adds copies of material
      *
-     * @param id     of material
-     * @param number how many copies to create
+     * @param id of material
+     * @param number how many copies to add
      */
     public static void addCopiesOfMaterial(int id, int number) {
         PropertyConfigurator.configure("log4j.properties");
@@ -972,26 +984,20 @@ public class Librarian extends User {
     }
 
     /**
-     * adding book to the library,with all parametres
+     * adding book to the library,with all parameters
      *
-     * @param title
-     * @param author
-     * @param publisher
-     * @param edition
-     * @param price
-     * @param keyWords
-     * @param is_bestseller
-     * @param reference
-     * @param year
-     * @param amount
-     * @throws SQLException
+     * @param title of book
+     * @param author of book
+     * @param publisher of book
+     * @param edition of book
+     * @param price of book
+     * @param keyWords of book
+     * @param is_bestseller of book
+     * @param reference of book
+     * @param year of book
+     * @param amount of book
      */
     public static void addBook(String title, String author, String publisher, String edition, int price, String keyWords, Boolean is_bestseller, boolean reference, int year, int amount){
-        /*
-         * To add book, you need to send all information about book
-         * ID will be created in DB with auto_increment
-         * time_left will be 999 and owner 0 - because only librarian(Id =0) can add books
-         * */
         PropertyConfigurator.configure("log4j.properties");
         try {
             Book book = new Book(title, author, publisher, edition, price, keyWords, is_bestseller, reference, year, "In library");
@@ -1006,26 +1012,20 @@ public class Librarian extends User {
     }
 
     /**
-     * the same method but for Article
+     * adding article to the library,with all parameters
      *
-     * @param title
-     * @param author
-     * @param price
-     * @param keyWords
-     * @param reference
-     * @param journal
-     * @param editor
-     * @param date
-     * @param amount
-     * @throws SQLException
+     * @param title of article
+     * @param author of article
+     * @param price of article
+     * @param keyWords of article
+     * @param reference of article
+     * @param journal of article
+     * @param editor of article
+     * @param date of article
+     * @param amount of article
      */
     public static void addArticle(String title, String author, int price, String keyWords,
                                   boolean reference, String journal, String editor, String date, int amount){
-        /*
-         * To add article, you need to send all information about article
-         * ID will be created in DB with auto_increment
-         * time_left will be 999 and owner 0 - because only librarian(Id =0) can add articles
-         * */
         PropertyConfigurator.configure("log4j.properties");
         try {
             Article article = new Article(title, author, price, keyWords, reference, journal, editor, date, "In library");
@@ -1040,14 +1040,13 @@ public class Librarian extends User {
     }
 
     /**
-     * The same method, but for AV
+     * adding AV to the library,with all parameters
      *
-     * @param title
-     * @param author
-     * @param price
-     * @param keyWords
-     * @param amount
-     * @throws SQLException
+     * @param title of AV
+     * @param author of AV
+     * @param price of AV
+     * @param keyWords of AV
+     * @param amount of AV
      */
     public static void addAV(String title, String author, int price, String keyWords, int amount){
         PropertyConfigurator.configure("log4j.properties");
@@ -1066,7 +1065,7 @@ public class Librarian extends User {
     /**
      * deletion of AV
      *
-     * @param id unique key of Av for deletion
+     * @param id unique key of AV for deletion
      */
     public static void deleteAVById(int id) {
         PropertyConfigurator.configure("log4j.properties");
@@ -1082,7 +1081,7 @@ public class Librarian extends User {
     }
 
     /**
-     * deletion of only 1 copy
+     * Deletion of 1 copy
      *
      * @param id unique key of copy
      */
@@ -1098,7 +1097,7 @@ public class Librarian extends User {
     }
 
     /**
-     * the same method, but for books
+     * deletion of book
      *
      * @param id unique key of book
      */
@@ -1117,7 +1116,7 @@ public class Librarian extends User {
     }
 
     /**
-     * the same method, but for article
+     * deletion of article
      *
      * @param id unique key of article
      */
@@ -1137,7 +1136,7 @@ public class Librarian extends User {
     /**
      * change information of AV
      *
-     * @param av which av to change, search by id
+     * @param av which AV to change, search by id
      */
     public static void modifyAV(AV av) {
         PropertyConfigurator.configure("log4j.properties");
@@ -1156,7 +1155,7 @@ public class Librarian extends User {
     }
 
     /**
-     * the same method, but for Article
+     * change information of the article
      *
      * @param article what article to change,search by id
      */
@@ -1181,7 +1180,7 @@ public class Librarian extends User {
     }
 
     /**
-     * the same method, but for books
+     * change information of the book
      *
      * @param book what book to change,search by id
      */
@@ -1208,9 +1207,9 @@ public class Librarian extends User {
 
 
     /**
-     * gets all AV
+     * gets all AV in system
      *
-     * @return arraylist of AV's
+     * @return all AV's
      */
     public static ArrayList<Material> getAllAV() {
         ArrayList<Material> avs = new ArrayList<Material>();
@@ -1244,9 +1243,9 @@ public class Librarian extends User {
     }
 
     /**
-     * the same method, bud for Articles
+     * gets all articles in system
      *
-     * @return arraylist of articles
+     * @return all articles
      */
     public static ArrayList<Material> getAllArticles() {
         ArrayList<Material> articles = new ArrayList<Material>();
@@ -1274,9 +1273,9 @@ public class Librarian extends User {
     }
 
     /**
-     * the same method, but for books
+     * gets all books in system
      *
-     * @return arraylist of books
+     * @return all books
      */
     public static ArrayList<Material> getAllBooks() {
         ArrayList<Material> books = new ArrayList<Material>();
@@ -1316,9 +1315,9 @@ public class Librarian extends User {
     }
 
     /**
-     * the same method, but for users of the library
+     * gets all users in system
      *
-     * @return linkedlist of users
+     * @return all users
      */
     public static LinkedList<User> getAllUsers() {
         LinkedList<User> users = new LinkedList<User>();
@@ -1343,8 +1342,12 @@ public class Librarian extends User {
         return users;
     }
 
+    /**
+     * gets all librarians  in system
+     * @return all librarians
+     */
     public static LinkedList<Librarian> getAllLibrarians() {
-        LinkedList<Librarian> users = new LinkedList<Librarian>();
+        LinkedList<Librarian> librarians = new LinkedList<Librarian>();
         try {
             Statement stmt = db.con.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM Users_of_the_library WHERE Type = 'Librarian Priv1' or Type = 'Librarian Priv2' or Type = 'Librarian Priv3'" );
@@ -1357,12 +1360,12 @@ public class Librarian extends User {
                 String type = rs.getString("Type");
                 String password = rs.getString("Password");
                 String email=rs.getString("Email");
-                users.add(new Librarian(name, address, Phonenumber, id, type, password,email));
+                librarians.add(new Librarian(name, address, Phonenumber, id, type, password,email));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return users;
+        return librarians;
     }
 
     /**
@@ -1387,10 +1390,10 @@ public class Librarian extends User {
     }
 
     /**
-     * return all materials, taken by user
+     * return all copies of materials, taken by user
      *
-     * @param user_id what user has taken materials
-     * @return linkedlist of taken copies
+     * @param user_id which user has taken materials
+     * @return all taken copies
      */
     public static LinkedList<Material> getAllCopiesTakenByUser(int user_id) {
         LinkedList<Material> copies = new LinkedList();
@@ -1451,6 +1454,11 @@ public class Librarian extends User {
     }
 
 
+    /**
+     * showing the queue of users for current material
+     * @param materialID on which material show the queue
+     * @return list of awaiting users
+     */
     public static ArrayList<User> getQueue(int materialID){
         ArrayList <User> queue = new ArrayList<>();
         try {
