@@ -1,10 +1,8 @@
 package main.java.librinno.model;
 
 import java.time.LocalDate;
-import java.util.Scanner;
 
 /**
- * Created by Ilnur Mamedbakov on 03.02.2018.
  * Class AV inherited from class Material
  * AV already have all properties in Class Material
  */

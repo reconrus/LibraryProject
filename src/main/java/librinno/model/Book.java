@@ -1,61 +1,109 @@
 package main.java.librinno.model;
 
-/**
- * Created by Ilnur Mamedbakov on 03.02.2018.
- * Class Book inherited from class Material
- * And its a properties of book:
- *publisher
- *year
- *edition
- * with setters and getters
- */
 import java.time.LocalDate;
 
+/**
+ * Class Book inherited from class Material
+ * Article has extra properties: publisher, year, edition
+ */
 public class Book extends Material {
+    //new properties
     private String publisher;
     private int year;
     private String edition;
     private boolean bestseller;
     private boolean reference;
     //getters and setters
-    public boolean getBestseller() {
-        return bestseller;
-    }
 
-    public boolean getReference(){
-        return reference;
-    }
-
-    public int getYear() {
-        return year;
-    }
-
-    public void setYear(int year) {
-        this.year = year;
-    }
-
-    public String getEdition() {
-        return edition;
-    }
-
-    public void setEdition(String edition) {
-        this.edition = edition;
-    }
-
-    public String getPublisher() {
-        return publisher;
-    }
-
-    public void setPublisher(String publisher) {
-        this.publisher = publisher;
-    }
-
+    /**
+     * setter
+     *
+     * @param bestseller set if book is bestseller or not
+     */
     public void setBestseller(boolean bestseller) {
         this.bestseller = bestseller;
     }
 
+    /**
+     * getter
+     *
+     * @return if book is bestseller
+     */
+    public boolean getBestseller() {
+        return bestseller;
+    }
+
+
+    /**
+     * setter
+     *
+     * @param reference set if book is reference or not
+     */
     public void setReference(boolean reference) {
         this.reference = reference;
+    }
+
+    /**
+     * getter
+     *
+     * @return if book is reference
+     */
+    public boolean getReference() {
+        return reference;
+    }
+
+    /**
+     * setter
+     *
+     * @param year year of book publishing
+     */
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    /**
+     * getter
+     *
+     * @return year of book publishing
+     */
+    public int getYear() {
+        return year;
+    }
+
+    /**
+     * setter
+     *
+     * @param edition edition of the book
+     */
+    public void setEdition(String edition) {
+        this.edition = edition;
+    }
+
+    /**
+     * getter
+     *
+     * @return edition of the book
+     */
+    public String getEdition() {
+        return edition;
+    }
+
+    /**
+     * setter
+     *
+     * @param publisher publisher of the book
+     */
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
+    }
+
+    /**
+     * getter
+     *
+     * @return publisher of the book
+     */
+    public String getPublisher() {
+        return publisher;
     }
 
     //constructors for different cases
@@ -70,22 +118,6 @@ public class Book extends Material {
         setBestseller(bestseller);
         setReference(reference);
         setYear(year);
-        setStatus(status);
-        setType("Book");
-    }
-
-    public Book(int id, String title, String author, String publisher, String edition, int price, String keyWords, boolean bestseller, boolean reference, int year, int amount, String status) {
-        setId(id);
-        setTitle(title);
-        setAuthor(author);
-        setPublisher(publisher);
-        setEdition(edition);
-        setPrice(price);
-        setKeyWords(keyWords);
-        setBestseller(bestseller);
-        setReference(reference);
-        setYear(year);
-        setTotalNumber(amount);
         setStatus(status);
         setType("Book");
     }
@@ -105,21 +137,6 @@ public class Book extends Material {
         setType("Book");
     }
 
-    public Book(int id, String title, String author, String publisher, String edition, int price, String keyWords, boolean bestseller, boolean reference, int year, int amount, LocalDate date) {
-        setId(id);
-        setTitle(title);
-        setAuthor(author);
-        setPublisher(publisher);
-        setEdition(edition);
-        setPrice(price);
-        setKeyWords(keyWords);
-        setBestseller(bestseller);
-        setReference(reference);
-        setYear(year);
-        setTotalNumber(amount);
-        setReturnDate(date);
-        setType("Book");
-    }
     public Book(int id, String title, String author, String publisher, String edition, int price, String keyWords, boolean bestseller, boolean reference, int year, int amount, LocalDate date, String status, int userid) {
         setId(id);
         setTitle(title);

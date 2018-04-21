@@ -1,15 +1,34 @@
 package main.java.librinno.model;
 
-import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
 import java.sql.*;
 
+/**
+ * Admin class inherited from user
+ * It already has all user properties
+ */
 public class Admin extends User {
     public static PreparedStatement prst=null;
+
+    /**
+     * Admin's constructor
+     * @param name admin's name
+     * @param address admin's address
+     * @param number admin's number
+     * @param cardnumber admin's id
+     * @param type admin's type
+     * @param password admin's password
+     * @param email admin's email
+     */
     public Admin(String name, String address, String number, int cardnumber, String type, String password, String email) {
         super(name, address, number, cardnumber, type, password, email);
     }
+
+    /**
+     * changing information of librarian
+     * @param user which librarian to modify
+     */
     public static void modify_librarian(User user) {
         PropertyConfigurator.configure("log4j.properties");
         try {
@@ -31,6 +50,10 @@ public class Admin extends User {
         }
     }
 
+    /**
+     * deletion of librarian
+     * @param user_id id of deleting librarian
+     */
     public static void delete_librarian(int user_id) {
         PropertyConfigurator.configure("log4j.properties");
         try {
@@ -42,6 +65,11 @@ public class Admin extends User {
             LOGGER.error("Error in librarian modification,librarian not found");
         }
     }
+
+    /**
+     * adding librarian to the system
+     * @param user what librarian (with all his parameters) to add
+     */
     public static void add_librarian(User user) {
         PropertyConfigurator.configure("log4j.properties");
         try {
