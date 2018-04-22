@@ -927,7 +927,7 @@ public class Librarian extends User {
      * @param user_id user's id for deletion
      */
     public void deleteUserById(int user_id) {
-        if(this.getType().equals("Librarian Priv2")) {
+        if(this.getType().equals("Librarian Priv3")) {
             PropertyConfigurator.configure("log4j.properties");
             try {
                 Database db = new Database();
@@ -1049,7 +1049,7 @@ public class Librarian extends User {
      * @param amount    of article
      */
     public void addArticle(String title, String author, int price, String keyWords,
-                                  boolean reference, String journal, String editor, String date, int amount) {
+                           boolean reference, String journal, String editor, String date, int amount) {
         if(this.getType().equals("Librarian Priv2")|| this.getType().equals("Librarian Priv3")) {
             PropertyConfigurator.configure("log4j.properties");
             try {
@@ -1151,7 +1151,7 @@ public class Librarian extends User {
      * @param id unique key of article
      */
     public void deleteArticleById(int id) {
-        if(getType().equals("Librarian Priv2")) {
+        if(getType().equals("Librarian Priv3")) {
             PropertyConfigurator.configure("log4j.properties");
             try {
                 PreparedStatement pr = db.con.prepareStatement("DELETE from Articles WHERE id=" + id);
