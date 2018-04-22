@@ -1,6 +1,9 @@
 package main.java.librinno.ui.librarianScreen;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXCheckBox;
+import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXTextField;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -26,6 +29,8 @@ import main.java.librinno.ui.editPatron.EditPatron;
 import main.java.librinno.ui.issue.Issue;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class LibrarianScreenController {
@@ -108,11 +113,36 @@ public class LibrarianScreenController {
     @FXML
     private TableColumn<Material, Integer> fine;
 
+    @FXML
+    private JFXComboBox<String> searchSection = new JFXComboBox<>();
+
+    @FXML
+    private JFXCheckBox searchBooks;
+
+    @FXML
+    private JFXCheckBox searchArticles;
+
+    @FXML
+    private JFXCheckBox searchAVs;
+
+    @FXML
+    private JFXCheckBox searchBestsellers;
+
+    @FXML
+    private JFXCheckBox searchNotReferences;
+
+    @FXML
+    private JFXCheckBox searchAvailable;
+
+    @FXML
+    private JFXTextField searchField;
+
     public void setLibrarianInfo(Librarian librarian){
         user=librarian;
     }
 
 
+    //TODO Delete librarians from this table
     @FXML
     void showTableUser(){
         userID.setCellValueFactory(new PropertyValueFactory<User,Integer>("card_number"));
@@ -145,6 +175,44 @@ public class LibrarianScreenController {
     }
 
     @FXML
+    void search() throws SQLException {
+        boolean haveCriteria = searchBestsellers.isSelected() || searchNotReferences.isSelected() || searchAvailable.isSelected();
+        boolean allTypes = !searchBooks.isSelected() && !searchArticles.isSelected() && !searchAVs.isSelected();
+
+        boolean searchByAll = searchSection.getSelectionModel().getSelectedItem().equals("All");
+        boolean searchByTitle = searchSection.getSelectionModel().getSelectedItem().equals("Title");
+        boolean searchByAuthor = searchSection.getSelectionModel().getSelectedItem().equals("Author");
+        boolean searchByKeywords = searchSection.getSelectionModel().getSelectedItem().equals("Keywords");
+        ArrayList<Material> materials;
+
+        if(allTypes)
+            if(searchByAll) materials = Search.materialByWordWithCriteria(searchField.getText(), true, true, true, true, true, true, searchBestsellers.isSelected(), searchNotReferences.isSelected(), searchAvailable.isSelected());
+            else materials = Search.materialByWordWithCriteria(searchField.getText(), true, true, true, searchByTitle, searchByAuthor, searchByKeywords, searchBestsellers.isSelected(), searchNotReferences.isSelected(), searchAvailable.isSelected());
+
+        else if(searchByAll) materials = Search.materialByWordWithCriteria(searchField.getText(), searchBooks.isSelected(), searchArticles.isSelected(), searchAVs.isSelected(), true, true, true, searchBestsellers.isSelected(), searchNotReferences.isSelected(), searchAvailable.isSelected());
+        else materials = Search.materialByWordWithCriteria(searchField.getText(), searchBooks.isSelected(), searchArticles.isSelected(), searchAVs.isSelected(), searchByTitle, searchByAuthor, searchByKeywords, searchBestsellers.isSelected(), searchNotReferences.isSelected(), searchAvailable.isSelected());
+
+        id.setCellValueFactory(new PropertyValueFactory("id"));
+        author.setCellValueFactory(new PropertyValueFactory("author"));
+        title.setCellValueFactory(new PropertyValueFactory("title"));
+        avaliability.setCellValueFactory(new PropertyValueFactory("numberAvailable"));
+        total.setCellValueFactory(new PropertyValueFactory("totalNumber"));
+        bookType.setCellValueFactory(new PropertyValueFactory("type"));
+
+        tableBook.getItems().setAll(materials);
+    }
+
+    @FXML
+    private void clearCriteria(){
+        searchBooks.setSelected(false);
+        searchArticles.setSelected(false);
+        searchAVs.setSelected(false);
+        searchBestsellers.setSelected(false);
+        searchNotReferences.setSelected(false);
+        searchAvailable.setSelected(false);
+    }
+
+    @FXML
     void showBookInfo() throws IOException {
         Material material = tableBook.getSelectionModel().getSelectedItem();
         String mat=material.getType();
@@ -155,6 +223,7 @@ public class LibrarianScreenController {
             reg.passGUI(Librarian.avById(material.getId()));
             Stage stage = new Stage(StageStyle.DECORATED);
             stage.setScene(new Scene(parent));
+            stage.setResizable(false);
             stage.showAndWait();
         }else if (mat.equals("Book")) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/main/java/librinno/ui/ShowDocInfo/ShowDocInfo.fxml"));
@@ -163,6 +232,7 @@ public class LibrarianScreenController {
             reg.passGUI(Librarian.bookByID(material.getId()));
             Stage stage = new Stage(StageStyle.DECORATED);
             stage.setScene(new Scene(parent));
+            stage.setResizable(false);
             stage.showAndWait();
         }
         else {
@@ -172,6 +242,7 @@ public class LibrarianScreenController {
             reg.passGUI(Librarian.articleById(material.getId()));
             Stage stage = new Stage(StageStyle.DECORATED);
             stage.setScene(new Scene(parent));
+            stage.setResizable(false);
             stage.showAndWait();
         }
     }
@@ -206,6 +277,7 @@ public class LibrarianScreenController {
             reg.passGUI(user);
             Stage stage = new Stage(StageStyle.DECORATED);
             stage.setScene(new Scene(parent));
+            stage.setResizable(false);
             stage.showAndWait();
             showTableUser();
         }
@@ -294,6 +366,7 @@ public class LibrarianScreenController {
             }
             Stage stage = new Stage(StageStyle.DECORATED);
             stage.setScene(new Scene(parent));
+            stage.setResizable(false);
             stage.showAndWait();
             showTables();
         }
@@ -313,6 +386,7 @@ public class LibrarianScreenController {
             reg.passGUI(book);
             Stage stage = new Stage(StageStyle.DECORATED);
             stage.setScene(new Scene(parent));
+            stage.setResizable(false);
             stage.showAndWait();
             showTables();
         }
@@ -329,6 +403,7 @@ public class LibrarianScreenController {
 
         Stage stage = new Stage(StageStyle.DECORATED);
         stage.setScene(new Scene(parent));
+        stage.setResizable(false);
         stage.showAndWait();
         showTables();
     }
@@ -379,6 +454,7 @@ public class LibrarianScreenController {
 
         Stage stage = new Stage();
         stage.setScene(new Scene(parent));
+        stage.setResizable(false);
         stage.showAndWait();
     }
 
@@ -389,12 +465,19 @@ public class LibrarianScreenController {
     }
 
     @FXML
-    void search(){};//TODO
-    @FXML
     void initialize(){
         showTableUser();
         showTableDocuments();
         showTableCopy();
+        setSearchSectionsBox();
+    }
+
+    private void setSearchSectionsBox(){
+        searchSection.getItems().add("All");
+        searchSection.getItems().add("Title");
+        searchSection.getItems().add("Author");
+        searchSection.getItems().add("Keywords");
+        searchSection.getSelectionModel().selectFirst();
     }
 
 }

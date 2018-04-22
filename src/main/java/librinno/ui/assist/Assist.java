@@ -23,6 +23,7 @@ public class Assist {
         Parent parent= FXMLLoader.load(fxml);
         Stage stage= new Stage(StageStyle.DECORATED);
         stage.setScene(new Scene(parent));
+        stage.setResizable(false);
         stage.show();
     }
 
@@ -35,6 +36,7 @@ public class Assist {
         Parent parent= FXMLLoader.load(fxml);
         Stage stage= new Stage(StageStyle.DECORATED);
         stage.setScene(new Scene(parent));
+        stage.setResizable(false);
         stage.showAndWait();
     }
 

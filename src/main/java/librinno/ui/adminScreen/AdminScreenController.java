@@ -135,6 +135,7 @@ public class AdminScreenController {
             reg.passGUI(user);
             Stage stage = new Stage(StageStyle.DECORATED);
             stage.setScene(new Scene(parent));
+            stage.setResizable(false);
             stage.showAndWait();
             showTableLibrarian();
         }

@@ -32,6 +32,7 @@ public class MainApp extends Application {
             Parent parent = FXMLLoader.load(getClass().getResource("/main/java/librinno/ui/main/DBInfo.fxml"));
             Stage stage = new Stage(StageStyle.DECORATED);
             stage.setScene(new Scene(parent));
+            stage.setResizable(false);
             stage.showAndWait();
         }
         Scanner sc = new Scanner(new File("dbinf.txt"));
@@ -50,6 +51,7 @@ public class MainApp extends Application {
         Scene scene = new Scene(root);
 
         primaryStage.setScene(scene);
+        primaryStage.setResizable(false);
         primaryStage.show();
         nthread = new Notification_thread();
         nthread.start();

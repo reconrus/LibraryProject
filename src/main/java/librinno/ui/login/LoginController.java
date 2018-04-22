@@ -45,6 +45,7 @@ public class LoginController {
             reg.setUserInfo(db.getInformationAboutTheUser(Integer.parseInt(id)));
             Stage stage = new Stage(StageStyle.DECORATED);
             stage.setScene(new Scene(parent));
+            stage.setResizable(false);
             stage.show();
             Assist.closeStage(login);
         }
@@ -109,6 +110,7 @@ public class LoginController {
             reg.setLibrarianInfo(db.getInformationAboutTheLibrarian(Integer.parseInt(id)));
             Stage stage = new Stage(StageStyle.DECORATED);
             stage.setScene(new Scene(parent));
+            stage.setResizable(false);
             stage.show();
             Assist.closeStage(login);
         }
