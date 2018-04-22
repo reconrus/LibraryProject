@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.LinkedList;
+
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
@@ -46,12 +47,13 @@ public class Librarian extends User {
      * @param type       it's type
      * @param password   it's password
      */
-    public Librarian(String name, String address, String number, int cardnumber, String type, String password,String email) {
-        super(name, address, number, cardnumber, type, password,email);
-        String[] typeArr= type.split(" ");
+    public Librarian(String name, String address, String number, int cardnumber, String type, String password, String email) {
+        super(name, address, number, cardnumber, type, password, email);
+        String[] typeArr = type.split(" ");
         setType(typeArr[0]);
         setPrivileges(typeArr[1]);
     }
+
     //getters and setters of privileges
     public void setPrivileges(String privileges) {
         this.privileges = privileges;
@@ -76,61 +78,67 @@ public class Librarian extends User {
      * sending email to people who took material with request to return it
      * and to people who was in queue with request that material is not available anymore
      * also deleting queue for this material
+     *
      * @param idOfMaterial id of material
      */
-    public static void outstandingRequest(int idOfMaterial){
+    public static void outstandingRequest(int idOfMaterial) {
         PropertyConfigurator.configure("log4j.properties");
         try {
             PreparedStatement pr = db.con.prepareStatement("UPDATE Copy SET Time_left=?,Return_date=?,CanRenew=? WHERE Id_of_original= " + idOfMaterial + " AND Status = 'Issued'");
-            pr.setInt(1,0);
-            pr.setDate(2,java.sql.Date.valueOf(LocalDate.now()));
-            pr.setBoolean(3,false);
+            pr.setInt(1, 0);
+            pr.setDate(2, java.sql.Date.valueOf(LocalDate.now()));
+            pr.setBoolean(3, false);
             pr.executeUpdate();
 
             ResultSet rs = pr.executeQuery("SELECT  * FROM Copy WHERE Id_of_original= " + idOfMaterial);
             int owner;
-            while (rs.next()){
+            while (rs.next()) {
                 owner = rs.getInt("Owner");
                 Statement stmt = db.con.createStatement();
                 ResultSet rs2 = stmt.executeQuery("SELECT  * FROM users_of_the_library WHERE Card_number= " + owner);
                 String email = null;
-                while (rs2.next()){
-                    email=rs2.getString("Email");
+                while (rs2.next()) {
+                    email = rs2.getString("Email");
                 }
                 SendEmail sendEmail = new SendEmail();
-                sendEmail.sendToOne(email,"Return book.","Urgently return the book throughout the day! Because of outstanding request.");
+                sendEmail.sendToOne(email, "Return book.", "Urgently return the book throughout the day! Because of outstanding request.");
             }
-
+            rs = pr.executeQuery("SELECT * FROM queue_on_" + idOfMaterial);
+            while (rs.next()) {
+                String email = rs.getString("Email");
+                SendEmail send = new SendEmail();
+                send.sendToOne(email, "Material is not available", "Material,which you reserved,now is not available.You are removed from waiting list");
+            }
             pr.executeUpdate("DROP TABLE IF EXISTS queue_on_" + idOfMaterial);
             LOGGER.trace("Librarian made an outstanding request");
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public static ArrayList<ArrayList<String>>  outstandingRequestWithDate(int idOfMaterial,LocalDate date){
-        ArrayList<String> emails=new ArrayList<>();
-        ArrayList<String> book_no_available=new ArrayList<>();
+    public static ArrayList<ArrayList<String>> outstandingRequestWithDate(int idOfMaterial, LocalDate date) {
+        ArrayList<String> emails = new ArrayList<>();
+        ArrayList<String> book_no_available = new ArrayList<>();
         try {
             PreparedStatement pr = db.con.prepareStatement("UPDATE Copy SET Time_left=?,Return_date=?,CanRenew=? WHERE Id_of_original= " + idOfMaterial + " AND Status = 'Issued'");
-            pr.setInt(1,0);
-            pr.setDate(2,java.sql.Date.valueOf(date));
-            pr.setBoolean(3,false);
+            pr.setInt(1, 0);
+            pr.setDate(2, java.sql.Date.valueOf(date));
+            pr.setBoolean(3, false);
             pr.executeUpdate();
 
             ResultSet rs = pr.executeQuery("SELECT  * FROM Copy WHERE Id_of_original= " + idOfMaterial);
             int owner;
-            while (rs.next() && rs.getInt("Owner")!=0){
+            while (rs.next() && rs.getInt("Owner") != 0) {
                 owner = rs.getInt("Owner");
                 Statement stmt = db.con.createStatement();
                 ResultSet rs2 = stmt.executeQuery("SELECT  * FROM users_of_the_library WHERE Card_number= " + owner);
                 String email = "";
-                while (rs2.next()){
-                    email=rs2.getString("Email");
+                while (rs2.next()) {
+                    email = rs2.getString("Email");
                     emails.add(email);
                 }
                 SendEmail sendEmail = new SendEmail();
-                sendEmail.sendToOne(email,"Return book.","Urgently return the book throughout the day! Because of outstanding request.");
+                sendEmail.sendToOne(email, "Return book.", "Urgently return the book throughout the day! Because of outstanding request.");
             }
             try {
                 rs = pr.executeQuery("SELECT * FROM queue_on_" + idOfMaterial);
@@ -140,24 +148,23 @@ public class Librarian extends User {
                     SendEmail send = new SendEmail();
                     send.sendToOne(email, "Material is not available", "Material,which you reserved,now is not available.You are removed from waiting list");
                 }
-            }
-            catch (SQLException e){
+            } catch (SQLException e) {
             }
             pr.executeUpdate("DROP TABLE IF EXISTS queue_on_" + idOfMaterial);
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
-        ArrayList<ArrayList<String>> all_emails=new ArrayList<>();
+        ArrayList<ArrayList<String>> all_emails = new ArrayList<>();
         all_emails.add(emails);
         all_emails.add(book_no_available);
         return all_emails;
     }
 
-    public static boolean renewWithDate(User user,int idOfRenewCopy,LocalDate date){
-        boolean oldCanRenew=false;
-        int idOfOriginal=0;
+    public static boolean renewWithDate(User user, int idOfRenewCopy, LocalDate date) {
+        boolean oldCanRenew = false;
+        int idOfOriginal = 0;
 
-        try{
+        try {
             Database db = new Database();
             PreparedStatement pr = db.con.prepareStatement("UPDATE Copy SET Time_left=?,Return_date=?,CanRenew=? WHERE Id_of_copy= " + idOfRenewCopy + " AND CanRenew=" + true);
             ResultSet rs = pr.executeQuery("SELECT  * FROM Copy WHERE Id_of_copy= " + idOfRenewCopy);
@@ -168,41 +175,41 @@ public class Librarian extends User {
 
             if (user.getType().equals("Visiting Professor")) {
                 //если визитинг профессор, то он всегда все берет только на одну неделю
-                pr.setInt(1,7);
-                pr.setDate(2,java.sql.Date.valueOf(date.plusDays(7)));
-                pr.setBoolean(3,true);
+                pr.setInt(1, 7);
+                pr.setDate(2, java.sql.Date.valueOf(date.plusDays(7)));
+                pr.setBoolean(3, true);
                 pr.executeUpdate();
                 return true;
 
-            } else if (oldCanRenew){//если это не ВизПроф, то чекаем обновлял ли он до этого(если обновлял то false, если может обновить, то true)
+            } else if (oldCanRenew) {//если это не ВизПроф, то чекаем обновлял ли он до этого(если обновлял то false, если может обновить, то true)
                 Statement stmt = db.con.createStatement();
                 rs = stmt.executeQuery("SELECT * FROM Books WHERE id =" + idOfOriginal);
                 if (rs.next()) {
                     //если книга, то уже смотрим на тип юзера и книгу
-                    if (user.getType().equals("Student") && rs.getBoolean("is_bestseller")){
-                        pr.setInt(1,14);
-                        pr.setDate(2,java.sql.Date.valueOf(date.plusDays(14)));
-                        pr.setBoolean(3,false);
+                    if (user.getType().equals("Student") && rs.getBoolean("is_bestseller")) {
+                        pr.setInt(1, 14);
+                        pr.setDate(2, java.sql.Date.valueOf(date.plusDays(14)));
+                        pr.setBoolean(3, false);
                         pr.executeUpdate();
                         return true;
 
-                    } else if(user.getType().equals("Student") && !rs.getBoolean("is_bestseller")){
-                        pr.setInt(1,21);
-                        pr.setDate(2,java.sql.Date.valueOf(date.plusDays(21)));
-                        pr.setBoolean(3,false);
+                    } else if (user.getType().equals("Student") && !rs.getBoolean("is_bestseller")) {
+                        pr.setInt(1, 21);
+                        pr.setDate(2, java.sql.Date.valueOf(date.plusDays(21)));
+                        pr.setBoolean(3, false);
                         pr.executeUpdate();
                         return true;
                     } else {
-                        pr.setInt(1,28);
-                        pr.setDate(2,java.sql.Date.valueOf(date.plusDays(28)));
-                        pr.setBoolean(3,false);
+                        pr.setInt(1, 28);
+                        pr.setDate(2, java.sql.Date.valueOf(date.plusDays(28)));
+                        pr.setBoolean(3, false);
                         pr.executeUpdate();
                         return true;
                     }
                 } else {
-                    pr.setInt(1,14);
-                    pr.setDate(2,java.sql.Date.valueOf(date.plusDays(14)));
-                    pr.setBoolean(3,false);
+                    pr.setInt(1, 14);
+                    pr.setDate(2, java.sql.Date.valueOf(date.plusDays(14)));
+                    pr.setBoolean(3, false);
                     pr.executeUpdate();
                     return true;
                 }
@@ -219,15 +226,16 @@ public class Librarian extends User {
 
     /**
      * renew of information of material
-     * @param user which user renews information
+     *
+     * @param user          which user renews information
      * @param idOfRenewCopy current copy of material
      * @return if renew was successful or not
      */
-    public static boolean renew(User user,int idOfRenewCopy){
+    public static boolean renew(User user, int idOfRenewCopy) {
         PropertyConfigurator.configure("log4j.properties");
-        boolean oldCanRenew=false;
-        int idOfOriginal=0;
-        try{
+        boolean oldCanRenew = false;
+        int idOfOriginal = 0;
+        try {
             Database db = new Database();
             PreparedStatement pr = db.con.prepareStatement("UPDATE Copy SET Time_left=?,Return_date=?,CanRenew=? WHERE Id_of_copy= " + idOfRenewCopy + " AND CanRenew=" + true);
             ResultSet rs = pr.executeQuery("SELECT  * FROM Copy WHERE Id_of_copy= " + idOfRenewCopy);
@@ -237,49 +245,49 @@ public class Librarian extends User {
 
             }
             if (user.getType().equals("Visiting Professor")) {
-                pr.setInt(1,7);
-                pr.setDate(2,java.sql.Date.valueOf(LocalDate.now().plusDays(7)));
-                pr.setBoolean(3,true);
+                pr.setInt(1, 7);
+                pr.setDate(2, java.sql.Date.valueOf(LocalDate.now().plusDays(7)));
+                pr.setBoolean(3, true);
                 pr.executeUpdate();
                 return true;
 
-            } else if (oldCanRenew){
+            } else if (oldCanRenew) {
                 Statement stmt = db.con.createStatement();
                 rs = stmt.executeQuery("SELECT * FROM Books WHERE id =" + idOfOriginal);
                 if (rs.next()) {
-                    if (user.getType().equals("Student") && rs.getBoolean("is_bestseller")){
-                        pr.setInt(1,14);
-                        pr.setDate(2,java.sql.Date.valueOf(LocalDate.now().plusDays(14)));
-                        pr.setBoolean(3,false);
+                    if (user.getType().equals("Student") && rs.getBoolean("is_bestseller")) {
+                        pr.setInt(1, 14);
+                        pr.setDate(2, java.sql.Date.valueOf(LocalDate.now().plusDays(14)));
+                        pr.setBoolean(3, false);
                         pr.executeUpdate();
-                        LOGGER.trace("user with id "+ user.getCard_number()+" renewed copy with id "+idOfRenewCopy);
+                        LOGGER.trace("user with id " + user.getCard_number() + " renewed copy with id " + idOfRenewCopy);
                         return true;
 
-                    } else if(user.getType().equals("Student") && !rs.getBoolean("is_bestseller")){
-                        pr.setInt(1,21);
-                        pr.setDate(2,java.sql.Date.valueOf(LocalDate.now().plusDays(21)));
-                        pr.setBoolean(3,false);
-                        LOGGER.trace("user with id "+ user.getCard_number()+" renewed copy with id "+idOfRenewCopy);
+                    } else if (user.getType().equals("Student") && !rs.getBoolean("is_bestseller")) {
+                        pr.setInt(1, 21);
+                        pr.setDate(2, java.sql.Date.valueOf(LocalDate.now().plusDays(21)));
+                        pr.setBoolean(3, false);
+                        LOGGER.trace("user with id " + user.getCard_number() + " renewed copy with id " + idOfRenewCopy);
                         pr.executeUpdate();
                         return true;
                     } else {
-                        pr.setInt(1,28);
-                        pr.setDate(2,java.sql.Date.valueOf(LocalDate.now().plusDays(28)));
-                        pr.setBoolean(3,false);
+                        pr.setInt(1, 28);
+                        pr.setDate(2, java.sql.Date.valueOf(LocalDate.now().plusDays(28)));
+                        pr.setBoolean(3, false);
                         pr.executeUpdate();
-                        LOGGER.trace("user with id "+ user.getCard_number()+" renewed copy with id "+idOfRenewCopy);
+                        LOGGER.trace("user with id " + user.getCard_number() + " renewed copy with id " + idOfRenewCopy);
                         return true;
                     }
                 } else {
-                    pr.setInt(1,14);
-                    pr.setDate(2,java.sql.Date.valueOf(LocalDate.now().plusDays(14)));
-                    pr.setBoolean(3,false);
+                    pr.setInt(1, 14);
+                    pr.setDate(2, java.sql.Date.valueOf(LocalDate.now().plusDays(14)));
+                    pr.setBoolean(3, false);
                     pr.executeUpdate();
-                    LOGGER.trace("user with id "+ user.getCard_number()+" renewed copy with id "+idOfRenewCopy);
+                    LOGGER.trace("user with id " + user.getCard_number() + " renewed copy with id " + idOfRenewCopy);
                     return true;
                 }
             }
-            LOGGER.trace("user with id "+ user.getCard_number()+"didn't renew copy with id "+idOfRenewCopy);
+            LOGGER.trace("user with id " + user.getCard_number() + "didn't renew copy with id " + idOfRenewCopy);
             return false;
 
         } catch (SQLException e) {
@@ -290,10 +298,11 @@ public class Librarian extends User {
 
     /**
      * fine for expiration of material
+     *
      * @param idOfCopy current copy
      * @return current amount of money of expiration
      */
-    public static int fine(int idOfCopy){
+    public static int fine(int idOfCopy) {
         PropertyConfigurator.configure("log4j.properties");
         try {
             Statement stmt = db.con.createStatement();
@@ -328,12 +337,13 @@ public class Librarian extends User {
                 }
             }
             return 0;
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             LOGGER.error("Error in fine operation");
         }
         return 0;
     }
-    public static int fineWithDate(int idOfCopy,LocalDate date){
+
+    public static int fineWithDate(int idOfCopy, LocalDate date) {
         try {
             Statement stmt = db.con.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT  * FROM Copy WHERE Id_of_copy= " + idOfCopy);
@@ -367,15 +377,16 @@ public class Librarian extends User {
                 }
             }
             return 0;
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return 0;
     }
+
     /**
      * method for checking out books
      *
-     * @param user to whom give a book
+     * @param user     to whom give a book
      * @param idOfBook which book to give
      * @return boolean value which will depend on success of checking out
      */
@@ -406,17 +417,19 @@ public class Librarian extends User {
                 }
                 pr.setString(3, "Issued");
                 pr.executeUpdate();
-                LOGGER.trace("Copy of book with id "+idOfBook+" was given to user with id "+user.getCard_number());
+                LOGGER.trace("Copy of book with id " + idOfBook + " was given to user with id " + user.getCard_number());
                 return true;
-            } else{
-                LOGGER.trace("Copy of book with id "+idOfBook+" wasn't given to user with id "+user.getCard_number());
-                return false;}
+            } else {
+                LOGGER.trace("Copy of book with id " + idOfBook + " wasn't given to user with id " + user.getCard_number());
+                return false;
+            }
         } catch (SQLException e) {
             LOGGER.error("Error in checking out book");
             return false;
         }
     }
-    public static boolean checkOutBookWithData(User user, int idOfBook,LocalDate date) {
+
+    public static boolean checkOutBookWithData(User user, int idOfBook, LocalDate date) {
         try {
             Database db = new Database();
             PreparedStatement pr = db.con.prepareStatement("UPDATE Copy SET Owner=?,Time_left=?,Status=?,Return_date=? WHERE Id_of_original= " + idOfBook + " AND Status= 'In library' LIMIT 1 ");
@@ -451,6 +464,7 @@ public class Librarian extends User {
             return false;
         }
     }
+
     /**
      * method for checking out AVs
      *
@@ -478,16 +492,17 @@ public class Librarian extends User {
             }
             pr.setString(3, "Issued");
             pr.executeUpdate();
-            LOGGER.trace("Copy of av with id "+idOfAV+" was given to user with id "+user.getCard_number());
+            LOGGER.trace("Copy of av with id " + idOfAV + " was given to user with id " + user.getCard_number());
             return true;
 
         } catch (SQLException e) {
             e.printStackTrace();
-            LOGGER.trace("Copy of av with id "+idOfAV+" wasn't given to user with id "+user.getCard_number());
+            LOGGER.trace("Copy of av with id " + idOfAV + " wasn't given to user with id " + user.getCard_number());
             return false;
         }
     }
-    public static boolean checkOutAVWithData(User user, int idOfAV,LocalDate date) {
+
+    public static boolean checkOutAVWithData(User user, int idOfAV, LocalDate date) {
         try {
             Database db = new Database();
             PreparedStatement pr = db.con.prepareStatement("UPDATE Copy SET Owner=?,Time_left=?,Status=?,Return_date=? WHERE Id_of_original= " + idOfAV + " AND Status= 'In library' LIMIT 1 ");
@@ -513,10 +528,11 @@ public class Librarian extends User {
             return false;
         }
     }
+
     /**
      * method for checking out articles
      *
-     * @param user who gets the articles
+     * @param user        who gets the articles
      * @param idOfArticle which article to give to user
      * @return boolean value - success or not on checking out
      */
@@ -541,10 +557,10 @@ public class Librarian extends User {
                 }
                 pr.setString(3, "Issued");
                 pr.executeUpdate();
-                LOGGER.trace("Article with id "+idOfArticle+" was checked out to user with id "+user.getCard_number());
+                LOGGER.trace("Article with id " + idOfArticle + " was checked out to user with id " + user.getCard_number());
                 return true;
             } else {
-                LOGGER.trace("Article with id "+idOfArticle+" wasn't checked out to user with id "+user.getCard_number());
+                LOGGER.trace("Article with id " + idOfArticle + " wasn't checked out to user with id " + user.getCard_number());
                 return false;
             }
         } catch (SQLException e) {
@@ -552,7 +568,8 @@ public class Librarian extends User {
             return false;
         }
     }
-    public static boolean checkOutArticleWithData(User user, int idOfArticle,LocalDate date) {
+
+    public static boolean checkOutArticleWithData(User user, int idOfArticle, LocalDate date) {
         try {
             Database db = new Database();
             PreparedStatement pr = db.con.prepareStatement("UPDATE Copy SET Owner=?,Time_left=?,Status=?,Return_date=? WHERE Id_of_original= " + idOfArticle + " AND Status= 'In library' LIMIT 1 ");
@@ -584,16 +601,17 @@ public class Librarian extends User {
 
     /**
      * checking for availability of copies of material
+     *
      * @param idMaterial which copy of material to find
      * @return if was found or not
      */
-    private static boolean isFreeCopyExist(int idMaterial){
-        try{
+    private static boolean isFreeCopyExist(int idMaterial) {
+        try {
             Statement stmt = db.con.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM Copy WHERE Status = 'In library' AND Id_of_original= " + idMaterial);
             rs.last();
-            if(rs.getRow() != 0) return true;
-        }catch (SQLException e) {
+            if (rs.getRow() != 0) return true;
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return false;
@@ -602,14 +620,14 @@ public class Librarian extends User {
     /**
      * check out for user,combination of all check out methods
      *
-     * @param user who check outs for material
+     * @param user       who check outs for material
      * @param idMaterial what material to check out
      * @return -1 error, 0 - user added in the queue, 1 - book is checked out
      */
     public static int checkOut(User user, int idMaterial) {
         PropertyConfigurator.configure("log4j.properties");
         try {
-            db.queue_on_material(idMaterial,user.getCard_number());
+            db.queue_on_material(idMaterial, user.getCard_number());
             int success = -1;
             Statement stmt = null;
             ResultSet queue = null;
@@ -624,25 +642,25 @@ public class Librarian extends User {
 
                 if (queue != null && queue.next() && queue.getInt("Card_number") == user.getCard_number()) {
                     ResultSet rs = stmt.executeQuery("SELECT * FROM Books WHERE id =" + idMaterial);
-                    if (rs.next() ) {
+                    if (rs.next()) {
                         if (isFreeCopyExist(idMaterial))
-                            success = checkOutBook(user, idMaterial)?1:0;
-                        else success =  0;
+                            success = checkOutBook(user, idMaterial) ? 1 : 0;
+                        else success = 0;
                     }
                     rs = stmt.executeQuery("SELECT * FROM AV WHERE id =" + idMaterial);
                     if (rs.next()) {
                         if (isFreeCopyExist(idMaterial))
-                            success = checkOutAV(user, idMaterial)?1:0;
+                            success = checkOutAV(user, idMaterial) ? 1 : 0;
                         else success = 0;
                     }
                     rs = stmt.executeQuery("SELECT * FROM Articles WHERE id =" + idMaterial);
                     if (rs.next()) {
                         if (isFreeCopyExist(idMaterial))
-                            success = checkOutArticle(user, idMaterial)?1:0;
-                        else success =  0;
+                            success = checkOutArticle(user, idMaterial) ? 1 : 0;
+                        else success = 0;
                     }
                     if (success == 1) {
-                        if(getNumberOfCopiesOfBook(idMaterial)>=0) {
+                        if (getNumberOfCopiesOfBook(idMaterial) >= 0) {
                             PreparedStatement pr = db.con.prepareStatement("DELETE from queue_on_" + idMaterial + " LIMIT 1");
                             pr.executeUpdate();
                             DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss.S");
@@ -655,29 +673,29 @@ public class Librarian extends User {
                         rs.last();
                         if (rs.getRow() == 0) {
                             stmt.executeUpdate("DROP TABLE queue_on_" + idMaterial);
-                            LOGGER.trace("There is no people awaiting for material "+idMaterial+". Queue is deleted.");
+                            LOGGER.trace("There is no people awaiting for material " + idMaterial + ". Queue is deleted.");
                         }
                     }
                 } else {
-                    LOGGER.trace("To early for user with id "+user.getCard_number()+" to get material with id "+idMaterial);
+                    LOGGER.trace("To early for user with id " + user.getCard_number() + " to get material with id " + idMaterial);
                 }
             } catch (SQLException e) {
-               LOGGER.error("Error in checking out of "+idMaterial);
+                LOGGER.error("Error in checking out of " + idMaterial);
             }
-            if(success==1)
-                LOGGER.trace("Successful checking out of "+idMaterial+" to user "+user.getCard_number());
-            if(success==0)
-                LOGGER.trace("User with id "+user.getCard_number()+" joining a queue on material with id "+idMaterial);
+            if (success == 1)
+                LOGGER.trace("Successful checking out of " + idMaterial + " to user " + user.getCard_number());
+            if (success == 0)
+                LOGGER.trace("User with id " + user.getCard_number() + " joining a queue on material with id " + idMaterial);
             return success;
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             LOGGER.error("Error in checking out");
             return -1;
         }
     }
-    public static int checkOutWithData(User user, int idMaterial,LocalDate date) {
+
+    public static int checkOutWithData(User user, int idMaterial, LocalDate date) {
         try {
-            db.queue_on_material(idMaterial,user.getCard_number());
+            db.queue_on_material(idMaterial, user.getCard_number());
             int success = -1;
             Statement stmt = null;
             ResultSet queue = null;
@@ -692,25 +710,25 @@ public class Librarian extends User {
 
                 if (queue != null && queue.next() && queue.getInt("Card_number") == user.getCard_number()) {
                     ResultSet rs = stmt.executeQuery("SELECT * FROM Books WHERE id =" + idMaterial);
-                    if (rs.next() ) {
+                    if (rs.next()) {
                         if (isFreeCopyExist(idMaterial))
-                            success = checkOutBookWithData(user, idMaterial,date)?1:0;
-                        else success =  0;
+                            success = checkOutBookWithData(user, idMaterial, date) ? 1 : 0;
+                        else success = 0;
                     }
                     rs = stmt.executeQuery("SELECT * FROM AV WHERE id =" + idMaterial);
                     if (rs.next()) {
                         if (isFreeCopyExist(idMaterial))
-                            success = checkOutAVWithData(user, idMaterial,date)?1:0;
+                            success = checkOutAVWithData(user, idMaterial, date) ? 1 : 0;
                         else success = 0;
                     }
                     rs = stmt.executeQuery("SELECT * FROM Articles WHERE id =" + idMaterial);
                     if (rs.next()) {
                         if (isFreeCopyExist(idMaterial))
-                            success = checkOutArticleWithData(user, idMaterial,date)?1:0;
-                        else success =  0;
+                            success = checkOutArticleWithData(user, idMaterial, date) ? 1 : 0;
+                        else success = 0;
                     }
                     if (success == 1) {
-                        if(getNumberOfCopiesOfBook(idMaterial)>=0) {
+                        if (getNumberOfCopiesOfBook(idMaterial) >= 0) {
                             PreparedStatement pr = db.con.prepareStatement("DELETE from queue_on_" + idMaterial + " LIMIT 1");
                             pr.executeUpdate();
                             DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss.S");
@@ -732,11 +750,11 @@ public class Librarian extends User {
                 e.printStackTrace();
             }
             return success;
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             return -1;
         }
     }
+
     /**
      * method for returning book
      *
@@ -752,12 +770,12 @@ public class Librarian extends User {
             pr.setInt(2, 999);
             pr.setString(3, "In library");
             pr.setDate(4, java.sql.Date.valueOf(LocalDate.of(9999, 1, 1)));
-            pr.setBoolean(5,true);
+            pr.setBoolean(5, true);
             pr.executeUpdate();
-            LOGGER.trace("Material with copy id "+idOfCopyOfBook+" is returned");
+            LOGGER.trace("Material with copy id " + idOfCopyOfBook + " is returned");
             return true;
         } catch (SQLException e) {
-            LOGGER.error("Error of returning material "+idOfCopyOfBook);
+            LOGGER.error("Error of returning material " + idOfCopyOfBook);
             return false;
         }
     }
@@ -776,7 +794,7 @@ public class Librarian extends User {
             PreparedStatement pr = db.con.prepareStatement("UPDATE Copy SET Status=? WHERE Id_of_copy= " + idOfCopyOfBook);
             pr.setString(1, "Returning");
             pr.executeUpdate();
-            LOGGER.trace("Successful request on "+idOfCopyOfBook);
+            LOGGER.trace("Successful request on " + idOfCopyOfBook);
             return true;
         } catch (SQLException e) {
             LOGGER.error("Error of request");
@@ -839,6 +857,7 @@ public class Librarian extends User {
 
     /**
      * get information about the book by it's id
+     *
      * @param id id of book
      */
     public static Book bookByID(int id) {
@@ -860,6 +879,7 @@ public class Librarian extends User {
 
     /**
      * get information about the AV by it's id
+     *
      * @param id id of AV
      */
     public static AV avById(int id) {
@@ -880,6 +900,7 @@ public class Librarian extends User {
 
     /**
      * get information about the article by it's id
+     *
      * @param id id of article
      */
     public static Article articleById(int id) {
@@ -916,14 +937,14 @@ public class Librarian extends User {
                 alert.setHeaderText("Deletion");
                 alert.setContentText("User has taken materials");
                 alert.show();
-                LOGGER.error("Attempt to delete user with id "+user_id+".Reason of not deleting: he has taken materials");
+                LOGGER.error("Attempt to delete user with id " + user_id + ".Reason of not deleting: he has taken materials");
             } else {
                 PreparedStatement pr = db.con.prepareStatement("DELETE from Users_of_the_library WHERE Card_number=" + user_id);
-                LOGGER.trace("Successful deletion of user with id "+user_id);
+                LOGGER.trace("Successful deletion of user with id " + user_id);
                 pr.executeUpdate();
             }
         } catch (SQLException e) {
-            LOGGER.error("user with id "+user_id+"isn't found");
+            LOGGER.error("user with id " + user_id + "isn't found");
         }
     }
 
@@ -945,7 +966,7 @@ public class Librarian extends User {
             pr.setString(5, user.getPassword());
             pr.setString(6, user.getEmail());
             pr.executeUpdate();
-            LOGGER.trace("Successful modification of user with id "+user.getCard_number());
+            LOGGER.trace("Successful modification of user with id " + user.getCard_number());
         } catch (SQLException e) {
             LOGGER.error("Error in modification of user");
         }
@@ -954,7 +975,7 @@ public class Librarian extends User {
     /**
      * adds copies of material
      *
-     * @param id of material
+     * @param id     of material
      * @param number how many copies to add
      */
     public static void addCopiesOfMaterial(int id, int number) {
@@ -973,7 +994,7 @@ public class Librarian extends User {
                             prst.setInt(3, 999);
                             prst.executeUpdate();
                         }
-                        LOGGER.trace("Added "+number +" copies of material "+id);
+                        LOGGER.trace("Added " + number + " copies of material " + id);
                         return;
                     }
                 }
@@ -986,18 +1007,18 @@ public class Librarian extends User {
     /**
      * adding book to the library,with all parameters
      *
-     * @param title of book
-     * @param author of book
-     * @param publisher of book
-     * @param edition of book
-     * @param price of book
-     * @param keyWords of book
+     * @param title         of book
+     * @param author        of book
+     * @param publisher     of book
+     * @param edition       of book
+     * @param price         of book
+     * @param keyWords      of book
      * @param is_bestseller of book
-     * @param reference of book
-     * @param year of book
-     * @param amount of book
+     * @param reference     of book
+     * @param year          of book
+     * @param amount        of book
      */
-    public static void addBook(String title, String author, String publisher, String edition, int price, String keyWords, Boolean is_bestseller, boolean reference, int year, int amount){
+    public static void addBook(String title, String author, String publisher, String edition, int price, String keyWords, Boolean is_bestseller, boolean reference, int year, int amount) {
         PropertyConfigurator.configure("log4j.properties");
         try {
             Book book = new Book(title, author, publisher, edition, price, keyWords, is_bestseller, reference, year, "In library");
@@ -1005,8 +1026,7 @@ public class Librarian extends User {
             ArrayList<Integer> arrayList = db.isBookAlreadyExist(book);
             addCopiesOfMaterial(arrayList.get(1), amount - 1);
             LOGGER.trace("Added book to the library");
-        }
-        catch (SQLException e){
+        } catch (SQLException e) {
             LOGGER.error("Error in adding book");
         }
     }
@@ -1014,18 +1034,18 @@ public class Librarian extends User {
     /**
      * adding article to the library,with all parameters
      *
-     * @param title of article
-     * @param author of article
-     * @param price of article
-     * @param keyWords of article
+     * @param title     of article
+     * @param author    of article
+     * @param price     of article
+     * @param keyWords  of article
      * @param reference of article
-     * @param journal of article
-     * @param editor of article
-     * @param date of article
-     * @param amount of article
+     * @param journal   of article
+     * @param editor    of article
+     * @param date      of article
+     * @param amount    of article
      */
     public static void addArticle(String title, String author, int price, String keyWords,
-                                  boolean reference, String journal, String editor, String date, int amount){
+                                  boolean reference, String journal, String editor, String date, int amount) {
         PropertyConfigurator.configure("log4j.properties");
         try {
             Article article = new Article(title, author, price, keyWords, reference, journal, editor, date, "In library");
@@ -1033,8 +1053,7 @@ public class Librarian extends User {
             ArrayList<Integer> arrayList = db.isArticleAlreadyExist(article);
             addCopiesOfMaterial(arrayList.get(1), amount - 1);
             LOGGER.trace("Added Article to the library");
-        }
-        catch(SQLException e){
+        } catch (SQLException e) {
             LOGGER.error("Error in adding article");
         }
     }
@@ -1042,13 +1061,13 @@ public class Librarian extends User {
     /**
      * adding AV to the library,with all parameters
      *
-     * @param title of AV
-     * @param author of AV
-     * @param price of AV
+     * @param title    of AV
+     * @param author   of AV
+     * @param price    of AV
      * @param keyWords of AV
-     * @param amount of AV
+     * @param amount   of AV
      */
-    public static void addAV(String title, String author, int price, String keyWords, int amount){
+    public static void addAV(String title, String author, int price, String keyWords, int amount) {
         PropertyConfigurator.configure("log4j.properties");
         try {
             AV av = new AV(title, author, price, keyWords, "In library");
@@ -1056,8 +1075,7 @@ public class Librarian extends User {
             ArrayList<Integer> arrayList = db.isAVAlreadyExist(av);
             addCopiesOfMaterial(arrayList.get(1), amount - 1);
             LOGGER.trace("Added AV to the library");
-        }
-        catch (SQLException e){
+        } catch (SQLException e) {
             LOGGER.error("Error in creating av");
         }
     }
@@ -1074,9 +1092,9 @@ public class Librarian extends User {
             pr.executeUpdate();
             pr = db.con.prepareStatement("DELETE FROM Copy WHERE Id_of_original=" + id);
             pr.executeUpdate();
-            LOGGER.trace("Successful deletion of AV with id "+id);
+            LOGGER.trace("Successful deletion of AV with id " + id);
         } catch (SQLException e) {
-            LOGGER.error("AV with id "+id+" isn't found");
+            LOGGER.error("AV with id " + id + " isn't found");
         }
     }
 
@@ -1090,9 +1108,9 @@ public class Librarian extends User {
         try {
             PreparedStatement pr = db.con.prepareStatement("DELETE from Copy WHERE Id_of_copy=" + id + " LIMIT 1");
             pr.executeUpdate();
-            LOGGER.trace("Successful deletion of Copy with id "+id);
+            LOGGER.trace("Successful deletion of Copy with id " + id);
         } catch (SQLException e) {
-            LOGGER.error("Copy with id "+id+" isn't found");
+            LOGGER.error("Copy with id " + id + " isn't found");
         }
     }
 
@@ -1109,9 +1127,9 @@ public class Librarian extends User {
             pr.executeUpdate();
             pr = db.con.prepareStatement("DELETE FROM Copy WHERE Id_of_original=" + id);
             pr.executeUpdate();
-            LOGGER.trace("Successful deletion of Book with id "+id);
+            LOGGER.trace("Successful deletion of Book with id " + id);
         } catch (SQLException e) {
-            LOGGER.error("Book with id "+id+" isn't found");
+            LOGGER.error("Book with id " + id + " isn't found");
         }
     }
 
@@ -1127,9 +1145,9 @@ public class Librarian extends User {
             pr.executeUpdate();
             pr = db.con.prepareStatement("DELETE FROM Copy WHERE Id_of_original=" + id);
             pr.executeUpdate();
-            LOGGER.trace("Successful deletion of Article with id "+id);
+            LOGGER.trace("Successful deletion of Article with id " + id);
         } catch (SQLException e) {
-            LOGGER.error("Article with id "+id+" isn't found");
+            LOGGER.error("Article with id " + id + " isn't found");
         }
     }
 
@@ -1148,9 +1166,9 @@ public class Librarian extends User {
             pr.setInt(3, av.getPrice());
             pr.setString(4, av.getKeyWords());
             pr.executeUpdate();
-            LOGGER.trace("Modification of AV with id "+av.getId());
+            LOGGER.trace("Modification of AV with id " + av.getId());
         } catch (SQLException e) {
-            LOGGER.error("AV with id "+av.getId()+" isn't found");
+            LOGGER.error("AV with id " + av.getId() + " isn't found");
         }
     }
 
@@ -1173,9 +1191,9 @@ public class Librarian extends User {
             pr.setString(7, article.getEditor());
             pr.setDate(8, java.sql.Date.valueOf(article.getDate()));
             pr.executeUpdate();
-            LOGGER.trace("Modification of Article with id "+article.getId());
+            LOGGER.trace("Modification of Article with id " + article.getId());
         } catch (SQLException e) {
-            LOGGER.error("AV with id "+article.getId()+" isn't found");
+            LOGGER.error("AV with id " + article.getId() + " isn't found");
         }
     }
 
@@ -1199,9 +1217,9 @@ public class Librarian extends User {
             pr.setBoolean(7, book.getBestseller());
             pr.setBoolean(8, book.getReference());
             pr.executeUpdate();
-            LOGGER.trace("Modification of Book with id "+book.getId());
+            LOGGER.trace("Modification of Book with id " + book.getId());
         } catch (SQLException e) {
-            LOGGER.error("Book with id "+book.getId()+" isn't found");
+            LOGGER.error("Book with id " + book.getId() + " isn't found");
         }
     }
 
@@ -1332,8 +1350,8 @@ public class Librarian extends User {
                 int id = rs.getInt("Card_number");
                 String type = rs.getString("Type");
                 String password = rs.getString("Password");
-                String email=rs.getString("Email");
-                User user = new User(name, address, Phonenumber, id, type, password,email);
+                String email = rs.getString("Email");
+                User user = new User(name, address, Phonenumber, id, type, password, email);
                 users.add(user);
             }
         } catch (SQLException e) {
@@ -1344,13 +1362,14 @@ public class Librarian extends User {
 
     /**
      * gets all librarians  in system
+     *
      * @return all librarians
      */
     public static LinkedList<Librarian> getAllLibrarians() {
         LinkedList<Librarian> librarians = new LinkedList<Librarian>();
         try {
             Statement stmt = db.con.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM Users_of_the_library WHERE Type = 'Librarian Priv1' or Type = 'Librarian Priv2' or Type = 'Librarian Priv3'" );
+            ResultSet rs = stmt.executeQuery("SELECT * FROM Users_of_the_library WHERE Type = 'Librarian Priv1' or Type = 'Librarian Priv2' or Type = 'Librarian Priv3'");
 
             while (rs.next()) {
                 String name = rs.getString("Name");
@@ -1359,8 +1378,8 @@ public class Librarian extends User {
                 int id = rs.getInt("Card_number");
                 String type = rs.getString("Type");
                 String password = rs.getString("Password");
-                String email=rs.getString("Email");
-                librarians.add(new Librarian(name, address, Phonenumber, id, type, password,email));
+                String email = rs.getString("Email");
+                librarians.add(new Librarian(name, address, Phonenumber, id, type, password, email));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -1456,11 +1475,12 @@ public class Librarian extends User {
 
     /**
      * showing the queue of users for current material
+     *
      * @param materialID on which material show the queue
      * @return list of awaiting users
      */
-    public static ArrayList<User> getQueue(int materialID){
-        ArrayList <User> queue = new ArrayList<>();
+    public static ArrayList<User> getQueue(int materialID) {
+        ArrayList<User> queue = new ArrayList<>();
         try {
             Statement stmt = db.con.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM queue_on_" + materialID);
@@ -1472,7 +1492,7 @@ public class Librarian extends User {
                 queue.add(user);
             }
 
-            for(int i = 0; i < queue.size(); i++) {
+            for (int i = 0; i < queue.size(); i++) {
                 rs = stmt.executeQuery("SELECT * FROM users_of_the_library WHERE Card_number=" + queue.get(i).getCard_Number());
 
                 while (rs.next()) {
