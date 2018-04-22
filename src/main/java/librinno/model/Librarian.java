@@ -1467,7 +1467,7 @@ public class Librarian extends User {
             while (rs.next()) {
                 int id = rs.getInt("Card_number");
                 String resTime = rs.getString("Reserving_time");
-                Boolean isNotified = rs.getBoolean("is_sended");
+                Boolean isNotified = rs.getBoolean("is_sent");
                 User user = new User(id, resTime, isNotified);
                 queue.add(user);
             }

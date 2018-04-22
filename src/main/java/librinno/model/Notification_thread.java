@@ -41,6 +41,7 @@ public class Notification_thread extends Thread {
         try {
             SendEmail sendEmail = new SendEmail();
             sendEmail.send();
+            sendEmail.clean_receivers();
         }
         catch (NullPointerException n){}
     }

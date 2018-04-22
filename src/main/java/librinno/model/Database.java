@@ -564,10 +564,6 @@ public class Database extends Main {
                         user = new User(cur_id, rs.getString("Type"), rs.getString("Reserving_time"), null,rs.getString("Email"));
                         pq.add(user);
                     } else {
-                        //Alert error = new Alert(Alert.AlertType.INFORMATION);
-                        // error.setHeaderText("Document");
-                        // error.setContentText("You already reserved this book.");
-                        // error.showAndWait();
                         LOGGER.trace("User with id "+cur_id+" tried to reserve book more than once,but he is already in queue");
                     }
                     PreparedStatement pr = con.prepareStatement("TRUNCATE Queue_on_" + material_id);
@@ -575,7 +571,7 @@ public class Database extends Main {
                 }
             } catch (SQLException exc) {
                 sql = "CREATE TABLE IF NOT EXISTS Queue_on_" + material_id + "(Card_number int(255) ," +
-                        " Type VARCHAR(30), Reserving_time VARCHAR(30),First_time DATETIME,is_sended TINYINT(1) DEFAULT '0',Email VARCHAR(30) DEFAULT 'none')";
+                        " Type VARCHAR(30), Reserving_time VARCHAR(30),First_time DATETIME,is_sent TINYINT(1) DEFAULT '0',Email VARCHAR(30) DEFAULT 'none')";
                 stmt.executeUpdate(sql);
                 LOGGER.trace("Queue on material with id "+material_id+" created");
             }
@@ -585,7 +581,7 @@ public class Database extends Main {
                 DateFormat first_date = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss.S");
                 Calendar cal2 = Calendar.getInstance();
                 if(counter==1) {
-                    sql = "INSERT INTO Queue_on_" + material_id + " (Card_number,Type,Reserving_time,First_time,is_sended,Email) " +
+                    sql = "INSERT INTO Queue_on_" + material_id + " (Card_number,Type,Reserving_time,First_time,is_sent,Email) " +
                             "VALUES ('" + cur_user.getCard_number() + "', '" + cur_user.getType() + "', '" + cur_user.getDate() +"', '"+dateFormat.format(cal.getTime()) + "', '"+0+"', '"+cur_user.getEmail()+" ')";
                     stmt.executeUpdate(sql);
                     counter++;

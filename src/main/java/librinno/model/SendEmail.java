@@ -136,9 +136,9 @@ public class SendEmail extends Database {
                             while (table_rs.next()) {
                                 String email = table_rs.getString("Email");
                                 String address = toAddress[i].toString().toLowerCase();
-                                boolean bool = table_rs.getInt("is_sended") == 0;
+                                boolean bool = table_rs.getInt("is_sent") == 0;
                                 if (emailsEquals(email, address) && bool) {
-                                    PreparedStatement pr = con.prepareStatement("UPDATE " + table_name + " SET is_sended=? LIMIT 1");
+                                    PreparedStatement pr = con.prepareStatement("UPDATE " + table_name + " SET is_sent=? LIMIT 1");
                                     pr.setInt(1, 1);
                                     pr.executeUpdate();
 
@@ -154,7 +154,6 @@ public class SendEmail extends Database {
                     catch (SQLException e){}
                     try {
                         for (int k = 0; k < message.getAllRecipients().length; k++)
-                            if (numberOfMeetings(all_emails, message.getAllRecipients()[k].toString()))
                                 all_emails.add(message.getAllRecipients()[k]);
                     }
                     catch (NullPointerException e){
@@ -199,20 +198,7 @@ public class SendEmail extends Database {
                 return match1.group(1).equalsIgnoreCase(match2.group(1));
         }
     }
-
-    /**
-     * checking if email was already met
-     * @param all where to check for meeting
-     * @param email current email
-     * @return if was met or not
-     */
-    private static boolean numberOfMeetings(ArrayList<Address> all, String email) {
-        int count = 0;
-        for (int i = 0; i < all.size(); i++) {
-            if (all.get(i).toString().equals(email))
-                count++;
-        }
-        if (count > 1) return false;
-        else return true;
+    public static void clean_receivers(){
+        all_emails.clear();
     }
 }
