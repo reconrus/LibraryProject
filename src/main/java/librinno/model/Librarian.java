@@ -81,38 +81,40 @@ public class Librarian extends User {
      *
      * @param idOfMaterial id of material
      */
-    public static void outstandingRequest(int idOfMaterial) {
-        PropertyConfigurator.configure("log4j.properties");
-        try {
-            PreparedStatement pr = db.con.prepareStatement("UPDATE Copy SET Time_left=?,Return_date=?,CanRenew=? WHERE Id_of_original= " + idOfMaterial + " AND Status = 'Issued'");
-            pr.setInt(1, 0);
-            pr.setDate(2, java.sql.Date.valueOf(LocalDate.now()));
-            pr.setBoolean(3, false);
-            pr.executeUpdate();
+    public void outstandingRequest(int idOfMaterial) {
+        if(getPrivileges().equals("Priv2") || getPrivileges().equals("Priv3")) {
+            PropertyConfigurator.configure("log4j.properties");
+            try {
+                PreparedStatement pr = db.con.prepareStatement("UPDATE Copy SET Time_left=?,Return_date=?,CanRenew=? WHERE Id_of_original= " + idOfMaterial + " AND Status = 'Issued'");
+                pr.setInt(1, 0);
+                pr.setDate(2, java.sql.Date.valueOf(LocalDate.now()));
+                pr.setBoolean(3, false);
+                pr.executeUpdate();
 
-            ResultSet rs = pr.executeQuery("SELECT  * FROM Copy WHERE Id_of_original= " + idOfMaterial);
-            int owner;
-            while (rs.next()) {
-                owner = rs.getInt("Owner");
-                Statement stmt = db.con.createStatement();
-                ResultSet rs2 = stmt.executeQuery("SELECT  * FROM users_of_the_library WHERE Card_number= " + owner);
-                String email = null;
-                while (rs2.next()) {
-                    email = rs2.getString("Email");
+                ResultSet rs = pr.executeQuery("SELECT  * FROM Copy WHERE Id_of_original= " + idOfMaterial);
+                int owner;
+                while (rs.next()) {
+                    owner = rs.getInt("Owner");
+                    Statement stmt = db.con.createStatement();
+                    ResultSet rs2 = stmt.executeQuery("SELECT  * FROM users_of_the_library WHERE Card_number= " + owner);
+                    String email = null;
+                    while (rs2.next()) {
+                        email = rs2.getString("Email");
+                    }
+                    SendEmail sendEmail = new SendEmail();
+                    sendEmail.sendToOne(email, "Return book.", "Urgently return the book throughout the day! Because of outstanding request.");
                 }
-                SendEmail sendEmail = new SendEmail();
-                sendEmail.sendToOne(email, "Return book.", "Urgently return the book throughout the day! Because of outstanding request.");
+                rs = pr.executeQuery("SELECT * FROM queue_on_" + idOfMaterial);
+                while (rs.next()) {
+                    String email = rs.getString("Email");
+                    SendEmail send = new SendEmail();
+                    send.sendToOne(email, "Material is not available", "Material,which you reserved,now is not available.You are removed from waiting list");
+                }
+                pr.executeUpdate("DROP TABLE IF EXISTS queue_on_" + idOfMaterial);
+                LOGGER.trace("Librarian made an outstanding request");
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
-            rs = pr.executeQuery("SELECT * FROM queue_on_" + idOfMaterial);
-            while (rs.next()) {
-                String email = rs.getString("Email");
-                SendEmail send = new SendEmail();
-                send.sendToOne(email, "Material is not available", "Material,which you reserved,now is not available.You are removed from waiting list");
-            }
-            pr.executeUpdate("DROP TABLE IF EXISTS queue_on_" + idOfMaterial);
-            LOGGER.trace("Librarian made an outstanding request");
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
     }
 
@@ -927,7 +929,7 @@ public class Librarian extends User {
      * @param user_id user's id for deletion
      */
     public void deleteUserById(int user_id) {
-        if(this.getType().equals("Librarian Priv2")) {
+        if(getPrivileges().equals("Priv3")) {
             PropertyConfigurator.configure("log4j.properties");
             try {
                 Database db = new Database();
@@ -1007,6 +1009,15 @@ public class Librarian extends User {
     }
 
     /**
+     * Adding new patron
+     * @param user - user that we want to add
+     */
+    public void addUser(User user){
+        if(getPrivileges().equals("Priv2")|| getPrivileges().equals("Priv3"))
+        Database.userCreation(user);
+    }
+
+    /**
      * adding book to the library,with all parameters
      *
      * @param title         of book
@@ -1021,7 +1032,7 @@ public class Librarian extends User {
      * @param amount        of book
      */
     public void addBook(String title, String author, String publisher, String edition, int price, String keyWords, Boolean is_bestseller, boolean reference, int year, int amount) {
-        if(this.getType().equals("Librarian Priv2")|| this.getType().equals("Librarian Priv3")) {
+        if(getPrivileges().equals("Priv2")|| getPrivileges().equals("Priv3")) {
             PropertyConfigurator.configure("log4j.properties");
             try {
                 Book book = new Book(title, author, publisher, edition, price, keyWords, is_bestseller, reference, year, "In library");
@@ -1050,7 +1061,7 @@ public class Librarian extends User {
      */
     public void addArticle(String title, String author, int price, String keyWords,
                                   boolean reference, String journal, String editor, String date, int amount) {
-        if(this.getType().equals("Librarian Priv2")|| this.getType().equals("Librarian Priv3")) {
+        if(getPrivileges().equals("Priv2")|| getPrivileges().equals("Priv3")) {
             PropertyConfigurator.configure("log4j.properties");
             try {
                 Article article = new Article(title, author, price, keyWords, reference, journal, editor, date, "In library");
@@ -1074,7 +1085,7 @@ public class Librarian extends User {
      * @param amount   of AV
      */
     public void addAV(String title, String author, int price, String keyWords, int amount) {
-        if(this.getType().equals("Librarian Priv2")|| this.getType().equals("Librarian Priv3")) {
+        if(getPrivileges().equals("Priv2")|| getPrivileges().equals("Priv3")) {
             PropertyConfigurator.configure("log4j.properties");
             try {
                 AV av = new AV(title, author, price, keyWords, "In library");
@@ -1094,7 +1105,7 @@ public class Librarian extends User {
      * @param id unique key of AV for deletion
      */
     public void deleteAVById(int id) {
-        if(this.getType().equals("Librarian Priv3")){
+        if(getPrivileges().equals("Priv3")){
             PropertyConfigurator.configure("log4j.properties");
             try {
                 PreparedStatement pr = db.con.prepareStatement("DELETE from AV WHERE id=" + id);
@@ -1130,7 +1141,7 @@ public class Librarian extends User {
      * @param id unique key of book
      */
     public void deleteBookById(int id) {
-        if(getType().equals("Librarian Priv3")) {
+        if(getPrivileges().equals("Priv3")) {
             PropertyConfigurator.configure("log4j.properties");
 
             try {
@@ -1151,7 +1162,7 @@ public class Librarian extends User {
      * @param id unique key of article
      */
     public void deleteArticleById(int id) {
-        if(getType().equals("Librarian Priv2")) {
+        if(getPrivileges().equals("Priv3")) {
             PropertyConfigurator.configure("log4j.properties");
             try {
                 PreparedStatement pr = db.con.prepareStatement("DELETE from Articles WHERE id=" + id);
@@ -1331,7 +1342,7 @@ public class Librarian extends User {
         LinkedList<User> users = new LinkedList<User>();
         try {
             Statement stmt = db.con.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM Users_of_the_library WHERE Type<>'Librarian'");
+            ResultSet rs = stmt.executeQuery("SELECT * FROM Users_of_the_library WHERE Type<>'Librarian Priv1' AND Type <>'Librarian Priv2' AND Type <>'Librarian Priv3'");
 
             while (rs.next()) {
                 String name = rs.getString("Name");
@@ -1584,8 +1595,9 @@ public class Librarian extends User {
      * @param material what material to delete
      */
     public void deleteDoc(Material material) {
-        if (material.getType().equals("Book")) deleteBookById(material.getId());
-        else if (material.getType().equals("AV")) deleteAVById(material.getId());
-        else deleteArticleById(material.getId());
+        if(getPrivileges().equals("Priv3"))
+            if (material.getType().equals("Book")) deleteBookById(material.getId());
+            else if (material.getType().equals("AV")) deleteAVById(material.getId());
+                 else deleteArticleById(material.getId());
     }
 }

@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ToggleGroup;
 import main.java.librinno.model.Database;
+import main.java.librinno.model.Librarian;
 import main.java.librinno.model.User;
 import main.java.librinno.ui.assist.Assist;
 
@@ -38,7 +39,6 @@ public class AddPatronController {
 
     @FXML
     private JFXButton confirm;
-
     @FXML
     private JFXButton cancel;
 
@@ -69,7 +69,6 @@ public class AddPatronController {
         else{
 
             if(Assist.isValidEmailAddress(mail)) {
-                Database db = new Database();
                 Database.userCreation(new User(user, phoneNum, addressText, type, pass, mail));
                 Assist.closeStage(confirm);
             }

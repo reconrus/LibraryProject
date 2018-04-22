@@ -39,7 +39,7 @@ public class LibrarianScreenController {
     @FXML
     private JFXButton logout;
 
-    Librarian user;
+    Librarian librarian;
 
     @FXML
     private JFXButton addDoc;
@@ -138,7 +138,7 @@ public class LibrarianScreenController {
     private JFXTextField searchField;
 
     public void setLibrarianInfo(Librarian librarian){
-        user=librarian;
+        this.librarian=librarian;
     }
 
 
@@ -285,17 +285,18 @@ public class LibrarianScreenController {
 
     @FXML
     void addDoc(ActionEvent event) throws IOException {
-        if (user.getPrivileges().equals("Priv1")){
+        if (librarian.getPrivileges().equals("Priv1")){
             Assist.error("Access Denied", "Your privilege level is insufficient.");
             return;
         }
+
         Assist.loadStageWait(getClass().getResource("/main/java/librinno/ui/addBook/AddBook.fxml"));
         showTables();
     }
 
     @FXML
     void addPatron(ActionEvent event) throws IOException {
-        if (user.getPrivileges().equals("Priv1")){
+        if (librarian.getPrivileges().equals("Priv1")){
             Assist.error("Access Denied", "Your privilege level is insufficient.");
             return;
         }
@@ -311,26 +312,26 @@ public class LibrarianScreenController {
     }
     @FXML
     void deletePatron(ActionEvent event) {
-        if (!user.getPrivileges().equals("Priv3")){
+        if (!librarian.getPrivileges().equals("Priv3")){
             Assist.error("Access Denied", "Your privilege level is insufficient.");
             return;
         }
         User user= tableUser.getSelectionModel().getSelectedItem();
         if(user!=null) {
-            Librarian.deleteUserById(user.card_number);
+            librarian.deleteUserById(user.card_number);
             showTableUser();
         }
     }
 
     @FXML
     void deleteDoc(ActionEvent event) {
-        if (!user.getPrivileges().equals("Priv3")){
+        if (!librarian.getPrivileges().equals("Priv3")){
             Assist.error("Access Denied", "Your privilege level is insufficient.");
             return;
         }
         Material book= tableBook.getSelectionModel().getSelectedItem();
         if(book != null) {
-            Librarian.deleteDoc(book);
+            librarian.deleteDoc(book);
             showTables();
         }
     }
@@ -435,7 +436,7 @@ public class LibrarianScreenController {
     @FXML
     private void outstandingRequest(){
         Material doc= tableBook.getSelectionModel().getSelectedItem();
-        Librarian.outstandingRequest(doc.getId());
+        librarian.outstandingRequest(doc.getId());
         Alert error = new Alert(Alert.AlertType.CONFIRMATION);
         error.setHeaderText("Success");
         error.showAndWait();

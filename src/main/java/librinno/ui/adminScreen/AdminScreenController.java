@@ -113,7 +113,8 @@ public class AdminScreenController {
     void deleteLibrarian(ActionEvent event) {
         User user= tableUser.getSelectionModel().getSelectedItem();
         if(user!=null) {
-            Librarian.deleteUserById(user.card_number);
+            Librarian librarian = new Librarian("Admin", null, null, 0, "Librarian " + Librarian.lev3, null, null);
+            librarian.deleteUserById(user.card_number);
             showTableLibrarian();
         }
     }
