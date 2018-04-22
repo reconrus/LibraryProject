@@ -14,7 +14,12 @@ public class Search {
     private static Database db = new Database();
     public Search(){}
 
-
+    /**
+     * Search in all materials and search in title,author,keyword
+     * Without criteria
+     * @param requiredMaterial
+     * @return
+     */
     public static ArrayList<Material> materialByWord(String requiredMaterial){
         Librarian l = new Librarian("1", "1", "1", 0, "Librarian Priv3", "1","1");
         ArrayList<Material> arrayList= new ArrayList();
@@ -92,6 +97,92 @@ public class Search {
         }
 
 
+        return arrayList;
+    }
+
+    /**
+     * Search in selected material with selected criteria
+     *
+     * @param word
+     * @param isBook
+     * @param isArticle
+     * @param isAv
+     * @param isTitle
+     * @param isAuthor
+     * @param isKeyword
+     * @param isAvailable
+     * @return
+     * @throws SQLException
+     */
+    public static ArrayList<Material> materialByWordWithCriteria(String word, boolean isBook, boolean isArticle, boolean isAv,
+                                                                 boolean isTitle, boolean isAuthor, boolean isKeyword, boolean isAvailable) throws SQLException {
+        Librarian l = new Librarian("1", "1", "1", 0, "Librarian Priv3", "1","1");
+        ArrayList<Material> arrayList = new ArrayList<>();
+
+        Statement stmt = null;
+        stmt = db.con.createStatement();
+        if (isBook) {
+            ResultSet rs = stmt.executeQuery("SELECT * FROM books ");
+            arrayList.addAll(searching("book",l,rs,word,isTitle,isAuthor,isKeyword,isAvailable));
+            //arrayList = new ArrayList<>(searching(l,rs,arrayList,word,isTitle,isAuthor,isKeyword,isAvailable));
+        }
+        if (isArticle) {
+            ResultSet rs = stmt.executeQuery("SELECT * FROM articles");
+            arrayList.addAll(searching("article",l,rs,word,isTitle,isAuthor,isKeyword,isAvailable));
+            //arrayList = new ArrayList<>(searching(l,rs,arrayList,word,isTitle,isAuthor,isKeyword,isAvailable));
+        }
+        if (isAv) {
+            ResultSet rs = stmt.executeQuery("SELECT * FROM av");
+            arrayList.addAll(searching("av",l,rs,word,isTitle,isAuthor,isKeyword,isAvailable));
+            //arrayList = new ArrayList<>(searching(l,rs,arrayList,word,isTitle,isAuthor,isKeyword,isAvailable));
+        }
+
+
+        return arrayList;
+    }
+
+    private static ArrayList<Material> searching(String type,Librarian l,ResultSet rs,String word,boolean isTitle, boolean isAuthor, boolean isKeyword, boolean isAvailable){
+        ArrayList<Material> arrayList = new ArrayList<>();
+        try {
+            while (rs.next()) {
+                if ((isAvailable && l.getNumberOfCopiesOfBook(rs.getInt("id")) > 0) || (!isAvailable && l.getNumberOfCopiesOfBook(rs.getInt("id")) == 0)) {
+                    if (isTitle)
+                        if (rs.getString("Name").trim().toLowerCase().indexOf(word.trim().toLowerCase()) >= 0) {
+                            if (type.equals("book")) {
+                                arrayList.add(l.bookByID(rs.getInt("id")));
+                            }else if(type.equals("article")){
+                                arrayList.add(l.articleById(rs.getInt("id")));
+                            }else {
+                                arrayList.add(l.avById(rs.getInt("id")));
+                            }
+                            continue;
+                        }
+                    if (isAuthor)
+                        if (rs.getString("Author").trim().toLowerCase().indexOf(word.trim().toLowerCase()) >= 0) {
+                            if (type.equals("book")) {
+                                arrayList.add(l.bookByID(rs.getInt("id")));
+                            }else if(type.equals("article")){
+                                arrayList.add(l.articleById(rs.getInt("id")));
+                            }else {
+                                arrayList.add(l.avById(rs.getInt("id")));
+                            }
+                            continue;
+                        }
+                    if (isKeyword)
+                        if (rs.getString("Keywords").trim().toLowerCase().indexOf(word.trim().toLowerCase()) >= 0) {
+                            if (type.equals("book")) {
+                                arrayList.add(l.bookByID(rs.getInt("id")));
+                            }else if(type.equals("article")){
+                                arrayList.add(l.articleById(rs.getInt("id")));
+                            }else {
+                                arrayList.add(l.avById(rs.getInt("id")));
+                            }
+                            continue;
+                        }
+                }
+            }
+        }catch (SQLException e) {
+        e.printStackTrace(); }
         return arrayList;
     }
 
@@ -636,6 +727,55 @@ public class Search {
         return arrayList;
     }
 
+    //maybe useless thing
+//    public static ArrayList<Book> bookByPartialInfo(String word,boolean isName,boolean isAuthor, boolean isPublisher, boolean isKeyword,
+//                                                    boolean isInscribedBestSeller, boolean isBestSeller,
+//                                                    boolean isInscribedReference, boolean isReference,boolean isInscribedAvailable, boolean isAvailable){
+//        Librarian l = new Librarian("1", "1", "1", 0, "Librarian Priv3", "1","1");
+//        ArrayList<Book> arrayList = new ArrayList<>();
+//
+//        Statement stmt = null;
+//        try {
+//            stmt = db.con.createStatement();
+//            ResultSet rs = stmt.executeQuery("SELECT books * FROM ");
+//            while (rs.next()) {
+//
+//                if (isName)
+//                    if (rs.getString("Name").trim().toLowerCase().indexOf(word.trim().toLowerCase()) >= 0) {
+//                        arrayList.add(l.bookByID(rs.getInt("id")));
+//                        continue;
+//                    }
+//                if (isAuthor)
+//                    if (rs.getString("Author").trim().toLowerCase().indexOf(word.trim().toLowerCase()) >= 0){
+//                        arrayList.add(l.bookByID(rs.getInt("id")));
+//                        continue;
+//                    }
+//                if (isPublisher)
+//                    if (rs.getString("Publisher").trim().toLowerCase().indexOf(word.trim().toLowerCase()) >= 0){
+//                        arrayList.add(l.bookByID(rs.getInt("id")));
+//                        continue;
+//                    }
+//                if (isKeyword)
+//                    if (rs.getString("Keywords").trim().toLowerCase().indexOf(word.trim().toLowerCase()) >= 0){
+//                        arrayList.add(l.bookByID(rs.getInt("id")));
+//                        continue;
+//                    }
+//                if (isInscribedBestSeller)
+//                    if (rs.getBoolean("is_bestseller")==isBestSeller){
+//                        arrayList.add(l.bookByID(rs.getInt("id")));
+//                        continue;
+//                    }
+//                if (isInscribedReference)
+//                    if (rs.getBoolean("is_reference")==isReference){
+//                        arrayList.add(l.bookByID(rs.getInt("id")));
+//                        continue;
+//                    }
+//            }
+//        }catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        return arrayList;
+//    }
 
     public static ArrayList<Book> bookByTitle(String title) {
         Librarian l = new Librarian("1", "1", "1", 0, "Librarian Priv3", "1","1");
