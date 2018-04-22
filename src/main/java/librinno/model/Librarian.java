@@ -869,7 +869,7 @@ public class Librarian extends User {
                         rs.getString(3), rs.getString(4),
                         rs.getString(5), rs.getInt(6),
                         rs.getString(7), rs.getBoolean(8),
-                        rs.getBoolean(9), rs.getInt(10), 1);
+                        rs.getBoolean(9), rs.getInt(10), getNumberOfCopiesOfBook(id), getNumberOfCopiesOfWithTaken(id));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -889,7 +889,7 @@ public class Librarian extends User {
             while (rs.next()) {
                 AV av = new AV(id, rs.getString("Name"),
                         rs.getString("Author"), rs.getInt("Price"),
-                        rs.getString("Keywords"));
+                        rs.getString("Keywords"),getNumberOfCopiesOfBook(id), getNumberOfCopiesOfWithTaken(id));
                 return av;
             }
         } catch (SQLException e) {
@@ -912,7 +912,7 @@ public class Librarian extends User {
                         rs.getString("Author"), rs.getInt("Price"),
                         rs.getString("Keywords"), rs.getBoolean("is_reference"),
                         rs.getString("Journal"), rs.getString("Editor"),
-                        rs.getString("Date"));
+                        rs.getString("Date"),getNumberOfCopiesOfBook(id), getNumberOfCopiesOfWithTaken(id));
                 return article;
             }
         } catch (SQLException e) {
@@ -1236,16 +1236,7 @@ public class Librarian extends User {
             ResultSet rs = stmt.executeQuery("SELECT * FROM AV");
             while (rs.next()) {
 
-                int number = 0;
                 int id = rs.getInt("id");
-                Statement stmt2 = db.con.createStatement();
-                ResultSet rs2;
-                rs2 = stmt2.executeQuery("SELECT * FROM Copy");
-                while (rs2.next()) {
-                    if (rs2.getInt("id_of_original") == id) {
-                        number++;
-                    }
-                }
 
                 String name = rs.getString("Name");
                 String author = rs.getString("Author");
@@ -1271,18 +1262,12 @@ public class Librarian extends User {
             Statement stmt = db.con.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM Articles");
             while (rs.next()) {
-                int number = 0;
                 int id = rs.getInt("id");
-                Statement stmt2 = db.con.createStatement();
-                ResultSet rs2;
-                rs2 = stmt2.executeQuery("SELECT * FROM Copy");
-                while (rs2.next()) {
-                    if (rs2.getInt("id_of_original") == id) {
-                        number++;
-                    }
-                }
 
-                articles.add(new Article(id, rs.getString("Name"), rs.getString("Author"), rs.getInt("Price"), rs.getString("Keywords"), rs.getBoolean("is_reference"), rs.getString("Journal"), rs.getString("Editor"), rs.getString("Date"), getNumberOfCopiesOfBook(id), getNumberOfCopiesOfWithTaken(id)));
+                articles.add(new Article(id, rs.getString("Name"), rs.getString("Author"),
+                        rs.getInt("Price"), rs.getString("Keywords"), rs.getBoolean("is_reference"),
+                        rs.getString("Journal"), rs.getString("Editor"), rs.getString("Date"),
+                        getNumberOfCopiesOfBook(id), getNumberOfCopiesOfWithTaken(id)));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -1303,16 +1288,7 @@ public class Librarian extends User {
             ResultSet rs = stmt.executeQuery("SELECT * FROM Books");
             while (rs.next()) {
 
-                int number = 0;
                 int id = rs.getInt("id");
-                Statement stmt2 = db.con.createStatement();
-                ResultSet rs2;
-                rs2 = stmt2.executeQuery("SELECT * FROM Copy");
-                while (rs2.next()) {
-                    if (rs2.getInt("id_of_original") == id) {
-                        number++;
-                    }
-                }
 
                 String name = rs.getString("Name");
                 String author = rs.getString("Author");
