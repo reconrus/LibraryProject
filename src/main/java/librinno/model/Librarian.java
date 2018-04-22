@@ -926,25 +926,27 @@ public class Librarian extends User {
      *
      * @param user_id user's id for deletion
      */
-    public static void deleteUserById(int user_id) {
-        PropertyConfigurator.configure("log4j.properties");
-        try {
-            Database db = new Database();
-            Statement stmt = db.con.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM Copy where Owner=" + user_id);
-            if (rs.next()) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setHeaderText("Deletion");
-                alert.setContentText("User has taken materials");
-                alert.show();
-                LOGGER.error("Attempt to delete user with id " + user_id + ".Reason of not deleting: he has taken materials");
-            } else {
-                PreparedStatement pr = db.con.prepareStatement("DELETE from Users_of_the_library WHERE Card_number=" + user_id);
-                LOGGER.trace("Successful deletion of user with id " + user_id);
-                pr.executeUpdate();
+    public void deleteUserById(int user_id) {
+        if(this.getType().equals("Librarian Priv2")) {
+            PropertyConfigurator.configure("log4j.properties");
+            try {
+                Database db = new Database();
+                Statement stmt = db.con.createStatement();
+                ResultSet rs = stmt.executeQuery("SELECT * FROM Copy where Owner=" + user_id);
+                if (rs.next()) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setHeaderText("Deletion");
+                    alert.setContentText("User has taken materials");
+                    alert.show();
+                    LOGGER.error("Attempt to delete user with id " + user_id + ".Reason of not deleting: he has taken materials");
+                } else {
+                    PreparedStatement pr = db.con.prepareStatement("DELETE from Users_of_the_library WHERE Card_number=" + user_id);
+                    LOGGER.trace("Successful deletion of user with id " + user_id);
+                    pr.executeUpdate();
+                }
+            } catch (SQLException e) {
+                LOGGER.error("user with id " + user_id + "isn't found");
             }
-        } catch (SQLException e) {
-            LOGGER.error("user with id " + user_id + "isn't found");
         }
     }
 
@@ -1018,16 +1020,18 @@ public class Librarian extends User {
      * @param year          of book
      * @param amount        of book
      */
-    public static void addBook(String title, String author, String publisher, String edition, int price, String keyWords, Boolean is_bestseller, boolean reference, int year, int amount) {
-        PropertyConfigurator.configure("log4j.properties");
-        try {
-            Book book = new Book(title, author, publisher, edition, price, keyWords, is_bestseller, reference, year, "In library");
-            db.bookCreation(book);
-            ArrayList<Integer> arrayList = db.isBookAlreadyExist(book);
-            addCopiesOfMaterial(arrayList.get(1), amount - 1);
-            LOGGER.trace("Added book to the library");
-        } catch (SQLException e) {
-            LOGGER.error("Error in adding book");
+    public void addBook(String title, String author, String publisher, String edition, int price, String keyWords, Boolean is_bestseller, boolean reference, int year, int amount) {
+        if(this.getType().equals("Librarian Priv2")|| this.getType().equals("Librarian Priv3")) {
+            PropertyConfigurator.configure("log4j.properties");
+            try {
+                Book book = new Book(title, author, publisher, edition, price, keyWords, is_bestseller, reference, year, "In library");
+                db.bookCreation(book);
+                ArrayList<Integer> arrayList = db.isBookAlreadyExist(book);
+                addCopiesOfMaterial(arrayList.get(1), amount - 1);
+                LOGGER.trace("Added book to the library");
+            } catch (SQLException e) {
+                LOGGER.error("Error in adding book");
+            }
         }
     }
 
@@ -1044,17 +1048,19 @@ public class Librarian extends User {
      * @param date      of article
      * @param amount    of article
      */
-    public static void addArticle(String title, String author, int price, String keyWords,
+    public void addArticle(String title, String author, int price, String keyWords,
                                   boolean reference, String journal, String editor, String date, int amount) {
-        PropertyConfigurator.configure("log4j.properties");
-        try {
-            Article article = new Article(title, author, price, keyWords, reference, journal, editor, date, "In library");
-            db.articleCreation(article);
-            ArrayList<Integer> arrayList = db.isArticleAlreadyExist(article);
-            addCopiesOfMaterial(arrayList.get(1), amount - 1);
-            LOGGER.trace("Added Article to the library");
-        } catch (SQLException e) {
-            LOGGER.error("Error in adding article");
+        if(this.getType().equals("Librarian Priv2")|| this.getType().equals("Librarian Priv3")) {
+            PropertyConfigurator.configure("log4j.properties");
+            try {
+                Article article = new Article(title, author, price, keyWords, reference, journal, editor, date, "In library");
+                db.articleCreation(article);
+                ArrayList<Integer> arrayList = db.isArticleAlreadyExist(article);
+                addCopiesOfMaterial(arrayList.get(1), amount - 1);
+                LOGGER.trace("Added Article to the library");
+            } catch (SQLException e) {
+                LOGGER.error("Error in adding article");
+            }
         }
     }
 
@@ -1067,16 +1073,18 @@ public class Librarian extends User {
      * @param keyWords of AV
      * @param amount   of AV
      */
-    public static void addAV(String title, String author, int price, String keyWords, int amount) {
-        PropertyConfigurator.configure("log4j.properties");
-        try {
-            AV av = new AV(title, author, price, keyWords, "In library");
-            db.avCreation(av);
-            ArrayList<Integer> arrayList = db.isAVAlreadyExist(av);
-            addCopiesOfMaterial(arrayList.get(1), amount - 1);
-            LOGGER.trace("Added AV to the library");
-        } catch (SQLException e) {
-            LOGGER.error("Error in creating av");
+    public void addAV(String title, String author, int price, String keyWords, int amount) {
+        if(this.getType().equals("Librarian Priv2")|| this.getType().equals("Librarian Priv3")) {
+            PropertyConfigurator.configure("log4j.properties");
+            try {
+                AV av = new AV(title, author, price, keyWords, "In library");
+                db.avCreation(av);
+                ArrayList<Integer> arrayList = db.isAVAlreadyExist(av);
+                addCopiesOfMaterial(arrayList.get(1), amount - 1);
+                LOGGER.trace("Added AV to the library");
+            } catch (SQLException e) {
+                LOGGER.error("Error in creating av");
+            }
         }
     }
 
@@ -1085,16 +1093,18 @@ public class Librarian extends User {
      *
      * @param id unique key of AV for deletion
      */
-    public static void deleteAVById(int id) {
-        PropertyConfigurator.configure("log4j.properties");
-        try {
-            PreparedStatement pr = db.con.prepareStatement("DELETE from AV WHERE id=" + id);
-            pr.executeUpdate();
-            pr = db.con.prepareStatement("DELETE FROM Copy WHERE Id_of_original=" + id);
-            pr.executeUpdate();
-            LOGGER.trace("Successful deletion of AV with id " + id);
-        } catch (SQLException e) {
-            LOGGER.error("AV with id " + id + " isn't found");
+    public void deleteAVById(int id) {
+        if(this.getType().equals("Librarian Priv3")){
+            PropertyConfigurator.configure("log4j.properties");
+            try {
+                PreparedStatement pr = db.con.prepareStatement("DELETE from AV WHERE id=" + id);
+                pr.executeUpdate();
+                pr = db.con.prepareStatement("DELETE FROM Copy WHERE Id_of_original=" + id);
+                pr.executeUpdate();
+                LOGGER.trace("Successful deletion of AV with id " + id);
+            } catch (SQLException e) {
+                LOGGER.error("AV with id " + id + " isn't found");
+            }
         }
     }
 
@@ -1119,17 +1129,19 @@ public class Librarian extends User {
      *
      * @param id unique key of book
      */
-    public static void deleteBookById(int id) {
-        PropertyConfigurator.configure("log4j.properties");
+    public void deleteBookById(int id) {
+        if(getType().equals("Librarian Priv3")) {
+            PropertyConfigurator.configure("log4j.properties");
 
-        try {
-            PreparedStatement pr = db.con.prepareStatement("DELETE from Books WHERE id=" + id);
-            pr.executeUpdate();
-            pr = db.con.prepareStatement("DELETE FROM Copy WHERE Id_of_original=" + id);
-            pr.executeUpdate();
-            LOGGER.trace("Successful deletion of Book with id " + id);
-        } catch (SQLException e) {
-            LOGGER.error("Book with id " + id + " isn't found");
+            try {
+                PreparedStatement pr = db.con.prepareStatement("DELETE from Books WHERE id=" + id);
+                pr.executeUpdate();
+                pr = db.con.prepareStatement("DELETE FROM Copy WHERE Id_of_original=" + id);
+                pr.executeUpdate();
+                LOGGER.trace("Successful deletion of Book with id " + id);
+            } catch (SQLException e) {
+                LOGGER.error("Book with id " + id + " isn't found");
+            }
         }
     }
 
@@ -1138,16 +1150,18 @@ public class Librarian extends User {
      *
      * @param id unique key of article
      */
-    public static void deleteArticleById(int id) {
-        PropertyConfigurator.configure("log4j.properties");
-        try {
-            PreparedStatement pr = db.con.prepareStatement("DELETE from Articles WHERE id=" + id);
-            pr.executeUpdate();
-            pr = db.con.prepareStatement("DELETE FROM Copy WHERE Id_of_original=" + id);
-            pr.executeUpdate();
-            LOGGER.trace("Successful deletion of Article with id " + id);
-        } catch (SQLException e) {
-            LOGGER.error("Article with id " + id + " isn't found");
+    public void deleteArticleById(int id) {
+        if(getType().equals("Librarian Priv2")) {
+            PropertyConfigurator.configure("log4j.properties");
+            try {
+                PreparedStatement pr = db.con.prepareStatement("DELETE from Articles WHERE id=" + id);
+                pr.executeUpdate();
+                pr = db.con.prepareStatement("DELETE FROM Copy WHERE Id_of_original=" + id);
+                pr.executeUpdate();
+                LOGGER.trace("Successful deletion of Article with id " + id);
+            } catch (SQLException e) {
+                LOGGER.error("Article with id " + id + " isn't found");
+            }
         }
     }
 
@@ -1569,7 +1583,7 @@ public class Librarian extends User {
      *
      * @param material what material to delete
      */
-    public static void deleteDoc(Material material) {
+    public void deleteDoc(Material material) {
         if (material.getType().equals("Book")) deleteBookById(material.getId());
         else if (material.getType().equals("AV")) deleteAVById(material.getId());
         else deleteArticleById(material.getId());
