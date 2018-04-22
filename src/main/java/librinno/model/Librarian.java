@@ -118,48 +118,51 @@ public class Librarian extends User {
         }
     }
 
-    public static ArrayList<ArrayList<String>> outstandingRequestWithDate(int idOfMaterial, LocalDate date) {
-        ArrayList<String> emails = new ArrayList<>();
-        ArrayList<String> book_no_available = new ArrayList<>();
-        try {
-            PreparedStatement pr = db.con.prepareStatement("UPDATE Copy SET Time_left=?,Return_date=?,CanRenew=? WHERE Id_of_original= " + idOfMaterial + " AND Status = 'Issued'");
-            pr.setInt(1, 0);
-            pr.setDate(2, java.sql.Date.valueOf(date));
-            pr.setBoolean(3, false);
-            pr.executeUpdate();
-
-            ResultSet rs = pr.executeQuery("SELECT  * FROM Copy WHERE Id_of_original= " + idOfMaterial);
-            int owner;
-            while (rs.next() && rs.getInt("Owner") != 0) {
-                owner = rs.getInt("Owner");
-                Statement stmt = db.con.createStatement();
-                ResultSet rs2 = stmt.executeQuery("SELECT  * FROM users_of_the_library WHERE Card_number= " + owner);
-                String email = "";
-                while (rs2.next()) {
-                    email = rs2.getString("Email");
-                    emails.add(email);
-                }
-                SendEmail sendEmail = new SendEmail();
-                sendEmail.sendToOne(email, "Return book.", "Urgently return the book throughout the day! Because of outstanding request.");
-            }
+    public ArrayList<ArrayList<String>> outstandingRequestWithDate(int idOfMaterial, LocalDate date) {
+        if(getPrivileges().equals("Priv2") || getPrivileges().equals("Priv3")) {
+            ArrayList<String> emails = new ArrayList<>();
+            ArrayList<String> book_no_available = new ArrayList<>();
             try {
-                rs = pr.executeQuery("SELECT * FROM queue_on_" + idOfMaterial);
-                while (rs.next()) {
-                    String email = rs.getString("Email");
-                    book_no_available.add(email);
-                    SendEmail send = new SendEmail();
-                    send.sendToOne(email, "Material is not available", "Material,which you reserved,now is not available.You are removed from waiting list");
+                PreparedStatement pr = db.con.prepareStatement("UPDATE Copy SET Time_left=?,Return_date=?,CanRenew=? WHERE Id_of_original= " + idOfMaterial + " AND Status = 'Issued'");
+                pr.setInt(1, 0);
+                pr.setDate(2, java.sql.Date.valueOf(date));
+                pr.setBoolean(3, false);
+                pr.executeUpdate();
+
+                ResultSet rs = pr.executeQuery("SELECT  * FROM Copy WHERE Id_of_original= " + idOfMaterial);
+                int owner;
+                while (rs.next() && rs.getInt("Owner") != 0) {
+                    owner = rs.getInt("Owner");
+                    Statement stmt = db.con.createStatement();
+                    ResultSet rs2 = stmt.executeQuery("SELECT  * FROM users_of_the_library WHERE Card_number= " + owner);
+                    String email = "";
+                    while (rs2.next()) {
+                        email = rs2.getString("Email");
+                        emails.add(email);
+                    }
+                    SendEmail sendEmail = new SendEmail();
+                    sendEmail.sendToOne(email, "Return book.", "Urgently return the book throughout the day! Because of outstanding request.");
                 }
+                try {
+                    rs = pr.executeQuery("SELECT * FROM queue_on_" + idOfMaterial);
+                    while (rs.next()) {
+                        String email = rs.getString("Email");
+                        book_no_available.add(email);
+                        SendEmail send = new SendEmail();
+                        send.sendToOne(email, "Material is not available", "Material,which you reserved,now is not available.You are removed from waiting list");
+                    }
+                } catch (SQLException e) {
+                }
+                pr.executeUpdate("DROP TABLE IF EXISTS queue_on_" + idOfMaterial);
             } catch (SQLException e) {
+                e.printStackTrace();
             }
-            pr.executeUpdate("DROP TABLE IF EXISTS queue_on_" + idOfMaterial);
-        } catch (SQLException e) {
-            e.printStackTrace();
+            ArrayList<ArrayList<String>> all_emails = new ArrayList<>();
+            all_emails.add(emails);
+            all_emails.add(book_no_available);
+            return all_emails;
         }
-        ArrayList<ArrayList<String>> all_emails = new ArrayList<>();
-        all_emails.add(emails);
-        all_emails.add(book_no_available);
-        return all_emails;
+        return null;
     }
 
     public static boolean renewWithDate(User user, int idOfRenewCopy, LocalDate date) {
