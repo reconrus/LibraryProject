@@ -110,12 +110,14 @@ public class Search {
      * @param isTitle
      * @param isAuthor
      * @param isKeyword
-     * @param isAvailable
+     * @param isBestseller //if true we show only BestSeller books, if false we show all books
+     * @param isReference  //if true we show all books,articles, if false only not reference books,articles
+     * @param isAvailable //if true we show only available materials, if false we show all materials
      * @return
      * @throws SQLException
      */
     public static ArrayList<Material> materialByWordWithCriteria(String word, boolean isBook, boolean isArticle, boolean isAv,
-                                                                 boolean isTitle, boolean isAuthor, boolean isKeyword, boolean isAvailable) throws SQLException {
+                                                                 boolean isTitle, boolean isAuthor, boolean isKeyword,boolean isBestseller, boolean isReference, boolean isAvailable) throws SQLException {
         Librarian l = new Librarian("1", "1", "1", 0, "Librarian Priv3", "1","1");
         ArrayList<Material> arrayList = new ArrayList<>();
 
@@ -123,17 +125,17 @@ public class Search {
         stmt = db.con.createStatement();
         if (isBook) {
             ResultSet rs = stmt.executeQuery("SELECT * FROM books ");
-            arrayList.addAll(searching("book",l,rs,word,isTitle,isAuthor,isKeyword,isAvailable));
+            arrayList.addAll(searching("book",l,rs,word,isTitle,isAuthor,isKeyword,isBestseller,isReference,isAvailable));
             //arrayList = new ArrayList<>(searching(l,rs,arrayList,word,isTitle,isAuthor,isKeyword,isAvailable));
         }
         if (isArticle) {
             ResultSet rs = stmt.executeQuery("SELECT * FROM articles");
-            arrayList.addAll(searching("article",l,rs,word,isTitle,isAuthor,isKeyword,isAvailable));
+            arrayList.addAll(searching("article",l,rs,word,isTitle,isAuthor,isKeyword,isBestseller,isReference,isAvailable));
             //arrayList = new ArrayList<>(searching(l,rs,arrayList,word,isTitle,isAuthor,isKeyword,isAvailable));
         }
         if (isAv) {
             ResultSet rs = stmt.executeQuery("SELECT * FROM av");
-            arrayList.addAll(searching("av",l,rs,word,isTitle,isAuthor,isKeyword,isAvailable));
+            arrayList.addAll(searching("av",l,rs,word,isTitle,isAuthor,isKeyword,isBestseller,isReference,isAvailable));
             //arrayList = new ArrayList<>(searching(l,rs,arrayList,word,isTitle,isAuthor,isKeyword,isAvailable));
         }
 
@@ -141,17 +143,20 @@ public class Search {
         return arrayList;
     }
 
-    private static ArrayList<Material> searching(String type,Librarian l,ResultSet rs,String word,boolean isTitle, boolean isAuthor, boolean isKeyword, boolean isAvailable){
+    private static ArrayList<Material> searching(String type,Librarian l,ResultSet rs,String word,boolean isTitle, boolean isAuthor, boolean isKeyword,boolean isBestseller, boolean isReference, boolean isAvailable){
         ArrayList<Material> arrayList = new ArrayList<>();
         try {
             while (rs.next()) {
-                if ((isAvailable && l.getNumberOfCopiesOfBook(rs.getInt("id")) > 0) || (!isAvailable && l.getNumberOfCopiesOfBook(rs.getInt("id")) == 0)) {
+                if ((isAvailable && l.getNumberOfCopiesOfBook(rs.getInt("id")) > 0) || !isAvailable) {
                     if (isTitle)
                         if (rs.getString("Name").trim().toLowerCase().indexOf(word.trim().toLowerCase()) >= 0) {
                             if (type.equals("book")) {
-                                arrayList.add(l.bookByID(rs.getInt("id")));
+                                if ((isBestseller && rs.getBoolean("is_bestseller") || !isBestseller) &&
+                                        (!isReference && !rs.getBoolean("is_reference") || isReference))
+                                    arrayList.add(l.bookByID(rs.getInt("id")));
                             }else if(type.equals("article")){
-                                arrayList.add(l.articleById(rs.getInt("id")));
+                                if (!isReference && !rs.getBoolean("is_reference") || isReference)
+                                    arrayList.add(l.articleById(rs.getInt("id")));
                             }else {
                                 arrayList.add(l.avById(rs.getInt("id")));
                             }
@@ -160,9 +165,12 @@ public class Search {
                     if (isAuthor)
                         if (rs.getString("Author").trim().toLowerCase().indexOf(word.trim().toLowerCase()) >= 0) {
                             if (type.equals("book")) {
-                                arrayList.add(l.bookByID(rs.getInt("id")));
+                                if ((isBestseller && rs.getBoolean("is_bestseller") || !isBestseller) &&
+                                        (!isReference && !rs.getBoolean("is_reference") || isReference))
+                                    arrayList.add(l.bookByID(rs.getInt("id")));
                             }else if(type.equals("article")){
-                                arrayList.add(l.articleById(rs.getInt("id")));
+                                if (!isReference && !rs.getBoolean("is_reference") || isReference)
+                                    arrayList.add(l.articleById(rs.getInt("id")));
                             }else {
                                 arrayList.add(l.avById(rs.getInt("id")));
                             }
@@ -171,9 +179,12 @@ public class Search {
                     if (isKeyword)
                         if (rs.getString("Keywords").trim().toLowerCase().indexOf(word.trim().toLowerCase()) >= 0) {
                             if (type.equals("book")) {
-                                arrayList.add(l.bookByID(rs.getInt("id")));
+                                if ((isBestseller && rs.getBoolean("is_bestseller") || !isBestseller) &&
+                                        (!isReference && !rs.getBoolean("is_reference") || isReference))
+                                    arrayList.add(l.bookByID(rs.getInt("id")));
                             }else if(type.equals("article")){
-                                arrayList.add(l.articleById(rs.getInt("id")));
+                                if (!isReference && !rs.getBoolean("is_reference") || isReference)
+                                    arrayList.add(l.articleById(rs.getInt("id")));
                             }else {
                                 arrayList.add(l.avById(rs.getInt("id")));
                             }
