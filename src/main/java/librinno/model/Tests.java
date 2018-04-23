@@ -1,6 +1,7 @@
 package main.java.librinno.model;
 
 import static java.time.temporal.ChronoUnit.DAYS;
+
 import javax.xml.crypto.Data;
 import java.io.IOException;
 import java.sql.*;
@@ -16,7 +17,7 @@ public class Tests {
     //creation of all needed information for tests
     Database db = new Database();
     Statement stmt = db.con.createStatement();
-//    Librarian l = new Librarian("1", "1", "1", 1, "1", "1",null);
+    //    Librarian l = new Librarian("1", "1", "1", 1, "1", "1",null);
     Book d1 = new Book("Introduction to Algorithms", "Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest and Clifford Stein", "MIT Press", "Third edition", 5000, "Algorithms, Data Structures, Complexity, Computational Theory", false, false, 2009, "In library");
     Book d2 = new Book("Algorithms + Data Structures = Programs", "Niklaus Wirth", "Prentice Hall PTR", "First edition", 5000, "Algorithms, Data Structures, Search Algorithms, Pascal", true, false, 1978, "In library");
     Book d3 = new Book("The Art of Computer Programming", "Donald E. Knuth", "Addison Wesley Longman Publishing Co., Inc.", "Third edition", 5000, "Algorithms, Combinatorial Algorithms, Recursion", false, true, 1997, "In library");
@@ -27,59 +28,69 @@ public class Tests {
     User p3 = new User("Elvira Espindola", "30003", "Via del Corso, 22", User.professor, "p3", "sadasd@gmail.com");
     User s = new User("Andrey Velo", "30004", "Avenida Mazatlan 250", User.student, "s", "sasdasd@mail.com");
     User v = new User("Veronika Rama", "30005", "Stret Atocha, 27", User.vProfessor, "vp", "solovov305@gmail.com");
-    Admin admin1 = new Admin("Admin", "!", "1", 0, "Admin", "0", "r@r.ur" );
-    Librarian l1 =  new Librarian("l1","l1","l1",1,"Librarian Priv1","l1","l1@mail.ru");
-    Librarian l2 =  new Librarian("l2","l2","l2",1,"Librarian Priv2","l2","l2@mail.ru");
-    Librarian l3 =  new Librarian("l3","l3","l3",1,"Librarian Priv3","l3","l3@mail.ru");
+    Admin admin1 = new Admin("Admin", "!", "1", 0, "Admin", "0", "r@r.ur");
+    Librarian l1 = new Librarian("l1", "l1", "l1", 1, "Librarian Priv1", "l1", "l1@mail.ru");
+    Librarian l2 = new Librarian("l2", "l2", "l2", 1, "Librarian Priv2", "l2", "l2@mail.ru");
+    Librarian l3 = new Librarian("l3", "l3", "l3", 1, "Librarian Priv3", "l3", "l3@mail.ru");
+
     public Tests() throws SQLException {
     }
 
-    private void initially() throws SQLException{
+    private void initially() throws SQLException {
         db.admin_creation(admin1);
-        db.bookCreation(d1);
-        db.bookCreation(d2);
-        db.bookCreation(d3);
     }
+
     public void tc1() throws SQLException {
         dump();
         initially();
-        Admin admin2=new Admin("admin","admin","admin",999,"Admin","admin","admin@mail.ru");
+        Admin admin2 = new Admin("admin", "admin", "admin", 999, "Admin", "admin", "admin@mail.ru");
         ResultSet rs = stmt.executeQuery("SELECT  * FROM users_of_the_library WHERE Type= 'Admin'");
         rs.last();
         int admin_amount = rs.getRow();
-        assert (admin_amount==1);
+        assert (admin_amount == 1);
         db.admin_creation(admin2);
         rs = stmt.executeQuery("SELECT  * FROM users_of_the_library WHERE Type= 'Admin'");
         rs.last();
-        admin_amount=rs.getRow();
-        assert (admin_amount==1);
+        admin_amount = rs.getRow();
+        assert (admin_amount == 1);
     }
+
     public void tc2() throws SQLException {
         dump();
         initially();
         admin1.add_librarian(l1);
         admin1.add_librarian(l2);
         admin1.add_librarian(l3);
-        assert((Integer) db.isUserAlreadyExist(l1).get(0)==1);
-        assert((Integer) db.isUserAlreadyExist(l2).get(0)==1);
-        assert((Integer) db.isUserAlreadyExist(l3).get(0)==1);
+        assert ((Integer) db.isUserAlreadyExist(l1).get(0) == 1);
+        assert ((Integer) db.isUserAlreadyExist(l2).get(0) == 1);
+        assert ((Integer) db.isUserAlreadyExist(l3).get(0) == 1);
     }
-    public void tc3() throws SQLException{
+
+    public void tc3() throws SQLException {
         tc2();
-        int d1_id=(Integer)db.isBookAlreadyExist(d1).get(1);
-        int d2_id=(Integer)db.isBookAlreadyExist(d2).get(1);
-        int d3_id=(Integer)db.isBookAlreadyExist(d3).get(1);
-        l1.addCopiesOfMaterial(d1_id,3);
-        l1.addCopiesOfMaterial(d2_id,3);
-        l1.addCopiesOfMaterial(d3_id,3);
+        //нельзя создать копии книги,если её, бл**ь, нет в системе
+        db.bookCreation(d1);
+        db.bookCreation(d2);
+        db.bookCreation(d3);
+
+        int d1_id = (Integer) db.isBookAlreadyExist(d1).get(1);
+        int d2_id = (Integer) db.isBookAlreadyExist(d2).get(1);
+        int d3_id = (Integer) db.isBookAlreadyExist(d3).get(1);
+        l1.addCopiesOfMaterial(d1_id, 3);
+        l1.addCopiesOfMaterial(d2_id, 3);
+        l1.addCopiesOfMaterial(d3_id, 3);
         assert (l1.getNumberOfCopiesOfBook(d1_id) == 0);
         assert (l1.getNumberOfCopiesOfBook(d2_id) == 0);
         assert (l1.getNumberOfCopiesOfBook(d3_id) == 0);
 
     }
+
     public void tc4() throws SQLException {
         tc2();
-        Database db = new Database();
+        //нельзя создать копии книги,если её, бл**ь, нет в системе
+        db.bookCreation(d1);
+        db.bookCreation(d2);
+        db.bookCreation(d3);
 
         int d1ID = (Integer) db.isBookAlreadyExist(d1).get(1);
         int d2ID = (Integer) db.isBookAlreadyExist(d2).get(1);
@@ -95,11 +106,46 @@ public class Tests {
         l2.addUser(s);
         l2.addUser(v);
 
-        assert (l2.getAllUsers().size() == 5);
+        //3 librarians:l1,l2,l3 and users p1,p2,p3,s,v
+        //admin is not a user,he is an admin(HE IS GOD)
+        assert (l2.getAllUsers().size() == 8);
         assert (l2.getNumberOfCopiesOfBook(d1ID) == 3);
         assert (l2.getNumberOfCopiesOfBook(d2ID) == 3);
         assert (l2.getNumberOfCopiesOfBook(d3ID) == 3);
     }
+
+    public void tc5() throws SQLException {
+        tc4();
+        int idOfCopy = 0;
+        stmt = db.con.createStatement();
+        ResultSet rs = stmt.executeQuery("SELECT  * FROM copy WHERE Id_of_original =" + (Integer) db.isBookAlreadyExist(d1).get(1));
+        while (rs.next())
+            idOfCopy = rs.getInt("Id_of_copy");
+        l3.deleteOneCopy(idOfCopy);
+
+        assert (l3.getNumberOfCopiesOfBook((Integer) db.isBookAlreadyExist(d1).get(1)) == 2);
+    }
+
+    public void tc6() throws SQLException {
+        tc4();
+        int d3ID = (Integer) db.isBookAlreadyExist(d3).get(1);
+        System.out.println(p1.getCard_Number());
+        l1.checkOut(p1,d3ID);
+        l1.checkOut(p2,d3ID);
+        l1.checkOut(s,d3ID);
+        l1.checkOut(v,d3ID);
+        l1.checkOut(p3,d3ID);
+        l1.outstandingRequest(d3ID);
+        ResultSet rs = stmt.executeQuery("SELECT  * FROM Copy WHERE Id_of_original="+d3ID+" and Owner<>0");
+        rs.last();
+        int copy_count = rs.getRow();
+        assert (copy_count==0);
+        rs = stmt.executeQuery("SELECT  * FROM queue_on_"+d3ID);
+        rs.last();
+        int awaiting = rs.getRow();
+        assert (awaiting==2);
+    }
+
     /*
     public void tc2() throws SQLException {
         dump();
@@ -258,7 +304,7 @@ public class Tests {
     /**
      * executing update in all tables
      */
-    public void dump(){
+    public void dump() {
         try {
             PreparedStatement pr = db.con.prepareStatement("DELETE from AV");
             pr.executeUpdate();
@@ -274,7 +320,7 @@ public class Tests {
             ResultSet rs = md.getTables(null, null, "queue%", null);
             while (rs.next()) {
                 String table_name = rs.getString(3);
-                pr.executeUpdate("DROP TABLE IF EXISTS "+table_name);
+                pr.executeUpdate("DROP TABLE IF EXISTS " + table_name);
             }
         } catch (SQLException e) {
             e.printStackTrace();
