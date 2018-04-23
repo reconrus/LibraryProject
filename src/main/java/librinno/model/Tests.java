@@ -51,6 +51,16 @@ public class Tests {
         admin_amount=rs.getRow();
         assert (admin_amount==1);
     }
+    public void tc2() throws SQLException {
+        dump();
+        initially();
+        admin1.add_librarian(l1);
+        admin1.add_librarian(l2);
+        admin1.add_librarian(l3);
+        assert((Integer) db.isUserAlreadyExist(l1).get(0)==1);
+        assert((Integer) db.isUserAlreadyExist(l2).get(0)==1);
+        assert((Integer) db.isUserAlreadyExist(l3).get(0)==1);
+    }
     /*
     public void tc2() throws SQLException {
         dump();
