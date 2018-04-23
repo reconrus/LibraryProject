@@ -28,6 +28,9 @@ public class Tests {
     User s = new User("Andrey Velo", "30004", "Avenida Mazatlan 250", User.student, "s", "sasdasd@mail.com");
     User v = new User("Veronika Rama", "30005", "Stret Atocha, 27", User.vProfessor, "vp", "solovov305@gmail.com");
     Admin admin1 = new Admin("Admin", "!", "1", 0, "Admin", "0", "r@r.ur" );
+    Librarian l1 =  new Librarian("l1","l1","l1",1,"Librarian Priv1","l1","l1@mail.ru");
+    Librarian l2 =  new Librarian("l2","l2","l2",1,"Librarian Priv2","l2","l2@mail.ru");
+    Librarian l3 =  new Librarian("l3","l3","l3",1,"Librarian Priv3","l3","l3@mail.ru");
     public Tests() throws SQLException {
     }
 
@@ -52,27 +55,14 @@ public class Tests {
     public void tc2() throws SQLException {
         dump();
         initially();
-        LocalDate date = LocalDate.parse("2018-03-05");
-        LocalDate now = LocalDate.parse("2018-04-02");
-        l.checkOutWithData(p1,d1.getId(),date);
-        l.checkOutWithData(p1,d2.getId(),date);
-        l.checkOutWithData(s,d1.getId(),date);
-        l.checkOutWithData(s,d2.getId(),date);
-        l.checkOutWithData(v,d1.getId(),date);
-        l.checkOutWithData(v,d2.getId(),date);
-
-        LinkedList<Material> p1doc = l.getAllCopiesTakenByUser(p1.getCard_number());
-        LinkedList<Material> sdoc = l.getAllCopiesTakenByUser(s.getCard_number());
-        LinkedList<Material> vdoc = l.getAllCopiesTakenByUser(v.getCard_number());
-
-        assert ((p1doc.get(0).getOverdue(p1,now)==0)&&(l.fineWithDate(p1doc.get(0).getId(),now)==0));
-        assert ((p1doc.get(1).getOverdue(p1,now)==0)&&(l.fineWithDate(p1doc.get(1).getId(),now)==0));
-        assert ((sdoc.get(0).getOverdue(s,now)==7)&&(l.fineWithDate(sdoc.get(0).getId(),now)==700));
-        assert ((sdoc.get(1).getOverdue(s,now)==14)&&(l.fineWithDate(sdoc.get(1).getId(),now)==1400));
-        assert ((vdoc.get(0).getOverdue(v,now)==21)&&(l.fineWithDate(vdoc.get(0).getId(),now)==2100));
-        assert ((vdoc.get(1).getOverdue(v,now)==21)&&(l.fineWithDate(vdoc.get(1).getId(),now)==1700));
-
+        admin1.add_librarian(l1);
+        admin1.add_librarian(l2);
+        admin1.add_librarian(l3);
+        assert((Integer) db.isUserAlreadyExist(l1).get(0)==1);
+        assert((Integer) db.isUserAlreadyExist(l2).get(0)==1);
+        assert((Integer) db.isUserAlreadyExist(l3).get(0)==1);
     }
+    /*
     public void tc3() throws SQLException {
         dump();
         initially();
