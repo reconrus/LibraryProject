@@ -186,11 +186,11 @@ public class LibrarianScreenController {
         ArrayList<Material> materials;
 
         if(allTypes)
-            if(searchByAll) materials = Search.materialByWordWithCriteria(searchField.getText(), true, true, true, true, true, true, searchBestsellers.isSelected(), searchNotReferences.isSelected(), searchAvailable.isSelected());
-            else materials = Search.materialByWordWithCriteria(searchField.getText(), true, true, true, searchByTitle, searchByAuthor, searchByKeywords, searchBestsellers.isSelected(), searchNotReferences.isSelected(), searchAvailable.isSelected());
+            if(searchByAll) materials = Search.materialByWordWithCriteria(searchField.getText(), true, true, true, true, true, true, searchBestsellers.isSelected(), !searchNotReferences.isSelected(), searchAvailable.isSelected());
+            else materials = Search.materialByWordWithCriteria(searchField.getText(), true, true, true, searchByTitle, searchByAuthor, searchByKeywords, searchBestsellers.isSelected(), !searchNotReferences.isSelected(), searchAvailable.isSelected());
 
-        else if(searchByAll) materials = Search.materialByWordWithCriteria(searchField.getText(), searchBooks.isSelected(), searchArticles.isSelected(), searchAVs.isSelected(), true, true, true, searchBestsellers.isSelected(), searchNotReferences.isSelected(), searchAvailable.isSelected());
-        else materials = Search.materialByWordWithCriteria(searchField.getText(), searchBooks.isSelected(), searchArticles.isSelected(), searchAVs.isSelected(), searchByTitle, searchByAuthor, searchByKeywords, searchBestsellers.isSelected(), searchNotReferences.isSelected(), searchAvailable.isSelected());
+        else if(searchByAll) materials = Search.materialByWordWithCriteria(searchField.getText(), searchBooks.isSelected(), searchArticles.isSelected(), searchAVs.isSelected(), true, true, true, searchBestsellers.isSelected(), !searchNotReferences.isSelected(), searchAvailable.isSelected());
+        else materials = Search.materialByWordWithCriteria(searchField.getText(), searchBooks.isSelected(), searchArticles.isSelected(), searchAVs.isSelected(), searchByTitle, searchByAuthor, searchByKeywords, searchBestsellers.isSelected(), !searchNotReferences.isSelected(), searchAvailable.isSelected());
 
         id.setCellValueFactory(new PropertyValueFactory("id"));
         author.setCellValueFactory(new PropertyValueFactory("author"));
