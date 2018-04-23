@@ -68,38 +68,33 @@ public class Tests {
 
     public void tc3() throws SQLException {
         tc2();
-        //нельзя создать копии книги,если её, бл**ь, нет в системе
-        db.bookCreation(d1);
-        db.bookCreation(d2);
-        db.bookCreation(d3);
+        l1.addBook(d1.getTitle(),d1.getAuthor(),d1.getPublisher(),d1.getEdition(),d1.getPrice(),d1.getKeyWords(),d1.getBestseller(),d1.getReference(),d1.getYear(),3);
+        l1.addBook(d2.getTitle(),d2.getAuthor(),d2.getPublisher(),d2.getEdition(),d2.getPrice(),d2.getKeyWords(),d2.getBestseller(),d2.getReference(),d2.getYear(),3);
+        l1.addBook(d3.getTitle(),d3.getAuthor(),d3.getPublisher(),d3.getEdition(),d3.getPrice(),d3.getKeyWords(),d3.getBestseller(),d3.getReference(),d3.getYear(),3);
 
-        int d1_id = (Integer) db.isBookAlreadyExist(d1).get(1);
-        int d2_id = (Integer) db.isBookAlreadyExist(d2).get(1);
-        int d3_id = (Integer) db.isBookAlreadyExist(d3).get(1);
-        l1.addCopiesOfMaterial(d1_id, 3);
-        l1.addCopiesOfMaterial(d2_id, 3);
-        l1.addCopiesOfMaterial(d3_id, 3);
-        assert (l1.getNumberOfCopiesOfBook(d1_id) == 0);
-        assert (l1.getNumberOfCopiesOfBook(d2_id) == 0);
-        assert (l1.getNumberOfCopiesOfBook(d3_id) == 0);
+        ResultSet rs = stmt.executeQuery("SELECT  * FROM Copy");
+        rs.last();
+        int copy_count = rs.getRow();
+        rs = stmt.executeQuery("SELECT  * FROM Books");
+        rs.last();
+        int book_count = rs.getRow();
+        //books and copies were not added to library
+        assert (copy_count==0);
+        assert (book_count==0);
 
     }
 
     public void tc4() throws SQLException {
         tc2();
-        //нельзя создать копии книги,если её, бл**ь, нет в системе
-        db.bookCreation(d1);
-        db.bookCreation(d2);
-        db.bookCreation(d3);
+
+        l2.addBook(d1.getTitle(),d1.getAuthor(),d1.getPublisher(),d1.getEdition(),d1.getPrice(),d1.getKeyWords(),d1.getBestseller(),d1.getReference(),d1.getYear(),3);
+        l2.addBook(d2.getTitle(),d2.getAuthor(),d2.getPublisher(),d2.getEdition(),d2.getPrice(),d2.getKeyWords(),d2.getBestseller(),d2.getReference(),d2.getYear(),3);
+        l2.addBook(d3.getTitle(),d3.getAuthor(),d3.getPublisher(),d3.getEdition(),d3.getPrice(),d3.getKeyWords(),d3.getBestseller(),d3.getReference(),d3.getYear(),3);
 
         int d1ID = (Integer) db.isBookAlreadyExist(d1).get(1);
         int d2ID = (Integer) db.isBookAlreadyExist(d2).get(1);
         int d3ID = (Integer) db.isBookAlreadyExist(d3).get(1);
 
-
-        l2.addCopiesOfMaterial(d1ID, 3);
-        l2.addCopiesOfMaterial(d2ID, 3);
-        l2.addCopiesOfMaterial(d3ID, 3);
         l2.addUser(p1);
         l2.addUser(p2);
         l2.addUser(p3);
@@ -308,19 +303,19 @@ public class Tests {
         try {
             PreparedStatement pr = db.con.prepareStatement("DELETE from AV");
             pr.executeUpdate();
-            pr = db.con.prepareStatement("DELETE from Copy");
+            pr = db.con.prepareStatement("TRUNCATE Copy");
             pr.executeUpdate();
-            pr = db.con.prepareStatement("DELETE from Articles");
+            pr = db.con.prepareStatement("TRUNCATE Articles");
             pr.executeUpdate();
-            pr = db.con.prepareStatement("DELETE from Books");
+            pr = db.con.prepareStatement("TRUNCATE Books");
             pr.executeUpdate();
-            pr = db.con.prepareStatement("DELETE FROM Users_of_the_library");
+            pr = db.con.prepareStatement("TRUNCATE Users_of_the_library");
             pr.executeUpdate();
             DatabaseMetaData md = db.con.getMetaData();
             ResultSet rs = md.getTables(null, null, "queue%", null);
             while (rs.next()) {
                 String table_name = rs.getString(3);
-                pr.executeUpdate("DROP TABLE IF EXISTS " + table_name);
+                pr.executeUpdate("TRUNCATE TABLE IF EXISTS " + table_name);
             }
         } catch (SQLException e) {
             e.printStackTrace();

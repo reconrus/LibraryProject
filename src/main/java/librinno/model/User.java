@@ -76,7 +76,6 @@ public class User {
         setPassword(password);
         setEmail(email);
     }
-
     public User(String name, String address, String number, int cardnumber, String type, String password,String email) {
         setName(name);
         setPhoneNumber(number);
@@ -86,7 +85,6 @@ public class User {
         setPassword(password);
         setEmail(email);
     }
-
     //getters and setters
     public void setPassword(String password) {
         this.password = password;

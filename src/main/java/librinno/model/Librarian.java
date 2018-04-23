@@ -990,11 +990,11 @@ public class Librarian extends User {
             PropertyConfigurator.configure("log4j.properties");
             try {
                 if (number > 0) {
-                    //Statement stmt = db.con.createStatement();
-                    //ResultSet rs;
-                    //rs = stmt.executeQuery("SELECT Id_of_original FROM Copy");
-                    //while (rs.next()) {
-                    //    if (rs.getInt(1) == id) {
+                    Statement stmt = db.con.createStatement();
+                    ResultSet rs;
+                    rs = stmt.executeQuery("SELECT Id_of_original FROM Copy");
+                    while (rs.next()) {
+                        if (rs.getInt(1) == id) {
                             for (int i = 0; i < number; i++) {
                                 PreparedStatement prst = db.con.prepareStatement("INSERT INTO Copy (id_of_original,Owner,Time_left) VALUES(?,?,?)");
                                 prst.setInt(1, id);
@@ -1004,8 +1004,8 @@ public class Librarian extends User {
                             }
                             LOGGER.trace("Added " + number + " copies of material " + id);
                             return;
-                    //    }
-                    //}
+                        }
+                    }
                 }
             } catch (SQLException e) {
                 LOGGER.error("Error in adding copies");

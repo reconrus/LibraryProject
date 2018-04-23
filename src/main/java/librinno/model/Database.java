@@ -224,7 +224,7 @@ public class Database extends Main {
                 //находим последний добавленный ID книги и запоминаем его, чтоб потом кинуть его в таблицу копий
 
 
-                /*Statement stmt = con.createStatement();
+                Statement stmt = con.createStatement();
                 ResultSet rsInside;
                 rsInside = stmt.executeQuery("SELECT id FROM Books");
                 int id_Of_material = 0;
@@ -238,9 +238,9 @@ public class Database extends Main {
                 prst.setBoolean(4,true);
                 prst.executeUpdate();
                 LOGGER.trace("Copies of Book added");
-                */
+
             } else {
-                /*
+
                 //кидаем id оригинала и остальную инфу
                 prst = con.prepareStatement("insert into Copy (id_of_original,Owner,Time_left,CanRenew) values(?,?,?,?)");
                 prst.setInt(1, arrayList.get(1));
@@ -249,7 +249,7 @@ public class Database extends Main {
                 prst.setBoolean(4,true);
                 prst.executeUpdate();
                 LOGGER.trace("Copies of Book added");
-                */
+
             }
         } catch (SQLException e) {
             LOGGER.error("Error in creating book");
