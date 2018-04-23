@@ -307,7 +307,7 @@ public class LibrarianScreenController {
     @FXML
     void addCopy(){
         Material material= tableBook.getSelectionModel().getSelectedItem();
-        Librarian.addCopiesOfMaterial(material.getId(),1);
+        librarian.addCopiesOfMaterial(material.getId(),1);
         showTables();
     }
     @FXML
@@ -422,7 +422,7 @@ public class LibrarianScreenController {
     void deleteCopy (ActionEvent event) throws IOException{
         Material copy= tableCopy.getSelectionModel().getSelectedItem();
         if(copy!=null) {
-            Librarian.deleteOneCopy(copy.getId());
+            librarian.deleteOneCopy(copy.getId());
             showTables();
         }
     }
