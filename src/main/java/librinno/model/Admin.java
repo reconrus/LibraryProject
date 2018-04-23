@@ -74,7 +74,7 @@ public class Admin extends User {
         PropertyConfigurator.configure("log4j.properties");
         try {
             Database db=new Database();
-            prst = db.con.prepareStatement("insert into Users_of_the_library(Name, Address, Phone_number,Type,Password,Email,Privilege) values(?, ?, ?,?,?,?,?)");
+            prst = db.con.prepareStatement("insert into Users_of_the_library(Name, Address, Phone_number,Type,Password,Email) values(?, ?, ?,?,?,?)");
             prst.setString(1, user.getName());
             prst.setString(2, user.getAdress());
             prst.setString(3, user.getPhoneNumber());

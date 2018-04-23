@@ -985,29 +985,31 @@ public class Librarian extends User {
      * @param id     of material
      * @param number how many copies to add
      */
-    public static void addCopiesOfMaterial(int id, int number) {
-        PropertyConfigurator.configure("log4j.properties");
-        try {
-            if (number > 0) {
-                Statement stmt = db.con.createStatement();
-                ResultSet rs;
-                rs = stmt.executeQuery("SELECT Id_of_original FROM Copy");
-                while (rs.next()) {
-                    if (rs.getInt(1) == id) {
-                        for (int i = 0; i < number; i++) {
-                            PreparedStatement prst = db.con.prepareStatement("INSERT INTO Copy (id_of_original,Owner,Time_left) VALUES(?,?,?)");
-                            prst.setInt(1, id);
-                            prst.setInt(2, 0);
-                            prst.setInt(3, 999);
-                            prst.executeUpdate();
+    public void addCopiesOfMaterial(int id, int number) {
+        if (getPrivileges().equals("Priv2")||getPrivileges().equals("Priv3")) {
+            PropertyConfigurator.configure("log4j.properties");
+            try {
+                if (number > 0) {
+                    Statement stmt = db.con.createStatement();
+                    ResultSet rs;
+                    rs = stmt.executeQuery("SELECT Id_of_original FROM Copy");
+                    while (rs.next()) {
+                        if (rs.getInt(1) == id) {
+                            for (int i = 0; i < number; i++) {
+                                PreparedStatement prst = db.con.prepareStatement("INSERT INTO Copy (id_of_original,Owner,Time_left) VALUES(?,?,?)");
+                                prst.setInt(1, id);
+                                prst.setInt(2, 0);
+                                prst.setInt(3, 999);
+                                prst.executeUpdate();
+                            }
+                            LOGGER.trace("Added " + number + " copies of material " + id);
+                            return;
                         }
-                        LOGGER.trace("Added " + number + " copies of material " + id);
-                        return;
                     }
                 }
+            } catch (SQLException e) {
+                LOGGER.error("Error in adding copies");
             }
-        } catch (SQLException e) {
-            LOGGER.error("Error in adding copies");
         }
     }
 
@@ -1127,14 +1129,16 @@ public class Librarian extends User {
      *
      * @param id unique key of copy
      */
-    public static void deleteOneCopy(int id) {
-        PropertyConfigurator.configure("log4j.properties");
-        try {
-            PreparedStatement pr = db.con.prepareStatement("DELETE from Copy WHERE Id_of_copy=" + id + " LIMIT 1");
-            pr.executeUpdate();
-            LOGGER.trace("Successful deletion of Copy with id " + id);
-        } catch (SQLException e) {
-            LOGGER.error("Copy with id " + id + " isn't found");
+    public void deleteOneCopy(int id) {
+        if(getPrivileges().equals("Priv3")) {
+            PropertyConfigurator.configure("log4j.properties");
+            try {
+                PreparedStatement pr = db.con.prepareStatement("DELETE from Copy WHERE Id_of_copy=" + id + " LIMIT 1");
+                pr.executeUpdate();
+                LOGGER.trace("Successful deletion of Copy with id " + id);
+            } catch (SQLException e) {
+                LOGGER.error("Copy with id " + id + " isn't found");
+            }
         }
     }
 
@@ -1345,7 +1349,7 @@ public class Librarian extends User {
         LinkedList<User> users = new LinkedList<User>();
         try {
             Statement stmt = db.con.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM Users_of_the_library WHERE Type<>'Librarian Priv1' AND Type <>'Librarian Priv2' AND Type <>'Librarian Priv3'");
+            ResultSet rs = stmt.executeQuery("SELECT * FROM Users_of_the_library WHERE Type<>'Librarian Priv1' AND Type <>'Librarian Priv2' AND Type <>'Librarian Priv3' AND Type <>'Admin'");
 
             while (rs.next()) {
                 String name = rs.getString("Name");

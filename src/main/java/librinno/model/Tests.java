@@ -36,6 +36,9 @@ public class Tests {
 
     private void initially() throws SQLException{
         db.admin_creation(admin1);
+        db.bookCreation(d1);
+        db.bookCreation(d2);
+        db.bookCreation(d3);
     }
     public void tc1() throws SQLException {
         dump();
@@ -60,6 +63,42 @@ public class Tests {
         assert((Integer) db.isUserAlreadyExist(l1).get(0)==1);
         assert((Integer) db.isUserAlreadyExist(l2).get(0)==1);
         assert((Integer) db.isUserAlreadyExist(l3).get(0)==1);
+    }
+    public void tc3() throws SQLException{
+        tc2();
+        int d1_id=(Integer)db.isBookAlreadyExist(d1).get(1);
+        int d2_id=(Integer)db.isBookAlreadyExist(d2).get(1);
+        int d3_id=(Integer)db.isBookAlreadyExist(d3).get(1);
+        l1.addCopiesOfMaterial(d1_id,3);
+        l1.addCopiesOfMaterial(d2_id,3);
+        l1.addCopiesOfMaterial(d3_id,3);
+        assert (l1.getNumberOfCopiesOfBook(d1_id) == 0);
+        assert (l1.getNumberOfCopiesOfBook(d2_id) == 0);
+        assert (l1.getNumberOfCopiesOfBook(d3_id) == 0);
+
+    }
+    public void tc4() throws SQLException {
+        tc2();
+        Database db = new Database();
+
+        int d1ID = (Integer) db.isBookAlreadyExist(d1).get(1);
+        int d2ID = (Integer) db.isBookAlreadyExist(d2).get(1);
+        int d3ID = (Integer) db.isBookAlreadyExist(d3).get(1);
+
+
+        l2.addCopiesOfMaterial(d1ID, 3);
+        l2.addCopiesOfMaterial(d2ID, 3);
+        l2.addCopiesOfMaterial(d3ID, 3);
+        l2.addUser(p1);
+        l2.addUser(p2);
+        l2.addUser(p3);
+        l2.addUser(s);
+        l2.addUser(v);
+
+        assert (l2.getAllUsers().size() == 5);
+        assert (l2.getNumberOfCopiesOfBook(d1ID) == 3);
+        assert (l2.getNumberOfCopiesOfBook(d2ID) == 3);
+        assert (l2.getNumberOfCopiesOfBook(d3ID) == 3);
     }
     /*
     public void tc2() throws SQLException {
