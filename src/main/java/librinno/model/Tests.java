@@ -1,14 +1,7 @@
 package main.java.librinno.model;
 
-import static java.time.temporal.ChronoUnit.DAYS;
-
-import javax.xml.crypto.Data;
-import java.io.IOException;
 import java.sql.*;
-import java.time.LocalDate;
-import java.time.Period;
 import java.util.ArrayList;
-import java.util.LinkedList;
 
 /**
  * Test cases for D3.
@@ -20,7 +13,7 @@ public class Tests {
     //    Librarian l = new Librarian("1", "1", "1", 1, "1", "1",null);
     Book d1 = new Book("Introduction to Algorithms", "Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest and Clifford Stein", "MIT Press", "Third edition", 5000, "Algorithms, Data Structures, Complexity, Computational Theory", false, false, 2009, "In library");
     Book d2 = new Book("Algorithms + Data Structures = Programs", "Niklaus Wirth", "Prentice Hall PTR", "First edition", 5000, "Algorithms, Data Structures, Search Algorithms, Pascal", true, false, 1978, "In library");
-    Book d3 = new Book("The Art of Computer Programming", "Donald E. Knuth", "Addison Wesley Longman Publishing Co., Inc.", "Third edition", 5000, "Algorithms, Combinatorial Algorithms, Recursion", false, true, 1997, "In library");
+    Book d3 = new Book("The Art of Computer Programming", "Donald E. Knuth", "Addison Wesley Longman Publishing Co., Inc.", "Third edition", 5000, "Algorithms, Combinatorial Algorithms, Recursion", false, false, 1997, "In library");
     //AV d3 = new AV("Null References: The Billion Dollar Mistake", ": Tony Hoare", 700, "av1");
     //AV av2 = new AV("Information Entropy", "Claude Shannon", 1, "av2");
     User p1 = new User("Sergey Afonso", "30001", "Via Margutta, 3", User.professor, "p1", "1@1.r");
@@ -68,9 +61,9 @@ public class Tests {
 
     public void tc3() throws SQLException {
         tc2();
-        l1.addBook(d1.getTitle(),d1.getAuthor(),d1.getPublisher(),d1.getEdition(),d1.getPrice(),d1.getKeyWords(),d1.getBestseller(),d1.getReference(),d1.getYear(),3);
-        l1.addBook(d2.getTitle(),d2.getAuthor(),d2.getPublisher(),d2.getEdition(),d2.getPrice(),d2.getKeyWords(),d2.getBestseller(),d2.getReference(),d2.getYear(),3);
-        l1.addBook(d3.getTitle(),d3.getAuthor(),d3.getPublisher(),d3.getEdition(),d3.getPrice(),d3.getKeyWords(),d3.getBestseller(),d3.getReference(),d3.getYear(),3);
+        l1.addBook(d1.getTitle(), d1.getAuthor(), d1.getPublisher(), d1.getEdition(), d1.getPrice(), d1.getKeyWords(), d1.getBestseller(), d1.getReference(), d1.getYear(), 3);
+        l1.addBook(d2.getTitle(), d2.getAuthor(), d2.getPublisher(), d2.getEdition(), d2.getPrice(), d2.getKeyWords(), d2.getBestseller(), d2.getReference(), d2.getYear(), 3);
+        l1.addBook(d3.getTitle(), d3.getAuthor(), d3.getPublisher(), d3.getEdition(), d3.getPrice(), d3.getKeyWords(), d3.getBestseller(), d3.getReference(), d3.getYear(), 3);
 
         ResultSet rs = stmt.executeQuery("SELECT  * FROM Copy");
         rs.last();
@@ -79,17 +72,17 @@ public class Tests {
         rs.last();
         int book_count = rs.getRow();
         //books and copies were not added to library
-        assert (copy_count==0);
-        assert (book_count==0);
+        assert (copy_count == 0);
+        assert (book_count == 0);
 
     }
 
     public void tc4() throws SQLException {
         tc2();
 
-        l2.addBook(d1.getTitle(),d1.getAuthor(),d1.getPublisher(),d1.getEdition(),d1.getPrice(),d1.getKeyWords(),d1.getBestseller(),d1.getReference(),d1.getYear(),3);
-        l2.addBook(d2.getTitle(),d2.getAuthor(),d2.getPublisher(),d2.getEdition(),d2.getPrice(),d2.getKeyWords(),d2.getBestseller(),d2.getReference(),d2.getYear(),3);
-        l2.addBook(d3.getTitle(),d3.getAuthor(),d3.getPublisher(),d3.getEdition(),d3.getPrice(),d3.getKeyWords(),d3.getBestseller(),d3.getReference(),d3.getYear(),3);
+        l2.addBook(d1.getTitle(), d1.getAuthor(), d1.getPublisher(), d1.getEdition(), d1.getPrice(), d1.getKeyWords(), d1.getBestseller(), d1.getReference(), d1.getYear(), 3);
+        l2.addBook(d2.getTitle(), d2.getAuthor(), d2.getPublisher(), d2.getEdition(), d2.getPrice(), d2.getKeyWords(), d2.getBestseller(), d2.getReference(), d2.getYear(), 3);
+        l2.addBook(d3.getTitle(), d3.getAuthor(), d3.getPublisher(), d3.getEdition(), d3.getPrice(), d3.getKeyWords(), d3.getBestseller(), d3.getReference(), d3.getYear(), 3);
 
         int d1ID = (Integer) db.isBookAlreadyExist(d1).get(1);
         int d2ID = (Integer) db.isBookAlreadyExist(d2).get(1);
@@ -124,23 +117,63 @@ public class Tests {
     public void tc6() throws SQLException {
         tc4();
         int d3ID = (Integer) db.isBookAlreadyExist(d3).get(1);
-        System.out.println(p1.getCard_Number());
-        l1.checkOut(p1,d3ID);
-        l1.checkOut(p2,d3ID);
-        l1.checkOut(s,d3ID);
-        l1.checkOut(v,d3ID);
-        l1.checkOut(p3,d3ID);
+        get_user_in_table(p1);
+        get_user_in_table(p2);
+        get_user_in_table(p3);
+        get_user_in_table(s);
+        get_user_in_table(v);
+        l1.checkOut(p1, d3ID);
+        l1.checkOut(p2, d3ID);
+        l1.checkOut(s, d3ID);
+        l1.checkOut(v, d3ID);
+        l1.checkOut(p3, d3ID);
         l1.outstandingRequest(d3ID);
-        ResultSet rs = stmt.executeQuery("SELECT  * FROM Copy WHERE Id_of_original="+d3ID+" and Owner<>0");
+        ResultSet rs = stmt.executeQuery("SELECT * FROM Copy WHERE Id_of_original=" + d3ID + " and Owner<>0");
         rs.last();
         int copy_count = rs.getRow();
-        assert (copy_count==0);
-        rs = stmt.executeQuery("SELECT  * FROM queue_on_"+d3ID);
+        assert (copy_count == 3);
+        rs = stmt.executeQuery("SELECT  * FROM queue_on_" + d3ID);
         rs.last();
         int awaiting = rs.getRow();
-        assert (awaiting==2);
+        assert (awaiting == 2);
     }
 
+    public void tc7() throws SQLException {
+        tc4();
+        int d3ID = (Integer) db.isBookAlreadyExist(d3).get(1);
+        l3.checkOut(p1, d3ID);
+        l3.checkOut(p2, d3ID);
+        l3.checkOut(s, d3ID);
+        l3.checkOut(v, d3ID);
+        l3.checkOut(p3, d3ID);
+        l3.outstandingRequest(d3ID);
+        DatabaseMetaData md = db.con.getMetaData();
+        ResultSet rs = md.getTables(null, null, "queue_on" + d3ID, null);
+        assert (!rs.next());
+        //There is no way to check if email was sent or not
+        //anyway,all emails are collected in class librarian
+        //method outstanding request
+        // in debug mode it is possible to see all notified emails
+    }
+
+    public void tc10() throws SQLException {
+       tc4();
+       Search search=new Search();
+       ArrayList<Book> result=search.bookByTitle("Introduction to Algorithms");
+       assert(result.size()==1);
+    }
+    public void tc11() throws SQLException{
+        tc4();
+        Search search=new Search();
+        ArrayList<Book> result=search.bookByTitle("Algorithms");
+        assert (result.size()==2);
+    }
+   public void tc12() throws SQLException{
+        tc4();
+        Search search=new Search();
+       ArrayList<Book> result=search.bookByKeywords("Algorithms");
+       assert (result.size()==3);
+   }
     /*
     public void tc2() throws SQLException {
         dump();
@@ -315,12 +348,16 @@ public class Tests {
             ResultSet rs = md.getTables(null, null, "queue%", null);
             while (rs.next()) {
                 String table_name = rs.getString(3);
-                pr.executeUpdate("TRUNCATE TABLE IF EXISTS " + table_name);
+                pr.executeUpdate("DROP TABLE IF EXISTS " + table_name);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-
+    public void get_user_in_table(User user) throws SQLException {
+        //name,number,adress,type,password,email
+        int id = (Integer) db.isUserAlreadyExist(user).get(1);
+        user.setCardNumberAsString(id);
+    }
 }
