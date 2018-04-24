@@ -174,6 +174,12 @@ public class Tests {
        ArrayList<Book> result=search.bookByKeywords("Algorithms");
        assert (result.size()==3);
    }
+   public void tc13()throws SQLException{
+        tc4();
+        Search search=new Search();
+        ArrayList<Book>result=search.bookByTitle("Algorithms Programming");
+        assert (result.size()==0);
+   }
     /*
     public void tc2() throws SQLException {
         dump();
