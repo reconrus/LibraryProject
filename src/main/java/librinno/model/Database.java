@@ -25,8 +25,8 @@ public class Database extends Main {
     public String login = super.getUSER();
     //public String password = "eQ1a5mg0Z7";
     public String password = super.getPASS();
-    public static PreparedStatement prst=null;
-    public static Connection con=null;
+    public static PreparedStatement prst = null;
+    public static Connection con = null;
     public static PriorityQueue<User> pq;
     public static final Logger LOGGER = Logger.getLogger("GLOBAL");
 
@@ -53,17 +53,15 @@ public class Database extends Main {
             Database db = new Database();
             Statement stmt = db.con.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT COUNT(*) FROM users_of_the_library WHERE Type = 'Admin'");
-            if(rs.next() && rs.getInt("COUNT(*)")<1){
+            if (rs.next() && rs.getInt("COUNT(*)") < 1) {
                 userCreation(admin);
-                LOGGER.trace("admin with id "+admin.getCard_Number()+ " added");
+                LOGGER.trace("admin with id " + admin.getCard_Number() + " added");
 
+            } else {
+                LOGGER.info("There is already one admin");
             }
-            else{
-                LOGGER.info("there is already one admin");
-            }
-        }
-        catch (SQLException e){
-            LOGGER.error("error in adding admin");
+        } catch (SQLException e) {
+            LOGGER.error("Error in adding admin");
         }
     }
 
@@ -82,9 +80,12 @@ public class Database extends Main {
             prst.setString(3, user.getPhoneNumber());
             prst.setString(4, user.getType());
             prst.setString(5, user.getPassword());
-            prst.setString(6,user.getEmail());
+            prst.setString(6, user.getEmail());
             prst.executeUpdate();
-            LOGGER.trace("User created");
+            Database db=new Database();
+            db.get_user_in_table(user);
+            if (!user.getType().equals("Admin"))
+                LOGGER.trace("User created");
         } catch (Exception e) {
             LOGGER.error("Error in adding user");
         }
@@ -94,12 +95,12 @@ public class Database extends Main {
      * Adding AV in DB
      * Description:
      * if AV not already in DB than creating AV in database,
-     *   else: add copy of this AV
+     * else: add copy of this AV
      *
      * @param av that to insert into table
      * @throws SQLException
      */
-    public void avCreation(AV av){
+    public void avCreation(AV av) {
         PropertyConfigurator.configure("log4j.properties");
         try {
             ArrayList<Integer> arrayList = isAVAlreadyExist(av);
@@ -110,7 +111,7 @@ public class Database extends Main {
                 prst.setInt(3, av.getPrice());
                 prst.setString(4, av.getKeyWords());
                 prst.executeUpdate();
-                LOGGER.trace("AV created");
+                LOGGER.trace("AV with id"+isAVAlreadyExist(av).get(1)+" created");
                 Statement stmt = con.createStatement();
                 ResultSet rsInside;
                 rsInside = stmt.executeQuery("SELECT id FROM AV");
@@ -124,7 +125,7 @@ public class Database extends Main {
                 prst.setInt(3, 999);
                 prst.setBoolean(4, true);
                 prst.executeUpdate();
-                LOGGER.trace("Copies of AV added");
+                LOGGER.trace("1 copy with id "+id_Of_material+" of AV with id "+isAVAlreadyExist(av).get(1)+" added");
 
             } else {
                 prst = con.prepareStatement("insert into Copy (id_of_original,Owner,Time_left,CanRenew) values(?,?,?,?)");
@@ -133,10 +134,9 @@ public class Database extends Main {
                 prst.setInt(3, 999);
                 prst.setBoolean(4, true);
                 prst.executeUpdate();
-                LOGGER.trace("Copies of AV with id "+av.getId()+" added");
+                LOGGER.trace("Copy of AV with id " + isAVAlreadyExist(av).get(1) + " added");
             }
-        }
-        catch (SQLException e){
+        } catch (SQLException e) {
             LOGGER.error("error of a/v creation");
         }
     }
@@ -145,12 +145,12 @@ public class Database extends Main {
      * Adding article in DB
      * Description:
      * if article not already in DB than creating article in database,
-     *   else: add copy of this article
+     * else: add copy of this article
      *
      * @param article that we want to add
      * @throws SQLException
      */
-    public void articleCreation(Article article){
+    public void articleCreation(Article article) {
         PropertyConfigurator.configure("log4j.properties");
         try {
             ArrayList<Integer> arrayList = isArticleAlreadyExist(article);
@@ -165,7 +165,8 @@ public class Database extends Main {
                 prst.setString(7, article.getEditor());
                 prst.setString(8, article.getDate());
                 prst.executeUpdate();
-                LOGGER.trace("Article created");
+                arrayList = isArticleAlreadyExist(article);
+                LOGGER.trace("Article with id "+arrayList.get(1)+" created");
                 //находим последний добавленный ID статьи и запоминаем его, чтоб потом кинуть его в таблицу копий
                 Statement stmt = con.createStatement();
                 ResultSet rsInside;
@@ -180,7 +181,7 @@ public class Database extends Main {
                 prst.setInt(3, 999);
                 prst.setBoolean(4, true);
                 prst.executeUpdate();
-                LOGGER.trace("Copies of Article added");
+                LOGGER.trace("1 copy with id "+id_Of_material+" of article with id "+arrayList.get(1)+" added");
             } else {
                 prst = con.prepareStatement("insert into Copy (id_of_original,Owner,Time_left,CanRenew) values(?,?,?,?)");
                 prst.setInt(1, arrayList.get(1));
@@ -188,10 +189,9 @@ public class Database extends Main {
                 prst.setInt(3, 999);
                 prst.setBoolean(4, true);
                 prst.executeUpdate();
-                LOGGER.trace("Copies of Article added");
+                LOGGER.trace("1 copy of article with id "+arrayList.get(1)+" is added");
             }
-        }
-        catch (SQLException e){
+        } catch (SQLException e) {
             LOGGER.error("error of article creation");
         }
     }
@@ -200,7 +200,7 @@ public class Database extends Main {
      * Adding book in DB
      * Description:
      * if book not already in DB than creating book in database,
-     *   else: add copy of this book
+     * else: add copy of this book
      *
      * @param book that we want to add
      */
@@ -220,7 +220,8 @@ public class Database extends Main {
                 prst.setBoolean(8, book.getReference());
                 prst.setInt(9, book.getYear());
                 prst.executeUpdate();
-                LOGGER.trace("Book created");
+                arrayList = isBookAlreadyExist(book);
+                LOGGER.trace("Book with id "+arrayList.get(1)+" created");
                 //находим последний добавленный ID книги и запоминаем его, чтоб потом кинуть его в таблицу копий
 
 
@@ -235,9 +236,9 @@ public class Database extends Main {
                 prst.setInt(1, id_Of_material);
                 prst.setInt(2, 0);
                 prst.setInt(3, 999);
-                prst.setBoolean(4,true);
+                prst.setBoolean(4, true);
                 prst.executeUpdate();
-                LOGGER.trace("Copies of Book added");
+                LOGGER.trace("1 copy with id "+id_Of_material+" of book with id "+arrayList.get(1)+" is added");
 
             } else {
 
@@ -246,9 +247,9 @@ public class Database extends Main {
                 prst.setInt(1, arrayList.get(1));
                 prst.setInt(2, 0);
                 prst.setInt(3, 999);
-                prst.setBoolean(4,true);
+                prst.setBoolean(4, true);
                 prst.executeUpdate();
-                LOGGER.trace("Copies of Book added");
+                LOGGER.trace("1 copy of book with id "+arrayList.get(1)+" added");
 
             }
         } catch (SQLException e) {
@@ -260,7 +261,7 @@ public class Database extends Main {
      * checking for dublicate AVs
      * Description:
      * If av already exist than return arrayList and in arrayList[0]-1(find),arrayList[1]-id of AV
-     *   else: arrayList and arrayList[0]-0(not find)
+     * else: arrayList and arrayList[0]-0(not find)
      *
      * @param av current av
      * @return arraylist of boolean value and id of av
@@ -287,7 +288,7 @@ public class Database extends Main {
      * checking for dublicate articles
      * Description:
      * If article already exist than return arrayList and in arrayList[0]-1(find),arrayList[1]-id of article
-     *   else: arrayList and arrayList[0]-0(not find)
+     * else: arrayList and arrayList[0]-0(not find)
      *
      * @param article current article
      * @return arraylist of boolean value and id of article
@@ -320,7 +321,7 @@ public class Database extends Main {
      * checking for dublicate books
      * Description:
      * If book already exist than return arrayList and in arrayList[0]-1(find),arrayList[1]-id of book
-     *   else: arrayList and arrayList[0]-0(not find)
+     * else: arrayList and arrayList[0]-0(not find)
      *
      * @param book current article
      * @return arraylist of boolean value and id of article
@@ -353,7 +354,7 @@ public class Database extends Main {
      * checking for dublicate users
      * Description:
      * If user already exist than return arrayList and in arrayList[0]-1(find),arrayList[1]-id of user
-     *   else: arrayList and arrayList[0]-0(not find)
+     * else: arrayList and arrayList[0]-0(not find)
      *
      * @param user current user
      * @return arraylist of boolean value and id of user
@@ -381,10 +382,12 @@ public class Database extends Main {
         arrayList.add(0);
         return arrayList;
     }
+
     public void get_user_in_table(User user) throws SQLException {
-        int id = (Integer)isUserAlreadyExist(user).get(1);
+        int id = (Integer) isUserAlreadyExist(user).get(1);
         user.setCardNumberAsString(id);
     }
+
     /**
      * Gets object User with all information about him
      *
@@ -400,18 +403,19 @@ public class Database extends Main {
         String Phonenumber = "";
         String type = "";
         String password = "";
-        String email="";
+        String email = "";
         while (rs.next()) {
             name = rs.getString("Name");
             address = rs.getString("Address");
             Phonenumber = rs.getString("Phone_number");
             type = rs.getString("Type");
             password = rs.getString("Password");
-            email=rs.getString("Email");
+            email = rs.getString("Email");
         }
-        User user = new User(name, address, Phonenumber, id, type, password,email);
+        User user = new User(name, address, Phonenumber, id, type, password, email);
         return user;
     }
+
     /**
      * Gets object Librarian with all information about him
      *
@@ -427,23 +431,23 @@ public class Database extends Main {
         String Phonenumber = "";
         String type = "";
         String password = "";
-        String email="";
+        String email = "";
         while (rs.next()) {
             name = rs.getString("Name");
             address = rs.getString("Address");
             Phonenumber = rs.getString("Phone_number");
             type = rs.getString("Type");
             password = rs.getString("Password");
-            email=rs.getString("Email");
+            email = rs.getString("Email");
         }
-        return new Librarian(name, address, Phonenumber, id, type, password,email);
+        return new Librarian(name, address, Phonenumber, id, type, password, email);
     }
 
     /**
      * Authorization of user
      * Description:
      * if all correct than return type of user
-     *   else: return empty string
+     * else: return empty string
      *
      * @param id   it's id
      * @param pass password
@@ -458,7 +462,7 @@ public class Database extends Main {
         if (rs.next()) {
             String password = rs.getString("Password");
             if (pass.equals(password)) {
-                LOGGER.trace("User with id "+id+ " has logged in system");
+                LOGGER.trace("User with id " + id + " has logged in system");
                 return rs.getString("Type");
             }
         }
@@ -469,7 +473,7 @@ public class Database extends Main {
      * Creating local dataBase(mySQL) on computer of user(with him account in mySQL)
      * Description:
      * if our database is not yet created than: create dataBase and
-     *   create all tables, and add 3 default users
+     * create all tables, and add 3 default users
      *
      * @param user
      * @param pass
@@ -553,13 +557,13 @@ public class Database extends Main {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Statement stmt = con.createStatement();
-             Librarian l = new Librarian("1", "1", "1", 0, "Librarian Priv3", "1","1");
+            Librarian l = new Librarian("1", "1", "1", 0, "Librarian Priv3", "1", "1");
             Comparator<User> comparator = new UserTypeComparator();
             pq = new PriorityQueue<User>(l.getAllUsers().size(), comparator);
             User user = l.UserById(user_id);
             DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss.S");
             Calendar cal = Calendar.getInstance();
-            User needed_user = new User(user.getCard_number(), user.getType(), dateFormat.format(cal.getTime()), null,user.getEmail());
+            User needed_user = new User(user.getCard_number(), user.getType(), dateFormat.format(cal.getTime()), null, user.getEmail());
             pq.add(needed_user);
             String query = "SELECT * FROM Queue_on_" + material_id;
             ResultSet rs = null;
@@ -569,10 +573,10 @@ public class Database extends Main {
                 while (rs.next()) {
                     int cur_id = rs.getInt("Card_number");
                     if (cur_id != user_id) {
-                        user = new User(cur_id, rs.getString("Type"), rs.getString("Reserving_time"), null,rs.getString("Email"));
+                        user = new User(cur_id, rs.getString("Type"), rs.getString("Reserving_time"), null, rs.getString("Email"));
                         pq.add(user);
                     } else {
-                        LOGGER.trace("User with id "+cur_id+" tried to reserve book more than once,but he is already in queue");
+                        LOGGER.trace("User with id " + isUserAlreadyExist(user).get(1) + " tried to reserve book more than once,but he is already in queue");
                     }
                     PreparedStatement pr = con.prepareStatement("TRUNCATE Queue_on_" + material_id);
                     pr.executeUpdate();
@@ -581,22 +585,21 @@ public class Database extends Main {
                 sql = "CREATE TABLE IF NOT EXISTS Queue_on_" + material_id + "(Card_number int(255) ," +
                         " Type VARCHAR(30), Reserving_time VARCHAR(30),First_time DATETIME,is_sent TINYINT(1) DEFAULT '0',Email VARCHAR(30) DEFAULT 'none')";
                 stmt.executeUpdate(sql);
-                LOGGER.trace("Queue on material with id "+material_id+" created");
+                LOGGER.trace("Queue on material with id " + material_id + " created");
             }
-            int counter=1;
+            int counter = 1;
             while (pq.size() > 0) {
                 User cur_user = pq.poll();
                 DateFormat first_date = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss.S");
                 Calendar cal2 = Calendar.getInstance();
-                if(counter==1) {
+                if (counter == 1) {
                     sql = "INSERT INTO Queue_on_" + material_id + " (Card_number,Type,Reserving_time,First_time,is_sent,Email) " +
-                            "VALUES ('" + cur_user.getCard_number() + "', '" + cur_user.getType() + "', '" + cur_user.getDate() +"', '"+dateFormat.format(cal.getTime()) + "', '"+0+"', '"+cur_user.getEmail()+" ')";
+                            "VALUES ('" + cur_user.getCard_number() + "', '" + cur_user.getType() + "', '" + cur_user.getDate() + "', '" + dateFormat.format(cal.getTime()) + "', '" + 0 + "', '" + cur_user.getEmail() + " ')";
                     stmt.executeUpdate(sql);
                     counter++;
-                }
-                else{
+                } else {
                     sql = "INSERT INTO Queue_on_" + material_id + " (Card_number,Type,Reserving_time,First_time,Email) " +
-                            "VALUES ('" + cur_user.getCard_number() + "', '" + cur_user.getType() + "', '" + cur_user.getDate() +"', '"+first_date.format(cal2.getTime())+"', '"+cur_user.getEmail()+" ')";
+                            "VALUES ('" + cur_user.getCard_number() + "', '" + cur_user.getType() + "', '" + cur_user.getDate() + "', '" + first_date.format(cal2.getTime()) + "', '" + cur_user.getEmail() + " ')";
                     stmt.executeUpdate(sql);
                     counter++;
                 }
@@ -625,14 +628,14 @@ public class Database extends Main {
                     while (matcher.find()) {
                         id = matcher.group();
                     }
-                    Librarian l = new Librarian("1", "1", "1", 0, "Librarian Priv3", "1","1");
+                    Librarian l = new Librarian("1", "1", "1", 0, "Librarian Priv3", "1", "1");
                     int user_id = table_rs.getInt("Card_number");
-                    if(l.getNumberOfCopiesOfBook(Integer.parseInt(id))>0) {
+                    if (l.getNumberOfCopiesOfBook(Integer.parseInt(id)) > 0) {
                         String note = "User: " + user_id + " You can get material with id " + id;
                         all_notes.add(note);
                     }
                     user = user_in_queue(user_id, Integer.parseInt(id));
-                    needed_user = new User(user.getCard_Number(), user.getType(), user.getDate(), all_notes,user.getEmail());
+                    needed_user = new User(user.getCard_Number(), user.getType(), user.getDate(), all_notes, user.getEmail());
                 }
             }
             if (needed_user != null)
@@ -668,17 +671,16 @@ public class Database extends Main {
                             table_id = matcher.group();
                         }
                         int user_id = table_rs.getInt("Card_number");
-                        Librarian l = new Librarian("1", "1", "1", 0, "Librarian Priv3", "1","1");
+                        Librarian l = new Librarian("1", "1", "1", 0, "Librarian Priv3", "1", "1");
                         user = l.UserById(user_id);
-                        if(l.getNumberOfCopiesOfBook(Integer.parseInt(table_id))>0)
+                        if (l.getNumberOfCopiesOfBook(Integer.parseInt(table_id)) > 0)
                             emails.add(user.getEmail());
                     }
-                }
-                catch (SQLException e){
+                } catch (SQLException e) {
                 }
             }
         } catch (SQLException e) {
-            LOGGER.trace("No available copies of material");
+            //LOGGER.trace("No available copies of material");
         }
         return emails;
     }
@@ -697,7 +699,7 @@ public class Database extends Main {
             while (rs.next()) {
                 ArrayList<String> tmp = new ArrayList<>();
                 User user = new User(user_id, rs.getString("Type"),
-                        rs.getString("Reserving_time"), tmp,rs.getString("Email"));
+                        rs.getString("Reserving_time"), tmp, rs.getString("Email"));
                 return user;
             }
         } catch (SQLException e) {
@@ -708,18 +710,18 @@ public class Database extends Main {
 
     /**
      * gets id of admin
+     *
      * @return id of admin
      */
-    public static int getAdminID(){
-        int id=0;
-        try{
-            Statement stmt=con.createStatement();
-            ResultSet rs=stmt.executeQuery("SELECT * FROM users_of_the_library WHERE Type ='Admin' LIMIT 1");
-            while(rs.next()){
-                id=rs.getInt("Card_number");
+    public static int getAdminID() {
+        int id = 0;
+        try {
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM users_of_the_library WHERE Type ='Admin' LIMIT 1");
+            while (rs.next()) {
+                id = rs.getInt("Card_number");
             }
-        }
-        catch (SQLException e){
+        } catch (SQLException e) {
         }
         return id;
     }

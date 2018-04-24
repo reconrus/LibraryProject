@@ -43,6 +43,7 @@ public class Admin extends User {
             pr.setString(5, user.getPassword());
             pr.setString(6, user.getEmail());
             pr.executeUpdate();
+            db.get_user_in_table(user);
             LOGGER.trace("Librarian with id "+user.getCard_number()+" was modified");
         } catch (SQLException e) {
             e.printStackTrace();
@@ -82,6 +83,7 @@ public class Admin extends User {
             prst.setString(5, user.getPassword());
             prst.setString(6,user.getEmail());
             prst.executeUpdate();
+            db.get_user_in_table(user);
             LOGGER.trace("Librarian with id "+user.getCard_number()+" was added");
         } catch (Exception e) {
             e.printStackTrace();

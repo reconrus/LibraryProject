@@ -111,7 +111,7 @@ public class Librarian extends User {
                     send.sendToOne(email, "Material is not available", "Material,which you reserved,now is not available.You are removed from waiting list");
                 }
                 pr.executeUpdate("DROP TABLE IF EXISTS queue_on_" + idOfMaterial);
-                LOGGER.trace("Librarian made an outstanding request");
+                LOGGER.trace("Librarian with id "+Database.isUserAlreadyExist(this).get(1)+" made an outstanding request on "+idOfMaterial);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -265,14 +265,14 @@ public class Librarian extends User {
                         pr.setDate(2, java.sql.Date.valueOf(LocalDate.now().plusDays(14)));
                         pr.setBoolean(3, false);
                         pr.executeUpdate();
-                        LOGGER.trace("user with id " + user.getCard_number() + " renewed copy with id " + idOfRenewCopy);
+                        LOGGER.trace("user with id " + Database.isUserAlreadyExist(user).get(1) + " renewed copy with id " + idOfRenewCopy);
                         return true;
 
                     } else if (user.getType().equals("Student") && !rs.getBoolean("is_bestseller")) {
                         pr.setInt(1, 21);
                         pr.setDate(2, java.sql.Date.valueOf(LocalDate.now().plusDays(21)));
                         pr.setBoolean(3, false);
-                        LOGGER.trace("user with id " + user.getCard_number() + " renewed copy with id " + idOfRenewCopy);
+                        LOGGER.trace("user with id " + Database.isUserAlreadyExist(user).get(1) + " renewed copy with id " + idOfRenewCopy);
                         pr.executeUpdate();
                         return true;
                     } else {
@@ -280,7 +280,7 @@ public class Librarian extends User {
                         pr.setDate(2, java.sql.Date.valueOf(LocalDate.now().plusDays(28)));
                         pr.setBoolean(3, false);
                         pr.executeUpdate();
-                        LOGGER.trace("user with id " + user.getCard_number() + " renewed copy with id " + idOfRenewCopy);
+                        LOGGER.trace("user with id " + Database.isUserAlreadyExist(user).get(1) + " renewed copy with id " + idOfRenewCopy);
                         return true;
                     }
                 } else {
@@ -288,11 +288,11 @@ public class Librarian extends User {
                     pr.setDate(2, java.sql.Date.valueOf(LocalDate.now().plusDays(14)));
                     pr.setBoolean(3, false);
                     pr.executeUpdate();
-                    LOGGER.trace("user with id " + user.getCard_number() + " renewed copy with id " + idOfRenewCopy);
+                    LOGGER.trace("user with id " + Database.isUserAlreadyExist(user).get(1) + " renewed copy with id " + idOfRenewCopy);
                     return true;
                 }
             }
-            LOGGER.trace("user with id " + user.getCard_number() + "didn't renew copy with id " + idOfRenewCopy);
+            LOGGER.trace("user with id " + Database.isUserAlreadyExist(user).get(1) + "didn't renew copy with id " + idOfRenewCopy);
             return false;
 
         } catch (SQLException e) {
@@ -422,10 +422,10 @@ public class Librarian extends User {
                 }
                 pr.setString(3, "Issued");
                 pr.executeUpdate();
-                LOGGER.trace("Copy of book with id " + idOfBook + " was given to user with id " + user.getCard_number());
+                LOGGER.trace("Copy of book with id " + idOfBook + " was given to user with id " + Database.isUserAlreadyExist(user).get(1));
                 return true;
             } else {
-                LOGGER.trace("Copy of book with id " + idOfBook + " wasn't given to user with id " + user.getCard_number());
+                LOGGER.trace("Copy of book with id " + idOfBook + " wasn't given to user with id " + Database.isUserAlreadyExist(user).get(1));
                 return false;
             }
         } catch (SQLException e) {
@@ -497,12 +497,15 @@ public class Librarian extends User {
             }
             pr.setString(3, "Issued");
             pr.executeUpdate();
-            LOGGER.trace("Copy of av with id " + idOfAV + " was given to user with id " + user.getCard_number());
+            LOGGER.trace("Copy of av with id " + idOfAV + " was given to user with id " + Database.isUserAlreadyExist(user).get(1));
             return true;
 
         } catch (SQLException e) {
             e.printStackTrace();
-            LOGGER.trace("Copy of av with id " + idOfAV + " wasn't given to user with id " + user.getCard_number());
+            try {
+                LOGGER.trace("Copy of av with id " + idOfAV + " wasn't given to user with id " + Database.isUserAlreadyExist(user).get(1));
+            } catch (SQLException e1) {
+            }
             return false;
         }
     }
@@ -682,15 +685,15 @@ public class Librarian extends User {
                         }
                     }
                 } else {
-                    LOGGER.trace("To early for user with id " + user.getCard_number() + " to get material with id " + idMaterial);
+                    LOGGER.trace("To early for user with id " + Database.isUserAlreadyExist(user).get(1) + " to get material with id " + idMaterial);
                 }
             } catch (SQLException e) {
                 LOGGER.error("Error in checking out of " + idMaterial);
             }
             if (success == 1)
-                LOGGER.trace("Successful checking out of " + idMaterial + " to user " + user.getCard_number());
+                LOGGER.trace("Successful checking out of " + idMaterial + " to user " + Database.isUserAlreadyExist(user).get(1));
             if (success == 0)
-                LOGGER.trace("User with id " + user.getCard_number() + " joining a queue on material with id " + idMaterial);
+                LOGGER.trace("User with id " + Database.isUserAlreadyExist(user).get(1) + " joining a queue on material with id " + idMaterial);
             return success;
         } catch (Exception e) {
             LOGGER.error("Error in checking out");
@@ -973,7 +976,7 @@ public class Librarian extends User {
             pr.setString(5, user.getPassword());
             pr.setString(6, user.getEmail());
             pr.executeUpdate();
-            LOGGER.trace("Successful modification of user with id " + user.getCard_number());
+            LOGGER.trace("Successful modification of user with id " + Database.isUserAlreadyExist(user).get(1));
         } catch (SQLException e) {
             LOGGER.error("Error in modification of user");
         }
@@ -1044,7 +1047,7 @@ public class Librarian extends User {
                 db.bookCreation(book);
                 ArrayList<Integer> arrayList = db.isBookAlreadyExist(book);
                 addCopiesOfMaterial(arrayList.get(1), amount - 1);
-                LOGGER.trace("Added book to the library");
+                LOGGER.trace("Added book with id "+arrayList.get(1)+" to the library");
             } catch (SQLException e) {
                 LOGGER.error("Error in adding book");
             }
@@ -1073,7 +1076,7 @@ public class Librarian extends User {
                 db.articleCreation(article);
                 ArrayList<Integer> arrayList = db.isArticleAlreadyExist(article);
                 addCopiesOfMaterial(arrayList.get(1), amount - 1);
-                LOGGER.trace("Added Article to the library");
+                LOGGER.trace("Added Article with id "+arrayList.get(1)+" to the library");
             } catch (SQLException e) {
                 LOGGER.error("Error in adding article");
             }
@@ -1097,7 +1100,7 @@ public class Librarian extends User {
                 db.avCreation(av);
                 ArrayList<Integer> arrayList = db.isAVAlreadyExist(av);
                 addCopiesOfMaterial(arrayList.get(1), amount - 1);
-                LOGGER.trace("Added AV to the library");
+                LOGGER.trace("Added AV "+arrayList.get(1)+" to the library");
             } catch (SQLException e) {
                 LOGGER.error("Error in creating av");
             }
@@ -1193,12 +1196,13 @@ public class Librarian extends User {
         try {
             PreparedStatement pr = db.con.prepareStatement("UPDATE AV " +
                     "SET Name=?,Author=?,Price=?,Keywords=? where id=" + av.getId());
+            ArrayList<Integer> arrayList = db.isAVAlreadyExist(av);
             pr.setString(1, av.getTitle());
             pr.setString(2, av.getAuthor());
             pr.setInt(3, av.getPrice());
             pr.setString(4, av.getKeyWords());
             pr.executeUpdate();
-            LOGGER.trace("Modification of AV with id " + av.getId());
+            LOGGER.trace("Modification of AV with id " +arrayList.get(1));
         } catch (SQLException e) {
             LOGGER.error("AV with id " + av.getId() + " isn't found");
         }
@@ -1214,6 +1218,7 @@ public class Librarian extends User {
         try {
             PreparedStatement pr = db.con.prepareStatement("UPDATE Articles " +
                     "SET Name=?,Author=?,Price=?,Keywords=?,is_reference=?,Journal=?,Editor=?,Date=? where id=" + article.getId());
+            ArrayList<Integer> arrayList = db.isArticleAlreadyExist(article);
             pr.setString(1, article.getTitle());
             pr.setString(2, article.getAuthor());
             pr.setInt(3, article.getPrice());
@@ -1223,9 +1228,9 @@ public class Librarian extends User {
             pr.setString(7, article.getEditor());
             pr.setDate(8, java.sql.Date.valueOf(article.getDate()));
             pr.executeUpdate();
-            LOGGER.trace("Modification of Article with id " + article.getId());
+            LOGGER.trace("Modification of Article with id " + arrayList.get(1));
         } catch (SQLException e) {
-            LOGGER.error("AV with id " + article.getId() + " isn't found");
+            LOGGER.error("AV with isn't found");
         }
     }
 
@@ -1249,9 +1254,9 @@ public class Librarian extends User {
             pr.setBoolean(7, book.getBestseller());
             pr.setBoolean(8, book.getReference());
             pr.executeUpdate();
-            LOGGER.trace("Modification of Book with id " + book.getId());
+            LOGGER.trace("Modification of Book with id " + arrayList.get(1));
         } catch (SQLException e) {
-            LOGGER.error("Book with id " + book.getId() + " isn't found");
+            LOGGER.error("Book isn't found");
         }
     }
 
