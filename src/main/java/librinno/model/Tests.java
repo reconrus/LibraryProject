@@ -177,8 +177,14 @@ public class Tests {
     public void tc13()throws SQLException{
         tc4();
         Search search=new Search();
-        ArrayList<Book>result=search.bookByTitle("Algorithms Programming");
+        ArrayList<Book>result=search.bookByTitle("Algorithms AND Programming");
         assert (result.size()==0);
+    }
+    public void tc14()throws SQLException{
+        tc4();
+        Search search=new Search();
+        ArrayList<Book>result=search.bookByTitle("Algorithms OR Programming");
+        assert (result.size()==3);
     }
     /*
     public void tc2() throws SQLException {

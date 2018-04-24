@@ -83,5 +83,7 @@ public class Main {
         System.out.println("Test 12 success");
         tests.tc13();
         System.out.println("Test 13 success");
+        tests.tc14();
+        System.out.println("Test 14 success");
     }
 }
