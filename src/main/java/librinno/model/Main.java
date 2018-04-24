@@ -62,6 +62,8 @@ public class Main {
         db.creationLocalDB(getUSER(), getPASS());
         Admin admin=new Admin("123","123","123",123,"123","123","123");
 
-        db.admin_creation(admin);
+        //db.admin_creation(admin);
+        Tests tests = new Tests();
+        tests.tc2();
     }
 }

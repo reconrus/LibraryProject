@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bbc7c2d5-398f-4d60-a540-ee2965b7e505" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/librinno/model/Librarian.java" afterPath="$PROJECT_DIR$/src/main/java/librinno/model/Librarian.java" />
+    <list default="true" id="bbc7c2d5-398f-4d60-a540-ee2965b7e505" name="Default" comment="Changed constructor in article/av/book byID method in Librarian class. Deleted some old useless values from getAll Av/article/book.">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/librinno/model/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/librinno/model/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/librinno/model/Tests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/librinno/model/Tests.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/test/" />
@@ -19,163 +21,52 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/librinno/model/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="8" column="0" lean-forward="true" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="478">
+              <caret line="65" selection-start-line="65" selection-end-line="65" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Article.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/librinno/model/Article.java">
+      <file leaf-file-name="Search.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/librinno/model/Search.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-996">
-              <caret line="13" column="13" lean-forward="false" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Librarian.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/librinno/model/Librarian.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="118" column="0" lean-forward="true" selection-start-line="118" selection-start-column="0" selection-end-line="118" selection-end-column="0" />
+            <state relative-caret-position="294">
+              <caret line="206" column="88" lean-forward="true" selection-start-line="205" selection-start-column="16" selection-end-line="206" selection-end-column="88" />
               <folding>
-                <element signature="docComment;class#Librarian#0" expanded="false" />
-                <element signature="docComment;field#db#0;class#Librarian#0" expanded="false" />
-                <element signature="docComment;method#Librarian#0;class#Librarian#0" expanded="false" />
-                <element signature="method#Librarian#0;class#Librarian#0" expanded="false" />
-                <element signature="docComment;method#Librarian#1;class#Librarian#0" expanded="false" />
-                <element signature="method#Librarian#1;class#Librarian#0" expanded="false" />
-                <element signature="method#renew#0;class#Librarian#0" expanded="false" />
-                <element signature="docComment;method#checkOutBook#0;class#Librarian#0" expanded="false" />
-                <element signature="method#checkOutBook#0;class#Librarian#0" expanded="false" />
-                <element signature="docComment;method#checkOutAV#0;class#Librarian#0" expanded="false" />
-                <element signature="method#checkOutAV#0;class#Librarian#0" expanded="false" />
-                <element signature="docComment;method#checkOutArticle#0;class#Librarian#0" expanded="false" />
-                <element signature="method#checkOutArticle#0;class#Librarian#0" expanded="false" />
-                <element signature="docComment;method#checkOut#0;class#Librarian#0" expanded="false" />
-                <element signature="docComment;method#returnBook#0;class#Librarian#0" expanded="false" />
-                <element signature="method#returnBook#0;class#Librarian#0" expanded="false" />
-                <element signature="docComment;method#requestReturnBook#0;class#Librarian#0" expanded="false" />
-                <element signature="method#requestReturnBook#0;class#Librarian#0" expanded="false" />
-                <element signature="docComment;method#UserById#0;class#Librarian#0" expanded="false" />
-                <element signature="method#UserById#0;class#Librarian#0" expanded="false" />
-                <element signature="docComment;method#MaterialByID#0;class#Librarian#0" expanded="false" />
-                <element signature="method#MaterialByID#0;class#Librarian#0" expanded="false" />
-                <element signature="method#bookByID#0;class#Librarian#0" expanded="false" />
-                <element signature="docComment;method#avById#0;class#Librarian#0" expanded="false" />
-                <element signature="method#avById#0;class#Librarian#0" expanded="false" />
-                <element signature="docComment;method#articleById#0;class#Librarian#0" expanded="false" />
-                <element signature="method#articleById#0;class#Librarian#0" expanded="false" />
-                <element signature="docComment;method#deleteUserById#0;class#Librarian#0" expanded="false" />
-                <element signature="method#deleteUserById#0;class#Librarian#0" expanded="false" />
-                <element signature="docComment;method#modifyUser#0;class#Librarian#0" expanded="false" />
-                <element signature="method#modifyUser#0;class#Librarian#0" expanded="false" />
-                <element signature="docComment;method#addCopiesOfMaterial#0;class#Librarian#0" expanded="false" />
-                <element signature="method#addCopiesOfMaterial#0;class#Librarian#0" expanded="false" />
-                <element signature="docComment;method#addBook#0;class#Librarian#0" expanded="false" />
-                <element signature="method#addBook#0;class#Librarian#0" expanded="false" />
-                <element signature="docComment;method#addArticle#0;class#Librarian#0" expanded="false" />
-                <element signature="method#addArticle#0;class#Librarian#0" expanded="false" />
-                <element signature="docComment;method#addAV#0;class#Librarian#0" expanded="false" />
-                <element signature="method#addAV#0;class#Librarian#0" expanded="false" />
-                <element signature="docComment;method#deleteAVById#0;class#Librarian#0" expanded="false" />
-                <element signature="method#deleteAVById#0;class#Librarian#0" expanded="false" />
-                <element signature="docComment;method#deleteOneCopy#0;class#Librarian#0" expanded="false" />
-                <element signature="method#deleteOneCopy#0;class#Librarian#0" expanded="false" />
-                <element signature="docComment;method#deleteBookById#0;class#Librarian#0" expanded="false" />
-                <element signature="method#deleteBookById#0;class#Librarian#0" expanded="false" />
-                <element signature="docComment;method#deleteArticleById#0;class#Librarian#0" expanded="false" />
-                <element signature="method#deleteArticleById#0;class#Librarian#0" expanded="false" />
-                <element signature="docComment;method#modifyAV#0;class#Librarian#0" expanded="false" />
-                <element signature="method#modifyAV#0;class#Librarian#0" expanded="false" />
-                <element signature="docComment;method#modifyArticle#0;class#Librarian#0" expanded="false" />
-                <element signature="method#modifyArticle#0;class#Librarian#0" expanded="false" />
-                <element signature="docComment;method#modifyBook#0;class#Librarian#0" expanded="false" />
-                <element signature="method#modifyBook#0;class#Librarian#0" expanded="false" />
-                <element signature="docComment;method#getAllAV#0;class#Librarian#0" expanded="false" />
-                <element signature="method#getAllAV#0;class#Librarian#0" expanded="false" />
-                <element signature="docComment;method#getAllArticles#0;class#Librarian#0" expanded="false" />
-                <element signature="method#getAllArticles#0;class#Librarian#0" expanded="false" />
-                <element signature="docComment;method#getAllBooks#0;class#Librarian#0" expanded="false" />
-                <element signature="method#getAllBooks#0;class#Librarian#0" expanded="false" />
-                <element signature="docComment;method#getAllUsers#0;class#Librarian#0" expanded="false" />
-                <element signature="method#getAllUsers#0;class#Librarian#0" expanded="false" />
-                <element signature="docComment;method#getNumberOfAllCopiesTakenByUser#0;class#Librarian#0" expanded="false" />
-                <element signature="method#getNumberOfAllCopiesTakenByUser#0;class#Librarian#0" expanded="false" />
-                <element signature="docComment;method#getAllCopiesTakenByUser#0;class#Librarian#0" expanded="false" />
-                <element signature="method#getAllCopiesTakenByUser#0;class#Librarian#0" expanded="false" />
-                <element signature="docComment;method#getNumberOfCopiesOfBook#0;class#Librarian#0" expanded="false" />
-                <element signature="method#getNumberOfCopiesOfBook#0;class#Librarian#0" expanded="false" />
-                <element signature="docComment;method#getNumberOfCopiesOfWithTaken#0;class#Librarian#0" expanded="false" />
-                <element signature="method#getNumberOfCopiesOfWithTaken#0;class#Librarian#0" expanded="false" />
-                <element signature="docComment;method#getAllCopies#0;class#Librarian#0" expanded="false" />
-                <element signature="method#getAllCopies#0;class#Librarian#0" expanded="false" />
-                <element signature="docComment;method#numberOfMeetings#0;class#Librarian#0" expanded="false" />
-                <element signature="method#numberOfMeetings#0;class#Librarian#0" expanded="false" />
-                <element signature="docComment;method#deleteDoc#0;class#Librarian#0" expanded="false" />
-                <element signature="method#deleteDoc#0;class#Librarian#0" expanded="false" />
-                <marker date="1522594157864" expanded="true" signature="1856:1962" ph="UPDATE Copy... " />
-                <marker date="1522594157864" expanded="true" signature="2017:2055" ph="SELECT * FRO... Copy" />
-                <marker date="1522594157864" expanded="true" signature="2893:2923" ph="SELECT * FRO... Books" />
-                <marker date="1522594157864" expanded="true" signature="4709:4747" ph="SELECT * FRO... Copy" />
-                <marker date="1522594157864" expanded="true" signature="5201:5231" ph="SELECT * FRO... Books" />
-                <marker date="1522594157864" expanded="true" signature="5419:5446" ph="SELECT * FRO... av" />
-                <marker date="1522594157864" expanded="true" signature="5634:5667" ph="SELECT * FRO... articles" />
-                <marker date="1522594157864" expanded="true" signature="6687:6817" ph="UPDATE Copy... " />
-                <marker date="1522594157864" expanded="true" signature="8756:8884" ph="UPDATE Copy... " />
-                <marker date="1522594157864" expanded="true" signature="10033:10166" ph="UPDATE Copy... " />
-                <marker date="1522594157864" expanded="true" signature="11637:11686" ph="SELECT * FRO... queue_on_missingValue" />
-                <marker date="1522594157864" expanded="true" signature="12064:12094" ph="SELECT * FRO... Books" />
-                <marker date="1522594157864" expanded="true" signature="12280:12307" ph="SELECT * FRO... AV" />
-                <marker date="1522594157864" expanded="true" signature="12491:12524" ph="SELECT * FRO... Articles" />
-                <marker date="1522594157864" expanded="true" signature="12848:12895" ph="DELETE from queue_on_missingValue... " />
-                <marker date="1522594157864" expanded="true" signature="13171:13230" ph="UPDATE queue_on_missingValue... " />
-                <marker date="1522594157864" expanded="true" signature="13435:13458" ph="SELECT * FRO... queue_on_missingValue" />
-                <marker date="1522594157864" expanded="true" signature="13606:13626" ph="DROP TABLE q... " />
-                <marker date="1522594157864" expanded="true" signature="14397:14485" ph="UPDATE Copy... " />
-                <marker date="1522594157864" expanded="true" signature="15213:15256" ph="UPDATE Copy... " />
-                <marker date="1522594157864" expanded="true" signature="15739:15792" ph="SELECT * FRO... Users_of_the_library" />
-                <marker date="1522594157864" expanded="true" signature="16612:16641" ph="SELECT * FRO... Books" />
-                <marker date="1522594157864" expanded="true" signature="16781:16807" ph="SELECT * FRO... AV" />
-                <marker date="1522594157864" expanded="true" signature="16961:16993" ph="SELECT * FRO... Articles" />
-                <marker date="1522594157864" expanded="true" signature="17412:17441" ph="SELECT * FRO... Books" />
-                <marker date="1522594157864" expanded="true" signature="18122:18148" ph="SELECT * FRO... AV" />
-                <marker date="1522594157864" expanded="true" signature="18735:18767" ph="SELECT * FRO... Articles" />
-                <marker date="1522594157864" expanded="true" signature="19600:19631" ph="SELECT * FRO... Copy" />
-                <marker date="1522594157864" expanded="true" signature="19968:20019" ph="DELETE from Users_of_the_library... " />
-                <marker date="1522594157864" expanded="true" signature="20603:20728" ph="UPDATE Users_of_the_library... " />
-                <marker date="1522594157864" expanded="true" signature="21483:21514" ph="SELECT Id_of... Copy" />
-                <marker date="1522594157864" expanded="true" signature="21737:21800" ph="INSERT INTO Copy... " />
-                <marker date="1522594157864" expanded="true" signature="25063:25087" ph="DELETE from AV... " />
-                <marker date="1522594157864" expanded="true" signature="25170:25208" ph="DELETE FROM Copy... " />
-                <marker date="1522594157864" expanded="true" signature="25576:25628" ph="DELETE from Copy... " />
-                <marker date="1522594157864" expanded="true" signature="25969:25996" ph="DELETE from Books... " />
-                <marker date="1522594157864" expanded="true" signature="26079:26117" ph="DELETE FROM Copy... " />
-                <marker date="1522594157864" expanded="true" signature="26503:26533" ph="DELETE from Articles... " />
-                <marker date="1522594157864" expanded="true" signature="26616:26654" ph="DELETE FROM Copy... " />
-                <marker date="1522594157864" expanded="true" signature="27036:27119" ph="UPDATE AV... " />
-                <marker date="1522594157864" expanded="true" signature="27681:27811" ph="UPDATE Articles... " />
-                <marker date="1522594157864" expanded="true" signature="28668:28807" ph="UPDATE Books... " />
-                <marker date="1522594157864" expanded="true" signature="29634:29650" ph="SELECT * FRO... AV" />
-                <marker date="1522594157864" expanded="true" signature="29894:29912" ph="SELECT * FRO... Copy" />
-                <marker date="1522594157864" expanded="true" signature="30921:30943" ph="SELECT * FRO... Articles" />
-                <marker date="1522594157864" expanded="true" signature="31186:31204" ph="SELECT * FRO... Copy" />
-                <marker date="1522594157864" expanded="true" signature="32138:32157" ph="SELECT * FRO... Books" />
-                <marker date="1522594157864" expanded="true" signature="32401:32419" ph="SELECT * FRO... Copy" />
-                <marker date="1522594157864" expanded="true" signature="33798:33871" ph="SELECT * FRO... Users_of_the_library" />
-                <marker date="1522594157864" expanded="true" signature="34922:34953" ph="SELECT * FRO... Copy" />
-                <marker date="1522594157864" expanded="true" signature="35557:35588" ph="SELECT * FRO... Copy" />
-                <marker date="1522594157864" expanded="true" signature="36024:36056" ph="SELECT * FRO... Articles" />
-                <marker date="1522594157864" expanded="true" signature="36949:36975" ph="SELECT * FRO... AV" />
-                <marker date="1522594157864" expanded="true" signature="37573:37602" ph="SELECT * FRO... Books" />
-                <marker date="1522594157864" expanded="true" signature="38997:39063" ph="SELECT * FRO... Copy" />
-                <marker date="1522594157864" expanded="true" signature="39606:39646" ph="SELECT * FRO... Copy" />
-                <marker date="1522594157864" expanded="true" signature="40183:40201" ph="SELECT * FRO... Copy" />
+                <element signature="e#394#541#0" />
+                <element signature="e#394#4578#0" />
+                <element signature="e#4584#5159#0" />
+                <element signature="e#4584#6756#0" />
+                <element signature="e#6762#10136#0" />
+                <element signature="e#11246#12298#0" />
+                <element signature="e#12303#13427#0" />
+                <element signature="e#13432#14528#0" />
+                <element signature="e#14533#15637#0" />
+                <element signature="e#15643#18572#0" />
+                <element signature="e#15763#15872#0" />
+                <element signature="e#18579#19738#0" />
+                <element signature="e#19743#21355#0" />
+                <element signature="e#21360#22299#0" />
+                <element signature="e#22304#23915#0" />
+                <element signature="e#23922#25321#0" />
+                <element signature="e#25326#27170#0" />
+                <element signature="e#27175#28343#0" />
+                <element signature="e#28348#30108#0" />
+                <element signature="e#30113#31333#0" />
+                <element signature="e#31338#32759#0" />
+                <element signature="e#32764#34177#0" />
+                <element signature="e#34182#35576#0" />
+                <element signature="e#35582#35603#0" />
+                <element signature="e#38091#39241#0" />
+                <element signature="e#39246#40832#0" />
+                <element signature="e#40837#42028#0" />
+                <element signature="e#42033#43206#0" />
+                <element signature="e#43211#44222#0" />
+                <element signature="e#44227#45830#0" />
+                <element signature="e#45835#46834#0" />
+                <element signature="e#46839#47831#0" />
+                <element signature="e#47836#48772#0" />
+                <element signature="e#48780#49024#0" />
               </folding>
             </state>
           </provider>
@@ -184,37 +75,61 @@
       <file leaf-file-name="Database.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/librinno/model/Database.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="245">
-              <caret line="73" column="0" lean-forward="false" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
+            <state relative-caret-position="547">
+              <caret line="356" column="54" selection-start-line="356" selection-start-column="54" selection-end-line="356" selection-end-column="54" />
               <folding>
-                <element signature="docComment;method#Database#0;class#Database#0" expanded="false" />
-                <element signature="method#Database#0;class#Database#0" expanded="false" />
-                <element signature="docComment;method#userCreation#0;class#Database#0" expanded="false" />
-                <element signature="method#userCreation#0;class#Database#0" expanded="false" />
-                <element signature="docComment;method#avCreation#0;class#Database#0" expanded="false" />
-                <element signature="method#avCreation#0;class#Database#0" expanded="false" />
-                <element signature="docComment;method#articleCreation#0;class#Database#0" expanded="false" />
-                <element signature="method#articleCreation#0;class#Database#0" expanded="false" />
-                <element signature="docComment;method#bookCreation#0;class#Database#0" expanded="false" />
-                <element signature="method#bookCreation#0;class#Database#0" expanded="false" />
-                <element signature="docComment;method#isAVAlreadyExist#0;class#Database#0" expanded="false" />
-                <element signature="method#isAVAlreadyExist#0;class#Database#0" expanded="false" />
-                <element signature="docComment;method#isArticleAlreadyExist#0;class#Database#0" expanded="false" />
-                <element signature="method#isArticleAlreadyExist#0;class#Database#0" expanded="false" />
-                <element signature="docComment;method#isBookAlreadyExist#0;class#Database#0" expanded="false" />
-                <element signature="method#isBookAlreadyExist#0;class#Database#0" expanded="false" />
-                <element signature="docComment;method#isUserAlreadyExist#0;class#Database#0" expanded="false" />
-                <element signature="method#isUserAlreadyExist#0;class#Database#0" expanded="false" />
-                <element signature="docComment;method#getInformationAboutTheUser#0;class#Database#0" expanded="false" />
-                <element signature="method#getInformationAboutTheUser#0;class#Database#0" expanded="false" />
-                <element signature="docComment;method#authorization#0;class#Database#0" expanded="false" />
-                <element signature="method#authorization#0;class#Database#0" expanded="false" />
-                <element signature="method#creationLocalDB#0;class#Database#0" expanded="false" />
-                <element signature="method#queue_on_material#0;class#Database#0" expanded="false" />
-                <element signature="method#notification#0;class#Database#0" expanded="false" />
-                <element signature="method#send_email#0;class#Database#0" expanded="false" />
-                <element signature="method#user_in_queue#0;class#Database#0" expanded="false" />
-                <element signature="class#UserTypeComparator#0" expanded="false" />
+                <element signature="docComment;class#Database#0" />
+                <element signature="docComment;method#Database#0;class#Database#0" />
+                <element signature="method#Database#0;class#Database#0" />
+                <element signature="docComment;method#admin_creation#0;class#Database#0" />
+                <element signature="method#admin_creation#0;class#Database#0" />
+                <element signature="docComment;method#userCreation#0;class#Database#0" />
+                <element signature="method#userCreation#0;class#Database#0" />
+                <element signature="docComment;method#avCreation#0;class#Database#0" />
+                <element signature="method#avCreation#0;class#Database#0" />
+                <element signature="docComment;method#articleCreation#0;class#Database#0" />
+                <element signature="method#articleCreation#0;class#Database#0" />
+                <element signature="docComment;method#bookCreation#0;class#Database#0" />
+                <element signature="method#bookCreation#0;class#Database#0" />
+                <element signature="docComment;method#isAVAlreadyExist#0;class#Database#0" />
+                <element signature="method#isAVAlreadyExist#0;class#Database#0" />
+                <element signature="docComment;method#isArticleAlreadyExist#0;class#Database#0" />
+                <element signature="method#isArticleAlreadyExist#0;class#Database#0" />
+                <element signature="docComment;method#isBookAlreadyExist#0;class#Database#0" />
+                <element signature="docComment;method#isUserAlreadyExist#0;class#Database#0" />
+                <element signature="method#isUserAlreadyExist#0;class#Database#0" />
+                <element signature="docComment;method#getInformationAboutTheUser#0;class#Database#0" />
+                <element signature="method#getInformationAboutTheUser#0;class#Database#0" />
+                <element signature="docComment;method#getInformationAboutTheLibrarian#0;class#Database#0" />
+                <element signature="method#getInformationAboutTheLibrarian#0;class#Database#0" />
+                <element signature="docComment;method#authorization#0;class#Database#0" />
+                <element signature="method#authorization#0;class#Database#0" />
+                <element signature="docComment;method#creationLocalDB#0;class#Database#0" />
+                <element signature="method#creationLocalDB#0;class#Database#0" />
+                <element signature="docComment;method#queue_on_material#0;class#Database#0" />
+                <element signature="method#queue_on_material#0;class#Database#0" />
+                <element signature="method#notification#0;class#Database#0" />
+                <element signature="docComment;method#send_email#0;class#Database#0" />
+                <element signature="method#send_email#0;class#Database#0" />
+                <element signature="docComment;method#user_in_queue#0;class#Database#0" />
+                <element signature="method#user_in_queue#0;class#Database#0" />
+                <element signature="docComment;class#UserTypeComparator#0" />
+                <element signature="class#UserTypeComparator#0" />
+                <element signature="method#compare#0;class#UserTypeComparator#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Tests.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/librinno/model/Tests.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="168">
+              <caret line="17" selection-start-line="17" selection-end-line="17" />
+              <folding>
+                <element signature="docComment;class#Tests#0" />
+                <element signature="docComment;method#dump#0;class#Tests#0" />
+                <element signature="method#dump#0;class#Tests#0" />
               </folding>
             </state>
           </provider>
@@ -223,25 +138,147 @@
       <file leaf-file-name="User.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/librinno/model/User.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="58" column="66" lean-forward="false" selection-start-line="58" selection-start-column="66" selection-end-line="58" selection-end-column="66" />
-              <folding />
+            <state relative-caret-position="357">
+              <caret line="70" column="83" selection-start-line="70" selection-start-column="83" selection-end-line="70" selection-end-column="83" />
+              <folding>
+                <element signature="docComment;class#User#0" />
+                <element signature="e#1264#1648#0" />
+                <element signature="e#1654#1847#0" />
+                <element signature="e#1854#2123#0" />
+                <element signature="e#2129#2456#0" />
+                <element signature="e#3261#3314#0" />
+                <element signature="e#3319#3357#0" />
+                <element signature="e#3435#3475#0" />
+                <element signature="e#3570#3610#0" />
+                <element signature="e#3695#3759#0" />
+                <element signature="e#3852#3964#0" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Book.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/librinno/model/Book.java">
+      <file leaf-file-name="Admin.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/librinno/model/Admin.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="44">
-              <caret line="13" column="13" lean-forward="false" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+            <state relative-caret-position="378">
+              <caret line="72" column="30" selection-start-line="72" selection-start-column="30" selection-end-line="72" selection-end-column="30" />
               <folding>
-                <element signature="method#Book#0;class#Book#0" expanded="false" />
-                <element signature="method#Book#1;class#Book#0" expanded="false" />
-                <element signature="method#Book#2;class#Book#0" expanded="false" />
-                <element signature="method#Book#3;class#Book#0" expanded="false" />
-                <element signature="method#Book#4;class#Book#0" expanded="false" />
-                <element signature="method#Book#5;class#Book#0" expanded="false" />
+                <element signature="docComment;class#Admin#0" />
+                <element signature="docComment;method#Admin#0;class#Admin#0" />
+                <element signature="method#Admin#0;class#Admin#0" />
+                <element signature="docComment;method#modify_librarian#0;class#Admin#0" />
+                <element signature="method#modify_librarian#0;class#Admin#0" />
+                <element signature="docComment;method#delete_librarian#0;class#Admin#0" />
+                <element signature="method#delete_librarian#0;class#Admin#0" />
+                <element signature="docComment;method#add_librarian#0;class#Admin#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Librarian.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/librinno/model/Librarian.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="511">
+              <caret line="1520" column="39" lean-forward="true" selection-start-line="1520" selection-end-line="1533" />
+              <folding>
+                <element signature="docComment;class#Librarian#0" />
+                <element signature="e#791#1000#0" />
+                <element signature="e#1091#1379#0" />
+                <element signature="e#1091#1693#0" />
+                <element signature="e#1905#2019#0" />
+                <element signature="e#1905#2256#0" />
+                <element signature="e#2262#2532#0" />
+                <element signature="e#2262#4567#0" />
+                <element signature="e#4573#7069#0" />
+                <element signature="e#7075#9922#0" />
+                <element signature="e#9928#10143#0" />
+                <element signature="e#9928#13434#0" />
+                <element signature="e#13440#13586#0" />
+                <element signature="e#13440#15402#0" />
+                <element signature="e#15408#17141#0" />
+                <element signature="e#17147#17361#0" />
+                <element signature="e#17147#19557#0" />
+                <element signature="e#19563#21389#0" />
+                <element signature="e#21395#21598#0" />
+                <element signature="e#21395#22928#0" />
+                <element signature="e#22934#23970#0" />
+                <element signature="e#23976#24200#0" />
+                <element signature="e#23976#25778#0" />
+                <element signature="e#25784#27014#0" />
+                <element signature="e#27020#27184#0" />
+                <element signature="e#27020#27620#0" />
+                <element signature="e#27626#27890#0" />
+                <element signature="e#27626#31508#0" />
+                <element signature="e#31514#34558#0" />
+                <element signature="e#34564#34727#0" />
+                <element signature="e#34564#35581#0" />
+                <element signature="e#35587#35758#0" />
+                <element signature="e#35587#36355#0" />
+                <element signature="e#36361#36451#0" />
+                <element signature="e#36361#37182#0" />
+                <element signature="e#37188#37282#0" />
+                <element signature="e#37188#38123#0" />
+                <element signature="e#38129#38224#0" />
+                <element signature="e#38129#38916#0" />
+                <element signature="e#38922#39013#0" />
+                <element signature="e#38922#39617#0" />
+                <element signature="e#39623#39724#0" />
+                <element signature="e#39623#40514#0" />
+                <element signature="e#40520#40611#0" />
+                <element signature="e#40520#41816#0" />
+                <element signature="e#41822#41938#0" />
+                <element signature="e#41822#42843#0" />
+                <element signature="e#42849#42975#0" />
+                <element signature="e#42849#44090#0" />
+                <element signature="e#44096#44178#0" />
+                <element signature="e#44096#44335#0" />
+                <element signature="e#44341#44773#0" />
+                <element signature="e#44341#45616#0" />
+                <element signature="e#45622#46012#0" />
+                <element signature="e#45622#46878#0" />
+                <element signature="e#46884#47099#0" />
+                <element signature="e#46884#47786#0" />
+                <element signature="e#47792#47879#0" />
+                <element signature="e#47792#48516#0" />
+                <element signature="e#48522#48602#0" />
+                <element signature="e#48522#49058#0" />
+                <element signature="e#49064#49142#0" />
+                <element signature="e#49064#49790#0" />
+                <element signature="e#49796#49880#0" />
+                <element signature="e#49796#50539#0" />
+                <element signature="e#50545#50645#0" />
+                <element signature="e#50545#51321#0" />
+                <element signature="e#51327#51444#0" />
+                <element signature="e#51327#52446#0" />
+                <element signature="e#52452#52560#0" />
+                <element signature="e#52452#53580#0" />
+                <element signature="e#53587#53658#0" />
+                <element signature="e#53587#54472#0" />
+                <element signature="e#54478#54559#0" />
+                <element signature="e#54478#55397#0" />
+                <element signature="e#55403#55478#0" />
+                <element signature="e#55403#56676#0" />
+                <element signature="e#56682#56757#0" />
+                <element signature="e#56682#57779#0" />
+                <element signature="e#57785#57871#0" />
+                <element signature="e#57785#58898#0" />
+                <element signature="e#58904#59067#0" />
+                <element signature="e#58904#59500#0" />
+                <element signature="e#59506#59662#0" />
+                <element signature="e#59506#63096#0" />
+                <element signature="e#63103#63272#0" />
+                <element signature="e#63103#64316#0" />
+                <element signature="e#64323#64480#0" />
+                <element signature="e#64323#64933#0" />
+                <element signature="e#64939#65084#0" />
+                <element signature="e#64939#65522#0" />
+                <element signature="e#65528#65577#0" />
+                <element signature="e#65528#66356#0" />
+                <element signature="e#66362#66567#0" />
+                <element signature="e#66362#66848#0" />
+                <element signature="e#66854#66947#0" />
+                <element signature="e#66854#67274#0" />
               </folding>
             </state>
           </provider>
@@ -252,8 +289,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="FxmlFile" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -262,16 +299,29 @@
       <find>DB_URL</find>
       <find>CanRenew</find>
       <find>return</find>
+      <find>SELECT</find>
       <find>select</find>
+      <find>librarian</find>
+      <find>Book</find>
+      <find>getNumberOfCopiesOfBook</find>
+      <find>getNumberOfCopies</find>
+      <find>articleById</find>
+      <find>getAllBo</find>
+      <find>bookByID</find>
+      <find>number</find>
+      <find>Admin</find>
+      <find>new Librarian</find>
+      <find>Librarian</find>
+      <find>Librar</find>
+      <find>userById</find>
+      <find>Alrea</find>
+      <find>AlreadyExist</find>
+      <find>LOGG</find>
+      <find>delete</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="GradleLocalSettings">
-    <option name="externalProjectsViewState">
-      <projects_view />
-    </option>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -284,7 +334,10 @@
         <option value="$PROJECT_DIR$/src/main/java/librinno/ui/patronScreen/PatronScreen.fxml" />
         <option value="$PROJECT_DIR$/src/main/java/librinno/ui/patronScreen/PatronSDocumentsController.java" />
         <option value="$PROJECT_DIR$/src/main/java/librinno/model/Database.java" />
+        <option value="$PROJECT_DIR$/src/main/java/librinno/model/Search.java" />
         <option value="$PROJECT_DIR$/src/main/java/librinno/model/Librarian.java" />
+        <option value="$PROJECT_DIR$/src/main/java/librinno/model/User.java" />
+        <option value="$PROJECT_DIR$/src/main/java/librinno/model/Tests.java" />
         <option value="$PROJECT_DIR$/src/main/java/librinno/model/Main.java" />
       </list>
     </option>
@@ -295,87 +348,157 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
+  <component name="MavenProjectNavigator">
+    <treeState>
+      <expand />
+      <select />
+    </treeState>
+  </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="102" />
+    <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1378" />
-    <option name="height" value="773" />
+    <option name="width" value="1616" />
+    <option name="height" value="916" />
+  </component>
+  <component name="ProjectLevelVcsManager">
+    <OptionsSetting value="false" id="Update" />
   </component>
   <component name="ProjectView">
-    <navigator currentView="ProjectPane" proportions="" version="1">
-      <flattenPackages />
-      <showMembers />
-      <showModules />
-      <showLibraryContents />
-      <hideEmptyPackages />
-      <abbreviatePackageNames />
-      <autoscrollToSource />
-      <autoscrollFromSource />
-      <sortByType />
-      <manualOrder />
+    <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
-    <panes>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="Project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Project" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Project" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Project" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Project" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="librinno" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Project" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="librinno" type="462c0819:PsiDirectoryNode" />
-              <item name="model" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Project" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="librinno" type="462c0819:PsiDirectoryNode" />
-              <item name="model" type="462c0819:PsiDirectoryNode" />
-              <item name="Database.java" type="529ef68f:ClassesTreeStructureProvider$PsiClassOwnerTreeNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="Scratches" />
-      <pane id="AndroidView" />
-    </panes>
+    <panes />
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$USER_HOME$/IdeaProjects/assaignment3" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/lib" />
-    <property name="settings.editor.selected.configurable" value="vcs.Git" />
+    <property name="settings.editor.selected.configurable" value="editing.templates" />
+  </component>
+  <component name="RestoreUpdateTree" date="Moments ago" ActionInfo="_Update">
+    <UpdatedFiles>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Updated from server" />
+        <option name="myStatusName" value="Changed on server" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="CHANGED_ON_SERVER" />
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Updated" />
+          <option name="myStatusName" value="Changed" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="UPDATED" />
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/librinno/model/Database.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/librinno/model/Librarian.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/librinno/model/Tests.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/librinno/ui/addBook/AddBook.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/librinno/ui/addPatron/AddPatronController.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/librinno/ui/adminScreen/AdminScreenController.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/librinno/ui/assist/Assist.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/librinno/ui/librarianScreen/LibrarianScreen.fxml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/librinno/ui/librarianScreen/LibrarianScreenController.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/librinno/ui/login/LoginController.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/librinno/ui/main/MainApp.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/librinno/ui/patronScreen/PatronScreen.fxml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/librinno/ui/patronScreen/PatronScreenController.java</PATH>
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Created" />
+          <option name="myStatusName" value="Created" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="CREATED" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Deleted" />
+          <option name="myStatusName" value="Deleted" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="true" />
+          <option name="myId" value="REMOVED_FROM_REPOSITORY" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Restored" />
+          <option name="myStatusName" value="Will be restored" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="RESTORED" />
+        </FILE-GROUP>
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Modified" />
+        <option name="myStatusName" value="Modified" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MODIFIED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Skipped" />
+        <option name="myStatusName" value="Skipped" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="SKIPPED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with conflicts" />
+        <option name="myStatusName" value="Will be merged with conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_CONFLICTS" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with tree conflicts" />
+        <option name="myStatusName" value="Merged with tree conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_TREE_CONFLICT" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with property conflicts" />
+        <option name="myStatusName" value="Will be merged with property conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_PROPERTY_CONFLICT" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged" />
+        <option name="myStatusName" value="Will be merged" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Not in repository" />
+        <option name="myStatusName" value="Not in repository" />
+        <option name="mySupportsDeletion" value="true" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="UNKNOWN" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Locally added" />
+        <option name="myStatusName" value="Locally added" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="LOCALLY_ADDED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Locally removed" />
+        <option name="myStatusName" value="Locally removed" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="LOCALLY_REMOVED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Switched" />
+        <option name="myStatusName" value="Switched" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="SWITCHED" />
+      </FILE-GROUP>
+    </UpdatedFiles>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -391,67 +514,45 @@
   </component>
   <component name="RunManager" selected="Application.Main">
     <configuration default="true" type="Applet" factoryName="Applet">
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
       <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <module />
     </configuration>
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+      <option name="MAIN_CLASS_NAME" value="main.java.librinno.model.Main" />
+      <module name="Test" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="main.java.librinno.model.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="MAIN_CLASS_NAME" value="main.java.librinno.model.Main" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="Test" />
-      <envs />
     </configuration>
     <configuration name="MainApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+      <option name="MAIN_CLASS_NAME" value="main.java.librinno.ui.main.MainApp" />
+      <module name="Test" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="main.java.librinno.ui.main.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="MAIN_CLASS_NAME" value="main.java.librinno.ui.main.MainApp" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
+    </configuration>
+    <configuration name="Search" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="main.java.librinno.model.Search" />
       <module name="Test" />
-      <envs />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="main.java.librinno.model.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="" />
-      <envs />
     </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" />
@@ -461,24 +562,13 @@
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
-      <option name="ENV_VARIABLES" />
       <option name="PASS_PARENT_ENVS" value="true" />
       <option name="TEST_SEARCH_SCOPE">
         <value defaultName="singleModule" />
       </option>
-      <envs />
       <patterns />
     </configuration>
-    <configuration default="true" type="Remote" factoryName="Remote">
-      <option name="USE_SOCKET_TRANSPORT" value="true" />
-      <option name="SERVER_MODE" value="false" />
-      <option name="SHMEM_ADDRESS" value="javadebug" />
-      <option name="HOST" value="localhost" />
-      <option name="PORT" value="5005" />
-    </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="SUITE_NAME" />
@@ -491,17 +581,21 @@
       <option name="PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
       <option name="OUTPUT_DIRECTORY" />
-      <option name="ANNOTATION_TYPE" />
-      <option name="ENV_VARIABLES" />
       <option name="PASS_PARENT_ENVS" value="true" />
       <option name="TEST_SEARCH_SCOPE">
         <value defaultName="singleModule" />
       </option>
       <option name="USE_DEFAULT_REPORTERS" value="false" />
       <option name="PROPERTIES_FILE" />
-      <envs />
       <properties />
       <listeners />
+    </configuration>
+    <configuration default="true" type="Remote" factoryName="Remote">
+      <option name="USE_SOCKET_TRANSPORT" value="true" />
+      <option name="SERVER_MODE" value="false" />
+      <option name="SHMEM_ADDRESS" value="javadebug" />
+      <option name="HOST" value="localhost" />
+      <option name="PORT" value="5005" />
     </configuration>
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
       <module name="" />
@@ -509,19 +603,18 @@
       <option name="PROGRAM_PARAMETERS" />
       <predefined_log_file id="idea.log" enabled="true" />
     </configuration>
-    <list size="2">
-      <item index="0" class="java.lang.String" itemvalue="Application.Main" />
-      <item index="1" class="java.lang.String" itemvalue="Application.MainApp" />
+    <list>
+      <item itemvalue="Application.Main" />
+      <item itemvalue="Application.MainApp" />
+      <item itemvalue="Application.Search" />
     </list>
     <recent_temporary>
-      <list size="2">
-        <item index="0" class="java.lang.String" itemvalue="Application.Main" />
-        <item index="1" class="java.lang.String" itemvalue="Application.MainApp" />
+      <list>
+        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.Search" />
+        <item itemvalue="Application.MainApp" />
       </list>
     </recent_temporary>
-  </component>
-  <component name="ShelveChangesManager" show_recycled="false">
-    <option name="remove_strategy" value="false" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -535,43 +628,105 @@
       <updated>1521114161401</updated>
       <workItem from="1521114162885" duration="55000" />
       <workItem from="1522568249830" duration="20552000" />
+      <workItem from="1523376669069" duration="1522000" />
+      <workItem from="1523447980811" duration="7828000" />
+      <workItem from="1523519540478" duration="21309000" />
+      <workItem from="1523552815780" duration="7035000" />
+      <workItem from="1523561490543" duration="113000" />
+      <workItem from="1524307326351" duration="7851000" />
+      <workItem from="1524338301894" duration="654000" />
+      <workItem from="1524391199463" duration="20419000" />
+      <workItem from="1524428945198" duration="3695000" />
+      <workItem from="1524493975827" duration="7381000" />
     </task>
+    <task id="LOCAL-00001" summary="Added comments in DataBase class">
+      <created>1524312309905</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1524312309905</updated>
+    </task>
+    <task id="LOCAL-00002" summary="New method for searching with criteria(materialByWordWithCriteria)">
+      <created>1524404890898</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1524404890898</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Add to materialByWordWithCriteria isBestSeller and isReference">
+      <created>1524416743349</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1524416743349</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Changed constructor in article/av/book byID method in Librarian class. Deleted some old useless values from getAll Av/article/book.">
+      <created>1524430774396</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1524430774396</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Add tc2">
+      <created>1524497497941</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1524497497941</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Add tc2()">
+      <created>1524497574151</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1524497574151</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="28367000" />
+    <option name="totallyTimeSpent" value="106174000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1936" height="1096" extended-state="6" />
     <layout>
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32935917" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32935917" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2548435" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.12737921" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info anchor="right" id="Palette" order="4" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.23264782" />
+      <window_info anchor="bottom" id="Messages" order="8" weight="0.32904884" />
+      <window_info anchor="right" id="Palette&#9;" order="4" />
+      <window_info id="Image Layers" order="3" />
+      <window_info anchor="right" id="Capture Analysis" order="4" />
+      <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" weight="0.3277635" />
+      <window_info anchor="right" id="Maven Projects" order="4" weight="0.32969153" />
+      <window_info anchor="bottom" id="Database Changes" order="9" weight="0.32904884" />
+      <window_info anchor="bottom" id="Version Control" order="8" weight="0.32881" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.25365344" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.32881" />
+      <window_info id="Capture Tool" order="3" />
+      <window_info id="Designer" order="3" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.12737921" />
+      <window_info anchor="right" id="Database" order="4" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info id="UI Designer" order="3" />
+      <window_info anchor="right" id="Theme Preview" order="4" />
+      <window_info id="Favorites" order="3" side_tool="true" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.52056557" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -580,407 +735,846 @@
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Added comments in DataBase class" />
+    <MESSAGE value="New method for searching with criteria(materialByWordWithCriteria)" />
+    <MESSAGE value="Add to materialByWordWithCriteria isBestSeller and isReference" />
+    <MESSAGE value="Changed constructor in article/av/book byID method in Librarian class" />
+    <MESSAGE value="Changed constructor in article/av/book byID method in Librarian class. Deleted some old useless values from getAll Av/article/book." />
+    <MESSAGE value="Add tc2" />
+    <MESSAGE value="Add tc2()" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add tc2()" />
+  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="4" />
+      <option name="time" value="32" />
     </breakpoint-manager>
-    <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/main/java/librinno/model/Database.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="11592">
+          <caret line="552" column="51" selection-start-line="552" selection-start-column="51" selection-end-line="552" selection-end-column="51" />
+          <folding>
+            <element signature="docComment;class#Database#0" />
+            <element signature="docComment;method#Database#0;class#Database#0" />
+            <element signature="method#Database#0;class#Database#0" />
+            <element signature="docComment;method#admin_creation#0;class#Database#0" />
+            <element signature="method#admin_creation#0;class#Database#0" />
+            <element signature="docComment;method#userCreation#0;class#Database#0" />
+            <element signature="method#userCreation#0;class#Database#0" />
+            <element signature="docComment;method#avCreation#0;class#Database#0" />
+            <element signature="method#avCreation#0;class#Database#0" />
+            <element signature="docComment;method#articleCreation#0;class#Database#0" />
+            <element signature="method#articleCreation#0;class#Database#0" />
+            <element signature="docComment;method#bookCreation#0;class#Database#0" />
+            <element signature="method#bookCreation#0;class#Database#0" />
+            <element signature="docComment;method#isAVAlreadyExist#0;class#Database#0" />
+            <element signature="method#isAVAlreadyExist#0;class#Database#0" />
+            <element signature="docComment;method#isArticleAlreadyExist#0;class#Database#0" />
+            <element signature="method#isArticleAlreadyExist#0;class#Database#0" />
+            <element signature="docComment;method#isBookAlreadyExist#0;class#Database#0" />
+            <element signature="docComment;method#isUserAlreadyExist#0;class#Database#0" />
+            <element signature="method#isUserAlreadyExist#0;class#Database#0" />
+            <element signature="docComment;method#getInformationAboutTheUser#0;class#Database#0" />
+            <element signature="method#getInformationAboutTheUser#0;class#Database#0" />
+            <element signature="docComment;method#getInformationAboutTheLibrarian#0;class#Database#0" />
+            <element signature="method#getInformationAboutTheLibrarian#0;class#Database#0" />
+            <element signature="docComment;method#authorization#0;class#Database#0" />
+            <element signature="method#authorization#0;class#Database#0" />
+            <element signature="docComment;method#creationLocalDB#0;class#Database#0" />
+            <element signature="method#creationLocalDB#0;class#Database#0" />
+            <element signature="docComment;method#queue_on_material#0;class#Database#0" />
+            <element signature="method#queue_on_material#0;class#Database#0" />
+            <element signature="method#notification#0;class#Database#0" />
+            <element signature="docComment;method#send_email#0;class#Database#0" />
+            <element signature="method#send_email#0;class#Database#0" />
+            <element signature="docComment;method#user_in_queue#0;class#Database#0" />
+            <element signature="method#user_in_queue#0;class#Database#0" />
+            <element signature="docComment;class#UserTypeComparator#0" />
+            <element signature="class#UserTypeComparator#0" />
+            <element signature="method#compare#0;class#UserTypeComparator#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/librinno/model/Search.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="10584">
+          <caret line="504" column="5" lean-forward="true" selection-start-line="504" selection-start-column="5" selection-end-line="504" selection-end-column="5" />
+          <folding>
+            <element signature="e#394#541#0" />
+            <element signature="e#394#4578#0" />
+            <element signature="e#4584#5159#0" />
+            <element signature="e#4584#6756#0" />
+            <element signature="e#6762#10136#0" />
+            <element signature="e#11246#12298#0" />
+            <element signature="e#12303#13427#0" />
+            <element signature="e#13432#14528#0" />
+            <element signature="e#14533#15637#0" />
+            <element signature="e#15643#18572#0" />
+            <element signature="e#15763#15872#0" />
+            <element signature="e#18579#19738#0" />
+            <element signature="e#19743#21355#0" />
+            <element signature="e#21360#22299#0" />
+            <element signature="e#22304#23915#0" />
+            <element signature="e#23922#25321#0" />
+            <element signature="e#25326#27170#0" />
+            <element signature="e#27175#28343#0" />
+            <element signature="e#28348#30108#0" />
+            <element signature="e#30113#31333#0" />
+            <element signature="e#31338#32759#0" />
+            <element signature="e#32764#34177#0" />
+            <element signature="e#34182#35576#0" />
+            <element signature="e#35582#35603#0" />
+            <element signature="e#38091#39241#0" />
+            <element signature="e#39246#40832#0" />
+            <element signature="e#40837#42028#0" />
+            <element signature="e#42033#43206#0" />
+            <element signature="e#43211#44222#0" />
+            <element signature="e#44227#45830#0" />
+            <element signature="e#45835#46834#0" />
+            <element signature="e#46839#47831#0" />
+            <element signature="e#47836#48772#0" />
+            <element signature="e#48780#49024#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/librinno/model/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1386">
+          <caret line="66" selection-start-line="66" selection-end-line="66" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/librinno/model/Book.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2940">
+          <caret line="140" column="182" selection-start-line="140" selection-start-column="182" selection-end-line="140" selection-end-column="182" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/librinno/model/Librarian.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="399">
+          <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/librinno/model/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="735">
+          <caret line="59" column="48" selection-start-line="59" selection-start-column="48" selection-end-line="59" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/librinno/model/Admin.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+          <folding>
+            <element signature="docComment;class#Admin#0" />
+            <element signature="docComment;method#Admin#0;class#Admin#0" />
+            <element signature="method#Admin#0;class#Admin#0" />
+            <element signature="docComment;method#modify_librarian#0;class#Admin#0" />
+            <element signature="method#modify_librarian#0;class#Admin#0" />
+            <element signature="docComment;method#delete_librarian#0;class#Admin#0" />
+            <element signature="method#delete_librarian#0;class#Admin#0" />
+            <element signature="docComment;method#add_librarian#0;class#Admin#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/librinno/model/Article.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/librinno/model/Database.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5481">
+          <caret line="261" column="5" selection-start-line="261" selection-start-column="5" selection-end-line="261" selection-end-column="5" />
+          <folding>
+            <element signature="docComment;class#Database#0" />
+            <element signature="docComment;method#Database#0;class#Database#0" />
+            <element signature="method#Database#0;class#Database#0" />
+            <element signature="docComment;method#admin_creation#0;class#Database#0" />
+            <element signature="method#admin_creation#0;class#Database#0" />
+            <element signature="docComment;method#userCreation#0;class#Database#0" />
+            <element signature="method#userCreation#0;class#Database#0" />
+            <element signature="docComment;method#avCreation#0;class#Database#0" />
+            <element signature="method#avCreation#0;class#Database#0" />
+            <element signature="docComment;method#articleCreation#0;class#Database#0" />
+            <element signature="method#articleCreation#0;class#Database#0" />
+            <element signature="docComment;method#bookCreation#0;class#Database#0" />
+            <element signature="method#bookCreation#0;class#Database#0" />
+            <element signature="docComment;method#isAVAlreadyExist#0;class#Database#0" />
+            <element signature="method#isAVAlreadyExist#0;class#Database#0" />
+            <element signature="docComment;method#isArticleAlreadyExist#0;class#Database#0" />
+            <element signature="method#isArticleAlreadyExist#0;class#Database#0" />
+            <element signature="docComment;method#isBookAlreadyExist#0;class#Database#0" />
+            <element signature="docComment;method#isUserAlreadyExist#0;class#Database#0" />
+            <element signature="method#isUserAlreadyExist#0;class#Database#0" />
+            <element signature="docComment;method#getInformationAboutTheUser#0;class#Database#0" />
+            <element signature="method#getInformationAboutTheUser#0;class#Database#0" />
+            <element signature="docComment;method#getInformationAboutTheLibrarian#0;class#Database#0" />
+            <element signature="method#getInformationAboutTheLibrarian#0;class#Database#0" />
+            <element signature="docComment;method#authorization#0;class#Database#0" />
+            <element signature="method#authorization#0;class#Database#0" />
+            <element signature="docComment;method#creationLocalDB#0;class#Database#0" />
+            <element signature="method#creationLocalDB#0;class#Database#0" />
+            <element signature="docComment;method#queue_on_material#0;class#Database#0" />
+            <element signature="method#queue_on_material#0;class#Database#0" />
+            <element signature="method#notification#0;class#Database#0" />
+            <element signature="docComment;method#send_email#0;class#Database#0" />
+            <element signature="method#send_email#0;class#Database#0" />
+            <element signature="docComment;method#user_in_queue#0;class#Database#0" />
+            <element signature="method#user_in_queue#0;class#Database#0" />
+            <element signature="docComment;class#UserTypeComparator#0" />
+            <element signature="class#UserTypeComparator#0" />
+            <element signature="method#compare#0;class#UserTypeComparator#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/librinno/model/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1092">
+          <caret line="66" selection-start-line="66" selection-end-line="66" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/librinno/model/Book.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="13" column="17" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/librinno/model/Search.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1533">
+          <caret line="136" selection-start-line="136" selection-end-line="136" />
+          <folding>
+            <element signature="e#394#541#0" />
+            <element signature="e#394#4578#0" />
+            <element signature="e#4584#5159#0" />
+            <element signature="e#4584#6756#0" />
+            <element signature="e#6762#10136#0" />
+            <element signature="e#11246#12298#0" />
+            <element signature="e#12303#13427#0" />
+            <element signature="e#13432#14528#0" />
+            <element signature="e#14533#15637#0" />
+            <element signature="e#15643#18572#0" />
+            <element signature="e#15763#15872#0" />
+            <element signature="e#18579#19738#0" />
+            <element signature="e#19743#21355#0" />
+            <element signature="e#21360#22299#0" />
+            <element signature="e#22304#23915#0" />
+            <element signature="e#23922#25321#0" />
+            <element signature="e#25326#27170#0" />
+            <element signature="e#27175#28343#0" />
+            <element signature="e#28348#30108#0" />
+            <element signature="e#30113#31333#0" />
+            <element signature="e#31338#32759#0" />
+            <element signature="e#32764#34177#0" />
+            <element signature="e#34182#35576#0" />
+            <element signature="e#35582#35603#0" />
+            <element signature="e#38091#39241#0" />
+            <element signature="e#39246#40832#0" />
+            <element signature="e#40837#42028#0" />
+            <element signature="e#42033#43206#0" />
+            <element signature="e#43211#44222#0" />
+            <element signature="e#44227#45830#0" />
+            <element signature="e#45835#46834#0" />
+            <element signature="e#46839#47831#0" />
+            <element signature="e#47836#48772#0" />
+            <element signature="e#48780#49024#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/librinno/model/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="8" selection-start-line="8" selection-end-line="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/librinno/model/Article.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/librinno/model/Librarian.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="441">
+          <caret line="21" column="40" selection-start-line="21" selection-start-column="40" selection-end-line="21" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/librinno/model/Database.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1428">
+          <caret line="68" column="47" lean-forward="true" selection-start-line="68" selection-start-column="47" selection-end-line="68" selection-end-column="47" />
+          <folding>
+            <element signature="docComment;class#Database#0" />
+            <element signature="docComment;method#Database#0;class#Database#0" />
+            <element signature="method#Database#0;class#Database#0" />
+            <element signature="docComment;method#admin_creation#0;class#Database#0" />
+            <element signature="method#admin_creation#0;class#Database#0" />
+            <element signature="docComment;method#userCreation#0;class#Database#0" />
+            <element signature="method#userCreation#0;class#Database#0" />
+            <element signature="docComment;method#avCreation#0;class#Database#0" />
+            <element signature="method#avCreation#0;class#Database#0" />
+            <element signature="docComment;method#articleCreation#0;class#Database#0" />
+            <element signature="method#articleCreation#0;class#Database#0" />
+            <element signature="docComment;method#bookCreation#0;class#Database#0" />
+            <element signature="method#bookCreation#0;class#Database#0" />
+            <element signature="docComment;method#isAVAlreadyExist#0;class#Database#0" />
+            <element signature="method#isAVAlreadyExist#0;class#Database#0" />
+            <element signature="docComment;method#isArticleAlreadyExist#0;class#Database#0" />
+            <element signature="method#isArticleAlreadyExist#0;class#Database#0" />
+            <element signature="docComment;method#isBookAlreadyExist#0;class#Database#0" />
+            <element signature="docComment;method#isUserAlreadyExist#0;class#Database#0" />
+            <element signature="method#isUserAlreadyExist#0;class#Database#0" />
+            <element signature="docComment;method#getInformationAboutTheUser#0;class#Database#0" />
+            <element signature="method#getInformationAboutTheUser#0;class#Database#0" />
+            <element signature="docComment;method#getInformationAboutTheLibrarian#0;class#Database#0" />
+            <element signature="method#getInformationAboutTheLibrarian#0;class#Database#0" />
+            <element signature="docComment;method#authorization#0;class#Database#0" />
+            <element signature="method#authorization#0;class#Database#0" />
+            <element signature="docComment;method#creationLocalDB#0;class#Database#0" />
+            <element signature="method#creationLocalDB#0;class#Database#0" />
+            <element signature="docComment;method#queue_on_material#0;class#Database#0" />
+            <element signature="method#queue_on_material#0;class#Database#0" />
+            <element signature="method#notification#0;class#Database#0" />
+            <element signature="docComment;method#send_email#0;class#Database#0" />
+            <element signature="method#send_email#0;class#Database#0" />
+            <element signature="docComment;method#user_in_queue#0;class#Database#0" />
+            <element signature="method#user_in_queue#0;class#Database#0" />
+            <element signature="docComment;class#UserTypeComparator#0" />
+            <element signature="class#UserTypeComparator#0" />
+            <element signature="method#compare#0;class#UserTypeComparator#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/librinno/model/Book.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/librinno/model/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1386">
+          <caret line="66" lean-forward="true" selection-start-line="66" selection-end-line="66" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/librinno/model/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="8" selection-start-line="8" selection-end-line="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/librinno/model/Article.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/librinno/model/Database.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1533">
+          <caret line="73" selection-start-line="73" selection-end-line="73" />
+          <folding>
+            <element signature="docComment;class#Database#0" />
+            <element signature="docComment;method#Database#0;class#Database#0" />
+            <element signature="method#Database#0;class#Database#0" />
+            <element signature="docComment;method#admin_creation#0;class#Database#0" />
+            <element signature="method#admin_creation#0;class#Database#0" />
+            <element signature="docComment;method#userCreation#0;class#Database#0" />
+            <element signature="method#userCreation#0;class#Database#0" />
+            <element signature="docComment;method#avCreation#0;class#Database#0" />
+            <element signature="method#avCreation#0;class#Database#0" />
+            <element signature="docComment;method#articleCreation#0;class#Database#0" />
+            <element signature="method#articleCreation#0;class#Database#0" />
+            <element signature="docComment;method#bookCreation#0;class#Database#0" />
+            <element signature="method#bookCreation#0;class#Database#0" />
+            <element signature="docComment;method#isAVAlreadyExist#0;class#Database#0" />
+            <element signature="method#isAVAlreadyExist#0;class#Database#0" />
+            <element signature="docComment;method#isArticleAlreadyExist#0;class#Database#0" />
+            <element signature="method#isArticleAlreadyExist#0;class#Database#0" />
+            <element signature="docComment;method#isBookAlreadyExist#0;class#Database#0" />
+            <element signature="docComment;method#isUserAlreadyExist#0;class#Database#0" />
+            <element signature="method#isUserAlreadyExist#0;class#Database#0" />
+            <element signature="docComment;method#getInformationAboutTheUser#0;class#Database#0" />
+            <element signature="method#getInformationAboutTheUser#0;class#Database#0" />
+            <element signature="docComment;method#getInformationAboutTheLibrarian#0;class#Database#0" />
+            <element signature="method#getInformationAboutTheLibrarian#0;class#Database#0" />
+            <element signature="docComment;method#authorization#0;class#Database#0" />
+            <element signature="method#authorization#0;class#Database#0" />
+            <element signature="docComment;method#creationLocalDB#0;class#Database#0" />
+            <element signature="method#creationLocalDB#0;class#Database#0" />
+            <element signature="docComment;method#queue_on_material#0;class#Database#0" />
+            <element signature="method#queue_on_material#0;class#Database#0" />
+            <element signature="method#notification#0;class#Database#0" />
+            <element signature="docComment;method#send_email#0;class#Database#0" />
+            <element signature="method#send_email#0;class#Database#0" />
+            <element signature="docComment;method#user_in_queue#0;class#Database#0" />
+            <element signature="method#user_in_queue#0;class#Database#0" />
+            <element signature="docComment;class#UserTypeComparator#0" />
+            <element signature="class#UserTypeComparator#0" />
+            <element signature="method#compare#0;class#UserTypeComparator#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/librinno/model/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1218">
+          <caret line="58" column="24" lean-forward="true" selection-start-line="58" selection-start-column="24" selection-end-line="58" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/librinno/model/Book.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/librinno/model/Librarian.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2478">
+          <caret line="118" lean-forward="true" selection-start-line="118" selection-end-line="118" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/librinno/model/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
-          <caret line="21" column="48" lean-forward="false" selection-start-line="21" selection-start-column="48" selection-end-line="21" selection-end-column="48" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <caret line="21" column="48" selection-start-line="21" selection-start-column="48" selection-end-line="21" selection-end-column="48" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/librinno/model/SendEmail.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
-          <caret line="15" column="27" lean-forward="false" selection-start-line="15" selection-start-column="27" selection-end-line="15" selection-end-column="27" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
+          <caret line="15" column="27" selection-start-line="15" selection-start-column="27" selection-end-line="15" selection-end-column="27" />
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/librinno/ui/patronScreen/PatronSDocuments.fxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/librinno/ui/librarianScreen/LibrarianPatronSCopiesController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
-          <caret line="21" column="11" lean-forward="false" selection-start-line="21" selection-start-column="11" selection-end-line="21" selection-end-column="11" />
-          <folding />
+          <caret line="21" column="11" selection-start-line="21" selection-start-column="11" selection-end-line="21" selection-end-column="11" />
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/librinno/ui/patronScreen/PatronScreen.fxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="23" column="54" lean-forward="false" selection-start-line="23" selection-start-column="54" selection-end-line="23" selection-end-column="54" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/librinno/ui/patronScreen/PatronSDocumentsController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
-          <caret line="19" column="0" lean-forward="true" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-          <folding />
+          <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/librinno/model/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
-          <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/librinno/model/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-208">
-          <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <caret line="33" selection-start-line="33" selection-end-line="33" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/librinno/ui/assist/Assist.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
-          <caret line="27" column="0" lean-forward="true" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/librinno/ui/librarianScreen/LibrarianScreenController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-34">
-          <caret line="197" column="43" lean-forward="false" selection-start-line="197" selection-start-column="43" selection-end-line="197" selection-end-column="43" />
-          <folding />
+          <caret line="27" lean-forward="true" selection-start-line="27" selection-end-line="27" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/librinno/ui/main/MainApp.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
-          <caret line="9" column="37" lean-forward="false" selection-start-line="9" selection-start-column="37" selection-end-line="9" selection-end-column="37" />
-          <folding />
+          <caret line="9" column="37" selection-start-line="9" selection-start-column="37" selection-end-line="9" selection-end-column="37" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/librinno/ui/main/dbinfo.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="257">
-          <caret line="22" column="0" lean-forward="true" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/librinno/ui/main/dbinfoClass.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/librinno/ui/main/DBInfoClass.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="334">
-          <caret line="34" column="5" lean-forward="false" selection-start-line="34" selection-start-column="5" selection-end-line="34" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
+          <caret line="34" column="5" selection-start-line="34" selection-start-column="5" selection-end-line="34" selection-end-column="5" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/librinno/model/SendEmail.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
-          <caret line="15" column="27" lean-forward="false" selection-start-line="15" selection-start-column="27" selection-end-line="15" selection-end-column="27" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/librinno/ui/patronScreen/PatronSDocuments.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <caret line="15" column="27" selection-start-line="15" selection-start-column="27" selection-end-line="15" selection-end-column="27" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/librinno/ui/patronScreen/PatronSDocumentsController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
-          <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-          <folding />
+          <caret line="19" selection-start-line="19" selection-end-line="19" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/librinno/ui/librarianScreen/LibrarianPatronSCopiesController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="130">
-          <caret line="21" column="11" lean-forward="false" selection-start-line="21" selection-start-column="11" selection-end-line="21" selection-end-column="11" />
-          <folding />
+          <caret line="21" column="11" selection-start-line="21" selection-start-column="11" selection-end-line="21" selection-end-column="11" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/librinno/ui/patronScreen/PatronScreen.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
+    <entry file="jar://$PROJECT_DIR$/lib/log4j-1.2.17.jar!/org/apache/log4j/PropertyConfigurator.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="23" column="54" lean-forward="false" selection-start-line="23" selection-start-column="54" selection-end-line="23" selection-end-column="54" />
-          <folding />
+        <state relative-caret-position="168">
+          <caret line="96" selection-start-line="96" selection-end-line="96" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/librinno/model/Material.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/librinno/ui/librarianScreen/LibrarianScreenController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="283">
-          <caret line="21" column="22" lean-forward="false" selection-start-line="21" selection-start-column="22" selection-end-line="21" selection-end-column="22" />
-          <folding />
+        <state relative-caret-position="84">
+          <caret line="30" column="13" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/librinno/model/User.java">
+    <entry file="jar://$PROJECT_DIR$/lib/mysql-connector-java-5.1.45-bin.jar!/com/mysql/jdbc/StatementImpl.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="58" column="66" lean-forward="false" selection-start-line="58" selection-start-column="66" selection-end-line="58" selection-end-column="66" />
-          <folding />
+        <state relative-caret-position="246">
+          <caret line="919" selection-start-line="919" selection-end-line="919" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/librinno/model/Article.java">
+    <entry file="jar://$PROJECT_DIR$/lib/mysql-connector-java-5.1.45-bin.jar!/com/mysql/jdbc/ResultSetImpl.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-996">
-          <caret line="13" column="13" lean-forward="false" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
-          <folding />
+        <state relative-caret-position="29820">
+          <caret line="1420" selection-start-line="1420" selection-end-line="1420" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/librinno/model/Book.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="44">
-          <caret line="13" column="13" lean-forward="false" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+        <state relative-caret-position="462">
+          <caret line="124" column="176" selection-start-line="124" selection-start-column="176" selection-end-line="124" selection-end-column="176" />
           <folding>
-            <element signature="method#Book#0;class#Book#0" expanded="false" />
-            <element signature="method#Book#1;class#Book#0" expanded="false" />
-            <element signature="method#Book#2;class#Book#0" expanded="false" />
-            <element signature="method#Book#3;class#Book#0" expanded="false" />
-            <element signature="method#Book#4;class#Book#0" expanded="false" />
-            <element signature="method#Book#5;class#Book#0" expanded="false" />
+            <element signature="docComment;class#Book#0" />
+            <element signature="docComment;method#setBestseller#0;class#Book#0" />
+            <element signature="docComment;method#getBestseller#0;class#Book#0" />
+            <element signature="docComment;method#setReference#0;class#Book#0" />
+            <element signature="docComment;method#getReference#0;class#Book#0" />
+            <element signature="docComment;method#setYear#0;class#Book#0" />
+            <element signature="docComment;method#getYear#0;class#Book#0" />
+            <element signature="docComment;method#setEdition#0;class#Book#0" />
+            <element signature="docComment;method#getEdition#0;class#Book#0" />
+            <element signature="docComment;method#setPublisher#0;class#Book#0" />
+            <element signature="docComment;method#getPublisher#0;class#Book#0" />
+            <element signature="method#Book#0;class#Book#0" />
+            <element signature="method#Book#1;class#Book#0" />
+            <element signature="method#Book#2;class#Book#0" />
+            <element signature="method#Book#3;class#Book#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/librinno/model/AV.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/librinno/model/Article.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-362">
+          <caret line="11" column="26" lean-forward="true" selection-start-line="11" selection-start-column="26" selection-end-line="11" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/librinno/model/Material.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="462">
+          <caret line="96" column="29" selection-start-line="96" selection-start-column="15" selection-end-line="96" selection-end-column="29" />
+          <folding>
+            <element signature="docComment;class#Material#0" />
+            <element signature="method#setId#0;class#Material#0" />
+            <element signature="method#getOverdue#0;class#Material#0" />
+            <element signature="method#getNumberAvailable#0;class#Material#0" />
+            <element signature="method#setNumberAvailable#0;class#Material#0" />
+            <element signature="method#getUserId#0;class#Material#0" />
+            <element signature="method#setUserId#0;class#Material#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/librinno/model/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="70" column="83" selection-start-line="70" selection-start-column="83" selection-end-line="70" selection-end-column="83" />
+          <folding>
+            <element signature="docComment;class#User#0" />
+            <element signature="e#1264#1648#0" />
+            <element signature="e#1654#1847#0" />
+            <element signature="e#1854#2123#0" />
+            <element signature="e#2129#2456#0" />
+            <element signature="e#3261#3314#0" />
+            <element signature="e#3319#3357#0" />
+            <element signature="e#3435#3475#0" />
+            <element signature="e#3570#3610#0" />
+            <element signature="e#3695#3759#0" />
+            <element signature="e#3852#3964#0" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/librinno/model/Database.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="245">
-          <caret line="73" column="0" lean-forward="false" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
+        <state relative-caret-position="547">
+          <caret line="356" column="54" selection-start-line="356" selection-start-column="54" selection-end-line="356" selection-end-column="54" />
           <folding>
-            <element signature="docComment;method#Database#0;class#Database#0" expanded="false" />
-            <element signature="method#Database#0;class#Database#0" expanded="false" />
-            <element signature="docComment;method#userCreation#0;class#Database#0" expanded="false" />
-            <element signature="method#userCreation#0;class#Database#0" expanded="false" />
-            <element signature="docComment;method#avCreation#0;class#Database#0" expanded="false" />
-            <element signature="method#avCreation#0;class#Database#0" expanded="false" />
-            <element signature="docComment;method#articleCreation#0;class#Database#0" expanded="false" />
-            <element signature="method#articleCreation#0;class#Database#0" expanded="false" />
-            <element signature="docComment;method#bookCreation#0;class#Database#0" expanded="false" />
-            <element signature="method#bookCreation#0;class#Database#0" expanded="false" />
-            <element signature="docComment;method#isAVAlreadyExist#0;class#Database#0" expanded="false" />
-            <element signature="method#isAVAlreadyExist#0;class#Database#0" expanded="false" />
-            <element signature="docComment;method#isArticleAlreadyExist#0;class#Database#0" expanded="false" />
-            <element signature="method#isArticleAlreadyExist#0;class#Database#0" expanded="false" />
-            <element signature="docComment;method#isBookAlreadyExist#0;class#Database#0" expanded="false" />
-            <element signature="method#isBookAlreadyExist#0;class#Database#0" expanded="false" />
-            <element signature="docComment;method#isUserAlreadyExist#0;class#Database#0" expanded="false" />
-            <element signature="method#isUserAlreadyExist#0;class#Database#0" expanded="false" />
-            <element signature="docComment;method#getInformationAboutTheUser#0;class#Database#0" expanded="false" />
-            <element signature="method#getInformationAboutTheUser#0;class#Database#0" expanded="false" />
-            <element signature="docComment;method#authorization#0;class#Database#0" expanded="false" />
-            <element signature="method#authorization#0;class#Database#0" expanded="false" />
-            <element signature="method#creationLocalDB#0;class#Database#0" expanded="false" />
-            <element signature="method#queue_on_material#0;class#Database#0" expanded="false" />
-            <element signature="method#notification#0;class#Database#0" expanded="false" />
-            <element signature="method#send_email#0;class#Database#0" expanded="false" />
-            <element signature="method#user_in_queue#0;class#Database#0" expanded="false" />
-            <element signature="class#UserTypeComparator#0" expanded="false" />
+            <element signature="docComment;class#Database#0" />
+            <element signature="docComment;method#Database#0;class#Database#0" />
+            <element signature="method#Database#0;class#Database#0" />
+            <element signature="docComment;method#admin_creation#0;class#Database#0" />
+            <element signature="method#admin_creation#0;class#Database#0" />
+            <element signature="docComment;method#userCreation#0;class#Database#0" />
+            <element signature="method#userCreation#0;class#Database#0" />
+            <element signature="docComment;method#avCreation#0;class#Database#0" />
+            <element signature="method#avCreation#0;class#Database#0" />
+            <element signature="docComment;method#articleCreation#0;class#Database#0" />
+            <element signature="method#articleCreation#0;class#Database#0" />
+            <element signature="docComment;method#bookCreation#0;class#Database#0" />
+            <element signature="method#bookCreation#0;class#Database#0" />
+            <element signature="docComment;method#isAVAlreadyExist#0;class#Database#0" />
+            <element signature="method#isAVAlreadyExist#0;class#Database#0" />
+            <element signature="docComment;method#isArticleAlreadyExist#0;class#Database#0" />
+            <element signature="method#isArticleAlreadyExist#0;class#Database#0" />
+            <element signature="docComment;method#isBookAlreadyExist#0;class#Database#0" />
+            <element signature="docComment;method#isUserAlreadyExist#0;class#Database#0" />
+            <element signature="method#isUserAlreadyExist#0;class#Database#0" />
+            <element signature="docComment;method#getInformationAboutTheUser#0;class#Database#0" />
+            <element signature="method#getInformationAboutTheUser#0;class#Database#0" />
+            <element signature="docComment;method#getInformationAboutTheLibrarian#0;class#Database#0" />
+            <element signature="method#getInformationAboutTheLibrarian#0;class#Database#0" />
+            <element signature="docComment;method#authorization#0;class#Database#0" />
+            <element signature="method#authorization#0;class#Database#0" />
+            <element signature="docComment;method#creationLocalDB#0;class#Database#0" />
+            <element signature="method#creationLocalDB#0;class#Database#0" />
+            <element signature="docComment;method#queue_on_material#0;class#Database#0" />
+            <element signature="method#queue_on_material#0;class#Database#0" />
+            <element signature="method#notification#0;class#Database#0" />
+            <element signature="docComment;method#send_email#0;class#Database#0" />
+            <element signature="method#send_email#0;class#Database#0" />
+            <element signature="docComment;method#user_in_queue#0;class#Database#0" />
+            <element signature="method#user_in_queue#0;class#Database#0" />
+            <element signature="docComment;class#UserTypeComparator#0" />
+            <element signature="class#UserTypeComparator#0" />
+            <element signature="method#compare#0;class#UserTypeComparator#0" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/librinno/model/Main.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/librinno/model/Search.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="8" column="0" lean-forward="true" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+        <state relative-caret-position="294">
+          <caret line="206" column="88" lean-forward="true" selection-start-line="205" selection-start-column="16" selection-end-line="206" selection-end-column="88" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#394#541#0" />
+            <element signature="e#394#4578#0" />
+            <element signature="e#4584#5159#0" />
+            <element signature="e#4584#6756#0" />
+            <element signature="e#6762#10136#0" />
+            <element signature="e#11246#12298#0" />
+            <element signature="e#12303#13427#0" />
+            <element signature="e#13432#14528#0" />
+            <element signature="e#14533#15637#0" />
+            <element signature="e#15643#18572#0" />
+            <element signature="e#15763#15872#0" />
+            <element signature="e#18579#19738#0" />
+            <element signature="e#19743#21355#0" />
+            <element signature="e#21360#22299#0" />
+            <element signature="e#22304#23915#0" />
+            <element signature="e#23922#25321#0" />
+            <element signature="e#25326#27170#0" />
+            <element signature="e#27175#28343#0" />
+            <element signature="e#28348#30108#0" />
+            <element signature="e#30113#31333#0" />
+            <element signature="e#31338#32759#0" />
+            <element signature="e#32764#34177#0" />
+            <element signature="e#34182#35576#0" />
+            <element signature="e#35582#35603#0" />
+            <element signature="e#38091#39241#0" />
+            <element signature="e#39246#40832#0" />
+            <element signature="e#40837#42028#0" />
+            <element signature="e#42033#43206#0" />
+            <element signature="e#43211#44222#0" />
+            <element signature="e#44227#45830#0" />
+            <element signature="e#45835#46834#0" />
+            <element signature="e#46839#47831#0" />
+            <element signature="e#47836#48772#0" />
+            <element signature="e#48780#49024#0" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/librinno/model/Librarian.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="118" column="0" lean-forward="true" selection-start-line="118" selection-start-column="0" selection-end-line="118" selection-end-column="0" />
+        <state relative-caret-position="511">
+          <caret line="1520" column="39" lean-forward="true" selection-start-line="1520" selection-end-line="1533" />
           <folding>
-            <element signature="docComment;class#Librarian#0" expanded="false" />
-            <element signature="docComment;field#db#0;class#Librarian#0" expanded="false" />
-            <element signature="docComment;method#Librarian#0;class#Librarian#0" expanded="false" />
-            <element signature="method#Librarian#0;class#Librarian#0" expanded="false" />
-            <element signature="docComment;method#Librarian#1;class#Librarian#0" expanded="false" />
-            <element signature="method#Librarian#1;class#Librarian#0" expanded="false" />
-            <element signature="method#renew#0;class#Librarian#0" expanded="false" />
-            <element signature="docComment;method#checkOutBook#0;class#Librarian#0" expanded="false" />
-            <element signature="method#checkOutBook#0;class#Librarian#0" expanded="false" />
-            <element signature="docComment;method#checkOutAV#0;class#Librarian#0" expanded="false" />
-            <element signature="method#checkOutAV#0;class#Librarian#0" expanded="false" />
-            <element signature="docComment;method#checkOutArticle#0;class#Librarian#0" expanded="false" />
-            <element signature="method#checkOutArticle#0;class#Librarian#0" expanded="false" />
-            <element signature="docComment;method#checkOut#0;class#Librarian#0" expanded="false" />
-            <element signature="docComment;method#returnBook#0;class#Librarian#0" expanded="false" />
-            <element signature="method#returnBook#0;class#Librarian#0" expanded="false" />
-            <element signature="docComment;method#requestReturnBook#0;class#Librarian#0" expanded="false" />
-            <element signature="method#requestReturnBook#0;class#Librarian#0" expanded="false" />
-            <element signature="docComment;method#UserById#0;class#Librarian#0" expanded="false" />
-            <element signature="method#UserById#0;class#Librarian#0" expanded="false" />
-            <element signature="docComment;method#MaterialByID#0;class#Librarian#0" expanded="false" />
-            <element signature="method#MaterialByID#0;class#Librarian#0" expanded="false" />
-            <element signature="method#bookByID#0;class#Librarian#0" expanded="false" />
-            <element signature="docComment;method#avById#0;class#Librarian#0" expanded="false" />
-            <element signature="method#avById#0;class#Librarian#0" expanded="false" />
-            <element signature="docComment;method#articleById#0;class#Librarian#0" expanded="false" />
-            <element signature="method#articleById#0;class#Librarian#0" expanded="false" />
-            <element signature="docComment;method#deleteUserById#0;class#Librarian#0" expanded="false" />
-            <element signature="method#deleteUserById#0;class#Librarian#0" expanded="false" />
-            <element signature="docComment;method#modifyUser#0;class#Librarian#0" expanded="false" />
-            <element signature="method#modifyUser#0;class#Librarian#0" expanded="false" />
-            <element signature="docComment;method#addCopiesOfMaterial#0;class#Librarian#0" expanded="false" />
-            <element signature="method#addCopiesOfMaterial#0;class#Librarian#0" expanded="false" />
-            <element signature="docComment;method#addBook#0;class#Librarian#0" expanded="false" />
-            <element signature="method#addBook#0;class#Librarian#0" expanded="false" />
-            <element signature="docComment;method#addArticle#0;class#Librarian#0" expanded="false" />
-            <element signature="method#addArticle#0;class#Librarian#0" expanded="false" />
-            <element signature="docComment;method#addAV#0;class#Librarian#0" expanded="false" />
-            <element signature="method#addAV#0;class#Librarian#0" expanded="false" />
-            <element signature="docComment;method#deleteAVById#0;class#Librarian#0" expanded="false" />
-            <element signature="method#deleteAVById#0;class#Librarian#0" expanded="false" />
-            <element signature="docComment;method#deleteOneCopy#0;class#Librarian#0" expanded="false" />
-            <element signature="method#deleteOneCopy#0;class#Librarian#0" expanded="false" />
-            <element signature="docComment;method#deleteBookById#0;class#Librarian#0" expanded="false" />
-            <element signature="method#deleteBookById#0;class#Librarian#0" expanded="false" />
-            <element signature="docComment;method#deleteArticleById#0;class#Librarian#0" expanded="false" />
-            <element signature="method#deleteArticleById#0;class#Librarian#0" expanded="false" />
-            <element signature="docComment;method#modifyAV#0;class#Librarian#0" expanded="false" />
-            <element signature="method#modifyAV#0;class#Librarian#0" expanded="false" />
-            <element signature="docComment;method#modifyArticle#0;class#Librarian#0" expanded="false" />
-            <element signature="method#modifyArticle#0;class#Librarian#0" expanded="false" />
-            <element signature="docComment;method#modifyBook#0;class#Librarian#0" expanded="false" />
-            <element signature="method#modifyBook#0;class#Librarian#0" expanded="false" />
-            <element signature="docComment;method#getAllAV#0;class#Librarian#0" expanded="false" />
-            <element signature="method#getAllAV#0;class#Librarian#0" expanded="false" />
-            <element signature="docComment;method#getAllArticles#0;class#Librarian#0" expanded="false" />
-            <element signature="method#getAllArticles#0;class#Librarian#0" expanded="false" />
-            <element signature="docComment;method#getAllBooks#0;class#Librarian#0" expanded="false" />
-            <element signature="method#getAllBooks#0;class#Librarian#0" expanded="false" />
-            <element signature="docComment;method#getAllUsers#0;class#Librarian#0" expanded="false" />
-            <element signature="method#getAllUsers#0;class#Librarian#0" expanded="false" />
-            <element signature="docComment;method#getNumberOfAllCopiesTakenByUser#0;class#Librarian#0" expanded="false" />
-            <element signature="method#getNumberOfAllCopiesTakenByUser#0;class#Librarian#0" expanded="false" />
-            <element signature="docComment;method#getAllCopiesTakenByUser#0;class#Librarian#0" expanded="false" />
-            <element signature="method#getAllCopiesTakenByUser#0;class#Librarian#0" expanded="false" />
-            <element signature="docComment;method#getNumberOfCopiesOfBook#0;class#Librarian#0" expanded="false" />
-            <element signature="method#getNumberOfCopiesOfBook#0;class#Librarian#0" expanded="false" />
-            <element signature="docComment;method#getNumberOfCopiesOfWithTaken#0;class#Librarian#0" expanded="false" />
-            <element signature="method#getNumberOfCopiesOfWithTaken#0;class#Librarian#0" expanded="false" />
-            <element signature="docComment;method#getAllCopies#0;class#Librarian#0" expanded="false" />
-            <element signature="method#getAllCopies#0;class#Librarian#0" expanded="false" />
-            <element signature="docComment;method#numberOfMeetings#0;class#Librarian#0" expanded="false" />
-            <element signature="method#numberOfMeetings#0;class#Librarian#0" expanded="false" />
-            <element signature="docComment;method#deleteDoc#0;class#Librarian#0" expanded="false" />
-            <element signature="method#deleteDoc#0;class#Librarian#0" expanded="false" />
-            <marker date="1522594157864" expanded="true" signature="1856:1962" ph="UPDATE Copy... " />
-            <marker date="1522594157864" expanded="true" signature="2017:2055" ph="SELECT * FRO... Copy" />
-            <marker date="1522594157864" expanded="true" signature="2893:2923" ph="SELECT * FRO... Books" />
-            <marker date="1522594157864" expanded="true" signature="4709:4747" ph="SELECT * FRO... Copy" />
-            <marker date="1522594157864" expanded="true" signature="5201:5231" ph="SELECT * FRO... Books" />
-            <marker date="1522594157864" expanded="true" signature="5419:5446" ph="SELECT * FRO... av" />
-            <marker date="1522594157864" expanded="true" signature="5634:5667" ph="SELECT * FRO... articles" />
-            <marker date="1522594157864" expanded="true" signature="6687:6817" ph="UPDATE Copy... " />
-            <marker date="1522594157864" expanded="true" signature="8756:8884" ph="UPDATE Copy... " />
-            <marker date="1522594157864" expanded="true" signature="10033:10166" ph="UPDATE Copy... " />
-            <marker date="1522594157864" expanded="true" signature="11637:11686" ph="SELECT * FRO... queue_on_missingValue" />
-            <marker date="1522594157864" expanded="true" signature="12064:12094" ph="SELECT * FRO... Books" />
-            <marker date="1522594157864" expanded="true" signature="12280:12307" ph="SELECT * FRO... AV" />
-            <marker date="1522594157864" expanded="true" signature="12491:12524" ph="SELECT * FRO... Articles" />
-            <marker date="1522594157864" expanded="true" signature="12848:12895" ph="DELETE from queue_on_missingValue... " />
-            <marker date="1522594157864" expanded="true" signature="13171:13230" ph="UPDATE queue_on_missingValue... " />
-            <marker date="1522594157864" expanded="true" signature="13435:13458" ph="SELECT * FRO... queue_on_missingValue" />
-            <marker date="1522594157864" expanded="true" signature="13606:13626" ph="DROP TABLE q... " />
-            <marker date="1522594157864" expanded="true" signature="14397:14485" ph="UPDATE Copy... " />
-            <marker date="1522594157864" expanded="true" signature="15213:15256" ph="UPDATE Copy... " />
-            <marker date="1522594157864" expanded="true" signature="15739:15792" ph="SELECT * FRO... Users_of_the_library" />
-            <marker date="1522594157864" expanded="true" signature="16612:16641" ph="SELECT * FRO... Books" />
-            <marker date="1522594157864" expanded="true" signature="16781:16807" ph="SELECT * FRO... AV" />
-            <marker date="1522594157864" expanded="true" signature="16961:16993" ph="SELECT * FRO... Articles" />
-            <marker date="1522594157864" expanded="true" signature="17412:17441" ph="SELECT * FRO... Books" />
-            <marker date="1522594157864" expanded="true" signature="18122:18148" ph="SELECT * FRO... AV" />
-            <marker date="1522594157864" expanded="true" signature="18735:18767" ph="SELECT * FRO... Articles" />
-            <marker date="1522594157864" expanded="true" signature="19600:19631" ph="SELECT * FRO... Copy" />
-            <marker date="1522594157864" expanded="true" signature="19968:20019" ph="DELETE from Users_of_the_library... " />
-            <marker date="1522594157864" expanded="true" signature="20603:20728" ph="UPDATE Users_of_the_library... " />
-            <marker date="1522594157864" expanded="true" signature="21483:21514" ph="SELECT Id_of... Copy" />
-            <marker date="1522594157864" expanded="true" signature="21737:21800" ph="INSERT INTO Copy... " />
-            <marker date="1522594157864" expanded="true" signature="25063:25087" ph="DELETE from AV... " />
-            <marker date="1522594157864" expanded="true" signature="25170:25208" ph="DELETE FROM Copy... " />
-            <marker date="1522594157864" expanded="true" signature="25576:25628" ph="DELETE from Copy... " />
-            <marker date="1522594157864" expanded="true" signature="25969:25996" ph="DELETE from Books... " />
-            <marker date="1522594157864" expanded="true" signature="26079:26117" ph="DELETE FROM Copy... " />
-            <marker date="1522594157864" expanded="true" signature="26503:26533" ph="DELETE from Articles... " />
-            <marker date="1522594157864" expanded="true" signature="26616:26654" ph="DELETE FROM Copy... " />
-            <marker date="1522594157864" expanded="true" signature="27036:27119" ph="UPDATE AV... " />
-            <marker date="1522594157864" expanded="true" signature="27681:27811" ph="UPDATE Articles... " />
-            <marker date="1522594157864" expanded="true" signature="28668:28807" ph="UPDATE Books... " />
-            <marker date="1522594157864" expanded="true" signature="29634:29650" ph="SELECT * FRO... AV" />
-            <marker date="1522594157864" expanded="true" signature="29894:29912" ph="SELECT * FRO... Copy" />
-            <marker date="1522594157864" expanded="true" signature="30921:30943" ph="SELECT * FRO... Articles" />
-            <marker date="1522594157864" expanded="true" signature="31186:31204" ph="SELECT * FRO... Copy" />
-            <marker date="1522594157864" expanded="true" signature="32138:32157" ph="SELECT * FRO... Books" />
-            <marker date="1522594157864" expanded="true" signature="32401:32419" ph="SELECT * FRO... Copy" />
-            <marker date="1522594157864" expanded="true" signature="33798:33871" ph="SELECT * FRO... Users_of_the_library" />
-            <marker date="1522594157864" expanded="true" signature="34922:34953" ph="SELECT * FRO... Copy" />
-            <marker date="1522594157864" expanded="true" signature="35557:35588" ph="SELECT * FRO... Copy" />
-            <marker date="1522594157864" expanded="true" signature="36024:36056" ph="SELECT * FRO... Articles" />
-            <marker date="1522594157864" expanded="true" signature="36949:36975" ph="SELECT * FRO... AV" />
-            <marker date="1522594157864" expanded="true" signature="37573:37602" ph="SELECT * FRO... Books" />
-            <marker date="1522594157864" expanded="true" signature="38997:39063" ph="SELECT * FRO... Copy" />
-            <marker date="1522594157864" expanded="true" signature="39606:39646" ph="SELECT * FRO... Copy" />
-            <marker date="1522594157864" expanded="true" signature="40183:40201" ph="SELECT * FRO... Copy" />
+            <element signature="docComment;class#Librarian#0" />
+            <element signature="e#791#1000#0" />
+            <element signature="e#1091#1379#0" />
+            <element signature="e#1091#1693#0" />
+            <element signature="e#1905#2019#0" />
+            <element signature="e#1905#2256#0" />
+            <element signature="e#2262#2532#0" />
+            <element signature="e#2262#4567#0" />
+            <element signature="e#4573#7069#0" />
+            <element signature="e#7075#9922#0" />
+            <element signature="e#9928#10143#0" />
+            <element signature="e#9928#13434#0" />
+            <element signature="e#13440#13586#0" />
+            <element signature="e#13440#15402#0" />
+            <element signature="e#15408#17141#0" />
+            <element signature="e#17147#17361#0" />
+            <element signature="e#17147#19557#0" />
+            <element signature="e#19563#21389#0" />
+            <element signature="e#21395#21598#0" />
+            <element signature="e#21395#22928#0" />
+            <element signature="e#22934#23970#0" />
+            <element signature="e#23976#24200#0" />
+            <element signature="e#23976#25778#0" />
+            <element signature="e#25784#27014#0" />
+            <element signature="e#27020#27184#0" />
+            <element signature="e#27020#27620#0" />
+            <element signature="e#27626#27890#0" />
+            <element signature="e#27626#31508#0" />
+            <element signature="e#31514#34558#0" />
+            <element signature="e#34564#34727#0" />
+            <element signature="e#34564#35581#0" />
+            <element signature="e#35587#35758#0" />
+            <element signature="e#35587#36355#0" />
+            <element signature="e#36361#36451#0" />
+            <element signature="e#36361#37182#0" />
+            <element signature="e#37188#37282#0" />
+            <element signature="e#37188#38123#0" />
+            <element signature="e#38129#38224#0" />
+            <element signature="e#38129#38916#0" />
+            <element signature="e#38922#39013#0" />
+            <element signature="e#38922#39617#0" />
+            <element signature="e#39623#39724#0" />
+            <element signature="e#39623#40514#0" />
+            <element signature="e#40520#40611#0" />
+            <element signature="e#40520#41816#0" />
+            <element signature="e#41822#41938#0" />
+            <element signature="e#41822#42843#0" />
+            <element signature="e#42849#42975#0" />
+            <element signature="e#42849#44090#0" />
+            <element signature="e#44096#44178#0" />
+            <element signature="e#44096#44335#0" />
+            <element signature="e#44341#44773#0" />
+            <element signature="e#44341#45616#0" />
+            <element signature="e#45622#46012#0" />
+            <element signature="e#45622#46878#0" />
+            <element signature="e#46884#47099#0" />
+            <element signature="e#46884#47786#0" />
+            <element signature="e#47792#47879#0" />
+            <element signature="e#47792#48516#0" />
+            <element signature="e#48522#48602#0" />
+            <element signature="e#48522#49058#0" />
+            <element signature="e#49064#49142#0" />
+            <element signature="e#49064#49790#0" />
+            <element signature="e#49796#49880#0" />
+            <element signature="e#49796#50539#0" />
+            <element signature="e#50545#50645#0" />
+            <element signature="e#50545#51321#0" />
+            <element signature="e#51327#51444#0" />
+            <element signature="e#51327#52446#0" />
+            <element signature="e#52452#52560#0" />
+            <element signature="e#52452#53580#0" />
+            <element signature="e#53587#53658#0" />
+            <element signature="e#53587#54472#0" />
+            <element signature="e#54478#54559#0" />
+            <element signature="e#54478#55397#0" />
+            <element signature="e#55403#55478#0" />
+            <element signature="e#55403#56676#0" />
+            <element signature="e#56682#56757#0" />
+            <element signature="e#56682#57779#0" />
+            <element signature="e#57785#57871#0" />
+            <element signature="e#57785#58898#0" />
+            <element signature="e#58904#59067#0" />
+            <element signature="e#58904#59500#0" />
+            <element signature="e#59506#59662#0" />
+            <element signature="e#59506#63096#0" />
+            <element signature="e#63103#63272#0" />
+            <element signature="e#63103#64316#0" />
+            <element signature="e#64323#64480#0" />
+            <element signature="e#64323#64933#0" />
+            <element signature="e#64939#65084#0" />
+            <element signature="e#64939#65522#0" />
+            <element signature="e#65528#65577#0" />
+            <element signature="e#65528#66356#0" />
+            <element signature="e#66362#66567#0" />
+            <element signature="e#66362#66848#0" />
+            <element signature="e#66854#66947#0" />
+            <element signature="e#66854#67274#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/librinno/model/Tests.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="17" selection-start-line="17" selection-end-line="17" />
+          <folding>
+            <element signature="docComment;class#Tests#0" />
+            <element signature="docComment;method#dump#0;class#Tests#0" />
+            <element signature="method#dump#0;class#Tests#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/librinno/model/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="478">
+          <caret line="65" selection-start-line="65" selection-end-line="65" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/librinno/model/Admin.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="72" column="30" selection-start-line="72" selection-start-column="30" selection-end-line="72" selection-end-column="30" />
+          <folding>
+            <element signature="docComment;class#Admin#0" />
+            <element signature="docComment;method#Admin#0;class#Admin#0" />
+            <element signature="method#Admin#0;class#Admin#0" />
+            <element signature="docComment;method#modify_librarian#0;class#Admin#0" />
+            <element signature="method#modify_librarian#0;class#Admin#0" />
+            <element signature="docComment;method#delete_librarian#0;class#Admin#0" />
+            <element signature="method#delete_librarian#0;class#Admin#0" />
+            <element signature="docComment;method#add_librarian#0;class#Admin#0" />
           </folding>
         </state>
       </provider>
