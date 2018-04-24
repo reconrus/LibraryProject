@@ -219,11 +219,69 @@ public class Tests {
             if(!logExist) System.out.println(i);
             assert(logExist);
         }
+    }
+
+    public void tc9() throws SQLException, FileNotFoundException {
+        dumpLogs();
+        tc7();
+
+        Scanner sc= new Scanner(new File("myproject.log"));
+        ArrayList<LogsForTable> arr= new ArrayList<>();
+        LogsForTable log;
+        boolean logExist = false;
+
+        ArrayList<String> logs = new ArrayList<>();
+
+        int l1ID = (int) Database.isUserAlreadyExist(l1).get(1);
+        int l2ID = (int) Database.isUserAlreadyExist(l2).get(1);
+        int l3ID = (int) Database.isUserAlreadyExist(l3).get(1);
+
+        int d1ID = (Integer) db.isBookAlreadyExist(d1).get(1);
+        int d2ID = (Integer) db.isBookAlreadyExist(d2).get(1);
+        int d3ID = (Integer) db.isBookAlreadyExist(d3).get(1);
+
+        int p1ID = (int) Database.isUserAlreadyExist(p1).get(1);
+        int p2ID = (int) Database.isUserAlreadyExist(p2).get(1);
+        int p3ID = (int) Database.isUserAlreadyExist(p3).get(1);
+        int sID = (int) Database.isUserAlreadyExist(s).get(1);
+        int vID = (int) Database.isUserAlreadyExist(v).get(1);
+
+        logs.add("Librarian with id "+l1ID+" was created");
+        logs.add("Librarian with id "+l2ID+" was created");
+        logs.add("Librarian with id "+l3ID+" was created");
+        logs.add("Librarian "+l2ID+" added 3 copies of material "+d1ID);
+        logs.add("Librarian "+l2ID+" added 3 copies of material "+d2ID);
+        logs.add("Librarian "+l2ID+" added 3 copies of material "+d3ID);
+        logs.add("Librarian "+l2ID+" created user with ID "+ p1ID);
+        logs.add("Librarian "+l2ID+" created user with ID "+ p2ID);
+        logs.add("Librarian "+l2ID+" created user with ID "+ p3ID);
+        logs.add("Librarian "+l2ID+" created user with ID "+ sID);
+        logs.add("Librarian "+l2ID+" created user with ID "+ vID);
+        logs.add("Copy of book with id "+d3ID+" was given to user with id "+p1ID);
+        logs.add("Copy of book with id "+d3ID+" was given to user with id "+p2ID);
+        logs.add("Copy of book with id "+d3ID+" was given to user with id "+sID);
+        logs.add("User with id "+vID+" joining a queue on material with id "+d3ID);
+        logs.add("User with id "+p3ID+" joining a queue on material with id "+d3ID);
+        logs.add("Librarian with id " + l3ID + " made an outstanding request on " + d3ID);
+        logs.add("Queue on material "+ d3ID + "was deleted");
+
+        while (sc.hasNext()) arr.add(new LogsForTable(sc.nextLine()));
+
+        for(String i: logs){
+            logExist = false;
+            for(LogsForTable j: arr)
+                if(j.getEvent().contains(i)){
+                    logExist = true;
+                    break;
+                }
+
+            if(!logExist) System.out.println(i);
+            assert(logExist);
+        }
 
 
 
     }
-
 
     public void tc10() throws SQLException {
         tc4();
@@ -252,8 +310,27 @@ public class Tests {
     public void tc14()throws SQLException{
         tc4();
         Search search=new Search();
-        ArrayList<Book>result=search.bookByTitle("Algorithms OR Programming");
-        assert (result.size()==3);
+        ArrayList<Material>result=search.materialByWordWithCriteria("Algorithms OR Programming", true, false, false, true, false, false, false, false, false);
+
+        ArrayList<String> test = new ArrayList<>();
+        test.add("Introduction to Algorithms");
+        test.add("Algorithms + Data Structures = Programs");
+        test.add("The Art of Computer Programming");
+
+        boolean k;
+        for(Material i: result){
+            k=false;
+            for(String j: test){
+                if(i.getTitle().contains(j)){
+                    k = true;
+                    break;
+                }
+            }
+            assert (k);
+        }
+
+
+
         try {
             FileWriter fstream1 = new FileWriter("myproject.log");// конструктор с одним параметром - для перезаписи
             BufferedWriter out1 = new BufferedWriter(fstream1); //  создаём буферезированный поток

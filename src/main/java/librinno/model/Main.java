@@ -1,6 +1,7 @@
 package main.java.librinno.model;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.sql.*;
@@ -49,7 +50,7 @@ public class Main {
         Main.USER = USER;
     }
 
-    public static void main(String[] args) throws SQLException, InterruptedException {
+    public static void main(String[] args) throws SQLException, InterruptedException, FileNotFoundException {
         PropertyConfigurator.configure("log4j.properties");
         //We need know your login and password in local server MySQL
         Scanner sc = new Scanner(System.in);
@@ -75,6 +76,10 @@ public class Main {
         System.out.println("Test 6 success");
         tests.tc7();
         System.out.println("Test 7 success");
+        tests.tc8();
+        System.out.println("Test 8 success");
+        tests.tc9();
+        System.out.println("Test 9 success");
         tests.tc10();
         System.out.println("Test 10 success");
         tests.tc11();

@@ -87,6 +87,7 @@ public class Librarian extends User {
         PropertyConfigurator.configure("log4j.properties");
         try {
             if (getPrivileges().equals("Priv2") || getPrivileges().equals("Priv3")) {
+                LOGGER.trace("Librarian with id " + Database.isUserAlreadyExist(this).get(1) + " made an outstanding request on " + idOfMaterial);
                 PreparedStatement pr = db.con.prepareStatement("UPDATE Copy SET Time_left=?,Return_date=?,CanRenew=? WHERE Id_of_original= " + idOfMaterial + " AND Status = 'Issued'");
                 pr.setInt(1, 0);
                 pr.setDate(2, java.sql.Date.valueOf(LocalDate.now()));
@@ -113,7 +114,7 @@ public class Librarian extends User {
                     send.sendToOne(email, "Material is not available", "Material,which you reserved,now is not available.You are removed from waiting list");
                 }
                 pr.executeUpdate("DROP TABLE IF EXISTS queue_on_" + idOfMaterial);
-                LOGGER.trace("Librarian with id " + Database.isUserAlreadyExist(this).get(1) + " made an outstanding request on " + idOfMaterial);
+                LOGGER.trace("Queue on material "+ idOfMaterial + "was deleted");
             }
             else LOGGER.trace("Librarian with id " + Database.isUserAlreadyExist(this).get(1) + " tried to make an outstanding request on " + idOfMaterial);
         } catch (SQLException e) {
