@@ -11,6 +11,7 @@ public class LogsForTable {
      */
     public LogsForTable(String a){
         String[] arr= a.split(",");
+        arr[1] = arr[1].split("-")[1];
         this.setDate(arr[0]);
         this.setEvent(arr[1]);
     }
