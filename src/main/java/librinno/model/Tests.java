@@ -1,9 +1,14 @@
 package main.java.librinno.model;
 
+import main.java.librinno.ui.adminScreen.LogsForTable;
+
 import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * Test cases for D3.
@@ -158,6 +163,68 @@ public class Tests {
         // in debug mode it is possible to see all notified emails
     }
 
+    public void tc8() throws SQLException, FileNotFoundException {
+        dumpLogs();
+        tc6();
+        Scanner sc= new Scanner(new File("myproject.log"));
+        ArrayList<LogsForTable> arr= new ArrayList<>();
+        LogsForTable log;
+        boolean logExist = false;
+
+
+        ArrayList<String> logs = new ArrayList<>();
+
+        int l1ID = (int) Database.isUserAlreadyExist(l1).get(1);
+        int l2ID = (int) Database.isUserAlreadyExist(l2).get(1);
+        int l3ID = (int) Database.isUserAlreadyExist(l3).get(1);
+
+        int d1ID = (Integer) db.isBookAlreadyExist(d1).get(1);
+        int d2ID = (Integer) db.isBookAlreadyExist(d2).get(1);
+        int d3ID = (Integer) db.isBookAlreadyExist(d3).get(1);
+
+        int p1ID = (int) Database.isUserAlreadyExist(p1).get(1);
+        int p2ID = (int) Database.isUserAlreadyExist(p2).get(1);
+        int p3ID = (int) Database.isUserAlreadyExist(p3).get(1);
+        int sID = (int) Database.isUserAlreadyExist(s).get(1);
+        int vID = (int) Database.isUserAlreadyExist(v).get(1);
+
+        logs.add("Librarian with id "+l1ID+" was created");
+        logs.add("Librarian with id "+l2ID+" was created");
+        logs.add("Librarian with id "+l3ID+" was created");
+        logs.add("Librarian "+l2ID+" added 3 copies of material "+d1ID);
+        logs.add("Librarian "+l2ID+" added 3 copies of material "+d2ID);
+        logs.add("Librarian "+l2ID+" added 3 copies of material "+d3ID);
+        logs.add("Librarian "+l2ID+" created user with ID "+ p1ID);
+        logs.add("Librarian "+l2ID+" created user with ID "+ p2ID);
+        logs.add("Librarian "+l2ID+" created user with ID "+ p3ID);
+        logs.add("Librarian "+l2ID+" created user with ID "+ sID);
+        logs.add("Librarian "+l2ID+" created user with ID "+ vID);
+        logs.add("Copy of book with id "+d3ID+" was given to user with id "+p1ID);
+        logs.add("Copy of book with id "+d3ID+" was given to user with id "+p2ID);
+        logs.add("Copy of book with id "+d3ID+" was given to user with id "+sID);
+        logs.add("User with id "+vID+" joining a queue on material with id "+d3ID);
+        logs.add("User with id "+p3ID+" joining a queue on material with id "+d3ID);
+        logs.add("Librarian with id " + l1ID + " tried to make an outstanding request on " + d3ID);
+
+        while (sc.hasNext()) arr.add(new LogsForTable(sc.nextLine()));
+
+        for(String i: logs){
+            logExist = false;
+            for(LogsForTable j: arr)
+                if(j.getEvent().contains(i)){
+                logExist = true;
+                break;
+            }
+
+            if(!logExist) System.out.println(i);
+            assert(logExist);
+        }
+
+
+
+    }
+
+
     public void tc10() throws SQLException {
         tc4();
         Search search=new Search();
@@ -196,6 +263,18 @@ public class Tests {
         {System.err.println("Error in file cleaning: " + e.getMessage());}
 
     }
+
+
+    public void dumpLogs(){
+        try {
+            FileWriter fstream1 = new FileWriter("myproject.log");
+            BufferedWriter out1 = new BufferedWriter(fstream1);
+            out1.write("");
+            out1.close();
+        } catch (Exception e){}
+    }
+
+
     /*
     public void tc2() throws SQLException {
         dump();
