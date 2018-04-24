@@ -123,26 +123,196 @@ public class Search {
 
         Statement stmt = null;
         stmt = db.con.createStatement();
-        if (isBook) {
-            ResultSet rs = stmt.executeQuery("SELECT * FROM books ");
-            arrayList.addAll(searching("book",l,rs,word,isTitle,isAuthor,isKeyword,isBestseller,isReference,isAvailable));
-            //arrayList = new ArrayList<>(searching(l,rs,arrayList,word,isTitle,isAuthor,isKeyword,isAvailable));
+        if (word.indexOf("AND")>=0) {
+            if (isBook) {
+                ResultSet rs = stmt.executeQuery("SELECT * FROM books ");
+                arrayList.addAll(searchingWithAND("book", l, rs, word, isTitle, isAuthor, isKeyword, isBestseller, isReference, isAvailable));
+            }
+            if (isArticle) {
+                ResultSet rs = stmt.executeQuery("SELECT * FROM articles");
+                arrayList.addAll(searchingWithAND("article", l, rs, word, isTitle, isAuthor, isKeyword, isBestseller, isReference, isAvailable));
+            }
+            if (isAv) {
+                ResultSet rs = stmt.executeQuery("SELECT * FROM av");
+                arrayList.addAll(searchingWithAND("av", l, rs, word, isTitle, isAuthor, isKeyword, isBestseller, isReference, isAvailable));
+            }
+        }else if(word.indexOf("OR")>=0){
+            if (isBook) {
+                ResultSet rs = stmt.executeQuery("SELECT * FROM books ");
+                arrayList.addAll(searchingWithOR("book", l, rs, word, isTitle, isAuthor, isKeyword, isBestseller, isReference, isAvailable));
+            }
+            if (isArticle) {
+                ResultSet rs = stmt.executeQuery("SELECT * FROM articles");
+                arrayList.addAll(searchingWithOR("article", l, rs, word, isTitle, isAuthor, isKeyword, isBestseller, isReference, isAvailable));
+            }
+            if (isAv) {
+                ResultSet rs = stmt.executeQuery("SELECT * FROM av");
+                arrayList.addAll(searchingWithOR("av", l, rs, word, isTitle, isAuthor, isKeyword, isBestseller, isReference, isAvailable));
+            }
+        }else {
+            if (isBook) {
+                ResultSet rs = stmt.executeQuery("SELECT * FROM books ");
+                arrayList.addAll(searching("book",l,rs,word,isTitle,isAuthor,isKeyword,isBestseller,isReference,isAvailable));
+            }
+            if (isArticle) {
+                ResultSet rs = stmt.executeQuery("SELECT * FROM articles");
+                arrayList.addAll(searching("article",l,rs,word,isTitle,isAuthor,isKeyword,isBestseller,isReference,isAvailable));
+            }
+            if (isAv) {
+                ResultSet rs = stmt.executeQuery("SELECT * FROM av");
+                arrayList.addAll(searching("av",l,rs,word,isTitle,isAuthor,isKeyword,isBestseller,isReference,isAvailable));
+            }
         }
-        if (isArticle) {
-            ResultSet rs = stmt.executeQuery("SELECT * FROM articles");
-            arrayList.addAll(searching("article",l,rs,word,isTitle,isAuthor,isKeyword,isBestseller,isReference,isAvailable));
-            //arrayList = new ArrayList<>(searching(l,rs,arrayList,word,isTitle,isAuthor,isKeyword,isAvailable));
-        }
-        if (isAv) {
-            ResultSet rs = stmt.executeQuery("SELECT * FROM av");
-            arrayList.addAll(searching("av",l,rs,word,isTitle,isAuthor,isKeyword,isBestseller,isReference,isAvailable));
-            //arrayList = new ArrayList<>(searching(l,rs,arrayList,word,isTitle,isAuthor,isKeyword,isAvailable));
-        }
-
 
         return arrayList;
     }
 
+    private static ArrayList<Material> searchingWithAND(String type,Librarian l,ResultSet rs,String word,boolean isTitle, boolean isAuthor, boolean isKeyword,boolean isBestseller, boolean isReference, boolean isAvailable){
+        ArrayList<Material> arrayList = new ArrayList<>();
+        String[] searchingWords = word.split("AND");
+        try {
+            while (rs.next()) {
+                if ((isAvailable && l.getNumberOfCopiesOfBook(rs.getInt("id")) > 0) || !isAvailable) {
+                    if (isTitle) {
+                        int tempSovpad=0;//отвечает за совпадения, если все слова совпали то всё каеф
+                        for (int i = 0; i <searchingWords.length ; i++) {//считаю количество совпавших слов, если совпали все введеные слова то смотрим дальше
+                            if (rs.getString("Name").trim().toLowerCase().indexOf(searchingWords[i].trim().toLowerCase()) >= 0)
+                                tempSovpad++;
+                        }
+                        if(tempSovpad==searchingWords.length) {
+                                if (type.equals("book")) {
+                                    if ((isBestseller && rs.getBoolean("is_bestseller") || !isBestseller) &&
+                                            (!isReference && !rs.getBoolean("is_reference") || isReference))
+                                        arrayList.add(l.bookByID(rs.getInt("id")));
+                                } else if (type.equals("article")) {
+                                    if (!isReference && !rs.getBoolean("is_reference") || isReference)
+                                        arrayList.add(l.articleById(rs.getInt("id")));
+                                } else {
+                                    arrayList.add(l.avById(rs.getInt("id")));
+                                }
+                                continue;
+
+                        }
+                    }
+                    if (isAuthor) {
+                        int tempSovpad=0;//отвечает за совпадения, если все слова совпали то всё каеф
+                        for (int i = 0; i <searchingWords.length ; i++) {
+                            if (rs.getString("Author").trim().toLowerCase().indexOf(searchingWords[i].trim().toLowerCase()) >= 0)
+                                tempSovpad++;
+                        }
+                        if(tempSovpad==searchingWords.length) {
+                            if (type.equals("book")) {
+                                if ((isBestseller && rs.getBoolean("is_bestseller") || !isBestseller) &&
+                                        (!isReference && !rs.getBoolean("is_reference") || isReference))
+                                    arrayList.add(l.bookByID(rs.getInt("id")));
+                            } else if (type.equals("article")) {
+                                if (!isReference && !rs.getBoolean("is_reference") || isReference)
+                                    arrayList.add(l.articleById(rs.getInt("id")));
+                            } else {
+                                arrayList.add(l.avById(rs.getInt("id")));
+                            }
+                            continue;
+                        }
+                    }
+                    if (isKeyword) {
+                        int tempSovpad=0;//отвечает за совпадения, если все слова совпали то всё каеф
+                        for (int i = 0; i <searchingWords.length ; i++) {
+                            if (rs.getString("Keywords").trim().toLowerCase().indexOf(searchingWords[i].trim().toLowerCase()) >= 0)
+                                tempSovpad++;
+                        }
+                        if(tempSovpad==searchingWords.length) {
+                            if (type.equals("book")) {
+                                if ((isBestseller && rs.getBoolean("is_bestseller") || !isBestseller) &&
+                                        (!isReference && !rs.getBoolean("is_reference") || isReference))
+                                    arrayList.add(l.bookByID(rs.getInt("id")));
+                            } else if (type.equals("article")) {
+                                if (!isReference && !rs.getBoolean("is_reference") || isReference)
+                                    arrayList.add(l.articleById(rs.getInt("id")));
+                            } else {
+                                arrayList.add(l.avById(rs.getInt("id")));
+                            }
+                            continue;
+                        }
+                    }
+                }
+            }
+        }catch (SQLException e) {
+            e.printStackTrace(); }
+        return arrayList;
+    }
+    private static ArrayList<Material> searchingWithOR(String type,Librarian l,ResultSet rs,String word,boolean isTitle, boolean isAuthor, boolean isKeyword,boolean isBestseller, boolean isReference, boolean isAvailable){
+        ArrayList<Material> arrayList = new ArrayList<>();
+        String[] searchingWords = word.split("AND");
+        try {
+            while (rs.next()) {
+                if ((isAvailable && l.getNumberOfCopiesOfBook(rs.getInt("id")) > 0) || !isAvailable) {
+                    if (isTitle) {
+                        int tempSovpad=0;
+                        for (int i = 0; i <searchingWords.length ; i++) {
+                            if (rs.getString("Name").trim().toLowerCase().indexOf(searchingWords[i].trim().toLowerCase()) >= 0)
+                                tempSovpad++;
+                        }
+                        if(tempSovpad>=0) {
+                            if (type.equals("book")) {
+                                if ((isBestseller && rs.getBoolean("is_bestseller") || !isBestseller) &&
+                                        (!isReference && !rs.getBoolean("is_reference") || isReference))
+                                    arrayList.add(l.bookByID(rs.getInt("id")));
+                            } else if (type.equals("article")) {
+                                if (!isReference && !rs.getBoolean("is_reference") || isReference)
+                                    arrayList.add(l.articleById(rs.getInt("id")));
+                            } else {
+                                arrayList.add(l.avById(rs.getInt("id")));
+                            }
+                            continue;
+
+                        }
+                    }
+                    if (isAuthor) {
+                        int tempSovpad=0;
+                        for (int i = 0; i <searchingWords.length ; i++) {
+                            if (rs.getString("Author").trim().toLowerCase().indexOf(searchingWords[i].trim().toLowerCase()) >= 0)
+                                tempSovpad++;
+                        }
+                        if(tempSovpad>=0) {
+                            if (type.equals("book")) {
+                                if ((isBestseller && rs.getBoolean("is_bestseller") || !isBestseller) &&
+                                        (!isReference && !rs.getBoolean("is_reference") || isReference))
+                                    arrayList.add(l.bookByID(rs.getInt("id")));
+                            } else if (type.equals("article")) {
+                                if (!isReference && !rs.getBoolean("is_reference") || isReference)
+                                    arrayList.add(l.articleById(rs.getInt("id")));
+                            } else {
+                                arrayList.add(l.avById(rs.getInt("id")));
+                            }
+                            continue;
+                        }
+                    }
+                    if (isKeyword) {
+                        int tempSovpad=0;
+                        for (int i = 0; i <searchingWords.length ; i++) {
+                            if (rs.getString("Keywords").trim().toLowerCase().indexOf(searchingWords[i].trim().toLowerCase()) >= 0)
+                                tempSovpad++;
+                        }
+                        if(tempSovpad>=0) {
+                            if (type.equals("book")) {
+                                if ((isBestseller && rs.getBoolean("is_bestseller") || !isBestseller) &&
+                                        (!isReference && !rs.getBoolean("is_reference") || isReference))
+                                    arrayList.add(l.bookByID(rs.getInt("id")));
+                            } else if (type.equals("article")) {
+                                if (!isReference && !rs.getBoolean("is_reference") || isReference)
+                                    arrayList.add(l.articleById(rs.getInt("id")));
+                            } else {
+                                arrayList.add(l.avById(rs.getInt("id")));
+                            }
+                            continue;
+                        }
+                    }
+                }
+            }
+        }catch (SQLException e) {
+            e.printStackTrace(); }
+        return arrayList;
+    }
     private static ArrayList<Material> searching(String type,Librarian l,ResultSet rs,String word,boolean isTitle, boolean isAuthor, boolean isKeyword,boolean isBestseller, boolean isReference, boolean isAvailable){
         ArrayList<Material> arrayList = new ArrayList<>();
         try {
