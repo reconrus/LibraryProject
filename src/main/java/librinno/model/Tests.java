@@ -1,5 +1,7 @@
 package main.java.librinno.model;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -117,11 +119,11 @@ public class Tests {
     public void tc6() throws SQLException {
         tc4();
         int d3ID = (Integer) db.isBookAlreadyExist(d3).get(1);
-        get_user_in_table(p1);
-        get_user_in_table(p2);
-        get_user_in_table(p3);
-        get_user_in_table(s);
-        get_user_in_table(v);
+        db.get_user_in_table(p1);
+        db.get_user_in_table(p2);
+        db.get_user_in_table(p3);
+        db.get_user_in_table(s);
+        db.get_user_in_table(v);
         l1.checkOut(p1, d3ID);
         l1.checkOut(p2, d3ID);
         l1.checkOut(s, d3ID);
@@ -185,6 +187,14 @@ public class Tests {
         Search search=new Search();
         ArrayList<Book>result=search.bookByTitle("Algorithms OR Programming");
         assert (result.size()==3);
+        try {
+            FileWriter fstream1 = new FileWriter("myproject.log");// конструктор с одним параметром - для перезаписи
+            BufferedWriter out1 = new BufferedWriter(fstream1); //  создаём буферезированный поток
+            out1.write(""); // очищаем, перезаписав поверх пустую строку
+            out1.close(); // закрываем
+        } catch (Exception e)
+        {System.err.println("Error in file cleaning: " + e.getMessage());}
+
     }
     /*
     public void tc2() throws SQLException {
@@ -367,9 +377,4 @@ public class Tests {
         }
     }
 
-    public void get_user_in_table(User user) throws SQLException {
-        //name,number,adress,type,password,email
-        int id = (Integer) db.isUserAlreadyExist(user).get(1);
-        user.setCardNumberAsString(id);
-    }
 }

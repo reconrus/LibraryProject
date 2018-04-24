@@ -381,7 +381,10 @@ public class Database extends Main {
         arrayList.add(0);
         return arrayList;
     }
-
+    public void get_user_in_table(User user) throws SQLException {
+        int id = (Integer)isUserAlreadyExist(user).get(1);
+        user.setCardNumberAsString(id);
+    }
     /**
      * Gets object User with all information about him
      *
