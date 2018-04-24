@@ -21,12 +21,14 @@ import main.java.librinno.model.*;
 import main.java.librinno.ui.ShowDocInfo.ShowAVInfo;
 import main.java.librinno.ui.ShowDocInfo.ShowArticleInfo;
 import main.java.librinno.ui.ShowDocInfo.ShowDocInfo;
+import main.java.librinno.ui.addPatron.AddPatronController;
 import main.java.librinno.ui.assist.Assist;
 import main.java.librinno.ui.editDoc.EditAVController;
 import main.java.librinno.ui.editDoc.EditArticleController;
 import main.java.librinno.ui.editDoc.EditBookController;
 import main.java.librinno.ui.editPatron.EditPatron;
 import main.java.librinno.ui.issue.Issue;
+import main.java.librinno.ui.patronScreen.PatronScreenController;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -300,7 +302,17 @@ public class LibrarianScreenController {
             Assist.error("Access Denied", "Your privilege level is insufficient.");
             return;
         }
-        Assist.loadStageWait(getClass().getResource("/main/java/librinno/ui/addPatron/AddPatron.fxml"));
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/main/java/librinno/ui/addPatron/AddPatron.fxml"));
+        Parent parent= loader.load();
+        AddPatronController reg = loader.getController();
+        reg.setLibrarian(this.librarian);
+
+        Stage stage= new Stage(StageStyle.DECORATED);
+        stage.setScene(new Scene(parent));
+        stage.setResizable(false);
+        stage.showAndWait();
+
         showTableUser();
     }
 

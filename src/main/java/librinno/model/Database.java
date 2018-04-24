@@ -70,25 +70,20 @@ public class Database extends Main {
      *
      * @param user - user that we want to add
      */
-    public static void userCreation(User user) {
+    public static void userCreation(User user) throws SQLException {
         PropertyConfigurator.configure("log4j.properties");
-        try {
-            //get all needed information
-            prst = con.prepareStatement("insert into Users_of_the_library(Name, Address, Phone_number,Type,Password,Email) values(?, ?, ?,?,?,?)");
-            prst.setString(1, user.getName());
-            prst.setString(2, user.getAdress());
-            prst.setString(3, user.getPhoneNumber());
-            prst.setString(4, user.getType());
-            prst.setString(5, user.getPassword());
-            prst.setString(6, user.getEmail());
-            prst.executeUpdate();
-            Database db=new Database();
-            db.get_user_in_table(user);
-            if (!user.getType().equals("Admin"))
-                LOGGER.trace("User with ID " + isUserAlreadyExist(user).get(1) + " is created");
-        } catch (Exception e) {
-            LOGGER.error("Error in adding user");
-        }
+
+        //get all needed information
+        prst = con.prepareStatement("insert into Users_of_the_library(Name, Address, Phone_number,Type,Password,Email) values(?, ?, ?,?,?,?)");
+        prst.setString(1, user.getName());
+        prst.setString(2, user.getAdress());
+        prst.setString(3, user.getPhoneNumber());
+        prst.setString(4, user.getType());
+        prst.setString(5, user.getPassword());
+        prst.setString(6, user.getEmail());
+        prst.executeUpdate();
+        Database db=new Database();
+        db.get_user_in_table(user);
     }
 
     /**
@@ -100,22 +95,17 @@ public class Database extends Main {
      * @param av that to insert into table
      * @throws SQLException
      */
-    public void avCreation(AV av) {
+    public void avCreation(AV av) throws SQLException {
         PropertyConfigurator.configure("log4j.properties");
-        try {
-            ArrayList<Integer> arrayList = isAVAlreadyExist(av);
-            if (arrayList.get(0) == 0) {
-                prst = con.prepareStatement("insert into AV(Name,Author,Price,Keywords) values(?,?,?,?)");
-                prst.setString(1, av.getTitle());
-                prst.setString(2, av.getAuthor());
-                prst.setInt(3, av.getPrice());
-                prst.setString(4, av.getKeyWords());
-                prst.executeUpdate();
-                LOGGER.trace("AV with id"+isAVAlreadyExist(av).get(1)+" created");
-            }
-        } catch (SQLException e) {
-            LOGGER.error("error of a/v creation");
-        }
+        ArrayList<Integer> arrayList = isAVAlreadyExist(av);
+        if (arrayList.get(0) == 0) {
+            prst = con.prepareStatement("insert into AV(Name,Author,Price,Keywords) values(?,?,?,?)");
+            prst.setString(1, av.getTitle());
+            prst.setString(2, av.getAuthor());
+            prst.setInt(3, av.getPrice());
+            prst.setString(4, av.getKeyWords());
+            prst.executeUpdate();
+            LOGGER.trace("AV with id"+isAVAlreadyExist(av).get(1)+" created"); }
     }
 
     /**
@@ -127,27 +117,23 @@ public class Database extends Main {
      * @param article that we want to add
      * @throws SQLException
      */
-    public void articleCreation(Article article) {
+    public void articleCreation(Article article) throws SQLException {
         PropertyConfigurator.configure("log4j.properties");
-        try {
-            ArrayList<Integer> arrayList = isArticleAlreadyExist(article);
-            if (arrayList.get(0) == 0) {
-                prst = con.prepareStatement("insert into Articles(Name,Author,Price,Keywords,is_reference,Journal,Editor,Date) values(?,?,?,?,?,?,?,?)");
-                prst.setString(1, article.getTitle());
-                prst.setString(2, article.getAuthor());
-                prst.setInt(3, article.getPrice());
-                prst.setString(4, article.getKeyWords());
-                prst.setBoolean(5, article.getReference());
-                prst.setString(6, article.getJournal());
-                prst.setString(7, article.getEditor());
-                prst.setString(8, article.getDate());
-                prst.executeUpdate();
-                arrayList = isArticleAlreadyExist(article);
-                LOGGER.trace("Article with id "+arrayList.get(1)+" created");
-            }
-        } catch (SQLException e) {
-            LOGGER.error("error of article creation");
-        }
+
+        ArrayList<Integer> arrayList = isArticleAlreadyExist(article);
+        if (arrayList.get(0) == 0) {
+            prst = con.prepareStatement("insert into Articles(Name,Author,Price,Keywords,is_reference,Journal,Editor,Date) values(?,?,?,?,?,?,?,?)");
+            prst.setString(1, article.getTitle());
+            prst.setString(2, article.getAuthor());
+            prst.setInt(3, article.getPrice());
+            prst.setString(4, article.getKeyWords());
+            prst.setBoolean(5, article.getReference());
+            prst.setString(6, article.getJournal());
+            prst.setString(7, article.getEditor());
+            prst.setString(8, article.getDate());
+            prst.executeUpdate();
+            arrayList = isArticleAlreadyExist(article);
+            LOGGER.trace("Article with id "+arrayList.get(1)+" created"); }
     }
 
     /**
@@ -158,29 +144,23 @@ public class Database extends Main {
      *
      * @param book that we want to add
      */
-    public void bookCreation(Book book) {
+    public void bookCreation(Book book) throws SQLException {
         PropertyConfigurator.configure("log4j.properties");
-        try {
-            ArrayList<Integer> arrayList = isBookAlreadyExist(book);
-            if (arrayList.get(0) == 0) {
-                prst = con.prepareStatement("insert into Books(Name,Author,Publisher,Edition,Price,Keywords,is_bestseller,is_reference,YEAR) values(?,?,?,?,?,?,?,?,?)");
-                prst.setString(1, book.getTitle());
-                prst.setString(2, book.getAuthor());
-                prst.setString(3, book.getPublisher());
-                prst.setString(4, book.getEdition());
-                prst.setInt(5, book.getPrice());
-                prst.setString(6, book.getKeyWords());
-                prst.setBoolean(7, book.getBestseller());
-                prst.setBoolean(8, book.getReference());
-                prst.setInt(9, book.getYear());
-                prst.executeUpdate();
-                arrayList = isBookAlreadyExist(book);
-                LOGGER.trace("Book with id "+arrayList.get(1)+" created");
-                //находим последний добавленный ID книги и запоминаем его, чтоб потом кинуть его в таблицу копий
 
-            }
-        } catch (SQLException e) {
-            LOGGER.error("Error in creating book");
+        ArrayList<Integer> arrayList = isBookAlreadyExist(book);
+        if (arrayList.get(0) == 0) {
+            prst = con.prepareStatement("insert into Books(Name,Author,Publisher,Edition,Price,Keywords,is_bestseller,is_reference,YEAR) values(?,?,?,?,?,?,?,?,?)");
+            prst.setString(1, book.getTitle());
+            prst.setString(2, book.getAuthor());
+            prst.setString(3, book.getPublisher());
+            prst.setString(4, book.getEdition());
+            prst.setInt(5, book.getPrice());
+            prst.setString(6, book.getKeyWords());
+            prst.setBoolean(7, book.getBestseller());
+            prst.setBoolean(8, book.getReference());
+            prst.setInt(9, book.getYear());
+            prst.executeUpdate();
+            arrayList = isBookAlreadyExist(book);
         }
     }
 

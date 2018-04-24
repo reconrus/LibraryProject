@@ -7,6 +7,7 @@ import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ToggleGroup;
+import main.java.librinno.model.Admin;
 import main.java.librinno.model.Database;
 import main.java.librinno.model.Librarian;
 import main.java.librinno.model.User;
@@ -71,7 +72,7 @@ public class LibrarianAddScreen {
         else {
             if(Assist.isValidEmailAddress(mail)) {
                 Database db = new Database();
-                db.userCreation(new User(user, phoneNum, addressText, 10000,"Librarian "+privilege, pass, mail));
+                Admin.add_librarian(new User(user, phoneNum, addressText, 10000, "Librarian " + privilege, pass, mail));
                 Assist.closeStage(confirm);
             }
             else Assist.emailError();

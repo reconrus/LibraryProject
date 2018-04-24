@@ -13,6 +13,8 @@ import java.util.LinkedList;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
+import javax.xml.crypto.Data;
+
 import static java.time.temporal.ChronoUnit.DAYS;
 
 /**
@@ -1023,7 +1025,7 @@ public class Librarian extends User {
                             prst.setInt(3, 999);
                             prst.executeUpdate();
                         }
-                        LOGGER.trace("Added " + number + " copies of material " + id);
+                        LOGGER.trace("Librarian "+ Database.isUserAlreadyExist(this).get(1)+ " added " + number + " copies of material " + id);
                         return;
                     }
                 }
@@ -1039,7 +1041,12 @@ public class Librarian extends User {
      */
     public void addUser(User user){
         if(getPrivileges().equals("Priv2")|| getPrivileges().equals("Priv3"))
-        Database.userCreation(user);
+            try {
+                Database.userCreation(user);
+                if (!user.getType().equals("Admin")) LOGGER.trace("Librarian "+Database.isUserAlreadyExist(this).get(1)+ " created user with ID " + Database.isUserAlreadyExist(user).get(1));
+            } catch (SQLException e) {
+                LOGGER.error("Error in adding user");
+            }
     }
 
     /**
@@ -1063,9 +1070,10 @@ public class Librarian extends User {
                 Book book = new Book(title, author, publisher, edition, price, keyWords, is_bestseller, reference, year, "In library");
                 db.bookCreation(book);
                 ArrayList<Integer> arrayList = db.isBookAlreadyExist(book);
+                LOGGER.trace("Librarian "+Database.isUserAlreadyExist(this).get(1)+ " created book with id "+arrayList.get(1));
                 addCopiesOfMaterial(arrayList.get(1), amount);
             } catch (SQLException e) {
-                LOGGER.error("Error in adding book");
+                LOGGER.error("Error in creating book");
             }
         }
     }
@@ -1091,6 +1099,7 @@ public class Librarian extends User {
                 Article article = new Article(title, author, price, keyWords, reference, journal, editor, date, "In library");
                 db.articleCreation(article);
                 ArrayList<Integer> arrayList = db.isArticleAlreadyExist(article);
+                LOGGER.trace("Librarian "+Database.isUserAlreadyExist(this)+ " created article with id "+arrayList.get(1));
                 addCopiesOfMaterial(arrayList.get(1), amount);
             } catch (SQLException e) {
                 LOGGER.error("Error in adding article");
@@ -1114,6 +1123,7 @@ public class Librarian extends User {
                 AV av = new AV(title, author, price, keyWords, "In library");
                 db.avCreation(av);
                 ArrayList<Integer> arrayList = db.isAVAlreadyExist(av);
+                LOGGER.trace("Librarian "+Database.isUserAlreadyExist(this)+ " created AV material with id "+arrayList.get(1));
                 addCopiesOfMaterial(arrayList.get(1), amount);
             } catch (SQLException e) {
                 LOGGER.error("Error in creating av");

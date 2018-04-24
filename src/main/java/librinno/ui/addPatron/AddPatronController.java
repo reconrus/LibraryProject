@@ -11,6 +11,8 @@ import main.java.librinno.ui.assist.Assist;
 
 public class AddPatronController {
 
+    Librarian librarian;
+
     @FXML
     private JFXTextField phone;
 
@@ -69,7 +71,7 @@ public class AddPatronController {
         else{
 
             if(Assist.isValidEmailAddress(mail)) {
-                Database.userCreation(new User(user, phoneNum, addressText, type, pass, mail));
+                librarian.addUser(new User(user, phoneNum, addressText, type, pass, mail));
                 Assist.closeStage(confirm);
             }
             else Assist.emailError();
@@ -90,5 +92,7 @@ public class AddPatronController {
         isVisitingProfessor.setToggleGroup(types);
 
     }
+
+    public void setLibrarian(Librarian librarian){ this.librarian = librarian;}
 
 }
