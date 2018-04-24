@@ -60,10 +60,28 @@ public class Main {
         setDbUrl("jdbc:mysql://localhost:3306");
         Database db = new Database();
         db.creationLocalDB(getUSER(), getPASS());
-        Admin admin=new Admin("123","123","123",123,"123","123","123");
-
-        //db.admin_creation(admin);
         Tests tests = new Tests();
+        tests.tc1();
+        System.out.println("Test 1 success");
         tests.tc2();
+        System.out.println("Test 2 success");
+        tests.tc3();
+        System.out.println("Test 3 success");
+        tests.tc4();
+        System.out.println("Test 4 success");
+        tests.tc5();
+        System.out.println("Test 5 success");
+        tests.tc6();
+        System.out.println("Test 6 success");
+        tests.tc7();
+        System.out.println("Test 7 success");
+        tests.tc10();
+        System.out.println("Test 10 success");
+        tests.tc11();
+        System.out.println("Test 11 success");
+        tests.tc12();
+        System.out.println("Test 12 success");
+        tests.tc13();
+        System.out.println("Test 13 success");
     }
 }
