@@ -993,21 +993,38 @@ public class Librarian extends User {
             PropertyConfigurator.configure("log4j.properties");
             try {
                 if (number > 0) {
+                    boolean isMaterialInDB = false;
                     Statement stmt = db.con.createStatement();
                     ResultSet rs;
-                    rs = stmt.executeQuery("SELECT Id_of_original FROM Copy");
-                    while (rs.next()) {
-                        if (rs.getInt(1) == id) {
-                            for (int i = 0; i < number; i++) {
-                                PreparedStatement prst = db.con.prepareStatement("INSERT INTO Copy (id_of_original,Owner,Time_left) VALUES(?,?,?)");
-                                prst.setInt(1, id);
-                                prst.setInt(2, 0);
-                                prst.setInt(3, 999);
-                                prst.executeUpdate();
-                            }
-                            LOGGER.trace("Added " + number + " copies of material " + id);
-                            return;
+                    rs = stmt.executeQuery("SELECT id FROM books");
+
+                    while (rs.next())
+                        if (rs.getInt(1) == id)
+                            isMaterialInDB = true;
+
+                    rs = stmt.executeQuery("SELECT id FROM articles");
+
+                    while (rs.next())
+                        if (rs.getInt(1) == id)
+                            isMaterialInDB = true;
+
+                    rs = stmt.executeQuery("SELECT id FROM av");
+
+                    while (rs.next())
+                        if (rs.getInt(1) == id)
+                            isMaterialInDB = true;
+
+
+                    if(isMaterialInDB) {
+                        for (int i = 0; i < number; i++) {
+                            PreparedStatement prst = db.con.prepareStatement("INSERT INTO Copy (id_of_original,Owner,Time_left) VALUES(?,?,?)");
+                            prst.setInt(1, id);
+                            prst.setInt(2, 0);
+                            prst.setInt(3, 999);
+                            prst.executeUpdate();
                         }
+                        LOGGER.trace("Added " + number + " copies of material " + id);
+                        return;
                     }
                 }
             } catch (SQLException e) {
@@ -1046,8 +1063,7 @@ public class Librarian extends User {
                 Book book = new Book(title, author, publisher, edition, price, keyWords, is_bestseller, reference, year, "In library");
                 db.bookCreation(book);
                 ArrayList<Integer> arrayList = db.isBookAlreadyExist(book);
-                addCopiesOfMaterial(arrayList.get(1), amount - 1);
-                LOGGER.trace("Added book with id "+arrayList.get(1)+" to the library");
+                addCopiesOfMaterial(arrayList.get(1), amount);
             } catch (SQLException e) {
                 LOGGER.error("Error in adding book");
             }
@@ -1075,8 +1091,7 @@ public class Librarian extends User {
                 Article article = new Article(title, author, price, keyWords, reference, journal, editor, date, "In library");
                 db.articleCreation(article);
                 ArrayList<Integer> arrayList = db.isArticleAlreadyExist(article);
-                addCopiesOfMaterial(arrayList.get(1), amount - 1);
-                LOGGER.trace("Added Article with id "+arrayList.get(1)+" to the library");
+                addCopiesOfMaterial(arrayList.get(1), amount);
             } catch (SQLException e) {
                 LOGGER.error("Error in adding article");
             }
@@ -1099,8 +1114,7 @@ public class Librarian extends User {
                 AV av = new AV(title, author, price, keyWords, "In library");
                 db.avCreation(av);
                 ArrayList<Integer> arrayList = db.isAVAlreadyExist(av);
-                addCopiesOfMaterial(arrayList.get(1), amount - 1);
-                LOGGER.trace("Added AV "+arrayList.get(1)+" to the library");
+                addCopiesOfMaterial(arrayList.get(1), amount);
             } catch (SQLException e) {
                 LOGGER.error("Error in creating av");
             }

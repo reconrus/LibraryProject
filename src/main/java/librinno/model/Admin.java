@@ -84,7 +84,7 @@ public class Admin extends User {
             prst.setString(6,user.getEmail());
             prst.executeUpdate();
             db.get_user_in_table(user);
-            LOGGER.trace("Librarian with id "+user.getCard_number()+" was added");
+            LOGGER.trace("Librarian with id "+user.getCard_number()+" was created");
         } catch (Exception e) {
             e.printStackTrace();
             LOGGER.error("Error in librarian adding");

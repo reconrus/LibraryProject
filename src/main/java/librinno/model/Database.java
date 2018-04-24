@@ -85,7 +85,7 @@ public class Database extends Main {
             Database db=new Database();
             db.get_user_in_table(user);
             if (!user.getType().equals("Admin"))
-                LOGGER.trace("User created");
+                LOGGER.trace("User with ID " + isUserAlreadyExist(user).get(1) + " is created");
         } catch (Exception e) {
             LOGGER.error("Error in adding user");
         }
@@ -112,29 +112,6 @@ public class Database extends Main {
                 prst.setString(4, av.getKeyWords());
                 prst.executeUpdate();
                 LOGGER.trace("AV with id"+isAVAlreadyExist(av).get(1)+" created");
-                Statement stmt = con.createStatement();
-                ResultSet rsInside;
-                rsInside = stmt.executeQuery("SELECT id FROM AV");
-                int id_Of_material = 0;
-                while (rsInside.next())
-                    id_Of_material = rsInside.getInt(1);
-                prst = con.prepareStatement("insert into Copy (id_of_original,Owner,Time_left,CanRenew) values(?,?,?,?)");
-
-                prst.setInt(1, id_Of_material);
-                prst.setInt(2, 0);
-                prst.setInt(3, 999);
-                prst.setBoolean(4, true);
-                prst.executeUpdate();
-                LOGGER.trace("1 copy with id "+id_Of_material+" of AV with id "+isAVAlreadyExist(av).get(1)+" added");
-
-            } else {
-                prst = con.prepareStatement("insert into Copy (id_of_original,Owner,Time_left,CanRenew) values(?,?,?,?)");
-                prst.setInt(1, arrayList.get(1));
-                prst.setInt(2, 0);
-                prst.setInt(3, 999);
-                prst.setBoolean(4, true);
-                prst.executeUpdate();
-                LOGGER.trace("Copy of AV with id " + isAVAlreadyExist(av).get(1) + " added");
             }
         } catch (SQLException e) {
             LOGGER.error("error of a/v creation");
@@ -167,29 +144,6 @@ public class Database extends Main {
                 prst.executeUpdate();
                 arrayList = isArticleAlreadyExist(article);
                 LOGGER.trace("Article with id "+arrayList.get(1)+" created");
-                //находим последний добавленный ID статьи и запоминаем его, чтоб потом кинуть его в таблицу копий
-                Statement stmt = con.createStatement();
-                ResultSet rsInside;
-                rsInside = stmt.executeQuery("SELECT id FROM Articles");
-                int id_Of_material = 0;
-                while (rsInside.next())
-                    id_Of_material = rsInside.getInt(1);
-                prst = con.prepareStatement("insert into Copy (id_of_original,Owner,Time_left,CanRenew) values(?,?,?,?)");
-
-                prst.setInt(1, id_Of_material);
-                prst.setInt(2, 0);
-                prst.setInt(3, 999);
-                prst.setBoolean(4, true);
-                prst.executeUpdate();
-                LOGGER.trace("1 copy with id "+id_Of_material+" of article with id "+arrayList.get(1)+" added");
-            } else {
-                prst = con.prepareStatement("insert into Copy (id_of_original,Owner,Time_left,CanRenew) values(?,?,?,?)");
-                prst.setInt(1, arrayList.get(1));
-                prst.setInt(2, 0);
-                prst.setInt(3, 999);
-                prst.setBoolean(4, true);
-                prst.executeUpdate();
-                LOGGER.trace("1 copy of article with id "+arrayList.get(1)+" is added");
             }
         } catch (SQLException e) {
             LOGGER.error("error of article creation");
@@ -223,33 +177,6 @@ public class Database extends Main {
                 arrayList = isBookAlreadyExist(book);
                 LOGGER.trace("Book with id "+arrayList.get(1)+" created");
                 //находим последний добавленный ID книги и запоминаем его, чтоб потом кинуть его в таблицу копий
-
-
-                Statement stmt = con.createStatement();
-                ResultSet rsInside;
-                rsInside = stmt.executeQuery("SELECT id FROM Books");
-                int id_Of_material = 0;
-                while (rsInside.next())
-                    id_Of_material = rsInside.getInt(1);
-                //кидайем необходимую инфу в таблицу копий(id оригинала,id хозяина(так как мы только доавили, то это Admin(id=0), и время =999, так как книга в бибиотеке))
-                prst = con.prepareStatement("insert into Copy (id_of_original,Owner,Time_left,CanRenew) values(?,?,?,?)");
-                prst.setInt(1, id_Of_material);
-                prst.setInt(2, 0);
-                prst.setInt(3, 999);
-                prst.setBoolean(4, true);
-                prst.executeUpdate();
-                LOGGER.trace("1 copy with id "+id_Of_material+" of book with id "+arrayList.get(1)+" is added");
-
-            } else {
-
-                //кидаем id оригинала и остальную инфу
-                prst = con.prepareStatement("insert into Copy (id_of_original,Owner,Time_left,CanRenew) values(?,?,?,?)");
-                prst.setInt(1, arrayList.get(1));
-                prst.setInt(2, 0);
-                prst.setInt(3, 999);
-                prst.setBoolean(4, true);
-                prst.executeUpdate();
-                LOGGER.trace("1 copy of book with id "+arrayList.get(1)+" added");
 
             }
         } catch (SQLException e) {
