@@ -55,7 +55,7 @@ public class Database extends Main {
             ResultSet rs = stmt.executeQuery("SELECT COUNT(*) FROM users_of_the_library WHERE Type = 'Admin'");
             if (rs.next() && rs.getInt("COUNT(*)") < 1) {
                 userCreation(admin);
-                LOGGER.trace("admin with id " + admin.getCard_Number() + " added");
+                //LOGGER.trace("admin with id " + admin.getCard_Number() + " created,not added");
 
             } else {
                 LOGGER.info("There is already one admin");
