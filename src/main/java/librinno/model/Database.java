@@ -291,8 +291,11 @@ public class Database extends Main {
     }
 
     public void get_user_in_table(User user) throws SQLException {
-        int id = (Integer) isUserAlreadyExist(user).get(1);
-        user.setCardNumberAsString(id);
+        try {
+            int id = (Integer) isUserAlreadyExist(user).get(1);
+            user.setCardNumberAsString(id);
+        }
+        catch (Exception e){}
     }
 
     /**
