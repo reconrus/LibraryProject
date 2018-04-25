@@ -424,7 +424,7 @@ public class Database extends Main {
             //create table AV
             sql = "CREATE TABLE IF NOT EXISTS AV(id int(255) AUTO_INCREMENT, Name VARCHAR(255), Author varchar(255),Price int(255),Keywords VARCHAR(255),PRIMARY KEY(id)) AUTO_INCREMENT=10000";
             stmt.executeUpdate(sql);
-            sql = "INSERT IGNORE INTO Users_of_the_library (Name,Address,Phone_number,Card_number,Type,Password,Email) VALUES ('Librarian Priv3', 'Russia', '+79999999999',33,'Librarian','124','Konev1999D@mail.ru')";
+            sql = "INSERT IGNORE INTO Users_of_the_library (Name,Address,Phone_number,Card_number,Type,Password,Email) VALUES ('Librarian Priv3', 'Russia', '+79999999999',33,'Librarian Priv3','124','Konev1999D@mail.ru')";
             stmt.executeUpdate(sql);
             sql = "INSERT IGNORE INTO Users_of_the_library (Name,Address,Phone_number,Card_number,Type,Password,Email) VALUES ('Albert Einstein', 'Princeton, New Jersey, U.S.', '+79999999999',32,'Student','1','Konev1999D@gmail.com')";
             stmt.executeUpdate(sql);
