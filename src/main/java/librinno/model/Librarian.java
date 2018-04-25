@@ -1026,7 +1026,9 @@ public class Librarian extends User {
                             prst.setInt(3, 999);
                             prst.executeUpdate();
                         }
+                        try{
                         LOGGER.trace("Librarian " + Database.isUserAlreadyExist(this).get(1) + " added " + number + " copies of material " + id);
+                        } catch (Exception e){}
                         return;
                     }
                 }
@@ -1073,7 +1075,9 @@ public class Librarian extends User {
                 Book book = new Book(title, author, publisher, edition, price, keyWords, is_bestseller, reference, year, "In library");
                 db.bookCreation(book);
                 ArrayList<Integer> arrayList = db.isBookAlreadyExist(book);
-                LOGGER.trace("Librarian " + Database.isUserAlreadyExist(this).get(1) + " created book with id " + arrayList.get(1));
+                try {
+                    LOGGER.trace("Librarian " + Database.isUserAlreadyExist(this).get(1) + " created book with id " + arrayList.get(1));
+                } catch (Exception e){}
                 addCopiesOfMaterial(arrayList.get(1), amount);
             } catch (SQLException e) {
                 LOGGER.error("Error in creating book");
