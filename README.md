@@ -1,6 +1,8 @@
 # LibraryProject
 Librinno project runs only on Java 9 and recent version of IntelliJIdea. 
 
+When you first open GUI (through MainApp) program will ask your database information. After that it will ask you to create admin. To enter admin screen (from login screen) you should remember his login (its id will pop up after creation) and his password (that you entered while creating).
+
 If MySQL server and MySQL workbench aren’t downloaded, download them via next link: https://dev.mysql.com/downloads/windows/installer/5.7.html
 
 Class with launcher(with tests): LibraryProject/src/main/java/librinno/model/Main.java 
