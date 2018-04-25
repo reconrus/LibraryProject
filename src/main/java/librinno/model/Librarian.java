@@ -87,7 +87,8 @@ public class Librarian extends User {
         PropertyConfigurator.configure("log4j.properties");
         try {
             if (getPrivileges().equals("Priv2") || getPrivileges().equals("Priv3")) {
-                LOGGER.trace("Librarian with id " + Database.isUserAlreadyExist(this).get(1) + " made an outstanding request on " + idOfMaterial);
+                try{
+                LOGGER.trace("Librarian with id " + Database.isUserAlreadyExist(this).get(1) + " made an outstanding request on " + idOfMaterial);}catch (Exception e){}
                 PreparedStatement pr = db.con.prepareStatement("UPDATE Copy SET Time_left=?,Return_date=?,CanRenew=? WHERE Id_of_original= " + idOfMaterial + " AND Status = 'Issued'");
                 pr.setInt(1, 0);
                 pr.setDate(2, java.sql.Date.valueOf(LocalDate.now()));
