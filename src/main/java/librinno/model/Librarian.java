@@ -114,9 +114,9 @@ public class Librarian extends User {
                     send.sendToOne(email, "Material is not available", "Material,which you reserved,now is not available.You are removed from waiting list");
                 }
                 pr.executeUpdate("DROP TABLE IF EXISTS queue_on_" + idOfMaterial);
-                LOGGER.trace("Queue on material "+ idOfMaterial + "was deleted");
-            }
-            else LOGGER.trace("Librarian with id " + Database.isUserAlreadyExist(this).get(1) + " tried to make an outstanding request on " + idOfMaterial);
+                LOGGER.trace("Queue on material " + idOfMaterial + "was deleted");
+            } else
+                LOGGER.trace("Librarian with id " + Database.isUserAlreadyExist(this).get(1) + " tried to make an outstanding request on " + idOfMaterial);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -1026,9 +1026,10 @@ public class Librarian extends User {
                             prst.setInt(3, 999);
                             prst.executeUpdate();
                         }
-                        try{
-                        LOGGER.trace("Librarian " + Database.isUserAlreadyExist(this).get(1) + " added " + number + " copies of material " + id);
-                        } catch (Exception e){}
+                        try {
+                            LOGGER.trace("Librarian " + Database.isUserAlreadyExist(this).get(1) + " added " + number + " copies of material " + id);
+                        } catch (Exception e) {
+                        }
                         return;
                     }
                 }
@@ -1047,8 +1048,12 @@ public class Librarian extends User {
         if (getPrivileges().equals("Priv2") || getPrivileges().equals("Priv3"))
             try {
                 Database.userCreation(user);
-                if (!user.getType().equals("Admin"))
-                    LOGGER.trace("Librarian " + Database.isUserAlreadyExist(this).get(1) + " created user with ID " + Database.isUserAlreadyExist(user).get(1));
+                if (!user.getType().equals("Admin")) {
+                    try {
+                        LOGGER.trace("Librarian " + Database.isUserAlreadyExist(this).get(1) + " created user with ID " + Database.isUserAlreadyExist(user).get(1));
+                    } catch (Exception e) {
+                    }
+                }
             } catch (SQLException e) {
                 LOGGER.error("Error in adding user");
             }
@@ -1077,7 +1082,8 @@ public class Librarian extends User {
                 ArrayList<Integer> arrayList = db.isBookAlreadyExist(book);
                 try {
                     LOGGER.trace("Librarian " + Database.isUserAlreadyExist(this).get(1) + " created book with id " + arrayList.get(1));
-                } catch (Exception e){}
+                } catch (Exception e) {
+                }
                 addCopiesOfMaterial(arrayList.get(1), amount);
             } catch (SQLException e) {
                 LOGGER.error("Error in creating book");
