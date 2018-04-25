@@ -108,14 +108,19 @@ public class Librarian extends User {
                     SendEmail sendEmail = new SendEmail();
                     sendEmail.sendToOne(email, "Return book.", "Urgently return the book throughout the day! Because of outstanding request.");
                 }
-                rs = pr.executeQuery("SELECT * FROM queue_on_" + idOfMaterial);
-                while (rs.next()) {
-                    String email = rs.getString("Email");
-                    SendEmail send = new SendEmail();
-                    send.sendToOne(email, "Material is not available", "Material,which you reserved,now is not available.You are removed from waiting list");
+                try {
+                    rs = pr.executeQuery("SELECT * FROM queue_on_" + idOfMaterial);
+                    while (rs.next()) {
+                        String email = rs.getString("Email");
+                        SendEmail send = new SendEmail();
+                        send.sendToOne(email, "Material is not available", "Material,which you reserved,now is not available.You are removed from waiting list");
+                    }
+                    pr.executeUpdate("DROP TABLE IF EXISTS queue_on_" + idOfMaterial);
+                    LOGGER.trace("Queue on material " + idOfMaterial + "was deleted");
                 }
-                pr.executeUpdate("DROP TABLE IF EXISTS queue_on_" + idOfMaterial);
-                LOGGER.trace("Queue on material " + idOfMaterial + "was deleted");
+                catch (SQLException e){
+                    LOGGER.trace("Queue on Material with id "+idOfMaterial+" doesn't exist");
+                }
             } else
                 LOGGER.trace("Librarian with id " + Database.isUserAlreadyExist(this).get(1) + " tried to make an outstanding request on " + idOfMaterial);
         } catch (SQLException e) {
