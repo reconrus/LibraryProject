@@ -242,7 +242,7 @@ public class Search {
     }
     private static ArrayList<Material> searchingWithOR(String type,Librarian l,ResultSet rs,String word,boolean isTitle, boolean isAuthor, boolean isKeyword,boolean isBestseller, boolean isReference, boolean isAvailable){
         ArrayList<Material> arrayList = new ArrayList<>();
-        String[] searchingWords = word.split("AND");
+        String[] searchingWords = word.split("OR");
         try {
             while (rs.next()) {
                 if ((isAvailable && l.getNumberOfCopiesOfBook(rs.getInt("id")) > 0) || !isAvailable) {
@@ -252,7 +252,7 @@ public class Search {
                             if (rs.getString("Name").trim().toLowerCase().indexOf(searchingWords[i].trim().toLowerCase()) >= 0)
                                 tempSovpad++;
                         }
-                        if(tempSovpad>=0) {
+                        if(tempSovpad>0) {
                             if (type.equals("book")) {
                                 if ((isBestseller && rs.getBoolean("is_bestseller") || !isBestseller) &&
                                         (!isReference && !rs.getBoolean("is_reference") || isReference))
@@ -273,7 +273,7 @@ public class Search {
                             if (rs.getString("Author").trim().toLowerCase().indexOf(searchingWords[i].trim().toLowerCase()) >= 0)
                                 tempSovpad++;
                         }
-                        if(tempSovpad>=0) {
+                        if(tempSovpad>0) {
                             if (type.equals("book")) {
                                 if ((isBestseller && rs.getBoolean("is_bestseller") || !isBestseller) &&
                                         (!isReference && !rs.getBoolean("is_reference") || isReference))
@@ -293,7 +293,7 @@ public class Search {
                             if (rs.getString("Keywords").trim().toLowerCase().indexOf(searchingWords[i].trim().toLowerCase()) >= 0)
                                 tempSovpad++;
                         }
-                        if(tempSovpad>=0) {
+                        if(tempSovpad>0) {
                             if (type.equals("book")) {
                                 if ((isBestseller && rs.getBoolean("is_bestseller") || !isBestseller) &&
                                         (!isReference && !rs.getBoolean("is_reference") || isReference))
