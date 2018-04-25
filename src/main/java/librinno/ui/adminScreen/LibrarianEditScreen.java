@@ -78,7 +78,7 @@ public class LibrarianEditScreen {
                 librarianEd.setName(user);
                 librarianEd.setPassword(pass);
                 librarianEd.setPhoneNumber(phoneNum);
-                librarianEd.setType("Librarian "+privilege);
+                librarianEd.setType("Librarian");
                 librarianEd.setPrivileges(privilege);
                 librarianEd.setEmail(mail);
                 Librarian.modifyUser(librarianEd);
