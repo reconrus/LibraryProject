@@ -13,6 +13,8 @@ import main.java.librinno.model.Librarian;
 import main.java.librinno.model.User;
 import main.java.librinno.ui.assist.Assist;
 
+import java.sql.SQLException;
+
 public class LibrarianAddScreen {
 
     @FXML
@@ -59,7 +61,7 @@ public class LibrarianAddScreen {
      * @param event
      */
     @FXML
-    void confirm(ActionEvent event) {
+    void confirm(ActionEvent event) throws SQLException {
         String user= name.getText();
         String pass= password.getText();
         String addressText= address.getText();
@@ -72,7 +74,7 @@ public class LibrarianAddScreen {
         else {
             if(Assist.isValidEmailAddress(mail)) {
                 Database db = new Database();
-                Admin.add_librarian(new User(user, phoneNum, addressText, 10000, "Librarian " + privilege, pass, mail));
+                db.userCreation(new User(user, phoneNum, addressText, 10000, "Librarian " + privilege, pass, mail));
                 Assist.closeStage(confirm);
             }
             else Assist.emailError();
